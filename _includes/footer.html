@@ -4,8 +4,8 @@
     <!-- دیوایدر بالا -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- گرید اصلی: ۴ ستون -->
-    <div class="footer-grid">
+    <!-- ستون‌ها پله‌ای -->
+    <div class="footer-grid footer-grid-2">
 
       <!-- ستون ۱: برند -->
       <div class="footer-col footer-brand">
@@ -16,21 +16,9 @@
         </p>
       </div>
 
-      <!-- ستون ۲: دسته‌بندی‌ها -->
+      <!-- ستون ۲: تماس با من -->
       <div class="footer-col">
-        <h4>دسته‌بندی‌ها</h4>
-        <ul class="footer-links">
-          <li><a href="{{ '/girls/' | relative_url }}">پرنسسی دخترانه</a></li>
-          <li><a href="{{ '/boys/' | relative_url }}">شخصیتی پسرانه</a></li>
-          <li><a href="{{ '/bags-shoes/' | relative_url }}">کیف و کفش</a></li>
-          <li><a href="{{ '/crown-wand/' | relative_url }}">تاج و عصا</a></li>
-          <li><a href="{{ '/accessories/' | relative_url }}">اکسسوری‌ها</a></li>
-        </ul>
-      </div>
-
-      <!-- ستون ۳: ارتباط با ما -->
-      <div class="footer-col">
-        <h4>ارتباط با ما</h4>
+        <h4>تماس با من</h4>
         <ul class="footer-links">
           {% if site.phone_display %}
           <li>
@@ -53,16 +41,6 @@
         </ul>
       </div>
 
-      <!-- ستون ۴: اطلاعات -->
-      <div class="footer-col">
-        <h4>اطلاعات</h4>
-        <ul class="footer-links">
-          <li><a href="{{ '/' | relative_url }}">صفحه اصلی</a></li>
-          <li><a href="{{ '/girls/' | relative_url }}">محصولات دخترانه</a></li>
-          <li><a href="{{ '/boys/' | relative_url }}">محصولات پسرانه</a></li>
-        </ul>
-      </div>
-
     </div>
 
     <!-- دیوایدر میانی -->
@@ -71,13 +49,11 @@
     <!-- باکس نمادهای اعتماد -->
     <div class="trust-boxes">
 
-      <!-- اینماد -->
       <a class="trust-box" href="https://trustseal.enamad.ir/" target="_blank" rel="noopener" aria-label="نماد اعتماد الکترونیکی">
         <img src="{{ '/assets/images/enamad.png' | relative_url }}" alt="نماد اعتماد الکترونیکی" loading="lazy">
         <span class="trust-label">نماد اعتماد</span>
       </a>
 
-      <!-- ساماندهی -->
       <a class="trust-box" href="https://samandehi.ir/" target="_blank" rel="noopener" aria-label="ساماندهی رسانه‌های دیجیتال">
         <img src="{{ '/assets/images/samandehi.png' | relative_url }}" alt="ساماندهی رسانه‌های دیجیتال" loading="lazy">
         <span class="trust-label">ساماندهی</span>
