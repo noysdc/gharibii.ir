@@ -18,37 +18,41 @@
       <div class="holo-divider" role="presentation"></div>
     </div>
 
-    <nav class="category-nav" aria-label="دسته‌بندی محصولات">
-      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
-      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
-      <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
-      <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
-      <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
-    </nav>
+    <div class="category-box">
+      <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+        <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
+        <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
+        <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
+        <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
+        <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
+      </nav>
+    </div>
 
   </div>
 
   <div class="sticky-bar" id="sticky-bar">
-    <div class="wrap sticky-bar-inner">
+    <div class="wrap">
+      <div class="control-box">
 
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="search" id="site-search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول" autocomplete="off">
-        <div class="search-results" id="search-results" hidden></div>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="site-search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول" autocomplete="off">
+          <div class="search-results" id="search-results" hidden></div>
+        </div>
+
+        <div class="nav-controls">
+          <button type="button" class="ctrl-btn" id="font-decrease" aria-label="کوچک‌تر کردن فونت" title="کوچک‌تر کردن فونت">
+            <span class="ctrl-icon">A−</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="font-increase" aria-label="بزرگ‌تر کردن فونت" title="بزرگ‌تر کردن فونت">
+            <span class="ctrl-icon">A+</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="theme-toggle" aria-label="حالت شب و روز" title="حالت شب/روز">
+            <span class="ctrl-icon theme-icon">🌙</span>
+          </button>
+        </div>
+
       </div>
-
-      <div class="nav-controls">
-        <button type="button" class="ctrl-btn" id="font-decrease" aria-label="کوچک‌تر کردن فونت" title="کوچک‌تر کردن فونت">
-          <span class="ctrl-icon">A−</span>
-        </button>
-        <button type="button" class="ctrl-btn" id="font-increase" aria-label="بزرگ‌تر کردن فونت" title="بزرگ‌تر کردن فونت">
-          <span class="ctrl-icon">A+</span>
-        </button>
-        <button type="button" class="ctrl-btn" id="theme-toggle" aria-label="حالت شب و روز" title="حالت شب/روز">
-          <span class="ctrl-icon theme-icon">🌙</span>
-        </button>
-      </div>
-
     </div>
   </div>
 </header>
