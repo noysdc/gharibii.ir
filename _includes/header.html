@@ -1,26 +1,21 @@
 <header class="site-header">
   <div class="wrap header-inner">
 
-    <!-- لوگو -->
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="غریبی کیش - خانه">
       <span class="holo-logo">
         <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="غریبی کیش" width="160" height="160">
       </span>
     </a>
 
-    <!-- دیوایدر هولوگرامی ۱ -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- عنوان فروشگاه -->
     <div class="store-title">
       <h1 class="store-name">فروشگاه غریبی کیش</h1>
       <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
     </div>
 
-    <!-- دیوایدر هولوگرامی ۲ -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- دسته‌بندی‌ها -->
     <nav class="category-nav" aria-label="دسته‌بندی محصولات">
       <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
       <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>

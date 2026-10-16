@@ -18,29 +18,19 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
    HEADER با لوگوی کریستالی هولوگرامی
    ============================================ */
 .site-header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-.site-header .bar{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
+.header-inner{
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:1rem;
-  min-height:6rem;
-  padding:.5rem 0;
+  gap:.75rem;
+  padding:1.5rem 0 1.25rem;
 }
 .brand{
-  grid-column:2;
   display:flex;
   align-items:center;
   justify-content:center;
   text-decoration:none;
 }
-.site-header nav{
-  grid-column:3;
-  justify-self:end;
-  display:flex;
-  gap:.5rem;
-}
-.site-header nav a{padding:.2rem .9rem;border-radius:999px;color:var(--ink)}
-.site-header nav a[aria-current],.site-header nav a:hover{background:var(--sea);color:#fff;text-decoration:none}
 
 /* --- ظرف لوگو: کریستالی و صدفی --- */
 .holo-logo{
@@ -135,6 +125,98 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
     brightness(1.05);
 }
 
+/* ============================================
+   دیوایدر هولوگرامی
+   ============================================ */
+.holo-divider{
+  width:min(420px, 85%);
+  height:3px;
+  border-radius:999px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    #ffb8e8 15%,
+    #c8b8ff 30%,
+    #b8e0ff 50%,
+    #b8ffd8 70%,
+    #ffe8b8 85%,
+    transparent 100%);
+  background-size:200% 100%;
+  animation:divider-flow 6s linear infinite;
+  box-shadow:
+    0 0 8px rgba(200,180,255,.5),
+    0 0 16px rgba(255,200,240,.35);
+  position:relative;
+}
+.holo-divider::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,
+    transparent 30%,
+    rgba(255,255,255,.9) 50%,
+    transparent 70%);
+  background-size:200% 100%;
+  animation:divider-shine 3s linear infinite;
+  mix-blend-mode:screen;
+}
+
+/* ============================================
+   عنوان فروشگاه
+   ============================================ */
+.store-title{text-align:center;margin:.25rem 0}
+.store-name{
+  font-size:1.5rem;
+  font-weight:700;
+  color:var(--sea-deep);
+  margin:0;
+  line-height:1.4;
+  letter-spacing:-.01em;
+}
+.store-tagline{
+  font-size:.95rem;
+  color:var(--muted);
+  margin:.15rem 0 0;
+  font-weight:400;
+}
+
+/* ============================================
+   نوار دسته‌بندی
+   ============================================ */
+.category-nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.5rem;
+  margin-top:.5rem;
+  width:100%;
+}
+.category-nav a{
+  display:inline-block;
+  padding:.45rem 1.1rem;
+  border-radius:999px;
+  background:linear-gradient(135deg, #f3f7f8, #e8f0f4);
+  color:var(--sea-deep);
+  font-size:.95rem;
+  font-weight:500;
+  border:1px solid var(--line);
+  text-decoration:none;
+  transition:all .25s ease;
+}
+.category-nav a:hover{
+  background:linear-gradient(135deg, #e8d5ff, #c8e6ff);
+  border-color:#c8b8ff;
+  color:var(--sea-deep);
+  text-decoration:none;
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(168,85,247,.18);
+}
+.category-nav a[aria-current="page"]{
+  background:linear-gradient(135deg, #a855f7, #0A6670);
+  border-color:transparent;
+  color:#fff;
+}
+
 /* --- انیمیشن‌ها --- */
 @keyframes crystal-shine{
   0%,100%{background-position:0% 0%,100% 100%,0% 50%}
@@ -150,13 +232,20 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
 @keyframes crystal-hue{
   to{filter:hue-rotate(360deg) blur(.5px)}
 }
+@keyframes divider-flow{
+  to{background-position:200% 0}
+}
+@keyframes divider-shine{
+  0%  {background-position:-100% 0}
+  100%{background-position:200% 0}
+}
 
 /* هاور */
 .brand:hover .holo-logo{transform:scale(1.05)}
 .brand:hover .holo-logo::before{animation-duration:2s}
 
 /* ============================================
-   دسته‌بندی
+   دسته‌بندی (کاشی‌های صفحه اصلی)
    ============================================ */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0 .5rem}
 .tile{display:flex;flex-direction:column;justify-content:flex-end;min-height:11rem;padding:1.25rem;border-radius:1.5rem 1.5rem 1.5rem .4rem;color:var(--ink)}
@@ -221,23 +310,24 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   h1{font-size:2.3rem}
 }
 @media(max-width:760px){
-  .site-header .bar{
-    grid-template-columns:1fr;
-    grid-template-rows:auto auto;
-    min-height:auto;
-    gap:.5rem;
-    padding:.75rem 0;
-  }
-  .brand{grid-column:1;grid-row:1}
-  .site-header nav{grid-column:1;grid-row:2;justify-self:center}
-  .holo-logo{width:105px;height:105px}
+  .header-inner{padding:1rem 0 .75rem;gap:.5rem}
+  .holo-logo{width:100px;height:100px}
+  .store-name{font-size:1.25rem}
+  .store-tagline{font-size:.85rem}
+  .holo-divider{width:90%}
+  .category-nav{gap:.35rem}
+  .category-nav a{padding:.35rem .85rem;font-size:.85rem}
 }
 @media(max-width:420px){
-  .holo-logo{width:88px;height:88px}
+  .holo-logo{width:84px;height:84px}
+  .store-name{font-size:1.1rem}
+  .category-nav a{padding:.3rem .7rem;font-size:.8rem}
 }
 @media(prefers-reduced-motion:reduce){
   .tile:hover{transform:none;transition:none}
   .holo-logo,
   .holo-logo::before,
-  .holo-logo::after{animation:none}
+  .holo-logo::after,
+  .holo-divider,
+  .holo-divider::after{animation:none}
 }
