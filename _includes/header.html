@@ -1,13 +1,33 @@
 <header class="site-header">
-  <div class="wrap bar">
+  <div class="wrap header-inner">
+
+    <!-- لوگو -->
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="غریبی کیش - خانه">
       <span class="holo-logo">
         <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="غریبی کیش" width="160" height="160">
       </span>
     </a>
-    <nav aria-label="دسته‌بندی">
-      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>دخترانه</a>
-      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>پسرانه</a>
+
+    <!-- دیوایدر هولوگرامی ۱ -->
+    <div class="holo-divider" role="presentation"></div>
+
+    <!-- عنوان فروشگاه -->
+    <div class="store-title">
+      <h1 class="store-name">فروشگاه غریبی کیش</h1>
+      <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+    </div>
+
+    <!-- دیوایدر هولوگرامی ۲ -->
+    <div class="holo-divider" role="presentation"></div>
+
+    <!-- دسته‌بندی‌ها -->
+    <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
+      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
+      <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
+      <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
+      <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
     </nav>
+
   </div>
 </header>
