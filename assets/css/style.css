@@ -53,8 +53,10 @@ html[data-theme="dark"] .holo-logo{
     inset 0 1px 2px rgba(255,255,255,.3),
     inset 0 -2px 6px rgba(100,60,140,.25),
     inset 2px 2px 12px rgba(0,150,200,.15),
-    0 6px 20px rgba(0,0,0,.4),
-    0 0 40px rgba(100,80,150,.3);
+    0 10px 30px rgba(0,0,0,.5),
+    0 6px 20px rgba(100,80,150,.3),
+    0 0 60px rgba(100,80,150,.4),
+    0 0 30px rgba(150,120,200,.3);
 }
 html[data-theme="dark"] .holo-logo img{
   filter:
@@ -89,7 +91,7 @@ html[data-theme="dark"] .holo-logo img{
 }
 .brand{display:flex;align-items:center;justify-content:center;text-decoration:none}
 
-/* --- لوگوی کریستالی (بزرگ‌تر) --- */
+/* --- لوگوی کریستالی (با سایه تقویت‌شده) --- */
 .holo-logo{
   position:relative;display:inline-flex;align-items:center;justify-content:center;
   width:180px;height:180px;border-radius:50%;
@@ -110,8 +112,10 @@ html[data-theme="dark"] .holo-logo img{
     inset 0 1px 2px rgba(255,255,255,.9),
     inset 0 -2px 6px rgba(168,85,247,.15),
     inset 2px 2px 12px rgba(0,207,255,.2),
-    0 8px 26px rgba(10,102,112,.2),
-    0 0 50px rgba(200,180,255,.4);
+    0 10px 30px rgba(10,102,112,.25),
+    0 6px 20px rgba(168,85,247,.2),
+    0 0 60px rgba(200,180,255,.5),
+    0 0 30px rgba(255,150,220,.25);
   animation:crystal-shine 8s ease-in-out infinite;
   overflow:hidden;
 }
@@ -184,6 +188,40 @@ html[data-theme="dark"] .holo-logo img{
 .store-tagline{
   font-size:calc(1.15rem * var(--font-scale));
   color:var(--muted);margin:.35rem 0 0;font-weight:400;
+}
+
+/* ============================================
+   متن معرفی صفحه اصلی — وسط‌چین، شیشه‌ای
+   ============================================ */
+.hero-intro{
+  text-align:center;
+  margin:.75rem auto 1.5rem;
+  padding:0 1rem;
+}
+.hero-lead{
+  display:inline-block;
+  max-width:65ch;
+  font-size:calc(1.05rem * var(--font-scale));
+  color:var(--muted);
+  line-height:2;
+  margin:0;
+  padding:1rem 1.5rem;
+  border-radius:1rem;
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 6px 20px rgba(168,85,247,.1),
+    0 2px 8px rgba(255,150,220,.06);
+}
+html[data-theme="dark"] .hero-lead{
+  background:rgba(30,45,55,.4);
+  border-color:rgba(150,180,200,.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 6px 20px rgba(0,0,0,.35);
 }
 
 /* ============================================
@@ -307,7 +345,6 @@ html[data-theme="dark"] .sticky-bar.is-stuck{
   box-shadow:0 4px 20px rgba(0,0,0,.5), 0 2px 12px rgba(168,85,247,.12);
 }
 
-/* --- باکس کنترل‌ها (تک‌ردیفه) --- */
 .control-box{
   display:flex;
   align-items:center;
@@ -339,7 +376,7 @@ html[data-theme="dark"] .control-box{
 }
 
 /* ============================================
-   جستجو (کوچیک‌تر و متناسب)
+   جستجو
    ============================================ */
 .search-box{
   position:relative;
@@ -672,7 +709,8 @@ html[data-theme="dark"] .card:hover{
   .store-tagline{font-size:calc(.95rem * var(--font-scale))}
   .holo-divider{width:90%}
 
-  /* باکس دسته‌بندی تمام عرض */
+  .hero-lead{font-size:calc(.95rem * var(--font-scale));padding:.85rem 1.1rem}
+
   .category-box{
     width:100%;
     max-width:none;
@@ -683,7 +721,6 @@ html[data-theme="dark"] .card:hover{
   .category-nav a{padding:.5rem 1rem;font-size:calc(.88rem * var(--font-scale))}
 
   .sticky-bar{padding:.4rem 0}
-  /* باکس کنترل‌ها یک‌ردیفه */
   .control-box{
     width:100%;
     max-width:none;

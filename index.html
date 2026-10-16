@@ -5,14 +5,27 @@ title: پوشاک دخترانه و پسرانه
 {%- assign girls = site.products | where: 'category', 'girls' -%}
 {%- assign boys = site.products | where: 'category', 'boys' -%}
 {%- assign latest = site.products | sort: 'date' | reverse -%}
-<section class="wrap hero">
-  <h1>{{ site.title }}</h1>
-  <p class="lead">قیمت و عکس محصولات را ببینید؛ برای خرید، دکمه «خرید» را بزنید و در واتساپ پیام بدهید.</p>
+
+<section class="wrap hero-intro">
+  <p class="hero-lead">
+    لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون — طرح‌های اورجینال و کیفیت بالا.
+    برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀
+  </p>
+</section>
+
+<section class="wrap">
   <div class="tiles">
-    <a class="tile girls" href="{{ '/girls/' | relative_url }}"><span class="tile-name">دخترانه</span><span class="tile-count">{{ girls.size }} محصول</span></a>
-    <a class="tile boys" href="{{ '/boys/' | relative_url }}"><span class="tile-name">پسرانه</span><span class="tile-count">{{ boys.size }} محصول</span></a>
+    <a class="tile girls" href="{{ '/girls/' | relative_url }}">
+      <span class="tile-name">دخترانه</span>
+      <span class="tile-count">{{ girls.size }} محصول</span>
+    </a>
+    <a class="tile boys" href="{{ '/boys/' | relative_url }}">
+      <span class="tile-name">پسرانه</span>
+      <span class="tile-count">{{ boys.size }} محصول</span>
+    </a>
   </div>
 </section>
+
 <section class="wrap">
   <h2>تازه‌ها</h2>
   <div class="grid">{% for p in latest limit: 8 %}{% include product-card.html product=p %}{% endfor %}</div>
