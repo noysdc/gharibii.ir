@@ -78,3 +78,121 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   h1{font-size:2.3rem}
 }
 @media(prefers-reduced-motion:reduce){.tile:hover{transform:none;transition:none}}
+
+/* ===== لوگوی هولوگرامی ===== */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: .4rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--sea-deep);
+}
+
+.brand-text small {
+  font-size: .8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* ظرف لوگو */
+.holo-logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  padding: 4px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* حلقه رنگین‌کمانی چرخان دور لوگو */
+.holo-logo::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(
+    from 0deg,
+    #ff0080,
+    #ff8c00,
+    #ffd700,
+    #00ff88,
+    #00cfff,
+    #a855f7,
+    #ff0080
+  );
+  animation: holo-spin 6s linear infinite;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+/* هاله‌ی بیرونی */
+.holo-logo::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 20px;
+  background: conic-gradient(
+    from 0deg,
+    #ff008066,
+    #00cfff66,
+    #a855f766,
+    #ff008066
+  );
+  animation: holo-spin 6s linear infinite reverse;
+  filter: blur(12px);
+  z-index: -1;
+  opacity: .85;
+}
+
+/* خود تصویر لوگو روی گرادیان */
+.holo-logo img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 2px;
+  transition: transform .3s ease, filter .3s ease;
+}
+
+/* افکت هاور */
+.brand:hover .holo-logo img {
+  transform: scale(1.06);
+  filter: brightness(1.08) saturate(1.15);
+}
+
+.brand:hover .holo-logo::before {
+  animation-duration: 2.5s;
+}
+
+/* انیمیشن چرخش */
+@keyframes holo-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 480px) {
+  .holo-logo { width: 46px; height: 46px; }
+  .brand-text { font-size: 1.2rem; }
+  .brand-text small { font-size: .7rem; }
+}
+
+/* احترام به تنظیمات کاربر */
+@media (prefers-reduced-motion: reduce) {
+  .holo-logo::before,
+  .holo-logo::after {
+    animation: none;
+  }
+}
