@@ -91,7 +91,7 @@ html[data-theme="dark"] .holo-logo img{
 }
 .brand{display:flex;align-items:center;justify-content:center;text-decoration:none}
 
-/* --- لوگوی کریستالی (با سایه تقویت‌شده) --- */
+/* --- لوگوی کریستالی --- */
 .holo-logo{
   position:relative;display:inline-flex;align-items:center;justify-content:center;
   width:180px;height:180px;border-radius:50%;
@@ -153,7 +153,7 @@ html[data-theme="dark"] .holo-logo img{
     brightness(1.05);
 }
 
-/* --- دیوایدر هولوگرامی (بلندتر) --- */
+/* --- دیوایدر هولوگرامی --- */
 .holo-divider{
   width:min(900px, 92%);height:3px;border-radius:999px;
   background:linear-gradient(90deg,
@@ -190,23 +190,13 @@ html[data-theme="dark"] .holo-logo img{
   color:var(--muted);margin:.35rem 0 0;font-weight:400;
 }
 
-/* ============================================
-   متن معرفی صفحه اصلی — وسط‌چین، شیشه‌ای
-   ============================================ */
-.hero-intro{
-  text-align:center;
-  margin:.75rem auto 1.5rem;
-  padding:0 1rem;
-}
+/* --- متن معرفی صفحه اصلی --- */
+.hero-intro{text-align:center;margin:.75rem auto 1.5rem;padding:0 1rem}
 .hero-lead{
-  display:inline-block;
-  max-width:65ch;
+  display:inline-block;max-width:65ch;
   font-size:calc(1.05rem * var(--font-scale));
-  color:var(--muted);
-  line-height:2;
-  margin:0;
-  padding:1rem 1.5rem;
-  border-radius:1rem;
+  color:var(--muted);line-height:2;margin:0;
+  padding:1rem 1.5rem;border-radius:1rem;
   background:rgba(255,255,255,.4);
   backdrop-filter:blur(16px) saturate(160%);
   -webkit-backdrop-filter:blur(16px) saturate(160%);
@@ -228,11 +218,8 @@ html[data-theme="dark"] .hero-lead{
    باکس دسته‌بندی‌ها
    ============================================ */
 .category-box{
-  width:auto;
-  max-width:fit-content;
-  margin:0 auto;
-  padding:.5rem .65rem;
-  border-radius:1rem;
+  width:auto;max-width:fit-content;margin:0 auto;
+  padding:.5rem .65rem;border-radius:1rem;
   background:rgba(255,255,255,.35);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
@@ -252,15 +239,11 @@ html[data-theme="dark"] .category-box{
     0 2px 8px rgba(168,85,247,.1);
 }
 .category-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:.4rem;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;
 }
 .category-nav a{
   position:relative;display:inline-block;
-  padding:.55rem 1.15rem;
-  border-radius:999px;
+  padding:.55rem 1.15rem;border-radius:999px;
   font-size:calc(.95rem * var(--font-scale));
   font-weight:600;color:var(--sea-deep);text-decoration:none;
   overflow:hidden;isolation:isolate;
@@ -326,11 +309,7 @@ html[data-theme="dark"] .category-nav a:hover{
    نوار قفل‌شونده + باکس کنترل‌ها
    ============================================ */
 .sticky-bar{
-  position:sticky;
-  top:0;
-  z-index:30;
-  width:100%;
-  padding:.5rem 0;
+  position:sticky;top:0;z-index:30;width:100%;padding:.5rem 0;
   transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
 }
 .sticky-bar.is-stuck{
@@ -344,18 +323,10 @@ html[data-theme="dark"] .sticky-bar.is-stuck{
   background:rgba(13,20,24,.85);
   box-shadow:0 4px 20px rgba(0,0,0,.5), 0 2px 12px rgba(168,85,247,.12);
 }
-
 .control-box{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.55rem;
-  flex-wrap:nowrap;
-  width:auto;
-  max-width:fit-content;
-  margin:0 auto;
-  padding:.4rem .6rem;
-  border-radius:1rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:.55rem;flex-wrap:nowrap;width:auto;max-width:fit-content;
+  margin:0 auto;padding:.4rem .6rem;border-radius:1rem;
   background:rgba(255,255,255,.4);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
@@ -379,20 +350,15 @@ html[data-theme="dark"] .control-box{
    جستجو
    ============================================ */
 .search-box{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:.35rem;
-  padding:.35rem .8rem;
-  border-radius:999px;
+  position:relative;display:flex;align-items:center;gap:.35rem;
+  padding:.35rem .8rem;border-radius:999px;
   background:rgba(255,255,255,.5);
   border:1px solid rgba(200,184,255,.4);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.9),
     0 1px 4px rgba(168,85,247,.06);
   transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
-  flex:0 1 240px;
-  min-width:180px;
+  flex:0 1 240px;min-width:180px;
 }
 .search-box:focus-within{
   background:rgba(255,255,255,.85);
@@ -454,14 +420,9 @@ html[data-theme="dark"] .search-box:focus-within{
 .search-empty{padding:1rem;text-align:center;font-size:.9rem;color:var(--muted)}
 
 /* ============================================
-   کنترل‌ها: فونت + شب/روز
+   کنترل‌ها
    ============================================ */
-.nav-controls{
-  display:flex;
-  gap:.4rem;
-  align-items:center;
-  flex:0 0 auto;
-}
+.nav-controls{display:flex;gap:.4rem;align-items:center;flex:0 0 auto}
 .ctrl-btn{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:2.5rem;height:2.5rem;padding:0 .6rem;
@@ -518,7 +479,6 @@ html[data-theme="dark"] .ctrl-btn:hover{
   0%  {background-position:-100% 0}
   100%{background-position:200% 0}
 }
-
 .brand:hover .holo-logo{transform:scale(1.05)}
 .brand:hover .holo-logo::before{animation-duration:2s}
 
@@ -534,17 +494,12 @@ html[data-theme="dark"] .ctrl-btn:hover{
 .tile-count{color:var(--muted)}
 
 /* ============================================
-   گرید کارت‌ها — شیشه‌ای، وسط‌چین
+   گرید کارت‌ها
    ============================================ */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 .card{
-  display:flex;
-  flex-direction:column;
-  gap:.15rem;
-  color:var(--ink);
-  text-align:center;
-  padding:.55rem;
-  border-radius:1.1rem;
+  display:flex;flex-direction:column;gap:.15rem;color:var(--ink);
+  text-align:center;padding:.55rem;border-radius:1.1rem;
   background:rgba(255,255,255,.35);
   backdrop-filter:blur(16px) saturate(160%);
   -webkit-backdrop-filter:blur(16px) saturate(160%);
@@ -556,8 +511,7 @@ html[data-theme="dark"] .ctrl-btn:hover{
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
 .card:hover{
-  text-decoration:none;
-  transform:translateY(-3px);
+  text-decoration:none;transform:translateY(-3px);
   background:rgba(255,255,255,.55);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
@@ -580,24 +534,12 @@ html[data-theme="dark"] .card:hover{
 }
 .card:hover .card-title{color:var(--sea)}
 .card-img{
-  display:block;
-  aspect-ratio:3/4;
-  overflow:hidden;
-  border-radius:.8rem;
-  background:var(--pearl,#E3ECEF);
+  display:block;aspect-ratio:3/4;overflow:hidden;
+  border-radius:.8rem;background:var(--pearl,#E3ECEF);
 }
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card-title{
-  font-weight:700;
-  margin-top:.5rem;
-  line-height:1.6;
-  text-align:center;
-}
-.card-price{
-  color:var(--muted);
-  font-size:.95rem;
-  text-align:center;
-}
+.card-title{font-weight:700;margin-top:.5rem;line-height:1.6;text-align:center}
+.card-price{color:var(--muted);font-size:.95rem;text-align:center}
 
 /* ============================================
    صفحه محصول
@@ -682,6 +624,55 @@ html[data-theme="dark"] .card:hover{
 }
 .footer-links a:hover{color:var(--sea);text-decoration:none;transform:translateX(-3px)}
 .footer-icon{font-size:1rem;filter:grayscale(.2)}
+
+/* ============================================
+   باکس‌های نماد اعتماد (اینماد + ساماندهی)
+   ============================================ */
+.trust-boxes{
+  display:flex;justify-content:center;align-items:center;
+  gap:1rem;flex-wrap:wrap;padding:.5rem 0;
+}
+.trust-box{
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  padding:.65rem .85rem;border-radius:1rem;
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 4px 16px rgba(168,85,247,.08),
+    0 1px 4px rgba(255,150,220,.05);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  text-decoration:none;min-width:100px;
+}
+.trust-box:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.6);
+  text-decoration:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 10px 24px rgba(168,85,247,.18),
+    0 3px 10px rgba(255,150,220,.1);
+}
+.trust-box img{width:80px;height:80px;object-fit:contain;display:block}
+.trust-label{font-size:.8rem;font-weight:600;color:var(--muted);text-align:center}
+html[data-theme="dark"] .trust-box{
+  background:rgba(30,45,55,.45);
+  border-color:rgba(150,180,200,.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 4px 16px rgba(0,0,0,.3);
+}
+html[data-theme="dark"] .trust-box:hover{
+  background:rgba(45,65,80,.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 10px 24px rgba(0,0,0,.45),
+    0 3px 10px rgba(168,85,247,.15);
+}
+
+/* کپی‌رایت */
 .footer-bottom{text-align:center;padding-top:.5rem}
 .footer-bottom p{margin:.25rem 0;font-size:.85rem;color:var(--muted)}
 .footer-credit{font-size:.8rem;color:#8a99a1}
@@ -708,32 +699,13 @@ html[data-theme="dark"] .card:hover{
   .store-name{font-size:calc(1.55rem * var(--font-scale))}
   .store-tagline{font-size:calc(.95rem * var(--font-scale))}
   .holo-divider{width:90%}
-
   .hero-lead{font-size:calc(.95rem * var(--font-scale));padding:.85rem 1.1rem}
-
-  .category-box{
-    width:100%;
-    max-width:none;
-    padding:.5rem .55rem;
-    border-radius:.85rem;
-  }
+  .category-box{width:100%;max-width:none;padding:.5rem .55rem;border-radius:.85rem}
   .category-nav{gap:.35rem}
   .category-nav a{padding:.5rem 1rem;font-size:calc(.88rem * var(--font-scale))}
-
   .sticky-bar{padding:.4rem 0}
-  .control-box{
-    width:100%;
-    max-width:none;
-    gap:.35rem;
-    padding:.4rem .5rem;
-    border-radius:.85rem;
-    flex-wrap:nowrap;
-  }
-  .search-box{
-    flex:1 1 auto;
-    min-width:0;
-    padding:.3rem .7rem;
-  }
+  .control-box{width:100%;max-width:none;gap:.35rem;padding:.4rem .5rem;border-radius:.85rem;flex-wrap:nowrap}
+  .search-box{flex:1 1 auto;min-width:0;padding:.3rem .7rem}
   .search-box input[type="search"]{font-size:calc(.85rem * var(--font-scale))}
   .nav-controls{order:0;gap:.25rem;flex:0 0 auto}
   .ctrl-btn{min-width:2.15rem;height:2.15rem;font-size:.8rem;padding:0 .45rem}
@@ -746,6 +718,10 @@ html[data-theme="dark"] .card:hover{
   .footer-links li{justify-content:center}
   .footer-links a:hover{transform:none}
   .footer-desc{margin:0 auto}
+  .trust-boxes{gap:.75rem}
+  .trust-box{padding:.5rem .7rem;min-width:85px}
+  .trust-box img{width:65px;height:65px}
+  .trust-label{font-size:.75rem}
 }
 @media(max-width:420px){
   .holo-logo{width:110px;height:110px}
