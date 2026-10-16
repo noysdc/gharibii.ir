@@ -1,6 +1,7 @@
 {%- assign p = include.product -%}
+{%- assign card_image = p.images[0] -%}
 <a class="card" href="{{ p.url | relative_url }}">
-  <span class="card-img"><img src="{% include img.html src=p.images[0] %}" alt="{{ p.title | escape }}" loading="lazy" width="600" height="800"></span>
+  <span class="card-img"><img src="{% include img.html src=card_image %}" alt="{{ p.title | escape }}" loading="lazy" width="600" height="800"></span>
   <span class="card-title">{{ p.title }}</span>
   <span class="card-price">{% include price.html value=p.price %}</span>
 </a>
