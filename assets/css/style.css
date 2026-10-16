@@ -383,3 +383,185 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
     animation: none;
   }
 }
+/* ============================================
+   هدر با لوگوی هولوگرامی وسط‌چین و بزرگ
+   ============================================ */
+.site-header .bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  min-height: 6rem;
+  padding: .5rem 0;
+}
+
+.brand {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.site-header nav {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: .5rem;
+}
+
+/* ============================================
+   ظرف لوگو
+   ============================================ */
+.holo-logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  isolation: isolate;
+  transition: transform .3s ease;
+}
+
+/* حلقه رنگین‌کمانی چرخان دور لوگو */
+.holo-logo::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #ff0080,
+    #ff8c00,
+    #ffd700,
+    #00ff88,
+    #00cfff,
+    #a855f7,
+    #ff0080
+  );
+  animation: holo-spin 5s linear infinite;
+  z-index: 0;
+  filter: blur(1px);
+}
+
+/* هاله محو بیرونی */
+.holo-logo::after {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg,
+    #ff008066,
+    #00cfff66,
+    #a855f766,
+    #ff008066
+  );
+  animation: holo-spin 7s linear infinite reverse;
+  filter: blur(16px);
+  z-index: -1;
+  opacity: .9;
+}
+
+/* ============================================
+   خود تصویر لوگو — با درخشش هولوگرامی
+   ============================================ */
+.holo-logo img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, .7),
+    inset 0 0 40px rgba(168, 85, 247, .15),
+    0 4px 14px rgba(10, 102, 112, .25);
+  animation: holo-glow 5s ease-in-out infinite alternate;
+}
+
+/* ============================================
+   انیمیشن‌ها
+   ============================================ */
+@keyframes holo-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes holo-glow {
+  0% {
+    filter:
+      hue-rotate(0deg)
+      saturate(1.1)
+      drop-shadow(0 0 6px rgba(255, 0, 128, .55))
+      drop-shadow(0 0 12px rgba(0, 207, 255, .45));
+  }
+  50% {
+    filter:
+      hue-rotate(120deg)
+      saturate(1.35)
+      drop-shadow(0 0 10px rgba(0, 207, 255, .65))
+      drop-shadow(0 0 20px rgba(168, 85, 247, .55));
+  }
+  100% {
+    filter:
+      hue-rotate(240deg)
+      saturate(1.15)
+      drop-shadow(0 0 8px rgba(168, 85, 247, .6))
+      drop-shadow(0 0 16px rgba(255, 140, 0, .5));
+  }
+}
+
+/* هاور */
+.brand:hover .holo-logo {
+  transform: scale(1.06);
+}
+
+.brand:hover .holo-logo::before {
+  animation-duration: 1.8s;
+}
+
+/* ============================================
+   ریسپانسیو
+   ============================================ */
+@media (max-width: 760px) {
+  .site-header .bar {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: auto;
+    gap: .5rem;
+    padding: .75rem 0;
+  }
+  .brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .site-header nav {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+  }
+  .holo-logo {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 420px) {
+  .holo-logo {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+/* احترام به تنظیمات کاربر */
+@media (prefers-reduced-motion: reduce) {
+  .holo-logo::before,
+  .holo-logo::after,
+  .holo-logo img {
+    animation: none;
+  }
+}
