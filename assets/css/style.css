@@ -68,8 +68,6 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   animation:crystal-shine 8s ease-in-out infinite;
   overflow:hidden;
 }
-
-/* لایه براقی متحرک */
 .holo-logo::before{
   content:"";
   position:absolute;
@@ -87,8 +85,6 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   pointer-events:none;
   mix-blend-mode:screen;
 }
-
-/* بازتاب رنگین‌کمانی ملایم دور لبه‌ها */
 .holo-logo::after{
   content:"";
   position:absolute;
@@ -110,8 +106,6 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   pointer-events:none;
   filter:blur(.5px);
 }
-
-/* خود تصویر لوگو */
 .holo-logo img{
   position:relative;
   z-index:1;
@@ -146,6 +140,7 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
     0 0 8px rgba(200,180,255,.5),
     0 0 16px rgba(255,200,240,.35);
   position:relative;
+  margin:0 auto;
 }
 .holo-divider::after{
   content:"";
@@ -164,60 +159,115 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
 /* ============================================
    عنوان فروشگاه
    ============================================ */
-.store-title{text-align:center;margin:.25rem 0}
+.store-title{text-align:center;margin:.5rem 0}
 .store-name{
-  font-size:1.5rem;
+  font-size:2.1rem;
   font-weight:700;
   color:var(--sea-deep);
   margin:0;
   line-height:1.4;
   letter-spacing:-.01em;
+  text-shadow:0 1px 2px rgba(10,102,112,.08);
 }
 .store-tagline{
-  font-size:.95rem;
+  font-size:1.15rem;
   color:var(--muted);
-  margin:.15rem 0 0;
+  margin:.35rem 0 0;
   font-weight:400;
 }
 
 /* ============================================
-   نوار دسته‌بندی
+   نوار دسته‌بندی — دکمه‌های شیشه‌ای
    ============================================ */
 .category-nav{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:.5rem;
-  margin-top:.5rem;
+  gap:.65rem;
+  margin-top:.75rem;
   width:100%;
 }
 .category-nav a{
+  position:relative;
   display:inline-block;
-  padding:.45rem 1.1rem;
+  padding:.65rem 1.5rem;
   border-radius:999px;
-  background:linear-gradient(135deg, #f3f7f8, #e8f0f4);
+  font-size:1.05rem;
+  font-weight:600;
   color:var(--sea-deep);
-  font-size:.95rem;
-  font-weight:500;
-  border:1px solid var(--line);
   text-decoration:none;
-  transition:all .25s ease;
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .25s ease, box-shadow .25s ease, color .25s ease, background .25s ease;
+  background:rgba(255, 255, 255, 0.55);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border:1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(200,180,255,.3),
+    0 4px 12px rgba(10,102,112,.08),
+    0 0 0 1px rgba(200,180,255,.15);
+}
+.category-nav a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.7) 0%,
+    rgba(255,255,255,0) 35%,
+    rgba(255,255,255,0) 65%,
+    rgba(200,230,255,.4) 100%
+  );
+  pointer-events:none;
+  z-index:-1;
+}
+.category-nav a::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.7) 50%,
+    transparent 100%
+  );
+  transition:left .6s ease;
+  pointer-events:none;
+  z-index:-1;
 }
 .category-nav a:hover{
-  background:linear-gradient(135deg, #e8d5ff, #c8e6ff);
-  border-color:#c8b8ff;
-  color:var(--sea-deep);
   text-decoration:none;
-  transform:translateY(-1px);
-  box-shadow:0 4px 12px rgba(168,85,247,.18);
+  color:var(--sea-deep);
+  transform:translateY(-2px);
+  background:rgba(255, 255, 255, 0.7);
+  border-color:rgba(200, 184, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(200,180,255,.4),
+    0 8px 22px rgba(168,85,247,.18),
+    0 0 0 1px rgba(200,180,255,.3);
 }
+.category-nav a:hover::after{left:100%}
 .category-nav a[aria-current="page"]{
-  background:linear-gradient(135deg, #a855f7, #0A6670);
-  border-color:transparent;
+  background:linear-gradient(135deg,
+    rgba(168,85,247,.85),
+    rgba(10,102,112,.9));
   color:#fff;
+  border-color:rgba(255,255,255,.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    0 8px 20px rgba(168,85,247,.35);
 }
 
-/* --- انیمیشن‌ها --- */
+/* ============================================
+   انیمیشن‌ها
+   ============================================ */
 @keyframes crystal-shine{
   0%,100%{background-position:0% 0%,100% 100%,0% 50%}
   50%    {background-position:0% 0%,100% 100%,100% 50%}
@@ -240,12 +290,12 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   100%{background-position:200% 0}
 }
 
-/* هاور */
+/* هاور لوگو */
 .brand:hover .holo-logo{transform:scale(1.05)}
 .brand:hover .holo-logo::before{animation-duration:2s}
 
 /* ============================================
-   دسته‌بندی (کاشی‌های صفحه اصلی)
+   کاشی‌های صفحه اصلی
    ============================================ */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0 .5rem}
 .tile{display:flex;flex-direction:column;justify-content:flex-end;min-height:11rem;padding:1.25rem;border-radius:1.5rem 1.5rem 1.5rem .4rem;color:var(--ink)}
@@ -293,10 +343,139 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
 .btn:hover{text-decoration:none}
 
 /* ============================================
-   فوتر و 404
+   فوتر
    ============================================ */
-.site-footer{margin-top:3.5rem;padding:2rem 0;border-top:1px solid var(--line);background:var(--surface)}
-.site-footer p{margin:.2rem 0}
+.site-footer{
+  margin-top:4rem;
+  padding:3rem 0 2rem;
+  background:linear-gradient(180deg,
+    var(--surface) 0%,
+    #f8fbfc 50%,
+    #f3f7f8 100%);
+  border-top:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-20%;
+  width:60%;
+  height:200%;
+  background:radial-gradient(ellipse at center,
+    rgba(200,180,255,.12) 0%,
+    transparent 60%);
+  pointer-events:none;
+}
+.site-footer::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  right:-20%;
+  width:60%;
+  height:200%;
+  background:radial-gradient(ellipse at center,
+    rgba(200,240,255,.12) 0%,
+    transparent 60%);
+  pointer-events:none;
+}
+.footer-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  gap:1.75rem;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:2rem;
+  padding:.5rem 0;
+}
+.footer-col h3{
+  font-size:1.35rem;
+  font-weight:700;
+  color:var(--sea-deep);
+  margin:0 0 .5rem;
+  line-height:1.4;
+}
+.footer-col h4{
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--sea-deep);
+  margin:0 0 .85rem;
+  position:relative;
+  padding-bottom:.5rem;
+}
+.footer-col h4::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:2.5rem;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,
+    #c8b8ff, #b8e0ff, #b8ffd8);
+}
+.footer-tagline{
+  font-size:.95rem;
+  color:var(--sea);
+  margin:.15rem 0 .75rem;
+  font-weight:500;
+}
+.footer-desc{
+  font-size:.9rem;
+  color:var(--muted);
+  line-height:1.9;
+  margin:0;
+  max-width:36ch;
+}
+.footer-links{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+}
+.footer-links li{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  font-size:.9rem;
+  color:var(--muted);
+}
+.footer-links a{
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .2s ease, transform .2s ease;
+  display:inline-block;
+}
+.footer-links a:hover{
+  color:var(--sea);
+  text-decoration:none;
+  transform:translateX(-3px);
+}
+.footer-icon{
+  font-size:1rem;
+  filter:grayscale(.2);
+}
+.footer-bottom{
+  text-align:center;
+  padding-top:.5rem;
+}
+.footer-bottom p{
+  margin:.25rem 0;
+  font-size:.85rem;
+  color:var(--muted);
+}
+.footer-credit{
+  font-size:.8rem;
+  color:#8a99a1;
+}
+
 .notfound{padding:2rem 0}
 
 /* ============================================
@@ -309,19 +488,41 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
   .tile{min-height:14rem}
   h1{font-size:2.3rem}
 }
+@media(max-width:900px){
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:1.75rem;
+  }
+}
 @media(max-width:760px){
   .header-inner{padding:1rem 0 .75rem;gap:.5rem}
   .holo-logo{width:100px;height:100px}
-  .store-name{font-size:1.25rem}
-  .store-tagline{font-size:.85rem}
+  .store-name{font-size:1.55rem}
+  .store-tagline{font-size:.95rem}
   .holo-divider{width:90%}
-  .category-nav{gap:.35rem}
-  .category-nav a{padding:.35rem .85rem;font-size:.85rem}
+  .category-nav{gap:.45rem}
+  .category-nav a{padding:.5rem 1.1rem;font-size:.9rem}
+}
+@media(max-width:600px){
+  .site-footer{padding:2rem 0 1.5rem;margin-top:3rem}
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:1.5rem;
+    text-align:center;
+  }
+  .footer-col h4::after{
+    right:50%;
+    transform:translateX(50%);
+  }
+  .footer-links li{justify-content:center}
+  .footer-links a:hover{transform:none}
+  .footer-desc{margin:0 auto}
 }
 @media(max-width:420px){
   .holo-logo{width:84px;height:84px}
-  .store-name{font-size:1.1rem}
-  .category-nav a{padding:.3rem .7rem;font-size:.8rem}
+  .store-name{font-size:1.3rem}
+  .store-tagline{font-size:.85rem}
+  .category-nav a{padding:.45rem .9rem;font-size:.85rem}
 }
 @media(prefers-reduced-motion:reduce){
   .tile:hover{transform:none;transition:none}

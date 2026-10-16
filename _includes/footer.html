@@ -1,7 +1,70 @@
 <footer class="site-footer">
-  <div class="wrap">
-    <p>سفارش و خرید به‌صورت تلفنی یا واتساپ انجام می‌شود.</p>
-    <p>{{ site.address }} · تلفن: <bdi>{{ site.phone_display }}</bdi></p>
-    <p class="muted">© {{ site.time | date: "%Y" }} {{ site.title }}</p>
+  <div class="wrap footer-inner">
+
+    <div class="holo-divider" role="presentation"></div>
+
+    <div class="footer-grid">
+
+      <div class="footer-col footer-brand">
+        <h3>فروشگاه غریبی کیش</h3>
+        <p class="footer-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+        <p class="footer-desc">
+          لباس‌های شخصیتی و پرنسسی برای کودکان با کیفیت بالا و طرح‌های اورجینال.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>دسته‌بندی‌ها</h4>
+        <ul class="footer-links">
+          <li><a href="{{ '/girls/' | relative_url }}">پرنسسی دخترانه</a></li>
+          <li><a href="{{ '/boys/' | relative_url }}">شخصیتی پسرانه</a></li>
+          <li><a href="{{ '/bags-shoes/' | relative_url }}">کیف و کفش</a></li>
+          <li><a href="{{ '/crown-wand/' | relative_url }}">تاج و عصا</a></li>
+          <li><a href="{{ '/accessories/' | relative_url }}">اکسسوری‌ها</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>ارتباط با ما</h4>
+        <ul class="footer-links">
+          {% if site.phone_display %}
+          <li>
+            <span class="footer-icon">📞</span>
+            <a href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">{{ site.phone_display }}</a>
+          </li>
+          {% endif %}
+          {% if site.whatsapp_numbers %}
+          <li>
+            <span class="footer-icon">💬</span>
+            <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">واتساپ</a>
+          </li>
+          {% endif %}
+          {% if site.address %}
+          <li>
+            <span class="footer-icon">📍</span>
+            <span>{{ site.address }}</span>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>اطلاعات</h4>
+        <ul class="footer-links">
+          <li><a href="{{ '/' | relative_url }}">صفحه اصلی</a></li>
+          <li><a href="{{ '/girls/' | relative_url }}">محصولات دخترانه</a></li>
+          <li><a href="{{ '/boys/' | relative_url }}">محصولات پسرانه</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="holo-divider" role="presentation"></div>
+
+    <div class="footer-bottom">
+      <p>© {{ 'now' | date: '%Y' }} فروشگاه غریبی کیش — تمامی حقوق محفوظ است.</p>
+      <p class="footer-credit">ساخته شده با ❤️ در کیش</p>
+    </div>
+
   </div>
 </footer>
