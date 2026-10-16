@@ -1,97 +1,224 @@
-{%- assign idx = include.index | modulo: 4 -%}
-<div class="toon-divider toon-{{ idx }}" role="presentation" aria-hidden="true">
+{%- assign idx = include.index | modulo: 6 -%}
+<div class="toon-divider" role="presentation" aria-hidden="true">
+  <span class="toon-line toon-line-left"></span>
 
-  {%- if idx == 0 -%}
-  <!-- تاج پرنسسی -->
-  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  {%- case idx -%}
+  {%- when 0 -%}
+  <!-- 💎 الماس پرنسسی ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="crownGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#ffd700"/>
-        <stop offset="50%" stop-color="#ff8c00"/>
-        <stop offset="100%" stop-color="#ff0080"/>
+      <linearGradient id="diamondTop" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#b8e0ff"/>
+        <stop offset="50%" stop-color="#ffb8e8"/>
+        <stop offset="100%" stop-color="#c8b8ff"/>
       </linearGradient>
-      <linearGradient id="jewelGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#00cfff"/>
-        <stop offset="100%" stop-color="#a855f7"/>
+      <linearGradient id="diamondLeft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#a855f7"/>
+        <stop offset="100%" stop-color="#6d28d9"/>
       </linearGradient>
-    </defs>
-    <!-- تاج -->
-    <path class="crown-base" d="M40 60 L60 25 L80 45 L100 15 L120 45 L140 25 L160 60 Z"
-          fill="url(#crownGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-    <!-- جواهر -->
-    <circle class="crown-jewel" cx="100" cy="15" r="5" fill="url(#jewelGrad)"/>
-    <circle class="crown-jewel" cx="60" cy="25" r="4" fill="url(#jewelGrad)"/>
-    <circle class="crown-jewel" cx="140" cy="25" r="4" fill="url(#jewelGrad)"/>
-    <!-- ستاره‌های چشمک‌زن -->
-    <path class="sparkle s1" d="M50 55 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2 z" fill="#fff"/>
-    <path class="sparkle s2" d="M150 55 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2 z" fill="#fff"/>
-  </svg>
-
-  {%- elsif idx == 1 -%}
-  <!-- پروانه پرنسسی -->
-  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="wingGrad" cx="0.5" cy="0.5" r="0.7">
-        <stop offset="0%" stop-color="#ffb8e8"/>
-        <stop offset="50%" stop-color="#c8b8ff"/>
-        <stop offset="100%" stop-color="#b8e0ff"/>
+      <linearGradient id="diamondRight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d946ef"/>
+        <stop offset="100%" stop-color="#9333ea"/>
+      </linearGradient>
+      <radialGradient id="diamondShine" cx="0.3" cy="0.3" r="0.5">
+        <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
       </radialGradient>
+      <filter id="glowDiamond">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
-    <g class="butterfly" transform="translate(100 40)">
-      <!-- بال چپ -->
-      <ellipse class="wing wing-left" cx="-25" cy="-8" rx="22" ry="18" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5"/>
-      <ellipse class="wing wing-left" cx="-18" cy="12" rx="14" ry="12" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5" opacity=".85"/>
-      <!-- بال راست -->
-      <ellipse class="wing wing-right" cx="25" cy="-8" rx="22" ry="18" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5"/>
-      <ellipse class="wing wing-right" cx="18" cy="12" rx="14" ry="12" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5" opacity=".85"/>
-      <!-- بدن -->
-      <ellipse cx="0" cy="0" rx="3" ry="14" fill="#073E45"/>
-      <!-- شاخک -->
-      <path d="M-2 -12 Q-8 -22 -12 -22 M2 -12 Q8 -22 12 -22" stroke="#073E45" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <circle cx="-12" cy="-22" r="2" fill="#ff0080"/>
-      <circle cx="12" cy="-22" r="2" fill="#ff0080"/>
+    <g filter="url(#glowDiamond)" transform="translate(60 60)">
+      <path d="M-30 -20 L-15 -35 L15 -35 L30 -20 L0 30 Z" fill="url(#diamondTop)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" class="diamond-body"/>
+      <path d="M-30 -20 L0 30 L0 -35 L-15 -35 Z" fill="url(#diamondLeft)" opacity=".7"/>
+      <path d="M30 -20 L0 30 L0 -35 L15 -35 Z" fill="url(#diamondRight)" opacity=".7"/>
+      <ellipse cx="-8" cy="-15" rx="8" ry="12" fill="url(#diamondShine)" opacity=".6" transform="rotate(-20)"/>
     </g>
   </svg>
 
-  {%- elsif idx == 2 -%}
-  <!-- ستاره جادویی -->
-  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  {%- when 1 -%}
+  <!-- 👑 تاج پرنسسی ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#ffd700"/>
-        <stop offset="50%" stop-color="#ff8c00"/>
-        <stop offset="100%" stop-color="#ff0080"/>
+      <linearGradient id="crownBody" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffe066"/>
+        <stop offset="50%" stop-color="#ffa726"/>
+        <stop offset="100%" stop-color="#ff6f00"/>
       </linearGradient>
+      <linearGradient id="crownDark" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ff8c00"/>
+        <stop offset="100%" stop-color="#e65100"/>
+      </linearGradient>
+      <linearGradient id="jewel1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#00e5ff"/>
+        <stop offset="100%" stop-color="#00b0ff"/>
+      </linearGradient>
+      <linearGradient id="jewel2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ff4d94"/>
+        <stop offset="100%" stop-color="#d500f9"/>
+      </linearGradient>
+      <filter id="glowCrown">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
-    <g class="star-group" transform="translate(100 40)">
-      <path class="star" d="M0 -25 L7 -8 L25 -8 L11 3 L16 22 L0 12 L-16 22 L-11 3 L-25 -8 L-7 -8 Z"
-            fill="url(#starGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-      <circle class="star-center" cx="0" cy="0" r="4" fill="#fff" opacity=".9"/>
+    <g filter="url(#glowCrown)" transform="translate(60 65)">
+      <path d="M-38 15 L-38 -5 L-22 -20 L-8 0 L0 -25 L8 0 L22 -20 L38 -5 L38 15 Z"
+            fill="url(#crownBody)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" class="crown-body"/>
+      <path d="M-38 15 L38 15 L38 25 L-38 25 Z" fill="url(#crownDark)"/>
+      <circle cx="0" cy="-25" r="5" fill="url(#jewel1)" class="crown-jewel"/>
+      <circle cx="-22" cy="-20" r="4" fill="url(#jewel2)" class="crown-jewel"/>
+      <circle cx="22" cy="-20" r="4" fill="url(#jewel2)" class="crown-jewel"/>
+      <ellipse cx="-25" cy="-5" rx="4" ry="8" fill="#fff" opacity=".35" transform="rotate(-20 -25 -5)"/>
     </g>
-    <!-- جرقه‌های دور -->
-    <circle class="sparkle s1" cx="55" cy="25" r="2" fill="#ffb8e8"/>
-    <circle class="sparkle s2" cx="145" cy="25" r="2" fill="#b8e0ff"/>
-    <circle class="sparkle s3" cx="70" cy="60" r="1.5" fill="#ffd700"/>
-    <circle class="sparkle s4" cx="130" cy="60" r="1.5" fill="#c8b8ff"/>
+  </svg>
+
+  {%- when 2 -%}
+  <!-- ⭐ ستاره جادویی ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="starMain" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fff59d"/>
+        <stop offset="40%" stop-color="#ffd54f"/>
+        <stop offset="100%" stop-color="#ff8f00"/>
+      </linearGradient>
+      <linearGradient id="starShine" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="glowStar">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#glowStar)" transform="translate(60 60)">
+      <path d="M0 -38 L10 -12 L38 -12 L16 6 L24 34 L0 18 L-24 34 L-16 6 L-38 -12 L-10 -12 Z"
+            fill="url(#starMain)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" class="star-body"/>
+      <ellipse cx="-8" cy="-12" rx="6" ry="10" fill="url(#starShine)" transform="rotate(-30 -8 -12)"/>
+      <circle cx="0" cy="0" r="4" fill="#fff" opacity=".9"/>
+    </g>
+  </svg>
+
+  {%- when 3 -%}
+  <!-- 🌙 ماه و ستاره ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="moonGrad" cx="0.35" cy="0.35" r="0.7">
+        <stop offset="0%" stop-color="#fff9c4"/>
+        <stop offset="50%" stop-color="#ffd54f"/>
+        <stop offset="100%" stop-color="#ff8f00"/>
+      </radialGradient>
+      <radialGradient id="moonShine" cx="0.3" cy="0.3" r="0.4">
+        <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glowMoon">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#glowMoon)" transform="translate(60 60)">
+      <path d="M10 -30 A30 30 0 1 0 10 30 A24 24 0 1 1 10 -30 Z"
+            fill="url(#moonGrad)" class="moon-body"/>
+      <ellipse cx="-8" cy="-10" rx="6" ry="10" fill="url(#moonShine)" transform="rotate(-30 -8 -10)"/>
+      <circle cx="25" cy="-15" r="3" fill="#fff9c4" class="moon-spark"/>
+      <circle cx="32" cy="5" r="2" fill="#fff9c4" class="moon-spark"/>
+      <circle cx="22" cy="20" r="2.5" fill="#fff9c4" class="moon-spark"/>
+    </g>
+  </svg>
+
+  {%- when 4 -%}
+  <!-- 🦋 پروانه ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wingMain" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ff80ab"/>
+        <stop offset="50%" stop-color="#e040fb"/>
+        <stop offset="100%" stop-color="#7c4dff"/>
+      </linearGradient>
+      <linearGradient id="wingInner" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#b388ff"/>
+        <stop offset="100%" stop-color="#536dfe"/>
+      </linearGradient>
+      <radialGradient id="wingShine" cx="0.3" cy="0.3" r="0.5">
+        <stop offset="0%" stop-color="#fff" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glowButterfly">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#glowButterfly)" transform="translate(60 60)">
+      <ellipse class="wing wing-left" cx="-18" cy="-12" rx="18" ry="16" fill="url(#wingMain)"/>
+      <ellipse class="wing wing-left" cx="-14" cy="10" rx="12" ry="10" fill="url(#wingInner)"/>
+      <ellipse class="wing wing-right" cx="18" cy="-12" rx="18" ry="16" fill="url(#wingMain)"/>
+      <ellipse class="wing wing-right" cx="14" cy="10" rx="12" ry="10" fill="url(#wingInner)"/>
+      <ellipse cx="-18" cy="-14" rx="6" ry="8" fill="url(#wingShine)" transform="rotate(-20 -18 -14)"/>
+      <ellipse cx="18" cy="-14" rx="6" ry="8" fill="url(#wingShine)" transform="rotate(20 18 -14)"/>
+      <ellipse cx="0" cy="0" rx="3" ry="16" fill="#4a148c"/>
+      <path d="M-2 -14 Q-8 -24 -12 -24 M2 -14 Q8 -24 12 -24" stroke="#4a148c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="-12" cy="-24" r="2" fill="#ff4081"/>
+      <circle cx="12" cy="-24" r="2" fill="#ff4081"/>
+    </g>
   </svg>
 
   {%- else -%}
-  <!-- قلب پرنسسی -->
-  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- 🎀 روبان پرنسسی ۳بعدی -->
+  <svg class="toon-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#ff0080"/>
-        <stop offset="50%" stop-color="#ff66c4"/>
-        <stop offset="100%" stop-color="#a855f7"/>
+      <linearGradient id="ribbonMain" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ff80ab"/>
+        <stop offset="50%" stop-color="#ff4081"/>
+        <stop offset="100%" stop-color="#c2185b"/>
       </linearGradient>
+      <linearGradient id="ribbonLight" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffb8d9"/>
+        <stop offset="100%" stop-color="#ff80ab"/>
+      </linearGradient>
+      <radialGradient id="ribbonShine" cx="0.3" cy="0.3" r="0.5">
+        <stop offset="0%" stop-color="#fff" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glowRibbon">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
-    <g class="heart-group" transform="translate(100 40)">
-      <path class="heart" d="M0 15 C-25 -5 -30 5 -22 12 C-15 18 -5 20 0 12 C5 20 15 18 22 12 C30 5 25 -5 0 15 Z"
-            fill="url(#heartGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <g filter="url(#glowRibbon)" transform="translate(60 60)">
+      <path d="M-25 -18 Q-40 -10 -38 5 Q-35 15 -20 12 Q-10 8 -5 0 Q-15 -8 -25 -18 Z"
+            fill="url(#ribbonMain)" class="ribbon-left"/>
+      <path d="M25 -18 Q40 -10 38 5 Q35 15 20 12 Q10 8 5 0 Q15 -8 25 -18 Z"
+            fill="url(#ribbonMain)" class="ribbon-right"/>
+      <path d="M-22 -15 Q-32 -8 -30 3 Q-28 10 -18 8 Q-12 5 -8 0 Q-15 -6 -22 -15 Z"
+            fill="url(#ribbonLight)" opacity=".6"/>
+      <path d="M22 -15 Q32 -8 30 3 Q28 10 18 8 Q12 5 8 0 Q15 -6 22 -15 Z"
+            fill="url(#ribbonLight)" opacity=".6"/>
+      <circle cx="0" cy="0" r="6" fill="url(#ribbonMain)" stroke="#fff" stroke-width="1"/>
+      <circle cx="-2" cy="-2" r="2" fill="url(#ribbonShine)"/>
+      <path d="M-15 12 Q-5 20 -8 30 M15 12 Q5 20 8 30" stroke="url(#ribbonMain)" stroke-width="4" fill="none" stroke-linecap="round" class="ribbon-tail"/>
     </g>
-    <path class="sparkle s1" d="M55 30 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 z" fill="#fff"/>
-    <path class="sparkle s2" d="M145 30 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 z" fill="#fff"/>
   </svg>
-  {%- endif -%}
+  {%- endcase -%}
 
+  <span class="toon-line toon-line-right"></span>
 </div>
