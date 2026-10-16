@@ -1,0 +1,2 @@
+{%- assign src = include.src | default: '/assets/images/placeholder.svg' -%}
+{%- if src contains '://' -%}{{ src }}{%- else -%}{{ src | relative_url }}{%- endif -%}

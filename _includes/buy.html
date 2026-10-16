@@ -1,0 +1,9 @@
+{%- capture msg -%}سلام، می‌خواهم این محصول را سفارش بدهم: {{ page.title }} — {{ page.url | absolute_url }}{%- endcapture -%}
+<details class="buy">
+  <summary>خرید</summary>
+  <div class="buy-links">
+    {% for w in site.whatsapp_numbers %}
+    <a class="wa" href="https://wa.me/{{ w.number }}?text={{ msg | url_encode }}" rel="noopener" target="_blank">{{ w.label }}</a>
+    {% endfor %}
+  </div>
+</details>

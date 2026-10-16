@@ -1,0 +1,15 @@
+{%- assign p = include.value | plus: 0 -%}
+{%- if p > 0 -%}
+{%- assign un = p | modulo: 1000 | prepend: '00' | slice: -3, 3 -%}
+{%- assign th_all = p | divided_by: 1000 -%}
+{%- assign th = th_all | modulo: 1000 -%}
+{%- assign mil = th_all | divided_by: 1000 -%}
+{%- capture txt -%}
+{%- if mil > 0 -%}{{ mil }},{{ th | prepend: '00' | slice: -3, 3 }},{{ un }}
+{%- elsif th_all > 0 -%}{{ th_all }},{{ un }}
+{%- else -%}{{ p }}{%- endif -%}
+{%- endcapture -%}
+{{- txt | replace: '0','۰' | replace: '1','۱' | replace: '2','۲' | replace: '3','۳' | replace: '4','۴' | replace: '5','۵' | replace: '6','۶' | replace: '7','۷' | replace: '8','۸' | replace: '9','۹' }} تومان
+{%- else -%}
+تماس بگیرید
+{%- endif -%}

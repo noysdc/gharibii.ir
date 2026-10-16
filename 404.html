@@ -1,0 +1,23 @@
+---
+layout: default
+title: صفحه پیدا نشد
+permalink: /404.html
+sitemap: false
+---
+<div class="wrap notfound">
+  <h1>این صفحه پیدا نشد</h1>
+  <p class="lead">ممکن است آدرس قدیمی باشد. از این‌جا ادامه دهید:</p>
+  <p><a class="btn" href="{{ '/' | relative_url }}">صفحه اصلی</a> <a class="btn alt" href="{{ '/girls/' | relative_url }}">دخترانه</a> <a class="btn alt" href="{{ '/boys/' | relative_url }}">پسرانه</a></p>
+</div>
+<script>
+(function () {
+  var map = {{ site.data.redirects | jsonify }} || [];
+  var base = {{ site.baseurl | jsonify }};
+  var here = decodeURIComponent(location.pathname + location.search).replace(/\/+$/, '');
+  if (base && here.indexOf(base) === 0) here = here.slice(base.length);
+  for (var i = 0; i < map.length; i++) {
+    var from = decodeURIComponent(map[i].from).replace(/\/+$/, '');
+    if (from === here) { location.replace(base + map[i].to); return; }
+  }
+})();
+</script>

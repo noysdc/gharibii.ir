@@ -1,0 +1,9 @@
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{{ '/' | relative_url }}">غریبی<small>کیش</small></a>
+    <nav aria-label="دسته‌بندی">
+      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>دخترانه</a>
+      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>پسرانه</a>
+    </nav>
+  </div>
+</header>

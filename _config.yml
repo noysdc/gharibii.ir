@@ -1,0 +1,42 @@
+# ---------- تنظیمات اصلی ----------
+title: فروشگاه غریبی کیش
+description: پوشاک دخترانه و پسرانه — قیمت و عکس محصولات، خرید تلفنی و واتساپ
+lang: fa
+
+# هنگام تست روی github.io:  url و baseurl را مثل پایین بگذارید
+# بعد از وصل کردن دامنه:    url: "https://gharibii.ir"   و   baseurl: ""
+url: "https://noysdc.github.io"
+baseurl: "/gharibii.ir"
+
+# ---------- شماره‌های واتساپ (بدون + و صفر اول، با کد کشور) ----------
+whatsapp_numbers:
+  - number: "989120000000"
+    label: "واتساپ شماره ۱"
+  - number: "989130000000"
+    label: "واتساپ شماره ۲"
+phone_display: "۰۷۶-۰۰۰۰۰۰۰۰"
+address: "جزیره کیش"
+
+# ---------- محصولات ----------
+collections:
+  products:
+    output: true
+    permalink: /products/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: products
+    values:
+      layout: product
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+exclude:
+  - README.md
+  - tools
+  - Gemfile
+  - Gemfile.lock

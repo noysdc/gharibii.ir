@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{%- assign items = site.products | where: 'category', page.category | sort: 'date' | reverse -%}
+<div class="wrap">
+  <nav class="crumbs" aria-label="مسیر"><a href="{{ '/' | relative_url }}">خانه</a> / {{ page.title }}</nav>
+  <h1>{{ page.title }}</h1>
+  {% if content != '' %}<div class="lead">{{ content }}</div>{% endif %}
+  {% if items.size > 0 %}
+  <div class="grid">{% for p in items %}{% include product-card.html product=p %}{% endfor %}</div>
+  {% else %}
+  <p class="muted">هنوز محصولی در این دسته ثبت نشده است.</p>
+  {% endif %}
+</div>
