@@ -3,6 +3,7 @@
 
     <div class="holo-divider" role="presentation"></div>
 
+    <!-- گرید اصلی: ۲ ستون -->
     <div class="footer-grid footer-grid-2">
 
       <!-- ستون ۱: برند -->
@@ -17,29 +18,52 @@
       <!-- ستون ۲: تماس با من -->
       <div class="footer-col">
         <h4>تماس با من</h4>
-        <ul class="footer-links">
+        <ul class="contact-list">
+
           {% if site.phone_display %}
-          <li>
-            <span class="footer-icon">📞</span>
-            <a href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">{{ site.phone_display }}</a>
+          <li class="contact-item">
+            <a href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">
+              <span class="contact-icon">📞</span>
+              <span class="contact-text">
+                <span class="contact-label">تلفن</span>
+                <span class="contact-value">{{ site.phone_display }}</span>
+              </span>
+            </a>
           </li>
           {% endif %}
+
           {% if site.whatsapp_numbers %}
-          <li>
-            <span class="footer-icon">💬</span>
-            <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">واتساپ</a>
+          <li class="contact-item">
+            <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
+              <span class="contact-icon">💬</span>
+              <span class="contact-text">
+                <span class="contact-label">واتساپ</span>
+                <span class="contact-value">ارسال پیام</span>
+              </span>
+            </a>
           </li>
           {% endif %}
-          <li>
-            <span class="footer-icon">✉️</span>
-            <a href="mailto:contact@gharibii.ir">contact@gharibii.ir</a>
+
+          <li class="contact-item">
+            <a href="mailto:contact@gharibii.ir">
+              <span class="contact-icon">✉️</span>
+              <span class="contact-text">
+                <span class="contact-label">ایمیل</span>
+                <span class="contact-value">contact@gharibii.ir</span>
+              </span>
+            </a>
           </li>
+
           {% if site.address %}
-          <li>
-            <span class="footer-icon">📍</span>
-            <span>{{ site.address }}</span>
+          <li class="contact-item">
+            <span class="contact-icon">📍</span>
+            <span class="contact-text">
+              <span class="contact-label">آدرس</span>
+              <span class="contact-value">{{ site.address }}</span>
+            </span>
           </li>
           {% endif %}
+
         </ul>
       </div>
 
