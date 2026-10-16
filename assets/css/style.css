@@ -77,22 +77,22 @@ html[data-theme="dark"] .holo-logo img{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.85rem;
-  padding:1.5rem 0 .5rem;
+  gap:1rem;
+  padding:1.75rem 0 .75rem;
 }
 .header-top{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:.75rem;
+  gap:.9rem;
   width:100%;
 }
 .brand{display:flex;align-items:center;justify-content:center;text-decoration:none}
 
-/* --- لوگوی کریستالی --- */
+/* --- لوگوی کریستالی (بزرگ‌تر) --- */
 .holo-logo{
   position:relative;display:inline-flex;align-items:center;justify-content:center;
-  width:130px;height:130px;border-radius:50%;
+  width:180px;height:180px;border-radius:50%;
   transition:transform .4s ease;
   background:
     radial-gradient(circle at 25% 20%,
@@ -110,8 +110,8 @@ html[data-theme="dark"] .holo-logo img{
     inset 0 1px 2px rgba(255,255,255,.9),
     inset 0 -2px 6px rgba(168,85,247,.15),
     inset 2px 2px 12px rgba(0,207,255,.2),
-    0 6px 20px rgba(10,102,112,.18),
-    0 0 40px rgba(200,180,255,.35);
+    0 8px 26px rgba(10,102,112,.2),
+    0 0 50px rgba(200,180,255,.4);
   animation:crystal-shine 8s ease-in-out infinite;
   overflow:hidden;
 }
@@ -149,9 +149,9 @@ html[data-theme="dark"] .holo-logo img{
     brightness(1.05);
 }
 
-/* --- دیوایدر هولوگرامی --- */
+/* --- دیوایدر هولوگرامی (بلندتر) --- */
 .holo-divider{
-  width:min(420px, 85%);height:3px;border-radius:999px;
+  width:min(900px, 92%);height:3px;border-radius:999px;
   background:linear-gradient(90deg,
     transparent 0%,#ffb8e8 15%,#c8b8ff 30%,
     #b8e0ff 50%,#b8ffd8 70%,#ffe8b8 85%,transparent 100%);
@@ -307,16 +307,17 @@ html[data-theme="dark"] .sticky-bar.is-stuck{
   box-shadow:0 4px 20px rgba(0,0,0,.5), 0 2px 12px rgba(168,85,247,.12);
 }
 
+/* --- باکس کنترل‌ها (تک‌ردیفه) --- */
 .control-box{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:.6rem;
-  flex-wrap:wrap;
+  gap:.55rem;
+  flex-wrap:nowrap;
   width:auto;
   max-width:fit-content;
   margin:0 auto;
-  padding:.45rem .65rem;
+  padding:.4rem .6rem;
   border-radius:1rem;
   background:rgba(255,255,255,.4);
   backdrop-filter:blur(20px) saturate(180%);
@@ -338,14 +339,14 @@ html[data-theme="dark"] .control-box{
 }
 
 /* ============================================
-   جستجو
+   جستجو (کوچیک‌تر و متناسب)
    ============================================ */
 .search-box{
   position:relative;
   display:flex;
   align-items:center;
-  gap:.4rem;
-  padding:.4rem .9rem;
+  gap:.35rem;
+  padding:.35rem .8rem;
   border-radius:999px;
   background:rgba(255,255,255,.5);
   border:1px solid rgba(200,184,255,.4);
@@ -353,7 +354,7 @@ html[data-theme="dark"] .control-box{
     inset 0 1px 0 rgba(255,255,255,.9),
     0 1px 4px rgba(168,85,247,.06);
   transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
-  flex:0 1 280px;
+  flex:0 1 240px;
   min-width:180px;
 }
 .search-box:focus-within{
@@ -416,7 +417,7 @@ html[data-theme="dark"] .search-box:focus-within{
 .search-empty{padding:1rem;text-align:center;font-size:.9rem;color:var(--muted)}
 
 /* ============================================
-   کنترل‌ها: فونت + شب/روز — سایز بزرگ
+   کنترل‌ها: فونت + شب/روز
    ============================================ */
 .nav-controls{
   display:flex;
@@ -666,7 +667,7 @@ html[data-theme="dark"] .card:hover{
 @media(max-width:760px){
   .header-inner{padding:1rem 0 .5rem;gap:.6rem}
   .header-top{gap:.5rem}
-  .holo-logo{width:100px;height:100px}
+  .holo-logo{width:130px;height:130px}
   .store-name{font-size:calc(1.55rem * var(--font-scale))}
   .store-tagline{font-size:calc(.95rem * var(--font-scale))}
   .holo-divider{width:90%}
@@ -694,7 +695,6 @@ html[data-theme="dark"] .card:hover{
   .search-box{
     flex:1 1 auto;
     min-width:0;
-    max-width:none;
     padding:.3rem .7rem;
   }
   .search-box input[type="search"]{font-size:calc(.85rem * var(--font-scale))}
@@ -711,7 +711,7 @@ html[data-theme="dark"] .card:hover{
   .footer-desc{margin:0 auto}
 }
 @media(max-width:420px){
-  .holo-logo{width:84px;height:84px}
+  .holo-logo{width:110px;height:110px}
   .store-name{font-size:calc(1.3rem * var(--font-scale))}
   .store-tagline{font-size:calc(.85rem * var(--font-scale))}
   .category-nav a{padding:.45rem .85rem;font-size:calc(.82rem * var(--font-scale))}
