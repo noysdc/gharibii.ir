@@ -16,13 +16,24 @@
 
     <div class="holo-divider" role="presentation"></div>
 
-    <nav class="category-nav" aria-label="دسته‌بندی محصولات">
-      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
-      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
-      <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
-      <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
-      <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
-    </nav>
+    <div class="nav-bar">
+      <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+        <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
+        <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
+        <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
+        <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
+        <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button type="button" class="ctrl-btn" id="font-toggle" aria-label="تنظیم فونت" title="تنظیم اندازه فونت">
+          <span class="ctrl-icon">Aa</span>
+        </button>
+        <button type="button" class="ctrl-btn" id="theme-toggle" aria-label="حالت شب و روز" title="حالت شب/روز">
+          <span class="ctrl-icon theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
 
   </div>
 </header>
