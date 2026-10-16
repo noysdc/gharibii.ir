@@ -177,7 +177,7 @@ html[data-theme="dark"] .holo-logo img{
   color:var(--muted);margin:.35rem 0 0;font-weight:400;
 }
 
-/* --- متن معرفی صفحه اصلی --- */
+/* --- متن معرفی صفحه اصلی (با سایه) --- */
 .hero-intro{
   display:flex;
   flex-direction:column;
@@ -202,15 +202,18 @@ html[data-theme="dark"] .holo-logo img{
   border:1px solid rgba(255,255,255,.65);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.95),
-    0 6px 20px rgba(168,85,247,.1),
-    0 2px 8px rgba(255,150,220,.06);
+    inset 0 -1px 0 rgba(200,180,255,.2),
+    0 8px 24px rgba(168,85,247,.14),
+    0 3px 10px rgba(255,150,220,.1);
 }
 html[data-theme="dark"] .hero-lead{
-  background:rgba(30,45,55,.4);
-  border-color:rgba(150,180,200,.25);
+  background:rgba(30,45,55,.5);
+  border-color:rgba(150,180,200,.3);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
-    0 6px 20px rgba(0,0,0,.35);
+    inset 0 -1px 0 rgba(100,80,150,.15),
+    0 8px 24px rgba(0,0,0,.4),
+    0 3px 10px rgba(168,85,247,.15);
 }
 
 /* ============================================
@@ -230,12 +233,13 @@ html[data-theme="dark"] .hero-lead{
     0 2px 8px rgba(255,150,220,.06);
 }
 html[data-theme="dark"] .category-box{
-  background:rgba(30,45,55,.35);
-  border-color:rgba(150,180,200,.25);
+  background:rgba(30,45,55,.45);
+  border-color:rgba(150,180,200,.3);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 6px 20px rgba(0,0,0,.35),
-    0 2px 8px rgba(168,85,247,.1);
+    inset 0 1px 0 rgba(255,255,255,.1),
+    inset 0 -1px 0 rgba(100,80,150,.2),
+    0 10px 28px rgba(0,0,0,.4),
+    0 3px 12px rgba(168,85,247,.15);
 }
 .category-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem}
 .category-nav a{
@@ -335,12 +339,13 @@ html[data-theme="dark"] .sticky-bar.is-stuck{
     0 2px 8px rgba(255,150,220,.08);
 }
 html[data-theme="dark"] .control-box{
-  background:rgba(30,45,55,.4);
-  border-color:rgba(150,180,200,.25);
+  background:rgba(30,45,55,.5);
+  border-color:rgba(150,180,200,.3);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 6px 20px rgba(0,0,0,.35),
-    0 2px 8px rgba(168,85,247,.12);
+    inset 0 1px 0 rgba(255,255,255,.1),
+    inset 0 -1px 0 rgba(100,80,150,.2),
+    0 10px 28px rgba(0,0,0,.4),
+    0 3px 12px rgba(168,85,247,.15);
 }
 
 /* ============================================
@@ -663,7 +668,7 @@ html[data-theme="dark"] .footer-tagline{color:var(--sea)}
 html[data-theme="dark"] .footer-contact-title{color:var(--ink)}
 
 /* ============================================
-   دکمه‌های تماس — شبیه دکمه‌های دسته‌بندی
+   دکمه‌های تماس — با سایه بنفش/صورتی قوی
    ============================================ */
 .contact-buttons{
   display:flex;
@@ -696,8 +701,8 @@ html[data-theme="dark"] .footer-contact-title{color:var(--ink)}
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 0 -1px 0 rgba(200,180,255,.3),
-    0 4px 12px rgba(168,85,247,.1),
-    0 1px 4px rgba(255,150,220,.06);
+    0 8px 22px rgba(168,85,247,.18),
+    0 3px 10px rgba(255,150,220,.12);
 }
 .contact-btn::before{
   content:"";
@@ -734,8 +739,8 @@ html[data-theme="dark"] .footer-contact-title{color:var(--ink)}
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
     inset 0 -1px 0 rgba(200,180,255,.4),
-    0 8px 22px rgba(168,85,247,.2),
-    0 2px 8px rgba(255,150,220,.12);
+    0 12px 28px rgba(168,85,247,.28),
+    0 4px 14px rgba(255,150,220,.18);
 }
 .contact-btn:hover::after{left:100%}
 
@@ -761,25 +766,31 @@ html[data-theme="dark"] .footer-contact-title{color:var(--ink)}
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 0 -1px 0 rgba(200,180,255,.3),
-    0 4px 12px rgba(168,85,247,.1),
-    0 1px 4px rgba(255,150,220,.06);
+    0 8px 22px rgba(168,85,247,.18),
+    0 3px 10px rgba(255,150,220,.12);
 }
 html[data-theme="dark"] .contact-btn{
-  background:rgba(40,60,75,.5);
-  border-color:rgba(150,180,200,.3);
+  background:rgba(40,60,75,.6);
+  border-color:rgba(150,180,200,.4);
   color:var(--ink);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 4px 12px rgba(0,0,0,.3),
-    0 1px 4px rgba(168,85,247,.1);
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(100,80,150,.2),
+    0 8px 22px rgba(0,0,0,.5),
+    0 3px 12px rgba(168,85,247,.2);
 }
 html[data-theme="dark"] .contact-btn:hover{
-  background:rgba(60,85,105,.75);
-  border-color:rgba(150,120,200,.6);
+  background:rgba(60,85,105,.85);
+  border-color:rgba(150,120,200,.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(100,80,150,.25),
+    0 12px 28px rgba(0,0,0,.6),
+    0 4px 16px rgba(168,85,247,.3);
 }
 html[data-theme="dark"] .contact-btn-address:hover{
-  background:rgba(40,60,75,.5);
-  border-color:rgba(150,180,200,.3);
+  background:rgba(40,60,75,.6);
+  border-color:rgba(150,180,200,.4);
 }
 
 /* ============================================
@@ -860,8 +871,12 @@ html[data-theme="dark"] .contact-btn-address:hover{
   color:var(--sea-deep);line-height:1;text-align:center;
 }
 html[data-theme="dark"] .social-box{
-  background:rgba(30,45,55,.45);
-  border-color:rgba(150,180,200,.25);
+  background:rgba(30,45,55,.5);
+  border-color:rgba(150,180,200,.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 8px 22px rgba(0,0,0,.4),
+    0 3px 10px rgba(168,85,247,.15);
 }
 html[data-theme="dark"] .social-label{color:var(--ink)}
 
@@ -906,8 +921,11 @@ html[data-theme="dark"] .social-label{color:var(--ink)}
 .trust-box img{width:80px;height:80px;object-fit:contain;display:block}
 .trust-label{font-size:.8rem;font-weight:600;color:var(--muted);text-align:center}
 html[data-theme="dark"] .trust-box{
-  background:rgba(30,45,55,.45);
-  border-color:rgba(150,180,200,.25);
+  background:rgba(30,45,55,.5);
+  border-color:rgba(150,180,200,.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 6px 20px rgba(0,0,0,.4);
 }
 
 /* کپی‌رایت */
