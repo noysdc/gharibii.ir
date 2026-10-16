@@ -3,75 +3,48 @@
 
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- گرید اصلی: ۲ ستون -->
-    <div class="footer-grid footer-grid-2">
+    <div class="footer-center">
 
-      <!-- ستون ۱: برند -->
-      <div class="footer-col footer-brand">
-        <h3>فروشگاه غریبی کیش</h3>
-        <p class="footer-tagline">کامل‌ترین فروشگاه لباس‌های شخصیتی در ایران!</p>
-        <p class="footer-desc">
-          لباس‌های شخصیتی و پرنسسی برای کودکان با کیفیت بالا و طرح‌های اورجینال.
-        </p>
-      </div>
+      <h3 class="footer-store-name">فروشگاه غریبی کیش</h3>
 
-      <!-- ستون ۲: تماس با من -->
-      <div class="footer-col">
-        <h4>تماس با من</h4>
-        <ul class="contact-list">
+      <p class="footer-tagline">کامل‌ترین فروشگاه لباس‌های شخصیتی در ایران!</p>
 
-          {% if site.phone_display %}
-          <li class="contact-item">
-            <a href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">
-              <span class="contact-icon">📞</span>
-              <span class="contact-text">
-                <span class="contact-label">تلفن</span>
-                <span class="contact-value">{{ site.phone_display }}</span>
-              </span>
-            </a>
-          </li>
-          {% endif %}
+      <h4 class="footer-contact-title">تماس با من</h4>
 
-          {% if site.whatsapp_numbers %}
-          <li class="contact-item">
-            <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
-              <span class="contact-icon">💬</span>
-              <span class="contact-text">
-                <span class="contact-label">واتساپ</span>
-                <span class="contact-value">ارسال پیام</span>
-              </span>
-            </a>
-          </li>
-          {% endif %}
+      <div class="contact-buttons">
 
-          <li class="contact-item">
-            <a href="mailto:contact@gharibii.ir">
-              <span class="contact-icon">✉️</span>
-              <span class="contact-text">
-                <span class="contact-label">ایمیل</span>
-                <span class="contact-value">contact@gharibii.ir</span>
-              </span>
-            </a>
-          </li>
+        {% if site.phone_display %}
+        <a class="contact-btn" href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">
+          <span class="contact-btn-icon">📞</span>
+          <span class="contact-btn-text">{{ site.phone_display }}</span>
+        </a>
+        {% endif %}
 
-          {% if site.address %}
-          <li class="contact-item">
-            <span class="contact-icon">📍</span>
-            <span class="contact-text">
-              <span class="contact-label">آدرس</span>
-              <span class="contact-value">{{ site.address }}</span>
-            </span>
-          </li>
-          {% endif %}
+        {% if site.whatsapp_numbers %}
+        <a class="contact-btn" href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
+          <span class="contact-btn-icon">💬</span>
+          <span class="contact-btn-text">واتساپ</span>
+        </a>
+        {% endif %}
 
-        </ul>
+        <a class="contact-btn" href="mailto:contact@gharibii.ir">
+          <span class="contact-btn-icon">✉️</span>
+          <span class="contact-btn-text">contact@gharibii.ir</span>
+        </a>
+
+        {% if site.address %}
+        <span class="contact-btn contact-btn-address">
+          <span class="contact-btn-icon">📍</span>
+          <span class="contact-btn-text">{{ site.address }}</span>
+        </span>
+        {% endif %}
+
       </div>
 
     </div>
 
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- شبکه‌های اجتماعی -->
     <div class="social-boxes">
       <a class="social-box" href="https://instagram.com/storegaribi16" target="_blank" rel="noopener" aria-label="اینستاگرام">
         <span class="social-icon social-instagram" aria-hidden="true">
@@ -107,7 +80,6 @@
 
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- نمادهای اعتماد -->
     <div class="trust-boxes">
       <a class="trust-box" href="https://trustseal.enamad.ir/" target="_blank" rel="noopener" aria-label="نماد اعتماد الکترونیکی">
         <img src="{{ '/assets/images/enamad.png' | relative_url }}" alt="نماد اعتماد الکترونیکی" loading="lazy">
