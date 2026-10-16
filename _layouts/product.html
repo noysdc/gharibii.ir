@@ -4,6 +4,7 @@ layout: default
 {%- assign cat_title = 'دخترانه' -%}
 {%- if page.category == 'boys' -%}{%- assign cat_title = 'پسرانه' -%}{%- endif -%}
 {%- assign related = site.products | where: 'category', page.category | sort: 'date' | reverse -%}
+{%- assign main_image = page.images[0] -%}
 <article class="wrap product">
   <nav class="crumbs" aria-label="مسیر">
     <a href="{{ '/' | relative_url }}">خانه</a> /
@@ -13,7 +14,7 @@ layout: default
 
   <div class="product-grid">
     <div class="gallery">
-      <img id="main-img" src="{% include img.html src=page.images[0] %}" alt="{{ page.title | escape }}" width="900" height="1200">
+      <img id="main-img" src="{% include img.html src=main_image %}" alt="{{ page.title | escape }}" width="900" height="1200">
       {% if page.images.size > 1 %}
       <div class="thumbs">
         {% for im in page.images %}
