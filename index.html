@@ -30,5 +30,15 @@ title: پوشاک دخترانه و پسرانه
 
 <section class="wrap">
   <h2>تازه‌ها</h2>
-  <div class="grid">{% for p in latest limit: 8 %}{% include product-card.html product=p %}{% endfor %}</div>
+  <div class="grid">
+    {% for p in latest limit: 12 %}
+      {% include product-card.html product=p %}
+      {% if forloop.index != 12 and forloop.index != latest.size %}
+        {% assign mod = forloop.index | modulo: 4 %}
+        {% if mod == 0 %}
+          {% include divider-toon.html index=forloop.index %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </section>

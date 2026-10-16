@@ -177,7 +177,7 @@ html[data-theme="dark"] .holo-logo img{
   color:var(--muted);margin:.35rem 0 0;font-weight:400;
 }
 
-/* --- متن معرفی صفحه اصلی (با سایه) --- */
+/* --- متن معرفی صفحه اصلی --- */
 .hero-intro{
   display:flex;
   flex-direction:column;
@@ -544,6 +544,137 @@ html[data-theme="dark"] .card:hover{
 .card-price{color:var(--muted);font-size:.95rem;text-align:center}
 
 /* ============================================
+   وکتور متحرک دیزنی بین محصولات
+   ============================================ */
+.toon-divider{
+  grid-column:1 / -1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin:1.25rem 0;
+  position:relative;
+  pointer-events:none;
+  user-select:none;
+}
+.toon-divider::before,
+.toon-divider::after{
+  content:"";
+  flex:1 1 auto;
+  height:1px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(200,180,255,.4) 30%,
+    rgba(255,180,220,.4) 50%,
+    rgba(200,180,255,.4) 70%,
+    transparent 100%);
+  border-radius:999px;
+  margin:0 .75rem;
+}
+.toon-svg{
+  width:140px;
+  height:auto;
+  max-width:40vw;
+  overflow:visible;
+  filter:
+    drop-shadow(0 4px 12px rgba(168,85,247,.25))
+    drop-shadow(0 0 20px rgba(255,150,220,.2));
+}
+html[data-theme="dark"] .toon-svg{
+  filter:
+    drop-shadow(0 4px 12px rgba(0,0,0,.5))
+    drop-shadow(0 0 24px rgba(168,85,247,.35));
+}
+
+/* انیمیشن‌های مشترک */
+@keyframes toon-float{
+  0%,100%{transform:translateY(0)}
+  50%    {transform:translateY(-8px)}
+}
+@keyframes toon-spin{
+  from{transform:rotate(0deg)}
+  to  {transform:rotate(360deg)}
+}
+@keyframes toon-pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%    {transform:scale(1.15);opacity:.85}
+}
+@keyframes toon-twinkle{
+  0%,100%{opacity:.2;transform:scale(.8)}
+  50%    {opacity:1;  transform:scale(1.2)}
+}
+@keyframes toon-flap{
+  0%,100%{transform:scaleX(1)}
+  50%    {transform:scaleX(.6)}
+}
+
+/* === تاج === */
+.crown-base{
+  animation:toon-float 3s ease-in-out infinite;
+  transform-origin:center;
+}
+.crown-jewel{
+  animation:toon-pulse 1.8s ease-in-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+.crown-jewel:nth-of-type(1){animation-delay:0s}
+.crown-jewel:nth-of-type(2){animation-delay:.3s}
+.crown-jewel:nth-of-type(3){animation-delay:.6s}
+
+/* === پروانه === */
+.butterfly{
+  animation:toon-float 2.6s ease-in-out infinite;
+}
+.wing{
+  transform-origin:center;
+  transform-box:fill-box;
+}
+.wing-left{
+  animation:toon-flap 1s ease-in-out infinite;
+}
+.wing-right{
+  animation:toon-flap 1s ease-in-out infinite;
+  animation-delay:.5s;
+}
+
+/* === ستاره === */
+.star-group{
+  animation:toon-float 3s ease-in-out infinite;
+}
+.star{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:toon-spin 8s linear infinite;
+}
+.star-center{
+  animation:toon-pulse 1.5s ease-in-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+
+/* === قلب === */
+.heart-group{
+  animation:toon-float 2.4s ease-in-out infinite;
+}
+.heart{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:toon-pulse 1.4s ease-in-out infinite;
+}
+
+/* === جرقه‌ها === */
+.sparkle{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:toon-twinkle 1.6s ease-in-out infinite;
+}
+.sparkle.s1{animation-delay:0s}
+.sparkle.s2{animation-delay:.4s}
+.sparkle.s3{animation-delay:.8s}
+.sparkle.s4{animation-delay:1.2s}
+
+/* ============================================
    صفحه محصول
    ============================================ */
 .crumbs{font-size:.9rem;color:var(--muted);margin:1rem 0 0}
@@ -601,7 +732,6 @@ html[data-theme="dark"] .card:hover{
   align-items:center;
 }
 
-/* بخش وسط‌چین */
 .footer-center{
   display:flex;
   flex-direction:column;
@@ -667,9 +797,6 @@ html[data-theme="dark"] .footer-tagline{color:var(--sea)}
 }
 html[data-theme="dark"] .footer-contact-title{color:var(--ink)}
 
-/* ============================================
-   دکمه‌های تماس — با سایه بنفش/صورتی قوی
-   ============================================ */
 .contact-buttons{
   display:flex;
   flex-wrap:wrap;
@@ -1038,6 +1165,9 @@ html[data-theme="dark"] .welcome-toast-close:hover{
   .nav-controls{order:0;gap:.25rem;flex:0 0 auto}
   .ctrl-btn{min-width:2.15rem;height:2.15rem;font-size:.8rem;padding:0 .45rem}
   .ctrl-icon{font-size:.85rem}
+
+  .toon-svg{width:100px}
+  .toon-divider{margin:1rem 0}
 }
 @media(max-width:600px){
   .site-footer{padding:2rem 0 1.5rem;margin-top:3rem}
@@ -1087,6 +1217,8 @@ html[data-theme="dark"] .welcome-toast-close:hover{
   .social-icon{width:2.4rem;height:2.4rem}
   .social-icon svg{width:1.2rem;height:1.2rem}
   .social-label{font-size:.72rem}
+
+  .toon-svg{width:80px}
 }
 @media(prefers-reduced-motion:reduce){
   .tile:hover{transform:none;transition:none}
@@ -1095,5 +1227,15 @@ html[data-theme="dark"] .welcome-toast-close:hover{
   .holo-logo::after,
   .holo-divider,
   .holo-divider::after,
-  .social-icon::after{animation:none}
+  .social-icon::after,
+  .crown-base,
+  .crown-jewel,
+  .butterfly,
+  .wing,
+  .star,
+  .star-group,
+  .star-center,
+  .heart,
+  .heart-group,
+  .sparkle{animation:none}
 }

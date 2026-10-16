@@ -1,0 +1,97 @@
+{%- assign idx = include.index | modulo: 4 -%}
+<div class="toon-divider toon-{{ idx }}" role="presentation" aria-hidden="true">
+
+  {%- if idx == 0 -%}
+  <!-- تاج پرنسسی -->
+  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="crownGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="50%" stop-color="#ff8c00"/>
+        <stop offset="100%" stop-color="#ff0080"/>
+      </linearGradient>
+      <linearGradient id="jewelGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#00cfff"/>
+        <stop offset="100%" stop-color="#a855f7"/>
+      </linearGradient>
+    </defs>
+    <!-- تاج -->
+    <path class="crown-base" d="M40 60 L60 25 L80 45 L100 15 L120 45 L140 25 L160 60 Z"
+          fill="url(#crownGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <!-- جواهر -->
+    <circle class="crown-jewel" cx="100" cy="15" r="5" fill="url(#jewelGrad)"/>
+    <circle class="crown-jewel" cx="60" cy="25" r="4" fill="url(#jewelGrad)"/>
+    <circle class="crown-jewel" cx="140" cy="25" r="4" fill="url(#jewelGrad)"/>
+    <!-- ستاره‌های چشمک‌زن -->
+    <path class="sparkle s1" d="M50 55 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2 z" fill="#fff"/>
+    <path class="sparkle s2" d="M150 55 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2 z" fill="#fff"/>
+  </svg>
+
+  {%- elsif idx == 1 -%}
+  <!-- پروانه پرنسسی -->
+  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="wingGrad" cx="0.5" cy="0.5" r="0.7">
+        <stop offset="0%" stop-color="#ffb8e8"/>
+        <stop offset="50%" stop-color="#c8b8ff"/>
+        <stop offset="100%" stop-color="#b8e0ff"/>
+      </radialGradient>
+    </defs>
+    <g class="butterfly" transform="translate(100 40)">
+      <!-- بال چپ -->
+      <ellipse class="wing wing-left" cx="-25" cy="-8" rx="22" ry="18" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5"/>
+      <ellipse class="wing wing-left" cx="-18" cy="12" rx="14" ry="12" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5" opacity=".85"/>
+      <!-- بال راست -->
+      <ellipse class="wing wing-right" cx="25" cy="-8" rx="22" ry="18" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5"/>
+      <ellipse class="wing wing-right" cx="18" cy="12" rx="14" ry="12" fill="url(#wingGrad)" stroke="#fff" stroke-width="1.5" opacity=".85"/>
+      <!-- بدن -->
+      <ellipse cx="0" cy="0" rx="3" ry="14" fill="#073E45"/>
+      <!-- شاخک -->
+      <path d="M-2 -12 Q-8 -22 -12 -22 M2 -12 Q8 -22 12 -22" stroke="#073E45" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="-12" cy="-22" r="2" fill="#ff0080"/>
+      <circle cx="12" cy="-22" r="2" fill="#ff0080"/>
+    </g>
+  </svg>
+
+  {%- elsif idx == 2 -%}
+  <!-- ستاره جادویی -->
+  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="50%" stop-color="#ff8c00"/>
+        <stop offset="100%" stop-color="#ff0080"/>
+      </linearGradient>
+    </defs>
+    <g class="star-group" transform="translate(100 40)">
+      <path class="star" d="M0 -25 L7 -8 L25 -8 L11 3 L16 22 L0 12 L-16 22 L-11 3 L-25 -8 L-7 -8 Z"
+            fill="url(#starGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      <circle class="star-center" cx="0" cy="0" r="4" fill="#fff" opacity=".9"/>
+    </g>
+    <!-- جرقه‌های دور -->
+    <circle class="sparkle s1" cx="55" cy="25" r="2" fill="#ffb8e8"/>
+    <circle class="sparkle s2" cx="145" cy="25" r="2" fill="#b8e0ff"/>
+    <circle class="sparkle s3" cx="70" cy="60" r="1.5" fill="#ffd700"/>
+    <circle class="sparkle s4" cx="130" cy="60" r="1.5" fill="#c8b8ff"/>
+  </svg>
+
+  {%- else -%}
+  <!-- قلب پرنسسی -->
+  <svg class="toon-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ff0080"/>
+        <stop offset="50%" stop-color="#ff66c4"/>
+        <stop offset="100%" stop-color="#a855f7"/>
+      </linearGradient>
+    </defs>
+    <g class="heart-group" transform="translate(100 40)">
+      <path class="heart" d="M0 15 C-25 -5 -30 5 -22 12 C-15 18 -5 20 0 12 C5 20 15 18 22 12 C30 5 25 -5 0 15 Z"
+            fill="url(#heartGrad)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    </g>
+    <path class="sparkle s1" d="M55 30 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 z" fill="#fff"/>
+    <path class="sparkle s2" d="M145 30 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 z" fill="#fff"/>
+  </svg>
+  {%- endif -%}
+
+</div>
