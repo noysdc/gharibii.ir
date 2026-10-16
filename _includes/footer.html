@@ -1,10 +1,8 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
 
-    <!-- دیوایدر بالا -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- ستون‌ها پله‌ای -->
     <div class="footer-grid footer-grid-2">
 
       <!-- ستون ۱: برند -->
@@ -32,6 +30,10 @@
             <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">واتساپ</a>
           </li>
           {% endif %}
+          <li>
+            <span class="footer-icon">✉️</span>
+            <a href="mailto:contact@gharibii.ir">contact@gharibii.ir</a>
+          </li>
           {% if site.address %}
           <li>
             <span class="footer-icon">📍</span>
@@ -43,28 +45,58 @@
 
     </div>
 
-    <!-- دیوایدر میانی -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- باکس نمادهای اعتماد -->
-    <div class="trust-boxes">
+    <!-- شبکه‌های اجتماعی -->
+    <div class="social-boxes">
+      <a class="social-box" href="https://instagram.com/storegaribi16" target="_blank" rel="noopener" aria-label="اینستاگرام">
+        <span class="social-icon social-instagram" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="social-label">اینستاگرام</span>
+      </a>
 
+      <a class="social-box" href="https://t.me/gharibii_ir" target="_blank" rel="noopener" aria-label="تلگرام">
+        <span class="social-icon social-telegram" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 3 3 11l6 2 2 6 3-5 5 3z"/>
+            <path d="M9 13l3 6"/>
+          </svg>
+        </span>
+        <span class="social-label">تلگرام</span>
+      </a>
+
+      <a class="social-box" href="mailto:contact@gharibii.ir" aria-label="ایمیل">
+        <span class="social-icon social-email" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        <span class="social-label">ایمیل</span>
+      </a>
+    </div>
+
+    <div class="holo-divider" role="presentation"></div>
+
+    <!-- نمادهای اعتماد -->
+    <div class="trust-boxes">
       <a class="trust-box" href="https://trustseal.enamad.ir/" target="_blank" rel="noopener" aria-label="نماد اعتماد الکترونیکی">
         <img src="{{ '/assets/images/enamad.png' | relative_url }}" alt="نماد اعتماد الکترونیکی" loading="lazy">
         <span class="trust-label">نماد اعتماد</span>
       </a>
-
       <a class="trust-box" href="https://samandehi.ir/" target="_blank" rel="noopener" aria-label="ساماندهی رسانه‌های دیجیتال">
         <img src="{{ '/assets/images/samandehi.png' | relative_url }}" alt="ساماندهی رسانه‌های دیجیتال" loading="lazy">
         <span class="trust-label">ساماندهی</span>
       </a>
-
     </div>
 
-    <!-- دیوایدر پایین -->
     <div class="holo-divider" role="presentation"></div>
 
-    <!-- کپی‌رایت -->
     <div class="footer-bottom">
       <p>© {{ 'now' | date: '%Y' }} فروشگاه غریبی کیش — تمامی حقوق محفوظ است.</p>
       <p class="footer-credit">ساخته شده با ❤️ در کیش</p>
