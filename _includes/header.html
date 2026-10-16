@@ -1,36 +1,41 @@
 <header class="site-header">
   <div class="wrap header-inner">
 
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="غریبی کیش - خانه">
-      <span class="holo-logo">
-        <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="غریبی کیش" width="160" height="160">
-      </span>
-    </a>
+    <div class="header-top">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="غریبی کیش - خانه">
+        <span class="holo-logo">
+          <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="غریبی کیش" width="160" height="160">
+        </span>
+      </a>
 
-    <div class="holo-divider" role="presentation"></div>
+      <div class="holo-divider" role="presentation"></div>
 
-    <div class="store-title">
-      <h1 class="store-name">فروشگاه غریبی کیش</h1>
-      <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+      <div class="store-title">
+        <h1 class="store-name">فروشگاه غریبی کیش</h1>
+        <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+      </div>
+
+      <div class="holo-divider" role="presentation"></div>
     </div>
 
-    <div class="holo-divider" role="presentation"></div>
+    <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+      <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
+      <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
+      <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
+      <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
+      <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
+    </nav>
 
-    <div class="nav-bar">
+  </div>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <div class="wrap sticky-bar-inner">
 
       <div class="search-box">
         <span class="search-icon">🔍</span>
         <input type="search" id="site-search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول" autocomplete="off">
         <div class="search-results" id="search-results" hidden></div>
       </div>
-
-      <nav class="category-nav" aria-label="دسته‌بندی محصولات">
-        <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
-        <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
-        <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
-        <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
-        <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
-      </nav>
 
       <div class="nav-controls">
         <button type="button" class="ctrl-btn" id="font-decrease" aria-label="کوچک‌تر کردن فونت" title="کوچک‌تر کردن فونت">
@@ -45,6 +50,5 @@
       </div>
 
     </div>
-
   </div>
 </header>

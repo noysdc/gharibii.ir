@@ -50,15 +50,15 @@
     });
   }
 
-  /* ---- ۴. نوار چسبان ---- */
-  const navBar = document.querySelector('.nav-bar');
-  if (navBar) {
+  /* ---- ۴. نوار قفل‌شونده (فقط sticky-bar) ---- */
+  const stickyBar = document.getElementById('sticky-bar');
+  if (stickyBar) {
     const sentinel = document.createElement('div');
     sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
-    navBar.parentNode.insertBefore(sentinel, navBar);
+    stickyBar.parentNode.insertBefore(sentinel, stickyBar);
     const obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        navBar.classList.toggle('is-stuck', !e.isIntersecting);
+        stickyBar.classList.toggle('is-stuck', !e.isIntersecting);
       });
     }, { threshold: [1] });
     obs.observe(sentinel);
