@@ -26,7 +26,6 @@ html[data-theme="dark"]{
   --sea:#5fb5c0;--sea-deep:#a8dde5;--rose:#3a2830;--mist:#1e2f3a;
 }
 html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
-html[data-theme="dark"] .site-header{background:var(--surface);border-bottom-color:var(--line)}
 html[data-theme="dark"] .site-footer{background:linear-gradient(180deg,#152025 0%,#0d1418 100%);border-top-color:var(--line)}
 html[data-theme="dark"] .store-name{color:var(--ink)}
 html[data-theme="dark"] .footer-col h3,
@@ -69,20 +68,18 @@ html[data-theme="dark"] .holo-logo img{
    ساختار هدر
    ============================================ */
 .site-header{
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
+  background:transparent;
+  border-bottom:0;
   position:relative;
   z-index:5;
 }
-
 .header-inner{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:1rem;
-  padding:1.5rem 0 1rem;
+  gap:.85rem;
+  padding:1.5rem 0 .5rem;
 }
-
 .header-top{
   display:flex;
   flex-direction:column;
@@ -90,7 +87,6 @@ html[data-theme="dark"] .holo-logo img{
   gap:.75rem;
   width:100%;
 }
-
 .brand{display:flex;align-items:center;justify-content:center;text-decoration:none}
 
 /* --- لوگوی کریستالی --- */
@@ -191,53 +187,53 @@ html[data-theme="dark"] .holo-logo img{
 }
 
 /* ============================================
-   باکس دسته‌بندی‌ها
+   باکس دسته‌بندی‌ها — شیشه‌ای، جمع‌وجور
    ============================================ */
 .category-box{
   width:100%;
-  max-width:900px;
+  max-width:780px;
   margin:0 auto;
-  padding:.85rem 1rem;
-  border-radius:1.25rem;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(16px) saturate(160%);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  border:1px solid rgba(255,255,255,.85);
+  padding:.5rem .65rem;
+  border-radius:1rem;
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.98),
-    0 8px 26px rgba(168,85,247,.12),
-    0 3px 12px rgba(255,150,220,.08);
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(200,180,255,.2),
+    0 6px 20px rgba(168,85,247,.1),
+    0 2px 8px rgba(255,150,220,.06);
 }
 html[data-theme="dark"] .category-box{
-  background:rgba(30,45,55,.55);
-  border-color:rgba(100,140,160,.35);
+  background:rgba(30,45,55,.35);
+  border-color:rgba(150,180,200,.25);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
-    0 8px 26px rgba(0,0,0,.35),
-    0 3px 12px rgba(168,85,247,.12);
+    0 6px 20px rgba(0,0,0,.35),
+    0 2px 8px rgba(168,85,247,.1);
 }
-
 .category-nav{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:.55rem;
+  gap:.35rem;
 }
 .category-nav a{
   position:relative;display:inline-block;
-  padding:.6rem 1.25rem;border-radius:999px;
-  font-size:calc(.95rem * var(--font-scale));
+  padding:.4rem .95rem;border-radius:999px;
+  font-size:calc(.88rem * var(--font-scale));
   font-weight:600;color:var(--sea-deep);text-decoration:none;
   overflow:hidden;isolation:isolate;
   transition:transform .25s ease, box-shadow .25s ease, color .25s ease, background .25s ease;
-  background:rgba(255, 255, 255, 0.75);
-  backdrop-filter:blur(14px) saturate(160%);
-  -webkit-backdrop-filter:blur(14px) saturate(160%);
-  border:1px solid rgba(255, 255, 255, 0.9);
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(12px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  border:1px solid rgba(255,255,255,.75);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.98),
-    0 4px 12px rgba(168,85,247,.1),
-    0 1px 4px rgba(255,150,220,.06);
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 3px 10px rgba(168,85,247,.08),
+    0 1px 3px rgba(255,150,220,.05);
 }
 .category-nav a::before{
   content:"";position:absolute;inset:0;border-radius:999px;
@@ -259,12 +255,12 @@ html[data-theme="dark"] .category-box{
 .category-nav a:hover{
   text-decoration:none;color:var(--sea-deep);
   transform:translateY(-2px);
-  background:rgba(255, 255, 255, 0.9);
-  border-color:rgba(200, 184, 255, 0.9);
+  background:rgba(255,255,255,.85);
+  border-color:rgba(200,184,255,.9);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
-    0 10px 24px rgba(168,85,247,.2),
-    0 3px 10px rgba(255,150,220,.12);
+    0 8px 20px rgba(168,85,247,.18),
+    0 2px 8px rgba(255,150,220,.1);
 }
 .category-nav a:hover::after{left:100%}
 .category-nav a[aria-current="page"]{
@@ -274,20 +270,16 @@ html[data-theme="dark"] .category-box{
   color:#fff;border-color:rgba(255,255,255,.4);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.4),
-    0 8px 22px rgba(168,85,247,.4),
+    0 6px 18px rgba(168,85,247,.4),
     0 2px 8px rgba(255,150,220,.25);
 }
 html[data-theme="dark"] .category-nav a{
-  background:rgba(40,60,75,.7);
-  border-color:rgba(100,140,160,.4);
+  background:rgba(40,60,75,.5);
+  border-color:rgba(150,180,200,.3);
   color:var(--ink);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 4px 12px rgba(0,0,0,.25),
-    0 1px 4px rgba(168,85,247,.1);
 }
 html[data-theme="dark"] .category-nav a:hover{
-  background:rgba(60,85,105,.85);
+  background:rgba(60,85,105,.75);
   border-color:rgba(150,120,200,.6);
 }
 
@@ -297,61 +289,51 @@ html[data-theme="dark"] .category-nav a:hover{
 .sticky-bar{
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:30;
   width:100%;
-  padding:.75rem 0;
-  background:linear-gradient(180deg,
-    rgba(243,247,248,.7) 0%,
-    rgba(243,247,248,.95) 100%);
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
+  padding:.5rem 0;
   transition:background .3s ease, padding .3s ease, box-shadow .3s ease;
 }
-html[data-theme="dark"] .sticky-bar{
-  background:linear-gradient(180deg,
-    rgba(13,20,24,.7) 0%,
-    rgba(13,20,24,.95) 100%);
-}
 .sticky-bar.is-stuck{
-  padding:.55rem 0;
-  background:rgba(243,247,248,.9);
+  padding:.4rem 0;
+  background:rgba(243,247,248,.85);
   backdrop-filter:blur(16px) saturate(160%);
   -webkit-backdrop-filter:blur(16px) saturate(160%);
-  box-shadow:0 4px 20px rgba(168,85,247,.1);
+  box-shadow:0 4px 20px rgba(168,85,247,.12);
 }
 html[data-theme="dark"] .sticky-bar.is-stuck{
-  background:rgba(13,20,24,.9);
+  background:rgba(13,20,24,.85);
   box-shadow:0 4px 20px rgba(0,0,0,.5), 0 2px 12px rgba(168,85,247,.12);
 }
 
-/* --- باکس کنترل‌ها --- */
 .control-box{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:.85rem;
+  gap:.6rem;
   flex-wrap:wrap;
   width:100%;
-  max-width:900px;
+  max-width:780px;
   margin:0 auto;
-  padding:.75rem 1rem;
-  border-radius:1.25rem;
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(16px) saturate(160%);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  border:1px solid rgba(255,255,255,.9);
+  padding:.45rem .65rem;
+  border-radius:1rem;
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.65);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.98),
-    0 8px 26px rgba(168,85,247,.14),
-    0 3px 12px rgba(255,150,220,.1);
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(200,180,255,.2),
+    0 6px 20px rgba(168,85,247,.12),
+    0 2px 8px rgba(255,150,220,.08);
 }
 html[data-theme="dark"] .control-box{
-  background:rgba(30,45,55,.7);
-  border-color:rgba(100,140,160,.4);
+  background:rgba(30,45,55,.4);
+  border-color:rgba(150,180,200,.25);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
-    0 8px 26px rgba(0,0,0,.35),
-    0 3px 12px rgba(168,85,247,.14);
+    0 6px 20px rgba(0,0,0,.35),
+    0 2px 8px rgba(168,85,247,.12);
 }
 
 /* ============================================
@@ -361,51 +343,44 @@ html[data-theme="dark"] .control-box{
   position:relative;
   display:flex;
   align-items:center;
-  gap:.4rem;
-  padding:.35rem .9rem;
+  gap:.35rem;
+  padding:.3rem .75rem;
   border-radius:999px;
-  background:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.5);
   border:1px solid rgba(200,184,255,.4);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.98),
-    0 2px 8px rgba(168,85,247,.08);
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 4px rgba(168,85,247,.06);
   transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
-  flex:1 1 280px;
-  max-width:440px;
-  min-width:170px;
+  flex:1 1 260px;
+  max-width:400px;
+  min-width:150px;
 }
 .search-box:focus-within{
-  background:#fff;
+  background:rgba(255,255,255,.85);
   border-color:rgba(168,85,247,.6);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
-    0 6px 18px rgba(168,85,247,.18),
+    0 4px 14px rgba(168,85,247,.18),
     0 0 0 3px rgba(200,184,255,.25);
 }
 html[data-theme="dark"] .search-box{
-  background:rgba(45,65,80,.85);
-  border-color:rgba(100,140,160,.4);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 2px 8px rgba(0,0,0,.3);
+  background:rgba(45,65,80,.5);
+  border-color:rgba(150,180,200,.3);
 }
 html[data-theme="dark"] .search-box:focus-within{
-  background:rgba(60,85,105,.95);
+  background:rgba(60,85,105,.85);
   border-color:rgba(168,85,247,.7);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 6px 18px rgba(168,85,247,.25),
-    0 0 0 3px rgba(150,120,200,.35);
 }
-.search-icon{font-size:.95rem;opacity:.6;flex:0 0 auto}
+.search-icon{font-size:.9rem;opacity:.6;flex:0 0 auto}
 .search-box input[type="search"]{
   flex:1 1 auto;min-width:0;border:0;outline:0;background:transparent;
-  font-family:inherit;font-size:calc(.95rem * var(--font-scale));
-  color:var(--ink);padding:.3rem 0;
+  font-family:inherit;font-size:calc(.9rem * var(--font-scale));
+  color:var(--ink);padding:.25rem 0;
 }
 .search-box input[type="search"]::placeholder{color:var(--muted);opacity:.8}
 .search-box input[type="search"]::-webkit-search-cancel-button{
-  -webkit-appearance:none;appearance:none;width:.9rem;height:.9rem;
+  -webkit-appearance:none;appearance:none;width:.85rem;height:.85rem;
   background:
     linear-gradient(45deg, transparent 45%, var(--muted) 45%, var(--muted) 55%, transparent 55%),
     linear-gradient(-45deg, transparent 45%, var(--muted) 45%, var(--muted) 55%, transparent 55%);
@@ -441,52 +416,48 @@ html[data-theme="dark"] .search-box:focus-within{
 .search-empty{padding:1rem;text-align:center;font-size:.9rem;color:var(--muted)}
 
 /* ============================================
-   کنترل‌ها: فونت (A- / A+) + شب/روز
+   کنترل‌ها: فونت + شب/روز
    ============================================ */
 .nav-controls{
   display:flex;
-  gap:.4rem;
+  gap:.3rem;
   align-items:center;
   flex:0 0 auto;
 }
 .ctrl-btn{
   display:inline-flex;align-items:center;justify-content:center;
-  min-width:2.5rem;height:2.5rem;padding:0 .6rem;
+  min-width:2.15rem;height:2.15rem;padding:0 .5rem;
   border-radius:999px;cursor:pointer;
-  font-family:inherit;font-size:.95rem;font-weight:700;
+  font-family:inherit;font-size:.85rem;font-weight:700;
   color:var(--sea-deep);
   border:1px solid rgba(200,184,255,.5);
-  background:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(12px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.98),
-    0 2px 8px rgba(168,85,247,.08);
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 2px 6px rgba(168,85,247,.08);
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 .ctrl-btn:hover{
   transform:translateY(-2px);
-  background:#fff;
+  background:rgba(255,255,255,.9);
   border-color:rgba(168,85,247,.6);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,1),
-    0 8px 20px rgba(168,85,247,.2),
+    0 6px 16px rgba(168,85,247,.2),
     0 2px 8px rgba(255,150,220,.12);
 }
 .ctrl-btn:active{transform:translateY(0)}
-.ctrl-icon{line-height:1;font-size:1rem}
+.ctrl-icon{line-height:1;font-size:.9rem}
 html[data-theme="dark"] .ctrl-btn{
-  background:rgba(45,65,80,.85);
-  border-color:rgba(100,140,160,.4);
+  background:rgba(45,65,80,.5);
+  border-color:rgba(150,180,200,.3);
   color:var(--ink);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 2px 8px rgba(0,0,0,.3);
 }
 html[data-theme="dark"] .ctrl-btn:hover{
-  background:rgba(60,85,105,.95);
+  background:rgba(60,85,105,.85);
   border-color:rgba(168,85,247,.7);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 8px 20px rgba(168,85,247,.25);
 }
 
 /* ============================================
@@ -525,16 +496,70 @@ html[data-theme="dark"] .ctrl-btn:hover{
 .tile-count{color:var(--muted)}
 
 /* ============================================
-   گرید کارت‌ها
+   گرید کارت‌ها — شیشه‌ای، وسط‌چین
    ============================================ */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-.card{display:flex;flex-direction:column;gap:.15rem;color:var(--ink)}
-.card:hover{text-decoration:none}
+.card{
+  display:flex;
+  flex-direction:column;
+  gap:.15rem;
+  color:var(--ink);
+  text-align:center;
+  padding:.55rem;
+  border-radius:1.1rem;
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 4px 16px rgba(168,85,247,.08),
+    0 1px 4px rgba(255,150,220,.05);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.card:hover{
+  text-decoration:none;
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 12px 28px rgba(168,85,247,.18),
+    0 4px 14px rgba(255,150,220,.12);
+}
+html[data-theme="dark"] .card{
+  background:rgba(30,45,55,.45);
+  border-color:rgba(150,180,200,.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 4px 16px rgba(0,0,0,.3);
+}
+html[data-theme="dark"] .card:hover{
+  background:rgba(45,65,80,.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 12px 28px rgba(0,0,0,.45),
+    0 4px 14px rgba(168,85,247,.15);
+}
 .card:hover .card-title{color:var(--sea)}
-.card-img{display:block;aspect-ratio:3/4;overflow:hidden;border-radius:.9rem;background:var(--pearl,#E3ECEF)}
+.card-img{
+  display:block;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:.8rem;
+  background:var(--pearl,#E3ECEF);
+}
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card-title{font-weight:700;margin-top:.5rem;line-height:1.6}
-.card-price{color:var(--muted);font-size:.95rem}
+.card-title{
+  font-weight:700;
+  margin-top:.5rem;
+  line-height:1.6;
+  text-align:center;
+}
+.card-price{
+  color:var(--muted);
+  font-size:.95rem;
+  text-align:center;
+}
 
 /* ============================================
    صفحه محصول
@@ -639,22 +664,22 @@ html[data-theme="dark"] .ctrl-btn:hover{
   .footer-grid{grid-template-columns:1fr 1fr;gap:1.75rem}
 }
 @media(max-width:760px){
-  .header-inner{padding:1rem 0 .75rem;gap:.75rem}
+  .header-inner{padding:1rem 0 .5rem;gap:.6rem}
   .header-top{gap:.5rem}
   .holo-logo{width:100px;height:100px}
   .store-name{font-size:calc(1.55rem * var(--font-scale))}
   .store-tagline{font-size:calc(.95rem * var(--font-scale))}
   .holo-divider{width:90%}
 
-  .category-box{padding:.65rem .75rem;border-radius:1rem}
-  .category-nav{gap:.4rem}
-  .category-nav a{padding:.5rem .95rem;font-size:calc(.85rem * var(--font-scale))}
+  .category-box{padding:.45rem .5rem;border-radius:.85rem}
+  .category-nav{gap:.3rem}
+  .category-nav a{padding:.35rem .8rem;font-size:calc(.8rem * var(--font-scale))}
 
-  .sticky-bar{padding:.5rem 0}
-  .control-box{gap:.5rem;padding:.55rem .65rem;border-radius:1rem;flex-direction:column}
+  .sticky-bar{padding:.4rem 0}
+  .control-box{gap:.4rem;padding:.4rem .5rem;border-radius:.85rem;flex-direction:column}
   .search-box{width:100%;max-width:none;flex:1 1 auto}
-  .nav-controls{order:-1;gap:.3rem}
-  .ctrl-btn{min-width:2.2rem;height:2.2rem;font-size:.85rem}
+  .nav-controls{order:-1;gap:.25rem}
+  .ctrl-btn{min-width:2rem;height:2rem;font-size:.8rem}
 }
 @media(max-width:600px){
   .site-footer{padding:2rem 0 1.5rem;margin-top:3rem}
@@ -668,7 +693,7 @@ html[data-theme="dark"] .ctrl-btn:hover{
   .holo-logo{width:84px;height:84px}
   .store-name{font-size:calc(1.3rem * var(--font-scale))}
   .store-tagline{font-size:calc(.85rem * var(--font-scale))}
-  .category-nav a{padding:.45rem .9rem;font-size:calc(.85rem * var(--font-scale))}
+  .category-nav a{padding:.35rem .7rem;font-size:calc(.78rem * var(--font-scale))}
 }
 @media(prefers-reduced-motion:reduce){
   .tile:hover{transform:none;transition:none}
