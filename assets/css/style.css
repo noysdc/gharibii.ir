@@ -1,16 +1,20 @@
 @font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-RD-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-RD-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
-:root{--bg:#F3F7F8;--surface:#fff;--ink:#10222C;--muted:#5A6E78;--line:#D7E1E5;--sea:#0A6670;--sea-deep:#073E45;--wa:#0F7F63;--rose:#F3DDE3;--mist:#D6E6F2}
+:root{
+  --bg:#F3F7F8;--surface:#fff;--ink:#10222C;--muted:#5A6E78;--line:#D7E1E5;
+  --sea:#0A6670;--sea-deep:#073E45;--wa:#0F7F63;--rose:#F3DDE3;--mist:#D6E6F2;
+  --font-scale:1;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.9 "Vazirmatn",Tahoma,"Segoe UI",sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 calc(1rem * var(--font-scale))/1.9 "Vazirmatn",Tahoma,"Segoe UI",sans-serif}
 a{color:var(--sea);text-decoration:none}
 a:hover{text-decoration:underline}
 :focus-visible{outline:3px solid var(--sea);outline-offset:2px}
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1120px;margin:0 auto;padding:0 1rem}
-h1{font-size:1.9rem;line-height:1.4;margin:1.5rem 0 .5rem}
-h2{font-size:1.25rem;margin:2.2rem 0 1rem}
+h1{font-size:calc(1.9rem * var(--font-scale));line-height:1.4;margin:1.5rem 0 .5rem}
+h2{font-size:calc(1.25rem * var(--font-scale));margin:2.2rem 0 1rem}
 .lead{color:var(--muted);max-width:60ch;margin:.25rem 0 1.25rem}
 .muted{color:var(--muted)}
 
@@ -18,15 +22,8 @@ h2{font-size:1.25rem;margin:2.2rem 0 1rem}
    حالت شب (Dark Mode)
    ============================================ */
 html[data-theme="dark"]{
-  --bg:#0d1418;
-  --surface:#152025;
-  --ink:#e8eef2;
-  --muted:#8fa3ad;
-  --line:#22323a;
-  --sea:#5fb5c0;
-  --sea-deep:#a8dde5;
-  --rose:#3a2830;
-  --mist:#1e2f3a;
+  --bg:#0d1418;--surface:#152025;--ink:#e8eef2;--muted:#8fa3ad;--line:#22323a;
+  --sea:#5fb5c0;--sea-deep:#a8dde5;--rose:#3a2830;--mist:#1e2f3a;
 }
 html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
 html[data-theme="dark"] .site-header{background:var(--surface);border-bottom-color:var(--line)}
@@ -45,6 +42,19 @@ html[data-theme="dark"] .ctrl-btn{
   border-color:rgba(100,140,160,.35);
   color:var(--ink);
 }
+html[data-theme="dark"] .search-box{
+  background:rgba(30,45,55,.55);
+  border-color:rgba(100,140,160,.35);
+}
+html[data-theme="dark"] .search-box:focus-within{
+  background:rgba(45,65,80,.75);
+  border-color:rgba(150,120,200,.6);
+}
+html[data-theme="dark"] .search-results{
+  background:var(--surface);
+  border-color:var(--line);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);
+}
 html[data-theme="dark"] .holo-logo{
   background:
     radial-gradient(circle at 25% 20%,
@@ -55,13 +65,8 @@ html[data-theme="dark"] .holo-logo{
       rgba(120,160,200,.35) 0%,
       transparent 45%),
     linear-gradient(135deg,
-      #3a2e50 0%,
-      #2a3e50 18%,
-      #2e4a42 35%,
-      #4a3e2e 52%,
-      #503a42 70%,
-      #2e3e50 88%,
-      #3a2e50 100%);
+      #3a2e50 0%,#2a3e50 18%,#2e4a42 35%,#4a3e2e 52%,
+      #503a42 70%,#2e3e50 88%,#3a2e50 100%);
   box-shadow:
     inset 0 1px 2px rgba(255,255,255,.3),
     inset 0 -2px 6px rgba(100,60,140,.25),
@@ -88,38 +93,19 @@ html[data-theme="dark"] .btn{background:#0a4d55;color:#fff}
 html[data-theme="dark"] .btn.alt{background:var(--surface);color:var(--ink);border-color:var(--line)}
 
 /* ============================================
-   تنظیم اندازه فونت
-   ============================================ */
-html[data-font="large"]{font-size:17px}
-html[data-font="xlarge"]{font-size:19px}
-
-/* ============================================
    HEADER
    ============================================ */
 .site-header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
 .header-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.75rem;
-  padding:1.5rem 0 .5rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:.75rem;padding:1.5rem 0 .5rem;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-}
+.brand{display:flex;align-items:center;justify-content:center;text-decoration:none}
 
 /* --- لوگوی کریستالی --- */
 .holo-logo{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:130px;
-  height:130px;
-  border-radius:50%;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:130px;height:130px;border-radius:50%;
   transition:transform .4s ease;
   background:
     radial-gradient(circle at 25% 20%,
@@ -130,13 +116,8 @@ html[data-font="xlarge"]{font-size:19px}
       rgba(200,230,255,.7) 0%,
       transparent 45%),
     linear-gradient(135deg,
-      #e8d5ff 0%,
-      #c8e6ff 18%,
-      #d4f0e8 35%,
-      #ffe8d4 52%,
-      #ffd4e8 70%,
-      #d4e8ff 88%,
-      #e8d5ff 100%);
+      #e8d5ff 0%,#c8e6ff 18%,#d4f0e8 35%,#ffe8d4 52%,
+      #ffd4e8 70%,#d4e8ff 88%,#e8d5ff 100%);
   background-size:100% 100%, 100% 100%, 250% 250%;
   box-shadow:
     inset 0 1px 2px rgba(255,255,255,.9),
@@ -148,49 +129,32 @@ html[data-font="xlarge"]{font-size:19px}
   overflow:hidden;
 }
 .holo-logo::before{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:linear-gradient(
-    115deg,
+  content:"";position:absolute;inset:-50%;
+  background:linear-gradient(115deg,
     transparent 30%,
     rgba(255,255,255,.85) 45%,
     rgba(200,240,255,.9) 50%,
     rgba(255,200,240,.85) 55%,
-    transparent 70%
-  );
+    transparent 70%);
   animation:crystal-sweep 5s ease-in-out infinite;
-  z-index:2;
-  pointer-events:none;
-  mix-blend-mode:screen;
+  z-index:2;pointer-events:none;mix-blend-mode:screen;
 }
 .holo-logo::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  background:conic-gradient(
-    from 0deg,
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,
     rgba(255,150,220,.35),
     rgba(150,220,255,.35),
     rgba(180,255,220,.35),
     rgba(255,240,180,.35),
     rgba(220,180,255,.35),
-    rgba(255,150,220,.35)
-  );
+    rgba(255,150,220,.35));
   -webkit-mask:radial-gradient(circle, transparent 62%, #000 68%, #000 95%, transparent 100%);
           mask:radial-gradient(circle, transparent 62%, #000 68%, #000 95%, transparent 100%);
   animation:crystal-hue 12s linear infinite;
-  z-index:3;
-  pointer-events:none;
-  filter:blur(.5px);
+  z-index:3;pointer-events:none;filter:blur(.5px);
 }
 .holo-logo img{
-  position:relative;
-  z-index:1;
-  width:78%;
-  height:78%;
-  object-fit:contain;
+  position:relative;z-index:1;width:78%;height:78%;object-fit:contain;
   filter:
     drop-shadow(0 1px 1px rgba(255,255,255,.9))
     drop-shadow(0 2px 3px rgba(10,102,112,.25))
@@ -202,30 +166,19 @@ html[data-font="xlarge"]{font-size:19px}
    دیوایدر هولوگرامی
    ============================================ */
 .holo-divider{
-  width:min(420px, 85%);
-  height:3px;
-  border-radius:999px;
+  width:min(420px, 85%);height:3px;border-radius:999px;
   background:linear-gradient(90deg,
-    transparent 0%,
-    #ffb8e8 15%,
-    #c8b8ff 30%,
-    #b8e0ff 50%,
-    #b8ffd8 70%,
-    #ffe8b8 85%,
-    transparent 100%);
+    transparent 0%,#ffb8e8 15%,#c8b8ff 30%,
+    #b8e0ff 50%,#b8ffd8 70%,#ffe8b8 85%,transparent 100%);
   background-size:200% 100%;
   animation:divider-flow 6s linear infinite;
   box-shadow:
     0 0 8px rgba(200,180,255,.5),
     0 0 16px rgba(255,200,240,.35);
-  position:relative;
-  margin:0 auto;
+  position:relative;margin:0 auto;
 }
 .holo-divider::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
+  content:"";position:absolute;inset:0;border-radius:999px;
   background:linear-gradient(90deg,
     transparent 30%,
     rgba(255,255,255,.9) 50%,
@@ -240,36 +193,24 @@ html[data-font="xlarge"]{font-size:19px}
    ============================================ */
 .store-title{text-align:center;margin:.5rem 0}
 .store-name{
-  font-size:2.1rem;
-  font-weight:700;
-  color:var(--sea-deep);
-  margin:0;
-  line-height:1.4;
-  letter-spacing:-.01em;
+  font-size:calc(2.1rem * var(--font-scale));
+  font-weight:700;color:var(--sea-deep);
+  margin:0;line-height:1.4;letter-spacing:-.01em;
   text-shadow:0 1px 2px rgba(10,102,112,.08);
 }
 .store-tagline{
-  font-size:1.15rem;
-  color:var(--muted);
-  margin:.35rem 0 0;
-  font-weight:400;
+  font-size:calc(1.15rem * var(--font-scale));
+  color:var(--muted);margin:.35rem 0 0;font-weight:400;
 }
 
 /* ============================================
-   نوار منو + کنترل‌ها (چسبان)
+   نوار منو + سرچ + کنترل‌ها (چسبان)
    ============================================ */
 .nav-bar{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.75rem;
-  width:100%;
-  flex-wrap:wrap;
-  position:sticky;
-  top:0;
-  z-index:10;
-  padding:.6rem .5rem;
-  margin-top:.25rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:.75rem;width:100%;flex-wrap:wrap;
+  position:sticky;top:0;z-index:10;
+  padding:.6rem .75rem;margin-top:.25rem;
   background:rgba(255,255,255,.85);
   backdrop-filter:blur(14px) saturate(150%);
   -webkit-backdrop-filter:blur(14px) saturate(150%);
@@ -285,25 +226,83 @@ html[data-theme="dark"] .nav-bar{
 html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
 
 /* ============================================
+   جستجوی محصولات
+   ============================================ */
+.search-box{
+  position:relative;display:flex;align-items:center;gap:.4rem;
+  padding:.4rem .85rem;border-radius:999px;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 4px 12px rgba(10,102,112,.08);
+  transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
+  flex:0 1 240px;min-width:160px;
+}
+.search-box:focus-within{
+  background:rgba(255,255,255,.8);
+  border-color:rgba(200,184,255,.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 6px 20px rgba(168,85,247,.15),
+    0 0 0 2px rgba(200,184,255,.25);
+}
+.search-icon{font-size:.95rem;opacity:.6;flex:0 0 auto}
+.search-box input[type="search"]{
+  flex:1 1 auto;min-width:0;border:0;outline:0;background:transparent;
+  font-family:inherit;font-size:calc(.95rem * var(--font-scale));
+  color:var(--ink);padding:.25rem 0;
+}
+.search-box input[type="search"]::placeholder{color:var(--muted);opacity:.8}
+.search-box input[type="search"]::-webkit-search-cancel-button{
+  -webkit-appearance:none;appearance:none;width:.9rem;height:.9rem;
+  background:
+    linear-gradient(45deg, transparent 45%, var(--muted) 45%, var(--muted) 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, var(--muted) 45%, var(--muted) 55%, transparent 55%);
+  cursor:pointer;opacity:.6;
+}
+.search-results{
+  position:absolute;top:calc(100% + .5rem);right:0;left:0;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:.9rem;
+  box-shadow:0 12px 30px rgba(10,102,112,.15);
+  overflow:hidden;z-index:50;max-height:22rem;overflow-y:auto;
+}
+.search-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.6rem .85rem;text-decoration:none;color:var(--ink);
+  border-bottom:1px solid var(--line);
+  transition:background .15s ease;
+}
+.search-item:last-child{border-bottom:0}
+.search-item:hover{background:rgba(200,180,255,.12);text-decoration:none}
+.search-item img{
+  width:3rem;height:4rem;object-fit:cover;
+  border-radius:.45rem;flex:0 0 auto;background:#e3ecef;
+}
+.search-item-info{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.search-item-info strong{
+  font-size:.95rem;font-weight:700;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.search-item-info small{font-size:.8rem;color:var(--muted)}
+.search-empty{padding:1rem;text-align:center;font-size:.9rem;color:var(--muted)}
+
+/* ============================================
    دکمه‌های دسته‌بندی — شیشه‌ای
    ============================================ */
 .category-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:.65rem;
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.5rem;flex:1 1 auto;
 }
 .category-nav a{
-  position:relative;
-  display:inline-block;
-  padding:.65rem 1.5rem;
-  border-radius:999px;
-  font-size:1.05rem;
-  font-weight:600;
-  color:var(--sea-deep);
-  text-decoration:none;
-  overflow:hidden;
-  isolation:isolate;
+  position:relative;display:inline-block;
+  padding:.55rem 1.15rem;border-radius:999px;
+  font-size:calc(.95rem * var(--font-scale));
+  font-weight:600;color:var(--sea-deep);text-decoration:none;
+  overflow:hidden;isolation:isolate;
   transition:transform .25s ease, box-shadow .25s ease, color .25s ease, background .25s ease;
   background:rgba(255, 255, 255, 0.55);
   backdrop-filter:blur(14px) saturate(160%);
@@ -316,40 +315,24 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
     0 0 0 1px rgba(200,180,255,.15);
 }
 .category-nav a::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  background:linear-gradient(
-    135deg,
+  content:"";position:absolute;inset:0;border-radius:999px;
+  background:linear-gradient(135deg,
     rgba(255,255,255,.7) 0%,
     rgba(255,255,255,0) 35%,
     rgba(255,255,255,0) 65%,
-    rgba(200,230,255,.4) 100%
-  );
-  pointer-events:none;
-  z-index:-1;
+    rgba(200,230,255,.4) 100%);
+  pointer-events:none;z-index:-1;
 }
 .category-nav a::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(
-    90deg,
+  content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,
     transparent 0%,
     rgba(255,255,255,.7) 50%,
-    transparent 100%
-  );
-  transition:left .6s ease;
-  pointer-events:none;
-  z-index:-1;
+    transparent 100%);
+  transition:left .6s ease;pointer-events:none;z-index:-1;
 }
 .category-nav a:hover{
-  text-decoration:none;
-  color:var(--sea-deep);
+  text-decoration:none;color:var(--sea-deep);
   transform:translateY(-2px);
   background:rgba(255, 255, 255, 0.7);
   border-color:rgba(200, 184, 255, 0.9);
@@ -364,33 +347,21 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
   background:linear-gradient(135deg,
     rgba(168,85,247,.85),
     rgba(10,102,112,.9));
-  color:#fff;
-  border-color:rgba(255,255,255,.4);
+  color:#fff;border-color:rgba(255,255,255,.4);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.4),
     0 8px 20px rgba(168,85,247,.35);
 }
 
 /* ============================================
-   دکمه‌های کنترلی (فونت + شب/روز)
+   کنترل‌ها: فونت (A- / A+) + شب/روز
    ============================================ */
-.nav-controls{
-  display:flex;
-  gap:.4rem;
-  align-items:center;
-}
+.nav-controls{display:flex;gap:.35rem;align-items:center;flex:0 0 auto}
 .ctrl-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:2.5rem;
-  height:2.5rem;
-  padding:0;
-  border-radius:999px;
-  cursor:pointer;
-  font-family:inherit;
-  font-size:.9rem;
-  font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:2.5rem;height:2.5rem;padding:0 .55rem;
+  border-radius:999px;cursor:pointer;
+  font-family:inherit;font-size:.95rem;font-weight:700;
   color:var(--sea-deep);
   border:1px solid rgba(255,255,255,.7);
   background:rgba(255,255,255,.55);
@@ -425,9 +396,7 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
   85% {opacity:1}
   100%{transform:translate(60%,60%) rotate(0deg);opacity:0}
 }
-@keyframes crystal-hue{
-  to{filter:hue-rotate(360deg) blur(.5px)}
-}
+@keyframes crystal-hue{to{filter:hue-rotate(360deg) blur(.5px)}}
 @keyframes divider-flow{to{background-position:200% 0}}
 @keyframes divider-shine{
   0%  {background-position:-100% 0}
@@ -489,117 +458,59 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
    فوتر
    ============================================ */
 .site-footer{
-  margin-top:4rem;
-  padding:3rem 0 2rem;
+  margin-top:4rem;padding:3rem 0 2rem;
   background:linear-gradient(180deg,
     var(--surface) 0%,
     #f8fbfc 50%,
     #f3f7f8 100%);
   border-top:1px solid var(--line);
-  position:relative;
-  overflow:hidden;
+  position:relative;overflow:hidden;
 }
 .site-footer::before{
-  content:"";
-  position:absolute;
-  top:-50%;
-  left:-20%;
-  width:60%;
-  height:200%;
+  content:"";position:absolute;top:-50%;left:-20%;
+  width:60%;height:200%;
   background:radial-gradient(ellipse at center,
-    rgba(200,180,255,.12) 0%,
-    transparent 60%);
+    rgba(200,180,255,.12) 0%,transparent 60%);
   pointer-events:none;
 }
 .site-footer::after{
-  content:"";
-  position:absolute;
-  top:-50%;
-  right:-20%;
-  width:60%;
-  height:200%;
+  content:"";position:absolute;top:-50%;right:-20%;
+  width:60%;height:200%;
   background:radial-gradient(ellipse at center,
-    rgba(200,240,255,.12) 0%,
-    transparent 60%);
+    rgba(200,240,255,.12) 0%,transparent 60%);
   pointer-events:none;
 }
 .footer-inner{
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-direction:column;
-  gap:1.75rem;
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:1.75rem;
 }
 .footer-grid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr 1fr;
-  gap:2rem;
-  padding:.5rem 0;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:2rem;padding:.5rem 0;
 }
 .footer-col h3{
-  font-size:1.35rem;
-  font-weight:700;
-  color:var(--sea-deep);
-  margin:0 0 .5rem;
-  line-height:1.4;
+  font-size:calc(1.35rem * var(--font-scale));
+  font-weight:700;color:var(--sea-deep);margin:0 0 .5rem;line-height:1.4;
 }
 .footer-col h4{
-  font-size:1.05rem;
-  font-weight:700;
-  color:var(--sea-deep);
-  margin:0 0 .85rem;
-  position:relative;
-  padding-bottom:.5rem;
+  font-size:calc(1.05rem * var(--font-scale));
+  font-weight:700;color:var(--sea-deep);margin:0 0 .85rem;
+  position:relative;padding-bottom:.5rem;
 }
 .footer-col h4::after{
-  content:"";
-  position:absolute;
-  bottom:0;
-  right:0;
-  width:2.5rem;
-  height:2px;
-  border-radius:999px;
+  content:"";position:absolute;bottom:0;right:0;
+  width:2.5rem;height:2px;border-radius:999px;
   background:linear-gradient(90deg,#c8b8ff,#b8e0ff,#b8ffd8);
 }
-.footer-tagline{
-  font-size:.95rem;
-  color:var(--sea);
-  margin:.15rem 0 .75rem;
-  font-weight:500;
-}
-.footer-desc{
-  font-size:.9rem;
-  color:var(--muted);
-  line-height:1.9;
-  margin:0;
-  max-width:36ch;
-}
-.footer-links{
-  list-style:none;
-  padding:0;
-  margin:0;
-  display:flex;
-  flex-direction:column;
-  gap:.55rem;
-}
-.footer-links li{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  font-size:.9rem;
-  color:var(--muted);
-}
+.footer-tagline{font-size:.95rem;color:var(--sea);margin:.15rem 0 .75rem;font-weight:500}
+.footer-desc{font-size:.9rem;color:var(--muted);line-height:1.9;margin:0;max-width:36ch}
+.footer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.55rem}
+.footer-links li{display:flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--muted)}
 .footer-links a{
-  color:var(--muted);
-  text-decoration:none;
-  transition:color .2s ease, transform .2s ease;
-  display:inline-block;
+  color:var(--muted);text-decoration:none;
+  transition:color .2s ease, transform .2s ease;display:inline-block;
 }
-.footer-links a:hover{
-  color:var(--sea);
-  text-decoration:none;
-  transform:translateX(-3px);
-}
+.footer-links a:hover{color:var(--sea);text-decoration:none;transform:translateX(-3px)}
 .footer-icon{font-size:1rem;filter:grayscale(.2)}
 .footer-bottom{text-align:center;padding-top:.5rem}
 .footer-bottom p{margin:.25rem 0;font-size:.85rem;color:var(--muted)}
@@ -615,7 +526,7 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
   .product-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
   .tiles{gap:1.5rem}
   .tile{min-height:14rem}
-  h1{font-size:2.3rem}
+  h1{font-size:calc(2.3rem * var(--font-scale))}
 }
 @media(max-width:900px){
   .footer-grid{grid-template-columns:1fr 1fr;gap:1.75rem}
@@ -623,14 +534,15 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
 @media(max-width:760px){
   .header-inner{padding:1rem 0 .5rem;gap:.5rem}
   .holo-logo{width:100px;height:100px}
-  .store-name{font-size:1.55rem}
-  .store-tagline{font-size:.95rem}
+  .store-name{font-size:calc(1.55rem * var(--font-scale))}
+  .store-tagline{font-size:calc(.95rem * var(--font-scale))}
   .holo-divider{width:90%}
-  .nav-bar{gap:.5rem;padding:.5rem .5rem;border-radius:0 0 .75rem .75rem}
-  .category-nav{gap:.45rem}
-  .category-nav a{padding:.5rem 1.1rem;font-size:.9rem}
-  .nav-controls{gap:.3rem}
-  .ctrl-btn{width:2.1rem;height:2.1rem;font-size:.8rem}
+  .nav-bar{gap:.5rem;padding:.5rem .5rem;border-radius:0 0 .75rem .75rem;flex-direction:column}
+  .search-box{width:100%;flex:1 1 auto}
+  .category-nav{gap:.4rem;justify-content:center}
+  .category-nav a{padding:.45rem .9rem;font-size:calc(.85rem * var(--font-scale))}
+  .nav-controls{order:-1;gap:.3rem}
+  .ctrl-btn{min-width:2.1rem;height:2.1rem;font-size:.8rem}
 }
 @media(max-width:600px){
   .site-footer{padding:2rem 0 1.5rem;margin-top:3rem}
@@ -642,9 +554,9 @@ html[data-theme="dark"] .nav-bar.is-stuck{box-shadow:0 4px 20px rgba(0,0,0,.4)}
 }
 @media(max-width:420px){
   .holo-logo{width:84px;height:84px}
-  .store-name{font-size:1.3rem}
-  .store-tagline{font-size:.85rem}
-  .category-nav a{padding:.45rem .9rem;font-size:.85rem}
+  .store-name{font-size:calc(1.3rem * var(--font-scale))}
+  .store-tagline{font-size:calc(.85rem * var(--font-scale))}
+  .category-nav a{padding:.45rem .9rem;font-size:calc(.85rem * var(--font-scale))}
 }
 @media(prefers-reduced-motion:reduce){
   .tile:hover{transform:none;transition:none}

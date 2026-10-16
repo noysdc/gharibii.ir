@@ -1,0 +1,15 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+  {% for p in site.products %}
+    {
+      "title": {{ p.title | jsonify }},
+      "url": {{ p.url | relative_url | jsonify }},
+      "category": {{ p.category | default: "" | jsonify }},
+      "price": {{ p.price | default: 0 }},
+      "image": {% if p.images and p.images.size > 0 %}{{ p.images[0] | relative_url | jsonify }}{% else %}""{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
