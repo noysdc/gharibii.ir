@@ -1,143 +1,243 @@
+@font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+:root{--bg:#F3F7F8;--surface:#fff;--ink:#10222C;--muted:#5A6E78;--line:#D7E1E5;--sea:#0A6670;--sea-deep:#073E45;--wa:#0F7F63;--rose:#F3DDE3;--mist:#D6E6F2}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.9 "Vazirmatn",Tahoma,"Segoe UI",sans-serif}
+a{color:var(--sea);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1rem}
+h1{font-size:1.9rem;line-height:1.4;margin:1.5rem 0 .5rem}
+h2{font-size:1.25rem;margin:2.2rem 0 1rem}
+.lead{color:var(--muted);max-width:60ch;margin:.25rem 0 1.25rem}
+.muted{color:var(--muted)}
+
 /* ============================================
-   لوگوی هولوگرامی — نسخه اصلاح‌شده
+   HEADER با لوگوی کریستالی هولوگرامی
    ============================================ */
-.site-header .bar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 1rem;
-  min-height: 6rem;
-  padding: .5rem 0;
+.site-header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.site-header .bar{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:1rem;
+  min-height:6rem;
+  padding:.5rem 0;
 }
-
-.brand {
-  grid-column: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.brand{
+  grid-column:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
 }
-
-.site-header nav {
-  grid-column: 3;
-  justify-self: end;
-  display: flex;
-  gap: .5rem;
+.site-header nav{
+  grid-column:3;
+  justify-self:end;
+  display:flex;
+  gap:.5rem;
 }
+.site-header nav a{padding:.2rem .9rem;border-radius:999px;color:var(--ink)}
+.site-header nav a[aria-current],.site-header nav a:hover{background:var(--sea);color:#fff;text-decoration:none}
 
-/* --- ظرف لوگو --- */
-.holo-logo {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  transition: transform .3s ease;
-}
-
-/* --- حلقه چرخان دور لوگو (فقط یه حلقه نازک) --- */
-.holo-logo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  padding: 4px;                                  /* ضخامت حلقه */
-  background: conic-gradient(
-    from 0deg,
-    #ff0080, #ff8c00, #ffd700,
-    #00ff88, #00cfff, #a855f7, #ff0080
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: holo-spin 5s linear infinite;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* --- هاله محو بیرونی --- */
-.holo-logo::after {
-  content: "";
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 180deg,
-    #ff008055, #00cfff55, #a855f755, #ff008055
-  );
-  animation: holo-spin 8s linear infinite reverse;
-  filter: blur(16px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* --- خود تصویر لوگو --- */
-.holo-logo img {
-  position: relative;
-  z-index: 1;
-  width: 92%;
-  height: 92%;
-  object-fit: contain;
-  border-radius: 50%;
-  background: #ffffff;
-  padding: 6px;
+/* --- ظرف لوگو: کریستالی و صدفی --- */
+.holo-logo{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  transition:transform .4s ease;
+  background:
+    radial-gradient(circle at 25% 20%,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.3) 15%,
+      transparent 40%),
+    radial-gradient(circle at 78% 85%,
+      rgba(200,230,255,.7) 0%,
+      transparent 45%),
+    linear-gradient(135deg,
+      #e8d5ff 0%,
+      #c8e6ff 18%,
+      #d4f0e8 35%,
+      #ffe8d4 52%,
+      #ffd4e8 70%,
+      #d4e8ff 88%,
+      #e8d5ff 100%);
+  background-size:100% 100%, 100% 100%, 250% 250%;
   box-shadow:
-    inset 0 0 14px rgba(255,255,255,.7),
-    0 4px 12px rgba(10,102,112,.2);
-  animation: holo-glow 5s ease-in-out infinite alternate;
+    inset 0 1px 2px rgba(255,255,255,.9),
+    inset 0 -2px 6px rgba(168,85,247,.15),
+    inset 2px 2px 12px rgba(0,207,255,.2),
+    0 6px 20px rgba(10,102,112,.18),
+    0 0 40px rgba(200,180,255,.35);
+  animation:crystal-shine 8s ease-in-out infinite;
+  overflow:hidden;
+}
+
+/* لایه براقی متحرک */
+.holo-logo::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255,255,255,.85) 45%,
+    rgba(200,240,255,.9) 50%,
+    rgba(255,200,240,.85) 55%,
+    transparent 70%
+  );
+  animation:crystal-sweep 5s ease-in-out infinite;
+  z-index:2;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+
+/* بازتاب رنگین‌کمانی ملایم دور لبه‌ها */
+.holo-logo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    rgba(255,150,220,.35),
+    rgba(150,220,255,.35),
+    rgba(180,255,220,.35),
+    rgba(255,240,180,.35),
+    rgba(220,180,255,.35),
+    rgba(255,150,220,.35)
+  );
+  -webkit-mask:radial-gradient(circle, transparent 62%, #000 68%, #000 95%, transparent 100%);
+          mask:radial-gradient(circle, transparent 62%, #000 68%, #000 95%, transparent 100%);
+  animation:crystal-hue 12s linear infinite;
+  z-index:3;
+  pointer-events:none;
+  filter:blur(.5px);
+}
+
+/* خود تصویر لوگو */
+.holo-logo img{
+  position:relative;
+  z-index:1;
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  filter:
+    drop-shadow(0 1px 1px rgba(255,255,255,.9))
+    drop-shadow(0 2px 3px rgba(10,102,112,.25))
+    saturate(1.1)
+    brightness(1.05);
 }
 
 /* --- انیمیشن‌ها --- */
-@keyframes holo-spin {
-  to { transform: rotate(360deg); }
+@keyframes crystal-shine{
+  0%,100%{background-position:0% 0%,100% 100%,0% 50%}
+  50%    {background-position:0% 0%,100% 100%,100% 50%}
+}
+@keyframes crystal-sweep{
+  0%  {transform:translate(-60%,-60%) rotate(0deg);opacity:0}
+  15% {opacity:1}
+  50% {transform:translate(60%,60%) rotate(0deg);opacity:1}
+  85% {opacity:1}
+  100%{transform:translate(60%,60%) rotate(0deg);opacity:0}
+}
+@keyframes crystal-hue{
+  to{filter:hue-rotate(360deg) blur(.5px)}
 }
 
-@keyframes holo-glow {
-  0% {
-    filter: hue-rotate(0deg) saturate(1.1)
-      drop-shadow(0 0 6px rgba(255,0,128,.5))
-      drop-shadow(0 0 12px rgba(0,207,255,.4));
+/* هاور */
+.brand:hover .holo-logo{transform:scale(1.05)}
+.brand:hover .holo-logo::before{animation-duration:2s}
+
+/* ============================================
+   دسته‌بندی
+   ============================================ */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0 .5rem}
+.tile{display:flex;flex-direction:column;justify-content:flex-end;min-height:11rem;padding:1.25rem;border-radius:1.5rem 1.5rem 1.5rem .4rem;color:var(--ink)}
+.tile:hover{text-decoration:none;transform:translateY(-2px);transition:transform .15s}
+.tile.girls{background:var(--rose)}
+.tile.boys{background:var(--mist)}
+.tile-name{font-size:2.2rem;font-weight:700;line-height:1.2}
+.tile-count{color:var(--muted)}
+
+/* ============================================
+   گرید کارت‌ها
+   ============================================ */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.card{display:flex;flex-direction:column;gap:.15rem;color:var(--ink)}
+.card:hover{text-decoration:none}
+.card:hover .card-title{color:var(--sea)}
+.card-img{display:block;aspect-ratio:3/4;overflow:hidden;border-radius:.9rem;background:var(--pearl,#E3ECEF)}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-title{font-weight:700;margin-top:.5rem;line-height:1.6}
+.card-price{color:var(--muted);font-size:.95rem}
+
+/* ============================================
+   صفحه محصول
+   ============================================ */
+.crumbs{font-size:.9rem;color:var(--muted);margin:1rem 0 0}
+.product-grid{display:grid;gap:1.5rem;margin-top:1rem}
+.gallery #main-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:1rem;background:#E3ECEF}
+.thumbs{display:flex;gap:.5rem;margin-top:.6rem;overflow-x:auto}
+.thumbs button{border:2px solid transparent;border-radius:.6rem;padding:0;background:none;cursor:pointer;flex:0 0 4.5rem}
+.thumbs button:focus-visible,.thumbs button:hover{border-color:var(--sea)}
+.thumbs img{border-radius:.5rem;aspect-ratio:3/4;object-fit:cover;width:100%}
+.price{font-size:1.5rem;font-weight:700;color:var(--sea-deep);margin:.25rem 0 1rem}
+.meta{margin:.25rem 0}
+.desc{margin:1rem 0 1.5rem}
+
+/* دکمه خرید */
+.buy summary{list-style:none;cursor:pointer;display:inline-block;background:var(--sea-deep);color:#fff;font-weight:700;padding:.7rem 2.6rem;border-radius:.8rem}
+.buy summary::-webkit-details-marker{display:none}
+.buy[open] summary{background:var(--sea)}
+.buy-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
+.wa{background:var(--wa);color:#fff;padding:.6rem 1.2rem;border-radius:.8rem}
+.wa:hover{text-decoration:none;filter:brightness(1.1)}
+.btn{display:inline-block;background:var(--sea-deep);color:#fff;padding:.5rem 1.2rem;border-radius:.7rem}
+.btn.alt{background:var(--surface);color:var(--sea-deep);border:1px solid var(--line)}
+.btn:hover{text-decoration:none}
+
+/* ============================================
+   فوتر و 404
+   ============================================ */
+.site-footer{margin-top:3.5rem;padding:2rem 0;border-top:1px solid var(--line);background:var(--surface)}
+.site-footer p{margin:.2rem 0}
+.notfound{padding:2rem 0}
+
+/* ============================================
+   ریسپانسیو
+   ============================================ */
+@media(min-width:760px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .product-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .tiles{gap:1.5rem}
+  .tile{min-height:14rem}
+  h1{font-size:2.3rem}
+}
+@media(max-width:760px){
+  .site-header .bar{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    min-height:auto;
+    gap:.5rem;
+    padding:.75rem 0;
   }
-  50% {
-    filter: hue-rotate(120deg) saturate(1.3)
-      drop-shadow(0 0 10px rgba(0,207,255,.6))
-      drop-shadow(0 0 20px rgba(168,85,247,.5));
-  }
-  100% {
-    filter: hue-rotate(240deg) saturate(1.15)
-      drop-shadow(0 0 8px rgba(168,85,247,.55))
-      drop-shadow(0 0 16px rgba(255,140,0,.45));
-  }
+  .brand{grid-column:1;grid-row:1}
+  .site-header nav{grid-column:1;grid-row:2;justify-self:center}
+  .holo-logo{width:105px;height:105px}
 }
-
-.brand:hover .holo-logo {
-  transform: scale(1.06);
+@media(max-width:420px){
+  .holo-logo{width:88px;height:88px}
 }
-
-/* --- ریسپانسیو --- */
-@media (max-width: 760px) {
-  .site-header .bar {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    min-height: auto;
-    gap: .5rem;
-    padding: .75rem 0;
-  }
-  .brand        { grid-column: 1; grid-row: 1; }
-  .site-header nav { grid-column: 1; grid-row: 2; justify-self: center; }
-  .holo-logo    { width: 100px; height: 100px; }
-}
-
-@media (max-width: 420px) {
-  .holo-logo { width: 84px; height: 84px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media(prefers-reduced-motion:reduce){
+  .tile:hover{transform:none;transition:none}
+  .holo-logo,
   .holo-logo::before,
-  .holo-logo::after,
-  .holo-logo img { animation: none; }
+  .holo-logo::after{animation:none}
 }
