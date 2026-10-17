@@ -2,6 +2,7 @@
 title: "شنل ماسک اسپایدرمن شخصیتی قهرمانی-فروشگاه غریبی کیش"
 slug: "cape-mask-spiderman"
 price: 998000
+price_group: "tier_3"
 category: accessories
 date: 2026-10-17
 material: "ساتن"

@@ -2,6 +2,7 @@
 title: "کلاه کپ بتمن شخصیت دیزنی قهرمانی-فروشگاه غریبی کیش"
 slug: "hat-batman-disney"
 price: 398000
+price_group: "tier_2"
 category: accessories
 date: 2026-10-17
 colors: ["آبی تیره", "83", "148)"]

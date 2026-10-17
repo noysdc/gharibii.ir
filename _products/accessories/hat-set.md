@@ -2,6 +2,7 @@
 title: "کلاه پمپی گوش متحرک استیج - فروشگاه غریبی کیش"
 slug: "hat-set"
 price: 898000
+price_group: "tier_8"
 category: accessories
 date: 2026-10-17
 images:

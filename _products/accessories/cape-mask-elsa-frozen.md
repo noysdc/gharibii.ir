@@ -2,6 +2,7 @@
 title: "شنل ماسک السا(فروزن) شخصیتی-فروشگاه غریبی"
 slug: "cape-mask-elsa-frozen"
 price: 998000
+price_group: "tier_3"
 category: accessories
 date: 2026-10-17
 images:

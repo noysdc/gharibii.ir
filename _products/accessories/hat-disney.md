@@ -2,6 +2,7 @@
 title: "کلاه کپ لول شخصیت دیزنی-فروشگاه غریبی کیش"
 slug: "hat-disney"
 price: 398000
+price_group: "tier_2"
 category: accessories
 date: 2026-10-17
 colors: ["صورتی روشن", "146", "241)", "صورتی تیره", "59", "237)"]

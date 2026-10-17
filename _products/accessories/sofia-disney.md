@@ -2,6 +2,7 @@
 title: "ناخن مصنوعی سوفیا شخصیتی دیزنی چسبدار-فروشگاه غریبی کیش"
 slug: "sofia-disney"
 price: 398000
+price_group: "tier_2"
 category: accessories
 date: 2026-10-17
 images:

@@ -2,6 +2,7 @@
 title: "پیراهن شخصیتی دختر کفشدوزکی"
 slug: "dress-shoes"
 price: 1598000
+price_group: "tier_5"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

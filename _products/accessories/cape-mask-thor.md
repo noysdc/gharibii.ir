@@ -2,6 +2,7 @@
 title: "شنل ماسک شخصیتی قهرمانی ثور - فروشگاه غریبی کیش"
 slug: "cape-mask-thor"
 price: 998000
+price_group: "tier_3"
 category: accessories
 date: 2026-10-17
 sizes: ["free size = 70cm * 70cm"]

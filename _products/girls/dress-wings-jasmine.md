@@ -2,6 +2,7 @@
 title: "پیراهن پرنسسی باله تم جاسمین"
 slug: "dress-wings-jasmine"
 price: 4998000
+price_group: "tier_4"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

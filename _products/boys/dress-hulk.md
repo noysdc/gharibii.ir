@@ -2,6 +2,7 @@
 title: "پیراهن پسرانه یکسره هالک عضلانی"
 slug: "dress-hulk"
 price: 5998000
+price_group: "tier_1"
 category: boys
 date: 2026-10-17
 badge: "تخفیف ویژه"

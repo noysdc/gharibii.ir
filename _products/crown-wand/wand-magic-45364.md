@@ -2,6 +2,7 @@
 title: "عصا مجیک پسرانه"
 slug: "wand-magic"
 price: 298000
+price_group: "tier_7"
 category: crown-wand
 date: 2026-10-17
 images:

@@ -2,6 +2,7 @@
 title: "ست نخی راحتی"
 slug: "set"
 price: 998000
+price_group: "tier_3"
 category: girls
 date: 2026-10-17
 badge: "نخ"

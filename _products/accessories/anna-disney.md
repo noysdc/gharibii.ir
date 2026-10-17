@@ -2,6 +2,7 @@
 title: "گردنبند مواوی موانا دیزنی-فروشگاه غریبی کیش"
 slug: "anna-disney"
 price: 198000
+price_group: "tier_6"
 category: accessories
 date: 2026-10-17
 images:

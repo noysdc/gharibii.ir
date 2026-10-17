@@ -2,6 +2,7 @@
 title: "پسرانه سرهمی عضلانی شخصیتی اسپایدرمن سیاه -فروشگاه غریبی کیش"
 slug: "spiderman"
 price: 5998000
+price_group: "tier_1"
 category: boys
 date: 2026-10-17
 badge: "فروش ویژه"

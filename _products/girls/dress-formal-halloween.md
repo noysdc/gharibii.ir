@@ -2,6 +2,7 @@
 title: "پیرهن مجلسی هالووین جادوگری - فروشگاه غریبی کیش"
 slug: "dress-formal-halloween"
 price: 1998000
+price_group: "tier_9"
 category: girls
 date: 2026-10-17
 badge: "تخفیف"

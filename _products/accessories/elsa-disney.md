@@ -2,6 +2,7 @@
 title: "ناخن مصنوعی السا شخصیتی دیزنی چسبدار-فروشگاه غریبی کیش"
 slug: "elsa-disney"
 price: 398000
+price_group: "tier_2"
 old_price: 498000
 discount: 20
 category: accessories

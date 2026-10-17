@@ -2,6 +2,7 @@
 title: "بال فرشته هولوگرامی دخترانه"
 slug: "wings"
 price: 598000
+price_group: "tier_12"
 category: accessories
 date: 2026-10-17
 sizes: ["50.50:#000"]

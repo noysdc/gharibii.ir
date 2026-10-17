@@ -2,6 +2,7 @@
 title: "پیراهن مجلسی دیزنی راپونزل"
 slug: "dress-rapunzel-formal-disney"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

@@ -2,6 +2,7 @@
 title: "ماسک صورت شخصیتی قهرمانی آیرون من فروشگاه غریبی کیش"
 slug: "mask-ironman"
 price: 398000
+price_group: "tier_2"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"

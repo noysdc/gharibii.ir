@@ -2,6 +2,7 @@
 title: "شنل ماسک هالک شخصیتی قهرمانی-فروشگاه غریبی کیش"
 slug: "cape-mask-hulk"
 price: 998000
+price_group: "tier_3"
 category: accessories
 date: 2026-10-17
 images:

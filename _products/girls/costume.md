@@ -2,6 +2,7 @@
 title: "لباس پرنسسی دیو و دلبر"
 slug: "costume"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

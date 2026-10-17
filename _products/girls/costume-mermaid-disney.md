@@ -2,6 +2,7 @@
 title: "لباس دخترانه پری دریایی دیزنی"
 slug: "costume-mermaid-disney"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 images:

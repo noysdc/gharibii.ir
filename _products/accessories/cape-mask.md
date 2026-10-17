@@ -2,6 +2,7 @@
 title: "شنل ماسک کاپتان آمریکا شخصیت قهرمانی-فروشگاه غریبی کیش"
 slug: "cape-mask"
 price: 998000
+price_group: "tier_3"
 category: accessories
 date: 2026-10-17
 images:

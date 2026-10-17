@@ -2,6 +2,7 @@
 title: "پسرانه سرهمی عضلانی قهرمانی فلش-فروشگاه غریبی کیش"
 slug: "flash"
 price: 5998000
+price_group: "tier_1"
 category: boys
 date: 2026-10-17
 badge: "فروش ویژه"

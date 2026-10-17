@@ -2,6 +2,7 @@
 title: "پیرهن توری اسب های پونی دیزنی - فروشگاه غریبی کیش"
 slug: "dress-disney"
 price: 598000
+price_group: "tier_12"
 category: accessories
 date: 2026-10-17
 sizes: ["S - مناسب 3 تا 5 سال", "M - مناسب 5 تا 6 سال", "L - مناسب 7 تا 8 سال", "XL - مناسب 8 تا 10 سال"]

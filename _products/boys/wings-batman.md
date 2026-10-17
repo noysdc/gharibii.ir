@@ -2,6 +2,7 @@
 title: "بال بتمن پسرانه"
 slug: "wings-batman"
 price: 398000
+price_group: "tier_2"
 category: boys
 date: 2026-10-17
 images:

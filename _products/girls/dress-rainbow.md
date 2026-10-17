@@ -2,6 +2,7 @@
 title: "پیراهن توری رنگین کمانی شخصیتی-فروشگاه غریبی"
 slug: "dress-rainbow"
 price: 1998000
+price_group: "tier_9"
 category: girls
 date: 2026-10-17
 material: "نخی"

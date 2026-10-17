@@ -2,6 +2,7 @@
 title: "دامن تتو باله دخترانه"
 slug: "wings-skirt"
 price: 698000
+price_group: "tier_11"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

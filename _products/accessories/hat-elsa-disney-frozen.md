@@ -2,6 +2,7 @@
 title: "کلاه کپ السا فروزن شخصیت دیزنی-فروشگاه غریبی کیش"
 slug: "hat-elsa-disney-frozen"
 price: 398000
+price_group: "tier_2"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"

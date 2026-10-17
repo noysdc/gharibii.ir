@@ -2,6 +2,7 @@
 title: "مایو لباسی سگهای نگهبان شخصیتی دخترانه-فروشگاه غریبی کیش"
 slug: "costume-swimsuit-paw-patrol"
 price: 1598000
+price_group: "tier_5"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"

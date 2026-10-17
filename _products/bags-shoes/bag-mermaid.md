@@ -2,6 +2,7 @@
 title: "کیف پرنسسی پری دریایی"
 slug: "bag-mermaid"
 price: 298000
+price_group: "tier_7"
 category: bags-shoes
 date: 2026-10-17
 badge: "فروش ویژه"

@@ -2,6 +2,7 @@
 title: "لباس اسپایدرمن عضلانی برای قهرمانان کوچک - فروشگاه غریبی کیش"
 slug: "costume-anna-spiderman"
 price: 5998000
+price_group: "tier_1"
 category: boys
 date: 2026-10-17
 badge: "فروش ویژه"

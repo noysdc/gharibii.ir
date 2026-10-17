@@ -2,6 +2,7 @@
 title: "لباس دخترانه پری دریایی"
 slug: "costume-mermaid"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

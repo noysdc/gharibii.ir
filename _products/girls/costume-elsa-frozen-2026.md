@@ -2,6 +2,7 @@
 title: "لباس پرنسسی السا فروزن - کالکشن 2026"
 slug: "costume-elsa-frozen-2026"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "کالکشن 2026"

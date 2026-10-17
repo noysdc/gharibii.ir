@@ -2,6 +2,7 @@
 title: "لباس شخصیتی شکارچیان شیاطین k-pop huntrix - رومی - rumi"
 slug: "costume-pop-huntrix-rumi"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "کالکشن 2026"

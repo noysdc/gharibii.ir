@@ -1,15 +1,29 @@
-{%- assign p = include.value | plus: 0 -%}
-{%- if p > 0 -%}
-{%- assign un = p | modulo: 1000 | prepend: '00' | slice: -3, 3 -%}
-{%- assign th_all = p | divided_by: 1000 -%}
-{%- assign th = th_all | modulo: 1000 -%}
-{%- assign mil = th_all | divided_by: 1000 -%}
-{%- capture txt -%}
-{%- if mil > 0 -%}{{ mil }},{{ th | prepend: '00' | slice: -3, 3 }},{{ un }}
-{%- elsif th_all > 0 -%}{{ th_all }},{{ un }}
-{%- else -%}{{ p }}{%- endif -%}
-{%- endcapture -%}
-{{- txt | replace: '0','۰' | replace: '1','۱' | replace: '2','۲' | replace: '3','۳' | replace: '4','۴' | replace: '5','۵' | replace: '6','۶' | replace: '7','۷' | replace: '8','۸' | replace: '9','۹' }} تومان
+{%- assign product = include.product -%}
+{%- assign price = product.price -%}
+{%- assign old_price = product.old_price -%}
+{%- assign discount = product.discount -%}
+
+{%- if product.price_group and site.data.price_groups.groups[product.price_group] -%}
+  {%- assign group = site.data.price_groups.groups[product.price_group] -%}
+  {%- assign price = group.price -%}
+  {%- assign old_price = group.old_price -%}
+  {%- assign discount = group.discount -%}
+{%- endif -%}
+
+{%- if price -%}
+  {%- assign price_fa = price | times: 1 | number_with_delimiter: ',' -%}
+  {%- assign price_fa = price_fa | replace: ',', '،' -%}
+  <span class="price-value">{{ price_fa }} تومان</span>
+  
+  {%- if old_price and old_price > price -%}
+    {%- assign old_price_fa = old_price | times: 1 | number_with_delimiter: ',' -%}
+    {%- assign old_price_fa = old_price_fa | replace: ',', '،' -%}
+    <del class="price-old">{{ old_price_fa }} تومان</del>
+  {%- endif -%}
+  
+  {%- if discount and discount > 0 -%}
+    <span class="price-discount">{{ discount }}٪ تخفیف</span>
+  {%- endif -%}
 {%- else -%}
-تماس بگیرید
+  <span class="price-value">تماس بگیرید</span>
 {%- endif -%}

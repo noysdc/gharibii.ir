@@ -2,6 +2,7 @@
 title: "پیرهن پرنسسی دیزنی السا فروزن همراه با شنل (آبی کاربنی) - فروشگاه غریبی کیش"
 slug: "dress-cape-elsa-disney"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "جدید"

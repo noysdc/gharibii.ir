@@ -2,7 +2,9 @@
 title: "پیراهن دو تیکه پرنسسی مووآنا"
 slug: "dress-anna-moana"
 price: 3998000
+price_group: "tier_10"
 old_price: 3998000
+price_group: "tier_10"
 discount: 0
 category: girls
 date: 2026-10-17

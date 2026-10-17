@@ -2,6 +2,7 @@
 title: "کلاه پمپی تکشاخ گوش متحرک دخترانه پسرانه - بی تی اس-فروشگاه غریبی"
 slug: "hat-unicorn"
 price: 898000
+price_group: "tier_8"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه کریسمس"

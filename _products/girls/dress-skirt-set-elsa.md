@@ -2,6 +2,7 @@
 title: "پیرهن آستین بلند دامن توری تمام نخ السا دیزنی - فروشگاه غریبی کیش"
 slug: "dress-skirt-set-elsa"
 price: 4998000
+price_group: "tier_4"
 category: girls
 date: 2026-10-17
 badge: "جدید"

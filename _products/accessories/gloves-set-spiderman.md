@@ -2,6 +2,7 @@
 title: "ست دستکش تیرپرتاب کن اسپایدرمن-فروشگاه غریبی کیش"
 slug: "gloves-set-spiderman"
 price: 398000
+price_group: "tier_2"
 old_price: 498000
 discount: 20
 category: accessories

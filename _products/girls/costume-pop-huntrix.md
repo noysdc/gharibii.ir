@@ -2,6 +2,7 @@
 title: "لباس شخصیتی کی پاپ - شکارچیان شیاطین رومی - k-pop huntrix"
 slug: "costume-pop-huntrix"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "کالکشن 2026"

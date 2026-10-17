@@ -2,6 +2,7 @@
 title: "پیرهن پرنسسی راپونزل (گیسوکمند) دیزنی - فروشگاه غریبی کیش"
 slug: "dress-rapunzel-disney"
 price: 5998000
+price_group: "tier_1"
 category: girls
 date: 2026-10-17
 badge: "جدید"
