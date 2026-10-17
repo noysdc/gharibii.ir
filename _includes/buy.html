@@ -1,11 +1,10 @@
 {%- assign product = include.product | default: page -%}
-{%- assign wa_link = "https://wa.me/" | append: site.whatsapp_numbers[0] -%}
+{%- assign phone = site.whatsapp_numbers[0] -%}
 {%- assign product_url = site.url | append: site.baseurl | append: product.url -%}
-{%- assign msg = "سلام، من می‌خوام این محصول رو سفارش بدم:%0A" | append: product.title | append: "%0A" | append: product_url %}
 
 <div class="buy-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
   
-  <a class="btn-wa" href="{{ wa_link }}?text={{ msg }}" target="_blank" rel="noopener">
+  <a class="btn-wa" href="https://wa.me/{{ phone }}?text=سلام، من می‌خوام این محصول رو سفارش بدم: {{ product.title | url_encode }} - {{ product_url | url_encode }}" target="_blank" rel="noopener">
     <span>🛍️</span> ثبت سفارش در واتساپ
   </a>
 

@@ -15,7 +15,10 @@ layout: default
 
   <div class="product-grid">
     <div class="gallery">
-      <img id="main-img" src="{{ main_image | relative_url }}" alt="{{ page.title | escape }}" width="900" height="1200">
+      {% if main_image %}
+        <img id="main-img" src="{{ main_image | relative_url }}" alt="{{ page.title | escape }}" width="900" height="1200">
+      {% endif %}
+      
       {% if page.images.size > 1 %}
       <div class="thumbs">
         {% for im in page.images %}
@@ -28,7 +31,6 @@ layout: default
     <div class="info">
       <h1>{{ page.title }}</h1>
       
-      <!-- نمایش قیمت با فرمت درست -->
       <p class="price">{% include price.html product=page %}</p>
       
       {% if page.sizes %}<p class="meta"><strong>سایز:</strong> {{ page.sizes | join: '، ' }}</p>{% endif %}
@@ -36,18 +38,7 @@ layout: default
       
       <div class="desc">{{ content }}</div>
       
-      <!-- دکمه‌های خرید (واتساپ و سبد) -->
       {% include buy.html product=page %}
-      
-      {% if page.external_link %}<p class="meta"><a href="{{ page.external_link }}" rel="nofollow noopener" target="_blank">لینک مرتبط</a></p>{% endif %}
     </div>
   </div>
-
-  {%- assign shown = 0 -%}
-  <section class="more">
-    <h2>محصولات دیگر {{ cat_title }}</h2>
-    <div class="grid">
-      {% for p in related %}{% if p.url != page.url and shown < 4 %}{% include product-card.html product=p %}{% assign shown = shown | plus: 1 %}{% endif %}{% endfor %}
-    </div>
-  </section>
 </article>
