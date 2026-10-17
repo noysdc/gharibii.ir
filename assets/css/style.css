@@ -1218,8 +1218,8 @@ html[data-theme="dark"] .floating-cart{background:#0a4d55;color:#fff;box-shadow:
 
 /* ۴) فاصله افقی هدر روی موبایل (جعبه دسته‌ها به لبه نچسبد) */
 .header-inner{padding-left:1rem;padding-right:1rem}
-.category-box{max-width:min(100%,fit-content)}
-.control-box{max-width:min(100%,fit-content)}
+.category-box{max-width:100%}
+.control-box{max-width:100%}
 
 /* ۵) قیمت کارت‌ها هم‌تراز در پایین */
 .card-body{flex:1 1 auto}
@@ -1274,4 +1274,219 @@ html[data-theme="dark"] body::before{
     radial-gradient(44rem 34rem at 2% 22%,  rgba(15,100,112,.3),  transparent 62%),
     radial-gradient(42rem 30rem at 84% 70%, rgba(130,50,110,.2),  transparent 62%),
     radial-gradient(40rem 30rem at 12% 96%, rgba(40,70,140,.22),  transparent 62%);
+}
+
+/* ============================================
+   منوی دسته‌بندی: یک ردیف، کشیدنی + هندل چپ/راست
+   ============================================ */
+.category-box{
+  display:flex;align-items:center;gap:.3rem;position:relative;
+  max-width:100%;
+}
+.category-nav{
+  --fl:0px;--fr:0px;
+  flex:1 1 auto;min-width:0;
+  flex-wrap:nowrap;justify-content:flex-start;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  padding:.15rem .1rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);
+}
+.category-nav::-webkit-scrollbar{display:none}
+.category-nav.can-left{--fl:26px}
+.category-nav.can-right{--fr:26px}
+.category-nav a{flex:0 0 auto;white-space:nowrap;scroll-snap-align:center}
+
+.cat-nav{
+  display:none;flex:0 0 auto;width:2rem;height:2rem;padding:0;border-radius:50%;
+  align-items:center;justify-content:center;cursor:pointer;
+  color:var(--sea-deep);
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 3px 10px rgba(168,85,247,.2);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.category-box.has-overflow .cat-nav{display:flex}
+.cat-nav:hover{transform:scale(1.1)}
+.cat-nav.is-off{opacity:.35;pointer-events:none}
+.cat-nav svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-theme="dark"] .cat-nav{background:rgba(21,32,37,.75);color:var(--ink);border-color:rgba(255,255,255,.2)}
+@media (hover:none){.cat-nav{display:none !important}}
+@media (max-width:520px){
+  .category-box{padding:.4rem .5rem}
+  .category-nav a{padding:.5rem .95rem}
+}
+/* RTL: هندل «چپ» واقعاً سمت چپ، هندل «راست» سمت راست */
+.cat-next{order:-1}
+.cat-prev{order:1}
+
+/* ============================================================
+   نسخه جدید: اسلایدر RTL، پیام خوش‌آمد، صفحه اصلی غنی‌تر، نصب اپ
+   ============================================================ */
+
+/* --- اسلایدر کاورها و بندانگشتی‌ها: راست‌به‌چپ (فارسی) --- */
+.card-img .slides{direction:rtl}
+.thumbs{direction:rtl}
+.slide-prev{right:.5rem;left:auto}   /* قبلی: سمت راست */
+.slide-next{left:.5rem;right:auto}   /* بعدی: سمت چپ  */
+
+/* --- پیام خوش‌آمد: همیشه یک خط --- */
+.welcome-toast{
+  left:0;right:0;margin-inline:auto;
+  width:max-content;max-width:calc(100vw - 1rem);
+  transform:translateY(-160%);
+}
+.welcome-toast.is-visible{transform:translateY(0)}
+.welcome-toast-content{white-space:nowrap;gap:.5rem;padding:.55rem .9rem}
+.welcome-toast-text{
+  overflow:hidden;text-overflow:ellipsis;
+  font-size:clamp(.78rem,3.4vw,.95rem);
+}
+
+/* --- باکس‌های دخترانه/پسرانه با کلاژ عکس --- */
+.tile{
+  position:relative;overflow:hidden;isolation:isolate;
+  min-height:17rem;align-items:center;text-align:center;gap:.1rem;
+  box-shadow:0 8px 24px rgba(168,85,247,.12),inset 0 1px 0 rgba(255,255,255,.7);
+}
+.tile.girls{background:linear-gradient(160deg,#fbe3ee 0%,#f1d9ea 55%,#e7d9f5 100%)}
+.tile.boys{background:linear-gradient(160deg,#dcebf7 0%,#d5e4f2 55%,#d2e9ec 100%)}
+html[data-theme="dark"] .tile.girls{background:linear-gradient(160deg,#3a2832 0%,#33263c 100%)}
+html[data-theme="dark"] .tile.boys{background:linear-gradient(160deg,#1f3040 0%,#1e3a3f 100%)}
+.tile-name{font-size:calc(1.7rem * var(--font-scale))}
+.tile-collage{
+  position:absolute;z-index:0;top:.9rem;left:0;right:0;height:7.2rem;
+  display:flex;justify-content:center;align-items:center;pointer-events:none;
+}
+.tile-collage img{
+  height:100%;width:auto;aspect-ratio:3/4;object-fit:cover;
+  margin-inline:-1.1rem;border-radius:.9rem;
+  border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 18px rgba(80,40,120,.22);
+  transition:transform .35s ease;
+}
+.tile-collage img:nth-child(1){transform:rotate(-8deg) translateY(.35rem);z-index:1}
+.tile-collage img:nth-child(2){transform:scale(1.1);z-index:3}
+.tile-collage img:nth-child(3){transform:rotate(8deg) translateY(.35rem);z-index:2}
+.tile:hover .tile-collage img:nth-child(1){transform:rotate(-12deg) translate(-.4rem,.2rem)}
+.tile:hover .tile-collage img:nth-child(2){transform:scale(1.16) translateY(-.2rem)}
+.tile:hover .tile-collage img:nth-child(3){transform:rotate(12deg) translate(.4rem,.2rem)}
+.tile > .tile-name,.tile > .tile-count,.tile > .tile-cta{position:relative;z-index:1}
+.tile-cta{
+  display:inline-flex;align-items:center;gap:.3rem;margin-top:.5rem;
+  padding:.3rem .85rem;border-radius:999px;font-size:.85rem;font-weight:700;
+  color:var(--sea-deep);
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.9);
+}
+html[data-theme="dark"] .tile-cta{background:rgba(21,32,37,.6);border-color:rgba(255,255,255,.2)}
+.tile-cta svg{width:.85rem;height:.85rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:760px){
+  .tile{min-height:21rem}
+  .tile-name{font-size:calc(2.2rem * var(--font-scale))}
+  .tile-collage{height:11rem;top:1.1rem}
+  .tile-collage img{margin-inline:-1.4rem}
+}
+
+/* --- پله‌ای کردن جمله‌ها روی موبایل: یکی بالا، یکی پایین --- */
+@media (max-width:759px){
+  .tile-col:nth-child(2) .hero-lead{margin-top:1.6rem}
+}
+
+/* --- هدر هر بخش --- */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:2.4rem 0 1rem}
+.section-head h2{margin:0}
+.section-sub{color:var(--muted);font-size:.9rem;margin:0}
+
+/* --- دسته‌بندی‌ها --- */
+.cat-row{
+  display:flex;gap:.9rem;overflow-x:auto;padding:.4rem .2rem 1rem;
+  scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.cat-row::-webkit-scrollbar{display:none}
+.cat-card{
+  flex:0 0 40%;max-width:11rem;scroll-snap-align:start;
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  text-align:center;color:var(--ink);
+}
+.cat-card:hover{text-decoration:none}
+.cat-card:hover .card-img{
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.95),0 14px 30px rgba(10,102,112,.22),0 8px 24px rgba(168,85,247,.22),0 0 34px rgba(255,150,220,.3);
+}
+.card-img.cat-cover{width:100%;aspect-ratio:1/1}
+.cat-emoji{
+  display:flex !important;align-items:center;justify-content:center;
+  font-size:3rem;background:rgba(255,255,255,.55);
+}
+.cat-name{font-weight:700;font-size:calc(1rem * var(--font-scale))}
+.cat-count{color:var(--muted);font-size:.85rem}
+@media (min-width:900px){
+  .cat-row{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;gap:1.2rem}
+  .cat-card{flex:none;max-width:none}
+}
+
+/* --- مراحل سفارش --- */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;grid-template-columns:1fr}
+.step{
+  display:flex;gap:.9rem;align-items:flex-start;padding:1rem 1.1rem;border-radius:1.2rem;
+  background:rgba(255,255,255,.5);
+  backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 22px rgba(168,85,247,.1);
+}
+.step-num{
+  flex:0 0 auto;width:2.4rem;height:2.4rem;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#ff80ab,#a855f7);
+  box-shadow:0 4px 12px rgba(168,85,247,.35),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.step strong{display:block;margin-bottom:.15rem}
+.step p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.9}
+html[data-theme="dark"] .step{background:rgba(30,45,55,.55);border-color:rgba(150,180,200,.2)}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+
+/* --- پنل تماس --- */
+.contact-panel{
+  margin-top:2.4rem;padding:1.4rem 1.2rem;border-radius:1.5rem;text-align:center;
+  background:rgba(255,255,255,.5);
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 10px 30px rgba(168,85,247,.14);
+}
+.contact-panel h2{margin:0 0 .3rem}
+.contact-panel .muted{margin:0 0 1rem}
+.contact-panel .wa-sellers{justify-content:center}
+.contact-panel .wa-seller{flex:1 1 12rem;max-width:16rem}
+html[data-theme="dark"] .contact-panel{background:rgba(21,32,37,.6);border-color:rgba(150,180,200,.2)}
+
+/* --- نصب اپلیکیشن --- */
+.install-bar{
+  position:fixed;z-index:80;left:0;right:0;margin-inline:auto;
+  bottom:calc(.8rem + env(safe-area-inset-bottom,0px));
+  width:min(92vw,30rem);display:flex;align-items:center;gap:.7rem;
+  padding:.6rem .7rem .6rem .9rem;border-radius:1.2rem;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 14px 40px rgba(10,102,112,.28),inset 0 1px 0 rgba(255,255,255,.95);
+}
+html[data-theme="dark"] .install-bar{background:rgba(21,32,37,.88);border-color:rgba(255,255,255,.18)}
+.install-icon{flex:0 0 auto;width:2.6rem;height:2.6rem;border-radius:.8rem;object-fit:cover}
+.install-text{flex:1;min-width:0;font-size:.85rem;line-height:1.7}
+.install-text strong{display:block;font-size:.95rem}
+.install-go{
+  flex:0 0 auto;border:0;border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;
+  font:700 .9rem "Vazirmatn",Tahoma,sans-serif;color:#fff;background:var(--sea);
+  box-shadow:0 6px 16px rgba(10,102,112,.3);
+}
+.install-close{flex:0 0 auto;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:.3rem}
+.install-link{
+  margin-top:.6rem;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:.45rem 1rem;cursor:pointer;
+  font:600 .9rem "Vazirmatn",Tahoma,sans-serif;color:var(--sea-deep);
+  background:rgba(255,255,255,.6);
 }

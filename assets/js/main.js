@@ -353,18 +353,19 @@ if (waBtn && waMenu) {
       if (!track || slides.length < 2) return;
 
       var idx = 0, timer = null, hold = false, visible = false;
+      var dir = (window.getComputedStyle(track).direction === 'rtl') ? -1 : 1;
 
       function mark() {
         dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); });
       }
       function go(i) {
         idx = (i + slides.length) % slides.length;
-        track.scrollTo({ left: idx * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+        track.scrollTo({ left: dir * idx * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
         mark();
       }
       track.addEventListener('scroll', function () {
         var w = track.clientWidth || 1;
-        var i = Math.round(track.scrollLeft / w);
+        var i = Math.round(Math.abs(track.scrollLeft) / w);
         if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); }
       }, { passive: true });
 
@@ -419,9 +420,10 @@ if (waBtn && waMenu) {
       if (first && !strip.querySelector('button.active')) first.classList.add('active');
 
       function update() {
-        var max = strip.scrollWidth - strip.clientWidth - 2;
-        if (prev) prev.classList.toggle('is-off', strip.scrollLeft <= 2);
-        if (next) next.classList.toggle('is-off', strip.scrollLeft >= max);
+        var max = strip.scrollWidth - strip.clientWidth;
+        var pos = Math.abs(strip.scrollLeft);          /* RTL-safe */
+        if (prev) prev.classList.toggle('is-off', pos >= max - 2);   /* left handle */
+        if (next) next.classList.toggle('is-off', pos <= 2);         /* right handle */
       }
       strip.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
@@ -457,11 +459,46 @@ if (waBtn && waMenu) {
       /* keep the chosen thumbnail in view */
       strip.querySelectorAll('button').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          var left = btn.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2;
-          strip.scrollTo({ left: left, behavior: 'smooth' });
+          if (btn.scrollIntoView) btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
         });
       });
     });
+  })();
+
+
+  /* ---- 9. Category menu: single row, swipe + left/right handles ---- */
+  (function initCategoryNav() {
+    var box = document.getElementById('category-box');
+    var nav = document.getElementById('category-nav');
+    if (!box || !nav) return;
+    var left = box.querySelector('.cat-prev');
+    var right = box.querySelector('.cat-next');
+
+    function update() {
+      var max = nav.scrollWidth - nav.clientWidth;
+      var overflow = max > 2;
+      box.classList.toggle('has-overflow', overflow);
+      var pos = Math.abs(nav.scrollLeft);           /* RTL-safe */
+      var atStart = pos <= 2;                        /* right edge in RTL */
+      var atEnd = pos >= max - 2;                    /* left edge in RTL  */
+      nav.classList.toggle('can-right', overflow && !atStart);
+      nav.classList.toggle('can-left', overflow && !atEnd);
+      if (left) left.classList.toggle('is-off', atEnd);
+      if (right) right.classList.toggle('is-off', atStart);
+    }
+    nav.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+
+    function step(dir) {
+      nav.scrollBy({ left: dir * Math.max(nav.clientWidth * 0.7, 120), behavior: 'smooth' });
+    }
+    if (left) left.addEventListener('click', function () { step(-1); });
+    if (right) right.addEventListener('click', function () { step(1); });
+
+    var cur = nav.querySelector('[aria-current="page"]');
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({ inline: 'center', block: 'nearest' });
+    update();
   })();
 
 })();

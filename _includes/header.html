@@ -18,14 +18,16 @@
       <div class="holo-divider" role="presentation"></div>
     </div>
 
-    <div class="category-box">
-      <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+    <div class="category-box" id="category-box">
+      <button type="button" class="cat-nav cat-prev" aria-label="دسته‌های قبلی (چپ)"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+      <nav class="category-nav" id="category-nav" aria-label="دسته‌بندی محصولات">
         <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
         <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
         <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
         <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
         <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
       </nav>
+      <button type="button" class="cat-nav cat-next" aria-label="دسته‌های بعدی (راست)"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
     </div>
 
   </div>
