@@ -30,7 +30,6 @@ layout: default
 
     <div class="info">
       <h1>{{ page.title }}</h1>
-      
       <p class="price">{% include price.html product=page %}</p>
       
       {% if page.sizes %}<p class="meta"><strong>سایز:</strong> {{ page.sizes | join: '، ' }}</p>{% endif %}
@@ -42,3 +41,16 @@ layout: default
     </div>
   </div>
 </article>
+
+<section class="wrap more">
+  <h2>محصولات دیگر {{ cat_title }}</h2>
+  <div class="grid">
+    {%- assign shown = 0 -%}
+    {% for p in related %}
+      {% if p.url != page.url and shown < 4 %}
+        {% include product-card.html product=p %}
+        {% assign shown = shown | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

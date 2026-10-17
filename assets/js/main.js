@@ -284,5 +284,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// ============================================
+// باز و بسته کردن منوی واتساپ
+// ============================================
+const waBtn = document.getElementById('open-wa-menu');
+const waMenu = document.getElementById('wa-menu');
+
+if (waBtn && waMenu) {
+    waBtn.addEventListener('click', function() {
+        if (waMenu.style.display === 'none') {
+            waMenu.style.display = 'block';
+        } else {
+            waMenu.style.display = 'none';
+        }
+    });
+}
 
 })();
