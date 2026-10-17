@@ -6,25 +6,22 @@ title: پوشاک دخترانه و پسرانه
 {%- assign boys = site.products | where: 'category', 'boys' -%}
 {%- assign latest = site.products | sort: 'date' | reverse -%}
 
-<section class="wrap hero-intro">
-  <p class="hero-lead">
-    لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.
-  </p>
-  <p class="hero-lead">
-    برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀
-  </p>
-</section>
-
 <section class="wrap">
   <div class="tiles">
-    <a class="tile girls" href="{{ '/girls/' | relative_url }}">
-      <span class="tile-name">دخترانه</span>
-      <span class="tile-count">{{ girls.size }} محصول</span>
-    </a>
-    <a class="tile boys" href="{{ '/boys/' | relative_url }}">
-      <span class="tile-name">پسرانه</span>
-      <span class="tile-count">{{ boys.size }} محصول</span>
-    </a>
+    <div class="tile-col">
+      <a class="tile girls" href="{{ '/girls/' | relative_url }}">
+        <span class="tile-name">دخترانه</span>
+        <span class="tile-count">{{ girls.size }} محصول</span>
+      </a>
+      <p class="hero-lead">لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.</p>
+    </div>
+    <div class="tile-col">
+      <a class="tile boys" href="{{ '/boys/' | relative_url }}">
+        <span class="tile-name">پسرانه</span>
+        <span class="tile-count">{{ boys.size }} محصول</span>
+      </a>
+      <p class="hero-lead">برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀</p>
+    </div>
   </div>
 </section>
 

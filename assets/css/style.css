@@ -1048,3 +1048,12 @@ html[data-theme="dark"] .wa-avatar::before{background:rgba(30,45,55,.8)}
 /* --- انتخاب فروشنده داخل سبد خرید --- */
 button.wa-seller{font:inherit;cursor:pointer;width:auto}
 .cart-sellers{margin-top:.75rem}
+
+/* --- باکس‌های دخترانه/پسرانه + جمله زیر هرکدام --- */
+.tiles{align-items:start}
+.tile-col{display:flex;flex-direction:column;gap:.9rem;min-width:0}
+.tile{align-items:center;text-align:center}
+.tile-col .hero-lead{
+  display:block;width:100%;max-width:none;text-align:center;
+  font-size:calc(.95rem * var(--font-scale));padding:.8rem 1rem;
+}
