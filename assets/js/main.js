@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
                 <div id="cart-items-container"></div>
                 <button class="cart-checkout" id="cart-checkout">ارسال سفارش در واتساپ</button>
+                <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
             </div>
         </div>
     `;
@@ -256,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
             document.getElementById('cart-modal').classList.remove('active');
+            const sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
         }
         
         // حذف آیتم
@@ -266,23 +268,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ۷. ارسال به واتساپ
+    // ۷. ارسال به واتساپ (انتخاب فروشنده با عکس)
+    let sellers = [];
+    try {
+        const el = document.getElementById('wa-sellers-data');
+        sellers = el ? JSON.parse(el.textContent) : [];
+    } catch (err) { sellers = []; }
+    if (!sellers.length) sellers = [{ name: 'فروشنده', number: '989347688356', photo: '' }];
+
+    const sellersBox = document.getElementById('cart-sellers');
     const checkoutBtn = document.getElementById('cart-checkout');
+
+    const buildMessage = () => {
+        let message = "سلام، من این محصولات را سفارش می‌دهم:\n\n";
+        cart.forEach((item, i) => {
+            message += `${i+1}. ${item.title}\n`;
+            message += `قیمت: ${item.price} تومان\n`;
+            message += `لینک: ${location.origin}${item.url}\n\n`;
+        });
+        return message;
+    };
+    const openWhatsApp = (number) => {
+        window.open(`https://wa.me/${number}?text=${encodeURIComponent(buildMessage())}`, '_blank');
+    };
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    const renderSellers = () => {
+        if (!sellersBox) return;
+        sellersBox.innerHTML = sellers.map((s, i) => `
+            <button type="button" class="wa-seller" data-i="${i}">
+                <span class="wa-avatar">${s.photo ? `<img src="${esc(s.photo)}" alt="" width="160" height="160" onerror="this.remove()">` : ''}</span>
+                <span class="wa-seller-info"><strong>${esc(s.name)}</strong><small>ارسال سفارش</small></span>
+            </button>`).join('');
+    };
+
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             if (cart.length === 0) return alert('سبد خرید خالی است!');
-
-            const phone = "989347688356"; // شماره واتساپ اول
-            let message = "سلام، من این محصولات را سفارش می‌دهم:\n\n";
-            
-            cart.forEach((item, i) => {
-                message += `${i+1}. ${item.title}\n`;
-                message += `قیمت: ${item.price} تومان\n`;
-                message += `لینک: ${location.origin}${item.url}\n\n`;
-            });
-
-            const encodedMsg = encodeURIComponent(message);
-            window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+            if (sellers.length === 1 || !sellersBox) return openWhatsApp(sellers[0].number);
+            if (sellersBox.hidden) renderSellers();
+            sellersBox.hidden = !sellersBox.hidden;
+        });
+    }
+    if (sellersBox) {
+        sellersBox.addEventListener('click', (e) => {
+            const btn = e.target.closest('.wa-seller');
+            if (!btn) return;
+            const s = sellers[parseInt(btn.dataset.i, 10)];
+            if (s) openWhatsApp(s.number);
         });
     }
 });

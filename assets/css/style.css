@@ -1044,3 +1044,7 @@ html[data-theme="dark"] .slide-dot{background:rgba(255,255,255,.55)}
 html[data-theme="dark"] .wa-seller{background:rgba(30,45,55,.6);border-color:rgba(150,180,200,.25);color:var(--ink)}
 html[data-theme="dark"] .wa-menu{background:rgba(21,32,37,.7);border-color:rgba(150,180,200,.2)}
 html[data-theme="dark"] .wa-avatar::before{background:rgba(30,45,55,.8)}
+
+/* --- انتخاب فروشنده داخل سبد خرید --- */
+button.wa-seller{font:inherit;cursor:pointer;width:auto}
+.cart-sellers{margin-top:.75rem}
