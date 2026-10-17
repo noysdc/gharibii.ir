@@ -1189,3 +1189,7 @@ html[data-theme="dark"] .thumb-nav{background:rgba(21,32,37,.75);color:var(--ink
   .product-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 }
 .product-grid > *,.thumbs-wrap{min-width:0}
+
+/* --- نمادهای اعتماد (اینماد / ساماندهی) --- */
+.trust-box{justify-content:center;min-width:6.5rem;min-height:6rem}
+.trust-box img{width:auto;height:4.5rem;max-width:7rem;object-fit:contain;cursor:pointer}
