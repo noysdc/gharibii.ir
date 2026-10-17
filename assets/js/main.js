@@ -79,7 +79,9 @@
 
   function loadProducts() {
     if (productsIndex) return Promise.resolve(productsIndex);
-    return fetch('/search.json')
+    var meta = document.querySelector('meta[name="site-baseurl"]');
+    var base = meta ? meta.getAttribute('content') : '';
+    return fetch(base + '/search.json')
       .then(function (r) { return r.json(); })
       .then(function (data) { productsIndex = data; return data; })
       .catch(function () { productsIndex = []; return []; });
@@ -104,7 +106,7 @@
       var img = p.image ? '<img src="' + p.image + '" alt="" loading="lazy">' : '';
       return '<a class="search-item" href="' + p.url + '">' + img +
         '<span class="search-item-info"><strong>' + p.title + '</strong>' +
-        '<small>' + (p.price ? p.price.toLocaleString('fa-IR') + ' \u062A\u0648\u0645\u0627\u0646' : '') +
+        '<small>' + (Number(String(p.price).replace(/,/g, '')) > 0 ? Number(String(p.price).replace(/,/g, '')).toLocaleString('fa-IR') + ' \u062A\u0648\u0645\u0627\u0646' : '') +
         '</small></span></a>';
     }).join('');
     searchResults.hidden = false;
@@ -276,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cart.forEach((item, i) => {
                 message += `${i+1}. ${item.title}\n`;
                 message += `قیمت: ${item.price} تومان\n`;
-                message += `لینک: https://gharibii.ir${item.url}\n\n`;
+                message += `لینک: ${location.origin}${item.url}\n\n`;
             });
 
             const encodedMsg = encodeURIComponent(message);

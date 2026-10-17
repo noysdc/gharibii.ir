@@ -669,4 +669,180 @@ html[data-theme="dark"] .card:hover{
 /* ============================================
    صفحه محصول
    ============================================ */
-.crumbs{font-size:.9rem;color:var(--muted);margin:1rem 0
+
+.crumbs{font-size:.9rem;color:var(--muted);margin:1rem 0}
+.crumbs a{color:var(--sea)}
+
+[hidden]{display:none !important}
+
+/* --- گرید واکنش‌گرا --- */
+@media (min-width:760px){
+  .grid{grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .tile{min-height:13rem}
+}
+@media (min-width:1040px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* --- گرید صفحه محصول --- */
+.product-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start;margin-top:.5rem}
+@media (min-width:820px){
+  .product-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+}
+.gallery #main-img{
+  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  border-radius:1.2rem;background:var(--pearl,#E3ECEF);
+  box-shadow:0 8px 28px rgba(168,85,247,.12);
+}
+.thumbs{display:flex;gap:.5rem;margin-top:.75rem;overflow-x:auto;padding-bottom:.25rem}
+.thumbs button{
+  flex:0 0 auto;width:4.5rem;padding:0;border:2px solid transparent;
+  border-radius:.7rem;overflow:hidden;background:var(--surface);cursor:pointer;
+  opacity:.75;transition:opacity .2s,border-color .2s,transform .2s;
+}
+.thumbs button img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.thumbs button:hover{opacity:1;transform:translateY(-2px)}
+.thumbs button.active{opacity:1;border-color:var(--sea)}
+
+.info h1{margin-top:0}
+.info .price{margin:.25rem 0 1rem}
+.price-value{font-size:calc(1.35rem * var(--font-scale));font-weight:700;color:var(--sea)}
+.card-price .price-value{font-size:inherit;font-weight:400;color:var(--muted)}
+.meta{margin:.3rem 0;color:var(--muted)}
+.desc{margin:1rem 0;line-height:2}
+.more{margin-top:2.5rem}
+
+/* --- دکمه‌های خرید --- */
+.btn-wa,.btn-cart{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:.8rem 1.2rem;border:0;border-radius:999px;
+  font:700 calc(1rem * var(--font-scale))/1.6 "Vazirmatn",Tahoma,sans-serif;
+  cursor:pointer;text-decoration:none;
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 6px 18px rgba(15,127,99,.28)}
+.btn-wa:hover{text-decoration:none;transform:translateY(-2px);filter:brightness(1.07);color:#fff}
+.btn-cart{
+  background:var(--surface);color:var(--sea-deep);
+  border:1.5px solid var(--sea);box-shadow:0 4px 14px rgba(10,102,112,.12);
+}
+.btn-cart:hover{transform:translateY(-2px);background:var(--sea);color:#fff}
+#wa-menu .btn-wa{width:auto;flex:1}
+html[data-theme="dark"] #wa-menu{background:var(--surface) !important;border-color:var(--line) !important}
+html[data-theme="dark"] #wa-menu p{color:var(--muted) !important}
+html[data-theme="dark"] .btn-cart{color:var(--ink)}
+
+/* --- پیام خوش‌آمد --- */
+.welcome-toast{
+  position:fixed;top:1rem;right:50%;transform:translate(50%,-150%);
+  z-index:100;max-width:92vw;opacity:0;
+  transition:transform .4s ease,opacity .4s ease;
+}
+.welcome-toast.is-visible{transform:translate(50%,0);opacity:1}
+.welcome-toast-content{
+  display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;border-radius:999px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 10px 30px rgba(168,85,247,.2);
+}
+html[data-theme="dark"] .welcome-toast-content{background:rgba(21,32,37,.9);border-color:var(--line)}
+.welcome-toast-text{margin:0;font-size:.95rem}
+.welcome-toast-close{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:1rem}
+
+/* ============================================
+   فوتر
+   ============================================ */
+.site-footer{
+  margin-top:4rem;padding:2.5rem 0 2rem;
+  background:linear-gradient(180deg,#eaf1f4 0%,#dce8ec 100%);
+  border-top:1px solid var(--line);
+}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:1.5rem;text-align:center}
+.footer-store-name{margin:0;font-size:calc(1.4rem * var(--font-scale))}
+.footer-tagline{margin:.25rem 0 0;color:var(--muted)}
+.footer-contact-title{margin:1.25rem 0 .75rem;font-size:calc(1.05rem * var(--font-scale))}
+.contact-buttons{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:999px;
+  color:var(--sea-deep);font-size:.95rem;
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 3px 10px rgba(168,85,247,.08);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+a.contact-btn:hover{text-decoration:none;transform:translateY(-2px);box-shadow:0 8px 18px rgba(168,85,247,.16)}
+.contact-btn-icon{font-size:1.05rem;line-height:1}
+
+.social-boxes{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.social-box{
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  width:5.5rem;padding:.8rem .4rem;border-radius:1.1rem;color:var(--sea-deep);
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 4px 14px rgba(168,85,247,.1);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.social-box:hover{text-decoration:none;transform:translateY(-3px);box-shadow:0 10px 22px rgba(168,85,247,.18)}
+.social-icon{display:inline-flex;width:2rem;height:2rem}
+.social-icon svg{width:100%;height:100%}
+.social-label{font-size:.8rem;font-weight:600}
+
+.trust-boxes{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.trust-box{
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  min-width:6.5rem;padding:.7rem;border-radius:1rem;color:var(--muted);
+  background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);
+}
+.trust-box:hover{text-decoration:none}
+.trust-box img{width:auto;height:4.5rem;max-width:6rem;object-fit:contain}
+.trust-label{font-size:.75rem}
+.footer-bottom p{margin:.2rem 0;font-size:.9rem;color:var(--muted)}
+html[data-theme="dark"] .contact-btn,
+html[data-theme="dark"] .social-box,
+html[data-theme="dark"] .trust-box{background:rgba(30,45,55,.5);border-color:rgba(150,180,200,.2);color:var(--ink)}
+
+/* ============================================
+   سبد خرید شناور
+   ============================================ */
+.floating-cart{
+  position:fixed;bottom:1.25rem;left:1.25rem;z-index:60;
+  display:flex;align-items:center;justify-content:center;gap:.3rem;
+  min-width:3.4rem;height:3.4rem;padding:0 .9rem;border-radius:999px;
+  background:var(--sea);color:#fff;font-size:1.2rem;cursor:pointer;
+  box-shadow:0 10px 26px rgba(10,102,112,.4);transition:transform .2s ease;
+}
+.floating-cart:hover{transform:scale(1.06)}
+.cart-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:1.4rem;height:1.4rem;padding:0 .35rem;border-radius:999px;
+  background:#ff4d94;color:#fff;font-size:.8rem;font-weight:700;
+}
+.cart-modal{
+  position:fixed;inset:0;z-index:90;display:none;
+  align-items:center;justify-content:center;padding:1rem;
+  background:rgba(8,20,26,.55);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.cart-modal.active{display:flex}
+.cart-content{
+  position:relative;width:100%;max-width:30rem;max-height:85vh;overflow-y:auto;
+  padding:1.5rem 1.25rem 1.25rem;border-radius:1.4rem;
+  background:var(--surface);color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.3);
+}
+.cart-close{
+  position:absolute;top:.7rem;left:.7rem;width:2.2rem;height:2.2rem;border:0;border-radius:50%;
+  background:var(--bg);color:var(--ink);cursor:pointer;font-size:1rem;
+}
+.cart-item{
+  display:flex;align-items:center;gap:.8rem;padding:.7rem 0;border-bottom:1px solid var(--line);
+}
+.cart-item img{width:3.8rem;height:5rem;object-fit:cover;border-radius:.6rem;flex:0 0 auto}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-info h4{margin:0 0 .2rem;font-size:.95rem;line-height:1.6}
+.cart-item-info span{color:var(--muted);font-size:.9rem}
+.cart-item-remove{border:0;background:transparent;cursor:pointer;font-size:1.2rem}
+.cart-checkout{
+  width:100%;margin-top:1rem;padding:.85rem 1rem;border:0;border-radius:999px;
+  background:var(--wa);color:#fff;font:700 1rem "Vazirmatn",Tahoma,sans-serif;cursor:pointer;
+}
+.cart-checkout:hover{filter:brightness(1.08)}
