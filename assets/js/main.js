@@ -165,5 +165,124 @@
   } else {
     showWelcomeToast();
   }
+/* ============================================
+   ۶. سیستم سبد خرید و واتساپ
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    const addBtn = document.getElementById('add-to-cart');
+    const cartStatus = document.getElementById('cart-status');
+    
+    // ۱. دریافت سبد از حافظه مرورگر
+    let cart = JSON.parse(localStorage.getItem('gharibii_cart')) || [];
+
+    // ۲. تابع ذخیره سبد
+    const saveCart = () => {
+        localStorage.setItem('gharibii_cart', JSON.stringify(cart));
+        updateCartUI();
+    };
+
+    // ۳. افزودن محصول به سبد
+    if (addBtn) {
+        addBtn.addEventListener('click', () => {
+            const product = {
+                title: addBtn.dataset.title,
+                price: addBtn.dataset.price,
+                image: addBtn.dataset.image,
+                url: addBtn.dataset.url
+            };
+            
+            // چک کن تکراری نباشه
+            const exists = cart.find(item => item.title === product.title);
+            if (!exists) {
+                cart.push(product);
+                saveCart();
+                if (cartStatus) {
+                    cartStatus.style.display = 'block';
+                    setTimeout(() => cartStatus.style.display = 'none', 2000);
+                }
+            }
+        });
+    }
+
+    // ۴. ساخت ظرف سبد شناور
+    const floatingCartHtml = `
+        <div class="floating-cart" id="floating-cart">
+            🛒 <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+        <div class="cart-modal" id="cart-modal">
+            <div class="cart-content">
+                <button class="cart-close" id="cart-close">✕</button>
+                <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
+                <div id="cart-items-container"></div>
+                <button class="cart-checkout" id="cart-checkout">ارسال سفارش در واتساپ</button>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', floatingCartHtml);
+
+    // ۵. آپدیت رابط کاربری سبد
+    const updateCartUI = () => {
+        const badge = document.getElementById('cart-badge');
+        const container = document.getElementById('cart-items-container');
+        
+        if (badge) badge.textContent = cart.length;
+        if (!container) return;
+
+        if (cart.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#777;">سبد خرید شما خالی است.</p>';
+            return;
+        }
+
+        container.innerHTML = cart.map((item, index) => `
+            <div class="cart-item">
+                ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
+                <div class="cart-item-info">
+                    <h4>${item.title}</h4>
+                    <span>${item.price} تومان</span>
+                </div>
+                <button class="cart-item-remove" data-index="${index}">🗑️</button>
+            </div>
+        `).join('');
+    };
+
+    updateCartUI(); // اجرای اولیه
+
+    // ۶. باز و بسته کردن مودال
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#floating-cart')) {
+            document.getElementById('cart-modal').classList.add('active');
+        }
+        if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
+            document.getElementById('cart-modal').classList.remove('active');
+        }
+        
+        // حذف آیتم
+        if (e.target.closest('.cart-item-remove')) {
+            const index = parseInt(e.target.closest('.cart-item-remove').dataset.index);
+            cart.splice(index, 1);
+            saveCart();
+        }
+    });
+
+    // ۷. ارسال به واتساپ
+    const checkoutBtn = document.getElementById('cart-checkout');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return alert('سبد خرید خالی است!');
+
+            const phone = "989347688356"; // شماره واتساپ اول
+            let message = "سلام، من این محصولات را سفارش می‌دهم:\n\n";
+            
+            cart.forEach((item, i) => {
+                message += `${i+1}. ${item.title}\n`;
+                message += `قیمت: ${item.price} تومان\n`;
+                message += `لینک: https://gharibii.ir${item.url}\n\n`;
+            });
+
+            const encodedMsg = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+        });
+    }
+});
 
 })();

@@ -1,9 +1,21 @@
-{%- capture msg -%}سلام، می‌خواهم این محصول را سفارش بدهم: {{ page.title }} — {{ page.url | absolute_url }}{%- endcapture -%}
-<details class="buy">
-  <summary>خرید</summary>
-  <div class="buy-links">
-    {% for w in site.whatsapp_numbers %}
-    <a class="wa" href="https://wa.me/{{ w.number }}?text={{ msg | url_encode }}" rel="noopener" target="_blank">{{ w.label }}</a>
-    {% endfor %}
-  </div>
-</details>
+{%- assign product = include.product | default: page -%}
+{%- assign wa_link = "https://wa.me/" | append: site.whatsapp_numbers[0] -%}
+{%- assign product_url = site.url | append: site.baseurl | append: product.url -%}
+{%- assign msg = "سلام، من می‌خوام این محصول رو سفارش بدم:%0A" | append: product.title | append: "%0A" | append: product_url %}
+
+<div class="buy-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+  
+  <a class="btn-wa" href="{{ wa_link }}?text={{ msg }}" target="_blank" rel="noopener">
+    <span>🛍️</span> ثبت سفارش در واتساپ
+  </a>
+
+  <button type="button" class="btn-cart" id="add-to-cart" 
+          data-title="{{ product.title | escape }}" 
+          data-price="{{ product.price_formatted | default: product.price }}" 
+          data-image="{% if product.images.size > 0 %}{{ product.images[0] | relative_url }}{% endif %}" 
+          data-url="{{ product.url | relative_url }}">
+    <span>🛒</span> افزودن به سبد خرید
+  </button>
+  
+  <div id="cart-status" style="font-size: 0.9rem; color: var(--sea); display: none;">✓ به سبد اضافه شد</div>
+</div>

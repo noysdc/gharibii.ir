@@ -1,14 +1,7 @@
 {%- assign product = include.product -%}
 
-{%- comment -%}
-  اولویت اول: اگه فیلد price_formatted توی فایل بود، همون رو نشون بده (چون از قبل کاماگذاری شده)
-{%- endcomment -%}
 {%- if product.price_formatted and product.price_formatted != "" -%}
   <span class="price-value">{{ product.price_formatted }} تومان</span>
-
-{%- comment -%}
-  اولویت دوم: اگه نبود، قیمت خام رو بگیر و خودمون توی قالب کاماگذاری کنیم
-{%- endcomment -%}
 {%- elsif product.price and product.price > 0 -%}
   {%- assign p_str = product.price | append: "" -%}
   {%- assign p_len = p_str | size -%}
@@ -28,9 +21,6 @@
     <span class="price-value">{{ p_str }} تومان</span>
   {%- endif -%}
 
-{%- comment -%}
-  اولویت سوم: اگه قیمت صفر بود یا نبود، بزن تماس بگیرید
-{%- endcomment -%}
 {%- else -%}
   <span class="price-value">تماس بگیرید</span>
 {%- endif -%}

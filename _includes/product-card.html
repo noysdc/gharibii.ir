@@ -1,13 +1,53 @@
-{%- assign p = include.product -%}
-{%- assign card_image = p.images[0] -%}
-<a class="card" href="{{ p.url | relative_url }}">
-  <span class="card-img">
-    {%- if card_image -%}
-      <img src="{{ card_image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy" width="600" height="800">
-    {%- else -%}
-      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #eee; color: #999; font-size: 0.9rem;">بدون عکس</div>
-    {%- endif -%}
-  </span>
-  <span class="card-title">{{ p.title }}</span>
-  <span class="card-price">{% include price.html product=p %}</span>
-</a>
+---
+layout: default
+---
+{%- assign cat_title = 'دخترانه' -%}
+{%- if page.category == 'boys' -%}{%- assign cat_title = 'پسرانه' -%}{%- endif -%}
+{%- assign related = site.products | where: 'category', page.category | sort: 'date' | reverse -%}
+{%- assign main_image = page.images[0] -%}
+
+<article class="wrap product">
+  <nav class="crumbs" aria-label="مسیر">
+    <a href="{{ '/' | relative_url }}">خانه</a> /
+    <a href="{{ '/' | append: page.category | append: '/' | relative_url }}">{{ cat_title }}</a> /
+    {{ page.title }}
+  </nav>
+
+  <div class="product-grid">
+    <div class="gallery">
+      <img id="main-img" src="{{ main_image | relative_url }}" alt="{{ page.title | escape }}" width="900" height="1200">
+      {% if page.images.size > 1 %}
+      <div class="thumbs">
+        {% for im in page.images %}
+        <button type="button" data-src="{{ im | relative_url }}" aria-label="تصویر {{ forloop.index }}"><img src="{{ im | relative_url }}" alt="" loading="lazy" width="120" height="160"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="info">
+      <h1>{{ page.title }}</h1>
+      
+      <!-- نمایش قیمت با فرمت درست -->
+      <p class="price">{% include price.html product=page %}</p>
+      
+      {% if page.sizes %}<p class="meta"><strong>سایز:</strong> {{ page.sizes | join: '، ' }}</p>{% endif %}
+      {% if page.colors %}<p class="meta"><strong>رنگ:</strong> {{ page.colors | join: '، ' }}</p>{% endif %}
+      
+      <div class="desc">{{ content }}</div>
+      
+      <!-- دکمه‌های خرید (واتساپ و سبد) -->
+      {% include buy.html product=page %}
+      
+      {% if page.external_link %}<p class="meta"><a href="{{ page.external_link }}" rel="nofollow noopener" target="_blank">لینک مرتبط</a></p>{% endif %}
+    </div>
+  </div>
+
+  {%- assign shown = 0 -%}
+  <section class="more">
+    <h2>محصولات دیگر {{ cat_title }}</h2>
+    <div class="grid">
+      {% for p in related %}{% if p.url != page.url and shown < 4 %}{% include product-card.html product=p %}{% assign shown = shown | plus: 1 %}{% endif %}{% endfor %}
+    </div>
+  </section>
+</article>
