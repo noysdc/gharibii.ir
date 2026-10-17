@@ -403,4 +403,63 @@ if (waBtn && waMenu) {
     });
   })();
 
+
+  /* ---- 8. Thumbnails slider (product page) ---- */
+  (function initThumbSlider() {
+    var wraps = document.querySelectorAll('.thumbs-wrap');
+    wraps.forEach(function (wrap) {
+      var strip = wrap.querySelector('.thumbs');
+      var prev = wrap.querySelector('.thumb-prev');
+      var next = wrap.querySelector('.thumb-next');
+      if (!strip) return;
+
+      var first = strip.querySelector('button');
+      if (first && !strip.querySelector('button.active')) first.classList.add('active');
+
+      function update() {
+        var max = strip.scrollWidth - strip.clientWidth - 2;
+        if (prev) prev.classList.toggle('is-off', strip.scrollLeft <= 2);
+        if (next) next.classList.toggle('is-off', strip.scrollLeft >= max);
+      }
+      strip.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      window.addEventListener('load', update);
+      update();
+
+      function page(dir) {
+        strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' });
+      }
+      if (prev) prev.addEventListener('click', function () { page(-1); });
+      if (next) next.addEventListener('click', function () { page(1); });
+
+      /* drag with mouse */
+      var down = false, moved = false, startX = 0, startLeft = 0;
+      strip.addEventListener('mousedown', function (e) {
+        down = true; moved = false; startX = e.clientX; startLeft = strip.scrollLeft;
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 5) { moved = true; strip.classList.add('is-dragging'); }
+        if (moved) strip.scrollLeft = startLeft - dx;
+      });
+      window.addEventListener('mouseup', function () {
+        if (!down) return;
+        down = false;
+        strip.classList.remove('is-dragging');
+      });
+      strip.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+      }, true);
+
+      /* keep the chosen thumbnail in view */
+      strip.querySelectorAll('button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var left = btn.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2;
+          strip.scrollTo({ left: left, behavior: 'smooth' });
+        });
+      });
+    });
+  })();
+
 })();

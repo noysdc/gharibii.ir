@@ -5,6 +5,7 @@
 {%- assign no_img = item.images[0] -%}
 <article class="card"{% if total > 1 %} data-slider{% endif %}>
   <div class="card-img">
+    <span class="card-ring" aria-hidden="true"></span>
     <div class="slides">
       {%- if total == 0 -%}
       <a class="slide" href="{{ item.url | relative_url }}" aria-label="{{ item.title | escape }}"><img src="{% include img.html src=no_img %}" alt="{{ item.title | escape }}" width="600" height="800"></a>
