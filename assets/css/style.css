@@ -1490,3 +1490,24 @@ html[data-theme="dark"] .install-bar{background:rgba(21,32,37,.88);border-color:
   font:600 .9rem "Vazirmatn",Tahoma,sans-serif;color:var(--sea-deep);
   background:rgba(255,255,255,.6);
 }
+
+/* --- اصلاح کلاژ تایل‌ها روی موبایل + دکمه یک‌خطی --- */
+.tile-cta{white-space:nowrap}
+.tile{min-height:18rem}
+.tile-collage{height:6.2rem;top:1rem}
+.tile-collage img{margin-inline:-.55rem}
+.tile-collage img:nth-child(2){transform:scale(1.05)}
+.tile:hover .tile-collage img:nth-child(2){transform:scale(1.1) translateY(-.2rem)}
+@media (min-width:760px){
+  .tile{min-height:22rem}
+  .tile-collage{height:11rem}
+  .tile-collage img{margin-inline:-1.2rem}
+}
+/* پله‌ای: فاصله بیشتر تا واضح باشد */
+@media (max-width:759px){
+  .tile-col:nth-child(2) .hero-lead{margin-top:2.2rem}
+}
+/* هندل‌های منو روی گوشی لازم نیست (کشیدن کافی است) */
+@media (max-width:520px){
+  .cat-nav{display:none !important}
+}

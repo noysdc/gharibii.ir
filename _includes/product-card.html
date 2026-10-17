@@ -16,8 +16,8 @@
       {%- endif -%}
     </div>
     {%- if total > 1 -%}
-    <button type="button" class="slide-btn slide-prev" aria-label="تصویر قبلی"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
-    <button type="button" class="slide-btn slide-next" aria-label="تصویر بعدی"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+    <button type="button" class="slide-btn slide-prev" aria-label="تصویر قبلی"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+    <button type="button" class="slide-btn slide-next" aria-label="تصویر بعدی"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
     <div class="slide-dots" aria-hidden="true">{%- for im in imgs limit: 5 -%}<span class="slide-dot{% if forloop.first %} active{% endif %}"></span>{%- endfor -%}</div>
     {%- endif -%}
   </div>

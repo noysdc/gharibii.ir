@@ -4,29 +4,71 @@ title: پوشاک دخترانه و پسرانه
 ---
 {%- assign girls = site.products | where: 'category', 'girls' -%}
 {%- assign boys = site.products | where: 'category', 'boys' -%}
+{%- assign girls_latest = girls | sort: 'date' | reverse -%}
+{%- assign boys_latest = boys | sort: 'date' | reverse -%}
 {%- assign latest = site.products | sort: 'date' | reverse -%}
+{%- assign cat_slugs = "girls|boys|bags-shoes|crown-wand|accessories" | split: "|" -%}
+{%- assign cat_names = "پرنسسی دخترانه|شخصیتی پسرانه|کیف و کفش|تاج و عصا|اکسسوری‌ها" | split: "|" -%}
+{%- assign cat_emojis = "👗|🦸|👜|👑|🎀" | split: "|" -%}
 
 <section class="wrap">
   <div class="tiles">
+
     <div class="tile-col">
       <a class="tile girls" href="{{ '/girls/' | relative_url }}">
+        <span class="tile-collage" aria-hidden="true">
+          {%- for gp in girls_latest limit: 3 -%}
+            {%- assign gim = gp.images[0] -%}
+            {%- if gim -%}<img src="{% include img.html src=gim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+          {%- endfor -%}
+        </span>
         <span class="tile-name">دخترانه</span>
         <span class="tile-count">{{ girls.size }} محصول</span>
+        <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
       </a>
       <p class="hero-lead">لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.</p>
     </div>
+
     <div class="tile-col">
       <a class="tile boys" href="{{ '/boys/' | relative_url }}">
+        <span class="tile-collage" aria-hidden="true">
+          {%- for bp in boys_latest limit: 3 -%}
+            {%- assign bim = bp.images[0] -%}
+            {%- if bim -%}<img src="{% include img.html src=bim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+          {%- endfor -%}
+        </span>
         <span class="tile-name">پسرانه</span>
         <span class="tile-count">{{ boys.size }} محصول</span>
+        <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
       </a>
       <p class="hero-lead">برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀</p>
     </div>
+
   </div>
 </section>
 
 <section class="wrap">
-  <h2>تازه‌ها</h2>
+  <div class="section-head">
+    <h2>دسته‌بندی‌ها</h2>
+    <p class="section-sub">یک دسته رو انتخاب کنید</p>
+  </div>
+  <div class="cat-row">
+    {%- for slug in cat_slugs -%}
+      {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
+      {%- assign cover = items[0].images[0] -%}
+      <a class="cat-card" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+        <span class="card-img cat-cover"><span class="card-ring"></span><span class="slides"><span class="slide{% unless cover %} cat-emoji{% endunless %}">{% if cover %}<img src="{% include img.html src=cover %}" alt="" loading="lazy" width="400" height="400">{% else %}{{ cat_emojis[forloop.index0] }}{% endif %}</span></span></span>
+        <span class="cat-name">{{ cat_names[forloop.index0] }}</span>
+        <span class="cat-count">{% if items.size > 0 %}{{ items.size }} محصول{% else %}به‌زودی{% endif %}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>تازه‌ها</h2>
+  </div>
   <div class="grid">
     {% for p in latest limit: 12 %}
       {% include product-card.html product=p %}
@@ -37,5 +79,50 @@ title: پوشاک دخترانه و پسرانه
         {% endif %}
       {% endif %}
     {% endfor %}
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>سفارش چطوره؟</h2>
+  </div>
+  <ol class="steps">
+    <li class="step">
+      <span class="step-num">۱</span>
+      <div><strong>انتخاب محصول</strong><p>از بین دسته‌ها، لباس یا اکسسوری موردنظرتون رو انتخاب کنید.</p></div>
+    </li>
+    <li class="step">
+      <span class="step-num">۲</span>
+      <div><strong>پیام در واتساپ</strong><p>دکمه «ثبت سفارش در واتساپ» رو بزنید و یکی از فروشنده‌ها رو انتخاب کنید.</p></div>
+    </li>
+    <li class="step">
+      <span class="step-num">۳</span>
+      <div><strong>هماهنگی سفارش</strong><p>سایز، رنگ و نحوه تحویل رو با فروشنده هماهنگ کنید.</p></div>
+    </li>
+  </ol>
+</section>
+
+{%- assign gmsg = "سلام، درباره محصولات فروشگاه غریبی کیش سوال داشتم" | url_encode -%}
+<section class="wrap">
+  <div class="contact-panel">
+    <h2>با ما در ارتباط باشید</h2>
+    {%- if site.address -%}<p class="muted">{{ site.address }}</p>{%- endif -%}
+    <div class="wa-sellers">
+      {%- if site.whatsapp_sellers -%}
+        {%- for s in site.whatsapp_sellers -%}
+        <a class="wa-seller" href="https://wa.me/{{ s.number }}?text={{ gmsg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar">{% if s.photo %}<img src="{{ s.photo | relative_url }}" alt="" width="160" height="160" loading="lazy" onerror="this.remove()">{% endif %}</span>
+          <span class="wa-seller-info"><strong>{{ s.name }}</strong><small>پیام در واتساپ</small></span>
+        </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for n in site.whatsapp_numbers -%}
+        <a class="wa-seller" href="https://wa.me/{{ n }}?text={{ gmsg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar"></span>
+          <span class="wa-seller-info"><strong>شماره {{ forloop.index }}</strong><small>پیام در واتساپ</small></span>
+        </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
   </div>
 </section>

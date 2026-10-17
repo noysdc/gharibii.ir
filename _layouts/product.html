@@ -25,13 +25,13 @@ layout: default
       </div>
       {% if page.images.size > 1 %}
       <div class="thumbs-wrap">
-        <button type="button" class="thumb-nav thumb-prev is-off" aria-label="تصاویر قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+        <button type="button" class="thumb-nav thumb-prev" aria-label="تصاویر قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
         <div class="thumbs">
           {% for im in page.images %}
           <button type="button" data-src="{% include img.html src=im %}" aria-label="تصویر {{ forloop.index }}"><img src="{% include img.html src=im %}" alt="" loading="lazy" width="120" height="160" draggable="false"></button>
           {% endfor %}
         </div>
-        <button type="button" class="thumb-nav thumb-next" aria-label="تصاویر بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+        <button type="button" class="thumb-nav thumb-next is-off" aria-label="تصاویر بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
       </div>
       {% endif %}
     </div>
