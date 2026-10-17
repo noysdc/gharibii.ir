@@ -1,24 +1,26 @@
 {%- assign product = include.product -%}
+{%- assign pr_clean = product.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- assign pr_num = pr_clean | plus: 0 -%}
 
 {%- if product.price_formatted and product.price_formatted != "" -%}
   <span class="price-value">{{ product.price_formatted }} تومان</span>
-{%- elsif product.price and product.price > 0 -%}
-  {%- assign p_str = product.price | append: "" -%}
-  {%- assign p_len = p_str | size -%}
-  
-  {%- if p_len > 6 -%}
-    {%- assign p1_len = p_len | minus: 6 -%}
-    {%- assign p1 = p_str | slice: 0, p1_len -%}
-    {%- assign p2 = p_str | slice: p1_len, 3 -%}
-    {%- assign p3 = p_str | slice: -3, 3 -%}
-    <span class="price-value">{{ p1 }}،{{ p2 }}،{{ p3 }} تومان</span>
-  {%- elsif p_len > 3 -%}
-    {%- assign p1_len = p_len | minus: 3 -%}
-    {%- assign p1 = p_str | slice: 0, p1_len -%}
-    {%- assign p2 = p_str | slice: p1_len, 3 -%}
-    <span class="price-value">{{ p1 }}،{{ p2 }} تومان</span>
+{%- elsif pr_num > 0 -%}
+  {%- assign pr_str = pr_num | append: "" -%}
+  {%- assign pr_len = pr_str | size -%}
+
+  {%- if pr_len > 6 -%}
+    {%- assign pr_l1 = pr_len | minus: 6 -%}
+    {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
+    {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
+    {%- assign pr_c = pr_str | slice: -3, 3 -%}
+    <span class="price-value">{{ pr_a }}،{{ pr_b }}،{{ pr_c }} تومان</span>
+  {%- elsif pr_len > 3 -%}
+    {%- assign pr_l1 = pr_len | minus: 3 -%}
+    {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
+    {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
+    <span class="price-value">{{ pr_a }}،{{ pr_b }} تومان</span>
   {%- else -%}
-    <span class="price-value">{{ p_str }} تومان</span>
+    <span class="price-value">{{ pr_str }} تومان</span>
   {%- endif -%}
 
 {%- else -%}

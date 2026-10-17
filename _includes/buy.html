@@ -1,11 +1,15 @@
 {%- assign product = include.product | default: page -%}
 {%- assign phone1 = site.whatsapp_numbers[0] -%}
 {%- assign phone2 = site.whatsapp_numbers[1] -%}
-{%- assign product_url = site.url | append: site.baseurl | append: product.url -%}
-{%- assign msg = "سلام، من می‌خوام این محصول رو سفارش بدم:%0A" | append: product.title | append: "%0A" | append: product_url -%}
+{%- assign product_url = product.url | absolute_url -%}
+{%- assign t1 = "سلام، من می‌خوام این محصول رو سفارش بدم:" | url_encode -%}
+{%- assign t2 = product.title | url_encode -%}
+{%- assign t3 = product_url | url_encode -%}
+{%- assign msg = t1 | append: "%0A" | append: t2 | append: "%0A" | append: t3 -%}
+{%- assign cart_img = product.images[0] -%}
 
 <div class="buy-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-  
+
   <!-- دکمه باز کردن منوی واتساپ -->
   <button type="button" class="btn-wa" id="open-wa-menu">
     <span>🛍️</span> ثبت سفارش در واتساپ
@@ -15,19 +19,19 @@
   <div id="wa-menu" style="display: none; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
     <p style="margin: 0 0 10px; font-size: 0.9rem; color: #555;">برای سفارش با کدوم شماره تماس بگیریم؟</p>
     <div style="display: flex; gap: 10px; justify-content: center;">
-      <a href="https://wa.me/{{ phone1 }}?text={{ msg }}" target="_blank" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۱</a>
-      <a href="https://wa.me/{{ phone2 }}?text={{ msg }}" target="_blank" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۲</a>
+      <a href="https://wa.me/{{ phone1 }}?text={{ msg }}" target="_blank" rel="noopener" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۱</a>
+      <a href="https://wa.me/{{ phone2 }}?text={{ msg }}" target="_blank" rel="noopener" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۲</a>
     </div>
   </div>
 
   <!-- دکمه سبد خرید -->
-  <button type="button" class="btn-cart" id="add-to-cart" 
-          data-title="{{ product.title | escape }}" 
-          data-price="{{ product.price_formatted | default: product.price }}" 
-          data-image="{% if product.images.size > 0 %}{{ product.images[0] | relative_url }}{% endif %}" 
+  <button type="button" class="btn-cart" id="add-to-cart"
+          data-title="{{ product.title | escape }}"
+          data-price="{{ product.price_formatted | default: product.price }}"
+          data-image="{% if cart_img %}{% include img.html src=cart_img %}{% endif %}"
           data-url="{{ product.url | relative_url }}">
     <span>🛒</span> افزودن به سبد خرید
   </button>
-  
+
   <div id="cart-status" style="font-size: 0.9rem; color: var(--sea); display: none; text-align: center;">✓ به سبد اضافه شد</div>
 </div>

@@ -28,6 +28,16 @@ defaults:
       type: products
     values:
       layout: product
+  - scope: { path: "_products/girls", type: products }
+    values: { category: girls }
+  - scope: { path: "_products/boys", type: products }
+    values: { category: boys }
+  - scope: { path: "_products/bags-shoes", type: products }
+    values: { category: bags-shoes }
+  - scope: { path: "_products/crown-wand", type: products }
+    values: { category: crown-wand }
+  - scope: { path: "_products/accessories", type: products }
+    values: { category: accessories }
 
 plugins:
   - jekyll-seo-tag

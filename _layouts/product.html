@@ -1,10 +1,16 @@
 ---
 layout: default
 ---
-{%- assign cat_title = 'دخترانه' -%}
-{%- if page.category == 'boys' -%}{%- assign cat_title = 'پسرانه' -%}{%- endif -%}
+{%- case page.category -%}
+  {%- when 'girls' -%}{%- assign cat_title = 'دخترانه' -%}
+  {%- when 'boys' -%}{%- assign cat_title = 'پسرانه' -%}
+  {%- when 'bags-shoes' -%}{%- assign cat_title = 'کیف و کفش' -%}
+  {%- when 'crown-wand' -%}{%- assign cat_title = 'تاج و عصا' -%}
+  {%- else -%}{%- assign cat_title = 'اکسسوری‌ها' -%}
+{%- endcase -%}
 {%- assign related = site.products | where: 'category', page.category | sort: 'date' | reverse -%}
 {%- assign main_image = page.images[0] -%}
+{%- assign p_num = page.price | append: "" | remove: "," | remove: "،" | remove: " " | plus: 0 -%}
 <article class="wrap product">
   <nav class="crumbs" aria-label="مسیر">
     <a href="{{ '/' | relative_url }}">خانه</a> /
@@ -26,11 +32,11 @@ layout: default
 
     <div class="info">
       <h1>{{ page.title }}</h1>
-      <p class="price">{% include price.html value=page.price %}</p>
+      <p class="price">{% include price.html product=page %}</p>
       {% if page.sizes %}<p class="meta"><strong>سایز:</strong> {{ page.sizes | join: '، ' }}</p>{% endif %}
       {% if page.colors %}<p class="meta"><strong>رنگ:</strong> {{ page.colors | join: '، ' }}</p>{% endif %}
       <div class="desc">{{ content }}</div>
-      {% include buy.html %}
+      {% include buy.html product=page %}
       {% if page.external_link %}<p class="meta"><a href="{{ page.external_link }}" rel="nofollow noopener" target="_blank">لینک مرتبط</a></p>{% endif %}
     </div>
   </div>
@@ -44,18 +50,18 @@ layout: default
   </section>
 </article>
 
-{%- if page.price and page.price > 0 -%}
+{%- if p_num > 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": {{ page.title | jsonify }},
-  "image": [{% for im in page.images %}{% capture u %}{% include img.html src=im %}{% endcapture %}{{ u | absolute_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+  "image": [{% for im in page.images %}{% capture u %}{% include img.html src=im %}{% endcapture %}{{ u | strip | absolute_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
   "description": {{ content | strip_html | strip_newlines | truncate: 300 | jsonify }},
   "offers": {
     "@type": "Offer",
     "priceCurrency": "IRR",
-    "price": "{{ page.price | times: 10 }}",
+    "price": "{{ p_num | times: 10 }}",
     "availability": "https://schema.org/InStock",
     "url": {{ page.url | absolute_url | jsonify }}
   }
