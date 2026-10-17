@@ -3,6 +3,7 @@ title: "کفش رقص باله دخترانه - فروشگاه غریبی کیش
 slug: "shoes-wings"
 price: 698000
 price_group: "tier_11"
+price_formatted: "698,000"
 category: bags-shoes
 date: 2026-10-17
 sizes: ["23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36"]

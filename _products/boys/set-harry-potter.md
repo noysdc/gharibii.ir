@@ -3,6 +3,7 @@ title: "ست کامل هری پاتر - فروشگاه غریبی کیش"
 slug: "set-harry-potter"
 price: 2998000
 price_group: "tier_13"
+price_formatted: "2,998,000"
 category: boys
 date: 2026-10-17
 badge: "جدید"

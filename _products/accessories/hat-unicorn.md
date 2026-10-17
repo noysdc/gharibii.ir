@@ -3,6 +3,7 @@ title: "کلاه پمپی تکشاخ گوش متحرک دخترانه پسران
 slug: "hat-unicorn"
 price: 898000
 price_group: "tier_8"
+price_formatted: "898,000"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه کریسمس"

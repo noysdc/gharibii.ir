@@ -3,6 +3,7 @@ title: "پیراهن شخصیتی سگهای نگهبان-فروشگاه غری�
 slug: "dress-paw-patrol"
 price: 1598000
 price_group: "tier_5"
+price_formatted: "1,598,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

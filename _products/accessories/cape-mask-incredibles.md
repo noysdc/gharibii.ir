@@ -3,6 +3,7 @@ title: "شنل ماسک شگفت انگیزان قهرمانی شخصیت کار
 slug: "cape-mask-incredibles"
 price: 998000
 price_group: "tier_3"
+price_formatted: "998,000"
 category: accessories
 date: 2026-10-17
 images:

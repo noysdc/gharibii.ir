@@ -3,6 +3,7 @@ title: "کیف های شخصیتی وارداتی-فروشگاه غریبی"
 slug: "bag"
 price: 398000
 price_group: "tier_2"
+price_formatted: "398,000"
 category: bags-shoes
 date: 2026-10-17
 images:

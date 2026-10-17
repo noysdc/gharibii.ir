@@ -3,6 +3,7 @@ title: "لباس پرنسسی زیبای خفته"
 slug: "costume"
 price: 4998000
 price_group: "tier_4"
+price_formatted: "4,998,000"
 old_price: 5498000
 discount: 9
 category: girls

@@ -3,6 +3,7 @@ title: "مایو لباسی سرهمی اونجر شخصیتی پسرانه -ف�
 slug: "costume-swimsuit"
 price: 1598000
 price_group: "tier_5"
+price_formatted: "1,598,000"
 category: boys
 date: 2026-10-17
 sizes: ["ُُs", "M", "L", "xl"]

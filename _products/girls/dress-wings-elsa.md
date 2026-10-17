@@ -3,6 +3,7 @@ title: "پیراهن پرنسسی باله تم السا"
 slug: "dress-wings-elsa"
 price: 2998000
 price_group: "tier_13"
+price_formatted: "2,998,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

@@ -3,6 +3,7 @@ title: "شنل ماسک شخصیتی قهرمانی ثور - فروشگاه غر
 slug: "cape-mask-thor"
 price: 998000
 price_group: "tier_3"
+price_formatted: "998,000"
 category: accessories
 date: 2026-10-17
 sizes: ["free size = 70cm * 70cm"]

@@ -3,6 +3,7 @@ title: "لباس پسرانه یکسره بتمن عضلانی"
 slug: "costume-batman"
 price: 5998000
 price_group: "tier_1"
+price_formatted: "5,998,000"
 category: boys
 date: 2026-10-17
 sizes: ["3 تا 5 سال - S", "5 تا 6 سال - M", "7 تا 10 - L"]

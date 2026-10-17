@@ -3,6 +3,7 @@ title: "عصای جادویی هری پاتر-فروشگاه غریبی کیش"
 slug: "wand-harry-potter"
 price: 198000
 price_group: "tier_6"
+price_formatted: "198,000"
 category: crown-wand
 date: 2026-10-17
 images:

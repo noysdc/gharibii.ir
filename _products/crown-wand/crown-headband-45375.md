@@ -3,6 +3,7 @@ title: "تل تاج مویی پرنسسی-فروشگاه غریبی"
 slug: "crown-headband"
 price: 398000
 price_group: "tier_2"
+price_formatted: "398,000"
 category: crown-wand
 date: 2026-10-17
 colors: ["آبی روشن", "133", "198)", "صورتی روشن", "146", "241)"]

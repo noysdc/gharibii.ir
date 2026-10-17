@@ -3,6 +3,7 @@ title: "کلاه کپ دخترانه شخصیتی میکی موس-فروشگاه
 slug: "hat-mickey-mouse"
 price: 398000
 price_group: "tier_2"
+price_formatted: "398,000"
 category: accessories
 date: 2026-10-17
 colors: ["صورتی تیره", "59", "237)"]

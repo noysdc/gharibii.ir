@@ -3,6 +3,7 @@ title: "پیرهن السای 2 (فروزن2)شخصیتی دیزنی-فروشگ�
 slug: "dress-elsa-disney-frozen"
 price: 1598000
 price_group: "tier_5"
+price_formatted: "1,598,000"
 old_price: 1798000
 discount: 11
 category: girls

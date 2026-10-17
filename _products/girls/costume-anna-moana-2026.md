@@ -3,6 +3,7 @@ title: "لباس مووآنا 2 - کالکشن 2026 - فروشگاه غریبی 
 slug: "costume-anna-moana-2026"
 price: 4998000
 price_group: "tier_4"
+price_formatted: "4,998,000"
 category: girls
 date: 2026-10-17
 badge: "کالکشن 2026"

@@ -3,6 +3,7 @@ title: "تیشرت شخصیتی پسرانه-فروشگاه غریبی"
 slug: "tshirt"
 price: 998000
 price_group: "tier_3"
+price_formatted: "998,000"
 category: boys
 date: 2026-10-17
 badge: "تخفیف ویژه"

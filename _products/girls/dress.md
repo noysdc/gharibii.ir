@@ -3,6 +3,7 @@ title: "پیراهن دخترانه پرنسس پیچ"
 slug: "dress"
 price: 4998000
 price_group: "tier_4"
+price_formatted: "4,998,000"
 category: girls
 date: 2026-10-17
 colors: ["صورتی روشن", "146", "241)"]

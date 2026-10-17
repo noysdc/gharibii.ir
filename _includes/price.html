@@ -10,15 +10,25 @@
   {%- assign discount = group.discount -%}
 {%- endif -%}
 
-{%- if price -%}
-  {%- assign price_fa = price | times: 1 | number_with_delimiter: ',' -%}
-  {%- assign price_fa = price_fa | replace: ',', '،' -%}
-  <span class="price-value">{{ price_fa }} تومان</span>
-  
+{%- if price > 0 -%}
+  {%- assign p_str = price | append: "" -%}
+  {%- assign p_len = p_str | size -%}
+  {%- if p_len > 3 -%}
+    {%- assign p1_len = p_len | minus: 3 -%}
+    {%- assign p1 = p_str | slice: 0, p1_len -%}
+    {%- assign p2 = p_str | slice: p1_len, 3 -%}
+    <span class="price-value">{{ p1 }}،{{ p2 }} تومان</span>
+  {%- else -%}
+    <span class="price-value">{{ p_str }} تومان</span>
+  {%- endif -%}
+
   {%- if old_price and old_price > price -%}
-    {%- assign old_price_fa = old_price | times: 1 | number_with_delimiter: ',' -%}
-    {%- assign old_price_fa = old_price_fa | replace: ',', '،' -%}
-    <del class="price-old">{{ old_price_fa }} تومان</del>
+    {%- assign op_str = old_price | append: "" -%}
+    {%- assign op_len = op_str | size -%}
+    {%- assign op1_len = op_len | minus: 3 -%}
+    {%- assign op1 = op_str | slice: 0, op1_len -%}
+    {%- assign op2 = op_str | slice: op1_len, 3 -%}
+    <del class="price-old">{{ op1 }}،{{ op2 }} تومان</del>
   {%- endif -%}
   
   {%- if discount and discount > 0 -%}

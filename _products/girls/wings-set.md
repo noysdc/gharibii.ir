@@ -3,6 +3,7 @@ title: "بادی ژیمناستیک باله دخترانه دکمه دار - ف
 slug: "wings-set"
 price: 1598000
 price_group: "tier_5"
+price_formatted: "1,598,000"
 category: girls
 date: 2026-10-17
 sizes: ["100", "110", "120", "130", "140", "150", "160", "170"]

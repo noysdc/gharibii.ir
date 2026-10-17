@@ -3,6 +3,7 @@ title: "تل تاج جادوگری( کلاه هالووین)-فروشگاه غر
 slug: "hat-crown-headband-halloween"
 price: 298000
 price_group: "tier_7"
+price_formatted: "298,000"
 category: crown-wand
 date: 2026-10-17
 colors: ["بنفش", "مشکی"]

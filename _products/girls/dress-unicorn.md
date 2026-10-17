@@ -3,6 +3,7 @@ title: "پیرهن توری تکشاخ شخصیتی - فروشگاه غریبی 
 slug: "dress-unicorn"
 price: 1998000
 price_group: "tier_9"
+price_formatted: "1,998,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف"

@@ -3,6 +3,7 @@ title: "شنل ماسک بتی گرل بتمن دخترانه شخصیتی قه�
 slug: "cape-mask-batman"
 price: 998000
 price_group: "tier_3"
+price_formatted: "998,000"
 category: accessories
 date: 2026-10-17
 images:

@@ -3,6 +3,7 @@ title: "ناخن مصنوعی سوفیا شخصیتی دیزنی چسبدار-ف
 slug: "sofia-disney"
 price: 398000
 price_group: "tier_2"
+price_formatted: "398,000"
 category: accessories
 date: 2026-10-17
 images:

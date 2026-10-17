@@ -3,6 +3,7 @@ title: "پیراهن مجلسی دیزنی میکی موس"
 slug: "dress-mickey-mouse-formal-disney"
 price: 1598000
 price_group: "tier_5"
+price_formatted: "1,598,000"
 old_price: 2098000
 discount: 24
 category: girls

@@ -3,6 +3,7 @@ title: "پرنسس پیچ دامن بلند-فروشگاه غریبی"
 slug: "skirt"
 price: 4998000
 price_group: "tier_4"
+price_formatted: "4,998,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

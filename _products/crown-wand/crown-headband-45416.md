@@ -3,6 +3,7 @@ title: "تل تاج پرنسسی گیس دار-فروشگاه غریبی کیش"
 slug: "crown-headband"
 price: 398000
 price_group: "tier_2"
+price_formatted: "398,000"
 category: crown-wand
 date: 2026-10-17
 colors: ["صورتی"]
