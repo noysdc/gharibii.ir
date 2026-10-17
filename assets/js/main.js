@@ -229,6 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('cart-items-container');
         
         if (badge) badge.textContent = cart.length;
+        const fc = document.getElementById('floating-cart');
+        if (fc) fc.classList.toggle('has-items', cart.length > 0);
         if (!container) return;
 
         if (cart.length === 0) {

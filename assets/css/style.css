@@ -1193,3 +1193,85 @@ html[data-theme="dark"] .thumb-nav{background:rgba(21,32,37,.75);color:var(--ink
 /* --- نمادهای اعتماد (اینماد / ساماندهی) --- */
 .trust-box{justify-content:center;min-width:6.5rem;min-height:6rem}
 .trust-box img{width:auto;height:4.5rem;max-width:7rem;object-fit:contain;cursor:pointer}
+
+/* ============================================================
+   اصلاحات بررسی نهایی (تبلت/موبایل/حالت شب) + بکگراند
+   ============================================================ */
+
+/* ۱) تبلت (۳ ستون): جداکننده‌ها ردیف ناقص می‌ساختند */
+@media (min-width:760px) and (max-width:1039px){
+  .grid .toon-divider{display:none}
+}
+
+/* ۲) دکمه‌های فروشنده روی صفحه‌های کوچک زیر هم */
+@media (max-width:520px){
+  .wa-seller{flex:1 1 100%}
+}
+
+/* ۳) سبد شناور: فقط وقتی محصولی داخلشه */
+.floating-cart{display:none}
+.floating-cart.has-items{display:flex}
+@media (max-width:520px){
+  .floating-cart{bottom:.9rem;left:.9rem;min-width:3rem;height:3rem;font-size:1.05rem}
+}
+html[data-theme="dark"] .floating-cart{background:#0a4d55;color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.12)}
+
+/* ۴) فاصله افقی هدر روی موبایل (جعبه دسته‌ها به لبه نچسبد) */
+.header-inner{padding-left:1rem;padding-right:1rem}
+.category-box{max-width:min(100%,fit-content)}
+.control-box{max-width:min(100%,fit-content)}
+
+/* ۵) قیمت کارت‌ها هم‌تراز در پایین */
+.card-body{flex:1 1 auto}
+.card-price{margin-top:auto}
+
+/* ۶) هدر جمع‌وجور در صفحه محصول */
+.is-product .header-inner{gap:.6rem;padding-top:1rem;padding-bottom:.4rem}
+.is-product .header-top{flex-direction:row;justify-content:center;align-items:center;gap:1rem;flex-wrap:wrap}
+.is-product .header-top .holo-divider,
+.is-product .store-tagline{display:none}
+.is-product .holo-logo{width:84px;height:84px}
+.is-product .store-name{font-size:calc(1.35rem * var(--font-scale))}
+.is-product .store-title{margin:0;text-align:start}
+
+/* ۷) حالت شب: عکس‌های با پس‌زمینه سفید کمی ملایم‌تر */
+html[data-theme="dark"] .slide img,
+html[data-theme="dark"] .gallery-main img,
+html[data-theme="dark"] .thumbs button img,
+html[data-theme="dark"] .cart-item img{
+  filter:brightness(.9) saturate(1.05);
+}
+
+/* ============================================
+   بکگراند: لکه‌های رنگی محو پشت کارت‌های شیشه‌ای
+   (لایه ثابت؛ فقط یک بار رسم می‌شود، سبک)
+   ============================================ */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(48rem 36rem at 92% -6%, rgba(255,212,232,.62), transparent 62%),
+    radial-gradient(44rem 34rem at 4% 16%,  rgba(200,230,255,.62), transparent 62%),
+    radial-gradient(42rem 32rem at 86% 62%, rgba(232,213,255,.5),  transparent 62%),
+    radial-gradient(40rem 30rem at 10% 92%, rgba(212,240,232,.5),  transparent 62%);
+}
+html[data-theme="dark"] body::before{
+  background:
+    radial-gradient(1.2px 1.2px at 8% 12%,  rgba(255,255,255,.55), transparent 70%),
+    radial-gradient(1px 1px at 22% 34%,     rgba(255,255,255,.4),  transparent 70%),
+    radial-gradient(1.4px 1.4px at 37% 8%,  rgba(255,255,255,.5),  transparent 70%),
+    radial-gradient(1px 1px at 51% 27%,     rgba(255,255,255,.35), transparent 70%),
+    radial-gradient(1.2px 1.2px at 66% 14%, rgba(255,255,255,.5),  transparent 70%),
+    radial-gradient(1px 1px at 79% 38%,     rgba(255,255,255,.4),  transparent 70%),
+    radial-gradient(1.4px 1.4px at 92% 21%, rgba(255,255,255,.55), transparent 70%),
+    radial-gradient(1px 1px at 14% 58%,     rgba(255,255,255,.35), transparent 70%),
+    radial-gradient(1.2px 1.2px at 31% 76%, rgba(255,255,255,.45), transparent 70%),
+    radial-gradient(1px 1px at 58% 66%,     rgba(255,255,255,.35), transparent 70%),
+    radial-gradient(1.4px 1.4px at 74% 82%, rgba(255,255,255,.5),  transparent 70%),
+    radial-gradient(1px 1px at 88% 70%,     rgba(255,255,255,.4),  transparent 70%),
+    radial-gradient(1.2px 1.2px at 45% 92%, rgba(255,255,255,.4),  transparent 70%),
+    radial-gradient(1px 1px at 5% 88%,      rgba(255,255,255,.35), transparent 70%),
+    radial-gradient(46rem 34rem at 90% -8%, rgba(92,60,150,.34),  transparent 62%),
+    radial-gradient(44rem 34rem at 2% 22%,  rgba(15,100,112,.3),  transparent 62%),
+    radial-gradient(42rem 30rem at 84% 70%, rgba(130,50,110,.2),  transparent 62%),
+    radial-gradient(40rem 30rem at 12% 96%, rgba(40,70,140,.22),  transparent 62%);
+}
