@@ -2,6 +2,7 @@
 title: "پیراهن پرنسسی باله تم راپونزل"
 slug: "dress-wings-rapunzel"
 price: 2698000
+price_formatted: "2,698,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

@@ -2,6 +2,7 @@
 title: "ست اکسسوری پرنسسی دخترانه - فروشگاه غریبی کیش"
 slug: "set"
 price: 1898000
+price_formatted: "1,898,000"
 category: accessories
 date: 2026-10-17
 badge: "جدید"

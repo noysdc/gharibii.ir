@@ -2,6 +2,7 @@
 title: "دستکش های پرنسسی دیزنی - فروشگاه غریبی کیش"
 slug: "gloves-set-disney"
 price: 798000
+price_formatted: "798,000"
 category: accessories
 date: 2026-10-17
 colors: ["صورتی روشن", "صورتی تیره", "بنفش", "آبی روشن", "آبی تیره"]

@@ -2,6 +2,7 @@
 title: "بادی مجلسی شخصیتی نوزادی"
 slug: "formal"
 price: 2498000
+price_formatted: "2,498,000"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"

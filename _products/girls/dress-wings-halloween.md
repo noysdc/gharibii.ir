@@ -2,6 +2,7 @@
 title: "پیراهن باله تم هالووین"
 slug: "dress-wings-halloween"
 price: 1698000
+price_formatted: "1,698,000"
 category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"

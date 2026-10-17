@@ -8,6 +8,10 @@ ROOT = HERE.parent
 PRODUCTS_DIR = ROOT / "_products"
 PRICE_GROUPS_FILE = ROOT / "_data" / "price_groups.yml"
 
+def format_currency(number):
+    """تبدیل 4998000 به 4,998,000"""
+    return f"{number:,}"
+
 def main():
     # ۱. خواندن گروه‌های قیمتی
     with PRICE_GROUPS_FILE.open(encoding='utf-8') as f:
@@ -42,10 +46,10 @@ def main():
             content = re.sub(r'\nprice_group:.*', '', content)
             content = re.sub(r'\nprice_formatted:.*', '', content)
             
-            # اضافه کردن فیلدهای جدید بعد از price
-            # (فیلد price_formatted رو مستقیم اینجا می‌سازیم که توی جکیل نیازی به فیلتر نداشته باشیم)
-            formatted_price = f"{current_price:,}"
+            # ساخت قیمت با کاما
+            formatted_price = format_currency(current_price)
             
+            # اضافه کردن فیلدهای جدید
             content = content.replace(
                 f'price: {current_price}',
                 f'price: {current_price}\nprice_group: "{tier_name}"\nprice_formatted: "{formatted_price}"'
@@ -53,8 +57,18 @@ def main():
             md_file.write_text(content, encoding='utf-8')
             updated_count += 1
             print(f"  ✓ {md_file.name} -> {tier_name} ({formatted_price})")
+            
+        # اگه محصول توی گروه‌ها نبود، فقط قیمت فرمت شده رو بهش اضافه کن
+        else:
+            if 'price_formatted:' not in content:
+                formatted_price = format_currency(current_price)
+                content = content.replace(
+                    f'price: {current_price}',
+                    f'price: {current_price}\nprice_formatted: "{formatted_price}"'
+                )
+                md_file.write_text(content, encoding='utf-8')
 
-    print(f"\n🎉 {updated_count} فایل محصول آپدیت شدند.")
+    print(f"\n🎉 {updated_count} فایل محصول با گروه قیمتی آپدیت شدند.")
 
 if __name__ == '__main__':
     main()

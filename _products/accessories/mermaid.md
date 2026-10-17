@@ -2,6 +2,7 @@
 title: "جا سوئیچی پری دریایی"
 slug: "mermaid"
 price: 168000
+price_formatted: "168,000"
 category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"

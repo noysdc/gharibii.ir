@@ -1,19 +1,25 @@
 {%- assign product = include.product -%}
-{%- assign price = product.price -%}
-{%- assign old_price = product.old_price -%}
-{%- assign discount = product.discount -%}
 
-{%- if product.price_group and site.data.price_groups.groups[product.price_group] -%}
-  {%- assign group = site.data.price_groups.groups[product.price_group] -%}
-  {%- assign price = group.price -%}
-  {%- assign old_price = group.old_price -%}
-  {%- assign discount = group.discount -%}
-{%- endif -%}
+{%- comment -%}
+  اولویت اول: اگه فیلد price_formatted توی فایل بود، همون رو نشون بده (چون از قبل کاماگذاری شده)
+{%- endcomment -%}
+{%- if product.price_formatted and product.price_formatted != "" -%}
+  <span class="price-value">{{ product.price_formatted }} تومان</span>
 
-{%- if price > 0 -%}
-  {%- assign p_str = price | append: "" -%}
+{%- comment -%}
+  اولویت دوم: اگه نبود، قیمت خام رو بگیر و خودمون توی قالب کاماگذاری کنیم
+{%- endcomment -%}
+{%- elsif product.price and product.price > 0 -%}
+  {%- assign p_str = product.price | append: "" -%}
   {%- assign p_len = p_str | size -%}
-  {%- if p_len > 3 -%}
+  
+  {%- if p_len > 6 -%}
+    {%- assign p1_len = p_len | minus: 6 -%}
+    {%- assign p1 = p_str | slice: 0, p1_len -%}
+    {%- assign p2 = p_str | slice: p1_len, 3 -%}
+    {%- assign p3 = p_str | slice: -3, 3 -%}
+    <span class="price-value">{{ p1 }}،{{ p2 }}،{{ p3 }} تومان</span>
+  {%- elsif p_len > 3 -%}
     {%- assign p1_len = p_len | minus: 3 -%}
     {%- assign p1 = p_str | slice: 0, p1_len -%}
     {%- assign p2 = p_str | slice: p1_len, 3 -%}
@@ -22,18 +28,9 @@
     <span class="price-value">{{ p_str }} تومان</span>
   {%- endif -%}
 
-  {%- if old_price and old_price > price -%}
-    {%- assign op_str = old_price | append: "" -%}
-    {%- assign op_len = op_str | size -%}
-    {%- assign op1_len = op_len | minus: 3 -%}
-    {%- assign op1 = op_str | slice: 0, op1_len -%}
-    {%- assign op2 = op_str | slice: op1_len, 3 -%}
-    <del class="price-old">{{ op1 }}،{{ op2 }} تومان</del>
-  {%- endif -%}
-  
-  {%- if discount and discount > 0 -%}
-    <span class="price-discount">{{ discount }}٪ تخفیف</span>
-  {%- endif -%}
+{%- comment -%}
+  اولویت سوم: اگه قیمت صفر بود یا نبود، بزن تماس بگیرید
+{%- endcomment -%}
 {%- else -%}
   <span class="price-value">تماس بگیرید</span>
 {%- endif -%}

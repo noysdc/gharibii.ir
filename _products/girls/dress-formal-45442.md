@@ -2,6 +2,7 @@
 title: "پیرهن مجلسی کرومی - فروشگاه غریبی کیش"
 slug: "dress-formal"
 price: 2598000
+price_formatted: "2,598,000"
 category: girls
 date: 2026-10-17
 sizes: ["XL - سه تا پنج سال", "Xxl - پنج تا هفت سال", "3XL -  هفت تا نه سال", "4XL - نه تا ده سال", "5XL - ده تا دوازده سال"]
