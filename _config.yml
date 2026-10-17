@@ -13,6 +13,17 @@ whatsapp_numbers:
   - "989347688356"
   - "989179962005"
 
+# ---------- فروشنده‌ها (دکمه‌های واتساپ بعد از «ثبت سفارش») ----------
+# عکس: مربع ۱۶۰×۱۶۰ پیکسل، فرمت webp، داخل assets/images/sellers/
+# اگر شماره را اینجا عوض می‌کنید، در whatsapp_numbers بالا هم عوض کنید (فوتر از آن می‌خواند)
+whatsapp_sellers:
+  - name: "فروشنده ۱"
+    number: "989347688356"
+    photo: "/assets/images/sellers/seller-1.webp"
+  - name: "فروشنده ۲"
+    number: "989179962005"
+    photo: "/assets/images/sellers/seller-2.webp"
+
 phone_display: "076-44561403"
 address: "جزیره زیبای کیش — بازار عرب‌ها 🏝️"
 

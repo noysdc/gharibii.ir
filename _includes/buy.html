@@ -15,12 +15,27 @@
     <span>🛍️</span> ثبت سفارش در واتساپ
   </button>
 
-  <!-- منوی مخفی انتخاب شماره (فقط با کلیک باز می‌شه) -->
-  <div id="wa-menu" style="display: none; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-    <p style="margin: 0 0 10px; font-size: 0.9rem; color: #555;">برای سفارش با کدوم شماره تماس بگیریم؟</p>
-    <div style="display: flex; gap: 10px; justify-content: center;">
-      <a href="https://wa.me/{{ phone1 }}?text={{ msg }}" target="_blank" rel="noopener" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۱</a>
-      <a href="https://wa.me/{{ phone2 }}?text={{ msg }}" target="_blank" rel="noopener" class="btn-wa" style="padding: 0.5rem 1rem; font-size: 0.9rem;">شماره ۲</a>
+  <!-- منوی مخفی انتخاب فروشنده (فقط با کلیک باز می‌شه) -->
+  <div id="wa-menu" class="wa-menu" style="display: none;">
+    <p class="wa-menu-title">برای سفارش با کدوم فروشنده در ارتباط باشیم؟</p>
+    <div class="wa-sellers">
+      {%- if site.whatsapp_sellers -%}
+        {%- for s in site.whatsapp_sellers -%}
+        <a class="wa-seller" href="https://wa.me/{{ s.number }}?text={{ msg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar">{% if s.photo %}<img src="{{ s.photo | relative_url }}" alt="" width="160" height="160" loading="lazy" onerror="this.remove()">{% endif %}</span>
+          <span class="wa-seller-info"><strong>{{ s.name }}</strong><small>پیام در واتساپ</small></span>
+        </a>
+        {%- endfor -%}
+      {%- else -%}
+        <a class="wa-seller" href="https://wa.me/{{ phone1 }}?text={{ msg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar"></span>
+          <span class="wa-seller-info"><strong>شماره ۱</strong><small>پیام در واتساپ</small></span>
+        </a>
+        <a class="wa-seller" href="https://wa.me/{{ phone2 }}?text={{ msg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar"></span>
+          <span class="wa-seller-info"><strong>شماره ۲</strong><small>پیام در واتساپ</small></span>
+        </a>
+      {%- endif -%}
     </div>
   </div>
 
