@@ -1,16 +1,15 @@
 """
-ساخت آیکن‌های نصب اپلیکیشن (PWA) از لوگوی فروشگاه.
-
-اجرا (از هر جا):   python scripts/make_icons.py
-لوگو را از این مسیر می‌خواند:  C:\Users\unes shojaei\Documents\GitHub\gharibii.ir\assets\images\gharibii-store-logo.webp  (یا .png)
-خروجی:  assets/icons/icon-192.png, icon-512.png, maskable-512.png, apple-touch-icon.png
-اگر لوگو پیدا نشود، یک آیکن موقت (تاج) می‌سازد.
+Generate PWA icons for the store from the logo.
+Run from root: python scripts/make_icons.py
+Logo path: assets/images/gharibii-store-logo.webp (or .png)
+Output: assets/icons/icon-192.png, icon-512.png, maskable-512.png, apple-touch-icon.png
+If logo not found, generates a temporary crown icon.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 
-BG_TOP = (10, 102, 112)      # فیروزه‌ای
-BG_BOTTOM = (59, 42, 107)    # بنفش
+BG_TOP = (10, 102, 112)      # Turquoise
+BG_BOTTOM = (59, 42, 107)    # Purple
 
 
 def find_root():
@@ -30,7 +29,7 @@ def gradient(size):
 
 
 def placeholder_logo(S=1024):
-    """آیکن موقت: حباب شیشه‌ای با تاج."""
+    """Temporary icon: glass bubble with a crown."""
     im = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     d.ellipse((0, 0, S, S), fill=(255, 255, 255, 40), outline=(255, 255, 255, 140), width=S // 60)
@@ -47,50 +46,60 @@ def load_logo(root):
     for name in ("gharibii-store-logo.webp", "gharibii-store-logo.png", "gharibii-store-logo.jpg"):
         f = root / "assets" / "images" / name
         if f.exists():
-            print("لوگو:", f)
+            print("Logo found:", f)
             return Image.open(f).convert("RGBA")
-    print("لوگو پیدا نشد؛ آیکن موقت ساخته می‌شود.")
+    print("Logo NOT found! Generating temporary placeholder icon...")
     return placeholder_logo()
 
 
 def make(logo, size, scale, rounded):
-    S = size * 2                                  # ساخت بزرگ‌تر برای لبه‌های نرم
+    S = size * 2                                  # Render larger for soft edges
     bg = gradient(S).convert("RGBA")
     L = int(S * scale)
     lg = logo.copy()
     lg.thumbnail((L, L), Image.LANCZOS)
-    # سایه ملایم زیر لوگو
+    
+    # Soft shadow
     shadow = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     sh = Image.new("RGBA", lg.size, (0, 0, 0, 90))
     shadow.paste(sh, ((S - lg.width) // 2, (S - lg.height) // 2 + S // 60), lg.split()[-1])
     shadow = shadow.filter(ImageFilter.GaussianBlur(S // 60))
     bg = Image.alpha_composite(bg, shadow)
+    
+    # Paste logo
     bg.alpha_composite(lg, ((S - lg.width) // 2, (S - lg.height) // 2))
+    
+    # Rounded corners
     if rounded:
         mask = Image.new("L", (S, S), 0)
         ImageDraw.Draw(mask).rounded_rectangle((0, 0, S, S), radius=int(S * 0.22), fill=255)
         bg.putalpha(mask)
+        
     return bg.resize((size, size), Image.LANCZOS)
 
 
 def main():
     root = find_root()
     if root is None:
-        print("ERROR: پوشه assets پیدا نشد.")
+        print("ERROR: assets folder not found.")
         return
     out = root / "assets" / "icons"
     out.mkdir(parents=True, exist_ok=True)
+    
     logo = load_logo(root)
+    
     jobs = [
         ("icon-192.png", 192, 0.78, True),
         ("icon-512.png", 512, 0.78, True),
-        ("maskable-512.png", 512, 0.56, False),     # ناحیه امن آیکن‌های گرد/ماسک‌دار
-        ("apple-touch-icon.png", 180, 0.72, False), # iOS خودش گوشه‌ها را گرد می‌کند
+        ("maskable-512.png", 512, 0.56, False),     # Safe zone for maskable icons
+        ("apple-touch-icon.png", 180, 0.72, False), # iOS rounds corners automatically
     ]
+    
     for name, size, scale, rounded in jobs:
         make(logo, size, scale, rounded).save(out / name)
         print("OK:", name)
-    print("تمام شد ->", out)
+        
+    print("DONE ->", out)
 
 
 if __name__ == "__main__":
