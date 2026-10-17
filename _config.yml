@@ -3,12 +3,20 @@ title: فروشگاه غریبی کیش
 description: پوشاک دخترانه و پسرانه — قیمت و عکس محصولات، خرید تلفنی و واتساپ
 lang: fa
 
-# هنگام تست روی github.io:  url و baseurl را مثل پایین بگذارید
-# بعد از وصل کردن دامنه:    url: "https://gharibii.ir"   و   baseurl: ""
+# ---------- تنظیمات آدرس ----------
+# برای تست روی github.io از این دو خط استفاده کن:
 url: "https://noysdc.github.io"
 baseurl: "/gharibii.ir"
 
-# ---------- شماره‌های واتساپ (بدون + و صفر اول، با کد کشور) ----------
+# بعد از وصل کردن دامنه، دو خط بالا رو پاک کن و این‌ها رو بذار:
+# url: "https://gharibii.ir"
+# baseurl: ""
+
+# ---------- تم ----------
+# تم پیش‌فرض گیت‌هاب رو غیرفعال می‌کنیم تا از layoutهای خودت استفاده بشه
+theme: null
+
+# ---------- شماره‌های واتساپ ----------
 whatsapp_numbers:
   - "989347688356"
   - "989179962005"
@@ -29,13 +37,14 @@ defaults:
     values:
       layout: product
 
+# ---------- پلاگین‌ها ----------
+# jekyll-redirect-from حذف شد چون با GitHub Pages سازگار نیست
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-redirect-from
 
 exclude:
   - README.md
-  - scripts    # ← از tools به scripts تغییر کرد
+  - scripts
   - Gemfile
   - Gemfile.lock
