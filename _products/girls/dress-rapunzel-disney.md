@@ -7,12 +7,12 @@ date: 2026-10-17
 badge: "جدید"
 sizes: ["120 - سه تا پنج سال", "130 - شش تا هفت سال", "140 - هشت تا نه سال", "150 - نه تا ده سال"]
 images:
-  - /assets/images/products/girls/dress-rapunzel-disney/1.jpg
-  - /assets/images/products/girls/dress-rapunzel-disney/2.jpg
-  - /assets/images/products/girls/dress-rapunzel-disney/3.jpg
-  - /assets/images/products/girls/dress-rapunzel-disney/4.jpg
-  - /assets/images/products/girls/dress-rapunzel-disney/5.jpg
-  - /assets/images/products/girls/dress-rapunzel-disney/6.jpg
+  - /assets/images/products/girls/dress-rapunzel-disney/1.webp
+  - /assets/images/products/girls/dress-rapunzel-disney/2.webp
+  - /assets/images/products/girls/dress-rapunzel-disney/3.webp
+  - /assets/images/products/girls/dress-rapunzel-disney/4.webp
+  - /assets/images/products/girls/dress-rapunzel-disney/5.webp
+  - /assets/images/products/girls/dress-rapunzel-disney/6.webp
 old_id: "45439"
 redirect_from:
   - /product/45439

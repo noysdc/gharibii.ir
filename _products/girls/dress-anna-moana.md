@@ -9,9 +9,9 @@ date: 2026-10-17
 badge: "تخفیف ویژه"
 material: "نخی"
 images:
-  - /assets/images/products/girls/dress-anna-moana/1.jpg
-  - /assets/images/products/girls/dress-anna-moana/2.jpg
-  - /assets/images/products/girls/dress-anna-moana/3.jpg
+  - /assets/images/products/girls/dress-anna-moana/1.webp
+  - /assets/images/products/girls/dress-anna-moana/2.webp
+  - /assets/images/products/girls/dress-anna-moana/3.webp
 old_id: "4"
 redirect_from:
   - /product/4

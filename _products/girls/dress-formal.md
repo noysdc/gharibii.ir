@@ -6,16 +6,16 @@ category: girls
 date: 2026-10-17
 sizes: ["110 - 3 تا 4 سال", "120 - 4 تا 6 سال", "130 - 6 تا 7 سال", "140 - 8 تا 9 سال", "150 - 9 تا 10 سال", "160 - 10 تا 12 سال"]
 images:
-  - /assets/images/products/girls/dress-formal/1.jpg
-  - /assets/images/products/girls/dress-formal/2.jpg
-  - /assets/images/products/girls/dress-formal/3.jpg
-  - /assets/images/products/girls/dress-formal/4.jpg
-  - /assets/images/products/girls/dress-formal/5.jpg
-  - /assets/images/products/girls/dress-formal/6.jpg
-  - /assets/images/products/girls/dress-formal/7.jpg
-  - /assets/images/products/girls/dress-formal/8.jpg
-  - /assets/images/products/girls/dress-formal/9.jpg
-  - /assets/images/products/girls/dress-formal/10.jpg
+  - /assets/images/products/girls/dress-formal/1.webp
+  - /assets/images/products/girls/dress-formal/2.webp
+  - /assets/images/products/girls/dress-formal/3.webp
+  - /assets/images/products/girls/dress-formal/4.webp
+  - /assets/images/products/girls/dress-formal/5.webp
+  - /assets/images/products/girls/dress-formal/6.webp
+  - /assets/images/products/girls/dress-formal/7.webp
+  - /assets/images/products/girls/dress-formal/8.webp
+  - /assets/images/products/girls/dress-formal/9.webp
+  - /assets/images/products/girls/dress-formal/10.webp
 old_id: "6"
 redirect_from:
   - /product/6

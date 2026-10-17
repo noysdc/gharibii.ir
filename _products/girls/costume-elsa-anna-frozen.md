@@ -8,12 +8,12 @@ badge: "تخفیف ویژه"
 sizes: ["M", "S", "L", "XL"]
 colors: ["سفید"]
 images:
-  - /assets/images/products/girls/costume-elsa-anna-frozen/1.png
-  - /assets/images/products/girls/costume-elsa-anna-frozen/2.png
-  - /assets/images/products/girls/costume-elsa-anna-frozen/3.png
-  - /assets/images/products/girls/costume-elsa-anna-frozen/4.png
-  - /assets/images/products/girls/costume-elsa-anna-frozen/5.png
-  - /assets/images/products/girls/costume-elsa-anna-frozen/6.png
+  - /assets/images/products/girls/costume-elsa-anna-frozen/1.webp
+  - /assets/images/products/girls/costume-elsa-anna-frozen/2.webp
+  - /assets/images/products/girls/costume-elsa-anna-frozen/3.webp
+  - /assets/images/products/girls/costume-elsa-anna-frozen/4.webp
+  - /assets/images/products/girls/costume-elsa-anna-frozen/5.webp
+  - /assets/images/products/girls/costume-elsa-anna-frozen/6.webp
 old_id: "8"
 redirect_from:
   - /product/8

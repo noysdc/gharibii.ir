@@ -6,7 +6,7 @@ category: accessories
 date: 2026-10-17
 sizes: ["free size = 70cm * 70cm"]
 images:
-  - /assets/images/products/accessories/cape-mask-thor/1.jpg
+  - /assets/images/products/accessories/cape-mask-thor/1.webp
 old_id: "45434"
 redirect_from:
   - /product/45434

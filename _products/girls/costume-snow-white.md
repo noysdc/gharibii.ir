@@ -7,13 +7,13 @@ date: 2026-10-17
 badge: "تخفیف ویژه"
 material: "نخی"
 images:
-  - /assets/images/products/girls/costume-snow-white/1.jpg
-  - /assets/images/products/girls/costume-snow-white/2.jpg
-  - /assets/images/products/girls/costume-snow-white/3.jpg
-  - /assets/images/products/girls/costume-snow-white/4.jpg
-  - /assets/images/products/girls/costume-snow-white/5.jpg
-  - /assets/images/products/girls/costume-snow-white/6.jpg
-  - /assets/images/products/girls/costume-snow-white/7.jpg
+  - /assets/images/products/girls/costume-snow-white/1.webp
+  - /assets/images/products/girls/costume-snow-white/2.webp
+  - /assets/images/products/girls/costume-snow-white/3.webp
+  - /assets/images/products/girls/costume-snow-white/4.webp
+  - /assets/images/products/girls/costume-snow-white/5.webp
+  - /assets/images/products/girls/costume-snow-white/6.webp
+  - /assets/images/products/girls/costume-snow-white/7.webp
 old_id: "45332"
 redirect_from:
   - /product/45332

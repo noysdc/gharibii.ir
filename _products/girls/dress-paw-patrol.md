@@ -6,10 +6,10 @@ category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"
 images:
-  - /assets/images/products/girls/dress-paw-patrol/1.jpg
-  - /assets/images/products/girls/dress-paw-patrol/2.jpg
-  - /assets/images/products/girls/dress-paw-patrol/3.jpg
-  - /assets/images/products/girls/dress-paw-patrol/4.jpg
+  - /assets/images/products/girls/dress-paw-patrol/1.webp
+  - /assets/images/products/girls/dress-paw-patrol/2.webp
+  - /assets/images/products/girls/dress-paw-patrol/3.webp
+  - /assets/images/products/girls/dress-paw-patrol/4.webp
 old_id: "45359"
 redirect_from:
   - /product/45359

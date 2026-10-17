@@ -8,10 +8,10 @@ badge: "تخفیف ویژه"
 sizes: ["110", "120", "130", "140"]
 material: "نخی"
 images:
-  - /assets/images/products/girls/dress-wings-jasmine/1.jpg
-  - /assets/images/products/girls/dress-wings-jasmine/2.jpg
-  - /assets/images/products/girls/dress-wings-jasmine/3.jpg
-  - /assets/images/products/girls/dress-wings-jasmine/4.jpg
+  - /assets/images/products/girls/dress-wings-jasmine/1.webp
+  - /assets/images/products/girls/dress-wings-jasmine/2.webp
+  - /assets/images/products/girls/dress-wings-jasmine/3.webp
+  - /assets/images/products/girls/dress-wings-jasmine/4.webp
 old_id: "45337"
 redirect_from:
   - /product/45337

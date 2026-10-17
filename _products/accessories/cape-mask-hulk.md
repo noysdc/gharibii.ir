@@ -5,7 +5,7 @@ price: 998000
 category: accessories
 date: 2026-10-17
 images:
-  - /assets/images/products/accessories/cape-mask-hulk/1.jpg
+  - /assets/images/products/accessories/cape-mask-hulk/1.webp
 old_id: "45411"
 redirect_from:
   - /product/45411

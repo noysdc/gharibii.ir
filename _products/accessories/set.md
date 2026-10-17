@@ -8,18 +8,18 @@ badge: "جدید"
 colors: ["صورتی", "آبی", "بنفش", "زرد"]
 material: "نخی"
 images:
-  - /assets/images/products/accessories/set/1.jpg
-  - /assets/images/products/accessories/set/2.jpg
-  - /assets/images/products/accessories/set/3.jpg
-  - /assets/images/products/accessories/set/4.jpg
-  - /assets/images/products/accessories/set/5.jpg
-  - /assets/images/products/accessories/set/6.jpg
-  - /assets/images/products/accessories/set/7.jpg
-  - /assets/images/products/accessories/set/8.jpg
-  - /assets/images/products/accessories/set/9.jpg
-  - /assets/images/products/accessories/set/10.jpg
-  - /assets/images/products/accessories/set/11.jpg
-  - /assets/images/products/accessories/set/12.jpg
+  - /assets/images/products/accessories/set/1.webp
+  - /assets/images/products/accessories/set/2.webp
+  - /assets/images/products/accessories/set/3.webp
+  - /assets/images/products/accessories/set/4.webp
+  - /assets/images/products/accessories/set/5.webp
+  - /assets/images/products/accessories/set/6.webp
+  - /assets/images/products/accessories/set/7.webp
+  - /assets/images/products/accessories/set/8.webp
+  - /assets/images/products/accessories/set/9.webp
+  - /assets/images/products/accessories/set/10.webp
+  - /assets/images/products/accessories/set/11.webp
+  - /assets/images/products/accessories/set/12.webp
 old_id: "45446"
 redirect_from:
   - /product/45446

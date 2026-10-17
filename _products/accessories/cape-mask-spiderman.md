@@ -6,8 +6,8 @@ category: accessories
 date: 2026-10-17
 material: "ساتن"
 images:
-  - /assets/images/products/accessories/cape-mask-spiderman/1.jpg
-  - /assets/images/products/accessories/cape-mask-spiderman/2.jpg
+  - /assets/images/products/accessories/cape-mask-spiderman/1.webp
+  - /assets/images/products/accessories/cape-mask-spiderman/2.webp
 old_id: "45327"
 redirect_from:
   - /product/45327

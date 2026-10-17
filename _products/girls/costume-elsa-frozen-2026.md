@@ -8,20 +8,20 @@ badge: "کالکشن 2026"
 sizes: ["120 - مناسب 3 تا 4 سال", "130 - مناسب 4 تا 6 سال", "140 - مناسب 7 تا 8 سال", "150 - مناسب 9 تا 10"]
 material: "نخی"
 images:
-  - /assets/images/products/girls/costume-elsa-frozen-2026/1.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/2.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/3.png
-  - /assets/images/products/girls/costume-elsa-frozen-2026/4.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/5.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/6.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/7.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/8.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/9.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/10.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/11.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/12.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/13.jpg
-  - /assets/images/products/girls/costume-elsa-frozen-2026/14.jpg
+  - /assets/images/products/girls/costume-elsa-frozen-2026/1.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/2.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/3.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/4.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/5.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/6.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/7.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/8.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/9.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/10.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/11.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/12.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/13.webp
+  - /assets/images/products/girls/costume-elsa-frozen-2026/14.webp
 old_id: "45448"
 redirect_from:
   - /product/45448

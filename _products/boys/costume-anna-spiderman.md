@@ -6,16 +6,16 @@ category: boys
 date: 2026-10-17
 badge: "فروش ویژه"
 images:
-  - /assets/images/products/boys/costume-anna-spiderman/1.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/2.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/3.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/4.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/5.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/6.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/7.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/8.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/9.jpg
-  - /assets/images/products/boys/costume-anna-spiderman/10.jpg
+  - /assets/images/products/boys/costume-anna-spiderman/1.webp
+  - /assets/images/products/boys/costume-anna-spiderman/2.webp
+  - /assets/images/products/boys/costume-anna-spiderman/3.webp
+  - /assets/images/products/boys/costume-anna-spiderman/4.webp
+  - /assets/images/products/boys/costume-anna-spiderman/5.webp
+  - /assets/images/products/boys/costume-anna-spiderman/6.webp
+  - /assets/images/products/boys/costume-anna-spiderman/7.webp
+  - /assets/images/products/boys/costume-anna-spiderman/8.webp
+  - /assets/images/products/boys/costume-anna-spiderman/9.webp
+  - /assets/images/products/boys/costume-anna-spiderman/10.webp
 old_id: "45390"
 redirect_from:
   - /product/45390

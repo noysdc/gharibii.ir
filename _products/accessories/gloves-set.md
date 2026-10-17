@@ -8,16 +8,16 @@ category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"
 images:
-  - /assets/images/products/accessories/gloves-set/1.jpg
-  - /assets/images/products/accessories/gloves-set/2.jpg
-  - /assets/images/products/accessories/gloves-set/3.jpg
-  - /assets/images/products/accessories/gloves-set/4.jpg
-  - /assets/images/products/accessories/gloves-set/5.jpg
-  - /assets/images/products/accessories/gloves-set/6.jpg
-  - /assets/images/products/accessories/gloves-set/7.jpg
-  - /assets/images/products/accessories/gloves-set/8.jpg
-  - /assets/images/products/accessories/gloves-set/9.jpg
-  - /assets/images/products/accessories/gloves-set/10.jpg
+  - /assets/images/products/accessories/gloves-set/1.webp
+  - /assets/images/products/accessories/gloves-set/2.webp
+  - /assets/images/products/accessories/gloves-set/3.webp
+  - /assets/images/products/accessories/gloves-set/4.webp
+  - /assets/images/products/accessories/gloves-set/5.webp
+  - /assets/images/products/accessories/gloves-set/6.webp
+  - /assets/images/products/accessories/gloves-set/7.webp
+  - /assets/images/products/accessories/gloves-set/8.webp
+  - /assets/images/products/accessories/gloves-set/9.webp
+  - /assets/images/products/accessories/gloves-set/10.webp
 old_id: "45389"
 redirect_from:
   - /product/45389

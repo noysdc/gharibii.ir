@@ -8,8 +8,8 @@ badge: "تخفیف ویژه"
 sizes: ["S", "M", "L", "XL"]
 colors: ["سبز", "168", "79)"]
 images:
-  - /assets/images/products/boys/dress-hulk/1.png
-  - /assets/images/products/boys/dress-hulk/2.png
+  - /assets/images/products/boys/dress-hulk/1.webp
+  - /assets/images/products/boys/dress-hulk/2.webp
 old_id: "7"
 redirect_from:
   - /product/7

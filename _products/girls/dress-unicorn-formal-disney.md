@@ -6,11 +6,11 @@ category: girls
 date: 2026-10-17
 badge: "تخفیف ویژه"
 images:
-  - /assets/images/products/girls/dress-unicorn-formal-disney/1.png
-  - /assets/images/products/girls/dress-unicorn-formal-disney/2.png
-  - /assets/images/products/girls/dress-unicorn-formal-disney/3.png
-  - /assets/images/products/girls/dress-unicorn-formal-disney/4.png
-  - /assets/images/products/girls/dress-unicorn-formal-disney/5.png
+  - /assets/images/products/girls/dress-unicorn-formal-disney/1.webp
+  - /assets/images/products/girls/dress-unicorn-formal-disney/2.webp
+  - /assets/images/products/girls/dress-unicorn-formal-disney/3.webp
+  - /assets/images/products/girls/dress-unicorn-formal-disney/4.webp
+  - /assets/images/products/girls/dress-unicorn-formal-disney/5.webp
 old_id: "45354"
 redirect_from:
   - /product/45354

@@ -8,7 +8,7 @@ category: accessories
 date: 2026-10-17
 badge: "فروش ویژه"
 images:
-  - /assets/images/products/accessories/gloves-set-spiderman/1.jpg
+  - /assets/images/products/accessories/gloves-set-spiderman/1.webp
 old_id: "45386"
 redirect_from:
   - /product/45386

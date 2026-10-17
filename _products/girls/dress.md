@@ -6,13 +6,13 @@ category: girls
 date: 2026-10-17
 colors: ["صورتی روشن", "146", "241)"]
 images:
-  - /assets/images/products/girls/dress/1.jpg
-  - /assets/images/products/girls/dress/2.png
-  - /assets/images/products/girls/dress/3.jpg
-  - /assets/images/products/girls/dress/4.jpg
-  - /assets/images/products/girls/dress/5.jpg
-  - /assets/images/products/girls/dress/6.jpg
-  - /assets/images/products/girls/dress/7.jpg
+  - /assets/images/products/girls/dress/1.webp
+  - /assets/images/products/girls/dress/2.webp
+  - /assets/images/products/girls/dress/3.webp
+  - /assets/images/products/girls/dress/4.webp
+  - /assets/images/products/girls/dress/5.webp
+  - /assets/images/products/girls/dress/6.webp
+  - /assets/images/products/girls/dress/7.webp
 old_id: "5"
 redirect_from:
   - /product/5
