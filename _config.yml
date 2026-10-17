@@ -32,7 +32,7 @@ defaults:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
-  # - jekyll-redirect-from  ← این خط را حذف یا کامنت کنید
+  - jekyll-redirect-from
 
 exclude:
   - README.md
