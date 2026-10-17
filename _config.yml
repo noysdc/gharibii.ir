@@ -36,6 +36,6 @@ plugins:
 
 exclude:
   - README.md
-  - tools
+  - scripts    # ← از tools به scripts تغییر کرد
   - Gemfile
   - Gemfile.lock
