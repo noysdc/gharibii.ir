@@ -302,4 +302,72 @@ if (waBtn && waMenu) {
     });
 }
 
+
+  /* ---- 7. Card sliders (cover images) ---- */
+  (function initCardSliders() {
+    var cards = document.querySelectorAll('[data-slider]');
+    if (!cards.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    cards.forEach(function (card) {
+      var track = card.querySelector('.slides');
+      var slides = card.querySelectorAll('.slide');
+      var dots = card.querySelectorAll('.slide-dot');
+      var prev = card.querySelector('.slide-prev');
+      var next = card.querySelector('.slide-next');
+      if (!track || slides.length < 2) return;
+
+      var idx = 0, timer = null, hold = false, visible = false;
+
+      function mark() {
+        dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); });
+      }
+      function go(i) {
+        idx = (i + slides.length) % slides.length;
+        track.scrollTo({ left: idx * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+        mark();
+      }
+      track.addEventListener('scroll', function () {
+        var w = track.clientWidth || 1;
+        var i = Math.round(track.scrollLeft / w);
+        if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); }
+      }, { passive: true });
+
+      function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+      function startAuto() {
+        if (reduce || timer || !visible) return;
+        timer = setInterval(function () { if (!hold) go(idx + 1); }, 3200 + Math.random() * 1500);
+      }
+
+      function bind(btn, step) {
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          go(idx + step);
+        });
+      }
+      bind(prev, -1);
+      bind(next, 1);
+
+      card.addEventListener('mouseenter', function () { hold = true; });
+      card.addEventListener('mouseleave', function () { hold = false; });
+      card.addEventListener('focusin', function () { hold = true; });
+      card.addEventListener('focusout', function () { hold = false; });
+      card.addEventListener('touchstart', function () {
+        hold = true;
+        clearTimeout(card._resume);
+        card._resume = setTimeout(function () { hold = false; }, 6000);
+      }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          if (visible) startAuto(); else stopAuto();
+        }, { threshold: 0.35 }).observe(card);
+      } else {
+        visible = true; startAuto();
+      }
+    });
+  })();
+
 })();
