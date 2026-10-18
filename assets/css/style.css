@@ -975,3 +975,147 @@ html[data-theme="dark"] .install-btn-glass .install-text strong {
 html[data-theme="dark"] .install-btn-glass .install-text small {
   color: var(--muted) !important;
 }
+/* ============================================================
+   🍏 اعمال افکت شیشه‌ای (Liquid Glass) به تمامی باکس‌های فوتر
+   ============================================================ */
+
+/* ۱. باکس‌های تماس (ایمیل و آدرس) */
+.contact-grid .contact-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  color: var(--sea-deep) !important;
+}
+
+.contact-grid .contact-btn:hover {
+  background: #ffffff !important;
+  transform: translateY(-3px) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ۲. باکس‌های شبکه‌های اجتماعی (اینستاگرام، تلگرام، ایمیل) */
+.social-boxes .social-box {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.social-boxes .social-box:hover {
+  background: #ffffff !important;
+  transform: translateY(-3px) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ۳. باکس‌های نمادهای اعتماد (اینماد و ساماندهی) */
+.trust-box {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.trust-box:hover {
+  background: #ffffff !important;
+  transform: translateY(-3px) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ۴. باکس نصب اپلیکیشن (جمع و جور و وسط‌چین) */
+.install-footer-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.install-btn-glass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: auto;
+  max-width: 28rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-family: inherit;
+  cursor: pointer;
+  
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.install-btn-glass:hover {
+  background: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.install-btn-glass .install-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  background: rgba(10, 102, 112, 0.1);
+  padding: 0.4rem;
+  border-radius: 50%;
+}
+
+.install-btn-glass .install-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.install-btn-glass .install-text strong {
+  font-size: 0.95rem;
+  color: var(--sea-deep);
+  font-weight: 700;
+}
+
+.install-btn-glass .install-text small {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ============================================================
+   🌙 تنظیمات حالت شب (Dark Mode) برای همه باکس‌های بالا
+   ============================================================ */
+html[data-theme="dark"] .contact-grid .contact-btn,
+html[data-theme="dark"] .social-boxes .social-box,
+html[data-theme="dark"] .trust-box,
+html[data-theme="dark"] .install-btn-glass {
+  background: rgba(30, 45, 55, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] .contact-grid .contact-btn:hover,
+html[data-theme="dark"] .social-boxes .social-box:hover,
+html[data-theme="dark"] .trust-box:hover,
+html[data-theme="dark"] .install-btn-glass:hover {
+  background: rgba(45, 65, 80, 0.95) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .install-btn-glass .install-icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .install-btn-glass .install-text strong {
+  color: var(--ink) !important;
+}
