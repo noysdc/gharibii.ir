@@ -1966,32 +1966,40 @@ html[data-theme="dark"] .cart-note {
   color: var(--muted);
 }
 /* ============================================================
-   اصلاحات جدید: وسط‌چین کردن گالری و افکت نور براق روی عکس‌ها
+   اصلاحات نهایی گالری: وسط‌چین کردن کامل و افکت نور استاندارد
    ============================================================ */
 
-/* ۱. وسط‌چین کردن هدر گالری */
+/* ۱. وسط‌چین کردن هدر گالری (متن و خط زیرین) */
 .gallery-section .section-head {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  gap: 0.5rem;
   width: 100%;
+  gap: 0.5rem;
 }
+
 .gallery-section .section-head h2 {
   margin: 0 !important;
 }
-.gallery-section .section-head .fancy-head::after {
-  right: 50% !important;
-  transform: translateX(50%) !important;
+
+/* قرار دادن خط گرادیانی دقیقاً در وسط */
+.gallery-section .fancy-head::after {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
 }
 
-/* ۲. افکت نور براق و شیشه‌ای روی عکس‌های گالری (مشابه کارت محصولات) */
+/* ۲. اصلاح افکت نور براق روی عکس‌های گالری */
+.gslide {
+  overflow: hidden; /* جلوگیری از بیرون زدن نور از کادر عکس */
+}
+
 .gslide::before {
   content: "";
   position: absolute;
-  z-index: 3; /* بالاتر از عکس و حاشیه رنگی */
+  z-index: 3;
   top: -10%;
   bottom: -10%;
   left: 0;
@@ -2000,13 +2008,13 @@ html[data-theme="dark"] .cart-note {
   background: linear-gradient(90deg,
     transparent 0%,
     rgba(255,255,255,.10) 30%,
-    rgba(255,255,255,.40) 50%,
+    rgba(255,255,255,.45) 50%,
     rgba(255,255,255,.10) 70%,
     transparent 100%);
-  filter: blur(2.5px);
+  filter: blur(2px);
   transform: translateX(-400%) skewX(-16deg);
   animation: card-sweep 8s ease-in-out infinite;
-  border-radius: 1.8rem;
+  border-radius: 1.8rem; /* هماهنگ با گوشه‌های عکس */
 }
 
 /* تاخیر در انیمیشن نور برای هر اسلاید تا همزمان نباشن */
@@ -2027,7 +2035,7 @@ html[data-theme="dark"] .gslide::before {
     transparent 100%);
 }
 
-/* در حالت کاهش حرکت، نور متوقف شود */
+/* در حالت کاهش حرکت (Reduced Motion)، نور متوقف شود */
 @media (prefers-reduced-motion: reduce) {
   .gslide::before {
     animation: none;
