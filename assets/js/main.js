@@ -176,11 +176,10 @@
   }
 
   /* ============================================
-     7. سبد خرید + واتساپ (نهایی)
+     7. سبد خرید + واتساپ
      ============================================ */
   var cart = JSON.parse(localStorage.getItem('gharibii_cart')) || [];
 
-  // فرمت قیمت با کاما (فارسی)
   function fmtPrice(num) {
     var n = Number(String(num).replace(/,/g, '')) || 0;
     if (n === 0) return 'تماس بگیرید';
@@ -207,8 +206,9 @@
     }, 2200);
   }
 
+  // اتصال دکمه‌های افزودن به سبد (در کارت‌ها و صفحه محصول)
   function bindAddToCartButtons() {
-    var buttons = document.querySelectorAll('.add-to-cart-btn');
+    var buttons = document.querySelectorAll('.add-to-cart-btn, #add-to-cart');
     buttons.forEach(function (btn) {
       if (btn._bound) return;
       btn._bound = true;
@@ -220,8 +220,10 @@
           title: btn.dataset.title,
           price: btn.dataset.price,
           image: btn.dataset.image,
-          url: btn.dataset.url
+          url: btn.dataset.url || window.location.pathname
         };
+
+        if (!product.title) return;
 
         var exists = cart.find(function (i) { return i.title === product.title; });
         if (exists) {
@@ -256,8 +258,10 @@
           <button class="cart-close" id="cart-close" type="button" aria-label="بستن">✕</button>
           <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
           <div id="cart-items-container"></div>
+          <p class="cart-note">⚠️ هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).</p>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
+          <p class="cart-note cart-note-wa" id="cart-note-wa" hidden>⚠️ هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).</p>
         </div>
       </div>
     `;
@@ -317,6 +321,7 @@
       message += "━━━━━━━━━━━━━━\n";
       message += "🧾 جمع کل: " + total.toLocaleString('fa-IR') + " تومان\n\n";
     }
+    message += "⚠️ توجه: هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).\n\n";
     message += "لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏";
     return message;
   }
@@ -327,6 +332,7 @@
 
   function renderSellers() {
     var box = document.getElementById('cart-sellers');
+    var noteWa = document.getElementById('cart-note-wa');
     if (!box) return;
     box.innerHTML = sellers.map(function (s, i) {
       return `
@@ -335,6 +341,7 @@
           <span class="wa-seller-info"><strong>${esc(s.name)}</strong><small>ارسال سفارش</small></span>
         </button>`;
     }).join('');
+    if (noteWa) noteWa.hidden = false;
   }
 
   function initCart() {
@@ -349,6 +356,7 @@
       if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
         document.getElementById('cart-modal').classList.remove('active');
         var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
+        var noteWa = document.getElementById('cart-note-wa'); if (noteWa) noteWa.hidden = true;
       }
       if (e.target.closest('.cart-item-remove')) {
         var index = parseInt(e.target.closest('.cart-item-remove').dataset.index, 10);
@@ -380,6 +388,18 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     setTimeout(bindAddToCartButtons, 500);
+  });
+
+  /* ============================================
+     7.5 منوی واتساپ در صفحه محصول (buy.html)
+     ============================================ */
+  document.addEventListener('click', function (e) {
+    var waBtn = e.target.closest('#open-wa-menu');
+    var waMenu = document.getElementById('wa-menu');
+    if (waBtn && waMenu) {
+      e.preventDefault();
+      waMenu.style.display = waMenu.style.display === 'none' ? 'block' : 'none';
+    }
   });
 
   /* ============================================
@@ -546,3 +566,28 @@
   })();
 
 })();
+/* ============================================================
+   استایل متن هزینه ارسال (برای سبد و صفحه محصول)
+   ============================================================ */
+.cart-note {
+  font-size: calc(.82rem * var(--font-scale));
+  line-height: 1.8;
+  color: #a05800;
+  background: rgba(255, 200, 100, .15);
+  border: 1px dashed rgba(200, 150, 50, .5);
+  border-radius: .8rem;
+  padding: .6rem .8rem;
+  margin: .75rem 0;
+  text-align: center;
+}
+
+html[data-theme="dark"] .cart-note {
+  background: rgba(200, 150, 50, .1);
+  border-color: rgba(200, 150, 50, .3);
+  color: #e0a800;
+}
+
+/* استایل دکمه‌های صفحه محصول (buy.html) در موبایل و دسکتاپ */
+.buy-actions { margin-top: 1.5rem; }
+.buy-actions .btn-wa { font-weight: 700; border-radius: 999px; }
+.buy-actions .btn-cart { font-weight: 700; border-radius: 999px; }

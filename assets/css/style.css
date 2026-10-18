@@ -1938,3 +1938,28 @@ html[data-theme="dark"] .add-to-cart-btn.is-added {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+/* ============================================================
+   متن هزینه ارسال در سبد خرید
+   ============================================================ */
+.cart-note {
+  font-size: calc(.82rem * var(--font-scale));
+  line-height: 1.8;
+  color: var(--muted);
+  background: rgba(255, 200, 100, .15);
+  border: 1px dashed rgba(200, 150, 50, .4);
+  border-radius: .8rem;
+  padding: .6rem .8rem;
+  margin: .6rem 0;
+  text-align: center;
+}
+
+.cart-note-wa {
+  margin-top: .75rem;
+  margin-bottom: .25rem;
+}
+
+html[data-theme="dark"] .cart-note {
+  background: rgba(200, 150, 50, .1);
+  border-color: rgba(200, 150, 50, .3);
+  color: var(--muted);
+}
