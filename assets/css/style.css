@@ -642,8 +642,15 @@ html[data-theme="dark"] .cat-tile-pill{background:rgba(21,32,37,.78);color:var(-
 @media (min-width:760px){.cat-block{padding:4.6rem 1.3rem 1.6rem}.cat-grid{grid-auto-flow:dense;gap:1rem}.cat-grid .card:nth-child(n+5){display:flex}.cat-grid .card:nth-child(n+7){display:none}}
 @media (min-width:1040px){.cat-grid .card:nth-child(n+7){display:flex}.cat-grid .card:nth-child(n+10){display:none}}
 
-.cat-grid .card:first-child {grid-column: auto !important;grid-row: auto !important;}
 .cat-grid .card:first-child::after {display: none !important;}
+
+/* ===== کارت شاخص: اولین محصول هر دسته بزرگ‌تر است (تبلت و دسکتاپ؛ در RTL سمت راست) ===== */
+@media (min-width:760px){
+  .cat-grid .card:first-child{grid-column:span 2;grid-row:span 2}
+  .cat-grid .card:first-child .card-img{aspect-ratio:auto;flex:1 1 auto;min-height:22rem}
+  .cat-grid .card:first-child .card-title{font-size:calc(1.2rem * var(--font-scale))}
+  .cat-grid .card:first-child .card-price .price-value{font-size:1.05rem}
+}
 
 .cat-more{display:flex;justify-content:center;margin-top:1.3rem}
 .more-btn{position:relative;display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1.2rem .6rem 1rem;border-radius:999px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));border:2px solid rgba(255,255,255,.9);box-shadow:0 10px 22px rgba(120,60,160,.3),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s ease,box-shadow .2s ease}
