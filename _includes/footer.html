@@ -13,20 +13,6 @@
 
       <div class="contact-grid">
 
-        {% if site.phone_display %}
-        <a class="contact-btn" href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">
-          <span class="contact-btn-icon">📞</span>
-          <span class="contact-btn-text" dir="ltr">{{ site.phone_display }}</span>
-        </a>
-        {% endif %}
-
-        {% if site.whatsapp_numbers %}
-        <a class="contact-btn contact-btn-wa" href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
-          <span class="contact-btn-icon">💬</span>
-          <span class="contact-btn-text">واتساپ</span>
-        </a>
-        {% endif %}
-
         <a class="contact-btn contact-wide" href="mailto:contact@gharibii.ir">
           <span class="contact-btn-icon">✉️</span>
           <span class="contact-btn-text" dir="ltr">contact@gharibii.ir</span>
