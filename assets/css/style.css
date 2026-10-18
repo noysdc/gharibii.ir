@@ -108,8 +108,8 @@ html[data-theme="dark"] .category-box{background:rgba(30,45,55,.45);border-color
 .category-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem}
 .category-nav a{
   position:relative;display:inline-block;padding:.55rem 1.15rem;border-radius:999px;font-size:calc(.95rem * var(--font-scale));font-weight:600;color:var(--sea-deep);text-decoration:none;overflow:hidden;isolation:isolate;transition:transform .25s ease, box-shadow .25s ease, color .25s ease, background .25s ease;
-  background:rgba(255,255,255,.65);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);
-  border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 3px 10px rgba(168,85,247,.08),0 1px 3px rgba(255,150,220,.05);
+  background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);
+  border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 3px 10px rgba(168,85,247,.08),0 1px 3px rgba(255,150,220,.05);
 }
 .category-nav a::before{content:"";position:absolute;inset:0;border-radius:999px;background:linear-gradient(135deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 65%, rgba(200,230,255,.4) 100%);pointer-events:none;z-index:-1}
 .category-nav a::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.8) 50%, transparent 100%);transition:left .6s ease;pointer-events:none;z-index:-1}
@@ -751,57 +751,66 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea, select, 
 
 /* دکمه‌های هدر، فوتر، صفحه محصول */
 .contact-btn, .ctrl-btn, .btn-wa, .btn-cart, .more-btn {
-  background: rgba(255, 255, 255, 0.75) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(16px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.3s ease !important;
 }
 .contact-btn:hover, .ctrl-btn:hover, .btn-wa:hover, .btn-cart:hover, .more-btn:hover {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: #ffffff !important;
   transform: translateY(-2px) !important;
-  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* دکمه افزودن به سبد (کارت‌ها) و دکمه قیمت (کارت‌ها) */
 .add-to-cart-btn, .cat-grid .card-price {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(12px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1), 0 4px 15px rgba(0, 0, 0, 0.08) !important;
   color: var(--sea-deep) !important;
 }
 .add-to-cart-btn:hover, .cat-grid .card-price:hover {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: #ffffff !important;
 }
 
 /* آیکون‌های فوتر (اینستاگرام، تلگرام، ایمیل) */
 .social-box {
-  background: rgba(255, 255, 255, 0.75) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(16px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.1) !important;
 }
 .social-box:hover {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: #ffffff !important;
   transform: translateY(-3px);
-  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* تنظیمات حالت شب برای دکمه‌های شیشه‌ای */
 html[data-theme="dark"] .contact-btn, html[data-theme="dark"] .ctrl-btn, html[data-theme="dark"] .btn-wa, html[data-theme="dark"] .btn-cart, html[data-theme="dark"] .more-btn,
 html[data-theme="dark"] .add-to-cart-btn, html[data-theme="dark"] .cat-grid .card-price, html[data-theme="dark"] .social-box {
-  background: rgba(30, 45, 55, 0.75) !important;
+  background: rgba(30, 45, 55, 0.85) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
   color: var(--ink) !important;
 }
 html[data-theme="dark"] .contact-btn:hover, html[data-theme="dark"] .ctrl-btn:hover, html[data-theme="dark"] .btn-wa:hover, html[data-theme="dark"] .btn-cart:hover, html[data-theme="dark"] .social-box:hover {
-  background: rgba(45, 65, 80, 0.9) !important;
+  background: rgba(45, 65, 80, 0.95) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.5) !important;
 }
+
+/* رفع مشکل دو خطی شدن دکمه افزودن به سبد در موبایل */
+.add-to-cart-btn {
+  white-space: nowrap;
+  font-size: calc(0.75rem * var(--font-scale)); /* کمی کوچکتر */
+  padding: 0.4rem 0.5rem; /* فاصله کمتر */
+}
+.add-to-cart-btn svg { width: 14px; height: 14px; }
 
 /* ============================================================
    گرید: بازگرداندن کارت بزرگ بدون نوار زرد رنگ
