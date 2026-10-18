@@ -792,3 +792,32 @@ html[data-theme="dark"] .contact-btn, html[data-theme="dark"] .ctrl-btn, html[da
 html[data-theme="dark"] .contact-btn:hover, html[data-theme="dark"] .ctrl-btn:hover, html[data-theme="dark"] .add-to-cart-btn:hover {
   background: rgba(45, 65, 80, 0.8) !important;
 }
+
+/* ============================================================
+   اصلاح نهایی: بازگرداندن کارت بزرگ بدون نوار زرد رنگ
+   ============================================================ */
+
+/* ۱. حذف قطعی نوار زرد رنگ از کارت اول */
+.cat-grid .card:first-child::after {
+  display: none !important;
+}
+
+/* ۲. بزرگ کردن کارت اول در دسکتاپ و تبلت */
+@media (min-width: 760px) {
+  .cat-grid {
+    grid-auto-flow: dense !important;
+  }
+  
+  .cat-grid .card:first-child {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+    display: flex !important;
+  }
+  
+  /* تنظیم عکس برای پر کردن فضای بزرگ */
+  .cat-grid .card:first-child .card-img {
+    aspect-ratio: auto !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+  }
+}
