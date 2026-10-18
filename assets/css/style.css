@@ -1138,10 +1138,9 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
 .notfound{text-align:center;padding:2.5rem 0}
 .notfound .btn{margin:.25rem}
 
-/* لینک‌های فوتر */
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.1rem;margin:.9rem auto 0;max-width:20rem}
-.footer-links a{color:var(--sea);text-decoration:none;font-weight:600;font-size:.95rem;padding:.2rem .1rem;border-bottom:1px dashed transparent}
-.footer-links a:hover,.footer-links a:focus-visible{border-bottom-color:currentColor}
+/* لینک‌های فوتر: دکمه‌های شیشه‌ای هم‌سبک بقیهٔ دکمه‌های فوتر (کلاس‌های contact-grid / contact-btn) */
+.footer-links{margin:.9rem auto 0}
+.footer-links .contact-btn[aria-current="page"]{border-color:rgba(168,85,247,.55) !important;box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 0 0 3px rgba(168,85,247,.16),0 10px 28px rgba(110,80,200,.16) !important}
 
 /* ================= صفحه‌های متنی (درباره ما / قوانین / راهنمای سایز) =================
    همهٔ باکس‌ها دقیقاً هم‌سبک باکس واتساپ فروشنده‌ها در صفحهٔ محصول (.wa-menu) هستند؛
@@ -1310,3 +1309,24 @@ html[data-theme="dark"] .trust-box:hover,
 html[data-theme="dark"] .install-btn-glass:hover{
   background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.09)) !important}
 
+/* ================= صفحهٔ لودینگ اپ نصب‌شده =================
+   همان لوگوی هولوگرامی و خط‌های هدر؛ فقط وقتی سایت به‌صورت اپ باز شود و فقط یک بار در هر نشست. */
+.app-splash{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1.5rem;
+  background:
+    radial-gradient(48rem 36rem at 92% -6%,rgba(255,212,232,.62),transparent 62%),
+    radial-gradient(44rem 34rem at 4% 16%,rgba(200,230,255,.62),transparent 62%),
+    radial-gradient(42rem 32rem at 86% 62%,rgba(232,213,255,.5),transparent 62%),
+    radial-gradient(40rem 30rem at 10% 92%,rgba(212,240,232,.5),transparent 62%),
+    var(--bg);
+  transition:opacity .55s ease,visibility .55s ease}
+html[data-theme="dark"] .app-splash{background:
+    radial-gradient(44rem 34rem at 92% -6%,rgba(168,85,247,.2),transparent 62%),
+    radial-gradient(40rem 30rem at 6% 90%,rgba(10,102,112,.28),transparent 62%),
+    var(--bg)}
+html.splash-on .app-splash{display:flex}
+.app-splash.is-out{opacity:0;visibility:hidden;pointer-events:none}
+.app-splash-inner{display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;text-align:center;animation:splash-in .7s ease both}
+.app-splash .holo-logo{width:min(46vw,190px);height:min(46vw,190px)}
+.app-splash .store-name,.app-splash .store-tagline{margin:0}
+@keyframes splash-in{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.app-splash-inner{animation:none}.app-splash{transition:none}}

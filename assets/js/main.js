@@ -516,8 +516,29 @@
     } catch (err) { /* چیدمان پیش‌فرض می‌ماند */ }
   })();
 
-  /* ---- 10. PWA: سرویس‌ورکر + دکمهٔ نصب اپلیکیشن ---- */
+  /* ---- 10. PWA: صفحهٔ لودینگ + سرویس‌ورکر + دکمهٔ نصب اپلیکیشن (اندروید و آیفون) ---- */
   (function initPWA() {
+    /* --- صفحهٔ لودینگ اپ: بعد از آماده شدن صفحه با محو شدن کنار می‌رود --- */
+    var splash = document.getElementById('app-splash');
+    if (splash) {
+      var shownAt = Date.now();
+      var closed = false;
+      var closeSplash = function () {
+        if (closed) return;
+        closed = true;
+        sstore.set('gharibii-splash', '1');
+        splash.classList.add('is-out');
+        setTimeout(function () { if (splash.parentNode) splash.parentNode.removeChild(splash); }, 700);
+      };
+      var armClose = function () {
+        /* حداقل ~۱ ثانیه می‌ماند تا انیمیشن هولوگرامی دیده شود */
+        setTimeout(closeSplash, Math.max(0, 1100 - (Date.now() - shownAt)));
+      };
+      if (document.readyState === 'complete') armClose();
+      else window.addEventListener('load', armClose);
+      setTimeout(closeSplash, 4000);                 /* اگر شبکه کند بود، گیر نکند */
+    }
+
     var secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     if ('serviceWorker' in navigator && secure) {
       window.addEventListener('load', function () {
@@ -534,8 +555,10 @@
     var ua = navigator.userAgent || '';
     var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     var isSafari = /safari/i.test(ua) && !/crios|fxios|edgios|opios|chrome|android/i.test(ua);
+    /* مرورگرهای داخلی اینستاگرام/فیسبوک/لاین و... نصب را پشتیبانی نمی‌کنند */
+    var inApp = /instagram|fban|fbav|fb_iab|line\/|micromessenger|twitter|snapchat|telegram/i.test(ua);
     var KEY = 'gharibii-install-dismissed';
-    var deferred = null;
+    var deferred = window.__bip || null;             /* رویداد نصب که زودتر در <head> گرفته شده */
 
     function dismissedRecently() {
       var t = parseInt(store.get(KEY) || '0', 10);
@@ -545,20 +568,23 @@
       var b = document.getElementById('install-bar');
       if (b) b.remove();
     }
+    function barText(mode) {
+      if (mode === 'inapp') return 'این صفحه داخل مرورگر برنامهٔ دیگری باز شده. از منوی ⋯ گزینهٔ «باز کردن در مرورگر» (Safari یا Chrome) را بزنید و بعد نصب کنید.';
+      if (mode === 'ios') return isSafari
+        ? 'دکمهٔ اشتراک‌گذاری (Share) پایین یا بالای صفحه را بزنید، گزینهٔ «Add to Home Screen» را انتخاب و «Add» را بزنید.'
+        : 'دکمهٔ اشتراک‌گذاری (Share) را بزنید، «Add to Home Screen» را انتخاب کنید. اگر گزینه را ندیدید، سایت را در Safari باز کنید.';
+      if (mode === 'manual') return 'از منوی مرورگر (⋮) گزینهٔ «Install app» یا «افزودن به صفحه اصلی» را بزنید.';
+      return 'مثل یک اپلیکیشن روی گوشی‌تان باشد؛ سریع‌تر و راحت‌تر.';
+    }
     function showBar(mode, force) {
       if (document.getElementById('install-bar')) return;
       if (!force && (dismissedRecently() || !window.matchMedia('(max-width: 900px)').matches)) return;
-      var text = mode === 'ios'
-        ? 'دکمه اشتراک‌گذاری (Share) را بزنید و «Add to Home Screen» را انتخاب کنید.'
-        : mode === 'manual'
-          ? 'از منوی مرورگر (⋮) گزینهٔ «افزودن به صفحه اصلی» یا «Install app» را بزنید.'
-          : 'مثل یک اپلیکیشن روی گوشی‌تان باشد؛ سریع‌تر و راحت‌تر.';
       var bar = document.createElement('div');
       bar.className = 'install-bar';
       bar.id = 'install-bar';
       bar.innerHTML =
         '<img class="install-icon" src="' + BASE + '/assets/icons/icon-192.png" alt="" width="42" height="42">' +
-        '<div class="install-text"><strong>نصب اپ غریبی کیش</strong>' + text + '</div>' +
+        '<div class="install-text"><strong>نصب اپ غریبی کیش</strong>' + barText(mode) + '</div>' +
         (mode === 'prompt' ? '<button type="button" class="install-go" id="install-go">نصب</button>' : '') +
         '<button type="button" class="install-close" id="install-close" aria-label="بستن">✕</button>';
       document.body.appendChild(bar);
@@ -574,6 +600,7 @@
       deferred.prompt();
       deferred.userChoice.then(function () {
         deferred = null;
+        window.__bip = null;
         removeBar();
       });
     }
@@ -588,13 +615,14 @@
       removeBar();
       if (box) box.style.display = 'none';
     });
-    if (isIOS && isSafari) setTimeout(function () { showBar('ios', false); }, 5000);
+    if (deferred) setTimeout(function () { showBar('prompt', false); }, 4000);   /* رویداد قبل از main.js آمده بود */
+    if (isIOS && !inApp) setTimeout(function () { showBar('ios', false); }, 5000);
 
-    /* دکمهٔ فوتر: اگر مرورگر اجازهٔ نصب مستقیم داده باشد نصب می‌کند، وگرنه راهنما نشان می‌دهد */
+    /* دکمهٔ فوتر: اگر مرورگر اجازهٔ نصب مستقیم داده باشد نصب می‌کند، وگرنه راهنمای مناسب دستگاه را نشان می‌دهد */
     if (btn) {
       btn.addEventListener('click', function () {
         if (deferred) doInstall();
-        else showBar(isIOS ? 'ios' : 'manual', true);
+        else showBar(inApp ? 'inapp' : (isIOS ? 'ios' : 'manual'), true);
       });
     }
   })();

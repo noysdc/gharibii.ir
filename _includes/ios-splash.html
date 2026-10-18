@@ -1,0 +1,12 @@
+{%- comment -%}
+  تصویر لودینگ آیفون (apple-touch-startup-image) — فقط حالت عمودی.
+  تصاویر با scripts/make_icons.py ساخته می‌شوند و در assets/splash/ هستند.
+  هر خط: عرض و ارتفاع به «نقطه» (CSS px) و ضریب پیکسل ← فایل به «پیکسل» واقعی.
+{%- endcomment -%}
+{%- assign ios_sizes = "440x956x3,430x932x3,428x926x3,414x896x3,414x896x2,414x736x3,402x874x3,393x852x3,390x844x3,375x812x3,375x667x2,320x568x2" | split: "," -%}
+{%- for s in ios_sizes -%}
+  {%- assign p = s | split: "x" -%}
+  {%- assign pw = p[0] | times: p[2] -%}
+  {%- assign ph = p[1] | times: p[2] -%}
+  <link rel="apple-touch-startup-image" media="(device-width: {{ p[0] }}px) and (device-height: {{ p[1] }}px) and (-webkit-device-pixel-ratio: {{ p[2] }}) and (orientation: portrait)" href="{{ '/assets/splash/ios-' | append: pw | append: 'x' | append: ph | append: '.jpg' | relative_url }}">
+{% endfor -%}

@@ -9,11 +9,23 @@
 
       <p class="footer-tagline">کامل‌ترین فروشگاه لباس‌های شخصیتی در ایران</p>
 
-      <nav class="footer-links" aria-label="لینک‌های مفید">
-        <a href="{{ '/about/' | relative_url }}">درباره ما</a>
-        <a href="{{ '/terms/' | relative_url }}">قوانین و مقررات</a>
-        <a href="{{ '/terms/#shipping' | relative_url }}">ارسال و هزینه‌ها</a>
-        <a href="{{ site.size_guide_url | relative_url }}">راهنمای سایز</a>
+      <nav class="footer-links contact-grid" aria-label="لینک‌های مفید">
+        <a class="contact-btn" href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>
+          <span class="contact-btn-icon">🎀</span>
+          <span class="contact-btn-text">درباره ما</span>
+        </a>
+        <a class="contact-btn" href="{{ '/terms/' | relative_url }}"{% if page.url == '/terms/' %} aria-current="page"{% endif %}>
+          <span class="contact-btn-icon">📜</span>
+          <span class="contact-btn-text">قوانین و مقررات</span>
+        </a>
+        <a class="contact-btn" href="{{ '/terms/#shipping' | relative_url }}">
+          <span class="contact-btn-icon">🚚</span>
+          <span class="contact-btn-text">ارسال و هزینه‌ها</span>
+        </a>
+        <a class="contact-btn" href="{{ site.size_guide_url | relative_url }}"{% if page.url == '/size-guide/' %} aria-current="page"{% endif %}>
+          <span class="contact-btn-icon">📏</span>
+          <span class="contact-btn-text">راهنمای سایز</span>
+        </a>
       </nav>
 
       <h4 class="footer-contact-title">تماس با ما</h4>

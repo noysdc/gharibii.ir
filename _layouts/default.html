@@ -12,6 +12,24 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/icons/icon-192.png' | relative_url }}">
   <link rel="apple-touch-icon" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+  {% include ios-splash.html %}
+  <script>
+  /* خیلی زود اجرا می‌شود (قبل از نمایش صفحه): حالت شب، تشخیص اپ نصب‌شده برای صفحهٔ لودینگ،
+     و نگه داشتن رویداد نصب اندروید تا main.js آماده شود */
+  (function () {
+    var d = document.documentElement;
+    try { if (localStorage.getItem('gharibii-theme') === 'dark') d.setAttribute('data-theme', 'dark'); } catch (e) {}
+    var app = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+    if (app) {
+      d.classList.add('is-app');
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('gharibii-splash'); } catch (e) {}
+      if (!seen) d.classList.add('splash-on');
+    }
+    window.__bip = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); window.__bip = e; });
+  })();
+  </script>
   {% seo %}
   {%- assign og_src = page.images[0] -%}
   {%- if og_src -%}
@@ -52,6 +70,16 @@
   {%- endif %}
 </head>
 <body{% if page.layout == 'product' %} class="is-product"{% endif %}>
+  <!-- صفحهٔ لودینگ اپ نصب‌شده: همان لوگو و تم هولوگرامی هدر (فقط داخل اپ و یک بار در هر نشست دیده می‌شود) -->
+  <div class="app-splash" id="app-splash" aria-hidden="true">
+    <div class="app-splash-inner">
+      <span class="holo-logo"><img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="160" height="160" fetchpriority="high"></span>
+      <div class="holo-divider" role="presentation"></div>
+      <p class="store-name">فروشگاه غریبی کیش</p>
+      <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+      <div class="holo-divider" role="presentation"></div>
+    </div>
+  </div>
   {% include header.html %}
   <main>{{ content }}</main>
   {% include footer.html %}
