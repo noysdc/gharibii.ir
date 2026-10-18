@@ -33,6 +33,11 @@ def main():
     for md_file in PRODUCTS_DIR.glob("*/*.md"):
         content = md_file.read_text(encoding='utf-8')
         
+        # محصولات ناموجود را دست نزن (گروه out_of_stock حفظ شود)
+        if re.search(r'^price_group:\s*["\']?out_of_stock', content, re.M):
+            print(f"  - {md_file.name} -> out_of_stock (skipped)")
+            continue
+
         # پیدا کردن قیمت فعلی
         price_match = re.search(r'^price:\s*(\d+)', content, re.M)
         if not price_match:

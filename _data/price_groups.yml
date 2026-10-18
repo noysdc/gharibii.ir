@@ -54,7 +54,6 @@ groups:
     label: "2 محصول هم‌قیمت"
     price: 2998000
 
-  # ---- اتمام موجودی: برای محصولات ناموجود در فایل محصول بنویسید  price_group: out_of_stock ----
   out_of_stock:
     label: "اتمام موجودی"
     out_of_stock: true
