@@ -20,7 +20,7 @@ redirect_from:
 - {: .d-amber} **قد لباس:** از شانه تا طولی که برای لباس دوست دارید؛ برای پیراهن‌های پرنسسی از شانه تا زیر زانو یا مچ پا.
 
 <div class="doc-tip" markdown="1">
-**برای دقت بیشتر**
+<p class="tip-title">برای دقت بیشتر</p>
 
 کودک را با لباس نازک و صاف و بدون حرکت نگه دارید و هر اندازه را **دو بار** بگیرید. اگر عدد دو بار متفاوت شد، عدد بزرگ‌تر را مبنا قرار دهید.
 </div>
@@ -53,14 +53,11 @@ redirect_from:
 قبل از ثبت سفارش، قد و سن کودک و نام محصول را در واتساپ برای ما بفرستید تا بهترین سایز را پیشنهاد کنیم.
 
 <div class="doc-tip" markdown="1">
-**نمونهٔ پیام برای فروشنده**
+<p class="tip-title">نمونهٔ پیام برای فروشنده</p>
 
 <span class="msg">سلام، برای محصول «نام محصول» می‌خواهم. قد کودک ۱۰۸ سانتی‌متر و سنش ۵ سال است. کدام سایز مناسب است؟</span>
 </div>
 
-<div class="doc-contact" markdown="0">
-  <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۱<small>پرسش دربارهٔ سایز</small></span></a>
-  <a href="https://wa.me/{{ site.whatsapp_numbers[1] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۲<small>پرسش دربارهٔ سایز</small></span></a>
-</div>
+{% include wa-sellers.html title="برای پرسش دربارهٔ سایز با کدوم فروشنده در ارتباط باشیم؟" text="سلام، می‌خوام دربارهٔ سایز لباس سؤال بپرسم." %}
 
 به یاد داشته باشید که طبق [قوانین و مقررات]({{ '/terms/' | relative_url }}) امکان مرجوعی وجود ندارد، پس سایز را با دقت انتخاب کنید.

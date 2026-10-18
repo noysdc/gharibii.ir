@@ -103,9 +103,9 @@ redirect_from:
 
 برای هر سؤال یا مشکل در سفارش:
 
+{% include wa-sellers.html title="برای سؤال یا پیگیری سفارش با کدوم فروشنده در ارتباط باشیم؟" text="سلام، یه سؤال دربارهٔ سفارشم دارم." %}
+
 <div class="doc-contact" markdown="0">
-  <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۱</span></a>
-  <a href="https://wa.me/{{ site.whatsapp_numbers[1] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۲</span></a>
-  <a href="tel:{{ site.phone_e164 }}"><span class="ico">📞</span><span class="txt">تماس تلفنی<small class="ltr">{{ site.phone_display }}</small></span></a>
-  <a href="mailto:contact@gharibii.ir"><span class="ico">✉️</span><span class="txt">ایمیل<small class="ltr">contact@gharibii.ir</small></span></a>
+  <a class="wa-seller" href="tel:{{ site.phone_e164 }}"><span class="wa-avatar emoji" data-e="📞"></span><span class="wa-seller-info"><strong>تماس تلفنی</strong><small class="ltr">{{ site.phone_display }}</small></span></a>
+  <a class="wa-seller" href="mailto:contact@gharibii.ir"><span class="wa-avatar emoji" data-e="✉️"></span><span class="wa-seller-info"><strong>ایمیل</strong><small class="ltr">contact@gharibii.ir</small></span></a>
 </div>

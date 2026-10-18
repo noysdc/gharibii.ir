@@ -38,19 +38,19 @@ redirect_from:
 4. سفارش از جزیره کیش برای شما ارسال می‌شود.
 
 <div class="doc-tip" markdown="1">
-**پیش از سفارش، این دو صفحه را بخوانید**
+<p class="tip-title">پیش از سفارش، این دو صفحه را بخوانید</p>
 
 [قوانین و مقررات]({{ '/terms/' | relative_url }}) (به‌ویژه بخش هزینهٔ ارسال، گمرک و مرجوعی) و [راهنمای سایز]({{ site.size_guide_url | relative_url }}). چون مرجوعی نداریم، انتخاب درست سایز خیلی مهم است.
 </div>
 
 ## ارتباط با ما
 
+{% include wa-sellers.html %}
+
 <div class="doc-contact" markdown="0">
-  <a href="{{ site.map_url }}" target="_blank" rel="noopener"><span class="ico">📍</span><span class="txt">جزیره کیش — بازار عرب‌ها<small>مسیریابی روی نقشه</small></span></a>
-  <a href="tel:{{ site.phone_e164 }}"><span class="ico">📞</span><span class="txt">تماس تلفنی<small class="ltr">{{ site.phone_display }}</small></span></a>
-  <a href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۱<small>پاسخگویی و ثبت سفارش</small></span></a>
-  <a href="https://wa.me/{{ site.whatsapp_numbers[1] }}" target="_blank" rel="noopener"><span class="ico">💬</span><span class="txt">واتساپ فروشنده ۲<small>پاسخگویی و ثبت سفارش</small></span></a>
-  <a href="mailto:contact@gharibii.ir"><span class="ico">✉️</span><span class="txt">ایمیل<small class="ltr">contact@gharibii.ir</small></span></a>
-  <a href="https://instagram.com/storegaribi16" target="_blank" rel="noopener"><span class="ico">📷</span><span class="txt">اینستاگرام<small class="ltr">@storegaribi16</small></span></a>
-  <a href="https://t.me/gharibii_ir" target="_blank" rel="noopener"><span class="ico">✈️</span><span class="txt">تلگرام<small class="ltr">@gharibii_ir</small></span></a>
+  <a class="wa-seller" href="{{ site.map_url }}" target="_blank" rel="noopener"><span class="wa-avatar emoji" data-e="📍"></span><span class="wa-seller-info"><strong>جزیره کیش — بازار عرب‌ها</strong><small>مسیریابی روی نقشه</small></span></a>
+  <a class="wa-seller" href="tel:{{ site.phone_e164 }}"><span class="wa-avatar emoji" data-e="📞"></span><span class="wa-seller-info"><strong>تماس تلفنی</strong><small class="ltr">{{ site.phone_display }}</small></span></a>
+  <a class="wa-seller" href="mailto:contact@gharibii.ir"><span class="wa-avatar emoji" data-e="✉️"></span><span class="wa-seller-info"><strong>ایمیل</strong><small class="ltr">contact@gharibii.ir</small></span></a>
+  <a class="wa-seller" href="https://instagram.com/storegaribi16" target="_blank" rel="noopener"><span class="wa-avatar emoji" data-e="📷"></span><span class="wa-seller-info"><strong>اینستاگرام</strong><small class="ltr">@storegaribi16</small></span></a>
+  <a class="wa-seller" href="https://t.me/gharibii_ir" target="_blank" rel="noopener"><span class="wa-avatar emoji" data-e="✈️"></span><span class="wa-seller-info"><strong>تلگرام</strong><small class="ltr">@gharibii_ir</small></span></a>
 </div>

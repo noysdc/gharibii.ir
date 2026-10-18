@@ -1,0 +1,21 @@
+{%- comment -%}
+  باکس فروشنده‌های واتساپ (همان ظاهر صفحهٔ محصول).
+  پارامترها:  title = تیتر باکس   |   text = متن آمادهٔ پیام (اختیاری)
+{%- endcomment -%}
+{%- assign wa_title = include.title | default: "برای سفارش با کدوم فروشنده در ارتباط باشیم؟" -%}
+{%- assign wa_q = "" -%}
+{%- if include.text -%}{%- assign wa_enc = include.text | url_encode -%}{%- assign wa_q = "?text=" | append: wa_enc -%}{%- endif -%}
+<div class="wa-menu" markdown="0">
+<p class="wa-menu-title">{{ wa_title }}</p>
+<div class="wa-sellers">
+{%- if site.whatsapp_sellers -%}
+{%- for s in site.whatsapp_sellers -%}
+<a class="wa-seller" href="https://wa.me/{{ s.number }}{{ wa_q }}" target="_blank" rel="noopener"><span class="wa-avatar">{% if s.photo %}<img src="{{ s.photo | relative_url }}" alt="" width="160" height="160" loading="lazy" onerror="this.remove()">{% endif %}</span><span class="wa-seller-info"><strong>{{ s.name }}</strong><small>پیام در واتساپ</small></span></a>
+{%- endfor -%}
+{%- else -%}
+{%- for n in site.whatsapp_numbers -%}
+<a class="wa-seller" href="https://wa.me/{{ n }}{{ wa_q }}" target="_blank" rel="noopener"><span class="wa-avatar"></span><span class="wa-seller-info"><strong>شماره {{ forloop.index }}</strong><small>پیام در واتساپ</small></span></a>
+{%- endfor -%}
+{%- endif -%}
+</div>
+</div>
