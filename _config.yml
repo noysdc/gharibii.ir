@@ -27,6 +27,12 @@ whatsapp_sellers:
 phone_display: "076-44561403"
 address: "جزیره زیبای کیش — بازار عرب‌ها 🏝️"
 
+# ---------- نقشه (فوتر) ----------
+map_name: "فروشگاه غریبی"
+map_lat: 26.54233
+map_lng: 54.0193253
+map_url: "https://maps.app.goo.gl/YtjBNcVfiDYY33XC9"
+
 # ---------- محصولات ----------
 collections:
   products:
@@ -56,6 +62,7 @@ plugins:
   - jekyll-redirect-from
 
 exclude:
+  - cloudflare_redirects.csv
   - README.md
   - scripts    # ← از tools به scripts تغییر کرد
   - Gemfile

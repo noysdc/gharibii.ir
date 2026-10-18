@@ -6,16 +6,33 @@ title: پوشاک دخترانه و پسرانه
 {%- assign boys = site.products | where: 'category', 'boys' -%}
 {%- assign girls_latest = girls | sort: 'date' | reverse -%}
 {%- assign boys_latest = boys | sort: 'date' | reverse -%}
-{%- assign latest = site.products | sort: 'date' | reverse -%}
 {%- assign cat_slugs = "girls|boys|bags-shoes|crown-wand|accessories" | split: "|" -%}
 {%- assign cat_names = "پرنسسی دخترانه|شخصیتی پسرانه|کیف و کفش|تاج و عصا|اکسسوری‌ها" | split: "|" -%}
 {%- assign cat_emojis = "👗|🦸|👜|👑|🎀" | split: "|" -%}
+{%- assign cat_tints = "girls|boys|bags|crown|acc" | split: "|" -%}
+
+<!-- آیکن‌های وکتور (یک‌بار تعریف، چندبار استفاده) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="gi-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></symbol>
+    <symbol id="gi-heart" viewBox="0 0 24 24"><path d="M12 21C5 16.5 2 12.5 2 8.8 2 6.2 4 4.2 6.5 4.2c1.9 0 3.7 1.1 5.5 3.3 1.8-2.2 3.6-3.3 5.5-3.3C20 4.2 22 6.2 22 8.8c0 3.7-3 7.7-10 12.2z"/></symbol>
+    <symbol id="gi-sparkle" viewBox="0 0 24 24"><path d="M12 2c.6 5.2 2.8 7.4 10 10-7.2 2.6-9.4 4.8-10 10-.6-5.2-2.8-7.4-10-10 7.2-2.6 9.4-4.8 10-10z"/></symbol>
+    <symbol id="gi-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></symbol>
+    <symbol id="gi-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></symbol>
+    <symbol id="gi-crown" viewBox="0 0 24 24"><path d="M3 18l-1-11 5.5 4L12 4l4.5 7L22 7l-1 11z"/></symbol>
+  </defs>
+</svg>
 
 <section class="wrap">
   <div class="tiles">
 
     <div class="tile-col">
       <a class="tile girls" href="{{ '/girls/' | relative_url }}">
+        <svg class="deco d1" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+        <svg class="deco d2" aria-hidden="true"><use href="#gi-heart"/></svg>
+        <svg class="deco d3" aria-hidden="true"><use href="#gi-star"/></svg>
+        <svg class="deco d4" aria-hidden="true"><use href="#gi-crown"/></svg>
+        <svg class="deco d5" aria-hidden="true"><use href="#gi-sparkle"/></svg>
         <span class="tile-collage" aria-hidden="true">
           {%- for gp in girls_latest limit: 3 -%}
             {%- assign gim = gp.images[0] -%}
@@ -26,11 +43,16 @@ title: پوشاک دخترانه و پسرانه
         <span class="tile-count">{{ girls.size }} محصول</span>
         <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
       </a>
-      <p class="hero-lead">لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.</p>
+      <p class="hero-lead tile-note">لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.</p>
     </div>
 
     <div class="tile-col">
       <a class="tile boys" href="{{ '/boys/' | relative_url }}">
+        <svg class="deco d1" aria-hidden="true"><use href="#gi-bolt"/></svg>
+        <svg class="deco d2" aria-hidden="true"><use href="#gi-star"/></svg>
+        <svg class="deco d3" aria-hidden="true"><use href="#gi-moon"/></svg>
+        <svg class="deco d4" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+        <svg class="deco d5" aria-hidden="true"><use href="#gi-bolt"/></svg>
         <span class="tile-collage" aria-hidden="true">
           {%- for bp in boys_latest limit: 3 -%}
             {%- assign bim = bp.images[0] -%}
@@ -41,46 +63,70 @@ title: پوشاک دخترانه و پسرانه
         <span class="tile-count">{{ boys.size }} محصول</span>
         <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
       </a>
-      <p class="hero-lead">برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀</p>
+      <p class="hero-lead tile-note">برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀</p>
     </div>
 
   </div>
 </section>
 
 <section class="wrap">
-  <div class="section-head">
+  <div class="section-head fancy-head">
     <h2>دسته‌بندی‌ها</h2>
     <p class="section-sub">یک دسته رو انتخاب کنید</p>
   </div>
-  <div class="cat-row">
+  <div class="cat-scroller">
     {%- for slug in cat_slugs -%}
       {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
       {%- assign cover = items[0].images[0] -%}
-      <a class="cat-card" href="{{ '/' | append: slug | append: '/' | relative_url }}">
-        <span class="card-img cat-cover"><span class="card-ring"></span><span class="slides"><span class="slide{% unless cover %} cat-emoji{% endunless %}">{% if cover %}<img src="{% include img.html src=cover %}" alt="" loading="lazy" width="400" height="400">{% else %}{{ cat_emojis[forloop.index0] }}{% endif %}</span></span></span>
-        <span class="cat-name">{{ cat_names[forloop.index0] }}</span>
-        <span class="cat-count">{% if items.size > 0 %}{{ items.size }} محصول{% else %}به‌زودی{% endif %}</span>
+      <a class="cat-tile tint-{{ cat_tints[forloop.index0] }}" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+        <span class="cat-tile-in">
+          {%- if cover -%}
+            <img src="{% include img.html src=cover %}" alt="" loading="lazy" width="400" height="500">
+          {%- else -%}
+            <span class="cat-tile-emoji">{{ cat_emojis[forloop.index0] }}</span>
+          {%- endif -%}
+          <span class="cat-tile-pill">{% if items.size > 0 %}{{ items.size }} محصول{% else %}به‌زودی{% endif %}</span>
+          <span class="cat-tile-label">
+            <strong>{{ cat_names[forloop.index0] }}</strong>
+            <span class="cat-tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></span>
+          </span>
+        </span>
       </a>
     {%- endfor -%}
   </div>
 </section>
 
-<section class="wrap">
-  <div class="section-head">
-    <h2>تازه‌ها</h2>
-  </div>
-  <div class="grid">
-    {% for p in latest limit: 12 %}
-      {% include product-card.html product=p %}
-      {% if forloop.index != 12 and forloop.index != latest.size %}
-        {% assign mod = forloop.index | modulo: 4 %}
-        {% if mod == 0 %}
-          {% include divider-toon.html index=forloop.index %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
-</section>
+<!-- هر دسته: چند محصول + دکمه «نمایش بیشتر» (موبایل ۴، تبلت ۶، دسکتاپ ۸ عدد) -->
+{%- for slug in cat_slugs -%}
+  {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
+  {%- if items.size > 0 -%}
+  <section class="wrap cat-section" id="cat-{{ slug }}">
+    <div class="cat-block tint-{{ cat_tints[forloop.index0] }}">
+      <header class="cat-block-head">
+        <a class="cat-block-title" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+          <span class="cat-block-emoji" aria-hidden="true">{{ cat_emojis[forloop.index0] }}</span>
+          <h2>{{ cat_names[forloop.index0] }}</h2>
+        </a>
+        <span class="cat-block-count">{{ items.size }} محصول</span>
+      </header>
+      <div class="grid cat-grid">
+        {%- for p in items limit: 8 -%}
+          {% include product-card.html product=p %}
+        {%- endfor -%}
+      </div>
+      {%- if items.size > 4 -%}
+      <div class="cat-more">
+        <a class="more-btn" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+          <span>نمایش بیشتر</span>
+          <small>همه‌ی {{ items.size }} محصول</small>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>
+        </a>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+{%- endfor -%}
 
 <section class="wrap">
   <div class="section-head">

@@ -9,37 +9,56 @@
 
       <p class="footer-tagline">کامل‌ترین فروشگاه لباس‌های شخصیتی در ایران</p>
 
-      <h4 class="footer-contact-title">تماس با من</h4>
+      <h4 class="footer-contact-title">تماس با ما</h4>
 
-      <div class="contact-buttons">
+      <div class="contact-grid">
 
         {% if site.phone_display %}
         <a class="contact-btn" href="tel:{{ site.phone_display | remove: ' ' | remove: '-' }}">
           <span class="contact-btn-icon">📞</span>
-          <span class="contact-btn-text">{{ site.phone_display }}</span>
+          <span class="contact-btn-text" dir="ltr">{{ site.phone_display }}</span>
         </a>
         {% endif %}
 
         {% if site.whatsapp_numbers %}
-        <a class="contact-btn" href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
+        <a class="contact-btn contact-btn-wa" href="https://wa.me/{{ site.whatsapp_numbers[0] }}" target="_blank" rel="noopener">
           <span class="contact-btn-icon">💬</span>
           <span class="contact-btn-text">واتساپ</span>
         </a>
         {% endif %}
 
-        <a class="contact-btn" href="mailto:contact@gharibii.ir">
+        <a class="contact-btn contact-wide" href="mailto:contact@gharibii.ir">
           <span class="contact-btn-icon">✉️</span>
-          <span class="contact-btn-text">contact@gharibii.ir</span>
+          <span class="contact-btn-text" dir="ltr">contact@gharibii.ir</span>
         </a>
 
         {% if site.address %}
-        <span class="contact-btn contact-btn-address">
+        <a class="contact-btn contact-wide contact-btn-address" href="{{ site.map_url | default: '#footer-map' }}" target="_blank" rel="noopener">
           <span class="contact-btn-icon">📍</span>
           <span class="contact-btn-text">{{ site.address }}</span>
-        </span>
+        </a>
         {% endif %}
 
       </div>
+
+      {%- if site.map_lat and site.map_lng -%}
+      <div class="map-card" id="footer-map">
+        <div class="map-frame">
+          <iframe
+            title="موقعیت {{ site.title | escape }} روی نقشه"
+            src="https://maps.google.com/maps?q={{ site.map_lat }},{{ site.map_lng }}&amp;z=17&amp;hl=fa&amp;output=embed"
+            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="map-bar">
+          <span class="map-pin" aria-hidden="true">📍</span>
+          <span class="map-text"><strong>{{ site.map_name | default: site.title }}</strong><small>{{ site.address }}</small></span>
+          <span class="map-actions">
+            <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={{ site.map_lat }},{{ site.map_lng }}" target="_blank" rel="noopener">مسیریابی</a>
+            <a class="map-btn alt" href="{{ site.map_url }}" target="_blank" rel="noopener">گوگل‌مپ</a>
+          </span>
+        </div>
+      </div>
+      {%- endif -%}
 
     </div>
 
