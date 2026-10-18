@@ -96,21 +96,27 @@ title: پوشاک دخترانه و پسرانه
   </div>
 </section>
 
-<!-- هر دسته: چند محصول + دکمه «نمایش بیشتر» (موبایل ۴، تبلت ۶، دسکتاپ ۸ عدد) -->
+<!-- هر دسته: باکس با تم دیزنی + چند محصول + دکمه «نمایش بیشتر» (موبایل ۴، تبلت ۶، دسکتاپ ۹ عدد) -->
 {%- for slug in cat_slugs -%}
   {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
   {%- if items.size > 0 -%}
   <section class="wrap cat-section" id="cat-{{ slug }}">
     <div class="cat-block tint-{{ cat_tints[forloop.index0] }}">
+      <span class="cb-skyline" aria-hidden="true"></span>
+      <svg class="cb-spark s1" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+      <svg class="cb-spark s2" aria-hidden="true"><use href="#gi-star"/></svg>
+      <svg class="cb-spark s3" aria-hidden="true"><use href="#gi-sparkle"/></svg>
       <header class="cat-block-head">
-        <a class="cat-block-title" href="{{ '/' | append: slug | append: '/' | relative_url }}">
-          <span class="cat-block-emoji" aria-hidden="true">{{ cat_emojis[forloop.index0] }}</span>
-          <h2>{{ cat_names[forloop.index0] }}</h2>
-        </a>
-        <span class="cat-block-count">{{ items.size }} محصول</span>
+        <span class="cb-banner-wrap">
+          <a class="cb-banner" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+            <span class="cb-medal" aria-hidden="true">{{ cat_emojis[forloop.index0] }}</span>
+            <h2>{{ cat_names[forloop.index0] }}</h2>
+          </a>
+        </span>
+        <span class="cb-count" aria-label="{{ items.size }} محصول"><b>{{ items.size }}</b><small>محصول</small></span>
       </header>
       <div class="grid cat-grid">
-        {%- for p in items limit: 8 -%}
+        {%- for p in items limit: 9 -%}
           {% include product-card.html product=p %}
         {%- endfor -%}
       </div>
@@ -127,6 +133,35 @@ title: پوشاک دخترانه و پسرانه
   </section>
   {%- endif -%}
 {%- endfor -%}
+
+<!-- گالری اسلایدی: هر عکسی که داخل assets/images/gallery/ بگذارید خودکار اینجا نمایش داده می‌شود -->
+{%- assign gallery_all = site.static_files | where_exp: 'f', "f.path contains 'assets/images/gallery/'" | sort: 'path' -%}
+{%- assign gallery_exts = ".jpg|.jpeg|.png|.webp|.avif|.gif" | split: "|" -%}
+{%- capture gallery_html -%}
+  {%- for f in gallery_all -%}
+    {%- assign fext = f.extname | downcase -%}
+    {%- if gallery_exts contains fext -%}
+      {%- assign fpath = f.path | prepend: '/' | replace: '//', '/' -%}
+      <figure class="gslide"><img src="{{ fpath | relative_url }}" alt="{{ f.basename | replace: '-', ' ' | replace: '_', ' ' | escape }}" loading="lazy" decoding="async" width="800" height="1000"></figure>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign gallery_html = gallery_html | strip -%}
+{%- if gallery_html != "" -%}
+<section class="wrap gallery-section" aria-label="گالری تصاویر">
+  <div class="section-head fancy-head">
+    <h2>گالری</h2>
+    <p class="section-sub">چند قاب از دنیای غریبی ✨</p>
+  </div>
+  <div class="gslider" data-gslider>
+    <button type="button" class="g-btn g-prev" aria-label="تصویر قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+    <div class="gslides" tabindex="0">{{ gallery_html }}</div>
+    <button type="button" class="g-btn g-next" aria-label="تصویر بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+    <div class="g-dots" aria-hidden="true"></div>
+  </div>
+</section>
+<script src="{{ '/assets/js/gallery.js' | relative_url }}" defer></script>
+{%- endif -%}
 
 <section class="wrap">
   <div class="section-head">

@@ -3,13 +3,14 @@ layout: null
 sitemap: false
 ---
 /* سرویس‌ورکر فروشگاه غریبی کیش — با تغییر VERSION کش قدیمی پاک می‌شود */
-const VERSION = 'gharibii-v1';
+const VERSION = 'gharibii-v2';
 const BASE = '{{ site.baseurl }}';
 const SHELL = [
   BASE + '/',
   BASE + '/offline/',
   BASE + '/assets/css/style.css',
   BASE + '/assets/js/main.js',
+  BASE + '/assets/js/gallery.js',
   BASE + '/assets/icons/icon-192.png'
 ];
 
