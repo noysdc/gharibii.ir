@@ -875,3 +875,103 @@ html[data-theme="dark"] .more-btn svg {
 html[data-theme="dark"] .more-btn small {
   background: rgba(255, 255, 255, 0.1) !important;
 }
+/* ============================================================
+   باکس و دکمه نصب اپلیکیشن در فوتر (Liquid Glass)
+   ============================================================ */
+
+/* ظرف باکس نصب */
+.install-footer-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+}
+
+/* دکمه شیشه‌ای نصب */
+.install-btn-glass {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 999px;
+  font-family: inherit;
+  cursor: pointer;
+  
+  /* افکت شیشه‌ای (Liquid Glass) */
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 1), 
+    0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    
+  transition: all 0.3s ease !important;
+}
+
+.install-btn-glass:hover {
+  background: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    inset 0 1px 3px rgba(255, 255, 255, 1), 
+    0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.install-btn-glass .install-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  background: rgba(10, 102, 112, 0.1);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.install-btn-glass .install-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+  line-height: 1.5;
+}
+
+.install-btn-glass .install-text strong {
+  font-size: 0.95rem;
+  color: var(--sea-deep);
+  font-weight: 700;
+}
+
+.install-btn-glass .install-text small {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* حالت شب برای دکمه نصب */
+html[data-theme="dark"] .install-btn-glass {
+  background: rgba(30, 45, 55, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+    0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .install-btn-glass:hover {
+  background: rgba(45, 65, 80, 0.95) !important;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+    0 8px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .install-btn-glass .install-icon {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .install-btn-glass .install-text strong {
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] .install-btn-glass .install-text small {
+  color: var(--muted) !important;
+}
