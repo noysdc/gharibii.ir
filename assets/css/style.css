@@ -1864,3 +1864,77 @@ html[data-theme="dark"] .g-btn{background:rgba(21,32,37,.75);color:var(--ink);bo
   .cat-tile,.cat-tile-in img,.more-btn{transition:none}
   .cb-spark{animation:none}
 }
+/* ============================================================
+   دکمه «افزودن به سبد خرید» روی کارت محصول
+   ============================================================ */
+.card { position: relative; }
+.add-to-cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: calc(100% - 1rem);
+  margin: .35rem auto .15rem;
+  padding: .5rem .8rem;
+  background: rgba(255, 255, 255, .85);
+  color: var(--sea);
+  border: 1.5px solid var(--sea);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: calc(.82rem * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 5;
+}
+.add-to-cart-btn:hover {
+  background: var(--sea);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(10, 102, 112, .3);
+}
+.add-to-cart-btn:active { transform: translateY(0) scale(.97); }
+.add-to-cart-btn svg { flex: 0 0 auto; }
+.add-to-cart-btn.is-added {
+  background: var(--wa);
+  border-color: var(--wa);
+  color: #fff;
+}
+.add-to-cart-btn.is-added:hover { filter: brightness(1.08); }
+
+html[data-theme="dark"] .add-to-cart-btn {
+  background: rgba(30, 45, 55, .7);
+  color: var(--sea-deep);
+  border-color: var(--sea);
+}
+html[data-theme="dark"] .add-to-cart-btn:hover,
+html[data-theme="dark"] .add-to-cart-btn.is-added {
+  background: var(--sea);
+  color: #fff;
+}
+
+/* پیام شناور کوچک */
+#mini-toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #10222C;
+  color: #fff;
+  padding: .6rem 1.2rem;
+  border-radius: 999px;
+  font-size: .9rem;
+  z-index: 200;
+  transition: transform .3s ease, opacity .3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+}
+#mini-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}

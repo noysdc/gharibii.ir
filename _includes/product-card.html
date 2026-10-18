@@ -3,6 +3,20 @@
 {%- assign total = imgs | size -%}
 {%- if total > 5 -%}{%- assign total = 5 -%}{%- endif -%}
 {%- assign no_img = item.images[0] -%}
+
+{%- comment -%}
+  استخراج قیمت نهایی دقیقاً مثل منطق price.html
+{%- endcomment -%}
+{%- assign final_price_raw = item.price -%}
+{%- if final_price_raw == nil or final_price_raw == "" -%}
+  {%- if item.price_group -%}
+    {%- assign grp = site.data.price_groups.groups[item.price_group] -%}
+    {%- if grp -%}{%- assign final_price_raw = grp.price -%}{%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign final_price_clean = final_price_raw | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- assign final_price_num = final_price_clean | plus: 0 -%}
+
 <article class="card"{% if total > 1 %} data-slider{% endif %}>
   <div class="card-img">
     <span class="card-ring" aria-hidden="true"></span>
@@ -25,4 +39,19 @@
     <span class="card-title">{{ item.title }}</span>
     <span class="card-price">{% include price.html product=item %}</span>
   </a>
+
+  <!-- ✅ دکمه افزودن به سبد خرید -->
+  <button class="add-to-cart-btn" type="button"
+          data-title="{{ item.title | escape }}"
+          data-price="{{ final_price_num }}"
+          data-image="{% include img.html src=no_img %}"
+          data-url="{{ item.url | relative_url }}"
+          aria-label="افزودن {{ item.title | escape }} به سبد خرید">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    افزودن به سبد
+  </button>
 </article>
