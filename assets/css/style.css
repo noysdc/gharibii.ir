@@ -2066,129 +2066,177 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea, select, 
   font-family: 'Vazirmatn', Tahoma, "Segoe UI", sans-serif !important;
 }
 /* ============================================================
-   🍏 Liquid Glass UI (شبیه‌سازی رابط کاربری iOS اپل)
+   🍏 Liquid Glass 2.0 (شبیه‌سازی دقیق iOS 18 با افکت نور مایع)
    ============================================================ */
 
-/* ۱. تعریف متغیرها و لایه‌های شیشه‌ای */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.75);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
-  --glass-blur: blur(24px) saturate(180%);
+  --liquid-bg: rgba(255, 255, 255, 0.25); 
+  --liquid-border: rgba(255, 255, 255, 0.5);
+  --liquid-blur: blur(20px) saturate(200%);
   
-  --glass-bg-dark: rgba(30, 45, 55, 0.55);
-  --glass-border-dark: rgba(255, 255, 255, 0.15);
+  --liquid-bg-dark: rgba(20, 30, 40, 0.4);
+  --liquid-border-dark: rgba(255, 255, 255, 0.15);
 }
 
-/* ۲. افکت شیشه‌ای برای دکمه‌ها (لمس و هاور) */
+/* ----------------------------------------------------
+   🎯 دکمه‌ها (شیشه مایع برجسته)
+   ---------------------------------------------------- */
 .contact-btn, 
 .ctrl-btn, 
 .btn-cart, 
-.cat-tile-go,
-.add-to-cart-btn {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
+.add-to-cart-btn, 
+.more-btn,
+.cat-tile-go {
+  position: relative;
+  background: var(--liquid-bg) !important;
+  backdrop-filter: var(--liquid-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-blur) !important;
+  border: 1px solid var(--liquid-border) !important;
+  /* سایه‌های چندلایه برای شبیه‌سازی نور از بالا و انعکاس از پایین */
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 4px 15px rgba(0, 0, 0, 0.05) !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.9), 
+    inset 0 -1px 1px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* هاور روی دکمه‌ها: کمی بزرگ‌تر و روشن‌تر می‌شن */
+/* افکت درخشش روی دکمه‌ها (شبیه لبه برنده شده شیشه) */
+.contact-btn::before, 
+.ctrl-btn::before, 
+.btn-cart::before, 
+.add-to-cart-btn::before,
+.more-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.2) 100%);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* حالت هاور (بزرگ‌نمایی و شفافیت بیشتر) */
 .contact-btn:hover, 
 .ctrl-btn:hover, 
 .btn-cart:hover, 
-.cat-tile-go:hover,
-.add-to-cart-btn:hover {
-  background: rgba(255, 255, 255, 0.65) !important;
+.add-to-cart-btn:hover, 
+.more-btn:hover,
+.cat-tile-go:hover {
+  background: rgba(255, 255, 255, 0.4) !important;
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 8px 25px rgba(0, 0, 0, 0.1) !important;
-  color: var(--sea-deep) !important;
+    inset 0 2px 4px rgba(255, 255, 255, 1), 
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
 }
 
-/* کلیک روی دکمه (حالت فشرده شدن) */
+/* حالت کلیک (فشرده شدن) */
 .contact-btn:active, 
 .ctrl-btn:active, 
 .btn-cart:active, 
-.add-to-cart-btn:active {
-  transform: translateY(1px) scale(0.97) !important;
+.add-to-cart-btn:active, 
+.more-btn:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* ۳. افکت شیشه‌ای برای باکس‌های بزرگ (کارت محصولات، سبد خرید، فوتر و...) */
+/* ----------------------------------------------------
+   🎯 باکس‌های بزرگ (کارت محصول، باکس سبد خرید، فوتر و...)
+   ---------------------------------------------------- */
 .card, 
-.cat-tile-in, 
 .cart-content,
 .wa-menu,
 .contact-panel,
 .category-box,
 .control-box {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
+  position: relative;
+  background: var(--liquid-bg) !important;
+  backdrop-filter: var(--liquid-blur) !important;
+  -webkit-backdrop-filter: var(--liquid-blur) !important;
+  border: 1px solid var(--liquid-border) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 10px 40px rgba(0, 0, 0, 0.06) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.8), 
+    inset 0 -1px 2px rgba(0, 0, 0, 0.03),
+    0 10px 40px rgba(0, 0, 0, 0.06),
+    0 2px 10px rgba(0, 0, 0, 0.03) !important;
   transition: all 0.4s ease !important;
+  overflow: hidden;
 }
 
-/* هاور روی کارت محصولات: کمی بالا میاد و شیشه‌ای‌تر میشه */
-.card:hover {
-  background: rgba(255, 255, 255, 0.65) !important;
-  transform: translateY(-4px) !important;
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 15px 50px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* ۴. حالت شب (Dark Mode) برای افکت شیشه‌ای */
-html[data-theme="dark"] .contact-btn, 
-html[data-theme="dark"] .ctrl-btn, 
-html[data-theme="dark"] .btn-cart, 
-html[data-theme="dark"] .cat-tile-go,
-html[data-theme="dark"] .add-to-cart-btn,
-html[data-theme="dark"] .card, 
-html[data-theme="dark"] .cat-tile-in, 
-html[data-theme="dark"] .cart-content,
-html[data-theme="dark"] .wa-menu,
-html[data-theme="dark"] .contact-panel,
-html[data-theme="dark"] .category-box,
-html[data-theme="dark"] .control-box {
-  background: var(--glass-bg-dark) !important;
-  border: 1px solid var(--glass-border-dark) !important;
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 10px 40px rgba(0, 0, 0, 0.3) !important;
-}
-
-html[data-theme="dark"] .contact-btn:hover, 
-html[data-theme="dark"] .ctrl-btn:hover, 
-html[data-theme="dark"] .btn-cart:hover, 
-html[data-theme="dark"] .cat-tile-go:hover,
-html[data-theme="dark"] .add-to-cart-btn:hover {
-  background: rgba(45, 65, 80, 0.75) !important;
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 8px 25px rgba(0, 0, 0, 0.4) !important;
-  color: var(--ink) !important;
-}
-
-html[data-theme="dark"] .card:hover {
-  background: rgba(45, 65, 80, 0.75) !important;
-}
-
-/* ۵. اضافه کردن افکت درخشش روی لبه‌ها (نور شیشه) */
-.card::before, 
-.contact-panel::before {
+/* افکت بازتاب نور روی باکس‌های بزرگ */
+.card::after, 
+.cart-content::after,
+.contact-panel::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%);
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255,255,255,0.2) 0%, transparent 40%);
   z-index: 1;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 
+    inset 0 2px 5px rgba(255, 255, 255, 1), 
+    inset 0 -2px 5px rgba(0, 0, 0, 0.05),
+    0 15px 50px rgba(0, 0, 0, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ----------------------------------------------------
+   🌙 حالت شب (Dark Mode)
+   ---------------------------------------------------- */
+html[data-theme="dark"] .contact-btn, 
+html[data-theme="dark"] .ctrl-btn, 
+html[data-theme="dark"] .btn-cart, 
+html[data-theme="dark"] .add-to-cart-btn,
+html[data-theme="dark"] .more-btn,
+html[data-theme="dark"] .cat-tile-go,
+html[data-theme="dark"] .card, 
+html[data-theme="dark"] .cart-content,
+html[data-theme="dark"] .wa-menu,
+html[data-theme="dark"] .contact-panel,
+html[data-theme="dark"] .category-box,
+html[data-theme="dark"] .control-box {
+  background: var(--liquid-bg-dark) !important;
+  border: 1px solid var(--liquid-border-dark) !important;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.2), 
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 2px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .contact-btn:hover, 
+html[data-theme="dark"] .ctrl-btn:hover, 
+html[data-theme="dark"] .btn-cart:hover, 
+html[data-theme="dark"] .add-to-cart-btn:hover {
+  background: rgba(40, 55, 70, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-theme="dark"] .contact-btn::before, 
+html[data-theme="dark"] .ctrl-btn::before, 
+html[data-theme="dark"] .btn-cart::before {
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+}
+
+html[data-theme="dark"] .card::after, 
+html[data-theme="dark"] .cart-content::after,
+html[data-theme="dark"] .contact-panel::after {
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255,255,255,0.05) 0%, transparent 40%);
 }
