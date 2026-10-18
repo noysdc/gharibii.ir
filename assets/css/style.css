@@ -1864,8 +1864,9 @@ html[data-theme="dark"] .g-btn{background:rgba(21,32,37,.75);color:var(--ink);bo
   .cat-tile,.cat-tile-in img,.more-btn{transition:none}
   .cb-spark{animation:none}
 }
+
 /* ============================================================
-   دکمه «افزودن به سبد خرید» روی کارت محصول
+   استایل دکمه «افزودن به سبد خرید» روی کارت محصول
    ============================================================ */
 .card { position: relative; }
 .add-to-cart-btn {
@@ -1916,7 +1917,9 @@ html[data-theme="dark"] .add-to-cart-btn.is-added {
   color: #fff;
 }
 
-/* پیام شناور کوچک */
+/* ============================================================
+   پیام شناور کوچک (Toast)
+   ============================================================ */
 #mini-toast {
   position: fixed;
   bottom: 5rem;
@@ -1938,6 +1941,7 @@ html[data-theme="dark"] .add-to-cart-btn.is-added {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+
 /* ============================================================
    متن هزینه ارسال در سبد خرید
    ============================================================ */
@@ -1952,12 +1956,10 @@ html[data-theme="dark"] .add-to-cart-btn.is-added {
   margin: .6rem 0;
   text-align: center;
 }
-
 .cart-note-wa {
   margin-top: .75rem;
   margin-bottom: .25rem;
 }
-
 html[data-theme="dark"] .cart-note {
   background: rgba(200, 150, 50, .1);
   border-color: rgba(200, 150, 50, .3);

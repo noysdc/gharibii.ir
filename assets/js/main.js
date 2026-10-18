@@ -3,12 +3,9 @@
 
   var root = document.documentElement;
 
-  /* ============================================
-     1. Theme (حالت شب)
-     ============================================ */
+  /* ---- 1. Theme ---- */
   var themeToggle = document.getElementById('theme-toggle');
   var themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
-
   function applyTheme(theme) {
     if (theme === 'dark') {
       root.setAttribute('data-theme', 'dark');
@@ -28,29 +25,23 @@
     });
   }
 
-  /* ============================================
-     2. Font Scale
-     ============================================ */
+  /* ---- 2. Font Scale ---- */
   var FONT_MIN = 0.85, FONT_MAX = 1.5, FONT_STEP = 0.1;
   var fontDec = document.getElementById('font-decrease');
   var fontInc = document.getElementById('font-increase');
-
   function applyFontScale(scale) {
     scale = Math.max(FONT_MIN, Math.min(FONT_MAX, scale));
     root.style.setProperty('--font-scale', scale);
     localStorage.setItem('gharibii-font-scale', scale);
   }
   applyFontScale(parseFloat(localStorage.getItem('gharibii-font-scale')) || 1);
-
   function getScale() {
     return parseFloat(root.style.getPropertyValue('--font-scale')) || 1;
   }
   if (fontInc) fontInc.addEventListener('click', function () { applyFontScale(getScale() + FONT_STEP); });
   if (fontDec) fontDec.addEventListener('click', function () { applyFontScale(getScale() - FONT_STEP); });
 
-  /* ============================================
-     3. Product Gallery
-     ============================================ */
+  /* ---- 3. Product Gallery ---- */
   var mainImg = document.getElementById('main-img');
   var thumbs = document.querySelectorAll('.thumbs button');
   if (mainImg && thumbs.length) {
@@ -64,9 +55,7 @@
     });
   }
 
-  /* ============================================
-     4. Sticky Bar
-     ============================================ */
+  /* ---- 4. Sticky Bar ---- */
   var stickyBar = document.getElementById('sticky-bar');
   if (stickyBar) {
     var sentinel = document.createElement('div');
@@ -80,31 +69,19 @@
     obs.observe(sentinel);
   }
 
-  /* ============================================
-     5. Search
-     ============================================ */
+  /* ---- 5. Search ---- */
   var searchInput = document.getElementById('site-search');
   var searchResults = document.getElementById('search-results');
   var productsIndex = null;
-
   function loadProducts() {
     if (productsIndex) return Promise.resolve(productsIndex);
     var meta = document.querySelector('meta[name="site-baseurl"]');
     var base = meta ? meta.getAttribute('content') : '';
-    return fetch(base + '/search.json')
-      .then(function (r) { return r.json(); })
-      .then(function (data) { productsIndex = data; return data; })
-      .catch(function () { productsIndex = []; return []; });
+    return fetch(base + '/search.json').then(function (r) { return r.json(); }).then(function (data) { productsIndex = data; return data; }).catch(function () { productsIndex = []; return []; });
   }
-
   function normalize(str) {
-    return (str || '').toString().toLowerCase()
-      .replace(/\u064A/g, '\u06CC')
-      .replace(/\u0643/g, '\u06A9')
-      .replace(/[\u064B-\u065F\u0670]/g, '')
-      .trim();
+    return (str || '').toString().toLowerCase().replace(/\u064A/g, '\u06CC').replace(/\u0643/g, '\u06A9').replace(/[\u064B-\u065F\u0670]/g, '').trim();
   }
-
   function renderResults(list) {
     if (!searchResults) return;
     if (!list.length) {
@@ -114,14 +91,10 @@
     }
     searchResults.innerHTML = list.slice(0, 8).map(function (p) {
       var img = p.image ? '<img src="' + p.image + '" alt="" loading="lazy">' : '';
-      return '<a class="search-item" href="' + p.url + '">' + img +
-        '<span class="search-item-info"><strong>' + p.title + '</strong>' +
-        '<small>' + (Number(String(p.price).replace(/,/g, '')) > 0 ? Number(String(p.price).replace(/,/g, '')).toLocaleString('fa-IR') + ' \u062A\u0648\u0645\u0627\u0646' : '') +
-        '</small></span></a>';
+      return '<a class="search-item" href="' + p.url + '">' + img + '<span class="search-item-info"><strong>' + p.title + '</strong><small>' + (Number(String(p.price).replace(/,/g, '')) > 0 ? Number(String(p.price).replace(/,/g, '')).toLocaleString('fa-IR') + ' \u062A\u0648\u0645\u0627\u0646' : '') + '</small></span></a>';
     }).join('');
     searchResults.hidden = false;
   }
-
   if (searchInput && searchResults) {
     var timer = null;
     searchInput.addEventListener('input', function () {
@@ -130,33 +103,25 @@
         var q = normalize(searchInput.value);
         if (q.length < 2) { searchResults.hidden = true; return; }
         loadProducts().then(function (products) {
-          var matched = products.filter(function (p) {
-            return normalize(p.title).indexOf(q) !== -1 || normalize(p.category).indexOf(q) !== -1;
-          });
+          var matched = products.filter(function (p) { return normalize(p.title).indexOf(q) !== -1 || normalize(p.category).indexOf(q) !== -1; });
           renderResults(matched);
         });
       }, 150);
     });
     document.addEventListener('click', function (e) {
-      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-        searchResults.hidden = true;
-      }
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) searchResults.hidden = true;
     });
   }
 
-  /* ============================================
-     6. Welcome Toast
-     ============================================ */
+  /* ---- 6. Welcome Toast ---- */
   var toast = document.getElementById('welcome-toast');
   var toastText = document.getElementById('welcome-toast-text');
   var toastClose = document.getElementById('welcome-toast-close');
-
   function hideWelcomeToast() {
     if (!toast) return;
     toast.classList.remove('is-visible');
     setTimeout(function () { toast.hidden = true; }, 400);
   }
-
   function showWelcomeToast() {
     if (!toast || !toastText) return;
     if (sessionStorage.getItem('gharibii-welcome-shown')) return;
@@ -169,14 +134,10 @@
     setTimeout(hideWelcomeToast, 6000);
   }
   if (toastClose) toastClose.addEventListener('click', hideWelcomeToast);
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', showWelcomeToast);
-  } else {
-    showWelcomeToast();
-  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', showWelcomeToast); } else { showWelcomeToast(); }
 
   /* ============================================
-     7. سبد خرید + واتساپ
+     سیستم سبد خرید و واتساپ
      ============================================ */
   var cart = JSON.parse(localStorage.getItem('gharibii_cart')) || [];
 
@@ -201,52 +162,10 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(t._timer);
-    t._timer = setTimeout(function () {
-      t.classList.remove('show');
-    }, 2200);
+    t._timer = setTimeout(function () { t.classList.remove('show'); }, 2200);
   }
 
-  // اتصال دکمه‌های افزودن به سبد (در کارت‌ها و صفحه محصول)
-  function bindAddToCartButtons() {
-    var buttons = document.querySelectorAll('.add-to-cart-btn, #add-to-cart');
-    buttons.forEach(function (btn) {
-      if (btn._bound) return;
-      btn._bound = true;
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        var product = {
-          title: btn.dataset.title,
-          price: btn.dataset.price,
-          image: btn.dataset.image,
-          url: btn.dataset.url || window.location.pathname
-        };
-
-        if (!product.title) return;
-
-        var exists = cart.find(function (i) { return i.title === product.title; });
-        if (exists) {
-          showMiniToast('این محصول قبلاً در سبد شماست ⚠️');
-          return;
-        }
-
-        cart.push(product);
-        saveCart();
-
-        btn.classList.add('is-added');
-        var original = btn.innerHTML;
-        btn.innerHTML = '✅ اضافه شد';
-        setTimeout(function () {
-          btn.classList.remove('is-added');
-          btn.innerHTML = original;
-        }, 1500);
-
-        showMiniToast('محصول به سبد خرید اضافه شد 🛒');
-      });
-    });
-  }
-
+  // ساخت ظرف سبد شناور
   function ensureCartShell() {
     if (document.getElementById('floating-cart')) return;
     var html = `
@@ -301,11 +220,7 @@
   } catch (err) { sellers = []; }
   if (!sellers.length) sellers = [{ name: 'فروشنده', number: '989347688356', photo: '' }];
 
-  function esc(t) {
-    return String(t).replace(/[&<>"]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-    });
-  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   function buildMessage() {
     var message = "سلام، من این محصولات را از فروشگاه غریبی کیش سفارش می‌دهم:\n\n";
@@ -317,26 +232,20 @@
       message += "   💰 قیمت: " + (p > 0 ? p.toLocaleString('fa-IR') + ' تومان' : 'تماس بگیرید') + "\n";
       message += "   🔗 " + location.origin + item.url + "\n\n";
     });
-    if (total > 0) {
-      message += "━━━━━━━━━━━━━━\n";
-      message += "🧾 جمع کل: " + total.toLocaleString('fa-IR') + " تومان\n\n";
-    }
+    if (total > 0) { message += "━━━━━━━━━━━━━━\n"; message += "🧾 جمع کل: " + total.toLocaleString('fa-IR') + " تومان\n\n"; }
     message += "⚠️ توجه: هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).\n\n";
     message += "لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏";
     return message;
   }
 
-  function openWhatsApp(number) {
-    window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(buildMessage()), '_blank');
-  }
+  function openWhatsApp(number) { window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(buildMessage()), '_blank'); }
 
   function renderSellers() {
     var box = document.getElementById('cart-sellers');
     var noteWa = document.getElementById('cart-note-wa');
     if (!box) return;
     box.innerHTML = sellers.map(function (s, i) {
-      return `
-        <button type="button" class="wa-seller" data-i="${i}">
+      return `<button type="button" class="wa-seller" data-i="${i}">
           <span class="wa-avatar">${s.photo ? `<img src="${esc(s.photo)}" alt="" width="160" height="160" onerror="this.remove()">` : ''}</span>
           <span class="wa-seller-info"><strong>${esc(s.name)}</strong><small>ارسال سفارش</small></span>
         </button>`;
@@ -344,72 +253,113 @@
     if (noteWa) noteWa.hidden = false;
   }
 
-  function initCart() {
-    ensureCartShell();
-    bindAddToCartButtons();
-    updateCartUI();
+  // ✅ تابع اختصاصی برای اضافه کردن محصول به سبد
+  function addToCart(btn) {
+    var product = {
+      title: btn.dataset.title,
+      price: btn.dataset.price,
+      image: btn.dataset.image,
+      url: btn.dataset.url || window.location.pathname
+    };
 
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('#floating-cart')) {
-        document.getElementById('cart-modal').classList.add('active');
-      }
-      if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
-        document.getElementById('cart-modal').classList.remove('active');
-        var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
-        var noteWa = document.getElementById('cart-note-wa'); if (noteWa) noteWa.hidden = true;
-      }
-      if (e.target.closest('.cart-item-remove')) {
-        var index = parseInt(e.target.closest('.cart-item-remove').dataset.index, 10);
-        cart.splice(index, 1);
-        saveCart();
-      }
-      if (e.target.closest('#cart-checkout')) {
-        if (cart.length === 0) { showMiniToast('سبد خرید خالی است!'); return; }
-        var box = document.getElementById('cart-sellers');
-        if (sellers.length === 1) { openWhatsApp(sellers[0].number); return; }
-        if (box) {
-          if (box.hidden) renderSellers();
-          box.hidden = !box.hidden;
-        }
-      }
-      if (e.target.closest('#cart-sellers .wa-seller')) {
-        var btn = e.target.closest('#cart-sellers .wa-seller');
-        var s = sellers[parseInt(btn.dataset.i, 10)];
-        if (s) openWhatsApp(s.number);
-      }
-    });
+    if (!product.title) return;
+
+    var exists = cart.find(function (i) { return i.title === product.title; });
+    if (exists) {
+      showMiniToast('این محصول قبلاً در سبد شماست ⚠️');
+      return;
+    }
+
+    cart.push(product);
+    saveCart();
+
+    if (btn.id === 'product-add-to-cart') {
+      var original = btn.innerHTML;
+      btn.classList.add('is-added');
+      btn.innerHTML = '✅ اضافه شد';
+      setTimeout(function () {
+        btn.classList.remove('is-added');
+        btn.innerHTML = original;
+      }, 1500);
+    }
+
+    showMiniToast('محصول به سبد خرید اضافه شد 🛒');
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCart);
-  } else {
-    initCart();
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(bindAddToCartButtons, 500);
-  });
-
-  /* ============================================
-     7.5 منوی واتساپ در صفحه محصول (buy.html)
-     ============================================ */
+  // ✅ اتصال دکمه‌ها با استفاده از event delegation (مطمئن‌ترین روش)
   document.addEventListener('click', function (e) {
+    // دکمه‌های افزودن به سبد (هم کارت‌ها هم صفحه محصول)
+    var cartBtn = e.target.closest('.add-to-cart-btn, #product-add-to-cart');
+    if (cartBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      addToCart(cartBtn);
+      return;
+    }
+
+    // دکمه باز کردن منوی واتساپ
     var waBtn = e.target.closest('#open-wa-menu');
     var waMenu = document.getElementById('wa-menu');
     if (waBtn && waMenu) {
       e.preventDefault();
       waMenu.style.display = waMenu.style.display === 'none' ? 'block' : 'none';
+      return;
+    }
+
+    // باز کردن مودال سبد
+    if (e.target.closest('#floating-cart')) {
+      document.getElementById('cart-modal').classList.add('active');
+      return;
+    }
+
+    // بستن مودال
+    if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
+      document.getElementById('cart-modal').classList.remove('active');
+      var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
+      var noteWa = document.getElementById('cart-note-wa'); if (noteWa) noteWa.hidden = true;
+      return;
+    }
+
+    // حذف آیتم
+    if (e.target.closest('.cart-item-remove')) {
+      var index = parseInt(e.target.closest('.cart-item-remove').dataset.index, 10);
+      cart.splice(index, 1);
+      saveCart();
+      return;
+    }
+
+    // ارسال سفارش در واتساپ (از داخل سبد)
+    if (e.target.closest('#cart-checkout')) {
+      if (cart.length === 0) { showMiniToast('سبد خرید خالی است!'); return; }
+      var box = document.getElementById('cart-sellers');
+      if (sellers.length === 1) { openWhatsApp(sellers[0].number); return; }
+      if (box) {
+        if (box.hidden) renderSellers();
+        box.hidden = !box.hidden;
+      }
+      return;
+    }
+
+    // انتخاب فروشنده
+    var sellerBtn = e.target.closest('#cart-sellers .wa-seller');
+    if (sellerBtn) {
+      var s = sellers[parseInt(sellerBtn.dataset.i, 10)];
+      if (s) openWhatsApp(s.number);
+      return;
     }
   });
 
-  /* ============================================
-     8. Card Sliders
-     ============================================ */
+  function initCart() {
+    ensureCartShell();
+    updateCartUI();
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCart); } else { initCart(); }
+
+  /* ---- 7. Card Sliders ---- */
   (function initCardSliders() {
     var cards = document.querySelectorAll('[data-slider]');
     if (!cards.length) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     cards.forEach(function (card) {
       var track = card.querySelector('.slides');
       var slides = card.querySelectorAll('.slide');
@@ -417,13 +367,9 @@
       var prev = card.querySelector('.slide-prev');
       var next = card.querySelector('.slide-next');
       if (!track || slides.length < 2) return;
-
       var idx = 0, timer = null, hold = false, visible = false;
       var dir = (window.getComputedStyle(track).direction === 'rtl') ? -1 : 1;
-
-      function mark() {
-        dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); });
-      }
+      function mark() { dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); }); }
       function go(i) {
         idx = (i + slides.length) % slides.length;
         track.scrollTo({ left: dir * idx * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
@@ -434,45 +380,22 @@
         var i = Math.round(Math.abs(track.scrollLeft) / w);
         if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); }
       }, { passive: true });
-
       function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
-      function startAuto() {
-        if (reduce || timer || !visible) return;
-        timer = setInterval(function () { if (!hold) go(idx + 1); }, 3200 + Math.random() * 1500);
-      }
-      function bind(btn, step) {
-        if (!btn) return;
-        btn.addEventListener('click', function (e) {
-          e.preventDefault(); e.stopPropagation();
-          go(idx + step);
-        });
-      }
-      bind(prev, -1);
-      bind(next, 1);
+      function startAuto() { if (reduce || timer || !visible) return; timer = setInterval(function () { if (!hold) go(idx + 1); }, 3200 + Math.random() * 1500); }
+      function bind(btn, step) { if (!btn) return; btn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); go(idx + step); }); }
+      bind(prev, -1); bind(next, 1);
       card.addEventListener('mouseenter', function () { hold = true; });
       card.addEventListener('mouseleave', function () { hold = false; });
       card.addEventListener('focusin', function () { hold = true; });
       card.addEventListener('focusout', function () { hold = false; });
-      card.addEventListener('touchstart', function () {
-        hold = true;
-        clearTimeout(card._resume);
-        card._resume = setTimeout(function () { hold = false; }, 6000);
-      }, { passive: true });
-
+      card.addEventListener('touchstart', function () { hold = true; clearTimeout(card._resume); card._resume = setTimeout(function () { hold = false; }, 6000); }, { passive: true });
       if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-          visible = entries[0].isIntersecting;
-          if (visible) startAuto(); else stopAuto();
-        }, { threshold: 0.35 }).observe(card);
-      } else {
-        visible = true; startAuto();
-      }
+        new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; if (visible) startAuto(); else stopAuto(); }, { threshold: 0.35 }).observe(card);
+      } else { visible = true; startAuto(); }
     });
   })();
 
-  /* ============================================
-     9. Thumbnails Slider
-     ============================================ */
+  /* ---- 8. Thumbnails Slider ---- */
   (function initThumbSlider() {
     var wraps = document.querySelectorAll('.thumbs-wrap');
     wraps.forEach(function (wrap) {
@@ -480,10 +403,8 @@
       var prev = wrap.querySelector('.thumb-prev');
       var next = wrap.querySelector('.thumb-next');
       if (!strip) return;
-
       var first = strip.querySelector('button');
       if (first && !strip.querySelector('button.active')) first.classList.add('active');
-
       function update() {
         var max = strip.scrollWidth - strip.clientWidth;
         var pos = Math.abs(strip.scrollLeft);
@@ -494,50 +415,32 @@
       window.addEventListener('resize', update);
       window.addEventListener('load', update);
       update();
-
-      function page(dir) {
-        strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' });
-      }
+      function page(dir) { strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: 'smooth' }); }
       if (prev) prev.addEventListener('click', function () { page(-1); });
       if (next) next.addEventListener('click', function () { page(1); });
-
       var down = false, moved = false, startX = 0, startLeft = 0;
-      strip.addEventListener('mousedown', function (e) {
-        down = true; moved = false; startX = e.clientX; startLeft = strip.scrollLeft;
-      });
+      strip.addEventListener('mousedown', function (e) { down = true; moved = false; startX = e.clientX; startLeft = strip.scrollLeft; });
       window.addEventListener('mousemove', function (e) {
         if (!down) return;
         var dx = e.clientX - startX;
         if (Math.abs(dx) > 5) { moved = true; strip.classList.add('is-dragging'); }
         if (moved) strip.scrollLeft = startLeft - dx;
       });
-      window.addEventListener('mouseup', function () {
-        if (!down) return;
-        down = false;
-        strip.classList.remove('is-dragging');
-      });
-      strip.addEventListener('click', function (e) {
-        if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
-      }, true);
-
+      window.addEventListener('mouseup', function () { if (!down) return; down = false; strip.classList.remove('is-dragging'); });
+      strip.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
       strip.querySelectorAll('button').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          if (btn.scrollIntoView) btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
-        });
+        btn.addEventListener('click', function () { if (btn.scrollIntoView) btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); });
       });
     });
   })();
 
-  /* ============================================
-     10. Category Nav
-     ============================================ */
+  /* ---- 9. Category Nav ---- */
   (function initCategoryNav() {
     var box = document.getElementById('category-box');
     var nav = document.getElementById('category-nav');
     if (!box || !nav) return;
     var left = box.querySelector('.cat-prev');
     var right = box.querySelector('.cat-next');
-
     function update() {
       var max = nav.scrollWidth - nav.clientWidth;
       var overflow = max > 2;
@@ -553,41 +456,12 @@
     nav.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     window.addEventListener('load', update);
-
-    function step(dir) {
-      nav.scrollBy({ left: dir * Math.max(nav.clientWidth * 0.7, 120), behavior: 'smooth' });
-    }
+    function step(dir) { nav.scrollBy({ left: dir * Math.max(nav.clientWidth * 0.7, 120), behavior: 'smooth' }); }
     if (left) left.addEventListener('click', function () { step(-1); });
     if (right) right.addEventListener('click', function () { step(1); });
-
     var cur = nav.querySelector('[aria-current="page"]');
     if (cur && cur.scrollIntoView) cur.scrollIntoView({ inline: 'center', block: 'nearest' });
     update();
   })();
 
 })();
-/* ============================================================
-   استایل متن هزینه ارسال (برای سبد و صفحه محصول)
-   ============================================================ */
-.cart-note {
-  font-size: calc(.82rem * var(--font-scale));
-  line-height: 1.8;
-  color: #a05800;
-  background: rgba(255, 200, 100, .15);
-  border: 1px dashed rgba(200, 150, 50, .5);
-  border-radius: .8rem;
-  padding: .6rem .8rem;
-  margin: .75rem 0;
-  text-align: center;
-}
-
-html[data-theme="dark"] .cart-note {
-  background: rgba(200, 150, 50, .1);
-  border-color: rgba(200, 150, 50, .3);
-  color: #e0a800;
-}
-
-/* استایل دکمه‌های صفحه محصول (buy.html) در موبایل و دسکتاپ */
-.buy-actions { margin-top: 1.5rem; }
-.buy-actions .btn-wa { font-weight: 700; border-radius: 999px; }
-.buy-actions .btn-cart { font-weight: 700; border-radius: 999px; }
