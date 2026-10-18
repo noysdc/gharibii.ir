@@ -134,6 +134,14 @@ title: پوشاک دخترانه و پسرانه
   {%- endif -%}
 {%- endfor -%}
 
+
+<!-- ============================================== -->
+<!-- دیوایدر بالای گالری -->
+<!-- ============================================== -->
+<div class="wrap">
+  <div class="holo-divider" role="presentation" style="margin-top: 3rem; margin-bottom: 2rem;"></div>
+</div>
+
 <!-- گالری اسلایدی: هر عکسی که داخل assets/images/gallery/ بگذارید خودکار اینجا نمایش داده می‌شود -->
 {%- assign gallery_all = site.static_files | where_exp: 'f', "f.path contains 'assets/images/gallery/'" | sort: 'path' -%}
 {%- assign gallery_exts = ".jpg|.jpeg|.png|.webp|.avif|.gif" | split: "|" -%}
@@ -149,8 +157,9 @@ title: پوشاک دخترانه و پسرانه
 {%- assign gallery_html = gallery_html | strip -%}
 {%- if gallery_html != "" -%}
 <section class="wrap gallery-section" aria-label="گالری تصاویر">
-  <div class="section-head fancy-head">
-    <h2>گالری</h2>
+  <!-- وسط چین کردن عنوان گالری -->
+  <div class="section-head fancy-head" style="justify-content: center; text-align: center; flex-direction: column; gap: 0.5rem;">
+    <h2 style="margin: 0;">گالری</h2>
     <p class="section-sub">چند قاب از دنیای غریبی ✨</p>
   </div>
   <div class="gslider" data-gslider>
@@ -163,9 +172,17 @@ title: پوشاک دخترانه و پسرانه
 <script src="{{ '/assets/js/gallery.js' | relative_url }}" defer></script>
 {%- endif -%}
 
+<!-- ============================================== -->
+<!-- دیوایدر بالای بخش سفارش چطوره -->
+<!-- ============================================== -->
+<div class="wrap">
+  <div class="holo-divider" role="presentation" style="margin-top: 1.5rem; margin-bottom: 2rem;"></div>
+</div>
+
+<!-- بخش سفارش چطوره (وسط‌چین) -->
 <section class="wrap">
-  <div class="section-head">
-    <h2>سفارش چطوره؟</h2>
+  <div class="section-head" style="justify-content: center; text-align: center;">
+    <h2 style="margin: 0 auto;">سفارش چطوره؟</h2>
   </div>
   <ol class="steps">
     <li class="step">
