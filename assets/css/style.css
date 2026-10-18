@@ -1132,7 +1132,7 @@ body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inse
 .notfound .btn{margin:.25rem}
 
 /* لینک‌های فوتر */
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.1rem;margin:.9rem 0 0}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.1rem;margin:.9rem auto 0;max-width:20rem}
 .footer-links a{color:var(--sea);text-decoration:none;font-weight:600;font-size:.95rem;padding:.2rem .1rem;border-bottom:1px dashed transparent}
 .footer-links a:hover,.footer-links a:focus-visible{border-bottom-color:currentColor}
 
@@ -1162,3 +1162,46 @@ html[data-theme="dark"] .prose h2{color:var(--ink)}
 .discount-pill{display:inline-block;margin-inline-start:.4rem;padding:.05rem .5rem;border-radius:999px;background:#d63a5f;color:#fff;font-size:.75rem;font-weight:700;vertical-align:middle;white-space:nowrap}
 .card-img{position:relative}
 .card-badge{position:absolute;z-index:3;top:.55rem;right:.55rem;padding:.2rem .65rem;border-radius:999px;background:rgba(214,58,95,.95);color:#fff;font-size:.72rem;font-weight:700;line-height:1.6;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+
+/* ================= فوتر شیشه‌ای (Liquid Glass) =================
+   پس‌زمینهٔ رنگی ملایم پشت فوتر + باکس‌های واقعاً نیمه‌شفاف تا افکت شیشه دیده شود.
+   برای برگشت به حالت قبل، همین بلاک را حذف کنید. */
+.site-footer{position:relative;isolation:isolate;overflow:hidden}
+.site-footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42% 26% at 10% 14%,rgba(244,114,182,.34),transparent 70%),
+    radial-gradient(40% 26% at 92% 30%,rgba(129,140,248,.34),transparent 70%),
+    radial-gradient(46% 30% at 48% 62%,rgba(56,189,248,.30),transparent 70%),
+    radial-gradient(38% 24% at 14% 94%,rgba(167,139,250,.30),transparent 70%),
+    radial-gradient(34% 22% at 90% 90%,rgba(251,191,36,.18),transparent 70%)}
+html[data-theme="dark"] .site-footer::before{opacity:.55}
+
+.contact-grid .contact-btn,
+.social-boxes .social-box,
+.trust-box,
+.install-btn-glass,
+.map-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.66),rgba(255,255,255,.34)) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(175%) !important;
+  backdrop-filter:blur(18px) saturate(175%) !important;
+  border:1px solid rgba(255,255,255,.8) !important;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(255,255,255,.3),0 10px 28px rgba(110,80,200,.16) !important}
+.contact-grid .contact-btn:hover,
+.social-boxes .social-box:hover,
+.trust-box:hover,
+.install-btn-glass:hover{
+  background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,255,255,.52)) !important}
+html[data-theme="dark"] .contact-grid .contact-btn,
+html[data-theme="dark"] .social-boxes .social-box,
+html[data-theme="dark"] .trust-box,
+html[data-theme="dark"] .install-btn-glass,
+html[data-theme="dark"] .map-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05)) !important;
+  border:1px solid rgba(255,255,255,.2) !important;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 10px 28px rgba(0,0,0,.35) !important}
+html[data-theme="dark"] .contact-grid .contact-btn:hover,
+html[data-theme="dark"] .social-boxes .social-box:hover,
+html[data-theme="dark"] .trust-box:hover,
+html[data-theme="dark"] .install-btn-glass:hover{
+  background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.09)) !important}
+

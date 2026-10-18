@@ -192,7 +192,7 @@
           <button class="cart-close" id="cart-close" type="button" aria-label="بستن">✕</button>
           <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
           <div id="cart-items-container"></div>
-          <p class="cart-note">🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) بر عهده‌ی مشتری است و جداگانه محاسبه می‌شه. مرجوعی نداریم. <a href="${BASE}/terms/">قوانین و مقررات</a></p>
+          <p class="cart-note">🎀 مادر عزیز، هزینه‌ی ارسال و ترخیص گمرکی (به‌خاطر ارسال از جزیره‌ی کیش) بر عهده‌ی مشتری است و جداگانه محاسبه می‌شود. از آن‌جا که امکان مرجوعی نداریم، لطفاً پیش از ثبت سفارش سایز را با ما هماهنگ کنید تا لباس دقیقاً اندازه‌ی کوچولوی شما باشد. ممنون از لطف و همراهی‌تان 💛 <a href="${BASE}/terms/">قوانین و مقررات</a></p>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
           <p class="cart-note cart-note-wa" id="cart-note-wa" hidden>🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.</p>
@@ -477,6 +477,43 @@
     var cur = nav.querySelector('[aria-current="page"]');
     if (cur && cur.scrollIntoView) cur.scrollIntoView({ inline: 'center', block: 'nearest' });
     update();
+  })();
+
+  /* ---- چیدمان تصادفی: ترتیب دسته‌ها و کارت‌ها در هر بار بارگذاری عوض می‌شود ----
+     (برای دیدن ترتیب ثابت: آدرس را با ?order=default باز کنید) */
+  (function shuffleLayout() {
+    if (/[?&]order=default/.test(location.search)) return;
+    function shuffled(list) {
+      var a = list.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    /* نودهای هم‌پدر را درجا جابه‌جا می‌کند */
+    function reorder(nodes) {
+      if (nodes.length < 2) return;
+      var parent = nodes[0].parentNode;
+      var end = document.createComment('');
+      parent.insertBefore(end, nodes[nodes.length - 1].nextSibling);
+      shuffled(nodes).forEach(function (n) { parent.insertBefore(n, end); });
+      parent.removeChild(end);
+    }
+    function kids(parent, sel) {
+      return Array.prototype.filter.call(parent.children, function (n) { return n.matches(sel); });
+    }
+    try {
+      var tiles = document.querySelector('.tiles');
+      if (tiles) reorder(kids(tiles, '.tile-col'));
+      var scroller = document.querySelector('.cat-scroller');
+      if (scroller) reorder(kids(scroller, '.cat-tile'));
+      var main = document.querySelector('main');
+      if (main) reorder(kids(main, '.cat-section'));
+      Array.prototype.forEach.call(document.querySelectorAll('.grid'), function (g) {
+        reorder(kids(g, '.card'));
+      });
+    } catch (err) { /* چیدمان پیش‌فرض می‌ماند */ }
   })();
 
   /* ---- 10. PWA: سرویس‌ورکر + دکمهٔ نصب اپلیکیشن ---- */
