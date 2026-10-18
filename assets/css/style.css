@@ -123,7 +123,6 @@ html[data-theme="dark"] .category-nav a:hover{background:rgba(60,85,105,.75);bor
    نوار قفل‌شونده + باکس کنترل‌ها
    ============================================ */
 .sticky-bar{position:sticky;top:0;z-index:30;width:100%;padding:.5rem 0;transition:background .3s ease, padding .3s ease, box-shadow .3s ease}
-/* حذف باکس سفید بلند (هنگام اسکرول) */
 .sticky-bar.is-stuck{background:transparent !important;box-shadow:none !important;padding:.4rem 0 !important;}
 .control-box{
   display:flex;align-items:center;justify-content:center;gap:.55rem;flex-wrap:nowrap;width:auto;max-width:fit-content;margin:0 auto;padding:.4rem .6rem;border-radius:1rem;
@@ -643,7 +642,6 @@ html[data-theme="dark"] .cat-tile-pill{background:rgba(21,32,37,.78);color:var(-
 @media (min-width:760px){.cat-block{padding:4.6rem 1.3rem 1.6rem}.cat-grid{grid-auto-flow:dense;gap:1rem}.cat-grid .card:nth-child(n+5){display:flex}.cat-grid .card:nth-child(n+7){display:none}}
 @media (min-width:1040px){.cat-grid .card:nth-child(n+7){display:flex}.cat-grid .card:nth-child(n+10){display:none}}
 
-/* خنثی کردن کارت زرد بزرگ (رفع باگ عکس) */
 .cat-grid .card:first-child {grid-column: auto !important;grid-row: auto !important;}
 .cat-grid .card:first-child::after {display: none !important;}
 
@@ -804,20 +802,76 @@ html[data-theme="dark"] .contact-btn:hover, html[data-theme="dark"] .ctrl-btn:ho
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* رفع مشکل دو خطی شدن دکمه افزودن به سبد در موبایل */
-.add-to-cart-btn {
-  white-space: nowrap;
-  font-size: calc(0.75rem * var(--font-scale)); /* کمی کوچکتر */
-  padding: 0.4rem 0.5rem; /* فاصله کمتر */
+/* ============================================================
+   اصلاح نهایی رنگ‌ها، دکمه‌ها و خوانایی
+   ============================================================ */
+
+/* ۱. رفع مشکل خوانایی دکمه «نمایش بیشتر» در حالت روز */
+.more-btn {
+  color: var(--sea-deep) !important; /* متن به رنگ سبز تیره */
 }
-.add-to-cart-btn svg { width: 14px; height: 14px; }
+.more-btn svg {
+  stroke: var(--sea-deep) !important; /* آیکون به رنگ سبز تیره */
+}
+.more-btn::before {
+  color: var(--sea-deep) !important; /* ستاره به رنگ سبز تیره */
+}
+.more-btn small {
+  color: var(--sea-deep) !important;
+  background: rgba(10, 102, 112, 0.1) !important; /* پس‌زمینه ملایم برای باکس تعداد */
+}
+
+/* ۲. رفع مشکل خوانایی قیمت‌ها در کارت محصول (حالت روز) */
+.cat-grid .card-price,
+.cat-grid .card-price .price-value {
+  color: var(--sea-deep) !important;
+}
+
+/* ۳. رفع مشکل خوانایی دکمه‌های صفحه محصول (واتساپ و افزودن به سبد) */
+.btn-wa, .btn-cart, .contact-btn, .add-to-cart-btn {
+  color: var(--sea-deep) !important;
+}
+.btn-wa svg, .btn-cart svg, .add-to-cart-btn svg {
+  stroke: var(--sea-deep) !important;
+}
 
 /* ============================================================
-   گرید: بازگرداندن کارت بزرگ بدون نوار زرد رنگ
+   رفع مشکل دو خطی شدن دکمه افزودن به سبد در موبایل
    ============================================================ */
-.cat-grid .card:first-child::after { display: none !important; }
-@media (min-width: 760px) {
-  .cat-grid { grid-auto-flow: dense !important; }
-  .cat-grid .card:first-child { grid-column: span 2 !important; grid-row: span 2 !important; display: flex !important; }
-  .cat-grid .card:first-child .card-img { aspect-ratio: auto !important; flex: 1 1 auto !important; min-height: 0 !important; }
+.add-to-cart-btn {
+  white-space: nowrap !important; /* جلوگیری از شکستن متن */
+  font-size: calc(0.75rem * var(--font-scale)) !important; /* فونت کمی کوچکتر برای جا شدن */
+  padding: 0.4rem 0.5rem !important;
+  gap: 4px !important;
+}
+.add-to-cart-btn svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* ============================================================
+   تنظیم رنگ‌ها برای حالت شب (تا در حالت شب هم خوانا باشند)
+   ============================================================ */
+html[data-theme="dark"] .more-btn,
+html[data-theme="dark"] .more-btn svg,
+html[data-theme="dark"] .more-btn::before,
+html[data-theme="dark"] .more-btn small,
+html[data-theme="dark"] .cat-grid .card-price,
+html[data-theme="dark"] .cat-grid .card-price .price-value,
+html[data-theme="dark"] .btn-wa,
+html[data-theme="dark"] .btn-cart,
+html[data-theme="dark"] .contact-btn,
+html[data-theme="dark"] .add-to-cart-btn {
+  color: var(--ink) !important; /* رنگ متن در حالت شب (سفید/خاکستری روشن) */
+}
+
+html[data-theme="dark"] .btn-wa svg,
+html[data-theme="dark"] .btn-cart svg,
+html[data-theme="dark"] .add-to-cart-btn svg,
+html[data-theme="dark"] .more-btn svg {
+  stroke: var(--ink) !important;
+}
+
+html[data-theme="dark"] .more-btn small {
+  background: rgba(255, 255, 255, 0.1) !important;
 }
