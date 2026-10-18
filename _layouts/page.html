@@ -2,13 +2,15 @@
 layout: default
 ---
 <article class="wrap page-doc">
-  <nav class="crumbs" aria-label="مسیر"><a href="{{ '/' | relative_url }}">خانه</a> / {{ page.title }}</nav>
-  <h1>{{ page.title }}</h1>
-  {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
-  <div class="prose">
-    {{ content }}
+  <nav class="crumbs doc-width" aria-label="مسیر"><a href="{{ '/' | relative_url }}">خانه</a> / {{ page.title }}</nav>
+  <div class="doc-box">
+    <h1>{{ page.title }}</h1>
+    {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    <div class="prose">
+      {{ content }}
+    </div>
+    {% if page.updated %}<p class="muted page-updated">آخرین بروزرسانی: {{ page.updated }}</p>{% endif %}
   </div>
-  {% if page.updated %}<p class="muted page-updated">آخرین بروزرسانی: {{ page.updated }}</p>{% endif %}
 </article>
 <script type="application/ld+json">
 {
