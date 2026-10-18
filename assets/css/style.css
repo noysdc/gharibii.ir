@@ -2042,3 +2042,26 @@ html[data-theme="dark"] .gslide::before {
     opacity: 0;
   }
 }
+/* ============================================================
+   اعمال قطعی فونت وزیرمتن روی کل سایت
+   ============================================================ */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/assets/fonts/Vazirmatn-RD-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/assets/fonts/Vazirmatn-RD-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* اعمال به تمام المان‌ها */
+body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea, select, li {
+  font-family: 'Vazirmatn', Tahoma, "Segoe UI", sans-serif !important;
+}
