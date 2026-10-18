@@ -2,7 +2,7 @@
 title: "عصای جادویی هری پاتر"
 slug: "wand-harry-potter"
 price: 198000
-price_group: "tier_6"
+price_group: "out_of_stock"
 price_formatted: "198,000"
 category: crown-wand
 date: 2026-10-17
