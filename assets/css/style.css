@@ -1965,3 +1965,72 @@ html[data-theme="dark"] .cart-note {
   border-color: rgba(200, 150, 50, .3);
   color: var(--muted);
 }
+/* ============================================================
+   اصلاحات جدید: وسط‌چین کردن گالری و افکت نور براق روی عکس‌ها
+   ============================================================ */
+
+/* ۱. وسط‌چین کردن هدر گالری */
+.gallery-section .section-head {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0.5rem;
+  width: 100%;
+}
+.gallery-section .section-head h2 {
+  margin: 0 !important;
+}
+.gallery-section .section-head .fancy-head::after {
+  right: 50% !important;
+  transform: translateX(50%) !important;
+}
+
+/* ۲. افکت نور براق و شیشه‌ای روی عکس‌های گالری (مشابه کارت محصولات) */
+.gslide::before {
+  content: "";
+  position: absolute;
+  z-index: 3; /* بالاتر از عکس و حاشیه رنگی */
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 15%;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.10) 30%,
+    rgba(255,255,255,.40) 50%,
+    rgba(255,255,255,.10) 70%,
+    transparent 100%);
+  filter: blur(2.5px);
+  transform: translateX(-400%) skewX(-16deg);
+  animation: card-sweep 8s ease-in-out infinite;
+  border-radius: 1.8rem;
+}
+
+/* تاخیر در انیمیشن نور برای هر اسلاید تا همزمان نباشن */
+.gslide:nth-child(2n)::before {
+  animation-delay: 1.5s;
+}
+.gslide:nth-child(3n)::before {
+  animation-delay: 3s;
+}
+
+/* حالت شب برای نور گالری */
+html[data-theme="dark"] .gslide::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.06) 30%,
+    rgba(255,255,255,.25) 50%,
+    rgba(255,255,255,.06) 70%,
+    transparent 100%);
+}
+
+/* در حالت کاهش حرکت، نور متوقف شود */
+@media (prefers-reduced-motion: reduce) {
+  .gslide::before {
+    animation: none;
+    opacity: 0;
+  }
+}
