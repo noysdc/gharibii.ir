@@ -177,10 +177,10 @@
           <button class="cart-close" id="cart-close" type="button" aria-label="بستن">✕</button>
           <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
           <div id="cart-items-container"></div>
-          <p class="cart-note">⚠️ هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).</p>
+          <p class="cart-note">🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.</p>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
-          <p class="cart-note cart-note-wa" id="cart-note-wa" hidden>⚠️ هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).</p>
+          <p class="cart-note cart-note-wa" id="cart-note-wa" hidden>🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.</p>
         </div>
       </div>
     `;
@@ -233,7 +233,7 @@
       message += "   🔗 " + location.origin + item.url + "\n\n";
     });
     if (total > 0) { message += "━━━━━━━━━━━━━━\n"; message += "🧾 جمع کل: " + total.toLocaleString('fa-IR') + " تومان\n\n"; }
-    message += "⚠️ توجه: هزینه‌ی ارسال جداگانه محاسبه می‌شود (ارسال از جزیره کیش هزینه‌ی گمرکی دارد).\n\n";
+    message += "🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.\n\n";
     message += "لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏";
     return message;
   }
