@@ -1,5 +1,5 @@
 ---
-title: "کفش رقص باله دخترانه - فروشگاه غریبی کیش"
+title: "کفش رقص باله دخترانه"
 slug: "shoes-wings"
 price: 698000
 price_group: "tier_11"
@@ -36,8 +36,10 @@ images:
   - /assets/images/products/bags-shoes/shoes-wings/24.webp
   - /assets/images/products/bags-shoes/shoes-wings/25.webp
 old_id: "45433"
+sort_id: 45433
 redirect_from:
   - /product/45433
+  - "/shop/کفش/P45433-کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش.html"
 ---
 
 

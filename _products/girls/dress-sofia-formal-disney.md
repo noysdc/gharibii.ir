@@ -27,8 +27,10 @@ images:
   - /assets/images/products/girls/dress-sofia-formal-disney/17.webp
   - /assets/images/products/girls/dress-sofia-formal-disney/18.webp
 old_id: "45345"
+sort_id: 45345
 redirect_from:
   - /product/45345
+  - "/shop/لباس-پرنسسی/P45345-پبراهن-مجلسی-دیزنی-سوفیا.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

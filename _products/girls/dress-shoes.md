@@ -19,8 +19,10 @@ images:
   - /assets/images/products/girls/dress-shoes/9.webp
   - /assets/images/products/girls/dress-shoes/10.webp
 old_id: "45370"
+sort_id: 45370
 redirect_from:
   - /product/45370
+  - "/shop/لباس-دخترانه/P45370-پیراهن-شخصیتی-دختر-کفشدوزکی.html"
 ---
 
 مناسب برای گروه سنی 3تا4 -4تا5  -5تا6 -6تا7 7تا8

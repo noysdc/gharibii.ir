@@ -1,5 +1,5 @@
 ---
-title: "ست اکسسوری پرنسسی دخترانه - فروشگاه غریبی کیش"
+title: "ست اکسسوری پرنسسی دخترانه"
 slug: "set"
 price: 1898000
 price_formatted: "1,898,000"
@@ -22,8 +22,10 @@ images:
   - /assets/images/products/accessories/set/11.webp
   - /assets/images/products/accessories/set/12.webp
 old_id: "45446"
+sort_id: 45446
 redirect_from:
   - /product/45446
+  - "/shop/اکسسوری/P45446-ست-اکسسوری-پرنسسی-دخترانه-فروشگاه-غریبی-کیش.html"
 ---
 
 اقلام همراه : دستکش تاج عصا گردن بند گوشواره دست بند انگشتر

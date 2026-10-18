@@ -1,5 +1,5 @@
 ---
-title: "پیرهن مجلسی کرومی - فروشگاه غریبی کیش"
+title: "پیرهن مجلسی کرومی"
 slug: "dress-formal"
 price: 2598000
 price_formatted: "2,598,000"
@@ -24,8 +24,10 @@ images:
   - /assets/images/products/girls/dress-formal/15.jpg
   - /assets/images/products/girls/dress-formal/16.jpg
 old_id: "45442"
+sort_id: 45442
 redirect_from:
   - /product/45442
+  - "/shop/پیراهن-مجلسی/P45442-پیرهن-مجلسی-کرومی-فروشگاه-غریبی-کیش.html"
 ---
 
 مناسب سنین 3 تا 12 سال 

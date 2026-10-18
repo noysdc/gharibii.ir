@@ -12,8 +12,10 @@ images:
   - /assets/images/products/boys/wings-batman/3.webp
   - /assets/images/products/boys/wings-batman/4.webp
 old_id: "45361"
+sort_id: 45361
 redirect_from:
   - /product/45361
+  - "/shop/شخصیتی-پسرانه/P45361-بال-بتمن-پسرانه.html"
 ---
 
 

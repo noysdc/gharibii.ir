@@ -1,5 +1,5 @@
 ---
-title: "ست دستکش تیرپرتاب کن آیرون من (مردان آهنین)-فروشگاه غریبی کیش"
+title: "ست دستکش تیرپرتاب کن آیرون من (مردان آهنین)"
 slug: "gloves-set-ironman"
 price: 398000
 price_group: "tier_2"
@@ -27,8 +27,10 @@ images:
   - /assets/images/products/accessories/gloves-set-ironman/15.webp
   - /assets/images/products/accessories/gloves-set-ironman/16.webp
 old_id: "45387"
+sort_id: 45387
 redirect_from:
   - /product/45387
+  - "/shop/اکسسوری/P45387-ست-دستکش-تیرپرتاب-کن-آیرون-من-مردان-آهنین-فروشگاه-غریبی-کیش.html"
 ---
 
 

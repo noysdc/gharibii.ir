@@ -1,5 +1,5 @@
 ---
-title: "پیرهن آستین بلند دامن توری تمام نخ السا دیزنی - فروشگاه غریبی کیش"
+title: "پیرهن آستین بلند دامن توری تمام نخ السا دیزنی"
 slug: "dress-skirt-set-elsa"
 price: 4998000
 price_group: "tier_4"
@@ -22,8 +22,10 @@ images:
   - /assets/images/products/girls/dress-skirt-set-elsa/11.webp
   - /assets/images/products/girls/dress-skirt-set-elsa/12.webp
 old_id: "45436"
+sort_id: 45436
 redirect_from:
   - /product/45436
+  - "/shop/لباس-پرنسسی/P45436-پیرهن-آستین-بلند-دامن-توری-تمام-نخ-السا-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 مناسب سن 3 تا ۱۲ سال.

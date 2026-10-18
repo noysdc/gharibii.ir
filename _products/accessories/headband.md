@@ -34,8 +34,10 @@ images:
   - /assets/images/products/accessories/headband/25.webp
   - /assets/images/products/accessories/headband/26.webp
 old_id: "45362"
+sort_id: 45362
 redirect_from:
   - /product/45362
+  - "/shop/اکسسوری/P45362-تل-موی-رنگی-شخصیتی-دخترانه.html"
 ---
 
 

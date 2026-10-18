@@ -25,8 +25,10 @@ images:
   - /assets/images/products/girls/costume-cinderella/14.webp
   - /assets/images/products/girls/costume-cinderella/15.webp
 old_id: "45333"
+sort_id: 45333
 redirect_from:
   - /product/45333
+  - "/shop/لباس-پرنسسی/P45333-لباس-دخترانه-ی-فرشته-ی-سیندرلا.html"
 ---
 
 لباس دخترانه ی فرشته ی سیندرلا 

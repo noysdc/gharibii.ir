@@ -1,5 +1,5 @@
 ---
-title: "عصای جادویی هری پاتر-فروشگاه غریبی کیش"
+title: "عصای جادویی هری پاتر"
 slug: "wand-harry-potter"
 price: 198000
 price_group: "tier_6"
@@ -22,8 +22,10 @@ images:
   - /assets/images/products/crown-wand/wand-harry-potter/13.webp
   - /assets/images/products/crown-wand/wand-harry-potter/14.webp
 old_id: "45374"
+sort_id: 45374
 redirect_from:
   - /product/45374
+  - "/shop/اکسسوری/P45374-عصای-هری-پاتر-فروشگاه-غریبی-کیش.html"
 ---
 
 عصای هری پاتر در سه رنگ اصلی

@@ -13,8 +13,10 @@ images:
   - /assets/images/products/girls/costume/2.webp
   - /assets/images/products/girls/costume/3.webp
 old_id: "45330"
+sort_id: 45330
 redirect_from:
   - /product/45330
+  - "/shop/لباس-پرنسسی/P45330-لباس-دخترانه-دیو-و-دلبر.html"
 ---
 
 دیو و دلبر

@@ -31,8 +31,10 @@ images:
   - /assets/images/products/girls/dress-set-elsa-formal/21.webp
   - /assets/images/products/girls/dress-set-elsa-formal/22.webp
 old_id: "45343"
+sort_id: 45343
 redirect_from:
   - /product/45343
+  - "/shop/لباس-پرنسسی/P45343-پبراهن-مجلسی-دیزنی-السا-1فروزن-آستین-بلند.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

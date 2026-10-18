@@ -1,5 +1,5 @@
 ---
-title: "پیرهن السای 2 (فروزن2)شخصیتی دیزنی-فروشگاه غریبی کیش"
+title: "پیرهن السای 2 (فروزن2)شخصیتی دیزنی"
 slug: "dress-elsa-disney-frozen"
 price: 1598000
 price_group: "tier_5"
@@ -38,8 +38,10 @@ images:
   - /assets/images/products/girls/dress-elsa-disney-frozen/25.webp
   - /assets/images/products/girls/dress-elsa-disney-frozen/26.webp
 old_id: "45393"
+sort_id: 45393
 redirect_from:
   - /product/45393
+  - "/shop/لباس-پرنسسی/P45393-پیرهن-السای-2-فروزن2-شخصیتی-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 

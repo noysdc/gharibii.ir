@@ -1,5 +1,5 @@
 ---
-title: "ناخن مصنوعی السا شخصیتی دیزنی چسبدار-فروشگاه غریبی کیش"
+title: "ناخن مصنوعی السا شخصیتی دیزنی چسبدار"
 slug: "elsa-disney"
 price: 398000
 price_group: "tier_2"
@@ -32,8 +32,10 @@ images:
   - /assets/images/products/accessories/elsa-disney/21.webp
   - /assets/images/products/accessories/elsa-disney/22.webp
 old_id: "45392"
+sort_id: 45392
 redirect_from:
   - /product/45392
+  - "/shop/اکسسوری/P45392-ناخن-مصنوعی-السا-شخصیتی-دیزنی-چسبدار-فروشگاه-غریبی-کیش.html"
 ---
 
 ناخن مصنوعی شخصیتی همراه با چسب مخصوص ناخن کودک

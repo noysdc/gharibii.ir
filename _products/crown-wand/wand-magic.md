@@ -22,8 +22,10 @@ images:
   - /assets/images/products/crown-wand/wand-magic/13.webp
   - /assets/images/products/crown-wand/wand-magic/14.webp
 old_id: "45363"
+sort_id: 45363
 redirect_from:
   - /product/45363
+  - "/shop/اکسسوری/P45363-عصا-مجیک-دخترانه.html"
 ---
 
 

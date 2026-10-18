@@ -1,5 +1,5 @@
 ---
-title: "کلاه پمپی گوش متحرک استیج - فروشگاه غریبی کیش"
+title: "کلاه پمپی گوش متحرک استیج"
 slug: "hat-set"
 price: 898000
 price_group: "tier_8"
@@ -18,8 +18,10 @@ images:
   - /assets/images/products/accessories/hat-set/9.webp
   - /assets/images/products/accessories/hat-set/10.webp
 old_id: "45425"
+sort_id: 45425
 redirect_from:
   - /product/45425
+  - "/shop/کلاه/P45425-کلاه-پمپی-گوش-متحرک-استیج-فروشگاه-غریبی.html"
 ---
 
 

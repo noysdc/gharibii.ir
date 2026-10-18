@@ -1,5 +1,5 @@
 ---
-title: "لباس پرنسسی زیبای خفته"
+title: "لباس پرنسسی زیبای خفته (کد 45341)"
 slug: "costume"
 price: 4998000
 price_group: "tier_4"
@@ -16,8 +16,10 @@ images:
   - /assets/images/products/girls/costume/3.jpg
   - /assets/images/products/girls/costume/4.png
 old_id: "45341"
+sort_id: 45341
 redirect_from:
   - /product/45341
+  - "/shop/لباس-پرنسسی/P45341-لباس-پرنسسی-زیبای-خفته.html"
 ---
 
 

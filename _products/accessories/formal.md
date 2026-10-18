@@ -43,8 +43,10 @@ images:
   - /assets/images/products/accessories/formal/33.webp
   - /assets/images/products/accessories/formal/34.webp
 old_id: "45335"
+sort_id: 45335
 redirect_from:
   - /product/45335
+  - "/shop/نوزادی/P45335-بادی-مجلسی-شخصیتی-نوزادی.html"
 ---
 
 بادی مجلسی شخصیتی نوزادی

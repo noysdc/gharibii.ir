@@ -1,5 +1,5 @@
 ---
-title: "مایو پری دریایی سه تیکه دیزنی - فروشگاه غریبی کیش"
+title: "مایو پری دریایی سه تیکه دیزنی"
 slug: "swimsuit-mermaid-disney"
 price: 3998000
 price_group: "tier_10"
@@ -21,8 +21,10 @@ images:
   - /assets/images/products/accessories/swimsuit-mermaid-disney/11.webp
   - /assets/images/products/accessories/swimsuit-mermaid-disney/12.webp
 old_id: "45422"
+sort_id: 45422
 redirect_from:
   - /product/45422
+  - "/shop/مایو/P45422-مایو-پری-دریایی-سه-تیکه-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

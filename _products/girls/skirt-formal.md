@@ -62,8 +62,10 @@ images:
   - /assets/images/products/girls/skirt-formal/53.webp
   - /assets/images/products/girls/skirt-formal/54.webp
 old_id: "45350"
+sort_id: 45350
 redirect_from:
   - /product/45350
+  - "/shop/دامن/P45350-دامن-مجلسی-دخترانه-وارداتی.html"
 ---
 
 

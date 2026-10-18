@@ -17,8 +17,10 @@ images:
   - /assets/images/products/girls/costume-snow-white/6.webp
   - /assets/images/products/girls/costume-snow-white/7.webp
 old_id: "45332"
+sort_id: 45332
 redirect_from:
   - /product/45332
+  - "/shop/لباس-پرنسسی/P45332-لباس-دخترانه-سفید-برفی.html"
 ---
 
 دختر کوچولوی شما با پوشیدن این لباس پرنسسی سفید برفی، مرکز توجه هر جمعی خواهد بود! این لباس خیره‌کننده با الهام از شخصیت کلاسیک و محبوب سفید برفی، شادی و زیبایی را به ارمغان می‌آورد.

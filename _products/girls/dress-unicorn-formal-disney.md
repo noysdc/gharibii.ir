@@ -14,8 +14,10 @@ images:
   - /assets/images/products/girls/dress-unicorn-formal-disney/4.webp
   - /assets/images/products/girls/dress-unicorn-formal-disney/5.webp
 old_id: "45354"
+sort_id: 45354
 redirect_from:
   - /product/45354
+  - "/shop/لباس-پرنسسی/P45354-پیراهن-دیزنی-مجلسی-یونیکورن.html"
 ---
 
 مناسب برای گروه سنی 3تا5 -  5تا6- 6تا7 -7تا9 - 9تا10

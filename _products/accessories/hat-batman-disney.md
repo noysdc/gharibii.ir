@@ -1,5 +1,5 @@
 ---
-title: "کلاه کپ بتمن شخصیت دیزنی قهرمانی-فروشگاه غریبی کیش"
+title: "کلاه کپ بتمن شخصیت دیزنی قهرمانی"
 slug: "hat-batman-disney"
 price: 398000
 price_group: "tier_2"
@@ -26,8 +26,10 @@ images:
   - /assets/images/products/accessories/hat-batman-disney/16.webp
   - /assets/images/products/accessories/hat-batman-disney/17.webp
 old_id: "45399"
+sort_id: 45399
 redirect_from:
   - /product/45399
+  - "/shop/کلاه/P45399-کلاه-کپ-بتمن-شخصیت-دیزنی-قهرمانی-فروشگاه-غریبی-کیش.html"
 ---
 
 

@@ -17,8 +17,10 @@ images:
   - /assets/images/products/girls/dress-rapunzel-formal-disney/7.webp
   - /assets/images/products/girls/dress-rapunzel-formal-disney/8.webp
 old_id: "45347"
+sort_id: 45347
 redirect_from:
   - /product/45347
+  - "/shop/لباس-پرنسسی/P45347-پیراهن-مجلسی-دیزنی-راپونزل.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

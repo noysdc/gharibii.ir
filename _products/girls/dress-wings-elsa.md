@@ -11,8 +11,10 @@ sizes: ["110"]
 images:
   - /assets/images/products/girls/dress-wings-elsa/1.webp
 old_id: "45338"
+sort_id: 45338
 redirect_from:
   - /product/45338
+  - "/shop/باله/P45338-پیرهن-باله-تم-السا.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

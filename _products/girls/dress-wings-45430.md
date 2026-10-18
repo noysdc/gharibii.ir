@@ -1,5 +1,5 @@
 ---
-title: "پیراهن رقص باله - فروشگاه غریبی کیش"
+title: "پیراهن رقص باله (کد 45430)"
 slug: "dress-wings"
 price: 4998000
 price_group: "tier_4"
@@ -14,8 +14,10 @@ images:
   - /assets/images/products/girls/dress-wings/3.jpg
   - /assets/images/products/girls/dress-wings/4.jpg
 old_id: "45430"
+sort_id: 45430
 redirect_from:
   - /product/45430
+  - "/shop/باله/P45430-پیراهن-رقص-باله-فروشگاه-غریبی-کیش.html"
 ---
 
 

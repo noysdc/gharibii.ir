@@ -13,8 +13,10 @@ images:
   - /assets/images/products/crown-wand/crown-headband/4.webp
   - /assets/images/products/crown-wand/crown-headband/5.webp
 old_id: "45365"
+sort_id: 45365
 redirect_from:
   - /product/45365
+  - "/shop/اکسسوری/P45365-تاج-وتل.html"
 ---
 
 رنگبندی مناسب با تم موجود میباشد.

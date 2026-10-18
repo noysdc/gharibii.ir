@@ -15,8 +15,10 @@ images:
   - /assets/images/products/girls/dress-wings-jasmine/3.webp
   - /assets/images/products/girls/dress-wings-jasmine/4.webp
 old_id: "45337"
+sort_id: 45337
 redirect_from:
   - /product/45337
+  - "/shop/لباس-پرنسسی/P45337-پبراهن-باله-تم-جاسمین.html"
 ---
 
 پبراهن باله تم  جاسمین - فروشگاه غریبی

@@ -1,5 +1,5 @@
 ---
-title: "ست کامل هری پاتر - فروشگاه غریبی کیش"
+title: "ست کامل هری پاتر"
 slug: "set-harry-potter"
 price: 2998000
 price_group: "tier_13"
@@ -21,8 +21,10 @@ images:
   - /assets/images/products/boys/set-harry-potter/9.webp
   - /assets/images/products/boys/set-harry-potter/10.webp
 old_id: "45441"
+sort_id: 45441
 redirect_from:
   - /product/45441
+  - "/shop/شخصیتی-پسرانه/P45441-ست-کامل-هری-پاتر-فروشگاه-غریبی-کیش.html"
 ---
 
 دارای سایز بندی از سنین 5 تا 16 سال 

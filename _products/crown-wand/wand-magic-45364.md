@@ -14,8 +14,10 @@ images:
   - /assets/images/products/crown-wand/wand-magic/5.jpg
   - /assets/images/products/crown-wand/wand-magic/6.jpg
 old_id: "45364"
+sort_id: 45364
 redirect_from:
   - /product/45364
+  - "/shop/اکسسوری/P45364-عصا-مجیک-پسرانه.html"
 ---
 
 

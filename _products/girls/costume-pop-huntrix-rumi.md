@@ -19,8 +19,10 @@ images:
   - /assets/images/products/girls/costume-pop-huntrix-rumi/8.webp
   - /assets/images/products/girls/costume-pop-huntrix-rumi/9.webp
 old_id: "45445"
+sort_id: 45445
 redirect_from:
   - /product/45445
+  - "/shop/شخصیتی-دخترانه/P45445-لباس-شخصیتی-شکارچیان-شیاطین-رومی-rumi.html"
 ---
 
 رنگ سفید و مشکی

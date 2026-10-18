@@ -1,5 +1,5 @@
 ---
-title: "کلاه کپ شخصیتهای دیزنی پرنسسی دخترانه-فروشگاه غریبی کیش"
+title: "کلاه کپ شخصیتهای دیزنی پرنسسی دخترانه"
 slug: "hat-disney"
 price: 398000
 price_group: "tier_2"
@@ -20,8 +20,10 @@ images:
   - /assets/images/products/accessories/hat-disney/11.jpg
   - /assets/images/products/accessories/hat-disney/12.jpg
 old_id: "45412"
+sort_id: 45412
 redirect_from:
   - /product/45412
+  - "/shop/کلاه/P45412-کلاه-کپ-شخصیتهای-دیزنی-پرنسسی-دخترانه-فروشگاه-غریبی-کیش.html"
 ---
 
 فری سایز

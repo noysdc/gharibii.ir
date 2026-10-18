@@ -1,5 +1,5 @@
 ---
-title: "پیرهن پرنسسی دیزنی السا فروزن همراه با شنل (آبی کاربنی) - فروشگاه غریبی کیش"
+title: "پیرهن پرنسسی دیزنی السا فروزن همراه با شنل (آبی کاربنی)"
 slug: "dress-cape-elsa-disney"
 price: 5998000
 price_group: "tier_1"
@@ -19,8 +19,10 @@ images:
   - /assets/images/products/girls/dress-cape-elsa-disney/8.webp
   - /assets/images/products/girls/dress-cape-elsa-disney/9.webp
 old_id: "45437"
+sort_id: 45437
 redirect_from:
   - /product/45437
+  - "/shop/لباس-پرنسسی/P45437-پیرهن-پرنسسی-دیزنی-السا-فروزن-همراه-با-شنل-فروشگاه-غریبی-کیش.html"
 ---
 
 مناسب برای سنین 3 تا 12 سال و دارای سایز بندی

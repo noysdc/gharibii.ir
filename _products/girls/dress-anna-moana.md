@@ -17,8 +17,10 @@ images:
   - /assets/images/products/girls/dress-anna-moana/2.webp
   - /assets/images/products/girls/dress-anna-moana/3.webp
 old_id: "4"
+sort_id: 4
 redirect_from:
   - /product/4
+  - "/shop/لباس-دخترانه/P4-تي-شرت-نخي-يقه-گرد-زنانه.html"
 ---
 
 تم پرنسسی مووآنا

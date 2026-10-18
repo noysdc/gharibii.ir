@@ -23,8 +23,10 @@ images:
   - /assets/images/products/girls/costume-mermaid/12.webp
   - /assets/images/products/girls/costume-mermaid/13.webp
 old_id: "45329"
+sort_id: 45329
 redirect_from:
   - /product/45329
+  - "/shop/لباس-دخترانه/P45329-لباس-دخترانه-پری-دریایی.html"
 ---
 
 تم پری دریایی

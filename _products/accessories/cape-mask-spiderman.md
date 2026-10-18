@@ -1,5 +1,5 @@
 ---
-title: "شنل ماسک اسپایدرمن شخصیتی قهرمانی-فروشگاه غریبی کیش"
+title: "شنل ماسک اسپایدرمن شخصیتی قهرمانی"
 slug: "cape-mask-spiderman"
 price: 998000
 price_group: "tier_3"
@@ -11,8 +11,10 @@ images:
   - /assets/images/products/accessories/cape-mask-spiderman/1.webp
   - /assets/images/products/accessories/cape-mask-spiderman/2.webp
 old_id: "45327"
+sort_id: 45327
 redirect_from:
   - /product/45327
+  - "/shop/اکسسوری/P45327-شنل-شخصیتی-همراه-با-ماسک-دخترانه-و-پسرانه-فروشگاه-غریبی.html"
 ---
 
 شنل شخصیتی دخترانه و پسرانه 

@@ -1,5 +1,5 @@
 ---
-title: "ست دستکش تیرپرتاب کن کاپتان آمریکا-فروشگاه غریبی کیش"
+title: "ست دستکش تیرپرتاب کن کاپتان آمریکا"
 slug: "gloves-set"
 price: 398000
 price_group: "tier_2"
@@ -21,8 +21,10 @@ images:
   - /assets/images/products/accessories/gloves-set/9.webp
   - /assets/images/products/accessories/gloves-set/10.webp
 old_id: "45389"
+sort_id: 45389
 redirect_from:
   - /product/45389
+  - "/shop/اکسسوری/P45389-ست-دستکش-تیرپرتاب-کن-کاپتان-آمریکا-فروشگاه-غریبی-کیش.html"
 ---
 
 

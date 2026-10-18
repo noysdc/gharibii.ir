@@ -1,5 +1,5 @@
 ---
-title: "تل تاج پرنسسی گیس دار-فروشگاه غریبی کیش"
+title: "تل تاج پرنسسی گیس دار"
 slug: "crown-headband"
 price: 398000
 price_group: "tier_2"
@@ -17,8 +17,10 @@ images:
   - /assets/images/products/crown-wand/crown-headband/7.png
   - /assets/images/products/crown-wand/crown-headband/8.jpg
 old_id: "45416"
+sort_id: 45416
 redirect_from:
   - /product/45416
+  - "/shop/اکسسوری/P45416-تل-تاج-پرنسسی-گیس-دار-فروشگاه-غریبی-کیش.html"
 ---
 
 

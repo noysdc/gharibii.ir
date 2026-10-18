@@ -11,8 +11,10 @@ sizes: ["M", "L", "XL", "XXL"]
 material: "نخی"
 images: []
 old_id: "45336"
+sort_id: 45336
 redirect_from:
   - /product/45336
+  - "/shop/لباس-پرنسسی/P45336-پبراهن-باله.html"
 ---
 
 پبراهن باله - فروشگاه غریبی

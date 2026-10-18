@@ -1,5 +1,5 @@
 ---
-title: "پیرهن پرنسسی راپونزل (گیسوکمند) دیزنی - فروشگاه غریبی کیش"
+title: "پیرهن پرنسسی راپونزل (گیسوکمند) دیزنی"
 slug: "dress-rapunzel-disney"
 price: 5998000
 price_group: "tier_1"
@@ -16,8 +16,10 @@ images:
   - /assets/images/products/girls/dress-rapunzel-disney/5.webp
   - /assets/images/products/girls/dress-rapunzel-disney/6.webp
 old_id: "45439"
+sort_id: 45439
 redirect_from:
   - /product/45439
+  - "/shop/لباس-پرنسسی/P45439-پیرهن-پرنسسی-راپونزل-گیسوکمند-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 تک رنگ

@@ -24,8 +24,10 @@ images:
   - /assets/images/products/girls/dress-rainbow/14.webp
   - /assets/images/products/girls/dress-rainbow/15.webp
 old_id: "45358"
+sort_id: 45358
 redirect_from:
   - /product/45358
+  - "/shop/لباس-پرنسسی/P45358-پیراهن-توری-رنگین-کمانی-شخصیتی-فروشگاه-غریبی.html"
 ---
 
 مناسب برای گروه سنی سه تا هشت سال

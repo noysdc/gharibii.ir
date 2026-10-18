@@ -19,8 +19,10 @@ images:
   - /assets/images/products/girls/set/9.webp
   - /assets/images/products/girls/set/10.webp
 old_id: "45351"
+sort_id: 45351
 redirect_from:
   - /product/45351
+  - "/shop/ست-راحتی/P45351-ست-نخی-راحتی.html"
 ---
 
 

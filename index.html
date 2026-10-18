@@ -1,11 +1,18 @@
 ---
 layout: default
 title: پوشاک دخترانه و پسرانه
+redirect_from:
+  - "/blog/"
+  - "/shop/"
+  - "/blog/3484-دانستی-ها/"
+  - "/blog/درباره-ما/P9-بهترین-لباس-ها-برای-فصل-سرما.html"
+  - "/blog/uncategorized/P10-بهترین-لباس-ها-با-توجه-به-رنگ-پوست-صورت.html"
+  - "/blog/uncategorized/P45443-سیندرلای-دوست-داشتنی.html"
 ---
 {%- assign girls = site.products | where: 'category', 'girls' -%}
 {%- assign boys = site.products | where: 'category', 'boys' -%}
-{%- assign girls_latest = girls | sort: 'date' | reverse -%}
-{%- assign boys_latest = boys | sort: 'date' | reverse -%}
+{%- assign girls_latest = girls | sort: 'sort_id' | reverse -%}
+{%- assign boys_latest = boys | sort: 'sort_id' | reverse -%}
 {%- assign cat_slugs = "girls|boys|bags-shoes|crown-wand|accessories" | split: "|" -%}
 {%- assign cat_names = "پرنسسی دخترانه|شخصیتی پسرانه|کیف و کفش|تاج و عصا|اکسسوری‌ها" | split: "|" -%}
 {%- assign cat_emojis = "👗|🦸|👜|👑|🎀" | split: "|" -%}
@@ -76,7 +83,7 @@ title: پوشاک دخترانه و پسرانه
   </div>
   <div class="cat-scroller">
     {%- for slug in cat_slugs -%}
-      {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
+      {%- assign items = site.products | where: 'category', slug | sort: 'sort_id' | reverse -%}
       {%- assign cover = items[0].images[0] -%}
       <a class="cat-tile tint-{{ cat_tints[forloop.index0] }}" href="{{ '/' | append: slug | append: '/' | relative_url }}">
         <span class="cat-tile-in">
@@ -98,7 +105,7 @@ title: پوشاک دخترانه و پسرانه
 
 <!-- هر دسته: باکس با تم دیزنی + چند محصول + دکمه «نمایش بیشتر» (موبایل ۴، تبلت ۶، دسکتاپ ۹ عدد) -->
 {%- for slug in cat_slugs -%}
-  {%- assign items = site.products | where: 'category', slug | sort: 'date' | reverse -%}
+  {%- assign items = site.products | where: 'category', slug | sort: 'sort_id' | reverse -%}
   {%- if items.size > 0 -%}
   <section class="wrap cat-section" id="cat-{{ slug }}">
     <div class="cat-block tint-{{ cat_tints[forloop.index0] }}">
@@ -150,7 +157,7 @@ title: پوشاک دخترانه و پسرانه
     {%- assign fext = f.extname | downcase -%}
     {%- if gallery_exts contains fext -%}
       {%- assign fpath = f.path | prepend: '/' | replace: '//', '/' -%}
-      <figure class="gslide"><img src="{{ fpath | relative_url }}" alt="{{ f.basename | replace: '-', ' ' | replace: '_', ' ' | escape }}" loading="lazy" decoding="async" width="800" height="1000"></figure>
+      <figure class="gslide"><img src="{{ fpath | relative_url }}" alt="گالری فروشگاه غریبی کیش — تصویر {{ forloop.index }}" loading="lazy" decoding="async" width="800" height="1000"></figure>
     {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}

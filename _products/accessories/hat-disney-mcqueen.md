@@ -1,5 +1,5 @@
 ---
-title: "کلاه کپ پسرانه مک کویین شخصیتی دیزنی-فروشگاه غریبی کیش"
+title: "کلاه کپ پسرانه مک کویین شخصیتی دیزنی"
 slug: "hat-disney-mcqueen"
 price: 398000
 price_group: "tier_2"
@@ -8,8 +8,10 @@ category: accessories
 date: 2026-10-17
 images: []
 old_id: "45409"
+sort_id: 45409
 redirect_from:
   - /product/45409
+  - "/shop/کلاه/P45409-کلاه-کپ-پسرانه-مک-کویین-شخصیتی-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 فری سایز

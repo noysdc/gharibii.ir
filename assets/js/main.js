@@ -2,6 +2,17 @@
   'use strict';
 
   var root = document.documentElement;
+  var BASE = (document.querySelector('meta[name="site-baseurl"]') || {}).content || '';
+
+  /* ذخیره‌سازی امن: در حالت خصوصی سافاری یا وقتی ذخیره‌سازی بسته است، خطا نمی‌دهد */
+  function mkStore(area) {
+    return {
+      get: function (k) { try { return window[area].getItem(k); } catch (e) { return null; } },
+      set: function (k, v) { try { window[area].setItem(k, v); } catch (e) {} }
+    };
+  }
+  var store = mkStore('localStorage');
+  var sstore = mkStore('sessionStorage');
 
   /* ---- 1. Theme ---- */
   var themeToggle = document.getElementById('theme-toggle');
@@ -15,12 +26,12 @@
       if (themeIcon) themeIcon.textContent = '\uD83C\uDF19';
     }
   }
-  applyTheme(localStorage.getItem('gharibii-theme') || 'light');
+  applyTheme(store.get('gharibii-theme') || 'light');
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
       var c = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       var n = c === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('gharibii-theme', n);
+      store.set('gharibii-theme', n);
       applyTheme(n);
     });
   }
@@ -32,9 +43,9 @@
   function applyFontScale(scale) {
     scale = Math.max(FONT_MIN, Math.min(FONT_MAX, scale));
     root.style.setProperty('--font-scale', scale);
-    localStorage.setItem('gharibii-font-scale', scale);
+    store.set('gharibii-font-scale', scale);
   }
-  applyFontScale(parseFloat(localStorage.getItem('gharibii-font-scale')) || 1);
+  applyFontScale(parseFloat(store.get('gharibii-font-scale')) || 1);
   function getScale() {
     return parseFloat(root.style.getPropertyValue('--font-scale')) || 1;
   }
@@ -103,7 +114,7 @@
         var q = normalize(searchInput.value);
         if (q.length < 2) { searchResults.hidden = true; return; }
         loadProducts().then(function (products) {
-          var matched = products.filter(function (p) { return normalize(p.title).indexOf(q) !== -1 || normalize(p.category).indexOf(q) !== -1; });
+          var matched = products.filter(function (p) { return normalize(p.title).indexOf(q) !== -1 || normalize(p.category).indexOf(q) !== -1 || normalize(p.category_fa).indexOf(q) !== -1; });
           renderResults(matched);
         });
       }, 150);
@@ -124,12 +135,12 @@
   }
   function showWelcomeToast() {
     if (!toast || !toastText) return;
-    if (sessionStorage.getItem('gharibii-welcome-shown')) return;
+    if (sstore.get('gharibii-welcome-shown')) return;
     toastText.textContent = '\u0628\u0647 \u0641\u0631\u0648\u0634\u06AF\u0627\u0647 \u0622\u0646\u0644\u0627\u06CC\u0646 \u063A\u0631\u06CC\u0628\u06CC \u062E\u0648\u0634 \u0627\u0648\u0645\u062F\u06CC\u062F';
     setTimeout(function () {
       toast.hidden = false;
       requestAnimationFrame(function () { toast.classList.add('is-visible'); });
-      sessionStorage.setItem('gharibii-welcome-shown', '1');
+      sstore.set('gharibii-welcome-shown', '1');
     }, 1500);
     setTimeout(hideWelcomeToast, 6000);
   }
@@ -139,7 +150,11 @@
   /* ============================================
      سیستم سبد خرید و واتساپ
      ============================================ */
-  var cart = JSON.parse(localStorage.getItem('gharibii_cart')) || [];
+  var cart = [];
+  try {
+    var savedCart = JSON.parse(store.get('gharibii_cart'));
+    if (Array.isArray(savedCart)) cart = savedCart.filter(function (i) { return i && i.title; });
+  } catch (err) { cart = []; }
 
   function fmtPrice(num) {
     var n = Number(String(num).replace(/,/g, '')) || 0;
@@ -148,7 +163,7 @@
   }
 
   function saveCart() {
-    localStorage.setItem('gharibii_cart', JSON.stringify(cart));
+    store.set('gharibii_cart', JSON.stringify(cart));
     updateCartUI();
   }
 
@@ -177,7 +192,7 @@
           <button class="cart-close" id="cart-close" type="button" aria-label="بستن">✕</button>
           <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
           <div id="cart-items-container"></div>
-          <p class="cart-note">🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.</p>
+          <p class="cart-note">🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) بر عهده‌ی مشتری است و جداگانه محاسبه می‌شه. مرجوعی نداریم. <a href="${BASE}/terms/">قوانین و مقررات</a></p>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
           <p class="cart-note cart-note-wa" id="cart-note-wa" hidden>🎀 دوستای گلمون، لطفاً توجه داشته باشید که هزینه‌ی ارسال و ترخیص گمرکی (به دلیل ارسال از جزیره‌ی زیبای کیش) به صورت جداگانه محاسبه می‌شه.</p>
@@ -202,9 +217,9 @@
     container.innerHTML = cart.map(function (item, index) {
       return `
         <div class="cart-item">
-          ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
+          ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ''}
           <div class="cart-item-info">
-            <h4>${item.title}</h4>
+            <h4>${esc(item.title)}</h4>
             <span>${fmtPrice(item.price)} تومان</span>
           </div>
           <button class="cart-item-remove" data-index="${index}" type="button" aria-label="حذف">🗑️</button>
@@ -264,7 +279,7 @@
 
     if (!product.title) return;
 
-    var exists = cart.find(function (i) { return i.title === product.title; });
+    var exists = cart.find(function (i) { return i.url === product.url; });
     if (exists) {
       showMiniToast('این محصول قبلاً در سبد شماست ⚠️');
       return;
@@ -462,6 +477,89 @@
     var cur = nav.querySelector('[aria-current="page"]');
     if (cur && cur.scrollIntoView) cur.scrollIntoView({ inline: 'center', block: 'nearest' });
     update();
+  })();
+
+  /* ---- 10. PWA: سرویس‌ورکر + دکمهٔ نصب اپلیکیشن ---- */
+  (function initPWA() {
+    var secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if ('serviceWorker' in navigator && secure) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register(BASE + '/sw.js', { scope: BASE + '/' }).catch(function () {});
+      });
+    }
+
+    var box = document.getElementById('install-footer-box');
+    var btn = document.getElementById('install-btn');
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+                     window.navigator.standalone === true;
+    if (standalone) { if (box) box.style.display = 'none'; return; }   /* قبلاً نصب شده */
+
+    var ua = navigator.userAgent || '';
+    var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isSafari = /safari/i.test(ua) && !/crios|fxios|edgios|opios|chrome|android/i.test(ua);
+    var KEY = 'gharibii-install-dismissed';
+    var deferred = null;
+
+    function dismissedRecently() {
+      var t = parseInt(store.get(KEY) || '0', 10);
+      return !!t && (Date.now() - t) < 14 * 86400000;
+    }
+    function removeBar() {
+      var b = document.getElementById('install-bar');
+      if (b) b.remove();
+    }
+    function showBar(mode, force) {
+      if (document.getElementById('install-bar')) return;
+      if (!force && (dismissedRecently() || !window.matchMedia('(max-width: 900px)').matches)) return;
+      var text = mode === 'ios'
+        ? 'دکمه اشتراک‌گذاری (Share) را بزنید و «Add to Home Screen» را انتخاب کنید.'
+        : mode === 'manual'
+          ? 'از منوی مرورگر (⋮) گزینهٔ «افزودن به صفحه اصلی» یا «Install app» را بزنید.'
+          : 'مثل یک اپلیکیشن روی گوشی‌تان باشد؛ سریع‌تر و راحت‌تر.';
+      var bar = document.createElement('div');
+      bar.className = 'install-bar';
+      bar.id = 'install-bar';
+      bar.innerHTML =
+        '<img class="install-icon" src="' + BASE + '/assets/icons/icon-192.png" alt="" width="42" height="42">' +
+        '<div class="install-text"><strong>نصب اپ غریبی کیش</strong>' + text + '</div>' +
+        (mode === 'prompt' ? '<button type="button" class="install-go" id="install-go">نصب</button>' : '') +
+        '<button type="button" class="install-close" id="install-close" aria-label="بستن">✕</button>';
+      document.body.appendChild(bar);
+      var go = document.getElementById('install-go');
+      if (go) go.addEventListener('click', doInstall);
+      document.getElementById('install-close').addEventListener('click', function () {
+        store.set(KEY, String(Date.now()));
+        removeBar();
+      });
+    }
+    function doInstall() {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () {
+        deferred = null;
+        removeBar();
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferred = e;
+      setTimeout(function () { showBar('prompt', false); }, 4000);
+    });
+    window.addEventListener('appinstalled', function () {
+      deferred = null;
+      removeBar();
+      if (box) box.style.display = 'none';
+    });
+    if (isIOS && isSafari) setTimeout(function () { showBar('ios', false); }, 5000);
+
+    /* دکمهٔ فوتر: اگر مرورگر اجازهٔ نصب مستقیم داده باشد نصب می‌کند، وگرنه راهنما نشان می‌دهد */
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (deferred) doInstall();
+        else showBar(isIOS ? 'ios' : 'manual', true);
+      });
+    }
   })();
 
 })();

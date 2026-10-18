@@ -13,8 +13,10 @@ images:
   - /assets/images/products/boys/dress-hulk/1.webp
   - /assets/images/products/boys/dress-hulk/2.webp
 old_id: "7"
+sort_id: 7
 redirect_from:
   - /product/7
+  - "/shop/شخصیتی-پسرانه/P7-تی-شرت-ویسکوز-یقه-گرد-زنانه.html"
 ---
 
 ویژگی ها	

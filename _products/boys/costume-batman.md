@@ -17,8 +17,10 @@ images:
   - /assets/images/products/boys/costume-batman/7.webp
   - /assets/images/products/boys/costume-batman/8.webp
 old_id: "45328"
+sort_id: 45328
 redirect_from:
   - /product/45328
+  - "/shop/شخصیتی-پسرانه/P45328-لباس-پسرانه-یکسره-بتمن-عضلانی.html"
 ---
 
 تم مخصوص تولد ها و هالوین

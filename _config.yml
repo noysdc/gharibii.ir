@@ -3,10 +3,13 @@ title: فروشگاه غریبی کیش
 description: پوشاک دخترانه و پسرانه — قیمت و عکس محصولات، خرید تلفنی و واتساپ
 lang: fa
 
-# هنگام تست روی github.io:  url و baseurl را مثل پایین بگذارید
-# بعد از وصل کردن دامنه:    url: "https://gharibii.ir"   و   baseurl: ""
+# ---------- آدرس سایت ----------
+# حالت تست (تا وقتی دامنه به GitHub وصل نشده):
 url: "https://noysdc.github.io"
 baseurl: "/gharibii.ir"
+# روز انتقال دامنه این دو خط بالا را با دو خط زیر عوض کنید و فایل CNAME (محتوا: gharibii.ir) را به ریشهٔ ریپو اضافه کنید:
+# url: "https://gharibii.ir"
+# baseurl: ""
 
 # ---------- شماره‌های واتساپ (بدون + و صفر اول، با کد کشور) ----------
 whatsapp_numbers:
@@ -25,6 +28,7 @@ whatsapp_sellers:
     photo: "/assets/images/sellers/seller-2.webp"
 
 phone_display: "076-44561403"
+phone_e164: "+987644561403"
 address: "جزیره زیبای کیش — بازار عرب‌ها 🏝️"
 
 # ---------- نقشه (فوتر) ----------
@@ -32,6 +36,9 @@ map_name: "فروشگاه غریبی"
 map_lat: 26.54233
 map_lng: 54.0193253
 map_url: "https://maps.app.goo.gl/YtjBNcVfiDYY33XC9"
+
+# ---------- صفحه‌های ثابت ----------
+size_guide_url: "/blog/راهنمای-انتخاب-لباس/P45435-سایز-بندی-لباس-های-فروشگاه-غریبی-کیش.html"
 
 # ---------- محصولات ----------
 collections:
@@ -62,8 +69,8 @@ plugins:
   - jekyll-redirect-from
 
 exclude:
-  - cloudflare_redirects.csv
   - README.md
-  - scripts    # ← از tools به scripts تغییر کرد
+  - CHANGES.md
+  - scripts
   - Gemfile
   - Gemfile.lock

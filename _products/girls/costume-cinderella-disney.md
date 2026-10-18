@@ -22,8 +22,10 @@ images:
   - /assets/images/products/girls/costume-cinderella-disney/13.webp
   - /assets/images/products/girls/costume-cinderella-disney/14.webp
 old_id: "45353"
+sort_id: 45353
 redirect_from:
   - /product/45353
+  - "/shop/لباس-پرنسسی/P45353-لباس-دخترانه-ی-دیزنی-سیندرلا.html"
 ---
 
 اکسسوری ها همراه محصول نیست (عکس ژورنالی)

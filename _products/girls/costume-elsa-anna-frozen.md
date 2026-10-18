@@ -17,8 +17,10 @@ images:
   - /assets/images/products/girls/costume-elsa-anna-frozen/5.webp
   - /assets/images/products/girls/costume-elsa-anna-frozen/6.webp
 old_id: "8"
+sort_id: 8
 redirect_from:
   - /product/8
+  - "/shop/لباس-پرنسسی/P8-لباس-پرنسسی-فروزن-2.html"
 ---
 
 ویژگی ها	

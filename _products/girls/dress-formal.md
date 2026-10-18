@@ -19,6 +19,7 @@ images:
   - /assets/images/products/girls/dress-formal/9.webp
   - /assets/images/products/girls/dress-formal/10.webp
 old_id: "6"
+sort_id: 6
 redirect_from:
   - /product/6
 ---

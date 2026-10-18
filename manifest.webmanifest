@@ -1,24 +1,19 @@
 {
+  "id": "/",
   "name": "فروشگاه غریبی کیش",
   "short_name": "غریبی کیش",
   "description": "لباس شخصیتی - تم دیزنی و پرنسسی",
+  "lang": "fa",
+  "dir": "rtl",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#F3F7F8",
   "theme_color": "#0A6670",
   "icons": [
-    {
-      "src": "/assets/images/gharibii-store-logo.webp",
-      "sizes": "192x192",
-      "type": "image/webp",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/assets/images/gharibii-store-logo.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
-      "purpose": "any maskable"
-    }
+    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

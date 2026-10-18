@@ -16,8 +16,10 @@ images:
   - /assets/images/products/girls/skirt/6.webp
   - /assets/images/products/girls/skirt/7.webp
 old_id: "45371"
+sort_id: 45371
 redirect_from:
   - /product/45371
+  - "/shop/لباس-پرنسسی/P45371-پرنسس-پیچ-دامن-بلند-فروشگاه-غریبی.html"
 ---
 
 

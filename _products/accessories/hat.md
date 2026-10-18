@@ -20,8 +20,10 @@ images:
   - /assets/images/products/accessories/hat/11.webp
   - /assets/images/products/accessories/hat/12.webp
 old_id: "45368"
+sort_id: 45368
 redirect_from:
   - /product/45368
+  - "/shop/کلاه/P45368-کلاه-کپ-شخصیتی.html"
 ---
 
 فری سایز

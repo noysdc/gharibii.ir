@@ -15,8 +15,10 @@ images:
   - /assets/images/products/girls/dress-jasmine-formal-disney/4.webp
   - /assets/images/products/girls/dress-jasmine-formal-disney/5.webp
 old_id: "45340"
+sort_id: 45340
 redirect_from:
   - /product/45340
+  - "/shop/لباس-پرنسسی/P45340-پبراهن-مجلسی-دیزنی-جاسمین.html"
 ---
 
 پیراهن مجلسی دیزنی جاسمین 

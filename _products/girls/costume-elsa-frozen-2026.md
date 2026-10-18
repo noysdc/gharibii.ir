@@ -25,8 +25,10 @@ images:
   - /assets/images/products/girls/costume-elsa-frozen-2026/13.webp
   - /assets/images/products/girls/costume-elsa-frozen-2026/14.webp
 old_id: "45448"
+sort_id: 45448
 redirect_from:
   - /product/45448
+  - "/shop/لباس-پرنسسی/P45448-لباس-پرنسسی-السا-فروزن-کالکشن-2026.html"
 ---
 
 آستر تمام نخ اکسسوری همراه لباس نیست(عکس لباس همراه با اکسسوری ژورنالی است)

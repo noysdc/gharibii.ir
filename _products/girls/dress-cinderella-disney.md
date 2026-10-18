@@ -1,5 +1,5 @@
 ---
-title: "پیرهن پرنسسی دیزنی سیندرلا (طرح جدید) - فروشگاه غریبی کیش"
+title: "پیرهن پرنسسی دیزنی سیندرلا (طرح جدید)"
 slug: "dress-cinderella-disney"
 price: 5998000
 price_group: "tier_1"
@@ -26,8 +26,10 @@ images:
   - /assets/images/products/girls/dress-cinderella-disney/15.webp
   - /assets/images/products/girls/dress-cinderella-disney/16.webp
 old_id: "45440"
+sort_id: 45440
 redirect_from:
   - /product/45440
+  - "/shop/لباس-پرنسسی/P45440-پیرهن-پرنسسی-دیزنی-سیندرلا-طرح-جدید-فروشگاه-غریبی-کیش.html"
 ---
 
 تک رنگ 

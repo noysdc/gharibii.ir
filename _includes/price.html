@@ -26,3 +26,12 @@
 {%- else -%}
   <span class="price-value">تماس بگیرید</span>
 {%- endif -%}
+
+{%- assign old_clean = product.old_price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- assign old_num = old_clean | plus: 0 -%}
+{%- if pr_num > 0 and old_num > pr_num -%}
+  {%- capture old_fmt -%}{%- include num.html n=old_num -%}{%- endcapture -%}
+  {%- assign off_pct = old_num | minus: pr_num | times: 100 | divided_by: old_num -%}
+  <s class="old-price">{{ old_fmt | strip }}</s>
+  <span class="discount-pill">{{ off_pct }}٪ تخفیف</span>
+{%- endif -%}

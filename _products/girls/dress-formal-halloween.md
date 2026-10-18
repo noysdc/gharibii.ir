@@ -1,5 +1,5 @@
 ---
-title: "پیرهن مجلسی هالووین جادوگری - فروشگاه غریبی کیش"
+title: "پیرهن مجلسی هالووین جادوگری"
 slug: "dress-formal-halloween"
 price: 1998000
 price_group: "tier_9"
@@ -20,8 +20,10 @@ images:
   - /assets/images/products/girls/dress-formal-halloween/8.webp
   - /assets/images/products/girls/dress-formal-halloween/9.webp
 old_id: "45420"
+sort_id: 45420
 redirect_from:
   - /product/45420
+  - "/shop/پیراهن-مجلسی/P45420-پیرهن-مجلسی-هالووین-جادوگری-فروشگاه-غریبی-کیش.html"
 ---
 
 

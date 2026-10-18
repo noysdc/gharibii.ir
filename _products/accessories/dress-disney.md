@@ -1,5 +1,5 @@
 ---
-title: "پیرهن توری اسب های پونی دیزنی - فروشگاه غریبی کیش"
+title: "پیرهن توری اسب های پونی دیزنی"
 slug: "dress-disney"
 price: 598000
 price_group: "tier_12"
@@ -25,8 +25,10 @@ images:
   - /assets/images/products/accessories/dress-disney/14.webp
   - /assets/images/products/accessories/dress-disney/15.webp
 old_id: "45427"
+sort_id: 45427
 redirect_from:
   - /product/45427
+  - "/shop/مایو/P45427-مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش.html"
 ---
 
 

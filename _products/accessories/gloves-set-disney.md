@@ -1,5 +1,5 @@
 ---
-title: "دستکش های پرنسسی دیزنی - فروشگاه غریبی کیش"
+title: "دستکش های پرنسسی دیزنی"
 slug: "gloves-set-disney"
 price: 798000
 price_formatted: "798,000"
@@ -24,8 +24,10 @@ images:
   - /assets/images/products/accessories/gloves-set-disney/14.webp
   - /assets/images/products/accessories/gloves-set-disney/15.webp
 old_id: "1"
+sort_id: 1
 redirect_from:
   - /product/1
+  - "/shop/اکسسوری/P1-تیشرت-نخی-یقه-گرد.html"
 ---
 
 

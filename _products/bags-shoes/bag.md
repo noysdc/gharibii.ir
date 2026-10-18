@@ -18,8 +18,10 @@ images:
   - /assets/images/products/bags-shoes/bag/9.webp
   - /assets/images/products/bags-shoes/bag/10.webp
 old_id: "45357"
+sort_id: 45357
 redirect_from:
   - /product/45357
+  - "/shop/کیف-و-کفش/P45357-کیف-های-شخصیتی-وارداتی-فروشگاه-غریبی.html"
 ---
 
 

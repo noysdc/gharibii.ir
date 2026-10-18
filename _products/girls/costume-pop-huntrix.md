@@ -26,8 +26,10 @@ images:
   - /assets/images/products/girls/costume-pop-huntrix/15.webp
   - /assets/images/products/girls/costume-pop-huntrix/16.webp
 old_id: "45447"
+sort_id: 45447
 redirect_from:
   - /product/45447
+  - "/shop/شخصیتی-دخترانه/P45447-لباس-شخصیتی-کی-پاپ-شکارچیان-شیاطین-رومی-k-pop-huntrix.html"
 ---
 
 

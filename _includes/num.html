@@ -1,0 +1,5 @@
+{%- assign s = include.n | append: "" -%}
+{%- assign l = s | size -%}
+{%- if l > 6 -%}{%- assign l1 = l | minus: 6 -%}{{ s | slice: 0, l1 }}،{{ s | slice: l1, 3 }}،{{ s | slice: -3, 3 }}
+{%- elsif l > 3 -%}{%- assign l1 = l | minus: 3 -%}{{ s | slice: 0, l1 }}،{{ s | slice: l1, 3 }}
+{%- else -%}{{ s }}{%- endif -%}

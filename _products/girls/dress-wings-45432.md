@@ -1,5 +1,5 @@
 ---
-title: "پیراهن رقص باله - فروشگاه غریبی کیش"
+title: "پیراهن رقص باله (کد 45432)"
 slug: "dress-wings"
 price: 4998000
 price_group: "tier_4"
@@ -10,8 +10,10 @@ sizes: ["M - مناسب 2 تا 3 سال", "L - مناسب 4 - 5", "XL - مناس
 colors: ["صورتی", "سفید"]
 images: []
 old_id: "45432"
+sort_id: 45432
 redirect_from:
   - /product/45432
+  - "/shop/باله/P45432-پی.html"
 ---
 
 

@@ -13,8 +13,10 @@ images:
   - /assets/images/products/accessories/hat-halloween/4.webp
   - /assets/images/products/accessories/hat-halloween/5.webp
 old_id: "45402"
+sort_id: 45402
 redirect_from:
   - /product/45402
+  - "/shop/کلاه/P45402-کلاه-جادوگری-شخصیتی-هالووین-فروشگاه-غریبی.html"
 ---
 
 

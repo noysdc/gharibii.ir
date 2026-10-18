@@ -16,8 +16,10 @@ images:
   - /assets/images/products/girls/dress/6.webp
   - /assets/images/products/girls/dress/7.webp
 old_id: "5"
+sort_id: 5
 redirect_from:
   - /product/5
+  - "/shop/لباس-پرنسسی/P5-تي-شرت-نخي-يقه-گرد-زنانه.html"
 ---
 
 - پیراهن دخترانه پرنسس پیچ - بدون تاج	

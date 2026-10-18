@@ -32,8 +32,10 @@ images:
   - /assets/images/products/girls/costume-mermaid-disney/23.webp
   - /assets/images/products/girls/costume-mermaid-disney/24.webp
 old_id: "45352"
+sort_id: 45352
 redirect_from:
   - /product/45352
+  - "/shop/لباس-پرنسسی/P45352-لباس-دخترانه-پری-دریایی-دیزنی.html"
 ---
 
 

@@ -16,8 +16,10 @@ images:
   - /assets/images/products/girls/wings-skirt/5.webp
   - /assets/images/products/girls/wings-skirt/6.webp
 old_id: "45349"
+sort_id: 45349
 redirect_from:
   - /product/45349
+  - "/shop/دامن/P45349-دامن-تتو-باله-دخترانه.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

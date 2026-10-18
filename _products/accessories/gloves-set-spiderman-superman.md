@@ -1,5 +1,5 @@
 ---
-title: "ست دستکش تیرپرتاب کن اسپایدرمن سیاه و سوپرمن-فروشگاه غریبی کیش"
+title: "ست دستکش تیرپرتاب کن اسپایدرمن سیاه و سوپرمن"
 slug: "gloves-set-spiderman-superman"
 price: 398000
 price_group: "tier_2"
@@ -12,8 +12,10 @@ badge: "فروش ویژه"
 images:
   - /assets/images/products/accessories/gloves-set-spiderman-superman/1.webp
 old_id: "45388"
+sort_id: 45388
 redirect_from:
   - /product/45388
+  - "/shop/اکسسوری/P45388-ست-دستکش-تیرپرتاب-کن-اسپایدرمن-سیاه-و-سوپرمن-فروشگاه-غریبی-کیش.html"
 ---
 
 

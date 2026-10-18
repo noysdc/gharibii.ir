@@ -18,8 +18,10 @@ images:
   - /assets/images/products/accessories/mermaid/8.webp
   - /assets/images/products/accessories/mermaid/9.webp
 old_id: "3"
+sort_id: 3
 redirect_from:
   - /product/3
+  - "/shop/اکسسوری/P3-پالتو-بلند-زنانه.html"
 ---
 
 

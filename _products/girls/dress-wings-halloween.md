@@ -12,8 +12,10 @@ images:
   - /assets/images/products/girls/dress-wings-halloween/3.webp
   - /assets/images/products/girls/dress-wings-halloween/4.webp
 old_id: "45342"
+sort_id: 45342
 redirect_from:
   - /product/45342
+  - "/shop/باله/P45342-پبراهن-باله-تم-هالووین.html"
 ---
 
 

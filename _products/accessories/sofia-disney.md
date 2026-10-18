@@ -1,5 +1,5 @@
 ---
-title: "ناخن مصنوعی سوفیا شخصیتی دیزنی چسبدار-فروشگاه غریبی کیش"
+title: "ناخن مصنوعی سوفیا شخصیتی دیزنی چسبدار"
 slug: "sofia-disney"
 price: 398000
 price_group: "tier_2"
@@ -26,8 +26,10 @@ images:
   - /assets/images/products/accessories/sofia-disney/17.webp
   - /assets/images/products/accessories/sofia-disney/18.webp
 old_id: "45391"
+sort_id: 45391
 redirect_from:
   - /product/45391
+  - "/shop/اکسسوری/P45391-ناخن-مصنوعی-شخصیتی-دیزنی-فروشگاه-غریبی.html"
 ---
 
 ناخص مصنوعی همراه با چسب مخصوص کودک

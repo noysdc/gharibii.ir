@@ -66,8 +66,10 @@ images:
   - /assets/images/products/accessories/wings/56.webp
   - /assets/images/products/accessories/wings/57.webp
 old_id: "45369"
+sort_id: 45369
 redirect_from:
   - /product/45369
+  - "/shop/بال/P45369-بال-فرشته-هولوگرامی-دخترانه.html"
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{%- assign items = site.products | where: 'category', page.category | sort: 'date' | reverse -%}
+{%- assign items = site.products | where: 'category', page.category | sort: 'sort_id' | reverse -%}
 <div class="wrap">
   <nav class="crumbs" aria-label="مسیر"><a href="{{ '/' | relative_url }}">خانه</a> / {{ page.title }}</nav>
   <h1>{{ page.title }}</h1>

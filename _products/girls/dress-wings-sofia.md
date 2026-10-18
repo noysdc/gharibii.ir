@@ -11,8 +11,10 @@ images:
   - /assets/images/products/girls/dress-wings-sofia/1.webp
   - /assets/images/products/girls/dress-wings-sofia/2.webp
 old_id: "45344"
+sort_id: 45344
 redirect_from:
   - /product/45344
+  - "/shop/باله/P45344-پبراهن-باله-تم-سوفیا.html"
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-title: "مایو لباسی سرهمی اونجر شخصیتی پسرانه -فروشگاه غریبی کیش"
+title: "مایو لباسی سرهمی اونجر شخصیتی پسرانه"
 slug: "costume-swimsuit"
 price: 1598000
 price_group: "tier_5"
@@ -20,8 +20,10 @@ images:
   - /assets/images/products/boys/costume-swimsuit/9.webp
   - /assets/images/products/boys/costume-swimsuit/10.webp
 old_id: "45366"
+sort_id: 45366
 redirect_from:
   - /product/45366
+  - "/shop/شخصیتی-پسرانه/P45366-مایو-لباسی-شخصیتی-پسرانه.html"
 ---
 
 

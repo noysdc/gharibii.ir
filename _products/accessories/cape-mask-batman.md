@@ -1,5 +1,5 @@
 ---
-title: "شنل ماسک بتی گرل بتمن دخترانه شخصیتی قهرمانی-فروشگاه غریبی کیش"
+title: "شنل ماسک بتی گرل بتمن دخترانه شخصیتی قهرمانی"
 slug: "cape-mask-batman"
 price: 998000
 price_group: "tier_3"
@@ -29,8 +29,10 @@ images:
   - /assets/images/products/accessories/cape-mask-batman/20.webp
   - /assets/images/products/accessories/cape-mask-batman/21.webp
 old_id: "45410"
+sort_id: 45410
 redirect_from:
   - /product/45410
+  - "/shop/اکسسوری/P45410-شنل-ماسک-بتی-گرل-بتمن-دخترانه-شخصیتی-قهرمانی-فروشگاه-غریبی-کیش.html"
 ---
 
 فری سایز

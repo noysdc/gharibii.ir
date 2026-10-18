@@ -14,8 +14,10 @@ images:
   - /assets/images/products/crown-wand/crown-headband/4.jpg
   - /assets/images/products/crown-wand/crown-headband/5.jpg
 old_id: "45375"
+sort_id: 45375
 redirect_from:
   - /product/45375
+  - "/shop/اکسسوری/P45375-تل-تاج-مویی-پرنسسی-فروشگاه-غریبی.html"
 ---
 
 

@@ -19,8 +19,10 @@ images:
   - /assets/images/products/girls/dress-mickey-mouse-formal-disney/6.webp
   - /assets/images/products/girls/dress-mickey-mouse-formal-disney/7.webp
 old_id: "45346"
+sort_id: 45346
 redirect_from:
   - /product/45346
+  - "/shop/لباس-پرنسسی/P45346-پیراهن-مجلسی-دیزنی-میکی-موس-فروشگاه-غریبی.html"
 ---
 
 لباس تک است و اکسسوری ها همراه لباس نیست (باید جداگانه تهیه شوند)

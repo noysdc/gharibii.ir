@@ -1,5 +1,5 @@
 ---
-title: "پیرهن پرنسسی السا فروزن اورجینال دیزنی - فروشگاه غریبی کیش"
+title: "پیرهن پرنسسی السا فروزن اورجینال دیزنی"
 slug: "dress-elsa-disney-frozen"
 price: 5998000
 price_group: "tier_1"
@@ -48,8 +48,10 @@ images:
   - /assets/images/products/girls/dress-elsa-disney-frozen/37.jpg
   - /assets/images/products/girls/dress-elsa-disney-frozen/38.jpg
 old_id: "45438"
+sort_id: 45438
 redirect_from:
   - /product/45438
+  - "/shop/لباس-پرنسسی/P45438-پیرهن-پرنسسی-السا-فروزن-اورجینال-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 مناسب برای سن 3 تا 10 سال 

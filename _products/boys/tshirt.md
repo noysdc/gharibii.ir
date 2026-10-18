@@ -21,8 +21,10 @@ images:
   - /assets/images/products/boys/tshirt/11.webp
   - /assets/images/products/boys/tshirt/12.webp
 old_id: "45360"
+sort_id: 45360
 redirect_from:
   - /product/45360
+  - "/shop/تیشرت-پسرانه/P45360-تیشرت-شخصیتی-پسرانه-فروشگاه-غریبی.html"
 ---
 
 تیشرت کاملا نخی پسرانه مناسب با گروه سنی یک تا دوازده سال

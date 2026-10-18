@@ -1,5 +1,5 @@
 ---
-title: "لباس اسپایدرمن عضلانی برای قهرمانان کوچک - فروشگاه غریبی کیش"
+title: "لباس اسپایدرمن عضلانی برای قهرمانان کوچک"
 slug: "costume-anna-spiderman"
 price: 5998000
 price_group: "tier_1"
@@ -19,8 +19,10 @@ images:
   - /assets/images/products/boys/costume-anna-spiderman/9.webp
   - /assets/images/products/boys/costume-anna-spiderman/10.webp
 old_id: "45390"
+sort_id: 45390
 redirect_from:
   - /product/45390
+  - "/shop/شخصیتی-پسرانه/P45390-یکسره-عضلانی-قهرمانی-شخصیت-اسپایدرمن-فروشگاه-غریبی.html"
 ---
 
 تبدیل به ابرقهرمان: لباس اسپایدرمن عضلانی برای قهرمانان کوچک!

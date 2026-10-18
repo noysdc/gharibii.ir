@@ -18,8 +18,10 @@ images:
   - /assets/images/products/bags-shoes/bag-mermaid/6.webp
   - /assets/images/products/bags-shoes/bag-mermaid/7.webp
 old_id: "2"
+sort_id: 2
 redirect_from:
   - /product/2
+  - "/shop/کیف-و-کفش/P2-تیشرت-نخی-آستین-بلند.html"
 ---
 
 

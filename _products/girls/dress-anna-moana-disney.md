@@ -1,5 +1,5 @@
 ---
-title: "پیرهن مووانا دیزنی - فروشگاه غریبی کیش"
+title: "پیرهن مووانا دیزنی"
 slug: "dress-anna-moana-disney"
 price: 989000
 price_formatted: "989,000"
@@ -26,8 +26,10 @@ images:
   - /assets/images/products/girls/dress-anna-moana-disney/17.webp
   - /assets/images/products/girls/dress-anna-moana-disney/18.webp
 old_id: "45421"
+sort_id: 45421
 redirect_from:
   - /product/45421
+  - "/shop/لباس-پرنسسی/P45421-پیرهن-مووانا-دیزنی-فروشگاه-غریبی-کیش.html"
 ---
 
 

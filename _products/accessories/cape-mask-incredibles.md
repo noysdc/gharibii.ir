@@ -1,5 +1,5 @@
 ---
-title: "شنل ماسک شگفت انگیزان قهرمانی شخصیت کارتونی-فروشگاه غریبی کیش"
+title: "شنل ماسک شگفت انگیزان قهرمانی شخصیت کارتونی"
 slug: "cape-mask-incredibles"
 price: 998000
 price_group: "tier_3"
@@ -9,8 +9,10 @@ date: 2026-10-17
 images:
   - /assets/images/products/accessories/cape-mask-incredibles/1.webp
 old_id: "45406"
+sort_id: 45406
 redirect_from:
   - /product/45406
+  - "/shop/اکسسوری/P45406-شنل-ماسک-شگفت-انگیزان-قهرمانی-شخصیت-کارتونی-فروشگاه-غریبی-کیش.html"
 ---
 
 فری سایز

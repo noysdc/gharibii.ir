@@ -1,5 +1,5 @@
 ---
-title: "لباس مووآنا 2 - کالکشن 2026 - فروشگاه غریبی کیش"
+title: "لباس مووآنا 2 - کالکشن 2026"
 slug: "costume-anna-moana-2026"
 price: 4998000
 price_group: "tier_4"
@@ -21,8 +21,10 @@ images:
   - /assets/images/products/girls/costume-anna-moana-2026/10.webp
   - /assets/images/products/girls/costume-anna-moana-2026/11.webp
 old_id: "45444"
+sort_id: 45444
 redirect_from:
   - /product/45444
+  - "/shop/شخصیتی-دخترانه/P45444-لباس-مووآنا-2-کالکشن-2026-فروشگاه-غریبی-کیش.html"
 ---
 
 
