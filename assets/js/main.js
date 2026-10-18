@@ -276,7 +276,7 @@
       url: btn.dataset.url || window.location.pathname
     };
 
-    if (!product.title) return;
+    if (!product.title || btn.disabled) return;
 
     var exists = cart.find(function (i) { return i.url === product.url; });
     if (exists) {

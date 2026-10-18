@@ -21,6 +21,8 @@ def main():
     # ساخت نقشه: قیمت -> اسم گروه
     price_to_tier = {}
     for tier_name, tier_info in groups.items():
+        if tier_info.get('out_of_stock'):
+            continue  # گروه اتمام موجودی با قیمت ربطی ندارد
         price_to_tier[tier_info['price']] = tier_name
 
     print(f"📦 {len(price_to_tier)} گروه قیمتی بارگذاری شد.\n")

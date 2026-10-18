@@ -1,4 +1,8 @@
 {%- assign product = include.product -%}
+{%- assign price_oos_grp = site.data.price_groups.groups[product.price_group] -%}{%- assign price_oos = product.out_of_stock -%}{%- if price_oos_grp.out_of_stock -%}{%- assign price_oos = true -%}{%- endif -%}
+{%- if price_oos -%}
+  <span class="price-value out-of-stock-label">اتمام موجودی</span>
+{%- else -%}
 {%- assign pr_clean = product.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
 {%- assign pr_num = pr_clean | plus: 0 -%}
 
@@ -34,4 +38,5 @@
   {%- assign off_pct = old_num | minus: pr_num | times: 100 | divided_by: old_num -%}
   <s class="old-price">{{ old_fmt | strip }}</s>
   <span class="discount-pill">{{ off_pct }}٪ تخفیف</span>
+{%- endif -%}
 {%- endif -%}

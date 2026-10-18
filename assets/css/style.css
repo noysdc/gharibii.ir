@@ -1355,3 +1355,16 @@ html.splash-on .app-splash{display:flex}
   width:100% !important;margin:0 !important;padding:.8rem 1.2rem !important;gap:.5rem !important;
   font-size:calc(1rem * var(--font-scale)) !important;line-height:1.6;border-radius:999px;
 }
+
+/* ===== اتمام موجودی ===== */
+.out-of-stock-label{color:#c0392b !important;font-weight:700}
+html[data-theme="dark"] .out-of-stock-label{color:#ff8a7a !important}
+.card-price .out-of-stock-label{font-weight:700 !important}
+.add-to-cart-btn:disabled,.add-to-cart-btn.is-soldout-btn,.btn-cart:disabled{
+  opacity:.6 !important;cursor:not-allowed !important;pointer-events:none;
+  background:rgba(120,120,120,.12) !important;border-color:rgba(120,120,120,.45) !important;
+  color:var(--muted) !important;box-shadow:none !important;transform:none !important;
+}
+.add-to-cart-btn.is-soldout-btn svg{display:none}
+.card.is-soldout .card-img img{filter:grayscale(.75);opacity:.7}
+.card.is-soldout .card-badge{display:none}

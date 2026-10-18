@@ -44,6 +44,15 @@ def main():
         yaml_lines.append(f"    price: {p}")
         yaml_lines.append("")
 
+    # گروه ثابت «اتمام موجودی» (با اجرای مجدد اسکریپت پاک نشود)
+    yaml_lines += [
+        "  out_of_stock:",
+        '    label: "اتمام موجودی"',
+        "    out_of_stock: true",
+        "    price: 0",
+        "",
+    ]
+
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_text("\n".join(yaml_lines), encoding='utf-8')
     
