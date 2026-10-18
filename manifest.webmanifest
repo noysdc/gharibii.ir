@@ -1,23 +1,24 @@
----
-layout: null
-sitemap: false
----
 {
-  "id": {{ '/' | relative_url | jsonify }},
   "name": "فروشگاه غریبی کیش",
   "short_name": "غریبی کیش",
-  "description": {{ site.description | jsonify }},
-  "lang": "fa",
-  "dir": "rtl",
-  "start_url": {{ '/?source=pwa' | relative_url | jsonify }},
-  "scope": {{ '/' | relative_url | jsonify }},
+  "description": "لباس شخصیتی - تم دیزنی و پرنسسی",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f3f7f8",
-  "theme_color": "#0a6670",
+  "background_color": "#F3F7F8",
+  "theme_color": "#0A6670",
   "icons": [
-    { "src": {{ '/assets/icons/icon-192.png' | relative_url | jsonify }}, "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": {{ '/assets/icons/icon-512.png' | relative_url | jsonify }}, "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": {{ '/assets/icons/maskable-512.png' | relative_url | jsonify }}, "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/assets/images/gharibii-store-logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/gharibii-store-logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
   ]
 }
