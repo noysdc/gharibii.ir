@@ -1330,3 +1330,18 @@ html.splash-on .app-splash{display:flex}
 .app-splash .store-name,.app-splash .store-tagline{margin:0}
 @keyframes splash-in{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.app-splash-inner{animation:none}.app-splash{transition:none}}
+
+/* ===== صفحه محصول: باکس متن هم‌اندازه عکس + دکمه‌ها هم‌عرض اسلایدر ===== */
+.info{display:flex;flex-direction:column;min-width:0}
+.info-box{
+  aspect-ratio:3/4;max-height:80vh;overflow-y:auto;overflow-x:hidden;
+  padding:1rem 1.1rem;border-radius:1.2rem;
+  background:var(--surface);border:1px solid var(--line);
+  box-shadow:0 8px 28px rgba(168,85,247,.12);
+  scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+}
+.info-box h1{font-size:calc(1.3rem * var(--font-scale));line-height:1.7;margin:0 0 .25rem}
+.info-box .desc{margin:.5rem 0 0}
+.info-box .desc > h1:first-child{display:none} /* عنوان تکراری داخل متن */
+.info .buy-actions{margin-top:.75rem !important;width:100%}
+@media (min-width:820px){.info-box{max-height:none}}

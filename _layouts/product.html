@@ -37,12 +37,14 @@ layout: default
     </div>
 
     <div class="info">
+      <div class="info-box">
       <h1>{{ page.title }}</h1>
       <p class="price">{% include price.html product=page %}</p>
       {% if page.sizes %}<p class="meta"><strong>سایز:</strong> {{ page.sizes | join: '، ' }} — <a href="{{ site.size_guide_url | relative_url }}">راهنمای سایز</a></p>{% endif %}
       {% if page.material %}<p class="meta"><strong>جنس:</strong> {{ page.material }}</p>{% endif %}
       {% if page.colors %}<p class="meta"><strong>رنگ:</strong> {{ page.colors | join: '، ' }}</p>{% endif %}
       <div class="desc">{{ content }}</div>
+      </div>
       {% include buy.html product=page %}
       {% if page.external_link %}<p class="meta"><a href="{{ page.external_link }}" rel="nofollow noopener" target="_blank">لینک مرتبط</a></p>{% endif %}
     </div>
