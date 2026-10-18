@@ -322,6 +322,7 @@
 
     // باز کردن مودال سبد
     if (e.target.closest('#floating-cart')) {
+      var waM = document.getElementById('wa-menu'); if (waM) waM.style.display = 'none'; // جلوگیری از نمایش دوبارهٔ متن هشدار
       document.getElementById('cart-modal').classList.add('active');
       return;
     }
