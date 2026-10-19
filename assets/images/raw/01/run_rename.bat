@@ -1,0 +1,1 @@
+python "C:\Users\unes shojaei\Documents\GitHub\gharibii.ir\assets\images\raw\01\rename_webp.py"

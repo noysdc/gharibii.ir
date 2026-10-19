@@ -9,16 +9,17 @@ import pandas as pd
 
 CSV = sys.argv[1] if len(sys.argv) > 1 else "products.csv"
 OUT = "_products"
+SAMPLES_OUT = os.path.join(OUT, "samples") # پوشه خروجی برای محصولات نمونه
 IMG_ROOT = "/assets/images/products"
 
+# مسیری که پوشه‌های عکس در آن قرار دارند
+RAW_IMAGES_DIR = r"C:\Users\unes shojaei\Documents\GitHub\gharibii.ir\assets\images\raw\01"
+
 # ═══════════════════════════════════════════════════════════════════
-# id محصولات اصلی (که در CSV هستند و داده از آن‌ها گرفته می‌شود)
 MERMAID_DRESS_ID  = 45329
 PONNY_SWIMSUIT_ID = 45427
-# id فرضی برای محصولات دوم (در CSV نیستند؛ در frontmatter نوشته می‌شوند)
 MERMAID_DRESS_FAKE_ID  = 99901
 PONNY_SWIMSUIT_FAKE_ID = 99902
-# نگاشت id فرضی → id منبع داده
 FAKE_ID_SOURCE = {
     MERMAID_DRESS_FAKE_ID:  MERMAID_DRESS_ID,
     PONNY_SWIMSUIT_FAKE_ID: PONNY_SWIMSUIT_ID,
@@ -42,8 +43,8 @@ MAP = {
  "fake-nails":45392, "frozen-2-elsa-anna-dress":8, "girls-ballet-gymnastics-bodysuit":45394,
  "girls-ballet-shoes":45433, "girls-cotton-top":45348, "girls-formal-skirt":45350,
  "girls-magic-wand":45363, "girls-tutu-ballet-skirt":45349,
- "glitter-mermaid-dress":45329,                 # محصول اول (واقعی)
- "mermaid-dress":MERMAID_DRESS_FAKE_ID,         # محصول دوم (id فرضی)
+ "glitter-mermaid-dress":45329,
+ "mermaid-dress":MERMAID_DRESS_FAKE_ID,
  "halloween-ballet-dress":45342, "halloween-witch-formal-dress":45420,
  "halloween-witch-hat":45402,
  "halloween-witch-hat-2":45395,
@@ -57,8 +58,8 @@ MAP = {
  "moana-2-collection-2026":45444, "moana-dress":45421,
  "moana-necklace":45415, "moana-necklace-2":45415,
  "moana-two-piece-dress":4,
- "my-little-pony-lace-dress":45427,             # محصول اول (واقعی)
- "ponny-swimsuit":PONNY_SWIMSUIT_FAKE_ID,       # محصول دوم (id فرضی)
+ "my-little-pony-lace-dress":45427,
+ "ponny-swimsuit":PONNY_SWIMSUIT_FAKE_ID,
  "ninja-turtles-cape-mask":45405,
  "original-elsa-frozen-dress":45438, "paw-patrol-dress":45359, "paw-patrol-swimsuit":45367,
  "peach-princess-dress":5, "pirate-hat":45413,
@@ -136,6 +137,7 @@ def html_to_md(s):
 def yq(x):
     return '"' + str(x).replace('\\','\\\\').replace('"','\\"') + '"'
 
+# خواندن CSV
 df = pd.read_csv(CSV, encoding="utf-8-sig")
 main = df[df["title"].notna()].drop_duplicates("id").set_index("id")
 
@@ -168,11 +170,22 @@ def write_product(name, e):
     r = main.loc[source_id]
     cat = category_of(name); gen = gender_of(name, cat)
     used.add(source_id)
+    
+    # 🔽 تبدیل قیمت به تومان با کاما 🔽
+    raw_price = str(r['price']).strip()
+    try:
+        price_int = int(float(raw_price))
+        formatted_price = f"{price_int:,}"
+    except (ValueError, TypeError):
+        formatted_price = "0"
+
     fm = ["---","layout: product",
           f"title: {yq(clean_title(r['title']))}",
           f"slug: {yq(name)}",
           f"category: {cat}", f"gender: {gen}",
-          f"price: {int(r['price'])}", "currency: IRR"]
+          f"price: {yq(formatted_price)}", # مقدار همراه با کاما
+          "currency: IRT",                # واحد پول تومان
+    ]
     fm.append("images_dirs: [" + ", ".join(yq(IMG_ROOT + "/" + f + "/") for f in e["folders"]) + "]")
     if e["needs_folder"]: fm.append("needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: " + e["folders"][0])
     fm.append(f"webzi_id: {e['id']}")
@@ -203,16 +216,63 @@ def write_product(name, e):
         status = "ok"
     report.append([name, cat, e["id"], clean_title(r["title"]), "|".join(e["folders"]), status])
 
+# ساخت محصولات اصلی از CSV
 for name, e in entries.items(): write_product(name, e)
 
+# ساخت اسکلت محصولات STUBS
 for folder, t in STUBS.items():
     cat = category_of(folder); d = os.path.join(OUT, cat); os.makedirs(d, exist_ok=True)
     fm = ["---","layout: product",f"title: {yq(t)}",f"folder: {yq(folder)}",f"category: {cat}",
-          f"gender: {gender_of(folder,cat)}","price:","currency: IRR",
+          f"gender: {gender_of(folder,cat)}",'price: "0"',"currency: IRT",
           f"images_dirs: [{yq(IMG_ROOT + '/' + folder + '/')}]","needs_review: true","---"]
     with open(os.path.join(d, folder + ".md"), "w", encoding="utf-8") as f:
         f.write("\n".join(fm) + "\n\n")
     report.append([folder, cat, "", t, folder, "NOT FOUND در CSV - اسکلت"])
+
+# =========================================================================
+# 🚨 بررسی پوشه‌های عکس در سیستم و ساخت محصول نمونه در صورت نیاز
+# =========================================================================
+print("Scanning images folder for unmapped products...")
+if os.path.isdir(RAW_IMAGES_DIR):
+    existing_folders = [d for d in os.listdir(RAW_IMAGES_DIR) if os.path.isdir(os.path.join(RAW_IMAGES_DIR, d))]
+    all_known_names = set(MAP.keys()) | set(EXTRA.keys()) | set(STUBS.keys())
+    
+    os.makedirs(SAMPLES_OUT, exist_ok=True)
+    
+    for folder in existing_folders:
+        clean_folder = re.sub(r'\s*\(\d+\)$', '', folder).strip()
+        
+        if clean_folder not in all_known_names and folder not in all_known_names:
+            print(f"Found new unmapped folder: {folder} -> Creating sample product.")
+            cat = category_of(clean_folder)
+            gen = gender_of(clean_folder, cat)
+            
+            fm = [
+                "---",
+                "layout: product",
+                f"title: {yq(clean_folder + ' (محصول نمونه)')}",
+                f"slug: {yq(clean_folder)}",
+                f"category: {cat}",
+                f"gender: {gen}",
+                'price: "0"',     # 🔽 قیمت نمونه 🔽
+                "currency: IRT",  # 🔽 واحد پول 🔽
+                f"images_dirs: [{yq(IMG_ROOT + '/' + folder + '/')}]",
+                "needs_review: true",
+                "# ⚠️ این محصول در فایل CSV وجود نداشت و به صورت خودکار ساخته شده است.",
+                "# لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.",
+                "---",
+                "",
+                "توضیحات محصول را اینجا بنویسید...",
+            ]
+            
+            with open(os.path.join(SAMPLES_OUT, clean_folder + ".md"), "w", encoding="utf-8") as f:
+                f.write("\n".join(fm) + "\n")
+            
+            report.append([clean_folder, cat, "", clean_folder + " (نمونه)", folder, "فولدر یتیم - ساخت Sample"])
+else:
+    print(f"WARNING: Images directory not found at {RAW_IMAGES_DIR}. Skipping orphan scan.")
+
+# =========================================================================
 
 for pid, r in main.iterrows():
     if pid not in used:
@@ -220,4 +280,4 @@ for pid, r in main.iterrows():
 
 with open("mapping_report.csv", "w", encoding="utf-8-sig", newline="") as f:
     w = csv.writer(f); w.writerow(["md_name","category","webzi_id","title","image_folders","status"]); w.writerows(report)
-print("done:", len(entries)+len(STUBS), "md files")
+print(f"done: {len(entries)+len(STUBS)} main md files, and sample files in {SAMPLES_OUT}")

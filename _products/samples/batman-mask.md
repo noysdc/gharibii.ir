@@ -1,0 +1,18 @@
+---
+layout: product
+title: "batman-mask (محصول نمونه)"
+slug: "batman-mask"
+category: accessories
+gender: boys
+price: "0"
+currency: IRT
+images_dirs: ["/assets/images/products/batman-mask/"]
+needs_review: true
+# ⚠️ این محصول در فایل CSV وجود نداشت و به صورت خودکار ساخته شده است.
+# لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
+
+images:
+  - /assets/images/raw/01/batman-mask/batman-mask.webp
+---
+
+توضیحات محصول را اینجا بنویسید...

@@ -1,0 +1,21 @@
+---
+layout: product
+title: "پیراهن باله - پرنسسی"
+slug: "princess-ballet-dress"
+category: girls
+gender: girls
+price: "4,998,000"
+currency: IRT
+images_dirs: ["/assets/images/products/princess-ballet-dress/"]
+needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: princess-ballet-dress
+webzi_id: 45336
+old_slug: "پبراهن-باله"
+webzi_images: ["c9840021f7b24a97bd3f805771343e1c.JPG", "db227713c9fb43f18364509d6431188b.JPG", "9d9e825307704b0c848052569de9118b.JPG", "43f2980803514538b08e48f9a7080061.JPG", "95d5b053453e4d988c41f440c9cdaf31.JPG", "3ec266c558924822b460c31d0719d609.JPG", "0aeb109cd87e41b49fa6e63a65dd066d.JPG", "a1d5e0f4581247349f1c5db820216ab2.JPG", "85fc5e99b0af410aaef9cf6e057175b9.JPG", "67627fc4c5014da7b02fb9a78c224a36.JPG", "e057aa50539a46a3ad265229fa2aa04b.JPG", "ff9670c1f40744b5af8c4b8a7a9d9916.JPG", "70a0a75e43fa40c2b5ccb2d33cccc0cb.JPG", "7be9a05dde2c4eaab70ba9e0aa921c17.JPG", "9607df1eb5bc48d3b010f1508a948f8b.jpg", "b74f92293e24405b9e45e6d8eb5e1e41.jpg", "99f80961722643c8aedd4a578ad8ccd7.JPG", "9a07ecbf796a4c11ab399a658d552054.jpg", "bcb830e844344a5e81e82292a3cff9c0.jpg", "f740c26575794489aa696221ae2ebc6f.JPG", "4916bf042cef402c92045e97dfc6e270.PNG", "b7964e55e1d94a48aee70d25aae198ff.JPG", "5ae69e045fb8458aa491134fab189f3f.JPG", "adc1f23d7f664c1da182bc6ad68700a6.png"]
+options:
+  - name: "اندازه"
+    values: ["M", "L", "XL", "XXL"]
+tags: ["پرنسسی", "کیش", "دیزنی", "تم", "تولد", "پبراهن باله", "ژیمناستیک", "رقص", "باله"]
+---
+
+پبراهن باله - فروشگاه غریبی
+مخصوص رقص و تم های خاص
