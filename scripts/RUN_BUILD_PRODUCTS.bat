@@ -3,9 +3,6 @@ chcp 65001 >nul
 title Build Products Automation
 color 0A
 
-:: Go to parent directory
-cd /d "%~dp0.."
-
 echo =======================================================
 echo       Running build_products.py ...
 echo =======================================================
@@ -25,14 +22,13 @@ if %errorlevel% equ 0 (
     goto :run_script
 )
 
-:: If neither worked
 echo [ERROR] Python is not installed or not in PATH!
 pause
 exit /b
 
 :run_script
 if not exist "products.csv" (
-    echo [ERROR] File "products.csv" not found!
+    echo [ERROR] File "products.csv" not found in this folder!
     pause
     exit /b
 )
