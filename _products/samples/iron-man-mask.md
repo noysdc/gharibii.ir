@@ -12,9 +12,8 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/iron-man-mask/iron-man-mask-01.webp
-  - /assets/images/raw/01/iron-man-mask/iron-man-mask-02.webp
-  - /assets/images/raw/01/iron-man-mask/iron-man-mask-03.webp
----
+  - /assets/images/products/accessories/iron-man-mask/1.webp
+  - /assets/images/products/accessories/iron-man-mask/2.webp
+  - /assets/images/products/accessories/iron-man-mask/3.webp
 
 توضیحات محصول را اینجا بنویسید...

@@ -12,14 +12,13 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-1.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-2.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-3.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-4.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-5.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-6.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-7.webp
-  - /assets/images/raw/01/کی پاپ - k pop - huntrix/kpop-huntrix-rumi-2-8.webp
----
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/1.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/2.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/3.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/4.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/5.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/6.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/7.webp
+  - /assets/images/products/girls/کی پاپ - k pop - huntrix/8.webp
 
 توضیحات محصول را اینجا بنویسید...

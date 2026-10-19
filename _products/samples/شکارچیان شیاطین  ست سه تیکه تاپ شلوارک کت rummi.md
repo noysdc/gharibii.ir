@@ -12,18 +12,17 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-1.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-10.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-11.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-12.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-2.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-3.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-4.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-5.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-6.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-7.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-8.webp
-  - /assets/images/raw/01/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/kpop-huntrix-rumi-9.webp
----
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/1.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/2.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/3.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/4.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/5.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/6.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/7.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/8.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/9.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/10.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/11.webp
+  - /assets/images/products/girls/شکارچیان شیاطین  ست سه تیکه تاپ شلوارک کت rummi/12.webp
 
 توضیحات محصول را اینجا بنویسید...

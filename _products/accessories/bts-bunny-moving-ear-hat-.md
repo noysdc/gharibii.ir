@@ -13,14 +13,13 @@ webzi_images: ["b043d93315bc4846975f83594be9d0ee.jpeg", "bfe9173189cf4056a3e8ec1
 tags: ["پسرانه", "بی تی اس", "مرکزتجاری کیش", "دخترانه", "کلاه", "پمپی", "گوش متحرک"]
 
 images:
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-01.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-02.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-03.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-04.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-05.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-06.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-07.webp
-  - /assets/images/raw/01/bts-bunny-moving-ear-hat-/bts-bunny-moving-ear-hat-08.webp
----
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/1.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/2.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/3.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/4.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/5.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/6.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/7.webp
+  - /assets/images/products/accessories/bts-bunny-moving-ear-hat-/8.webp
 
 فری سایز

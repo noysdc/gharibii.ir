@@ -13,10 +13,9 @@ old_slug: "سرهمی-شخصیتی-گربه-سیاه-فروشگاه-غریبی"
 webzi_images: ["86da3051005447a1b4370b31bd10f618.jpg"]
 
 images:
-  - /assets/images/raw/01/black-cat-jumpsuit/black-cat-jumpsuit-01.webp
-  - /assets/images/raw/01/black-cat-jumpsuit/black-cat-jumpsuit-02.webp
-  - /assets/images/raw/01/black-cat-jumpsuit/black-cat-jumpsuit-03.webp
-  - /assets/images/raw/01/black-cat-jumpsuit/black-cat-jumpsuit-04.webp
----
+  - /assets/images/products/boys/black-cat-jumpsuit/1.webp
+  - /assets/images/products/boys/black-cat-jumpsuit/2.webp
+  - /assets/images/products/boys/black-cat-jumpsuit/3.webp
+  - /assets/images/products/boys/black-cat-jumpsuit/4.webp
 
 

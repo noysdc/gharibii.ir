@@ -13,28 +13,27 @@ webzi_images: ["2f3dfedf2b47409593b229de5e1427e9.jpg", "bdd5fcfafe414eea89e3e6ef
 tags: ["فروزن 2", "کیش", "فروشگاه لباس های شخصیتی غریبی", "شنل", "تم", "دیزی", "کریسمس", "فروش ویژه", "قهرمانی", "ماسک"]
 
 images:
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-01.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-02.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-03.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-04.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-05.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-06.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-07.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-08.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-09.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-10.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-11.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-12.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-13.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-14.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-15.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-16.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-17.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-18.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-19.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-20.webp
-  - /assets/images/raw/01/spiderman-hero-cape-mask/spiderman-hero-cape-mask-21.webp
----
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/1.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/2.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/3.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/4.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/5.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/6.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/7.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/8.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/9.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/10.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/11.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/12.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/13.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/14.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/15.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/16.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/17.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/18.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/19.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/20.webp
+  - /assets/images/products/accessories/spiderman-hero-cape-mask/21.webp
 
 شنل شخصیتی دخترانه و پسرانه
 ساتن

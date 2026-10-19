@@ -12,8 +12,7 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/hulk-mask/hulk-mask-01.webp
-  - /assets/images/raw/01/hulk-mask/hulk-mask-02.webp
----
+  - /assets/images/products/accessories/hulk-mask/1.webp
+  - /assets/images/products/accessories/hulk-mask/2.webp
 
 توضیحات محصول را اینجا بنویسید...

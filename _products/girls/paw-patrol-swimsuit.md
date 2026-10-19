@@ -13,9 +13,8 @@ webzi_images: ["c4b15d42e7ed4acc98989e39e11524f3.JPG", "f250d72cfbac4d89a197ff49
 tags: ["لباس پرنسسی دیزنی", "السا و آنا", "هالک عضلانی", "فروشگاه لباس های شخصیتی غریبی", "تم دیزنی", "سفید برفی", "سیندرلا", "دخترانه", "بتمن", "مایو", "مرکز تجاری کیش", "سگهای نگهبان", "فلش", "سوپرمن", "اسپایدرمن", "استخری"]
 
 images:
-  - /assets/images/raw/01/paw-patrol-swimsuit/paw-patrol-swimsuit-01.webp
-  - /assets/images/raw/01/paw-patrol-swimsuit/paw-patrol-swimsuit-02.webp
----
+  - /assets/images/products/girls/paw-patrol-swimsuit/1.webp
+  - /assets/images/products/girls/paw-patrol-swimsuit/2.webp
 
 مناسب برای گروه سنی 2-4 4-6 6-8
 ضد کلر مناسب با آب استخر

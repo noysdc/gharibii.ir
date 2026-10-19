@@ -18,10 +18,9 @@ options:
 tags: ["تم", "شخصیتی", "هری پاتر"]
 
 images:
-  - /assets/images/raw/01/harry-potter-full-set/harry-potter-full-set-01.webp
-  - /assets/images/raw/01/harry-potter-full-set/harry-potter-full-set-02.webp
-  - /assets/images/raw/01/harry-potter-full-set/harry-potter-full-set-03.webp
----
+  - /assets/images/products/boys/harry-potter-full-set/1.webp
+  - /assets/images/products/boys/harry-potter-full-set/2.webp
+  - /assets/images/products/boys/harry-potter-full-set/3.webp
 
 دارای سایز بندی از سنین 5 تا 16 سال
 دارای رنگ بندی ( زرد - آبی - سبز - قرمز)

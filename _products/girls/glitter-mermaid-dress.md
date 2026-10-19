@@ -16,31 +16,30 @@ options:
 tags: ["لباس های دیزنی", "لباس پرنسسی دیزنی", "کیش", "فروشگاه لباس های شخصیتی غریبی", "پری دریایی", "کریسمس", "فروش ویژه"]
 
 images:
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-01.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-02.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-03.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-04.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-05.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-06.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-07.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-08.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-09.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-10.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-11.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-12.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-13.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-14.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-15.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-16.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-17.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-18.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-19.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-20.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-21.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-22.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-23.webp
-  - /assets/images/raw/01/glitter-mermaid-dress/glitter-mermaid-dress-24.webp
----
+  - /assets/images/products/girls/glitter-mermaid-dress/1.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/2.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/3.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/4.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/5.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/6.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/7.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/8.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/9.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/10.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/11.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/12.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/13.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/14.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/15.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/16.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/17.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/18.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/19.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/20.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/21.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/22.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/23.webp
+  - /assets/images/products/girls/glitter-mermaid-dress/24.webp
 
 تم پری دریایی
 اکسسوری ها روی محصول نیست و جداگانه باید تهیه شوند.

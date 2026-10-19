@@ -16,13 +16,12 @@ options:
 tags: ["لباس پرنسسی دیزنی", "دیزنی", "بتمن", "شخصیتی", "کارتونی", "قهرمانی", "یکسره", "عضلانی اسپایدرمن"]
 
 images:
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-01.webp
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-02.webp
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-03.webp
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-04.webp
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-05.webp
-  - /assets/images/raw/01/spiderman-muscle-suit/spiderman-muscle-suit-06.webp
----
+  - /assets/images/products/boys/spiderman-muscle-suit/1.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/2.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/3.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/4.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/5.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/6.webp
 
 تبدیل به ابرقهرمان: لباس اسپایدرمن عضلانی برای قهرمانان کوچک!
 

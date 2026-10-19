@@ -17,11 +17,10 @@ options:
     values: ["ُُs", "M", "L", "xl"]
 
 images:
-  - /assets/images/raw/01/boy-avenger-swimsuit/boy-avenger-swimsuit-01.webp
-  - /assets/images/raw/01/boy-avenger-swimsuit/boy-avenger-swimsuit-02.webp
-  - /assets/images/raw/01/boy-avenger-swimsuit/boy-avenger-swimsuit-03.webp
-  - /assets/images/raw/01/boy-avenger-swimsuit/boy-avenger-swimsuit-04.webp
-  - /assets/images/raw/01/boy-avenger-swimsuit/boy-avenger-swimsuit-05.webp
----
+  - /assets/images/products/boys/boy-avenger-swimsuit/1.webp
+  - /assets/images/products/boys/boy-avenger-swimsuit/2.webp
+  - /assets/images/products/boys/boy-avenger-swimsuit/3.webp
+  - /assets/images/products/boys/boy-avenger-swimsuit/4.webp
+  - /assets/images/products/boys/boy-avenger-swimsuit/5.webp
 
 

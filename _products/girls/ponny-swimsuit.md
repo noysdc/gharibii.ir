@@ -19,7 +19,6 @@ options:
 tags: ["تم دیزنی", "تم", "مرکزتجاری کیش", "شخصیتی", "لباس توری", "پونی", "کارتونی", "دخترکفشدوزکی", "تولد جشن", "بیکینی", "اسبهای پونی", "لباس پونی"]
 
 images:
-  - /assets/images/raw/01/ponny-swimsuit/ponny-swimsuit.webp
----
+  - /assets/images/products/girls/ponny-swimsuit/1.webp
 
 

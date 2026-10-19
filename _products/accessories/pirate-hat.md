@@ -13,10 +13,9 @@ webzi_images: ["7e1e8c06567c451bb43fd1c67d43c242.JPG", "066621d47ff549d89ffca68e
 tags: ["پرنسسی", "پسرانه", "تم", "مرکزتجاری کیش", "دخترانه", "شخصیتی", "جشن تولد تم", "جادوگری", "کلاه دزدان دریایی", "هالووین"]
 
 images:
-  - /assets/images/raw/01/pirate-hat (1)/pirate-hat (1)-01.webp
-  - /assets/images/raw/01/pirate-hat (1)/pirate-hat (1)-02.webp
-  - /assets/images/raw/01/pirate-hat (1)/pirate-hat (1)-03.webp
-  - /assets/images/raw/01/pirate-hat (1)/pirate-hat (1)-04.webp
----
+  - /assets/images/products/accessories/pirate-hat/1.webp
+  - /assets/images/products/accessories/pirate-hat/2.webp
+  - /assets/images/products/accessories/pirate-hat/3.webp
+  - /assets/images/products/accessories/pirate-hat/4.webp
 
 فری سایز

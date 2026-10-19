@@ -18,11 +18,10 @@ options:
 tags: ["تم دیزنی", "تم", "مرکزتجاری کیش", "شخصیتی", "لباس توری", "پونی", "کارتونی", "دخترکفشدوزکی", "تولد جشن", "بیکینی", "اسبهای پونی", "لباس پونی"]
 
 images:
-  - /assets/images/raw/01/my-little-pony-lace-dress/my-little-pony-lace-dress-01.webp
-  - /assets/images/raw/01/my-little-pony-lace-dress/my-little-pony-lace-dress-02.webp
-  - /assets/images/raw/01/my-little-pony-lace-dress/my-little-pony-lace-dress-03.webp
-  - /assets/images/raw/01/my-little-pony-lace-dress/my-little-pony-lace-dress-04.webp
-  - /assets/images/raw/01/my-little-pony-lace-dress/my-little-pony-lace-dress-05.webp
----
+  - /assets/images/products/girls/my-little-pony-lace-dress/1.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/2.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/3.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/4.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/5.webp
 
 

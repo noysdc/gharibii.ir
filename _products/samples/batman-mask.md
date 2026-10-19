@@ -12,7 +12,6 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/batman-mask/batman-mask.webp
----
+  - /assets/images/products/accessories/batman-mask/1.webp
 
 توضیحات محصول را اینجا بنویسید...

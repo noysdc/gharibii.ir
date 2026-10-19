@@ -14,7 +14,6 @@ webzi_images: ["9a4507f0bf6a46e287f960f15259db78.jpg"]
 tags: ["دیزنی", "تم", "مرکزتجاری کیش", "ست", "شخصیتی", "جشن تولد تم", "قهرمانی", "دستکش پسرانه", "دستکش کاپتان آمریکا", "تیرپرتاب کن کاپتان آمریکا"]
 
 images:
-  - /assets/images/raw/01/captain-america-web-shooter-gloves/captain-america-web-shooter-gloves.webp
----
+  - /assets/images/products/accessories/captain-america-web-shooter-gloves/1.webp
 
 

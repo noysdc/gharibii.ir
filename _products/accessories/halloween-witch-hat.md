@@ -13,8 +13,7 @@ webzi_images: ["6bc925f2b0aa4d92af911200e57ce2c7.JPG", "a917d28ea9bb42fab990e061
 tags: ["لباس پرنسسی دیزنی", "پسرانه", "دیزنی", "تم", "مرکزتجاری کیش", "دخترانه", "جشن", "شخصیتی", "جشن تولد تم", "ونزدی", "کلاه هالووین", "جادوگری"]
 
 images:
-  - /assets/images/raw/01/halloween-witch-hat/halloween-witch-hat-01.webp
-  - /assets/images/raw/01/halloween-witch-hat/halloween-witch-hat-02.webp
----
+  - /assets/images/products/accessories/halloween-witch-hat/1.webp
+  - /assets/images/products/accessories/halloween-witch-hat/2.webp
 
 

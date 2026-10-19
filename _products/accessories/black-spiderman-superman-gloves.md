@@ -13,9 +13,8 @@ webzi_images: ["622881dc771e476b9ef5016899796a38.jpg"]
 tags: ["لباس پرنسسی دیزنی", "دیزنی", "تم", "مرکزتجاری کیش", "شخصیتی", "جشن تولد تم", "قهرمانی", "دستکش پسرانه", "دستکش اسپایدرمن مشکی", "دستکش سوپرمن"]
 
 images:
-  - /assets/images/raw/01/black-spiderman-superman-gloves/black-spiderman-superman-gloves-01.webp
-  - /assets/images/raw/01/black-spiderman-superman-gloves/black-spiderman-superman-gloves-02.webp
-  - /assets/images/raw/01/black-spiderman-superman-gloves/black-spiderman-superman-gloves-03.webp
----
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/1.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/2.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/3.webp
 
 

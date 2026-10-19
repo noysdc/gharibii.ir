@@ -12,9 +12,8 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/raw/01/ladybug-collection-2/ladybug-bikini-01.webp
-  - /assets/images/raw/01/ladybug-collection-2/ladybug-bikini-03.webp
-  - /assets/images/raw/01/ladybug-collection-2/پیراهن شخصیتی دختر کفشدوزکی-فروشگاه غریبی-07.webp
----
+  - /assets/images/products/girls/ladybug-collection-2/1.webp
+  - /assets/images/products/girls/ladybug-collection-2/2.webp
+  - /assets/images/products/girls/ladybug-collection-2/3.webp
 
 توضیحات محصول را اینجا بنویسید...

@@ -13,9 +13,8 @@ webzi_images: ["02f6e8d4332343559c754db66e90c21a.JPG", "1c622a3b1f5f487da755d64a
 tags: ["مرکزتجاری کیش", "اسپایدرمن", "قهرمانی", "تیرپرتاب کن اسپایدرمن", "دستکش پسرانه", "تارکن", "تارپرتاب کن اسپایدر"]
 
 images:
-  - /assets/images/raw/01/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-01.webp
-  - /assets/images/raw/01/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-02.webp
-  - /assets/images/raw/01/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-03.webp
----
+  - /assets/images/products/accessories/spiderman-web-shooter-gloves/1.webp
+  - /assets/images/products/accessories/spiderman-web-shooter-gloves/2.webp
+  - /assets/images/products/accessories/spiderman-web-shooter-gloves/3.webp
 
 
