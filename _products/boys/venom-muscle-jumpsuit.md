@@ -18,9 +18,7 @@ options:
 tags: ["لباس پرنسسی دیزنی", "پسرانه", "فروشگاه لباس های شخصیتی غریبی", "تم", "مرکزتجاری کیش", "شخصیتی", "جشن تولد تم", "قهرمانی", "ونوم", "عضلانی ونوم", "سرهمی ونوم"]
 
 images:
-  - /assets/images/products/boys/venom-muscle-jumpsuit/1.webp
-  - /assets/images/products/boys/venom-muscle-jumpsuit/2.webp
-  - /assets/images/products/boys/venom-muscle-jumpsuit/3.webp
+ 
   - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-4.webp
   - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-5.webp
   - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-6.webp
