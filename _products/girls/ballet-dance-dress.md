@@ -18,31 +18,7 @@ options:
 tags: ["لباس پرنسسی دیزنی", "تم", "سیندرلا", "رقص", "باله", "مجلسی", "مرکزتجاری کیش", "دخترانه", "السا", "جشن تولد تم", "فرشته", "لباس باله", "لباس رقص باله"]
 
 images:
-  - /assets/images/products/girls/ballet-dance-dress/1.webp
-  - /assets/images/products/girls/ballet-dance-dress/2.webp
-  - /assets/images/products/girls/ballet-dance-dress/3.webp
-  - /assets/images/products/girls/ballet-dance-dress/4.webp
-  - /assets/images/products/girls/ballet-dance-dress/5.webp
-  - /assets/images/products/girls/ballet-dance-dress/6.webp
-  - /assets/images/products/girls/ballet-dance-dress/7.webp
-  - /assets/images/products/girls/ballet-dance-dress/8.webp
-  - /assets/images/products/girls/ballet-dance-dress/9.webp
-  - /assets/images/products/girls/ballet-dance-dress/10.webp
-  - /assets/images/products/girls/ballet-dance-dress/11.webp
-  - /assets/images/products/girls/ballet-dance-dress/12.webp
-  - /assets/images/products/girls/ballet-dance-dress/13.webp
-  - /assets/images/products/girls/ballet-dance-dress/14.webp
-  - /assets/images/products/girls/ballet-dance-dress/15.webp
-  - /assets/images/products/girls/ballet-dance-dress/16.webp
-  - /assets/images/products/girls/ballet-dance-dress/17.webp
-  - /assets/images/products/girls/ballet-dance-dress/18.webp
-  - /assets/images/products/girls/ballet-dance-dress/19.webp
-  - /assets/images/products/girls/ballet-dance-dress/20.webp
-  - /assets/images/products/girls/ballet-dance-dress/21.webp
-  - /assets/images/products/girls/ballet-dance-dress/22.webp
-  - /assets/images/products/girls/ballet-dance-dress/23.webp
-  - /assets/images/products/girls/ballet-dance-dress/24.webp
-  - /assets/images/products/girls/ballet-dance-dress/25.webp
+
   - /assets/images/products/girls/ballet-dance-dress/ballet-dance-dress-26.webp
   - /assets/images/products/girls/ballet-dance-dress/ballet-dance-dress-27.webp
   - /assets/images/products/girls/ballet-dance-dress/ballet-dance-dress-28.webp

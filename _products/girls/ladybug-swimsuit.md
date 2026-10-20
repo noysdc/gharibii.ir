@@ -12,10 +12,7 @@ needs_review: true
 # لطفا اطلاعات، قیمت و توضیحات را به صورت دستی وارد کنید.
 
 images:
-  - /assets/images/products/girls/ladybug-swimsuit/1.webp
-  - /assets/images/products/girls/ladybug-swimsuit/2.webp
-  - /assets/images/products/girls/ladybug-swimsuit/3.webp
-  - /assets/images/products/girls/ladybug-swimsuit/4.webp
+
   - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-5.webp
   - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-6.webp
   - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-7.webp

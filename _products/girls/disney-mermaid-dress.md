@@ -13,13 +13,7 @@ webzi_images: ["c697dbac915b4ffd988296aa206d173b.JPG", "177ae09143bb4ebbb94668d1
 tags: ["دیزنی", "اکسسوری پری دریایی", "پری دریایی", "تم", "تولد", "مجلسی", "مرکزتجاری کیش", "دخترانه", "پیرهن", "مایو"]
 
 images:
-  - /assets/images/products/girls/disney-mermaid-dress/1.webp
-  - /assets/images/products/girls/disney-mermaid-dress/2.webp
-  - /assets/images/products/girls/disney-mermaid-dress/3.webp
-  - /assets/images/products/girls/disney-mermaid-dress/4.webp
-  - /assets/images/products/girls/disney-mermaid-dress/5.webp
-  - /assets/images/products/girls/disney-mermaid-dress/6.webp
-  - /assets/images/products/girls/disney-mermaid-dress/7.webp
+
   - /assets/images/products/girls/disney-mermaid-dress/disney-mermaid-dress-8.webp
   - /assets/images/products/girls/disney-mermaid-dress/disney-mermaid-dress-9.webp
   - /assets/images/products/girls/disney-mermaid-dress/disney-mermaid-dress-10.webp

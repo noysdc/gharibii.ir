@@ -13,8 +13,7 @@ webzi_images: ["504b0b8736a240eba059c83ea2f0c583.JPG", "5fb5da3451ec4c6ab3350084
 tags: ["دیزنی", "تم", "مرکزتجاری کیش", "دخترانه", "السا", "جشن تولد تم", "مواوی", "موانا"]
 
 images:
-  - /assets/images/products/accessories/moana-necklace/1.webp
-  - /assets/images/products/accessories/moana-necklace/2.webp
+
   - /assets/images/products/accessories/moana-necklace/moana-necklace-3.webp
   - /assets/images/products/accessories/moana-necklace/moana-necklace-4.webp
 ---

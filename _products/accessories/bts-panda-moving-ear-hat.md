@@ -13,22 +13,7 @@ webzi_images: ["52155d2f8c324752bda982a8b67c8b15.jpg", "e0d89759331846ffaddd67c4
 tags: ["پرنسسی", "کیش", "بی تی اس", "کلاه پمپی", "تم تولد", "لباس پرنسسی", "کلاه گوش متحرک"]
 
 images:
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/1.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/2.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/3.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/4.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/5.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/6.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/7.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/8.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/9.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/10.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/11.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/12.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/13.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/14.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/15.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/16.webp
+
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-17.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-18.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-19.webp

@@ -18,10 +18,7 @@ options:
 tags: ["لباس پرنسسی دیزنی", "کیش", "مرکزتجاری کیش", "دخترانه", "توری", "کیتی"]
 
 images:
-  - /assets/images/products/girls/hello-kitty-lace-dress/1.webp
-  - /assets/images/products/girls/hello-kitty-lace-dress/2.webp
-  - /assets/images/products/girls/hello-kitty-lace-dress/3.webp
-  - /assets/images/products/girls/hello-kitty-lace-dress/4.webp
+
   - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-5.webp
   - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-6.webp
   - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-7.webp
