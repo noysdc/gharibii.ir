@@ -18,9 +18,7 @@ options:
 tags: ["تم", "شخصیتی", "هری پاتر"]
 
 images:
-  - /assets/images/products/boys/harry-potter-full-set/1.webp
-  - /assets/images/products/boys/harry-potter-full-set/2.webp
-  - /assets/images/products/boys/harry-potter-full-set/3.webp
+
   - /assets/images/products/boys/harry-potter-full-set/harry-potter-full-set-4.webp
   - /assets/images/products/boys/harry-potter-full-set/harry-potter-full-set-5.webp
   - /assets/images/products/boys/harry-potter-full-set/harry-potter-full-set-6.webp

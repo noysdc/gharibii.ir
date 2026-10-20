@@ -17,11 +17,7 @@ options:
     values: ["ُُs", "M", "L", "xl"]
 
 images:
-  - /assets/images/products/boys/boy-avenger-swimsuit/1.webp
-  - /assets/images/products/boys/boy-avenger-swimsuit/2.webp
-  - /assets/images/products/boys/boy-avenger-swimsuit/3.webp
-  - /assets/images/products/boys/boy-avenger-swimsuit/4.webp
-  - /assets/images/products/boys/boy-avenger-swimsuit/5.webp
+
   - /assets/images/products/boys/boy-avenger-swimsuit/boy-avenger-swimsuit-6.webp
   - /assets/images/products/boys/boy-avenger-swimsuit/boy-avenger-swimsuit-7.webp
   - /assets/images/products/boys/boy-avenger-swimsuit/boy-avenger-swimsuit-8.webp
