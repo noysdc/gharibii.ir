@@ -1,0 +1,65 @@
+/* =====================================================================
+   extra.css — اصلاحات بعد از style.css (گالری واضح‌تر + نوار پایین موبایل)
+   این فایل بعد از style.css لود می‌شود؛ برای برگشت کافی است لینکش را از default.html بردارید.
+   ===================================================================== */
+
+/* ---------- ۱) گالری: عکس‌ها شفاف و واضح ---------- */
+/* قبلاً: اسلاید غیرفعال با opacity ‎.7‎ + چرخش + لایه‌ی سفیدِ روی عکس، عکس را «مات» نشان می‌داد */
+.gslide,
+.gslide:nth-child(odd),
+.gslide:nth-child(even){--tilt:0deg;opacity:1;transform:scale(.94)}
+.gslide.is-active{transform:scale(1)}
+.gslide:not(.is-active) img{filter:saturate(.92) brightness(.97)}
+.gslide img{image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+/* هالهٔ سفید گوشهٔ عکس حذف؛ فقط یک خط ظریف دور عکس */
+.gslide::after{background:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+/* نور متحرک (shimmer) ملایم‌تر و بدون بلور */
+.gslide::before{filter:none;opacity:.55}
+.gallery-main::before,.thumbs button::before{filter:none;opacity:.45}
+/* تامبنیل‌ها کم‌رنگ نباشند */
+.thumbs button{opacity:.92}
+.thumbs button.active,.thumbs button:hover{opacity:1}
+html[data-theme="dark"] .gslide img,
+html[data-theme="dark"] .gallery-main img,
+html[data-theme="dark"] .thumbs button img{filter:none}
+html[data-theme="dark"] .gslide:not(.is-active) img{filter:brightness(.92)}
+
+/* ---------- ۲) نوار دسته‌بندی پایین (شبیه تب‌بار آیفون) — فقط موبایل ---------- */
+.ios-tabbar{display:none}
+
+@media (max-width:768px){
+  .ios-tabbar{
+    display:flex;position:fixed;z-index:70;left:50%;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px));
+    width:min(94vw,26rem);padding:6px;gap:2px;direction:rtl;
+    border-radius:28px;
+    background:rgba(255,255,255,.66);
+    -webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%);
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:0 10px 30px rgba(40,30,80,.2),inset 0 1px 0 rgba(255,255,255,.95);
+    transform:translate(-50%,170%);opacity:0;pointer-events:none;
+    transition:transform .45s cubic-bezier(.2,.9,.25,1.05),opacity .3s ease
+  }
+  .ios-tabbar.is-visible{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+  .ios-tabbar.is-visible.is-hidden{transform:translate(-50%,170%);opacity:0;pointer-events:none}
+  .ios-tabbar a{
+    flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    padding:7px 2px 6px;border-radius:22px;color:#5b6b75;text-decoration:none;
+    font-size:10.5px;line-height:1.3;white-space:nowrap;
+    -webkit-tap-highlight-color:transparent;transition:background .2s ease,color .2s ease,transform .15s ease
+  }
+  .ios-tabbar a:active{transform:scale(.94)}
+  .ios-tabbar svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ios-tabbar a[aria-current="page"]{color:var(--sea-deep,#073E45);background:rgba(10,102,112,.13);font-weight:700}
+  html[data-theme="dark"] .ios-tabbar{background:rgba(21,32,37,.72);border-color:rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12)}
+  html[data-theme="dark"] .ios-tabbar a{color:#9fb3bd}
+  html[data-theme="dark"] .ios-tabbar a[aria-current="page"]{color:#a8dde5;background:rgba(95,181,192,.18)}
+
+  /* جا برای نوار: انتهای صفحه زیر نوار نرود و دکمه‌های شناور بالاتر بنشینند */
+  body{padding-bottom:calc(5.6rem + env(safe-area-inset-bottom,0px))}
+  .floating-cart{bottom:calc(5.8rem + env(safe-area-inset-bottom,0px))}
+  #mini-toast{bottom:calc(8.6rem + env(safe-area-inset-bottom,0px))}
+  .install-bar{bottom:calc(5.9rem + env(safe-area-inset-bottom,0px))}
+}
+
+@media (prefers-reduced-motion:reduce){.ios-tabbar{transition:opacity .2s ease}}

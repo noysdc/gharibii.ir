@@ -30,17 +30,57 @@
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); window.__bip = e; });
   })();
   </script>
-  {% seo %}
-  {%- assign og_src = page.images[0] -%}
-  {%- if og_src -%}
-    {%- capture og_rel -%}{% include img.html src=og_src %}{%- endcapture -%}
-    <meta property="og:image" content="{{ og_rel | strip | prepend: site.url }}">
-    <meta name="twitter:image" content="{{ og_rel | strip | prepend: site.url }}">
-  {%- else -%}
-    <meta property="og:image" content="{{ '/assets/icons/icon-512.png' | absolute_url }}">
-    <meta name="twitter:image" content="{{ '/assets/icons/icon-512.png' | absolute_url }}">
+{%- comment -%}
+  ===== پیش‌نمایش لینک (واتساپ / تلگرام / گوگل) =====
+  عنوان : «عنوان صفحه | فروشگاه غریبی کیش»
+  توضیح : description همان صفحه (فرانت‌متر)؛ برای محصول: متن توضیحات، و اگر خالی/نمونه بود یک جملهٔ خودکار با قیمت
+  عکس   : محصول → عکس اول خودش ؛ بقیهٔ صفحه‌ها → /assets/images/og-card.jpg
+{%- endcomment -%}
+  {%- assign pv_title = site.title -%}
+  {%- if page.title -%}{%- assign pv_title = page.title | append: ' | ' | append: site.title -%}{%- endif -%}
+  {%- assign pv_desc = page.description | default: '' -%}
+  {%- if pv_desc == '' and page.layout == 'product' -%}
+    {%- assign pv_body = page.content | strip_html | strip_newlines | normalize_whitespace | strip -%}
+    {%- assign pv_ok = false -%}
+    {%- if pv_body.size > 30 -%}{%- assign pv_ok = true -%}{%- endif -%}
+    {%- if pv_body contains 'توضیحات محصول را اینجا' -%}{%- assign pv_ok = false -%}{%- endif -%}
+    {%- if pv_ok -%}
+      {%- assign pv_desc = pv_body | truncate: 155 -%}
+    {%- else -%}
+      {%- capture pv_price_html -%}{%- include price.html product=page -%}{%- endcapture -%}
+      {%- assign pv_price = pv_price_html | split: '</span>' | first | strip_html | strip -%}
+      {%- capture pv_desc -%}{{ page.title }} — {{ pv_price }} | سفارش در واتساپ یا تماس تلفنی، فروشگاه غریبی کیش{%- endcapture -%}
+    {%- endif -%}
   {%- endif -%}
+  {%- if pv_desc == '' -%}{%- assign pv_desc = site.description -%}{%- endif -%}
+  {%- assign pv_img = page.images[0] -%}
+  {%- if pv_img -%}
+    {%- capture pv_img_rel -%}{% include img.html src=pv_img %}{%- endcapture -%}
+    {%- assign pv_img_url = pv_img_rel | strip | prepend: site.url -%}
+    {%- assign pv_img_w = 900 -%}{%- assign pv_img_h = 1200 -%}
+  {%- else -%}
+    {%- assign pv_img_url = '/assets/images/og-card.jpg' | absolute_url -%}
+    {%- assign pv_img_w = 1200 -%}{%- assign pv_img_h = 630 -%}
+  {%- endif -%}
+  <title>{{ pv_title | escape }}</title>
+  <meta name="description" content="{{ pv_desc | strip | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ pv_title | escape }}">
+  <meta property="og:description" content="{{ pv_desc | strip | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ pv_img_url }}">
+  <meta property="og:image:width" content="{{ pv_img_w }}">
+  <meta property="og:image:height" content="{{ pv_img_h }}">
+  <meta property="og:image:alt" content="{{ page.title | default: site.title | escape }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ pv_title | escape }}">
+  <meta name="twitter:description" content="{{ pv_desc | strip | escape }}">
+  <meta name="twitter:image" content="{{ pv_img_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}">
   {%- if page.url == '/' %}
   <script type="application/ld+json">
   {
@@ -84,6 +124,7 @@
   <main>{{ content }}</main>
   {% include footer.html %}
   <script type="application/json" id="wa-sellers-data">[{% if site.whatsapp_sellers %}{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }},"photo":{% if s.photo %}{{ s.photo | relative_url | jsonify }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}{% else %}{% for n in site.whatsapp_numbers %}{"name":"شماره {{ forloop.index }}","number":{{ n | jsonify }},"photo":""}{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}]</script>
+  {% include mobile-tabbar.html %}
   <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
 </body>
 </html>
