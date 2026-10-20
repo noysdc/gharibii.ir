@@ -4,6 +4,7 @@ title: "ست کامل هری پاتر"
 slug: "harry-potter-full-set"
 category: boys
 gender: boys
+price_group: "out_of_stock"
 price: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/harry-potter-full-set/"]
