@@ -4,7 +4,7 @@ title: "کلاه دزدان دریایی تم"
 slug: "pirate-hat"
 category: accessories
 gender: boys
-price: "198,000"
+price group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/pirate-hat/"]
 webzi_id: 45413
