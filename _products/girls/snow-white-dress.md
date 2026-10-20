@@ -6,11 +6,20 @@ category: girls
 gender: girls
 price: "5,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/snow-white-dress/"]
+images_dirs: ["/assets/images/products/girls/snow-white-dress/"]
 webzi_id: 45332
 old_slug: "لباس-دخترانه-سفید-برفی"
 webzi_images: ["962a49ed55e84bb7abccf28b50289987.JPG", "49bd39e5673843a5aad81a844559aac4.jpg", "ce43dbfef4f2414cb24d4f15c6c725cc.jpg", "b0bbc7ff6e844468b0e15270b0d7c328.jpg", "4bd27f04238047449b4d21f8b0c923d7.jpeg", "aa33c5433fa545bfabcb6eb00d91a0fb.png"]
 tags: ["کیش", "دیزنی", "فروشگاه لباس های شخصیتی غریبی", "تم", "لباس دخترانه سفید برفی", "سفید برفی", "کریسمس", "فروش ویژه"]
+
+images:
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-1.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-2.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-3.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-4.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-5.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-6.webp
+  - /assets/images/products/girls/snow-white-dress/snow-white-dress-7.webp
 ---
 
 دختر کوچولوی شما با پوشیدن این لباس پرنسسی سفید برفی، مرکز توجه هر جمعی خواهد بود! این لباس خیره‌کننده با الهام از شخصیت کلاسیک و محبوب سفید برفی، شادی و زیبایی را به ارمغان می‌آورد.

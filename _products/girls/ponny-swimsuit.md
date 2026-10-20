@@ -6,7 +6,7 @@ category: girls
 gender: girls
 price: "598,000"
 currency: IRT
-images_dirs: ["/assets/images/products/ponny-swimsuit/"]
+images_dirs: ["/assets/images/products/girls/ponny-swimsuit/"]
 webzi_id: 99902
 fake_id: true   # id فرضی — منبع داده: 45427
 old_slug: "مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش"
@@ -20,5 +20,7 @@ tags: ["تم دیزنی", "تم", "مرکزتجاری کیش", "شخصیتی", "
 
 images:
   - /assets/images/products/girls/ponny-swimsuit/1.webp
+  - /assets/images/products/girls/ponny-swimsuit/ponny-swimsuit-2.webp
+---
 
 

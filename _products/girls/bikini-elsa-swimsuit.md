@@ -6,11 +6,15 @@ category: girls
 gender: girls
 price: "1,598,000"
 currency: IRT
-images_dirs: ["/assets/images/products/bikini-elsa-swimsuit/", "/assets/images/products/elsa-swimsuit/"]
+images_dirs: ["/assets/images/products/girls/bikini-elsa-swimsuit/"]
 webzi_id: 45372
 old_slug: "مایو-اسلیپ-دخترانه"
 webzi_images: ["772aa727124b4c69babb25fd2dfe2a76.JPG", "01f13c27cdd840e1a1c0797492f5ac31.JPG"]
 tags: ["لباس پرنسسی دیزنی", "تم", "سیندرلا", "تولد", "مرکزتجاری کیش", "دخترانه", "السا", "بتمن", "شخصیتی", "مایو", "پونی", "فلش", "اسپایدرمن", "اسلیپ", "تایلندی", "چین", "مووانا"]
+
+images:
+  - /assets/images/products/girls/bikini-elsa-swimsuit/bikini-elsa-swimsuit-1.webp
+  - /assets/images/products/girls/bikini-elsa-swimsuit/bikini-elsa-swimsuit-2.webp
 ---
 
 مایو وارداتی ضد کلر ومخصوص استخرو شنا

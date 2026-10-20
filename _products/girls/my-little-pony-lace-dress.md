@@ -6,7 +6,7 @@ category: girls
 gender: girls
 price: "598,000"
 currency: IRT
-images_dirs: ["/assets/images/products/my-little-pony-lace-dress/"]
+images_dirs: ["/assets/images/products/girls/my-little-pony-lace-dress/"]
 webzi_id: 45427
 old_slug: "مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش"
 webzi_images: ["c3b642f75eee4fee971b9d5f4689d9cb.JPG", "625fe47186604d938b73723e901b7b67.JPG", "59b7f4ae5257458d87eb1a06fc4684f2.JPG", "9bc653dcab4a4c62bf19144899cbf5d9.JPG", "de046a070b4b454eacb75b5d2e11b46b.JPG"]
@@ -23,5 +23,11 @@ images:
   - /assets/images/products/girls/my-little-pony-lace-dress/3.webp
   - /assets/images/products/girls/my-little-pony-lace-dress/4.webp
   - /assets/images/products/girls/my-little-pony-lace-dress/5.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/my-little-pony-lace-dress-6.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/my-little-pony-lace-dress-7.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/my-little-pony-lace-dress-8.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/my-little-pony-lace-dress-9.webp
+  - /assets/images/products/girls/my-little-pony-lace-dress/my-little-pony-lace-dress-10.webp
+---
 
 

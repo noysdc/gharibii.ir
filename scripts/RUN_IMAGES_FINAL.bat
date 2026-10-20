@@ -1,13 +1,11 @@
 @echo off
+chcp 65001 >nul
 color 0A
+cd /d "%~dp0"
 echo ===================================================
-echo      Copying Matched Images Automatically...
+echo      Moving images to products + linking md ...
 echo ===================================================
 echo.
-cd /d "%~dp0"
 python organize_images_final.py
 echo.
-echo ===================================================
-echo               DONE!
-echo ===================================================
 pause

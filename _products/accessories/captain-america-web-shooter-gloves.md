@@ -6,8 +6,7 @@ category: accessories
 gender: boys
 price: "398,000"
 currency: IRT
-images_dirs: ["/assets/images/products/captain-america-web-shooter-gloves/"]
-needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: captain-america-web-shooter-gloves
+images_dirs: ["/assets/images/products/accessories/captain-america-web-shooter-gloves/"]
 webzi_id: 45389
 old_slug: "ست-دستکش-تیرپرتاب-کن-کاپتان-آمریکا-فروشگاه-غریبی-کیش"
 webzi_images: ["9a4507f0bf6a46e287f960f15259db78.jpg"]
@@ -15,5 +14,7 @@ tags: ["دیزنی", "تم", "مرکزتجاری کیش", "ست", "شخصیتی"
 
 images:
   - /assets/images/products/accessories/captain-america-web-shooter-gloves/1.webp
+  - /assets/images/products/accessories/captain-america-web-shooter-gloves/captain-america-web-shooter-gloves-2.webp
+---
 
 

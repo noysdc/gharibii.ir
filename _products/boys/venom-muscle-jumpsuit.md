@@ -6,8 +6,7 @@ category: boys
 gender: boys
 price: "5,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/venom-muscle-jumpsuit/"]
-needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: venom-muscle-jumpsuit
+images_dirs: ["/assets/images/products/boys/venom-muscle-jumpsuit/"]
 webzi_id: 45384
 old_slug: "پسرانه-سرهمی-عضلانی-شخصیتی-ونوم-فروشگاه-غریبی-کیش"
 webzi_images: ["d91d12db9fc94cab8de608c77d2a7e57.jpg"]
@@ -22,5 +21,9 @@ images:
   - /assets/images/products/boys/venom-muscle-jumpsuit/1.webp
   - /assets/images/products/boys/venom-muscle-jumpsuit/2.webp
   - /assets/images/products/boys/venom-muscle-jumpsuit/3.webp
+  - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-4.webp
+  - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-5.webp
+  - /assets/images/products/boys/venom-muscle-jumpsuit/venom-muscle-jumpsuit-6.webp
+---
 
 

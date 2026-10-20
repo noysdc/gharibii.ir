@@ -6,7 +6,7 @@ category: accessories
 gender: boys
 price: "398,000"
 currency: IRT
-images_dirs: ["/assets/images/products/black-spiderman-superman-gloves/"]
+images_dirs: ["/assets/images/products/accessories/black-spiderman-superman-gloves/"]
 webzi_id: 45388
 old_slug: "ست-دستکش-تیرپرتاب-کن-اسپایدرمن-سیاه-و-سوپرمن-فروشگاه-غریبی-کیش"
 webzi_images: ["622881dc771e476b9ef5016899796a38.jpg"]
@@ -16,5 +16,9 @@ images:
   - /assets/images/products/accessories/black-spiderman-superman-gloves/1.webp
   - /assets/images/products/accessories/black-spiderman-superman-gloves/2.webp
   - /assets/images/products/accessories/black-spiderman-superman-gloves/3.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-4.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-5.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-6.webp
+---
 
 

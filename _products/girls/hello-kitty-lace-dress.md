@@ -6,7 +6,7 @@ category: girls
 gender: girls
 price: "1,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/hello-kitty-lace-dress/"]
+images_dirs: ["/assets/images/products/girls/hello-kitty-lace-dress/"]
 webzi_id: 45424
 old_slug: "پیرهن-توری-کیتی-دخترانه-فروشگاه-غریبی-کیش"
 webzi_images: ["77dedaf39fdb4884830aaff1251cecec.JPG", "8270759d151942b8ba7f87f746c334e7.PNG", "8fe52df6db244af691a1517d6566954c.JPG"]
@@ -22,5 +22,10 @@ images:
   - /assets/images/products/girls/hello-kitty-lace-dress/2.webp
   - /assets/images/products/girls/hello-kitty-lace-dress/3.webp
   - /assets/images/products/girls/hello-kitty-lace-dress/4.webp
+  - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-5.webp
+  - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-6.webp
+  - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-7.webp
+  - /assets/images/products/girls/hello-kitty-lace-dress/hello-kitty-lace-dress-8.webp
+---
 
 
