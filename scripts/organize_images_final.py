@@ -21,6 +21,7 @@ import difflib
 import os
 import re
 import shutil
+import stat
 import sys
 from pathlib import Path
 
@@ -49,6 +50,7 @@ MD_ROOT = ROOT / "_products"                         # md محصولات
 SAMPLES_DIR = MD_ROOT / "samples"                    # md نمونه‌ها
 URL_PREFIX = "/assets/images/products"
 REPORT_CSV = HERE / "images_transfer_report.csv"
+MAP_CSV = HERE / "folder_map.csv"   # نگاشت دستی: نام پوشه → slug محصول
 
 CONVERT_TO_WEBP = True   # عکس‌ها هنگام انتقال به webp تبدیل شوند (نیاز به Pillow)
 WEBP_QUALITY = 80
@@ -57,12 +59,15 @@ JUNK_FILES = {"desktop.ini", "thumbs.db", ".ds_store"}
 EOL = "\r\n"             # مثل بقیه‌ی md های پروژه
 
 DRY_RUN = "--dry-run" in sys.argv
+ALIASES = {}
 PLANNED = {}  # فقط برای اجرای آزمایشی: شماره‌ی بعدی هر پوشه
 
 
 # ───────────────────────── کمک‌تابع‌ها ─────────────────────────
 def norm(name):
     """نام را برای مقایسه تمیز می‌کند: حروف کوچک، فاصله/زیرخط → خط تیره، فقط a-z 0-9 -"""
+    if re.search(r"[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]", str(name)):
+        return ""  # نام شامل حروف فارسی/عربی است → نام انگلیسی نیست
     s = re.sub(r"\s*\(\d+\)\s*$", "", str(name)).strip().lower()  # «name (1)» → name
     s = re.sub(r"[\s_]+", "-", s)
     s = re.sub(r"[^a-z0-9-]", "", s)
@@ -406,6 +411,27 @@ def describe_folder(folder):
     return "فایل‌ها: " + "، ".join(f"{e}×{c}" for e, c in sorted(exts.items()))
 
 
+def _clear_attrs(path):
+    """ویندوز: ویژگی‌های Read-only/Hidden/System را برمی‌دارد (پوشه‌های دارای desktop.ini معمولاً Read-only هستند)."""
+    try:
+        if os.name == "nt":
+            import ctypes
+            ctypes.windll.kernel32.SetFileAttributesW(str(path), 0x80)  # NORMAL
+        else:
+            os.chmod(path, stat.S_IRWXU)
+    except Exception:
+        pass
+
+
+def _force_remove(path, is_dir):
+    fn = os.rmdir if is_dir else os.unlink
+    try:
+        fn(path)
+    except PermissionError:
+        _clear_attrs(path)
+        fn(path)
+
+
 def prune(folder):
     """پوشه‌های خالی (یا فقط حاوی desktop.ini …) را از پایین به بالا پاک می‌کند."""
     try:
@@ -417,15 +443,16 @@ def prune(folder):
                 continue
             for f in files:
                 if f.lower() in JUNK_FILES:
-                    (d / f).unlink()
+                    _force_remove(d / f, False)
             if not any(d.iterdir()):
-                d.rmdir()
+                _force_remove(d, True)
         p = folder.parent
         while p != RAW_DIR and p.exists() and not any(p.iterdir()):
-            p.rmdir()
+            _force_remove(p, True)
             p = p.parent
     except Exception as e:
-        print(f"   ⚠️ پوشه‌ی خالی پاک نشد ({folder.name}): {e}")
+        print(f"   ⚠️ پوشه‌ی خالی پاک نشد ({folder.name}): {e}\n"
+              f"      (احتمالاً پوشه در Explorer یا برنامه‌ی دیگری باز است؛ آن را ببندید و دوباره اجرا کنید، یا دستی پاک کنید. عکس‌ها سالم منتقل شده‌اند.)")
 
 
 def find_image_folders(idx):
@@ -453,6 +480,56 @@ def find_image_folders(idx):
                 if [p for p in li if p.parent == leaf]:
                     found.append((leaf, [p for p in li]))
     return found, empty, loose
+
+
+def load_aliases():
+    """folder_map.csv: ستون‌های folder و slug؛ ردیف‌هایی که slug دارند اعمال می‌شوند."""
+    out = {}
+    if not MAP_CSV.exists():
+        return out
+    try:
+        with open(MAP_CSV, "r", encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                fo, sl = (row.get("folder") or "").strip(), (row.get("slug") or "").strip()
+                if fo and sl:
+                    out[fo] = sl
+    except Exception as e:
+        print(f"⚠️ خواندن {MAP_CSV.name} ممکن نشد: {e}")
+    return out
+
+
+def save_todo(todo):
+    """پوشه‌های ردشده را به folder_map.csv اضافه می‌کند (slug را خودتان پر کنید)."""
+    present = {d.name for d in RAW_DIR.iterdir() if d.is_dir()} if RAW_DIR.exists() else set()
+    if not todo and not MAP_CSV.exists():
+        return
+    rows, seen = [], set()
+    if MAP_CSV.exists():
+        try:
+            with open(MAP_CSV, "r", encoding="utf-8-sig", newline="") as f:
+                for r in csv.DictReader(f):
+                    fo = (r.get("folder") or "").strip()
+                    if fo:
+                        if not (r.get("slug") or "").strip() and fo not in present:
+                            continue  # ردیف خالی مربوط به پوشه‌ای که دیگر در raw/01 نیست
+                        rows.append([r.get("folder", ""), r.get("slug", ""), r.get("suggestions", ""), r.get("images", "")])
+                        seen.add(fo)
+        except Exception:
+            pass
+    added = 0
+    for fo, (sug, n) in todo.items():
+        if fo not in seen:
+            rows.append([fo, "", sug, n])
+            added += 1
+    try:
+        with open(MAP_CSV, "w", encoding="utf-8-sig", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["folder", "slug", "suggestions", "images"])
+            w.writerows(rows)
+        if added:
+            print(f"📝 {added} پوشه به {MAP_CSV.name} اضافه شد؛ ستون slug را پر کنید و دوباره اجرا کنید.")
+    except Exception as e:
+        print(f"⚠️ نوشتن {MAP_CSV.name} ممکن نشد: {e}")
 
 
 # ───────────────────────── برنامه‌ی اصلی ─────────────────────────
@@ -489,6 +566,11 @@ def main():
               + (" و ترمیم شد.\n" if not DRY_RUN else "؛ در اجرای واقعی ترمیم می‌شود.\n"))
 
     idx = index_products()
+    ALIASES.clear()
+    ALIASES.update(load_aliases())
+    print(f"📂 پوشه‌ی عکس‌ها: {RAW_DIR}")
+    if ALIASES:
+        print(f"🗺️ {len(ALIASES)} نگاشت دستی از {MAP_CSV.name} خوانده شد.")
     folders, empty, loose = find_image_folders(idx)
     print(f"🔍 {len(folders)} پوشه عکس در raw/01 و {sum(len(v) for v in idx.values())} کلید محصول پیدا شد.")
     if loose:
@@ -496,7 +578,14 @@ def main():
     print()
 
     report = []
+    todo = {}
     for d, why in empty:
+        only_junk = all(f.lower() in JUNK_FILES for _dp, _dn, fs in os.walk(d) for f in fs)
+        if only_junk and not DRY_RUN:
+            prune(d)
+            if not d.exists():
+                print(f"🧹 پوشه‌ی خالی «{d.name}» پاک شد.")
+                continue
         print(f"⚠️ «{d.name}» هیچ عکس قابل‌استفاده‌ای ندارد؛ همان‌جا ماند — {why}")
         report.append([d.name, "عکس پیدا نشد", "", "", 0, 0, why])
     if empty:
@@ -504,35 +593,35 @@ def main():
     stats = dict(matched=0, samples=0, skipped=0, moved=0, left=0)
 
     for folder, images in folders:
-        key = norm(folder.name)
-        if not key:
+        alias = ALIASES.get(folder.name, "")
+        key = norm(alias) if alias else norm(folder.name)
+        md, status = None, "none"
+        if alias:
+            print(f"   🗺️ «{folder.name}» طبق folder_map.csv → {key}")
+        if key:
+            md, status = pick_product(idx, key)
+        else:
             # نام فارسی: فقط اگر دقیقاً با عنوان (title) یا old_slug یک md اصلی بخورد وصل می‌شود
             hits = PIDX.get(pnorm(folder.name), set())
             if len(hits) == 1:
                 md, status = next(iter(hits)), "ok"
                 print(f"   🔤 «{folder.name}» با عنوان فارسی md تطبیق داده شد.")
             else:
-                why = "نام پوشه انگلیسی نیست"
-                if len(hits) > 1:
-                    why = "چند md با این عنوان فارسی مطابقت دارد: " + " | ".join(sorted(m.stem for m in hits))
-                    print(f"⚠️ «{folder.name}» با چند محصول هم‌عنوان است ({' | '.join(sorted(m.stem for m in hits))})؛ همان‌جا ماند. پوشه را به اسم یکی از آن‌ها تغییر دهید.")
-                    report.append([folder.name, "رد شد", "", "", 0, len(images), why])
-                    stats["skipped"] += 1
-                    stats["left"] += len(images)
-                    continue
-                near = difflib.get_close_matches(pnorm(folder.name), list(PIDX.keys()), n=2, cutoff=0.6)
-                sug = " | ".join(sorted(m.stem for k in near for m in PIDX[k]))
-                print(f"⚠️ «{folder.name}» اسم انگلیسی ندارد؛ همان‌جا ماند. "
-                      + (f"💡 شبیه: {sug} — پوشه را به این اسم تغییر دهید." if sug else "نام پوشه را انگلیسی (مثل slug محصول) کنید."))
+                near = difflib.get_close_matches(pnorm(folder.name), list(PIDX.keys()), n=3, cutoff=0.55)
+                names = sorted({m.stem for m in hits} | {m.stem for k in near for m in PIDX[k]})
+                sug = " | ".join(names)
+                why = ("چند md با این عنوان فارسی مطابقت دارد" if len(hits) > 1 else "نام پوشه انگلیسی نیست")
+                print(f"⚠️ «{folder.name}» اسم انگلیسی ندارد؛ همان‌جا ماند."
+                      + (f" 💡 شبیه: {sug}" if sug else ""))
                 report.append([folder.name, "رد شد", "", "", 0, len(images), why + (f" | شبیه: {sug}" if sug else "")])
+                todo[folder.name] = (sug, len(images))
                 stats["skipped"] += 1
                 stats["left"] += len(images)
                 continue
-        else:
-            md, status = pick_product(idx, key)
         if status == "ambiguous":
             print(f"⚠️ «{folder.name}» با چند md یکسان مطابقت دارد؛ همان‌جا ماند.")
             report.append([folder.name, "رد شد", "", "", 0, len(images), "چند md مطابق است"])
+            todo[folder.name] = ("", len(images))
             stats["skipped"] += 1
             stats["left"] += len(images)
             continue
@@ -643,6 +732,8 @@ def main():
         stats["left"] += len(failed)
         report.append([folder.name, "نمونه ساخته شد" if created_sample else "وصل شد",
                        md.relative_to(ROOT).as_posix(), cat, len(done), len(failed), ""])
+
+    save_todo(todo)
 
     if not DRY_RUN:
         try:

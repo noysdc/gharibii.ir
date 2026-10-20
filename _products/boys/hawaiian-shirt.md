@@ -5,7 +5,8 @@ seo_keywords: ["پیراهن هاوایی پسرانه", "پیراهن طرح س
 folder: "hawaiian-shirt"
 category: boys
 gender: boys
-price: "out_of_stock"
+price_group: "out_of_stock"
+price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/hawaiian-shirt/"]
 needs_review: true

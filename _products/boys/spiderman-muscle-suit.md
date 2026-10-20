@@ -28,6 +28,12 @@ images:
   - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-10.webp
   - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-11.webp
   - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-12.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-13.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-14.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-15.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-16.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-17.webp
+  - /assets/images/products/boys/spiderman-muscle-suit/spiderman-muscle-suit-18.webp
 ---
 
 تبدیل به ابرقهرمان: لباس اسپایدرمن عضلانی برای قهرمانان کوچک!

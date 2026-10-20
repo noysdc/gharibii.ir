@@ -19,6 +19,7 @@ images:
   - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-4.webp
   - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-5.webp
   - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-6.webp
+  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-7.webp
 ---
 
 
