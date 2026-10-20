@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "کلاه دزدان دریایی تم"
+title: "کلاه دزدان دریایی"
 slug: "pirate-hat"
 category: accessories
 gender: boys
