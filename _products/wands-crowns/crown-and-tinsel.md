@@ -2,7 +2,7 @@
 layout: product
 title: "تاج وتل"
 slug: "crown-and-tinsel"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "298,000"
 currency: IRT

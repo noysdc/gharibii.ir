@@ -28,6 +28,7 @@ BACKUP = HERE / "_backup_site_fixes"
 NEW_FILES = [
     "_includes/mobile-tabbar.html",
     "assets/css/extra.css",
+    "assets/js/extra.js",
     "assets/images/og-card.jpg",
 ]
 
@@ -189,6 +190,59 @@ def copy_new_files():
     return ok
 
 
+def ensure_extra_js():
+    """لینک extra.js را (اگر نبود) بعد از main.js در default.html می‌گذارد."""
+    p = ROOT / "_layouts" / "default.html"
+    t = read(p)
+    if "extra.js" in t:
+        print("• default.html: extra.js از قبل لینک شده.")
+        return True
+    e = eol_of(t)
+    n = t.replace("\r\n", "\n")
+    js_line = "<script src=\"{{ '/assets/js/main.js' | relative_url }}\" defer></script>"
+    if js_line not in n:
+        print("✗ default.html: خط main.js پیدا نشد؛ extra.js را دستی اضافه کنید.")
+        return False
+    backup(p)
+    n = n.replace(js_line, js_line + "\n  <script src=\"{{ '/assets/js/extra.js' | relative_url }}\" defer></script>", 1)
+    write(p, n.replace("\n", e))
+    print("✓ default.html: extra.js اضافه شد.")
+    return True
+
+
+def fix_categories():
+    """
+    md هایی که category: wands-crowns دارند ولی سایت (صفحه‌ی اصلی، هدر، صفحه‌ی دسته) «crown-wand» می‌خواند،
+    اصلاح می‌شوند تا دستهٔ «تاج و عصا» نمایش داده شود. اسکریپت‌های ساخت md هم اصلاح می‌شوند.
+    """
+    md_root = ROOT / "_products"
+    pat = re.compile(r"^(category:[ \t]*)([\"']?)wands-crowns\2([ \t]*)(?=\r?$)", re.M)
+    changed = 0
+    for md in sorted(md_root.rglob("*.md")):
+        try:
+            t = read(md)
+        except Exception:
+            continue
+        if not t.startswith("---"):
+            continue
+        t2, n = pat.subn(lambda m: m.group(1) + "crown-wand" + m.group(3), t, count=1)
+        if n:
+            write(md, t2)
+            changed += 1
+    if changed:
+        print(f"✓ دستهٔ {changed} محصول از wands-crowns به crown-wand اصلاح شد.")
+    else:
+        print("• هیچ md ای با category: wands-crowns نبود (قبلاً اصلاح شده).")
+    for name in ("build_products.py", "organize_images_final.py"):
+        sp = HERE / name
+        if sp.exists():
+            t = read(sp)
+            if 'return "wands-crowns"' in t:
+                write(sp, t.replace('return "wands-crowns"', 'return "crown-wand"'))
+                print(f"✓ {name}: دستهٔ پیش‌فرض تاج و عصا به crown-wand اصلاح شد.")
+    return True
+
+
 def main():
     print("=" * 60)
     print("  اعمال اصلاحات سایت")
@@ -202,7 +256,8 @@ def main():
         print("\n⛔ چون فایل‌های بالا نیستند، default.html تغییر داده نشد. پوشهٔ site_fixes_payload را کنار اسکریپت بگذارید و دوباره اجرا کنید.")
         r = [False, fix_footer(), False]
     else:
-        r = [files_ok, fix_footer(), fix_default()]
+        r = [files_ok, fix_footer(), fix_default(), ensure_extra_js()]
+    r.append(fix_categories())
     print()
     print("🎉 همه‌چیز انجام شد." if all(r) else "⚠️ بعضی بخش‌ها انجام نشد؛ پیام‌های بالا را ببینید.")
     print("نسخه‌ی پشتیبان فایل‌های قبلی: scripts/_backup_site_fixes/")

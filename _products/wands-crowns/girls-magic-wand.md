@@ -2,7 +2,7 @@
 layout: product
 title: "عصا مجیک دخترانه"
 slug: "girls-magic-wand"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "298,000"
 currency: IRT

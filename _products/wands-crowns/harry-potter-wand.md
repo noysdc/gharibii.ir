@@ -2,7 +2,7 @@
 layout: product
 title: "عصای جادویی هری پاتر"
 slug: "harry-potter-wand"
-category: wands-crowns
+category: crown-wand
 gender: boys
 price: "198,000"
 currency: IRT

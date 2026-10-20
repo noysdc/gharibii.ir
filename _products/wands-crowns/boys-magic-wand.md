@@ -2,7 +2,7 @@
 layout: product
 title: "عصا مجیک پسرانه"
 slug: "boys-magic-wand"
-category: wands-crowns
+category: crown-wand
 gender: boys
 price: "298,000"
 currency: IRT

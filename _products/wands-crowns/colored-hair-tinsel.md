@@ -2,7 +2,7 @@
 layout: product
 title: "تل موی رنگی شخصیتی دخترانه"
 slug: "colored-hair-tinsel"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "298,000"
 currency: IRT

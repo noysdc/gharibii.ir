@@ -99,7 +99,7 @@ STUBS = {
 def category_of(folder):
     f = folder
     if any(k in f for k in ("bag","shoes")): return "bags-shoes"
-    if any(k in f for k in ("wand","crown","tinsel","clip","wig","braid")): return "wands-crowns"
+    if any(k in f for k in ("wand","crown","tinsel","clip","wig","braid")): return "crown-wand"
     if any(k in f for k in ("gloves","cape-mask","mask","hat","cap","necklace","keychain","nails","wings","accessory")):
         return "accessories"
     if any(k in f for k in ("batman","hulk","spiderman","boy","harry-potter","ninja","hawaiian","iron-man","venom","flash","black-cat","muscle")): return "boys"

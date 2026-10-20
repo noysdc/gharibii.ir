@@ -2,7 +2,7 @@
 layout: product
 title: "تل تاج توری پرنسسی"
 slug: "princess-lace-crown"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "398,000"
 currency: IRT

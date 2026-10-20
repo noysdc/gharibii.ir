@@ -2,7 +2,7 @@
 layout: product
 title: "گیره ی موی پرنسسی گیس دار"
 slug: "princess-braid-hair-clip"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "398,000"
 currency: IRT

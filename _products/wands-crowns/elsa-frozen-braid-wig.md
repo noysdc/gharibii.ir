@@ -2,7 +2,7 @@
 layout: product
 title: "گیس موی السا فروزن پرنسسی"
 slug: "elsa-frozen-braid-wig"
-category: wands-crowns
+category: crown-wand
 gender: girls
 price: "198,000"
 currency: IRT
