@@ -2,8 +2,8 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 # ---------------- تنظیمات ----------------
-ROOT = Path(r"C:\Users\unes shojaei\Desktop\01")  # مسیر ورودی
-W, H = 900, 1200
+ROOT = Path(__file__).resolve().parent  # پوشه‌ای که اسکریپت در آن قرار دارد
+W, H = 900, 1200                        # عرض و ارتفاع خروجی (این خط جا افتاده بود)
 PAD = False
 QUALITY = 80
 EXTS = {".jpg", ".jpeg", ".jfif", ".png", ".webp", ".bmp"}
