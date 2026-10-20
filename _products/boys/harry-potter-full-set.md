@@ -4,7 +4,7 @@ title: "ست کامل هری پاتر"
 slug: "harry-potter-full-set"
 category: boys
 gender: boys
-price: "2,998,000"
+price: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/harry-potter-full-set/"]
 webzi_id: 45441
