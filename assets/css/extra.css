@@ -149,3 +149,116 @@ html[data-theme="dark"] .order-alt-link{color:#a8dde5}
 }
 .order-toast.is-on{opacity:1;transform:translate(-50%,0)}
 .cart-content .order-alt[hidden]{display:none}
+/* ============================================================
+   استایل دکمه‌های روش‌های دیگر سفارش (شبیه دکمه‌های محصول)
+   ============================================================ */
+
+/* ظرف نگهدارنده دکمه‌ها */
+.order-alt-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* استایل پایه دکمه‌ها (شبیه دکمه افزودن به سبد خرید) */
+.order-alt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--sea);
+  border: 1.5px solid var(--sea);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: calc(0.82rem * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-decoration: none;
+}
+
+/* افکت هاور */
+.order-alt-btn:hover {
+  background: var(--sea);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(10, 102, 112, 0.3);
+}
+
+.order-alt-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* استایل برای شماره‌های تلفن (کپی شماره) */
+.order-alt-phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.order-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--sea);
+  border: 1.5px solid var(--sea);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: calc(0.9rem * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  direction: ltr;
+  unicode-bidi: embed;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.order-phone:hover {
+  background: var(--sea);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(10, 102, 112, 0.3);
+}
+
+/* استایل برای عنوان و متن راهنما */
+.order-alt-title {
+  text-align: center;
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.order-alt-hint {
+  text-align: center;
+  font-size: calc(0.75rem * var(--font-scale));
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* ============================================================
+   تنظیمات حالت شب (Dark Mode)
+   ============================================================ */
+html[data-theme="dark"] .order-alt-btn,
+html[data-theme="dark"] .order-phone {
+  background: rgba(30, 45, 55, 0.7);
+  color: var(--sea-deep);
+  border-color: var(--sea);
+}
+
+html[data-theme="dark"] .order-alt-btn:hover,
+html[data-theme="dark"] .order-phone:hover {
+  background: var(--sea);
+  color: #fff;
+}
