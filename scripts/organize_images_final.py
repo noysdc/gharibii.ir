@@ -54,6 +54,11 @@ MAP_CSV = HERE / "folder_map.csv"   # نگاشت دستی: نام پوشه → s
 
 CONVERT_TO_WEBP = True   # عکس‌ها هنگام انتقال به webp تبدیل شوند (نیاز به Pillow)
 WEBP_QUALITY = 80
+LOW_RES_MIN_WIDTH = 700  # عکسی که پس از برش ۳:۴ کمتر از این عرض داشته باشد در گالری مات دیده می‌شود
+LOWRES = []              # (مسیر مقصد، عرض، ارتفاع)
+MAKE_THUMBS = True       # کنار هر عکس webp یک <name>-t.webp کوچک هم ساخته شود (برای کارت‌ها/جستجو؛ سایت را سریع می‌کند)
+THUMB_SIZE = (540, 720)
+THUMB_QUALITY = 78
 IMG_EXT = {".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff", ".avif", ".heic", ".heif"}
 JUNK_FILES = {"desktop.ini", "thumbs.db", ".ds_store"}
 EOL = "\r\n"             # مثل بقیه‌ی md های پروژه
@@ -357,6 +362,29 @@ def image_basename(base, number, single):
     return base if single else f"{base}-{number}"
 
 
+def _note_size(dst, size):
+    """عکس‌های کم‌وضوح را ثبت می‌کند (پس از برش ۳:۴ که سایت نمایش می‌دهد)."""
+    w, h = size
+    eff_w = min(w, h * 3 / 4)
+    if eff_w < LOW_RES_MIN_WIDTH:
+        LOWRES.append((dst, w, h))
+
+
+def make_thumb(dst):
+    """تامبنیل <name>-t.webp کنار عکس اصلی می‌سازد (همان منطق make_thumbs.py)."""
+    if not MAKE_THUMBS or Image is None or dst.suffix.lower() != ".webp" or dst.stem.endswith("-t"):
+        return
+    try:
+        with Image.open(dst) as im:
+            im = ImageOps.exif_transpose(im)
+            alpha = im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info)
+            im = im.convert("RGBA" if alpha else "RGB")
+            th = ImageOps.fit(im, THUMB_SIZE, Image.LANCZOS, centering=(0.5, 0.5))
+            th.save(dst.with_name(dst.stem + "-t.webp"), "WEBP", quality=THUMB_QUALITY, method=4)
+    except Exception as e:
+        print(f"   ⚠️ تامبنیل ساخته نشد ({dst.name}): {e}")
+
+
 def put_image(src, dest_dir, name):
     """یک عکس را به مقصد می‌نویسد (webp یا کپی عادی) و مسیر مقصد را برمی‌گرداند. منبع را دست نمی‌زند."""
     ext = src.suffix.lower()
@@ -364,6 +392,7 @@ def put_image(src, dest_dir, name):
         dst = dest_dir / f"{name}.webp"
         with Image.open(src) as im:
             im = ImageOps.exif_transpose(im)
+            _note_size(dst, im.size)
             has_alpha = im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info)
             im = im.convert("RGBA" if has_alpha else "RGB")
             im.save(dst, "WEBP", quality=WEBP_QUALITY)
@@ -373,9 +402,16 @@ def put_image(src, dest_dir, name):
         if ext == "":
             ext = ".jpg"
         dst = dest_dir / f"{name}{ext}"
+        if Image is not None:
+            try:
+                with Image.open(src) as _im:
+                    _note_size(dst, _im.size)
+            except Exception:
+                pass
         shutil.copy2(src, dst)
     if not dst.exists() or dst.stat().st_size == 0:
         raise IOError("فایل مقصد ساخته نشد")
+    make_thumb(dst)
     return dst
 
 
@@ -755,6 +791,21 @@ def main():
     if not DRY_RUN:
         print(f"   گزارش: {REPORT_CSV.name}")
     print("=" * 62)
+    if LOWRES:
+        print(f"\n🔎 {len(LOWRES)} عکس کم‌وضوح است (عرض مؤثر < {LOW_RES_MIN_WIDTH}px) و در گالری/موبایل ممکن است مات دیده شود:")
+        for dst, w, h in sorted(LOWRES, key=lambda t: min(t[1], t[2] * 3 / 4))[:20]:
+            print(f"   {w}×{h}  {dst.relative_to(ROOT).as_posix()}")
+        if len(LOWRES) > 20:
+            print(f"   ... و {len(LOWRES) - 20} مورد دیگر (لیست کامل: images_low_res.csv)")
+        try:
+            with open(HERE / "images_low_res.csv", "w", encoding="utf-8-sig", newline="") as f:
+                w_ = csv.writer(f)
+                w_.writerow(["file", "width", "height"])
+                for dst, w, h in LOWRES:
+                    w_.writerow([dst.relative_to(ROOT).as_posix(), w, h])
+        except Exception:
+            pass
+        print("   راه‌حل: عکس بزرگ‌تر (حداقل ۹۰۰×۱۲۰۰) جایگزین کنید.")
 
 
 if __name__ == "__main__":

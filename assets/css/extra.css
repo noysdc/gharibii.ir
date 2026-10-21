@@ -114,3 +114,38 @@ html[data-theme="dark"] .category-nav a{box-shadow:inset 0 1px 0 rgba(255,255,25
   width:1.3em;height:1.3em;flex:0 0 auto;fill:none;stroke:currentColor;
   stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round
 }
+
+/* ---------- ۸) روش‌های دیگر سفارش (برای کسانی که واتساپ ندارند) ---------- */
+.order-alt{margin-top:1rem;padding:.85rem .9rem;border:1px dashed var(--line);border-radius:1rem;background:rgba(168,85,247,.05);text-align:right}
+.order-alt-title{margin:0 0 .6rem;font-size:calc(.86rem * var(--font-scale));font-weight:700;color:var(--ink);line-height:1.7}
+.order-alt-grid{display:flex;flex-wrap:wrap;gap:.45rem}
+.order-alt-btn{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .85rem;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;
+  font-size:calc(.82rem * var(--font-scale));font-weight:600;line-height:1.5;text-decoration:none;cursor:pointer;
+  transition:border-color .2s ease,transform .15s ease
+}
+.order-alt-btn:hover{border-color:rgba(168,85,247,.55);text-decoration:none}
+.order-alt-btn:active{transform:scale(.97)}
+.order-alt-btn[data-ch="sms"]{display:none}                         /* پیامک فقط روی گوشی */
+@media (hover:none) and (pointer:coarse){.order-alt-btn[data-ch="sms"]{display:inline-flex}}
+.order-alt-phones{margin-top:.7rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;font-size:calc(.82rem * var(--font-scale));color:var(--muted)}
+.order-phone{
+  direction:ltr;unicode-bidi:embed;padding:.22rem .65rem;border-radius:.65rem;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font-weight:700;text-decoration:none;letter-spacing:.02em
+}
+.order-phone:hover{border-color:rgba(168,85,247,.55);text-decoration:none}
+.order-alt-hint{margin:.45rem 0 0;font-size:calc(.74rem * var(--font-scale));color:var(--muted)}
+.order-alt-link{
+  align-self:center;background:none;border:0;padding:.15rem .25rem;font:inherit;font-size:calc(.85rem * var(--font-scale));
+  color:var(--sea-deep,#073E45);text-decoration:underline;text-underline-offset:3px;cursor:pointer
+}
+html[data-theme="dark"] .order-alt-link{color:#a8dde5}
+.order-toast{
+  position:fixed;left:50%;bottom:calc(6.5rem + env(safe-area-inset-bottom,0px));z-index:130;
+  transform:translate(-50%,10px);opacity:0;pointer-events:none;max-width:min(92vw,24rem);
+  padding:.6rem 1.1rem;border-radius:999px;background:rgba(20,30,40,.92);color:#fff;
+  font-size:calc(.85rem * var(--font-scale));text-align:center;transition:opacity .25s ease,transform .25s ease
+}
+.order-toast.is-on{opacity:1;transform:translate(-50%,0)}
+.cart-content .order-alt[hidden]{display:none}

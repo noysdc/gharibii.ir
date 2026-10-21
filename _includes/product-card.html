@@ -27,7 +27,7 @@
       <a class="slide" href="{{ item.url | relative_url }}" aria-label="{{ item.title | escape }}"><img src="{% include img.html src=no_img %}" alt="{{ item.title | escape }}" width="600" height="800"></a>
       {%- else -%}
       {%- for im in imgs limit: 5 -%}
-      <a class="slide" href="{{ item.url | relative_url }}"{% unless forloop.first %} tabindex="-1" aria-hidden="true"{% endunless %}><img src="{% include img.html src=im %}" alt="{% if forloop.first %}{{ item.title | escape }}{% endif %}" loading="lazy" width="600" height="800"></a>
+      <a class="slide" href="{{ item.url | relative_url }}"{% unless forloop.first %} tabindex="-1" aria-hidden="true"{% endunless %}><img src="{% include thumb.html src=im %}" onerror="this.onerror=null;this.src='{% include img.html src=im %}'" decoding="async" alt="{% if forloop.first %}{{ item.title | escape }}{% endif %}" loading="lazy" width="600" height="800"></a>
       {%- endfor -%}
       {%- endif -%}
     </div>

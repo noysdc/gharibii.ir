@@ -30,6 +30,7 @@ NEW_FILES = [
     "assets/css/extra.css",
     "assets/js/extra.js",
     "assets/images/og-card.jpg",
+    "_includes/thumb.html",
 ]
 
 FOOTER_TRUST = '''<div class="trust-boxes">
@@ -299,6 +300,119 @@ def bust_cache():
     return True
 
 
+CONFIG_BLOCK = """
+
+# ---------- روش‌های دیگر سفارش (برای کسانی که واتساپ ندارند) ----------
+# هر کدام را خالی بگذارید، دکمه‌اش در سایت نمایش داده نمی‌شود.
+order_telegram: "gharibii_ir"      # آیدی تلگرام بدون @
+order_bale: ""                     # آیدی بله بدون @ ، مثلاً gharibii  ← لینک: https://ble.ir/gharibii
+order_instagram: "storegaribi16"   # آیدی اینستاگرام بدون @ (دایرکت)
+"""
+
+CHANNELS_JSON = (
+    '<script type="application/json" id="order-channels-data">'
+    '{"telegram":{{ site.order_telegram | default: "" | jsonify }},'
+    '"bale":{{ site.order_bale | default: "" | jsonify }},'
+    '"instagram":{{ site.order_instagram | default: "" | jsonify }},'
+    '"phones":[{% for s in site.whatsapp_sellers %}{"label":{{ s.name | jsonify }},"number":{{ s.number | jsonify }}}'
+    '{% unless forloop.last %},{% endunless %}{% endfor %}'
+    '{% if site.phone_e164 %}{% if site.whatsapp_sellers %},{% endif %}'
+    '{"label":"تلفن فروشگاه","number":{{ site.phone_e164 | jsonify }},"display":{{ site.phone_display | jsonify }}}{% endif %}]}'
+    '</script>'
+)
+
+
+def fix_order_channels():
+    """روش‌های دیگر سفارش (بله، تلگرام، تماس، ...): تنظیمات در _config.yml و داده‌ی JSON در default.html."""
+    ok = True
+    cp = ROOT / "_config.yml"
+    t = read(cp)
+    if "order_telegram:" in t:
+        print("• _config.yml: تنظیمات روش‌های سفارش از قبل هست.")
+    else:
+        backup(cp)
+        e = eol_of(t)
+        write(cp, t.rstrip("\r\n") + CONFIG_BLOCK.replace("\n", e) + e)
+        print("✓ _config.yml: بخش «روش‌های دیگر سفارش» اضافه شد (order_bale را پر کنید).")
+    dp = ROOT / "_layouts" / "default.html"
+    d = read(dp)
+    if 'id="order-channels-data"' in d:
+        print("• default.html: داده‌ی روش‌های سفارش از قبل هست.")
+        return ok
+    e = eol_of(d)
+    n = d.replace("\r\n", "\n")
+    m = re.search(r'^[ \t]*<script type="application/json" id="wa-sellers-data">.*$', n, re.M)
+    if not m:
+        print("✗ default.html: خط wa-sellers-data پیدا نشد؛ داده‌ی سفارش اضافه نشد.")
+        return False
+    backup(dp)
+    n = n[:m.end()] + "\n  " + CHANNELS_JSON + n[m.end():]
+    write(dp, n.replace("\n", e))
+    print("✓ default.html: داده‌ی روش‌های سفارش اضافه شد.")
+    return ok
+
+
+def _thumb_coverage():
+    base = ROOT / "assets" / "images" / "products"
+    if not base.exists():
+        return 0, 0
+    srcs = [p for p in base.rglob("*.webp") if not p.stem.endswith("-t")]
+    have = sum(1 for p in srcs if p.with_name(p.stem + "-t.webp").exists())
+    return have, len(srcs)
+
+
+def speed_pack():
+    """کارت‌ها، نوار تصاویر، صفحهٔ اصلی و جستجو را از تصویر کوچک (-t.webp) بخوانند. فقط اگر تامبنیل‌ها ساخته شده باشند."""
+    have, total = _thumb_coverage()
+    if total == 0 or have < total * 0.98:
+        print(f"⏭️ بهینه‌سازی تصاویر انجام نشد: فقط {have} از {total} تامبنیل ساخته شده. اول RUN_THUMBS.bat را اجرا کنید، بعد دوباره این اسکریپت.")
+        return True
+    def FB(var):
+        return "onerror=\"this.onerror=null;this.src='{% include img.html src=" + var + " %}'\""
+    jobs = [
+        ("_includes/product-card.html",
+         [('<img src="{% include img.html src=im %}"',
+           '<img src="{% include thumb.html src=im %}" ' + FB("im") + ' decoding="async"')]),
+        ("_layouts/product.html",
+         [('<img src="{% include img.html src=im %}" alt="" loading="lazy"',
+           '<img src="{% include thumb.html src=im %}" ' + FB("im") + ' alt="" loading="lazy" decoding="async"'),
+          ('<img id="main-img" src=', '<img id="main-img" fetchpriority="high" src=')]),
+        ("index.html",
+         [('<img src="{% include img.html src=gim %}"', '<img src="{% include thumb.html src=gim %}" ' + FB("gim")),
+          ('<img src="{% include img.html src=bim %}"', '<img src="{% include thumb.html src=bim %}" ' + FB("bim")),
+          ('<img src="{% include img.html src=cover %}"', '<img src="{% include thumb.html src=cover %}" ' + FB("cover"))]),
+        ("search.json",
+         [("{% capture u %}{% include img.html src=im %}{% endcapture %}", "{% capture u %}{% include thumb.html src=im %}{% endcapture %}")]),
+    ]
+    all_ok = True
+    for rel, reps in jobs:
+        p = ROOT / rel
+        if not p.exists():
+            print(f"✗ {rel}: پیدا نشد.")
+            all_ok = False
+            continue
+        t = read(p)
+        e = eol_of(t)
+        n = t.replace("\r\n", "\n")
+        changed = 0
+        for old, new in reps:
+            if new in n:
+                continue
+            if old in n:
+                n = n.replace(old, new)
+                changed += 1
+            else:
+                print(f"✗ {rel}: بخش «{old[:45]}…» پیدا نشد (فایل تغییر کرده؟).")
+                all_ok = False
+        if changed:
+            backup(p)
+            write(p, n.replace("\n", e))
+            print(f"✓ {rel}: {changed} تغییر.")
+        else:
+            print(f"• {rel}: از قبل بهینه است (یا تغییری لازم نبود).")
+    return all_ok
+
+
 def main():
     print("=" * 60)
     print("  اعمال اصلاحات سایت")
@@ -316,6 +430,8 @@ def main():
     r.append(fix_categories())
     r.append(fix_header_icons())
     r.append(bust_cache())
+    r.append(fix_order_channels())
+    r.append(speed_pack())
     print()
     print("🎉 همه‌چیز انجام شد." if all(r) else "⚠️ بعضی بخش‌ها انجام نشد؛ پیام‌های بالا را ببینید.")
     print("نسخه‌ی پشتیبان فایل‌های قبلی: scripts/_backup_site_fixes/")

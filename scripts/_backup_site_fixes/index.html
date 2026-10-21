@@ -1,0 +1,233 @@
+---
+layout: default
+title: پوشاک دخترانه و پسرانه
+redirect_from:
+  - "/blog/"
+  - "/shop/"
+  - "/blog/3484-دانستی-ها/"
+  - "/blog/درباره-ما/P9-بهترین-لباس-ها-برای-فصل-سرما.html"
+  - "/blog/uncategorized/P10-بهترین-لباس-ها-با-توجه-به-رنگ-پوست-صورت.html"
+  - "/blog/uncategorized/P45443-سیندرلای-دوست-داشتنی.html"
+---
+{%- assign girls = site.products | where: 'category', 'girls' -%}
+{%- assign boys = site.products | where: 'category', 'boys' -%}
+{%- assign girls_latest = girls | sort: 'sort_id' | reverse -%}
+{%- assign boys_latest = boys | sort: 'sort_id' | reverse -%}
+{%- assign cat_slugs = "girls|boys|bags-shoes|crown-wand|accessories" | split: "|" -%}
+{%- assign cat_names = "پرنسسی دخترانه|شخصیتی پسرانه|کیف و کفش|تاج و عصا|اکسسوری‌ها" | split: "|" -%}
+{%- assign cat_emojis = "👗|🦸|👜|👑|🎀" | split: "|" -%}
+{%- assign cat_tints = "girls|boys|bags|crown|acc" | split: "|" -%}
+
+<!-- آیکن‌های وکتور (یک‌بار تعریف، چندبار استفاده) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="gi-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></symbol>
+    <symbol id="gi-heart" viewBox="0 0 24 24"><path d="M12 21C5 16.5 2 12.5 2 8.8 2 6.2 4 4.2 6.5 4.2c1.9 0 3.7 1.1 5.5 3.3 1.8-2.2 3.6-3.3 5.5-3.3C20 4.2 22 6.2 22 8.8c0 3.7-3 7.7-10 12.2z"/></symbol>
+    <symbol id="gi-sparkle" viewBox="0 0 24 24"><path d="M12 2c.6 5.2 2.8 7.4 10 10-7.2 2.6-9.4 4.8-10 10-.6-5.2-2.8-7.4-10-10 7.2-2.6 9.4-4.8 10-10z"/></symbol>
+    <symbol id="gi-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></symbol>
+    <symbol id="gi-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></symbol>
+    <symbol id="gi-crown" viewBox="0 0 24 24"><path d="M3 18l-1-11 5.5 4L12 4l4.5 7L22 7l-1 11z"/></symbol>
+  </defs>
+</svg>
+
+<section class="wrap">
+  <div class="tiles">
+
+    <div class="tile-col">
+      <a class="tile girls" href="{{ '/girls/' | relative_url }}">
+        <svg class="deco d1" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+        <svg class="deco d2" aria-hidden="true"><use href="#gi-heart"/></svg>
+        <svg class="deco d3" aria-hidden="true"><use href="#gi-star"/></svg>
+        <svg class="deco d4" aria-hidden="true"><use href="#gi-crown"/></svg>
+        <svg class="deco d5" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+        <span class="tile-collage" aria-hidden="true">
+          {%- for gp in girls_latest limit: 3 -%}
+            {%- assign gim = gp.images[0] -%}
+            {%- if gim -%}<img src="{% include img.html src=gim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+          {%- endfor -%}
+        </span>
+        <span class="tile-name">دخترانه</span>
+        <span class="tile-count">{{ girls.size }} محصول</span>
+        <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
+      </a>
+      <p class="hero-lead tile-note">لباس‌های شخصیتی و پرنسسی برای کوچولوهاتون.</p>
+    </div>
+
+    <div class="tile-col">
+      <a class="tile boys" href="{{ '/boys/' | relative_url }}">
+        <svg class="deco d1" aria-hidden="true"><use href="#gi-bolt"/></svg>
+        <svg class="deco d2" aria-hidden="true"><use href="#gi-star"/></svg>
+        <svg class="deco d3" aria-hidden="true"><use href="#gi-moon"/></svg>
+        <svg class="deco d4" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+        <svg class="deco d5" aria-hidden="true"><use href="#gi-bolt"/></svg>
+        <span class="tile-collage" aria-hidden="true">
+          {%- for bp in boys_latest limit: 3 -%}
+            {%- assign bim = bp.images[0] -%}
+            {%- if bim -%}<img src="{% include img.html src=bim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+          {%- endfor -%}
+        </span>
+        <span class="tile-name">پسرانه</span>
+        <span class="tile-count">{{ boys.size }} محصول</span>
+        <span class="tile-cta">مشاهده <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></span>
+      </a>
+      <p class="hero-lead tile-note">برای سفارش، محصول موردنظر رو انتخاب کنید و در واتساپ پیام بدید. 🎀</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head fancy-head">
+    <h2>دسته‌بندی‌ها</h2>
+    <p class="section-sub">یک دسته رو انتخاب کنید</p>
+  </div>
+  <div class="cat-scroller">
+    {%- for slug in cat_slugs -%}
+      {%- assign items = site.products | where: 'category', slug | sort: 'sort_id' | reverse -%}
+      {%- assign cover = items[0].images[0] -%}
+      <a class="cat-tile tint-{{ cat_tints[forloop.index0] }}" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+        <span class="cat-tile-in">
+          {%- if cover -%}
+            <img src="{% include img.html src=cover %}" alt="" loading="lazy" width="400" height="500">
+          {%- else -%}
+            <span class="cat-tile-emoji">{{ cat_emojis[forloop.index0] }}</span>
+          {%- endif -%}
+          <span class="cat-tile-pill">{% if items.size > 0 %}{{ items.size }} محصول{% else %}به‌زودی{% endif %}</span>
+          <span class="cat-tile-label">
+            <strong>{{ cat_names[forloop.index0] }}</strong>
+            <span class="cat-tile-go" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></span>
+          </span>
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- هر دسته: باکس با تم دیزنی + چند محصول + دکمه «نمایش بیشتر» (موبایل ۴، تبلت ۶، دسکتاپ ۹ عدد) -->
+{%- for slug in cat_slugs -%}
+  {%- assign items = site.products | where: 'category', slug | sort: 'sort_id' | reverse -%}
+  {%- if items.size > 0 -%}
+  <section class="wrap cat-section" id="cat-{{ slug }}">
+    <div class="cat-block tint-{{ cat_tints[forloop.index0] }}">
+      <span class="cb-skyline" aria-hidden="true"></span>
+      <svg class="cb-spark s1" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+      <svg class="cb-spark s2" aria-hidden="true"><use href="#gi-star"/></svg>
+      <svg class="cb-spark s3" aria-hidden="true"><use href="#gi-sparkle"/></svg>
+      <header class="cat-block-head">
+        <span class="cb-banner-wrap">
+          <a class="cb-banner" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+            <span class="cb-medal" aria-hidden="true">{{ cat_emojis[forloop.index0] }}</span>
+            <h2>{{ cat_names[forloop.index0] }}</h2>
+          </a>
+        </span>
+        <span class="cb-count" aria-label="{{ items.size }} محصول"><b>{{ items.size }}</b><small>محصول</small></span>
+      </header>
+      <div class="grid cat-grid">
+        {%- for p in items limit: 9 -%}
+          {% include product-card.html product=p %}
+        {%- endfor -%}
+      </div>
+      {%- if items.size > 4 -%}
+      <div class="cat-more">
+        <a class="more-btn" href="{{ '/' | append: slug | append: '/' | relative_url }}">
+          <span>نمایش بیشتر</span>
+          <small>همه‌ی {{ items.size }} محصول</small>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg>
+        </a>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+{%- endfor -%}
+
+
+<!-- ============================================== -->
+<!-- دیوایدر بالای گالری -->
+<!-- ============================================== -->
+<div class="wrap">
+  <div class="holo-divider" role="presentation" style="margin-top: 3rem; margin-bottom: 2rem;"></div>
+</div>
+
+<!-- گالری اسلایدی: هر عکسی که داخل assets/images/gallery/ بگذارید خودکار اینجا نمایش داده می‌شود -->
+{%- assign gallery_all = site.static_files | where_exp: 'f', "f.path contains 'assets/images/gallery/'" | sort: 'path' -%}
+{%- assign gallery_exts = ".jpg|.jpeg|.png|.webp|.avif|.gif" | split: "|" -%}
+{%- capture gallery_html -%}
+  {%- for f in gallery_all -%}
+    {%- assign fext = f.extname | downcase -%}
+    {%- if gallery_exts contains fext -%}
+      {%- assign fpath = f.path | prepend: '/' | replace: '//', '/' -%}
+      <figure class="gslide"><img src="{{ fpath | relative_url }}" alt="گالری فروشگاه غریبی کیش — تصویر {{ forloop.index }}" loading="lazy" decoding="async" width="800" height="1000"></figure>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign gallery_html = gallery_html | strip -%}
+{%- if gallery_html != "" -%}
+<section class="wrap gallery-section" aria-label="گالری تصاویر">
+  <!-- وسط چین کردن عنوان گالری -->
+  <div class="section-head fancy-head" style="justify-content: center; text-align: center; flex-direction: column; gap: 0.5rem;">
+    <h2 style="margin: 0;">گالری</h2>
+    <p class="section-sub">چند قاب از دنیای غریبی ✨</p>
+  </div>
+  <div class="gslider" data-gslider>
+    <button type="button" class="g-btn g-prev" aria-label="تصویر قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+    <div class="gslides" tabindex="0">{{ gallery_html }}</div>
+    <button type="button" class="g-btn g-next" aria-label="تصویر بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+    <div class="g-dots" aria-hidden="true"></div>
+  </div>
+</section>
+<script src="{{ '/assets/js/gallery.js' | relative_url }}" defer></script>
+{%- endif -%}
+
+<!-- ============================================== -->
+<!-- دیوایدر بالای بخش سفارش چطوره -->
+<!-- ============================================== -->
+<div class="wrap">
+  <div class="holo-divider" role="presentation" style="margin-top: 1.5rem; margin-bottom: 2rem;"></div>
+</div>
+
+<!-- بخش سفارش چطوره (وسط‌چین) -->
+<section class="wrap">
+  <div class="section-head" style="justify-content: center; text-align: center;">
+    <h2 style="margin: 0 auto;">سفارش چطوره؟</h2>
+  </div>
+  <ol class="steps">
+    <li class="step">
+      <span class="step-num">۱</span>
+      <div><strong>انتخاب محصول</strong><p>از بین دسته‌ها، لباس یا اکسسوری موردنظرتون رو انتخاب کنید.</p></div>
+    </li>
+    <li class="step">
+      <span class="step-num">۲</span>
+      <div><strong>پیام در واتساپ</strong><p>دکمه «ثبت سفارش در واتساپ» رو بزنید و یکی از فروشنده‌ها رو انتخاب کنید.</p></div>
+    </li>
+    <li class="step">
+      <span class="step-num">۳</span>
+      <div><strong>هماهنگی سفارش</strong><p>سایز، رنگ و نحوه تحویل رو با فروشنده هماهنگ کنید.</p></div>
+    </li>
+  </ol>
+</section>
+
+{%- assign gmsg = "سلام، درباره محصولات فروشگاه غریبی کیش سوال داشتم" | url_encode -%}
+<section class="wrap">
+  <div class="contact-panel">
+    <h2>با ما در ارتباط باشید</h2>
+    {%- if site.address -%}<p class="muted">{{ site.address }}</p>{%- endif -%}
+    <div class="wa-sellers">
+      {%- if site.whatsapp_sellers -%}
+        {%- for s in site.whatsapp_sellers -%}
+        <a class="wa-seller" href="https://wa.me/{{ s.number }}?text={{ gmsg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar">{% if s.photo %}<img src="{{ s.photo | relative_url }}" alt="" width="160" height="160" loading="lazy" onerror="this.remove()">{% endif %}</span>
+          <span class="wa-seller-info"><strong>{{ s.name }}</strong><small>پیام در واتساپ</small></span>
+        </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for n in site.whatsapp_numbers -%}
+        <a class="wa-seller" href="https://wa.me/{{ n }}?text={{ gmsg }}" target="_blank" rel="noopener">
+          <span class="wa-avatar"></span>
+          <span class="wa-seller-info"><strong>شماره {{ forloop.index }}</strong><small>پیام در واتساپ</small></span>
+        </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>

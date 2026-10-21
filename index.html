@@ -43,7 +43,7 @@ redirect_from:
         <span class="tile-collage" aria-hidden="true">
           {%- for gp in girls_latest limit: 3 -%}
             {%- assign gim = gp.images[0] -%}
-            {%- if gim -%}<img src="{% include img.html src=gim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+            {%- if gim -%}<img src="{% include thumb.html src=gim %}" onerror="this.onerror=null;this.src='{% include img.html src=gim %}'" alt="" loading="lazy" width="300" height="400">{%- endif -%}
           {%- endfor -%}
         </span>
         <span class="tile-name">دخترانه</span>
@@ -63,7 +63,7 @@ redirect_from:
         <span class="tile-collage" aria-hidden="true">
           {%- for bp in boys_latest limit: 3 -%}
             {%- assign bim = bp.images[0] -%}
-            {%- if bim -%}<img src="{% include img.html src=bim %}" alt="" loading="lazy" width="300" height="400">{%- endif -%}
+            {%- if bim -%}<img src="{% include thumb.html src=bim %}" onerror="this.onerror=null;this.src='{% include img.html src=bim %}'" alt="" loading="lazy" width="300" height="400">{%- endif -%}
           {%- endfor -%}
         </span>
         <span class="tile-name">پسرانه</span>
@@ -88,7 +88,7 @@ redirect_from:
       <a class="cat-tile tint-{{ cat_tints[forloop.index0] }}" href="{{ '/' | append: slug | append: '/' | relative_url }}">
         <span class="cat-tile-in">
           {%- if cover -%}
-            <img src="{% include img.html src=cover %}" alt="" loading="lazy" width="400" height="500">
+            <img src="{% include thumb.html src=cover %}" onerror="this.onerror=null;this.src='{% include img.html src=cover %}'" alt="" loading="lazy" width="400" height="500">
           {%- else -%}
             <span class="cat-tile-emoji">{{ cat_emojis[forloop.index0] }}</span>
           {%- endif -%}
