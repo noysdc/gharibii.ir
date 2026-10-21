@@ -93,12 +93,12 @@
         {% endif %}
       </div>
 
-      <!-- تلفن ثابت (متن ثابت برای جلوگیری از برعکس شدن) -->
+      <!-- تلفن ثابت (اصلاح برعکس بودن) -->
       <button onclick="copyPhone('{{ site.phone_display }}')" class="box-btn full-width glass-effect">
-        <span>📞</span> تماس تلفنی: 076-44561403
+        <span>📞</span> تماس تلفنی: <span dir="ltr" style="unicode-bidi: embed;">076-44561403</span>
       </button>
 
-      <!-- موبایل‌ها (متن ثابت برای جلوگیری از برعکس شدن) -->
+      <!-- موبایل‌ها -->
       <div class="grid-2-cols">
         <button onclick="copyPhone('09347688356')" class="box-btn glass-effect phone-num">
           0934 768 8356
