@@ -330,3 +330,11 @@ html[data-theme="dark"] .alt-pill{background:rgba(40,60,75,.5);border-color:rgba
 html[data-theme="dark"] .alt-pill::before{opacity:.1}
 html[data-theme="dark"] .alt-pill:hover{background:rgba(60,85,105,.75);border-color:rgba(150,120,200,.6);color:#fff}
 @media (max-width:360px){.alt-row{grid-template-columns:1fr}}
+
+/* موبایل: دکمه‌ها در یک ردیف بمانند */
+.alt-pill.is-num{white-space:nowrap}
+@media (max-width:480px){
+  .alt-pill{padding:.5rem .55rem;gap:.35rem;font-size:calc(.82rem * var(--font-scale))}
+  .alt-pill.is-num{font-size:calc(.8rem * var(--font-scale));letter-spacing:0}
+  .alt-pill.is-num .alt-ico{display:none}
+}
