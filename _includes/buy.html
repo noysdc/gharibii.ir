@@ -62,58 +62,63 @@
     </div>
   </div>
 
-  <!-- بخش روش‌های دیگر سفارش -->
+  <!-- ========================================== -->
+  <!-- بخش روش‌های دیگر سفارش (چیدمان اصلاح‌شده) -->
+  <!-- ========================================== -->
   <div class="order-alt-box">
+    <!-- 01 - عنوان -->
     <p class="order-alt-title">واتساپ ندارید؟ از این راه‌ها هم می‌توانید سفارش بدهید</p>
 
-    <!-- ردیف اول: شبکه‌های اجتماعی -->
-    <div class="order-alt-grid">
+    <!-- 02 - باکس کپی متن سفارش -->
+    <div class="order-copy-box">
+      <button onclick="copyCartText()" class="copy-text-full-btn">
+        <span>📋</span> کپی متن سفارش
+      </button>
+    </div>
+
+    <!-- 03 - دکمه‌های شبکه‌های اجتماعی -->
+    <div class="order-social-grid">
       {% if site.order_telegram %}
-      <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="order-alt-btn">
+      <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="order-btn-glass">
         <span>✈️</span> تلگرام
       </a>
       {% endif %}
       
-      <!-- دکمه‌های بله (اصلاح‌شده برای دو آیدی) -->
       {% if site.order_bale %}
-        {% for bale_id in site.order_bale %}
-          <a href="https://ble.ir/{{ bale_id }}" target="_blank" rel="noopener" class="order-alt-btn">
-            <span>💬</span> بله {{ forloop.index }}
-          </a>
-        {% endfor %}
+      <a href="https://ble.ir/{{ site.order_bale[0] }}" target="_blank" rel="noopener" class="order-btn-glass">
+        <span>💬</span> بله
+      </a>
       {% endif %}
 
       {% if site.order_instagram %}
-      <a href="https://instagram.com/{{ site.order_instagram }}" target="_blank" rel="noopener" class="order-alt-btn">
+      <a href="https://instagram.com/{{ site.order_instagram }}" target="_blank" rel="noopener" class="order-btn-glass">
         <span>📷</span> دایرکت اینستاگرام
       </a>
       {% endif %}
     </div>
 
-    <!-- ردیف دوم: کپی متن سفارش -->
-    <div class="order-alt-grid" style="margin-top: 8px;">
-      <button onclick="copyCartText()" class="order-alt-btn copy-text-btn">
-        <span>📋</span> کپی متن سفارش
-      </button>
-    </div>
+    <!-- 04 و 05 - شماره تماس و موبایل‌ها -->
+    <div class="order-phones-grid">
+      <!-- تلفن ثابت -->
+      <div class="phone-row">
+        <span class="phone-label">📞 تماس تلفنی:</span>
+        <button onclick="copyPhone('{{ site.phone_display }}')" class="order-phone-btn">
+          {{ site.phone_display }}
+        </button>
+      </div>
 
-    <!-- ردیف سوم: شماره‌های تلفن -->
-    <div class="order-alt-phones">
-      <span class="phone-label">📞 تماس تلفنی:</span>
-      <button onclick="copyPhone('{{ site.whatsapp_numbers[0] }}')" class="order-phone">
-        {{ site.whatsapp_numbers[0] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[0] | slice: 6, 3 }} {{ site.whatsapp_numbers[0] | slice: 9, 4 }}
-      </button>
-      <button onclick="copyPhone('{{ site.whatsapp_numbers[1] }}')" class="order-phone">
-        {{ site.whatsapp_numbers[1] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[1] | slice: 6, 3 }} {{ site.whatsapp_numbers[1] | slice: 9, 4 }}
-      </button>
+      <!-- شماره‌های موبایل -->
+      <div class="phone-row mobile-row">
+        <button onclick="copyPhone('{{ site.whatsapp_numbers[0] }}')" class="order-phone-btn">
+          {{ site.whatsapp_numbers[0] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[0] | slice: 6, 3 }} {{ site.whatsapp_numbers[0] | slice: 9, 4 }}
+        </button>
+        <button onclick="copyPhone('{{ site.whatsapp_numbers[1] }}')" class="order-phone-btn">
+          {{ site.whatsapp_numbers[1] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[1] | slice: 6, 3 }} {{ site.whatsapp_numbers[1] | slice: 9, 4 }}
+        </button>
+      </div>
     </div>
     
-    <div class="order-alt-phones" style="margin-top: 8px;">
-      <button onclick="copyPhone('{{ site.phone_display }}')" class="order-phone">
-        {{ site.phone_display }}
-      </button>
-    </div>
-
+    <!-- 06 - راهنما -->
     <p class="order-alt-hint">روی شماره بزنید تا کپی شود.</p>
   </div>
 

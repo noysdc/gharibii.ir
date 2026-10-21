@@ -450,3 +450,178 @@ html[data-theme="dark"] .terms-link {
   /* اگر می‌خواهید قلب واقعی باشد، از ایموجی 💖 استفاده کنید و رنگ را با فیلتر تغییر دهید. 
      اما چون ایموجی است، با CSS رنگش تغییر نمی‌کند. برای تغییر رنگ، از فونت‌آیکون یا SVG استفاده کنید. */
 }
+/* ============================================================
+   چیدمان دقیق بخش روش‌های دیگر سفارش
+   ============================================================ */
+
+.order-alt-box {
+  margin-top: 1rem;
+  padding: 1.2rem 1rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* فاصله بین ردیف‌ها */
+}
+
+html[data-theme="dark"] .order-alt-box {
+  background: rgba(30, 45, 55, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 01 - عنوان */
+.order-alt-title {
+  margin: 0;
+  text-align: center;
+  font-size: calc(0.9rem * var(--font-scale));
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* 02 - باکس کپی متن */
+.order-copy-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.copy-text-full-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: calc(0.88rem * var(--font-scale));
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: var(--sea-deep);
+}
+
+.copy-text-full-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 03 - شبکه‌های اجتماعی (تلگرام، بله، اینستاگرام) */
+.order-social-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.order-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: calc(0.85rem * var(--font-scale));
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: var(--sea-deep);
+  flex: 1 1 auto; /* برای هم‌اندازه شدن */
+  max-width: 140px;
+}
+
+.order-btn-glass:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 04 و 05 - شماره‌ها */
+.order-phones-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.phone-label {
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.order-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-family: Tahoma, Arial, sans-serif; /* برای اعداد */
+  font-size: calc(0.95rem * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: var(--sea-deep);
+  direction: ltr;
+  letter-spacing: 0.5px;
+}
+
+.order-phone-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 06 - راهنما */
+.order-alt-hint {
+  margin: 0;
+  text-align: center;
+  font-size: calc(0.75rem * var(--font-scale));
+  color: var(--muted);
+}
+
+/* ============================================================
+   تنظیمات حالت شب (Dark Mode)
+   ============================================================ */
+html[data-theme="dark"] .copy-text-full-btn,
+html[data-theme="dark"] .order-btn-glass,
+html[data-theme="dark"] .order-phone-btn {
+  background: rgba(30, 45, 55, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.4);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .copy-text-full-btn:hover,
+html[data-theme="dark"] .order-btn-glass:hover,
+html[data-theme="dark"] .order-phone-btn:hover {
+  background: rgba(45, 65, 80, 0.95);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+html[data-theme="dark"] .order-alt-title {
+  color: var(--ink);
+}
