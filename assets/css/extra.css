@@ -262,3 +262,131 @@ html[data-theme="dark"] .order-phone:hover {
   background: var(--sea);
   color: #fff;
 }
+/* ============================================================
+   استایل اختصاصی دکمه‌های روش‌های دیگر سفارش (Liquid Glass + چیدمان مرتب)
+   ============================================================ */
+
+/* ظرف اصلی که همه دکمه‌ها را در بر می‌گیرد */
+.order-alt-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem; /* فاصله بین دکمه‌ها */
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* استایل پایه تمام دکمه‌ها (شیشه‌ای) */
+.order-alt-btn, 
+.order-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px; /* کاملاً گرد */
+  font-family: inherit;
+  font-size: calc(0.88rem * var(--font-scale));
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  /* افکت Liquid Glass */
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+  color: var(--sea-deep) !important;
+}
+
+/* افکت هاور (شیشه شفاف‌تر و کمی بالا می‌آید) */
+.order-alt-btn:hover, 
+.order-phone:hover {
+  background: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 1), 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  color: var(--sea) !important;
+}
+
+/* استایل اختصاصی برای اعداد شماره تلفن (برای اینکه برعکس نشوند) */
+.order-phone {
+  direction: ltr;
+  unicode-bidi: embed;
+  font-family: Tahoma, Arial, sans-serif; /* فونت اعداد */
+  font-size: calc(0.95rem * var(--font-scale));
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* مرتب‌سازی ردیف دوم: دکمه کپی متن سفارش را در مرکز قرار می‌دهیم */
+/* با استفاده از یک کلاس کمکی یا انتخابگر nth-child */
+.order-alt-grid .order-alt-btn[data-ch="sms"],
+.order-alt-grid .order-alt-btn.copy-text-btn {
+  flex-basis: 100%; /* کل عرض را می‌گیرد تا به خط بعد برود */
+  max-width: max-content; /* اما دکمه به اندازه محتوایش است */
+  margin: 0 auto; /* در مرکز قرار می‌گیرد */
+}
+
+/* ظرف شماره‌ها */
+.order-alt-phones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* متن راهنمای کنار تلفن */
+.order-alt-phones .phone-label {
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--muted);
+  font-weight: 600;
+  margin-inline-end: 0.5rem;
+}
+
+/* متن پایین (روی شماره بزنید...) */
+.order-alt-hint {
+  width: 100%;
+  text-align: center;
+  font-size: calc(0.75rem * var(--font-scale));
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* متن بالای دکمه‌ها (واتساپ ندارید؟...) */
+.order-alt-title {
+  width: 100%;
+  text-align: center;
+  font-size: calc(0.9rem * var(--font-scale));
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   تنظیمات حالت شب (Dark Mode) برای این دکمه‌ها
+   ============================================================ */
+html[data-theme="dark"] .order-alt-btn,
+html[data-theme="dark"] .order-phone {
+  background: rgba(30, 45, 55, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] .order-alt-btn:hover,
+html[data-theme="dark"] .order-phone:hover {
+  background: rgba(45, 65, 80, 0.95) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* اصلاح رنگ متن عنوان‌ها در حالت شب */
+html[data-theme="dark"] .order-alt-title {
+  color: var(--ink);
+}
