@@ -17,6 +17,7 @@
 
 <script>
   window.SITE_SHIPPING_COST = {{ site.shipping_cost | default: 450000 }};
+  window.SITE_CUSTOMS_COST = {{ site.customs_cost | default: 100000 }};
 </script>
 
 <div class="buy-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
@@ -156,10 +157,12 @@ function buildOrderText() {
   });
 
   const shipping = window.SITE_SHIPPING_COST || 450000;
-  const finalTotal = total + shipping;
+  const customs = window.SITE_CUSTOMS_COST || 100000; // هزینه گمرکی
+  const finalTotal = total + shipping + customs;
 
   text += `🧾 جمع کل محصولات: ${formatPrice(total)} تومان\n`;
-  text += `🚚 هزینه ارسال: ${formatPrice(shipping)} تومان\n`;
+  text += `🚚 هزینه ارسال پستی: ${formatPrice(shipping)} تومان\n`;
+  text += `🛃 هزینه گمرکی: ${formatPrice(customs)} تومان\n`;
   text += `💳 مبلغ قابل پرداخت: ${formatPrice(finalTotal)} تومان\n\n`;
   text += `لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏`;
 
