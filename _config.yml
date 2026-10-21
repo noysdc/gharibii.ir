@@ -81,3 +81,6 @@ order_telegram: "gharibii_ir"      # آیدی تلگرام بدون @
 order_bale: "garibistore16"                     # آیدی بله بدون @ ، مثلاً gharibii  ← لینک: https://ble.ir/gharibii
 order_instagram: "storegaribi16"   # آیدی اینستاگرام بدون @ (دایرکت)
 
+# ---------- هزینه ارسال ----------
+# این عدد به تومان است و در پیام واتساپ و کپی متن سفارش به جمع کل اضافه می‌شود.
+shipping_cost: 450000
