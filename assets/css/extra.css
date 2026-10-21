@@ -338,3 +338,8 @@ html[data-theme="dark"] .alt-pill:hover{background:rgba(60,85,105,.75);border-co
   .alt-pill.is-num{font-size:calc(.8rem * var(--font-scale));letter-spacing:0}
   .alt-pill.is-num .alt-ico{display:none}
 }
+
+/* عنوان‌های فرعی باکس تماس (فقط صفحهٔ اصلی) */
+.alt-sub{display:none;margin:.2rem 0 -.1rem;font-size:calc(.8rem * var(--font-scale));font-weight:700;color:var(--muted);text-align:center}
+.order-alt-box[data-kind="home"] .alt-sub{display:block}
+.contact-panel .order-alt-box{max-width:30rem;margin-inline:auto}

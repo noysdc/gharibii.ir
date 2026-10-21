@@ -13,6 +13,7 @@
       <button type="button" class="alt-pill" data-action="copy"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a2 2 0 012 2v13a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/></svg> کپی متن سفارش</button>
     </div>
 
+    <p class="alt-sub">پیام‌رسان‌ها</p>
     <div class="alt-row">
       {%- if site.order_telegram -%}
       <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="alt-pill" data-ch="telegram"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 3L2 11l7 2.5L11.5 21l3-4.5L19 20z"/><path d="M9 13.5L22 3"/></svg> تلگرام</a>
@@ -42,6 +43,7 @@
     {%- endif -%}
 
     {%- if site.phone_display -%}
+    <p class="alt-sub">تماس تلفنی</p>
     <div class="alt-row is-full">
       <a href="tel:{{ site.phone_e164 }}" class="alt-pill" data-phone="{{ site.phone_display | remove: '-' }}"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg> تماس تلفنی: <span dir="ltr" style="unicode-bidi: embed;">{{ site.phone_display }}</span></a>
     </div>

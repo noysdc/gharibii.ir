@@ -328,6 +328,12 @@
     if (!frag) return;
     var box = frag.querySelector('.order-alt-box');
     if (box) box.setAttribute('data-kind', kind);
+    if (box && kind === 'home') {               /* صفحهٔ اصلی: متن سفارش معنی ندارد؛ فقط راه‌های ارتباط */
+      var cp = box.querySelector('[data-action="copy"]');
+      if (cp && cp.parentNode) cp.parentNode.remove();
+      var ttl = box.querySelector('.order-alt-title');
+      if (ttl) ttl.textContent = 'راه‌های دیگر ارتباط';
+    }
     slot.appendChild(frag);
     var hint = slot.querySelector('.order-alt-hint');
     if (hint && isTouch) hint.textContent = 'روی شماره بزنید تا تماس گرفته شود.';
@@ -495,7 +501,7 @@
           copyText(m2).then(function (ok) { showMiniToast(ok ? 'متن سفارش کپی شد ✅ — پیامک را از گوشی خود بفرستید' : 'کپی نشد؛ متن را دستی بنویسید'); });
           return;
         }
-        if (m2) copyText(m2).then(function (ok) { if (ok) showMiniToast('متن سفارش کپی شد ✅ — در چت paste کنید'); });
+        if (m2 && kind !== 'home') copyText(m2).then(function (ok) { if (ok) showMiniToast('متن سفارش کپی شد ✅ — در چت paste کنید'); });
         return;
       }
       var ph = t.closest('[data-phone]');
