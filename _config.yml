@@ -78,7 +78,8 @@ exclude:
 # ---------- روش‌های دیگر سفارش (برای کسانی که واتساپ ندارند) ----------
 # هر کدام را خالی بگذارید، دکمه‌اش در سایت نمایش داده نمی‌شود.
 order_telegram: "gharibii_ir"      # آیدی تلگرام بدون @
-order_bale: "garibistore16"                     # آیدی بله بدون @ ، مثلاً gharibii  ← لینک: https://ble.ir/gharibii
+order_bale: "garibistore16"        # آیدی بله بدون @ ، مثلاً gharibii  ← لینک: 
+order_bale: "gharibi_2005"         # آیدی بله بدون @ ، مثلاً gharibii  ← لینک: https://ble.ir/gharibii
 order_instagram: "storegaribi16"   # آیدی اینستاگرام بدون @ (دایرکت)
 
 # ---------- هزینه ارسال ----------
