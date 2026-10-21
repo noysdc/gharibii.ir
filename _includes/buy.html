@@ -63,59 +63,56 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- بخش روش‌های دیگر سفارش (چیدمان اصلاح‌شده) -->
+  <!-- بخش روش‌های دیگر سفارش (چیدمان باکسی و منظم) -->
   <!-- ========================================== -->
   <div class="order-alt-box">
     <!-- 01 - عنوان -->
     <p class="order-alt-title">واتساپ ندارید؟ از این راه‌ها هم می‌توانید سفارش بدهید</p>
 
-    <!-- 02 - باکس کپی متن سفارش -->
-    <div class="order-copy-box">
-      <button onclick="copyCartText()" class="copy-text-full-btn">
+    <!-- کانتینر اصلی گرید -->
+    <div class="order-grid-container">
+      
+      <!-- ردیف 1: کپی متن (تمام عرض) -->
+      <button onclick="copyCartText()" class="box-btn full-width">
         <span>📋</span> کپی متن سفارش
       </button>
-    </div>
 
-    <!-- 03 - دکمه‌های شبکه‌های اجتماعی -->
-    <div class="order-social-grid">
-      {% if site.order_telegram %}
-      <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="order-btn-glass">
-        <span>✈️</span> تلگرام
-      </a>
-      {% endif %}
-      
-      {% if site.order_bale %}
-      <a href="https://ble.ir/{{ site.order_bale[0] }}" target="_blank" rel="noopener" class="order-btn-glass">
-        <span>💬</span> بله
-      </a>
-      {% endif %}
+      <!-- ردیف 2: شبکه‌های اجتماعی (سه تایی) -->
+      <div class="grid-3-cols">
+        {% if site.order_telegram %}
+        <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="box-btn">
+          <span>✈️</span> تلگرام
+        </a>
+        {% endif %}
+        
+        {% if site.order_bale %}
+        <a href="https://ble.ir/{{ site.order_bale[0] }}" target="_blank" rel="noopener" class="box-btn">
+          <span>💬</span> بله
+        </a>
+        {% endif %}
 
-      {% if site.order_instagram %}
-      <a href="https://instagram.com/{{ site.order_instagram }}" target="_blank" rel="noopener" class="order-btn-glass">
-        <span>📷</span> دایرکت اینستاگرام
-      </a>
-      {% endif %}
-    </div>
-
-    <!-- 04 و 05 - شماره تماس و موبایل‌ها -->
-    <div class="order-phones-grid">
-      <!-- تلفن ثابت -->
-      <div class="phone-row">
-        <span class="phone-label">📞 تماس تلفنی:</span>
-        <button onclick="copyPhone('{{ site.phone_display }}')" class="order-phone-btn">
-          {{ site.phone_display }}
-        </button>
+        {% if site.order_instagram %}
+        <a href="https://instagram.com/{{ site.order_instagram }}" target="_blank" rel="noopener" class="box-btn">
+          <span>📷</span> اینستاگرام
+        </a>
+        {% endif %}
       </div>
 
-      <!-- شماره‌های موبایل -->
-      <div class="phone-row mobile-row">
-        <button onclick="copyPhone('{{ site.whatsapp_numbers[0] }}')" class="order-phone-btn">
+      <!-- ردیف 3: تلفن ثابت (تمام عرض) -->
+      <button onclick="copyPhone('{{ site.phone_display }}')" class="box-btn full-width">
+        <span>📞</span> تماس تلفنی: {{ site.phone_display }}
+      </button>
+
+      <!-- ردیف 4: موبایل‌ها (دو تایی) -->
+      <div class="grid-2-cols">
+        <button onclick="copyPhone('{{ site.whatsapp_numbers[0] }}')" class="box-btn">
           {{ site.whatsapp_numbers[0] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[0] | slice: 6, 3 }} {{ site.whatsapp_numbers[0] | slice: 9, 4 }}
         </button>
-        <button onclick="copyPhone('{{ site.whatsapp_numbers[1] }}')" class="order-phone-btn">
+        <button onclick="copyPhone('{{ site.whatsapp_numbers[1] }}')" class="box-btn">
           {{ site.whatsapp_numbers[1] | slice: 2, 10 | replace: "989", "0" | slice: 1, 10 | replace: "989", "0" | slice: 0, 4 }} {{ site.whatsapp_numbers[1] | slice: 6, 3 }} {{ site.whatsapp_numbers[1] | slice: 9, 4 }}
         </button>
       </div>
+
     </div>
     
     <!-- 06 - راهنما -->
