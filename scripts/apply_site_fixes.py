@@ -243,6 +243,39 @@ def fix_categories():
     return True
 
 
+CAT_ICONS = {
+    "girls": '<path d="M9 3l3 3.5L15 3"/><path d="M10 7l-1 4.5-4.5 9.5h15L15 11.5 14 7"/><path d="M9 11.5h6"/>',
+    "boys": '<path d="M8 3L3 6l2 4 3-1v12h8V9l3 1 2-4-5-3c-1 2-7 2-8 0z"/>',
+    "bags-shoes": '<path d="M6 8h12l1 13H5z"/><path d="M9 8V6.5a3 3 0 016 0V8"/>',
+    "crown-wand": '<path d="M3 18L4 7l5 5 3-7 3 7 5-5 1 11z"/><path d="M3 21h18"/>',
+    "accessories": '<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.8 6.4 20.1l1.4-6.3L3 9.5l6.4-.6z"/>',
+}
+
+
+def fix_header_icons():
+    """به هر دکمهٔ دستهٔ هدر یک آیکون SVG (همان آیکون‌های نوار پایین موبایل) اضافه می‌کند."""
+    p = ROOT / "_includes" / "header.html"
+    t = read(p)
+    if 'class="cat-ico"' in t:
+        print("• header.html: آیکون‌ها از قبل اضافه شده‌اند.")
+        return True
+    e = eol_of(t)
+    n = t.replace("\r\n", "\n")
+    done = 0
+    for slug, paths in CAT_ICONS.items():
+        pat = re.compile(r"(<a href=\"\{\{ '/" + re.escape(slug) + r"/' \| relative_url \}\}\"[^>]*>)(?!<svg)")
+        svg = '<svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true">' + paths + "</svg>"
+        n, c = pat.subn(lambda m: m.group(1) + svg, n, count=1)
+        done += c
+    if done < 5:
+        print(f"✗ header.html: فقط {done} از ۵ دکمه پیدا شد؛ فایل تغییر کرده؟ چیزی نوشته نشد.")
+        return False
+    backup(p)
+    write(p, n.replace("\n", e))
+    print("✓ header.html: آیکون به ۵ دکمهٔ دسته اضافه شد.")
+    return True
+
+
 def main():
     print("=" * 60)
     print("  اعمال اصلاحات سایت")
@@ -258,6 +291,7 @@ def main():
     else:
         r = [files_ok, fix_footer(), fix_default(), ensure_extra_js()]
     r.append(fix_categories())
+    r.append(fix_header_icons())
     print()
     print("🎉 همه‌چیز انجام شد." if all(r) else "⚠️ بعضی بخش‌ها انجام نشد؛ پیام‌های بالا را ببینید.")
     print("نسخه‌ی پشتیبان فایل‌های قبلی: scripts/_backup_site_fixes/")

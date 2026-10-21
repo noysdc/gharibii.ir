@@ -107,3 +107,10 @@ html[data-theme="dark"] .category-nav a{box-shadow:inset 0 1px 0 rgba(255,255,25
   .category-box{padding:.3rem .4rem}
   .category-nav a{padding:.34rem .9rem}   /* همان اندازهٔ دسکتاپ */
 }
+
+/* ---------- ۷) آیکون روی دکمه‌های دستهٔ هدر (همان آیکون‌های نوار پایین موبایل) ---------- */
+.category-nav a{display:inline-flex;align-items:center;gap:.4rem}
+.category-nav a .cat-ico{
+  width:1.3em;height:1.3em;flex:0 0 auto;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round
+}

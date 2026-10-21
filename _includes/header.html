@@ -21,11 +21,11 @@
     <div class="category-box" id="category-box">
       <button type="button" class="cat-nav cat-prev" aria-label="دسته‌های قبلی (چپ)"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
       <nav class="category-nav" id="category-nav" aria-label="دسته‌بندی محصولات">
-        <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}>پرنسسی دخترانه</a>
-        <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}>شخصیتی پسرانه</a>
-        <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}>کیف و کفش</a>
-        <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}>تاج و عصا</a>
-        <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}>اکسسوری‌ها</a>
+        <a href="{{ '/girls/' | relative_url }}"{% if page.category == 'girls' %} aria-current="page"{% endif %}><svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3l3 3.5L15 3"/><path d="M10 7l-1 4.5-4.5 9.5h15L15 11.5 14 7"/><path d="M9 11.5h6"/></svg>پرنسسی دخترانه</a>
+        <a href="{{ '/boys/' | relative_url }}"{% if page.category == 'boys' %} aria-current="page"{% endif %}><svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3L3 6l2 4 3-1v12h8V9l3 1 2-4-5-3c-1 2-7 2-8 0z"/></svg>شخصیتی پسرانه</a>
+        <a href="{{ '/bags-shoes/' | relative_url }}"{% if page.category == 'bags-shoes' %} aria-current="page"{% endif %}><svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l1 13H5z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>کیف و کفش</a>
+        <a href="{{ '/crown-wand/' | relative_url }}"{% if page.category == 'crown-wand' %} aria-current="page"{% endif %}><svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18L4 7l5 5 3-7 3 7 5-5 1 11z"/><path d="M3 21h18"/></svg>تاج و عصا</a>
+        <a href="{{ '/accessories/' | relative_url }}"{% if page.category == 'accessories' %} aria-current="page"{% endif %}><svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.8 6.4 20.1l1.4-6.3L3 9.5l6.4-.6z"/></svg>اکسسوری‌ها</a>
       </nav>
       <button type="button" class="cat-nav cat-next" aria-label="دسته‌های بعدی (راست)"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
     </div>
