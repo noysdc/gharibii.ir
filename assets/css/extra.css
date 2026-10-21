@@ -64,16 +64,17 @@ html[data-theme="dark"] .gslide:not(.is-active) img{filter:brightness(.92)}
 @media (prefers-reduced-motion:reduce){.ios-tabbar{transition:opacity .2s ease}}
 
 /* ---------- ۳) جستجو: کادر نتایج پهن‌تر و اسم کامل محصول ---------- */
-/* کادر نتایج به‌جای عرض باریکِ خود اینپوت، زیر کل نوار جستجو باز می‌شود */
-.control-box{position:relative}
-.search-box{position:static}
-.search-results{
-  left:50%;right:auto;transform:translateX(-50%);
-  width:max(100%,min(27rem,94vw));max-height:min(70vh,28rem)
-}
+/* دسکتاپ/تبلت: کادر ~۳۰rem از لبهٔ راستِ کادر جستجو به سمت چپ باز می‌شود */
+.search-results{left:auto;right:0;width:min(30rem,94vw);max-height:min(70vh,28rem)}
 .search-item{align-items:flex-start}
 .search-item-info{flex:1 1 auto}
 .search-item-info strong{display:block;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.55}
+/* موبایل: کادر زیر کل نوار جستجو و تقریباً هم‌عرض صفحه */
+@media (max-width:699px){
+  .control-box{position:relative}
+  .search-box{position:static}
+  .search-results{left:50%;right:auto;transform:translateX(-50%);width:min(94vw,26rem)}
+}
 
 /* ---------- ۴) صفحهٔ اصلی: کلیک روی دکمهٔ دسته در بالا → اسکرول نرم به باکس همان دسته ---------- */
 .cat-section{scroll-margin-top:5.5rem}
