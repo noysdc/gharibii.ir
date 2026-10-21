@@ -8,7 +8,8 @@
   function mkStore(area) {
     return {
       get: function (k) { try { return window[area].getItem(k); } catch (e) { return null; } },
-      set: function (k, v) { try { window[area].setItem(k, v); } catch (e) {} }
+      set: function (k, v) { try { window[area].setItem(k, v); } catch (e) {} },
+      remove: function (k) { try { window[area].removeItem(k); } catch (e) {} }
     };
   }
   var store = mkStore('localStorage');
@@ -148,24 +149,72 @@
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', showWelcomeToast); } else { showWelcomeToast(); }
 
   /* ============================================
-     سیستم سبد خرید و واتساپ
+     سیستم سبد خرید و سفارش
+     یک منبع داده (localStorage: gharibii_cart) و یک سازندهٔ پیام برای همهٔ صفحه‌ها
      ============================================ */
-  var cart = [];
-  try {
-    var savedCart = JSON.parse(store.get('gharibii_cart'));
-    if (Array.isArray(savedCart)) cart = savedCart.filter(function (i) { return i && i.title; });
-  } catch (err) { cart = []; }
+  var CART_KEY = 'gharibii_cart';
+  var CART_TTL = 30 * 24 * 3600 * 1000;           /* انتخاب‌های قدیمی‌تر از ۳۰ روز خودکار پاک می‌شوند */
+  var MAX_WA_URL = 4000;                          /* بالاتر از این، متن کامل کپی می‌شود و پیام کوتاه باز می‌شود */
+  var HOME_MSG = 'سلام، درباره محصولات فروشگاه غریبی کیش سوال داشتم';
+  var isTouch = !!(window.matchMedia && matchMedia('(hover: none) and (pointer: coarse)').matches);
+
+  var CFG = {};
+  try { var cfgEl = document.getElementById('order-config'); CFG = cfgEl ? JSON.parse(cfgEl.textContent) : {}; } catch (err) { CFG = {}; }
+  function cfgNum(k) { return Number(CFG[k]) || 0; }
+
+  function toNum(v) { return Number(String(v == null ? '' : v).replace(/[,٬،\s]/g, '')) || 0; }
+
+  /* آدرس‌ها بدون baseurl ذخیره می‌شوند تا بعد از وصل شدن دامنه، سبدهای قدیمی خراب نشوند */
+  function toPath(u) {
+    u = String(u || '');
+    try {
+      var a = new URL(u, location.origin);
+      if (a.origin !== location.origin) return u;
+      u = a.pathname;
+    } catch (err) {}
+    if (BASE && u.indexOf(BASE + '/') === 0) u = u.slice(BASE.length);
+    return u;
+  }
+  function fullPath(p) { p = String(p || ''); return /^(https?:)?\/\//.test(p) ? p : BASE + p; }
+  function fullUrl(p) { return /^(https?:)?\/\//.test(p) ? p : location.origin + BASE + p; }
+
+  function readCart() {
+    var list = [], legacy = null, changed = false;
+    try { list = JSON.parse(store.get(CART_KEY)) || []; } catch (err) { list = []; }
+    if (!Array.isArray(list)) list = [];
+    /* مهاجرت از کلید قدیمی صفحهٔ محصول ('cart') */
+    try { legacy = JSON.parse(store.get('cart')); } catch (err) { legacy = null; }
+    if (Array.isArray(legacy)) { list = list.concat(legacy); changed = true; }
+    if (store.get('cart') !== null) { store.remove('cart'); }
+
+    var now = Date.now(), seen = {}, out = [];
+    list.forEach(function (i) {
+      if (!i || !i.title) return;
+      var path = toPath(i.path || i.url);
+      if (!path || seen[path]) { changed = true; return; }
+      var ts = Number(i.ts) || now;
+      if (now - ts > CART_TTL) { changed = true; return; }
+      seen[path] = 1;
+      out.push({ title: String(i.title), price: toNum(i.price), image: i.image ? toPath(i.image) : '', path: path, ts: ts });
+    });
+    if (changed) store.set(CART_KEY, JSON.stringify(out));
+    return out;
+  }
+  var cart = readCart();
+
+  function saveCart() {
+    store.set(CART_KEY, JSON.stringify(cart));
+    updateCartUI();
+  }
+  function inCart(path) { return cart.some(function (i) { return i.path === path; }); }
 
   function fmtPrice(num) {
-    var n = Number(String(num).replace(/,/g, '')) || 0;
+    var n = toNum(num);
     if (n === 0) return 'تماس بگیرید';
     return n.toLocaleString('fa-IR');
   }
-
-  function saveCart() {
-    store.set('gharibii_cart', JSON.stringify(cart));
-    updateCartUI();
-  }
+  function money(n) { return n.toLocaleString('fa-IR') + ' تومان'; }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   function showMiniToast(msg) {
     var t = document.getElementById('mini-toast');
@@ -177,10 +226,113 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(t._timer);
-    t._timer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+    t._timer = setTimeout(function () { t.classList.remove('show'); }, 2600);
   }
 
-  // ساخت ظرف سبد شناور
+  /* ---- محاسبهٔ جمع و هزینهٔ ارسال/گمرک (تنظیم از _config.yml) ---- */
+  function calc(items) {
+    var n = items.length, sub = 0, unpriced = 0;
+    items.forEach(function (i) { if (i.price > 0) sub += i.price; else unpriced++; });
+    var fees = n ? cfgNum('shippingCustoms') : 0;      /* ارسال + گمرک: یک مبلغ برای کل سفارش (_config.yml → shipping_customs_cost) */
+    return { n: n, sub: sub, unpriced: unpriced, fees: fees, total: sub + fees };
+  }
+
+  /* ---- تنها سازندهٔ متن سفارش (واتساپ، کپی، تلگرام، بله، اینستاگرام) ---- */
+  function buildMessage(items) {
+    var c = calc(items);
+    var m = 'سلام، من می‌خوام این ' + (items.length > 1 ? 'محصولات' : 'محصول') + ' رو از فروشگاه غریبی کیش سفارش بدم:\n\n';
+    items.forEach(function (it, i) {
+      m += (i + 1) + '. ' + it.title + '\n';
+      m += '   💰 قیمت: ' + (it.price > 0 ? money(it.price) : 'تماس بگیرید') + '\n';
+      m += '   🔗 ' + fullUrl(it.path) + '\n\n';
+    });
+    m += '━━━━━━━━━━━━━━\n';
+    if (c.sub > 0) m += '🧾 جمع کالاها: ' + money(c.sub) + '\n';
+    if (c.fees > 0) m += '🚚 هزینه ارسال و گمرک: ' + money(c.fees) + '\n';
+    if (c.sub > 0) m += '💳 جمع کل: ' + money(c.total) + '\n';
+    if (c.unpriced > 0) m += '⚠️ قیمت ' + c.unpriced.toLocaleString('fa-IR') + ' محصول با فروشنده هماهنگ می‌شود.\n';
+    m += '\nلطفاً برای نهایی‌سازی (سایز، رنگ، آدرس و هزینهٔ دقیق ارسال) راهنمایی‌ام کنید. 🙏';
+    return m;
+  }
+
+  /* محصولِ همین صفحه (برای باکس سفارش صفحهٔ محصول) */
+  function productItem() {
+    var b = document.querySelector('.buy-actions[data-title]');
+    if (!b) return null;
+    return { title: b.dataset.title, price: toNum(b.dataset.price), image: b.dataset.image ? toPath(b.dataset.image) : '', path: toPath(b.dataset.url || location.pathname) };
+  }
+
+  /* kind: product = همین محصول | cart = کل سبد | home = پیام عمومی */
+  function messageFor(kind) {
+    if (kind === 'cart') return cart.length ? buildMessage(cart) : '';
+    if (kind === 'product') { var p = productItem(); return p ? buildMessage([p]) : HOME_MSG; }
+    return HOME_MSG;
+  }
+
+  function copyText(t) {
+    function fallback() {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = t; ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch (err) { return false; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return fallback(); });
+    }
+    return Promise.resolve(fallback());
+  }
+
+  function openWhatsApp(number, kind) {
+    var msg = messageFor(kind);
+    if (kind === 'cart' && !msg) { showMiniToast('سبد خرید خالی است!'); return; }
+    var url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(msg);
+    if (url.length > MAX_WA_URL) {
+      /* سفارش بلند: متن کامل کپی می‌شود تا در چت paste شود، و فقط یک پیام کوتاه باز می‌شود */
+      copyText(msg);
+      showMiniToast('سفارش طولانی است؛ متن کامل کپی شد — در واتساپ paste کنید ✅');
+      window.open('https://wa.me/' + number + '?text=' + encodeURIComponent('سلام، سفارش من چند محصول است. متن کامل سفارش را در پیام بعدی می‌فرستم.'), '_blank', 'noopener');
+      return;
+    }
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ---- فروشنده‌ها ---- */
+  var sellers = [];
+  try {
+    var el = document.getElementById('wa-sellers-data');
+    sellers = el ? JSON.parse(el.textContent) : [];
+  } catch (err) { sellers = []; }
+  if (!sellers.length) sellers = [{ name: 'فروشنده', number: '989347688356', photo: '' }];
+
+  function renderSellers() {
+    var box = document.getElementById('cart-sellers');
+    if (!box) return;
+    box.innerHTML = sellers.map(function (s) {
+      return `<button type="button" class="wa-seller" data-wa-number="${esc(s.number)}" data-kind="cart">
+          <span class="wa-avatar">${s.photo ? `<img src="${esc(s.photo)}" alt="" width="160" height="160" onerror="this.remove()">` : ''}</span>
+          <span class="wa-seller-info"><strong>${esc(s.name)}</strong><small>ارسال سفارش</small></span>
+        </button>`;
+    }).join('');
+  }
+
+  /* ---- قالب‌های مشترک (از _includes: یک متن، یک ظاهر) ---- */
+  function tpl(id) { var t = document.getElementById(id); return t && t.content ? t.content.cloneNode(true) : null; }
+  function mountAlt(slot, kind) {
+    if (!slot || slot.querySelector('.order-alt-box')) return;
+    var frag = tpl('tpl-order-alt');
+    if (!frag) return;
+    var box = frag.querySelector('.order-alt-box');
+    if (box) box.setAttribute('data-kind', kind);
+    slot.appendChild(frag);
+    var hint = slot.querySelector('.order-alt-hint');
+    if (hint && isTouch) hint.textContent = 'روی شماره بزنید تا تماس گرفته شود.';
+  }
+
   function ensureCartShell() {
     if (document.getElementById('floating-cart')) return;
     var html = `
@@ -192,13 +344,30 @@
           <button class="cart-close" id="cart-close" type="button" aria-label="بستن">✕</button>
           <h3 style="margin-top:0; text-align:center;">سبد خرید شما</h3>
           <div id="cart-items-container"></div>
-          <p class="cart-note">🌸 هزینه‌ی ارسال و هزینه‌ی گمرکی (به‌خاطر ارسال از جزیره‌ی کیش) بر عهده‌ی مشتری است و قبل از پرداخت به شما اعلام می‌شود. چون امکان مرجوعی نداریم، خوشحال می‌شویم پیش از ثبت سفارش، سایز را با ما هماهنگ کنید تا مطمئن شوید لباس برای کوچولوی شما مناسب است. ممنون از درک مهربان‌تان 💛 <a href="${BASE}/terms/">قوانین و مقررات</a></p>
+          <div id="cart-totals" class="cart-totals" hidden></div>
+          <button type="button" class="cart-clear" id="cart-clear" hidden>🗑️ خالی کردن سبد</button>
+          <div id="cart-note-slot"></div>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
+          <div id="cart-alt-slot"></div>
         </div>
       </div>
     `;
     document.body.insertAdjacentHTML('beforeend', html);
+    var n = tpl('tpl-order-note'), slot = document.getElementById('cart-note-slot');
+    if (n && slot) slot.appendChild(n);
+    mountAlt(document.getElementById('cart-alt-slot'), 'cart');
+  }
+
+  /* دکمهٔ «افزودن به سبد» صفحهٔ محصول: بعد از رفرش هم می‌داند محصول در سبد هست */
+  function syncProductBtn() {
+    var b = document.getElementById('product-add-to-cart');
+    if (!b || b.disabled) return;
+    if (b._orig === undefined) b._orig = b.innerHTML;
+    if (b.classList.contains('is-added')) return;
+    var yes = inCart(toPath(b.dataset.url || location.pathname));
+    b.classList.toggle('is-in-cart', yes);
+    b.innerHTML = yes ? '✅ در سبد شماست — مشاهدهٔ سبد' : b._orig;
   }
 
   function updateCartUI() {
@@ -207,112 +376,92 @@
     var fc = document.getElementById('floating-cart');
     if (badge) badge.textContent = cart.length;
     if (fc) fc.classList.toggle('has-items', cart.length > 0);
+    syncProductBtn();
     if (!container) return;
 
-    if (cart.length === 0) {
+    var empty = cart.length === 0;
+    var totals = document.getElementById('cart-totals');
+    var clearBtn = document.getElementById('cart-clear');
+    var checkout = document.getElementById('cart-checkout');
+    var alt = document.querySelector('#cart-modal .order-alt-box');
+    if (clearBtn) clearBtn.hidden = empty;
+    if (checkout) checkout.hidden = empty;
+    if (alt) alt.hidden = empty;
+    if (empty) {
+      var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
+    }
+
+    if (empty) {
       container.innerHTML = '<p style="text-align:center; color:#777;">سبد خرید شما خالی است.</p>';
+      if (totals) totals.hidden = true;
       return;
     }
     container.innerHTML = cart.map(function (item, index) {
       return `
         <div class="cart-item">
-          ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ''}
+          ${item.image ? `<img src="${esc(fullPath(item.image))}" alt="${esc(item.title)}">` : ''}
           <div class="cart-item-info">
-            <h4>${esc(item.title)}</h4>
-            <span>${fmtPrice(item.price)} تومان</span>
+            <h4><a href="${esc(fullPath(item.path))}">${esc(item.title)}</a></h4>
+            <span>${fmtPrice(item.price)}${item.price > 0 ? ' تومان' : ''}</span>
           </div>
           <button class="cart-item-remove" data-index="${index}" type="button" aria-label="حذف">🗑️</button>
         </div>
       `;
     }).join('');
+
+    if (totals) {
+      var c = calc(cart);
+      var rows = '';
+      if (c.sub > 0) rows += `<div class="cart-totals-row"><span>جمع کالاها</span><b>${money(c.sub)}</b></div>`;
+      if (c.fees > 0) rows += `<div class="cart-totals-row"><span>هزینه ارسال و گمرک</span><b>${money(c.fees)}</b></div>`;
+      if (c.sub > 0) rows += `<div class="cart-totals-row is-total"><span>جمع کل</span><b>${money(c.total)}</b></div>`;
+      if (c.unpriced > 0) rows += `<div class="cart-totals-row is-hint"><span>قیمت ${c.unpriced.toLocaleString('fa-IR')} محصول با فروشنده هماهنگ می‌شود.</span></div>`;
+      totals.innerHTML = rows;
+      totals.hidden = !rows;
+    }
   }
 
-  var sellers = [];
-  try {
-    var el = document.getElementById('wa-sellers-data');
-    sellers = el ? JSON.parse(el.textContent) : [];
-  } catch (err) { sellers = []; }
-  if (!sellers.length) sellers = [{ name: 'فروشنده', number: '989347688356', photo: '' }];
-
-  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-
-  function buildMessage() {
-    var message = "سلام، من این محصولات را از فروشگاه غریبی کیش سفارش می‌دهم:\n\n";
-    var total = 0;
-    cart.forEach(function (item, i) {
-      var p = Number(String(item.price).replace(/,/g, '')) || 0;
-      total += p;
-      message += (i + 1) + ". " + item.title + "\n";
-      message += "   💰 قیمت: " + (p > 0 ? p.toLocaleString('fa-IR') + ' تومان' : 'تماس بگیرید') + "\n";
-      message += "   🔗 " + location.origin + item.url + "\n\n";
-    });
-    if (total > 0) { message += "━━━━━━━━━━━━━━\n"; message += "🧾 جمع کل: " + total.toLocaleString('fa-IR') + " تومان\n\n"; }
-    message += "🌸 هزینه‌ی ارسال و هزینه‌ی گمرکی (به‌خاطر ارسال از جزیره‌ی کیش) بر عهده‌ی مشتری است و قبل از پرداخت به شما اعلام می‌شود. چون امکان مرجوعی نداریم، خوشحال می‌شویم پیش از ثبت سفارش، سایز را با ما هماهنگ کنید تا مطمئن شوید لباس برای کوچولوی شما مناسب است. ممنون از درک مهربان‌تان 💛\n\n";
-    message += "لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏";
-    return message;
+  function resetClearBtn(btn) {
+    btn.dataset.armed = '';
+    btn.textContent = '🗑️ خالی کردن سبد';
   }
 
-  function openWhatsApp(number) { window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(buildMessage()), '_blank'); }
-
-  function renderSellers() {
-    var box = document.getElementById('cart-sellers');
-    var noteWa = document.getElementById('cart-note-wa');
-    if (!box) return;
-    box.innerHTML = sellers.map(function (s, i) {
-      return `<button type="button" class="wa-seller" data-i="${i}">
-          <span class="wa-avatar">${s.photo ? `<img src="${esc(s.photo)}" alt="" width="160" height="160" onerror="this.remove()">` : ''}</span>
-          <span class="wa-seller-info"><strong>${esc(s.name)}</strong><small>ارسال سفارش</small></span>
-        </button>`;
-    }).join('');
-    if (noteWa) noteWa.hidden = false;
-  }
-
-  // ✅ تابع اختصاصی برای اضافه کردن محصول به سبد
   function addToCart(btn) {
-    var product = {
-      title: btn.dataset.title,
-      price: btn.dataset.price,
-      image: btn.dataset.image,
-      url: btn.dataset.url || window.location.pathname
-    };
+    var title = btn.dataset.title;
+    if (!title || btn.disabled) return;
+    var path = toPath(btn.dataset.url || location.pathname);
 
-    if (!product.title || btn.disabled) return;
-
-    var exists = cart.find(function (i) { return i.url === product.url; });
-    if (exists) {
-      showMiniToast('این محصول قبلاً در سبد شماست ⚠️');
+    if (inCart(path)) {
+      if (btn.id === 'product-add-to-cart') {
+        var m = document.getElementById('cart-modal'); if (m) m.classList.add('active');
+      } else {
+        showMiniToast('این محصول قبلاً در سبد شماست ⚠️');
+      }
       return;
     }
 
-    cart.push(product);
-    saveCart();
+    cart.push({ title: title, price: toNum(btn.dataset.price), image: btn.dataset.image ? toPath(btn.dataset.image) : '', path: path, ts: Date.now() });
 
     if (btn.id === 'product-add-to-cart') {
-      var original = btn.innerHTML;
       btn.classList.add('is-added');
       btn.innerHTML = '✅ اضافه شد';
-      setTimeout(function () {
-        btn.classList.remove('is-added');
-        btn.innerHTML = original;
-      }, 1500);
+      setTimeout(function () { btn.classList.remove('is-added'); syncProductBtn(); }, 1500);
     }
-
+    saveCart();
     showMiniToast('محصول به سبد خرید اضافه شد 🛒');
   }
 
-  // ✅ اتصال دکمه‌ها با استفاده از event delegation (مطمئن‌ترین روش)
+  /* ✅ همهٔ کلیک‌ها یک‌جا (event delegation) */
   document.addEventListener('click', function (e) {
-    // دکمه‌های افزودن به سبد (هم کارت‌ها هم صفحه محصول)
-    var cartBtn = e.target.closest('.add-to-cart-btn, #product-add-to-cart');
-    if (cartBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-      addToCart(cartBtn);
-      return;
-    }
+    var t = e.target;
+    if (!t || !t.closest) return;
 
-    // دکمه باز کردن منوی واتساپ
-    var waBtn = e.target.closest('#open-wa-menu');
+    /* افزودن به سبد (کارت‌ها و صفحهٔ محصول) */
+    var cartBtn = t.closest('.add-to-cart-btn, #product-add-to-cart');
+    if (cartBtn) { e.preventDefault(); e.stopPropagation(); addToCart(cartBtn); return; }
+
+    /* باز/بسته کردن منوی فروشنده‌ها در صفحهٔ محصول */
+    var waBtn = t.closest('#open-wa-menu');
     var waMenu = document.getElementById('wa-menu');
     if (waBtn && waMenu) {
       e.preventDefault();
@@ -320,52 +469,105 @@
       return;
     }
 
-    // باز کردن مودال سبد
-    if (e.target.closest('#floating-cart')) {
-      var waM = document.getElementById('wa-menu'); if (waM) waM.style.display = 'none'; // جلوگیری از نمایش دوبارهٔ متن هشدار
+    /* انتخاب فروشنده (صفحهٔ محصول و سبد) → همین قالب پیام */
+    var sel = t.closest('[data-wa-number]');
+    if (sel) { e.preventDefault(); openWhatsApp(sel.getAttribute('data-wa-number'), sel.getAttribute('data-kind') || 'product'); return; }
+
+    /* باکس «روش‌های دیگر سفارش» */
+    var box = t.closest('.order-alt-box');
+    if (box) {
+      var kind = box.getAttribute('data-kind') || 'home';
+      var act = t.closest('[data-action="copy"]');
+      if (act) {
+        e.preventDefault();
+        var msg = messageFor(kind);
+        if (!msg) { showMiniToast('سبد خرید خالی است!'); return; }
+        copyText(msg).then(function (ok) { showMiniToast(ok ? 'متن سفارش کپی شد ✅' : 'کپی نشد؛ متن را دستی بنویسید'); });
+        return;
+      }
+      var ch = t.closest('[data-ch]');
+      if (ch) {                               /* تلگرام/بله/اینستاگرام: لینک باز می‌شود + متن کپی می‌شود */
+        var m2 = messageFor(kind);
+        if (ch.getAttribute('data-ch') === 'sms') {     /* پیامک: موبایل → متن آماده داخل لینک | دسکتاپ → کپی متن */
+          if (!m2) { e.preventDefault(); showMiniToast('سبد خرید خالی است!'); return; }
+          if (isTouch) { ch.setAttribute('href', 'sms:' + ch.getAttribute('data-sms') + '?&body=' + encodeURIComponent(m2)); return; }
+          e.preventDefault();
+          copyText(m2).then(function (ok) { showMiniToast(ok ? 'متن سفارش کپی شد ✅ — پیامک را از گوشی خود بفرستید' : 'کپی نشد؛ متن را دستی بنویسید'); });
+          return;
+        }
+        if (m2) copyText(m2).then(function (ok) { if (ok) showMiniToast('متن سفارش کپی شد ✅ — در چت paste کنید'); });
+        return;
+      }
+      var ph = t.closest('[data-phone]');
+      if (ph && !isTouch) {                   /* دسکتاپ: تماس مستقیم ممکن نیست → کپی شماره */
+        e.preventDefault();
+        var num = ph.getAttribute('data-phone');
+        copyText(num).then(function (ok) { showMiniToast(ok ? 'شماره کپی شد: ' + num : 'شمارهٔ ' + num + ' را یادداشت کنید'); });
+        return;
+      }
+      return;
+    }
+
+    /* باز کردن مودال سبد */
+    if (t.closest('#floating-cart')) {
+      var waM = document.getElementById('wa-menu'); if (waM) waM.style.display = 'none';
       document.getElementById('cart-modal').classList.add('active');
       return;
     }
 
-    // بستن مودال
-    if (e.target.closest('#cart-close') || e.target.classList.contains('cart-modal')) {
+    /* بستن مودال */
+    if (t.closest('#cart-close') || t.classList.contains('cart-modal')) {
       document.getElementById('cart-modal').classList.remove('active');
       var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
-      var noteWa = document.getElementById('cart-note-wa'); if (noteWa) noteWa.hidden = true;
       return;
     }
 
-    // حذف آیتم
-    if (e.target.closest('.cart-item-remove')) {
-      var index = parseInt(e.target.closest('.cart-item-remove').dataset.index, 10);
+    /* حذف یک آیتم */
+    if (t.closest('.cart-item-remove')) {
+      var index = parseInt(t.closest('.cart-item-remove').dataset.index, 10);
       cart.splice(index, 1);
       saveCart();
       return;
     }
 
-    // ارسال سفارش در واتساپ (از داخل سبد)
-    if (e.target.closest('#cart-checkout')) {
-      if (cart.length === 0) { showMiniToast('سبد خرید خالی است!'); return; }
-      var box = document.getElementById('cart-sellers');
-      if (sellers.length === 1) { openWhatsApp(sellers[0].number); return; }
-      if (box) {
-        if (box.hidden) renderSellers();
-        box.hidden = !box.hidden;
+    /* خالی کردن کل سبد (دو مرحله‌ای، بدون پنجرهٔ confirm) */
+    var clr = t.closest('#cart-clear');
+    if (clr) {
+      if (clr.dataset.armed === '1') {
+        clearTimeout(clr._t);
+        cart = [];
+        saveCart();
+        resetClearBtn(clr);
+        showMiniToast('سبد خرید خالی شد');
+      } else {
+        clr.dataset.armed = '1';
+        clr.textContent = 'مطمئنید؟ دوباره بزنید';
+        clr._t = setTimeout(function () { resetClearBtn(clr); }, 3500);
       }
       return;
     }
 
-    // انتخاب فروشنده
-    var sellerBtn = e.target.closest('#cart-sellers .wa-seller');
-    if (sellerBtn) {
-      var s = sellers[parseInt(sellerBtn.dataset.i, 10)];
-      if (s) openWhatsApp(s.number);
+    /* ارسال سفارش در واتساپ (از داخل سبد) */
+    if (t.closest('#cart-checkout')) {
+      if (cart.length === 0) { showMiniToast('سبد خرید خالی است!'); return; }
+      if (sellers.length === 1) { openWhatsApp(sellers[0].number, 'cart'); return; }
+      var sbox = document.getElementById('cart-sellers');
+      if (sbox) {
+        if (sbox.hidden) renderSellers();
+        sbox.hidden = !sbox.hidden;
+      }
       return;
     }
   });
 
+  /* همگام‌سازی بین تب‌ها: اگر در تب دیگر چیزی اضافه/حذف شد، همین‌جا هم عوض می‌شود */
+  window.addEventListener('storage', function (e) {
+    if (e.key === CART_KEY || e.key === null) { cart = readCart(); updateCartUI(); }
+  });
+
   function initCart() {
     ensureCartShell();
+    mountAlt(document.querySelector('.contact-panel'), 'home');
     updateCartUI();
   }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCart); } else { initCart(); }

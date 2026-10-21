@@ -124,7 +124,10 @@
   <main>{{ content }}</main>
   {% include footer.html %}
   <script type="application/json" id="wa-sellers-data">[{% if site.whatsapp_sellers %}{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }},"photo":{% if s.photo %}{{ s.photo | relative_url | jsonify }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}{% else %}{% for n in site.whatsapp_numbers %}{"name":"شماره {{ forloop.index }}","number":{{ n | jsonify }},"photo":""}{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}]</script>
-  <script type="application/json" id="order-channels-data">{"telegram":{{ site.order_telegram | default: "" | jsonify }},"bale":{{ site.order_bale | default: "" | jsonify }},"instagram":{{ site.order_instagram | default: "" | jsonify }},"phones":[{% for s in site.whatsapp_sellers %}{"label":{{ s.name | jsonify }},"number":{{ s.number | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}{% if site.phone_e164 %}{% if site.whatsapp_sellers %},{% endif %}{"label":"تلفن فروشگاه","number":{{ site.phone_e164 | jsonify }},"display":{{ site.phone_display | jsonify }}}{% endif %}]}</script>
+  <script type="application/json" id="order-config">{"shippingCustoms":{{ site.shipping_customs_cost | default: 0 }}}</script>
+  <!-- قالب‌های مشترک: main.js از این‌ها در سبد خرید و صفحهٔ اصلی کپی می‌گیرد (یک متن، یک ظاهر) -->
+  <template id="tpl-order-note">{% include order-note.html %}</template>
+  <template id="tpl-order-alt">{% include order-alt.html kind="home" %}</template>
   {% include mobile-tabbar.html %}
   <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
   <script src="{{ '/assets/js/extra.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>

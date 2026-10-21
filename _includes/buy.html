@@ -15,106 +15,42 @@
 {%- assign final_price_clean = final_price_raw | append: "" | remove: "," | remove: "،" | remove: " " -%}
 {%- assign final_price_num = final_price_clean | plus: 0 -%}
 
-<script>
-  window.SITE_SHIPPING_COST = {{ site.shipping_cost | default: 450000 }};
-  window.SITE_CUSTOMS_COST = {{ site.customs_cost | default: 100000 }};
-</script>
-
-<div class="buy-actions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+<div class="buy-actions" data-title="{{ product.title | escape }}" data-price="{{ final_price_num }}" data-url="{{ product.url }}" data-image="{% if cart_img %}{% include img.html src=cart_img %}{% endif %}" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
 
   <!-- دکمه واتساپ -->
   <button type="button" class="btn-wa" id="open-wa-menu">
     <span>🛍️</span> ثبت سفارش در واتساپ
   </button>
 
-  <!-- منوی مخفی انتخاب فروشنده -->
+  <!-- منوی انتخاب فروشنده (پیام را main.js از روی همین محصول می‌سازد) -->
   <div id="wa-menu" class="wa-menu" style="display: none;">
     <p class="wa-menu-title">برای سفارش با کدوم فروشنده در ارتباط باشیم؟</p>
     <div class="wa-sellers">
       {%- if site.whatsapp_sellers -%}
         {%- for s in site.whatsapp_sellers -%}
-        <a class="wa-seller" href="#" onclick="sendCartToWhatsApp(event, '{{ s.number }}')">
+        <a class="wa-seller" href="https://wa.me/{{ s.number }}" data-wa-number="{{ s.number }}" data-kind="product" target="_blank" rel="noopener">
           <span class="wa-avatar">{% if s.photo %}<img src="{{ s.photo | relative_url }}" alt="" width="160" height="160" loading="lazy" onerror="this.remove()">{% endif %}</span>
           <span class="wa-seller-info"><strong>{{ s.name }}</strong><small>پیام در واتساپ</small></span>
         </a>
         {%- endfor -%}
       {%- else -%}
-        <a class="wa-seller" href="#" onclick="sendCartToWhatsApp(event, '{{ phone1 }}')">
+        {%- for n in site.whatsapp_numbers -%}
+        <a class="wa-seller" href="https://wa.me/{{ n }}" data-wa-number="{{ n }}" data-kind="product" target="_blank" rel="noopener">
           <span class="wa-avatar"></span>
-          <span class="wa-seller-info"><strong>شماره ۱</strong><small>پیام در واتساپ</small></span>
+          <span class="wa-seller-info"><strong>شماره {{ forloop.index }}</strong><small>پیام در واتساپ</small></span>
         </a>
-        <a class="wa-seller" href="#" onclick="sendCartToWhatsApp(event, '{{ phone2 }}')">
-          <span class="wa-avatar"></span>
-          <span class="wa-seller-info"><strong>شماره ۲</strong><small>پیام در واتساپ</small></span>
-        </a>
+        {%- endfor -%}
       {%- endif -%}
     </div>
-    
-    <!-- متن قوانین -->
-    <div class="cart-note-wrapper">
-      <p class="cart-note-text">
-        🌸 هزینه‌ی ارسال و هزینه‌ی گمرکی (به‌خاطر ارسال از جزیره‌ی کیش) بر عهده‌ی مشتری است و قبل از پرداخت به شما اعلام می‌شود. چون امکان مرجوعی نداریم، خوشحال می‌شویم پیش از ثبت سفارش، سایز را با ما هماهنگ کنید تا مطمئن شوید لباس برای کوچولوی شما مناسب است. ممنون از درک مهربان‌تان
-        <svg class="heart-icon-svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="color: #ec5b9a; vertical-align: middle; margin-right: 4px;">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      </p>
-      <a href="{{ '/terms/' | relative_url }}" class="terms-link">قوانین و مقررات</a>
-    </div>
+
+    <!-- متن هشدار: همان include که در سبد خرید هم استفاده می‌شود -->
+    {% include order-note.html %}
   </div>
 
-  <!-- بخش روش‌های دیگر سفارش -->
-  <div class="order-alt-box">
-    <p class="order-alt-title">واتساپ ندارید؟ از این راه‌ها هم می‌توانید سفارش بدهید</p>
+  <!-- روش‌های دیگر سفارش: فقط یک‌جا -->
+  {% include order-alt.html kind="product" %}
 
-    <div class="order-grid-container">
-      
-      <!-- کپی متن -->
-      <button onclick="copyCartText()" class="box-btn full-width glass-effect">
-        <span>📋</span> کپی متن سفارش
-      </button>
-
-      <!-- شبکه‌های اجتماعی -->
-      <div class="grid-3-cols">
-        {% if site.order_telegram %}
-        <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="box-btn glass-effect">
-          <span>✈️</span> تلگرام
-        </a>
-        {% endif %}
-        
-        {% if site.order_bale %}
-        <a href="https://ble.ir/{{ site.order_bale[0] }}" target="_blank" rel="noopener" class="box-btn glass-effect">
-          <span>💬</span> بله
-        </a>
-        {% endif %}
-
-        {% if site.order_instagram %}
-        <a href="https://instagram.com/{{ site.order_instagram }}" target="_blank" rel="noopener" class="box-btn glass-effect">
-          <span>📷</span> اینستاگرام
-        </a>
-        {% endif %}
-      </div>
-
-      <!-- تلفن ثابت (اصلاح برعکس بودن) -->
-      <button onclick="copyPhone('{{ site.phone_display }}')" class="box-btn full-width glass-effect">
-        <span>📞</span> تماس تلفنی: <span dir="ltr" style="unicode-bidi: embed;">076-44561403</span>
-      </button>
-
-      <!-- موبایل‌ها -->
-      <div class="grid-2-cols">
-        <button onclick="copyPhone('09347688356')" class="box-btn glass-effect phone-num">
-          0934 768 8356
-        </button>
-        <button onclick="copyPhone('09179962005')" class="box-btn glass-effect phone-num">
-          0917 996 2005
-        </button>
-      </div>
-
-    </div>
-    
-    <p class="order-alt-hint">روی شماره بزنید تا کپی شود.</p>
-  </div>
-
-  <!-- دکمه‌های سبد خرید -->
+  <!-- دکمه سبد خرید -->
   {%- if buy_oos -%}
   <button type="button" class="btn-cart add-to-cart-btn is-soldout-btn" id="product-add-to-cart" disabled aria-disabled="true">
     <span>⛔</span> اتمام موجودی
@@ -130,61 +66,3 @@
   {%- endif -%}
 
 </div>
-
-<script>
-function formatPrice(num) {
-  const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-  let str = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "٬");
-  return str.replace(/\d/g, d => persianDigits[d]);
-}
-
-function getCart() {
-  try { return JSON.parse(localStorage.getItem('cart')) || []; } catch (e) { return []; }
-}
-
-function buildOrderText() {
-  const cart = getCart();
-  if (cart.length === 0) return "سلام، من می‌خوام از فروشگاه غریبی کیش سفارش بدم. (سبد خرید خالی است)";
-
-  let text = "سلام، من این محصولات را از فروشگاه غریبی کیش سفارش می‌دهم:\n\n";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    text += `${index + 1}. ${item.title}\n`;
-    text += `   💰 قیمت: ${formatPrice(item.price)} تومان\n`;
-    text += `   🔗 https://noysdc.github.io/gharibii.ir${item.url}\n\n`;
-    total += parseInt(item.price);
-  });
-
-  const shipping = window.SITE_SHIPPING_COST || 450000;
-  const customs = window.SITE_CUSTOMS_COST || 100000; // هزینه گمرکی
-  const finalTotal = total + shipping + customs;
-
-  text += `🧾 جمع کل محصولات: ${formatPrice(total)} تومان\n`;
-  text += `🚚 هزینه ارسال پستی: ${formatPrice(shipping)} تومان\n`;
-  text += `🛃 هزینه گمرکی: ${formatPrice(customs)} تومان\n`;
-  text += `💳 مبلغ قابل پرداخت: ${formatPrice(finalTotal)} تومان\n\n`;
-  text += `لطفاً برای نهایی‌سازی و هماهنگی ارسال (سایز، رنگ، آدرس) راهنمایی‌ام کنید. 🙏`;
-
-  return text;
-}
-
-function sendCartToWhatsApp(event, phoneNumber) {
-  event.preventDefault();
-  const text = buildOrderText();
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
-  window.open(url, '_blank');
-}
-
-function copyCartText() {
-  const text = buildOrderText();
-  navigator.clipboard.writeText(text).then(() => alert("متن سفارش کپی شد!"))
-  .catch(() => { const el = document.createElement('textarea'); el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); alert("متن سفارش کپی شد!"); });
-}
-
-function copyPhone(phoneNumber) {
-  const englishNumber = phoneNumber.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
-  navigator.clipboard.writeText(englishNumber).then(() => alert("شماره تلفن کپی شد!"))
-  .catch(() => { const el = document.createElement('textarea'); el.value = englishNumber; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); alert("شماره تلفن کپی شد!"); });
-}
-</script>

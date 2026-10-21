@@ -287,3 +287,46 @@ html[data-theme="dark"] .glass-effect:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   سبد خرید: جمع‌ها، خالی کردن، وضعیت «در سبد است»
+   ============================================================ */
+.cart-content [hidden]{display:none !important}
+.cart-item-info h4 a{color:inherit;text-decoration:none}
+.cart-item-info h4 a:hover{text-decoration:underline}
+.cart-totals{margin:.9rem 0 .3rem;padding:.75rem .9rem;border-radius:1rem;background:rgba(255,255,255,.55);border:1px solid var(--line);display:flex;flex-direction:column;gap:.35rem}
+.cart-totals-row{display:flex;justify-content:space-between;gap:.75rem;font-size:calc(.88rem * var(--font-scale));color:var(--muted)}
+.cart-totals-row b{color:var(--ink);font-weight:700;white-space:nowrap}
+.cart-totals-row.is-total{margin-top:.25rem;padding-top:.5rem;border-top:1px dashed var(--line);font-size:calc(.98rem * var(--font-scale));color:var(--ink)}
+.cart-totals-row.is-hint{justify-content:center;font-size:calc(.8rem * var(--font-scale))}
+html[data-theme="dark"] .cart-totals{background:rgba(30,45,55,.5)}
+.cart-clear{display:block;margin:.4rem auto 0;padding:.3rem .8rem;border:0;background:none;font:inherit;font-size:calc(.82rem * var(--font-scale));color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cart-clear[data-armed="1"]{color:#c0392b;font-weight:700}
+#product-add-to-cart.is-in-cart{border-color:var(--wa);color:var(--wa)}
+.cart-content .order-alt-box{margin-top:1rem}
+
+/* ============================================================
+   دکمه‌های «روش‌های دیگر سفارش» — هم‌سبک دکمه‌های دسته‌بندی (.category-nav a)
+   ============================================================ */
+.alt-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.alt-row.is-full{grid-template-columns:1fr}
+.alt-pill{
+  position:relative;display:flex;align-items:center;justify-content:center;gap:.45rem;
+  padding:.5rem .8rem;border-radius:999px;overflow:hidden;isolation:isolate;cursor:pointer;
+  font:inherit;font-size:calc(.85rem * var(--font-scale));font-weight:600;line-height:1.5;text-align:center;
+  color:var(--sea-deep);text-decoration:none;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 6px rgba(168,85,247,.07);
+  transition:transform .25s ease,box-shadow .25s ease,color .25s ease,background .25s ease
+}
+.alt-pill::before{content:"";position:absolute;inset:0;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 35%,rgba(255,255,255,0) 65%,rgba(200,230,255,.4) 100%);opacity:.5;pointer-events:none;z-index:-1}
+.alt-pill::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.8) 50%,transparent 100%);transition:left .6s ease;pointer-events:none;z-index:-1}
+.alt-pill:hover{text-decoration:none;color:var(--sea-deep);transform:translateY(-1px);background:rgba(255,255,255,.85);border-color:rgba(200,184,255,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 8px 20px rgba(168,85,247,.18),0 2px 8px rgba(255,150,220,.1)}
+.alt-pill:hover::after{left:100%}
+.alt-ico{width:1.3em;height:1.3em;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.alt-pill.is-num{font-weight:700;letter-spacing:.3px}
+html[data-theme="dark"] .alt-pill{background:rgba(40,60,75,.5);border-color:rgba(150,180,200,.3);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 6px rgba(0,0,0,.25)}
+html[data-theme="dark"] .alt-pill::before{opacity:.1}
+html[data-theme="dark"] .alt-pill:hover{background:rgba(60,85,105,.75);border-color:rgba(150,120,200,.6);color:#fff}
+@media (max-width:360px){.alt-row{grid-template-columns:1fr}}

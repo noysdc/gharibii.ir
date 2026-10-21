@@ -1,0 +1,61 @@
+{%- comment -%}
+  باکس «واتساپ ندارید؟ روش‌های دیگر سفارش» — تنها نسخهٔ این باکس در کل سایت.
+  پارامتر kind:  product = همین محصول | cart = کل سبد | home = پیام عمومی
+  بله و پیامک برای هر فروشنده جدا هستند (ترتیب order_bale در _config.yml = ترتیب whatsapp_sellers).
+  رفتار دکمه‌ها (کپی، لینک‌ها، شماره‌ها) در assets/js/main.js است.
+{%- endcomment -%}
+{%- assign oa_kind = include.kind | default: "home" -%}
+<div class="order-alt-box" data-kind="{{ oa_kind }}">
+  <p class="order-alt-title">واتساپ ندارید؟ از این راه‌ها هم می‌توانید سفارش بدهید</p>
+  <div class="order-grid-container">
+
+    <div class="alt-row is-full">
+      <button type="button" class="alt-pill" data-action="copy"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a2 2 0 012 2v13a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/></svg> کپی متن سفارش</button>
+    </div>
+
+    <div class="alt-row">
+      {%- if site.order_telegram -%}
+      <a href="https://t.me/{{ site.order_telegram }}" target="_blank" rel="noopener" class="alt-pill" data-ch="telegram"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 3L2 11l7 2.5L11.5 21l3-4.5L19 20z"/><path d="M9 13.5L22 3"/></svg> تلگرام</a>
+      {%- endif -%}
+      {%- if site.order_instagram -%}
+      <a href="https://ig.me/m/{{ site.order_instagram }}" target="_blank" rel="noopener" class="alt-pill" data-ch="instagram"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg> اینستاگرام</a>
+      {%- endif -%}
+    </div>
+
+    {%- if site.order_bale and site.whatsapp_sellers -%}
+    <div class="alt-row">
+      {%- for s in site.whatsapp_sellers -%}
+      {%- assign bale_id = site.order_bale[forloop.index0] -%}
+      {%- if bale_id -%}
+      <a href="https://ble.ir/{{ bale_id }}" target="_blank" rel="noopener" class="alt-pill" data-ch="bale"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg> بله · {{ s.name }}</a>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if site.whatsapp_sellers -%}
+    <div class="alt-row">
+      {%- for s in site.whatsapp_sellers -%}
+      <a href="sms:+{{ s.number }}" class="alt-pill" data-ch="sms" data-sms="+{{ s.number }}"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> پیامک · {{ s.name }}</a>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if site.phone_display -%}
+    <div class="alt-row is-full">
+      <a href="tel:{{ site.phone_e164 }}" class="alt-pill" data-phone="{{ site.phone_display | remove: '-' }}"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg> تماس تلفنی: <span dir="ltr" style="unicode-bidi: embed;">{{ site.phone_display }}</span></a>
+    </div>
+    {%- endif -%}
+
+    {%- if site.whatsapp_sellers -%}
+    <div class="alt-row">
+      {%- for s in site.whatsapp_sellers -%}
+      {%- assign d = s.number | slice: 2, 10 | prepend: "0" -%}
+      <a href="tel:+{{ s.number }}" class="alt-pill is-num" data-phone="{{ d }}"><svg class="alt-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg> <span dir="ltr">{{ d | slice: 0, 4 }} {{ d | slice: 4, 3 }} {{ d | slice: 7, 4 }}</span></a>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+  </div>
+  <p class="order-alt-hint">روی شماره بزنید تا کپی شود.</p>
+</div>
