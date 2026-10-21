@@ -79,8 +79,8 @@
   <meta name="twitter:title" content="{{ pv_title | escape }}">
   <meta name="twitter:description" content="{{ pv_desc | strip | escape }}">
   <meta name="twitter:image" content="{{ pv_img_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+  <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
   {%- if page.url == '/' %}
   <script type="application/ld+json">
   {
@@ -125,7 +125,7 @@
   {% include footer.html %}
   <script type="application/json" id="wa-sellers-data">[{% if site.whatsapp_sellers %}{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }},"photo":{% if s.photo %}{{ s.photo | relative_url | jsonify }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}{% else %}{% for n in site.whatsapp_numbers %}{"name":"شماره {{ forloop.index }}","number":{{ n | jsonify }},"photo":""}{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}]</script>
   {% include mobile-tabbar.html %}
-  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
-  <script src="{{ '/assets/js/extra.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+  <script src="{{ '/assets/js/extra.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
 </body>
 </html>

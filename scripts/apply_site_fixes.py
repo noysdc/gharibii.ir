@@ -257,14 +257,20 @@ def fix_header_icons():
     p = ROOT / "_includes" / "header.html"
     t = read(p)
     if 'class="cat-ico"' in t:
-        print("• header.html: آیکون‌ها از قبل اضافه شده‌اند.")
+        if 'class="cat-ico" width=' in t:
+            print("• header.html: آیکون‌ها از قبل اضافه شده‌اند.")
+            return True
+        # نسخهٔ قبلی بدون اندازه بود؛ اندازهٔ صریح اضافه می‌شود تا حتی با CSS کش‌شده هم بزرگ نشوند
+        backup(p)
+        write(p, t.replace('<svg class="cat-ico" viewBox=', '<svg class="cat-ico" width="18" height="18" viewBox='))
+        print("✓ header.html: اندازهٔ صریح (۱۸px) به آیکون‌ها اضافه شد.")
         return True
     e = eol_of(t)
     n = t.replace("\r\n", "\n")
     done = 0
     for slug, paths in CAT_ICONS.items():
         pat = re.compile(r"(<a href=\"\{\{ '/" + re.escape(slug) + r"/' \| relative_url \}\}\"[^>]*>)(?!<svg)")
-        svg = '<svg class="cat-ico" viewBox="0 0 24 24" aria-hidden="true">' + paths + "</svg>"
+        svg = '<svg class="cat-ico" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">' + paths + "</svg>"
         n, c = pat.subn(lambda m: m.group(1) + svg, n, count=1)
         done += c
     if done < 5:
@@ -273,6 +279,23 @@ def fix_header_icons():
     backup(p)
     write(p, n.replace("\n", e))
     print("✓ header.html: آیکون به ۵ دکمهٔ دسته اضافه شد.")
+    return True
+
+
+def bust_cache():
+    """به CSS/JS در default.html یک ?v=زمان-بیلد می‌چسباند تا بعد از هر انتشار، مرورگر/سرویس‌ورکر نسخهٔ قبلی را نشان ندهد."""
+    p = ROOT / "_layouts" / "default.html"
+    t = read(p)
+    e = eol_of(t)
+    n = t.replace("\r\n", "\n")
+    pat = re.compile(r"(\{\{ '/assets/(?:css|js)/[\w.-]+\.(?:css|js)' \| relative_url \}\})(?=\")")
+    n2, c = pat.subn(lambda m: m.group(1) + "?v={{ site.time | date: '%Y%m%d%H%M%S' }}", n)
+    if c == 0:
+        print("• default.html: نسخه‌گذاری CSS/JS از قبل انجام شده (یا لینکی پیدا نشد).")
+        return True
+    backup(p)
+    write(p, n2.replace("\n", e))
+    print(f"✓ default.html: {c} فایل CSS/JS نسخه‌دار شد (مشکل «تغییر را نمی‌بینم» برطرف می‌شود).")
     return True
 
 
@@ -292,6 +315,7 @@ def main():
         r = [files_ok, fix_footer(), fix_default(), ensure_extra_js()]
     r.append(fix_categories())
     r.append(fix_header_icons())
+    r.append(bust_cache())
     print()
     print("🎉 همه‌چیز انجام شد." if all(r) else "⚠️ بعضی بخش‌ها انجام نشد؛ پیام‌های بالا را ببینید.")
     print("نسخه‌ی پشتیبان فایل‌های قبلی: scripts/_backup_site_fixes/")
