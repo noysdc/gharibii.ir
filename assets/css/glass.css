@@ -481,3 +481,27 @@ html[data-theme="dark"]:root:root:root .cb-banner h2{color:#fff}
 html[data-theme="dark"]:root:root:root .cb-count{
   color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.06));
 }
+
+/* =====================================================================
+   ۱۵) دکمه‌ی «افزودن به سبد»: شیشه‌ی رنگی هم‌خانواده‌ی دکمه‌ی قیمت
+   ===================================================================== */
+html:root:root:root .add-to-cart-btn:not(.is-soldout-btn){
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#0A6670) 20%,rgba(255,255,255,.62)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 10%,rgba(255,255,255,.22)) 100%) !important;
+  border:1px solid rgba(255,255,255,.8) !important;
+  box-shadow:var(--gl-edge),0 6px 16px rgba(60,80,140,.16) !important;
+  color:var(--sea-deep) !important;
+}
+html[data-theme="dark"]:root:root:root .add-to-cart-btn:not(.is-soldout-btn){
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#5fb5c0) 34%,rgba(255,255,255,.10)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 20%,rgba(255,255,255,.04)) 100%) !important;
+  border-color:rgba(255,255,255,.26) !important;
+  color:#fff !important;
+}
+/* روی لمسی، بالا نپرد و از جایش بیرون نزند */
+@media (hover:none){
+  html:root:root:root .add-to-cart-btn:hover{transform:none}
+}
+html:root:root:root .add-to-cart-btn{position:relative;z-index:5}
