@@ -343,3 +343,341 @@ html[data-theme="dark"] .alt-pill:hover{background:rgba(60,85,105,.75);border-co
 .alt-sub{display:none;margin:.2rem 0 -.1rem;font-size:calc(.8rem * var(--font-scale));font-weight:700;color:var(--muted);text-align:center}
 .order-alt-box[data-kind="home"] .alt-sub{display:block}
 .contact-panel .order-alt-box{max-width:30rem;margin-inline:auto}
+
+
+/* =====================================================================
+   glass.css — شیشه‌ی مایع (Liquid Glass) به سبک iOS
+   این فایل باید «آخرین» فایل CSS باشد (بعد از style.css و extra.css).
+   همه‌ی باکس‌ها، دکمه‌ها، سبد خرید و پنجره‌های صفحه‌ی اصلی و صفحه‌ی محصول را پوشش می‌دهد.
+   برای تنظیم شدت شیشه فقط متغیرهای بخش «۱) متغیرها» را عوض کنید.
+   ===================================================================== */
+
+/* ---------- ۱) متغیرها: روز ---------- */
+html{
+  --gl-blur-lg:blur(26px) saturate(190%);      /* باکس‌های بزرگ */
+  --gl-blur-md:blur(18px) saturate(180%);      /* کارت‌ها */
+  --gl-blur-sm:blur(12px) saturate(170%);      /* دکمه‌ها */
+
+  --gl-panel:linear-gradient(145deg,rgba(255,255,255,.60) 0%,rgba(255,255,255,.26) 48%,rgba(255,255,255,.42) 100%);
+  --gl-card:linear-gradient(145deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.30) 100%);
+  --gl-btn:linear-gradient(160deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.34) 55%,rgba(255,255,255,.5) 100%);
+  --gl-btn-hover:linear-gradient(160deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.5) 55%,rgba(255,255,255,.66) 100%);
+
+  --gl-border:rgba(255,255,255,.72);
+  --gl-edge:inset 0 1.5px 0 rgba(255,255,255,.98),inset 0 -1px 0 rgba(255,255,255,.40),inset 1px 0 0 rgba(255,255,255,.45),inset -1px 0 0 rgba(255,255,255,.45),inset 0 0 22px rgba(255,255,255,.28);
+  --gl-shadow-lg:0 14px 38px rgba(88,64,160,.17),0 3px 10px rgba(88,64,160,.08);
+  --gl-shadow-md:0 8px 24px rgba(88,64,160,.15),0 2px 6px rgba(88,64,160,.07);
+  --gl-shadow-sm:0 5px 14px rgba(88,64,160,.14),0 1px 3px rgba(88,64,160,.08);
+  --gl-shadow-hover:0 14px 30px rgba(168,85,247,.24),0 3px 8px rgba(88,64,160,.12);
+
+  /* دکمه‌ی اصلی (سبز واتساپ) */
+  --gl-pri:linear-gradient(160deg,rgba(24,160,124,.92) 0%,rgba(15,127,99,.78) 100%);
+  --gl-pri-hover:linear-gradient(160deg,rgba(30,176,137,.98) 0%,rgba(15,127,99,.88) 100%);
+  --gl-pri-border:rgba(255,255,255,.55);
+  --gl-pri-ink:#fff;
+  --gl-pri-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(0,0,0,.08),0 10px 24px rgba(15,127,99,.34);
+
+  --gl-amber:linear-gradient(145deg,rgba(255,214,120,.42),rgba(255,226,160,.22));
+  --gl-amber-border:rgba(224,168,46,.45);
+
+  --gl-overlay:rgba(70,50,125,.26);
+  --gl-modal:linear-gradient(150deg,rgba(255,255,255,.80) 0%,rgba(255,255,255,.60) 100%);
+  --gl-ink-price:var(--ink2,var(--sea-deep));
+}
+
+/* ---------- ۱) متغیرها: شب ---------- */
+html[data-theme="dark"]{
+  --gl-blur-lg:blur(28px) saturate(170%) brightness(1.08);
+  --gl-blur-md:blur(20px) saturate(165%) brightness(1.08);
+  --gl-blur-sm:blur(14px) saturate(160%) brightness(1.1);
+
+  --gl-panel:linear-gradient(145deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 50%,rgba(255,255,255,.10) 100%);
+  --gl-card:linear-gradient(145deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 100%);
+  --gl-btn:linear-gradient(160deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.08) 55%,rgba(255,255,255,.14) 100%);
+  --gl-btn-hover:linear-gradient(160deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.14) 55%,rgba(255,255,255,.22) 100%);
+
+  --gl-border:rgba(255,255,255,.24);
+  --gl-edge:inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(255,255,255,.06),inset 1px 0 0 rgba(255,255,255,.12),inset -1px 0 0 rgba(255,255,255,.12),inset 0 0 22px rgba(255,255,255,.05);
+  --gl-shadow-lg:0 16px 40px rgba(0,0,0,.50),0 3px 10px rgba(0,0,0,.30);
+  --gl-shadow-md:0 10px 26px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.25);
+  --gl-shadow-sm:0 6px 16px rgba(0,0,0,.40),0 1px 3px rgba(0,0,0,.25);
+  --gl-shadow-hover:0 14px 32px rgba(0,0,0,.55),0 0 22px rgba(168,85,247,.22);
+
+  --gl-pri:linear-gradient(160deg,rgba(40,190,148,.62) 0%,rgba(15,127,99,.48) 100%);
+  --gl-pri-hover:linear-gradient(160deg,rgba(52,205,162,.74) 0%,rgba(15,127,99,.60) 100%);
+  --gl-pri-border:rgba(255,255,255,.30);
+  --gl-pri-ink:#eafff7;
+  --gl-pri-shadow:inset 0 1.5px 0 rgba(255,255,255,.40),inset 0 -1px 0 rgba(0,0,0,.2),0 10px 26px rgba(0,0,0,.45);
+
+  --gl-amber:linear-gradient(145deg,rgba(224,168,46,.20),rgba(224,168,46,.08));
+  --gl-amber-border:rgba(224,168,46,.38);
+
+  --gl-overlay:rgba(2,6,12,.50);
+  --gl-modal:linear-gradient(150deg,rgba(40,52,68,.72) 0%,rgba(22,30,42,.62) 100%);
+  --gl-ink-price:#fff;
+}
+
+/* ---------- ۲) پس‌زمینه‌ی رنگی (بدون آن، شیشه چیزی برای بلر کردن ندارد) ---------- */
+html body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(48rem 38rem at 92% -6%,rgba(255,176,214,.62),transparent 62%),
+    radial-gradient(44rem 36rem at -8% 18%,rgba(196,176,255,.58),transparent 62%),
+    radial-gradient(46rem 38rem at 78% 62%,rgba(160,222,255,.50),transparent 64%),
+    radial-gradient(42rem 34rem at 8% 96%,rgba(172,236,214,.52),transparent 62%),
+    radial-gradient(30rem 26rem at 50% 40%,rgba(255,226,170,.30),transparent 66%);
+}
+html[data-theme="dark"] body::before{
+  background:
+    radial-gradient(48rem 38rem at 92% -6%,rgba(190,60,140,.36),transparent 62%),
+    radial-gradient(44rem 36rem at -8% 18%,rgba(110,70,210,.42),transparent 62%),
+    radial-gradient(46rem 38rem at 78% 62%,rgba(20,120,150,.38),transparent 64%),
+    radial-gradient(42rem 34rem at 8% 96%,rgba(20,140,110,.32),transparent 62%),
+    radial-gradient(30rem 26rem at 50% 40%,rgba(160,110,30,.16),transparent 66%);
+}
+
+/* ---------- ۳) باکس‌های بزرگ ---------- */
+html:root:root:root :is(
+  .hero-lead,.tile-col .hero-lead,.tile-note,.category-box,.control-box,
+  .step,.contact-panel,.info-box,.order-alt-box,.wa-menu,.map-card,
+  .install-bar,.welcome-toast-content,.cart-totals,.search-results
+){
+  background:var(--gl-panel) !important;
+  -webkit-backdrop-filter:var(--gl-blur-lg) !important;backdrop-filter:var(--gl-blur-lg) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-lg) !important;
+}
+
+/* دو باکس صفحه‌ی اصلی (دخترانه / پسرانه): شیشه‌ی رنگی شفاف */
+html:root:root:root .tile.girls{
+  background:linear-gradient(155deg,rgba(255,196,224,.62) 0%,rgba(236,208,250,.42) 55%,rgba(222,206,250,.50) 100%) !important;
+}
+html:root:root:root .tile.boys{
+  background:linear-gradient(155deg,rgba(184,218,255,.62) 0%,rgba(190,226,246,.42) 55%,rgba(176,232,230,.50) 100%) !important;
+}
+html[data-theme="dark"]:root:root:root .tile.girls{
+  background:linear-gradient(155deg,rgba(220,90,160,.26) 0%,rgba(150,80,200,.16) 55%,rgba(120,80,200,.20) 100%) !important;
+}
+html[data-theme="dark"]:root:root:root .tile.boys{
+  background:linear-gradient(155deg,rgba(60,130,220,.28) 0%,rgba(40,140,170,.16) 55%,rgba(30,160,150,.20) 100%) !important;
+}
+html:root:root:root .tile{
+  -webkit-backdrop-filter:var(--gl-blur-lg) !important;backdrop-filter:var(--gl-blur-lg) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-lg) !important;
+}
+html:root:root:root .tile-collage img{border-color:rgba(255,255,255,.85)}
+
+/* بلوک هر دسته در صفحه‌ی اصلی: شیشه‌ی رنگی */
+html:root:root:root .cat-block{
+  background:
+    linear-gradient(170deg,color-mix(in srgb,var(--ta) 62%,transparent) 0%,color-mix(in srgb,var(--tb) 46%,transparent) 100%) !important;
+  -webkit-backdrop-filter:var(--gl-blur-lg) !important;backdrop-filter:var(--gl-blur-lg) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-lg) !important;
+}
+html[data-theme="dark"]:root:root:root .cat-block{
+  background:
+    linear-gradient(170deg,color-mix(in srgb,var(--c1) 20%,rgba(20,28,40,.55)) 0%,color-mix(in srgb,var(--c2) 14%,rgba(16,24,34,.50)) 100%) !important;
+}
+
+/* ---------- ۴) کارت‌های محصول ---------- */
+html:root:root:root :is(.card,.cat-grid .card){
+  background:var(--gl-card) !important;
+  -webkit-backdrop-filter:var(--gl-blur-md) !important;backdrop-filter:var(--gl-blur-md) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-md) !important;
+}
+html:root:root:root :is(.card,.cat-grid .card):hover{
+  background:var(--gl-btn-hover) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-hover) !important;
+}
+
+/* ---------- ۵) دکمه‌های شیشه‌ای ---------- */
+html:root:root:root :is(
+  .add-to-cart-btn,.more-btn,.btn-cart,.contact-btn,.ctrl-btn,.social-box,.alt-pill,
+  .wa-seller,.tile-cta,.category-nav a,.search-box,.slide-btn,.thumb-nav,.cat-nav,.g-btn,.cart-close,
+  .glass-effect,.cat-tile-pill
+){
+  background:var(--gl-btn) !important;
+  -webkit-backdrop-filter:var(--gl-blur-sm) !important;backdrop-filter:var(--gl-blur-sm) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-sm) !important;
+  color:var(--sea-deep) !important;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease !important;
+}
+html:root:root:root :is(
+  .add-to-cart-btn,.more-btn,.btn-cart,.contact-btn,.ctrl-btn,.social-box,.alt-pill,
+  .wa-seller,.tile-cta,.category-nav a,.thumb-nav,.cat-nav,.g-btn,.cart-close,.glass-effect
+):hover{
+  background:var(--gl-btn-hover) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-hover) !important;
+  transform:translateY(-2px);
+  color:var(--sea-deep) !important;
+}
+html:root:root:root :is(
+  .add-to-cart-btn,.more-btn,.btn-cart,.contact-btn,.ctrl-btn,.social-box,.alt-pill,
+  .wa-seller,.tile-cta,.category-nav a,.cart-close
+):active{transform:translateY(0) scale(.97)}
+html[data-theme="dark"]:root:root:root :is(
+  .add-to-cart-btn,.more-btn,.btn-cart,.contact-btn,.ctrl-btn,.social-box,.alt-pill,
+  .wa-seller,.tile-cta,.category-nav a,.search-box,.slide-btn,.thumb-nav,.cat-nav,.g-btn,.cart-close,
+  .glass-effect,.cat-tile-pill
+){color:var(--ink) !important}
+html[data-theme="dark"]:root:root:root :is(
+  .add-to-cart-btn,.more-btn,.btn-cart,.contact-btn,.ctrl-btn,.social-box,.alt-pill,
+  .wa-seller,.tile-cta,.category-nav a,.thumb-nav,.cat-nav,.g-btn,.cart-close
+):hover{color:#fff !important}
+
+/* دکمه‌ی «نمایش بیشتر»: رنگ دسته را کمی در شیشه می‌گیرد */
+html:root:root:root .more-btn{
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#0A6670) 22%,rgba(255,255,255,.62)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 12%,rgba(255,255,255,.28)) 100%) !important;
+}
+html[data-theme="dark"]:root:root:root .more-btn{
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#5fb5c0) 38%,rgba(255,255,255,.10)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 24%,rgba(255,255,255,.04)) 100%) !important;
+}
+html:root:root:root .more-btn small{background:rgba(255,255,255,.45) !important}
+html[data-theme="dark"]:root:root:root .more-btn small{background:rgba(255,255,255,.16) !important;color:var(--ink) !important}
+
+/* دکمه‌ی افزودن به سبد */
+html:root:root:root .add-to-cart-btn{border-width:1px !important}
+html:root:root:root .add-to-cart-btn.is-soldout-btn{opacity:.55;filter:grayscale(.4)}
+
+/* ---------- ۶) دکمه‌ی قیمت (همه‌ی کارت‌ها) ---------- */
+html:root:root:root .card .card-price{
+  align-self:center;margin-inline:auto;padding:.14rem 1rem;border-radius:999px;
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#0A6670) 26%,rgba(255,255,255,.60)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 16%,rgba(255,255,255,.26)) 100%) !important;
+  -webkit-backdrop-filter:var(--gl-blur-sm) !important;backdrop-filter:var(--gl-blur-sm) !important;
+  border:1px solid var(--gl-border) !important;
+  box-shadow:var(--gl-edge),var(--gl-shadow-sm) !important;
+  color:var(--gl-ink-price) !important;
+}
+html:root:root:root .card .card-price .price-value{color:var(--gl-ink-price) !important;font-weight:700}
+html[data-theme="dark"]:root:root:root .card .card-price{
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--c1,#5fb5c0) 40%,rgba(255,255,255,.10)) 0%,
+    color-mix(in srgb,var(--c2,#a855f7) 26%,rgba(255,255,255,.04)) 100%) !important;
+}
+
+/* ---------- ۷) دکمه‌های اصلی سبز (ثبت سفارش در واتساپ / ارسال سفارش) ---------- */
+html:root:root:root :is(.btn-wa,.cart-checkout){
+  background:var(--gl-pri) !important;
+  -webkit-backdrop-filter:var(--gl-blur-sm) !important;backdrop-filter:var(--gl-blur-sm) !important;
+  border:1px solid var(--gl-pri-border) !important;
+  box-shadow:var(--gl-pri-shadow) !important;
+  color:var(--gl-pri-ink) !important;
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease,filter .22s ease !important;
+}
+html:root:root:root :is(.btn-wa,.cart-checkout):hover{
+  background:var(--gl-pri-hover) !important;
+  color:var(--gl-pri-ink) !important;
+  transform:translateY(-2px);filter:none !important;
+}
+html:root:root:root :is(.btn-wa,.cart-checkout):active{transform:translateY(0) scale(.98)}
+html:root:root:root :is(.btn-wa,.cart-checkout) *{color:inherit}
+html:root:root:root #product-add-to-cart.is-in-cart{color:var(--wa) !important}
+html[data-theme="dark"]:root:root:root #product-add-to-cart.is-in-cart{color:#7be0c0 !important}
+
+/* ---------- ۸) سبد خرید ---------- */
+html:root:root:root .cart-modal{
+  background:var(--gl-overlay) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(140%) !important;backdrop-filter:blur(14px) saturate(140%) !important;
+}
+html:root:root:root .cart-content{
+  background:var(--gl-modal) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(190%) !important;backdrop-filter:blur(34px) saturate(190%) !important;
+  border:1px solid var(--gl-border) !important;
+  border-radius:1.7rem;
+  box-shadow:var(--gl-edge),0 30px 70px rgba(30,20,70,.34) !important;
+}
+html:root:root:root .cart-item{border-bottom-color:color-mix(in srgb,var(--ink) 10%,transparent)}
+html:root:root:root .cart-item img{
+  border:1px solid var(--gl-border);
+  box-shadow:0 4px 12px rgba(60,40,120,.18);
+}
+html:root:root:root .cart-totals{border-radius:1.1rem}
+html:root:root:root .cart-totals-row.is-total{border-top-color:color-mix(in srgb,var(--ink) 22%,transparent)}
+html:root:root:root .cart-note-wrapper{
+  background:var(--gl-amber) !important;
+  border:1px solid var(--gl-amber-border) !important;
+  border-radius:1.1rem;
+  -webkit-backdrop-filter:var(--gl-blur-md);backdrop-filter:var(--gl-blur-md);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+}
+html:root:root:root .cart-item-remove{
+  width:2.1rem;height:2.1rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--gl-btn);border:1px solid var(--gl-border);box-shadow:var(--gl-edge),var(--gl-shadow-sm);
+}
+html:root:root:root .floating-cart{
+  background:linear-gradient(160deg,rgba(18,140,152,.85) 0%,rgba(10,102,112,.68) 100%) !important;
+  -webkit-backdrop-filter:var(--gl-blur-sm);backdrop-filter:var(--gl-blur-sm);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(0,0,0,.1),0 12px 28px rgba(10,102,112,.38) !important;
+}
+html[data-theme="dark"]:root:root:root .floating-cart{
+  background:linear-gradient(160deg,rgba(40,170,184,.50) 0%,rgba(10,77,85,.60) 100%) !important;
+  border-color:rgba(255,255,255,.28);
+}
+
+/* ---------- ۹) صفحه‌ی محصول: گالری و بند انگشتی‌ها ---------- */
+html:root:root:root .gallery-main{
+  border:1px solid var(--gl-border);
+  box-shadow:var(--gl-edge),var(--gl-shadow-lg);
+}
+html:root:root:root .thumbs button{
+  border:1.5px solid var(--gl-border);
+  background:var(--gl-btn);
+  box-shadow:var(--gl-shadow-sm);
+}
+html:root:root:root .thumbs button.active{border-color:var(--sea)}
+html:root:root:root .crumbs{
+  display:inline-block;padding:.15rem .9rem;border-radius:999px;
+  background:var(--gl-btn);border:1px solid var(--gl-border);
+  -webkit-backdrop-filter:var(--gl-blur-sm);backdrop-filter:var(--gl-blur-sm);
+  box-shadow:var(--gl-edge),var(--gl-shadow-sm);
+}
+
+/* ---------- ۱۰) نوار پایین موبایل: همان زبان شیشه ---------- */
+@media (max-width:768px){
+  html:root:root:root .ios-tabbar{
+    background:var(--gl-panel);
+    -webkit-backdrop-filter:var(--gl-blur-lg);backdrop-filter:var(--gl-blur-lg);
+    border-color:var(--gl-border);
+    box-shadow:var(--gl-edge),var(--gl-shadow-lg);
+  }
+}
+
+/* ---------- ۱۱) موبایل: بلر کمتر تا روان بماند ---------- */
+@media (max-width:640px){
+  html{
+    --gl-blur-lg:blur(20px) saturate(180%);
+    --gl-blur-md:blur(14px) saturate(170%);
+    --gl-blur-sm:blur(10px) saturate(160%);
+  }
+}
+
+/* ---------- ۱۲) مرورگرهایی که بلر ندارند: پس‌زمینه کمی مات‌تر ---------- */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html{
+    --gl-panel:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.82));
+    --gl-card:linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,255,255,.86));
+    --gl-btn:linear-gradient(160deg,rgba(255,255,255,.96),rgba(255,255,255,.86));
+    --gl-modal:linear-gradient(150deg,rgba(255,255,255,.97),rgba(255,255,255,.94));
+  }
+  html[data-theme="dark"]{
+    --gl-panel:linear-gradient(145deg,rgba(30,42,54,.94),rgba(24,34,44,.9));
+    --gl-card:linear-gradient(145deg,rgba(32,44,56,.94),rgba(26,36,46,.9));
+    --gl-btn:linear-gradient(160deg,rgba(44,60,74,.95),rgba(34,48,60,.9));
+    --gl-modal:linear-gradient(150deg,rgba(28,38,50,.98),rgba(22,30,40,.96));
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html:root:root:root :is(.add-to-cart-btn,.more-btn,.btn-cart,.btn-wa,.cart-checkout,.alt-pill,.card):hover{transform:none}
+}
