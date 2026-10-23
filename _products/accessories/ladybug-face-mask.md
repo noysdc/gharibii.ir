@@ -17,7 +17,6 @@ auto_sig: "b=91f212e1;d=01f25676;g=df4737a3;t=28d06433"
 
 images:
   - /assets/images/products/accessories/ladybug-face-mask/ladybug-face-mask-1.webp
-
 ---
 
 <!-- AUTO:START -->
