@@ -19,6 +19,7 @@ options:
     values: ["آبی روشن"]
 
 tags: ["پیراهن پرنسسی سیندرلا", "لباس سیندرلا", "لباس سیندرلا دخترانه", "سیندرلا", "پرنسس سیندرلا", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=8c360d51;g=51364292;t=f5a04724"
 images:
   - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-1.webp
   - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-2.webp

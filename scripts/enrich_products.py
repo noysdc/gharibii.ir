@@ -3,20 +3,26 @@
 """
 enrich_products.py — به‌روزرسانی خودکار فایل‌های محصول (_products/**/*.md)
 
-کارهایی که انجام می‌دهد (فقط روی فایل‌های محصول):
-  1. عنوان (title)  : اگر برای slug در product_catalog.TITLES عنوان تعریف شده باشد.
-                      (محصول جدید با عنوان خودتان دست‌نخورده می‌ماند؛ برای ساخت خودکار از --retitle استفاده کنید.)
-  2. هشتگ‌ها (tags) : از نوع محصول + شخصیت + مخاطب + مناسبت‌ها ساخته می‌شود.
-  3. توضیحات (body) : فقط بین نشانگرهای  <!-- AUTO:START -->  و  <!-- AUTO:END -->  بازنویسی می‌شود.
-                      هر چیزی که بیرون از نشانگرها بنویسید (مثلاً «نکات مهم») هرگز دست نمی‌خورد.
-                      توضیحات دستی بلند (بیش از ۶۰۰ نویسه) و بدون نشانگر، دست‌نخورده می‌ماند.
-  4. سایز/رنگ (options): اسم گزینه‌ها یکدست و قالب سایزها یکسان می‌شود (عدد/سن‌ها دست‌نمی‌خورند).
-  5. description    : متای توضیحات برای گوگل (در front matter).
+چه چیزهایی ساخته می‌شود (فقط روی فایل‌های محصول):
+  1. عنوان (title)  : برای slugهایی که در product_catalog.TITLES عنوان دارند.
+  2. هشتگ‌ها (tags) : از نوع محصول + شخصیت + مخاطب؛ هشتگ‌های شخصی را در  extra_tags  بنویسید.
+  3. توضیحات (body) : فقط بین  <!-- AUTO:START -->  و  <!-- AUTO:END -->
+  4. سایز/رنگ (options): نام گزینه‌ها و قالب سایزها یکدست می‌شود.
+  5. description    : متای گوگل.
+
+ویرایش دستی شما هرگز پاک نمی‌شود:
+  • هر چیزی بیرون از نشانگرهای AUTO دست‌نخورده می‌ماند.
+  • اگر title / tags / description یا متن داخل بلوک AUTO را خودتان تغییر دهید، اسکریپت آن بخش را
+    تشخیص می‌دهد (با auto_sig در front matter) و دیگر بازنویسی نمی‌کند.
+  • قفل صریح:   lock: [title, tags, description, options, body]   یا   lock: all
+  • کل فایل را کنار بگذار:   auto: false
+  • بازگشت به حالت خودکار برای یک محصول:   --only مسیر --force
 
 اجرا:
-    python scripts/enrich_products.py --dry-run          # فقط گزارش، بدون نوشتن
+    python scripts/enrich_products.py --dry-run          # فقط گزارش
     python scripts/enrich_products.py                    # اعمال روی همه
     python scripts/enrich_products.py --only girls/snow-white-dress.md
+    python scripts/enrich_products.py --only girls/snow-white-dress.md --force
     python scripts/enrich_products.py --report scripts/report.csv
 """
 import argparse, csv, glob, hashlib, json, os, re, sys
@@ -212,29 +218,63 @@ def clean_legacy(body, old_title):
             out.append(t)
     return out
 
+def kind_group(kind):
+    return C.KIND_GROUP.get(kind["key"], "accessory")
+
 def build_auto_block(fm, slug, kind, char, options):
     gender = fm.get("gender", "unisex")
     ch = C.CHILD_FA.get(gender, "کودک شما")
     cname = char["name"] if char else "شخصیت‌های محبوب"
     world = char["world"] if char else C.GENERIC_WORLD
-    tpl = pick(kind["templates"], slug, "t")
-    occ = pick(kind["occ"], slug, "o")
-    intro = tpl.format(ch=ch, c=cname, w=world, k=kind["name"])
+    fmt = dict(ch=ch, c=cname, w=world, k=kind["name"])
+    grp = C.GROUP_TEXT[kind_group(kind)]
+
+    intro = pick(kind["templates"], slug, "t").format(**fmt)
     if not intro.endswith((".", "!", "؛", "؟")):
         intro += "."
+    occ = pick(kind["occ"], slug, "o")
+    detail = pick(grp["detail"], slug, "d").format(**fmt)
+    style = grp["style"].get(gender, grp["style"]["unisex"])
+    gift = pick(C.GIFT, slug, "g")
+
     specs = [f"- **نوع محصول:** {kind['name']}"]
     if char:
         specs.append(f"- **تم / شخصیت:** {char['name']}")
     specs.append(f"- **مناسب برای:** {C.AUDIENCE_FA.get(gender, 'کودکان')}")
+    has_size = False
     for o in options or []:
         label = {"اندازه": "سایزبندی", "سن و سال": "سن و سال", "رنگ": "رنگ‌بندی"}.get(o["name"], o["name"])
         specs.append(f"- **{label}:** {compact_values(o['values'])}")
-    lines = [START, "", intro, "", occ, "", "## مشخصات", ""] + specs + ["", END]
+        if o["name"] in ("اندازه", "سن و سال"):
+            has_size = True
+
+    guide = [style]
+    if has_size:
+        guide.insert(0, pick(C.SIZE_ADVICE, slug, "s"))
+    guide.append(gift)
+
+    lines = [START, "",
+             "## درباره‌ی این محصول", "", intro, "", occ + " " + detail, "",
+             "## مشخصات", ""] + specs + ["",
+             "## راهنمای انتخاب و ست کردن", ""] + [g + "\n" for g in guide] + [END]
     return "\n".join(lines)
 
 
 # ------------------------------------------------------------------ file i/o
 FM_RE = re.compile(r"^---\n(.*?)\n---\n?(.*)$", re.S)
+BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END), re.S)
+ALL_FIELDS = {"title", "tags", "description", "options", "body"}
+
+def h(s):
+    return hashlib.md5(s.encode("utf-8")).hexdigest()[:8]
+
+def parse_sig(v):
+    d = {}
+    for part in str(v or "").split(";"):
+        if "=" in part:
+            k, x = part.split("=", 1)
+            d[k.strip()] = x.strip()
+    return d
 
 def set_scalar(fm_text, key, value_line):
     pat = re.compile(rf"^{key}:.*\n", re.M)
@@ -248,6 +288,15 @@ def insert_before(fm_text, anchor_pat, text):
         return fm_text[:m.start()] + text + fm_text[m.start():]
     return fm_text + text
 
+def get_lock(fm):
+    v = fm.get("lock")
+    if v in (None, False, ""):
+        return set()
+    if isinstance(v, str):
+        v = [x.strip() for x in v.split(",")]
+    v = {str(x).strip() for x in v}
+    return set(ALL_FIELDS) if "all" in v else v & ALL_FIELDS
+
 def process(path, args):
     raw = open(path, encoding="utf-8", newline="").read()
     crlf = "\r\n" in raw
@@ -259,44 +308,117 @@ def process(path, args):
     fm = yaml.safe_load(fm_text) or {}
     slug = str(fm.get("slug") or os.path.splitext(os.path.basename(path))[0])
     old_title = str(fm.get("title", ""))
-    flags = []
+    flags, kept = [], []
 
-    if "(محصول نمونه)" in old_title or PLACEHOLDER_BODY in body or fm.get("needs_review") is True and "محصول نمونه" in old_title:
+    if fm.get("auto") is False:
+        return None, ["auto: false — دست نخورد"]
+    if "(محصول نمونه)" in old_title or PLACEHOLDER_BODY in body:
         return None, ["محصول نمونه/ناقص — دست نخورد"]
 
-    # ---- title / character override
+    lock = get_lock(fm)
+    sig = parse_sig(fm.get("auto_sig"))
+    new_sig = dict(sig)
+
+    def user_edited(key, current):
+        """اگر مقدار فعلی با آخرین مقدارِ تولیدشده‌ی اسکریپت فرق کند، یعنی خودتان ویرایش کرده‌اید."""
+        return (not args.force) and key in sig and h(current) != sig[key]
+
+    # ---- شخصیت و نوع
     forced = C.TITLES.get(slug)
     forced_char = None
     if isinstance(forced, tuple):
         forced, forced_char = forced
     char = char_by_key(forced_char) if forced_char else find_char(slug)
     kind = find_kind(slug)
-    new_title = old_title
+    gen_title = None
     if forced:
-        new_title = forced.replace(" | ", C.TITLE_SEP)
+        gen_title = forced.replace(" | ", C.TITLE_SEP)
     elif args.retitle:
         aud = C.AUDIENCE_FA.get(fm.get("gender", "unisex"), "")
-        new_title = f"{kind['name']} {char['name'] if char else ''} {C.TITLE_SEP.strip()} {aud}".replace("  ", " ").strip()
+        gen_title = f"{kind['name']} {char['name'] if char else ''} {C.TITLE_SEP.strip()} {aud}".replace("  ", " ").strip()
     elif not char:
         flags.append("شخصیت شناسایی نشد (توضیح عمومی)")
 
-    # ---- options
+    # ---- options (همیشه یکدست می‌شود، مگر قفل باشد)
     opts_old = fm.get("options")
-    opts_new, opts_changed = normalize_options(opts_old)
+    if "options" in lock:
+        opts_new, opts_changed = opts_old, False
+        kept.append("options(lock)")
+    else:
+        opts_new, opts_changed = normalize_options(opts_old)
+
+    # ---- title
+    new_title = old_title
+    if gen_title is not None:
+        if "title" in lock:
+            kept.append("title(lock)")
+        elif user_edited("t", old_title):
+            kept.append("title(ویرایش دستی)")
+        else:
+            new_title = gen_title
+            new_sig["t"] = h(gen_title)
+    title_for_text = new_title
 
     # ---- tags
-    new_tags = make_tags(fm, kind, char, new_title, fm.get("tags"))
+    extras = [str(x) for x in (fm.get("extra_tags") or [])]
+    cur_tags = [str(x) for x in (fm.get("tags") or [])]
+    gen_tags = make_tags(fm, kind, char, title_for_text, cur_tags)
+    gen_tags = gen_tags + [e for e in extras if e not in gen_tags]
+    new_tags = gen_tags
+    if "tags" in lock:
+        new_tags = cur_tags; kept.append("tags(lock)")
+    elif cur_tags and user_edited("g", "|".join(cur_tags)):
+        new_tags = cur_tags; kept.append("tags(ویرایش دستی)")
+    else:
+        new_sig["g"] = h("|".join(gen_tags))
+
+    # ---- description (متای گوگل)
+    cur_desc = str(fm.get("description", "") or "")
+    gen_desc = make_meta_description(fm, kind, char, title_for_text, slug)
+    new_desc = gen_desc
+    if "description" in lock:
+        new_desc = cur_desc; kept.append("description(lock)")
+    elif cur_desc and user_edited("d", cur_desc):
+        new_desc = cur_desc; kept.append("description(ویرایش دستی)")
+    else:
+        new_sig["d"] = h(gen_desc)
+
+    # ---- body
+    body_note = ""
+    new_body = body
+    if "body" in lock:
+        body_note = "قفل (lock)"; kept.append("body(lock)")
+    elif START in body and END in body:
+        cur_block = BLOCK_RE.search(body).group(0)
+        if user_edited("b", cur_block):
+            body_note = "ویرایش دستیِ داخل بلوک حفظ شد"; kept.append("body(ویرایش دستی)")
+        else:
+            auto = build_auto_block(fm, slug, kind, char, opts_new)
+            new_body = BLOCK_RE.sub(lambda m: auto, body, count=1)
+            new_sig["b"] = h(auto)
+            body_note = "بازنویسی بین نشانگر"
+    elif "auto_sig" in fm or len(body.strip()) >= MANUAL_BODY_MIN:
+        body_note = "توضیح دستی حفظ شد"
+    else:
+        legacy = clean_legacy(body, old_title)
+        auto = build_auto_block(fm, slug, kind, char, opts_new)
+        new_body = "\n" + auto + "\n"
+        if legacy:
+            new_body += "\n## نکات مهم\n\n" + "\n".join(f"- {x}" for x in legacy) + "\n"
+        new_sig["b"] = h(auto)
+        body_note = "ساخته شد" + (f" + {len(legacy)} نکته‌ی قبلی" if legacy else "")
 
     # ---- front matter text edits
     fmt = fm_text
-    fmt = set_scalar(fmt, "title", f"title: {dq(new_title)}") or fmt
+    if new_title != old_title:
+        fmt = set_scalar(fmt, "title", f"title: {dq(new_title)}") or fmt
     tag_line = f"tags: [{', '.join(dq(x) for x in new_tags)}]\n"
     tag_pat = re.compile(r"^tags:[^\n]*\n(?:[ \t]+-[^\n]*\n)*", re.M)
     if tag_pat.search(fmt):
         fmt = tag_pat.sub(lambda m: tag_line, fmt, count=1)
     else:
         fmt = insert_before(fmt, r"^images:", tag_line)
-    desc_line = f"description: {dq(make_meta_description(fm, kind, char, new_title, slug))}\n"
+    desc_line = f"description: {dq(new_desc)}\n"
     desc_pat = re.compile(r"^description:[^\n]*\n", re.M)
     if desc_pat.search(fmt):
         fmt = desc_pat.sub(lambda m: desc_line, fmt, count=1)
@@ -305,48 +427,38 @@ def process(path, args):
     if opts_old and opts_changed:
         opt_pat = re.compile(r"^options:\n(?:[ \t]+[^\n]*\n)+", re.M)
         fmt = opt_pat.sub(lambda m: options_block(opts_new), fmt, count=1)
-
-    # ---- body
-    body_note = ""
-    if START in body and END in body:
-        auto = build_auto_block(fm, slug, kind, char, opts_new)
-        new_body = re.sub(re.escape(START) + r".*?" + re.escape(END), lambda m: auto, body, flags=re.S)
-        body_note = "بازنویسی بین نشانگر"
-    elif len(body.strip()) >= MANUAL_BODY_MIN:
-        new_body = body
-        body_note = "توضیح دستی حفظ شد"
+    sig_line = 'auto_sig: "' + ";".join(f"{k}={v}" for k, v in sorted(new_sig.items())) + '"\n'
+    sig_pat = re.compile(r"^auto_sig:[^\n]*\n", re.M)
+    if sig_pat.search(fmt):
+        fmt = sig_pat.sub(lambda m: sig_line, fmt, count=1)
     else:
-        legacy = clean_legacy(body, old_title)
-        auto = build_auto_block(fm, slug, kind, char, opts_new)
-        new_body = "\n" + auto + "\n"
-        if legacy:
-            new_body += "\n## نکات مهم\n\n" + "\n".join(f"- {x}" for x in legacy) + "\n"
-        body_note = "ساخته شد" + (f" + {len(legacy)} نکته‌ی قبلی" if legacy else "")
+        fmt = insert_before(fmt, r"^images:", sig_line)
 
     head = "---\n" + fmt.rstrip("\n") + "\n---\n"
-    out = head + ("\n" + body.lstrip("\n") if body_note == "توضیح دستی حفظ شد" else new_body)
+    out = head + ("\n" + body.lstrip("\n") if body_note in ("توضیح دستی حفظ شد", "قفل (lock)") else new_body)
     if crlf:
         out = out.replace("\n", "\r\n")
 
     info = dict(slug=slug, old_title=old_title, new_title=new_title,
-                old_tags=len(fm.get("tags") or []), new_tags=len(new_tags),
+                old_tags=len(cur_tags), new_tags=len(new_tags),
                 options_changed=opts_changed, body=body_note, char=char["name"] if char else "",
-                kind=kind["name"], flags="; ".join(flags))
+                kind=kind["name"], kept_manual=", ".join(kept), flags="; ".join(flags))
     return (out, info), flags
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default="_products")
-    ap.add_argument("--only")
+    ap.add_argument("--only", help="فقط یک فایل، مثل girls/snow-white-dress.md")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--retitle", action="store_true", help="برای محصولاتی که عنوان دستی ندارند هم عنوان بسازد")
+    ap.add_argument("--force", action="store_true", help="ویرایش‌های دستی را نادیده بگیر و دوباره تولید کن (lock حفظ می‌شود)")
     ap.add_argument("--report")
     args = ap.parse_args()
 
     files = sorted(glob.glob(os.path.join(args.dir, "**", "*.md"), recursive=True))
     if args.only:
-        files = [f for f in files if f.replace("\\", "/").endswith(args.only)]
+        files = [f for f in files if f.replace("\\", "/").endswith(args.only.replace("\\", "/"))]
     rows, skipped = [], []
     for f in files:
         res, flags = process(f, args)
@@ -361,10 +473,15 @@ def main():
     print(f"{'[dry-run] ' if args.dry_run else ''}پردازش‌شده: {len(rows)} | ردشده: {len(skipped)}")
     for f, fl in skipped:
         print("  - رد شد:", f, fl)
+    kept_rows = [r for r in rows if r["kept_manual"]]
+    if kept_rows:
+        print(f"ویرایش دستی/قفل حفظ شد در {len(kept_rows)} فایل:")
+        for r in kept_rows:
+            print("  -", r["slug"], "→", r["kept_manual"])
     if args.report:
         with open(args.report, "w", encoding="utf-8-sig", newline="") as fh:
             w = csv.DictWriter(fh, fieldnames=["file", "slug", "old_title", "new_title", "old_tags", "new_tags",
-                                               "options_changed", "body", "char", "kind", "flags"])
+                                               "options_changed", "body", "char", "kind", "kept_manual", "flags"])
             w.writeheader(); w.writerows(rows)
         print("گزارش:", args.report)
 

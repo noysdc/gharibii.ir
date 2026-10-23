@@ -1,14 +1,31 @@
-# اجرای خودکار: هر بار فایل محصول (.md) یا اسکریپت تغییر کرد، توضیحات/هشتگ‌ها/سایزها را به‌روز می‌کند.
-name: Enrich products
+# دکمه‌ی اجرای دستی:  Actions  ←  Enrich products (manual)  ←  Run workflow
+name: Enrich products (manual)
 on:
-  push:
-    branches: [main]
-    paths:
-      - "_products/**/*.md"
-      - "scripts/product_catalog.py"
-      - "scripts/enrich_products.py"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "حالت اجرا — preview: فقط گزارش | apply: اعمال و کامیت"
+        type: choice
+        options: [preview, apply]
+        default: preview
+      product:
+        description: "فقط یک محصول (اختیاری)، مثال: girls/snow-white-dress.md — خالی = همه"
+        type: string
+        required: false
+        default: ""
+      force:
+        description: "ویرایش‌های دستی را نادیده بگیر و دوباره تولید کن (فقط با تعیین محصول توصیه می‌شود)"
+        type: boolean
+        default: false
+      retitle:
+        description: "برای محصولاتی که عنوان دستی ندارند هم عنوان بساز"
+        type: boolean
+        default: false
 permissions:
   contents: write
+concurrency:
+  group: enrich-products
+  cancel-in-progress: false
 jobs:
   enrich:
     runs-on: ubuntu-latest
@@ -18,11 +35,32 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - run: python scripts/enrich_products.py
+      - name: Run enrich script
+        env:
+          MODE: ${{ inputs.mode }}
+          PRODUCT: ${{ inputs.product }}
+          FORCE: ${{ inputs.force }}
+          RETITLE: ${{ inputs.retitle }}
+        run: |
+          ARGS=(--report scripts/report.csv)
+          if [ "$MODE" != "apply" ]; then ARGS+=(--dry-run); fi
+          if [ -n "$PRODUCT" ]; then
+            if ! [[ "$PRODUCT" =~ ^[A-Za-z0-9_./-]+$ ]]; then echo "مسیر محصول نامعتبر است"; exit 1; fi
+            ARGS+=(--only "$PRODUCT")
+          fi
+          if [ "$FORCE" = "true" ]; then ARGS+=(--force); fi
+          if [ "$RETITLE" = "true" ]; then ARGS+=(--retitle); fi
+          python scripts/enrich_products.py "${ARGS[@]}"
+      - name: Summary
+        run: python scripts/summarize_report.py scripts/report.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: products-report
+          path: scripts/report.csv
       - name: Commit changes
+        if: ${{ inputs.mode == 'apply' }}
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add -A _products
-          git diff --cached --quiet || git commit -m "به‌روزرسانی خودکار توضیحات و هشتگ محصولات"
-          git push
+          git diff --cached --quiet && echo "تغییری وجود ندارد" || (git commit -m "به‌روزرسانی محصولات (اجرای دستی)" && git push)

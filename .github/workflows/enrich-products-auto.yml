@@ -1,0 +1,29 @@
+# اختیاری: بعد از هر push که فایل محصول عوض کند، خودکار اجرا می‌شود.
+# اگر فقط اجرای دستی می‌خواهید، این فایل را حذف کنید.
+name: Enrich products (auto on push)
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_products/**/*.md"
+permissions:
+  contents: write
+concurrency:
+  group: enrich-products
+  cancel-in-progress: false
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python scripts/enrich_products.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A _products
+          git diff --cached --quiet || (git commit -m "به‌روزرسانی خودکار محصولات" && git push)

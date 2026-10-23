@@ -45,15 +45,19 @@ echo ==============================================
 echo   1  Preview ALL products (no files changed)
 echo   2  Apply to ALL products
 echo   3  ONE product (preview first, then apply)
-echo   4  Exit
+echo   4  ONE product - FORCE (discard my manual edits)
+echo   5  Exit
+echo ==============================================
+echo   Your manual edits are kept automatically.
 echo ==============================================
 set "CH="
-set /p CH=Choose 1-4: 
+set /p CH=Choose 1-5: 
 
 if "%CH%"=="1" goto preview_all
 if "%CH%"=="2" goto apply_all
 if "%CH%"=="3" goto one
-if "%CH%"=="4" goto end
+if "%CH%"=="4" goto one_force
+if "%CH%"=="5" goto end
 echo Invalid choice.
 goto menu
 
@@ -89,6 +93,24 @@ set "OK="
 set /p OK=Apply to this product? Type y to apply: 
 if /i not "%OK%"=="y" goto menu
 %PY% scripts\enrich_products.py --only "%P%"
+echo.
+echo Done.
+pause
+goto menu
+
+:one_force
+echo.
+echo FORCE rebuilds the title, tags, description and AUTO block of ONE product
+echo and discards your manual edits in those parts. Text outside the AUTO block stays.
+echo Example: girls\snow-white-dress.md
+set "P="
+set /p P=Product file: 
+if "%P%"=="" goto menu
+set "P=%P:\=/%"
+set "OK="
+set /p OK=Type y to force-rebuild this product: 
+if /i not "%OK%"=="y" goto menu
+%PY% scripts\enrich_products.py --only "%P%" --force
 echo.
 echo Done.
 pause

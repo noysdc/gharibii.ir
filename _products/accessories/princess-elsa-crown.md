@@ -17,6 +17,7 @@ options:
     values: ["نقره‌ای آبی"]
 
 tags: ["تاج پرنسسی السا", "تل تاج السا", "تل تاج السا دخترانه", "السا", "فروزن", "السا و آنا", "تل تاج", "تاج پرنسسی", "تاج دخترانه", "هدیه کودک", "اکسسوری تم", "فروشگاه غریبی کیش"]
+auto_sig: "d=d85c7453;g=a60fb8f0;t=e664a597"
 images:
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-1.webp
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-2.webp

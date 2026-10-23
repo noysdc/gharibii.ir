@@ -19,6 +19,7 @@ options:
     values: ["آبی روشن", "آبی نفتی"]
 
 tags: ["لباس فانتزی السا", "لباس السا", "لباس السا دخترانه", "السا", "فروزن", "السا و آنا", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش"]
+auto_sig: "d=9a492b2f;g=9afdd751;t=3a4807df"
 images:
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-1.webp
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-2.webp

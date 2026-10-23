@@ -19,6 +19,7 @@ options:
     values: ["آبی روشن"]
 
 tags: ["پیراهن هاوایی پسرانه", "پیراهن پسرانه", "پیراهن تابستانی", "لباس پسرانه", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=467bb386;g=09b571db;t=a1881a37"
 images:
   - /assets/images/products/boys/hawaiian-shirt/hawaiian-shirt-1.webp
   - /assets/images/products/boys/hawaiian-shirt/hawaiian-shirt-2.webp

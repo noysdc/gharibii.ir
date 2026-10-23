@@ -7,7 +7,7 @@ category: girls
 gender: girls
 price: "4,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/girls/sleeping-beauty-dress-2/"]
+images_dirs: ["/assets/images/products/sleeping-beauty-dress-2/"]
 webzi_id: 45341
 old_slug: "لباس-پرنسسی-زیبای-خفته"
 webzi_images: ["b668e6b196ce4ca998cc0b36425ff9d9.JPG", "6d955da59f8d4a1f8a9a858bbe960874.JPG", "f9a1f2b2ac2f484791f9e8960cc2a18c.JPG", "08203e701a9c484da1b6d13d935073d1.JPG", "53eda202021147029a3df333fc9a950d.JPG", "5bc7896e09f5459a8e64e133392f56c3.png"]
@@ -15,34 +15,16 @@ options:
   - name: "اندازه"
     values: ["100", "110", "120", "130", "140"]
 tags: ["پیراهن پرنسس اورورا", "لباس زیبای خفته", "لباس زیبای خفته دخترانه", "زیبای خفته", "پرنسس اورورا", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
-
-images:
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-1.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-2.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-3.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-4.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-5.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-6.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-7.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-8.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-9.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-10.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-11.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-12.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-13.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-14.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-15.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-16.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-17.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-18.webp
-  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-19.webp
+auto_sig: "b=cf72bf04;d=0cf81650;g=ae6e6b06;t=775fee3c"
 ---
 
 <!-- AUTO:START -->
 
+## درباره‌ی این محصول
+
 دختر کوچولوی شما با این لباس الهام‌گرفته از زیبای خفته، وارد دنیای افسانه‌ای زیبای خفته می‌شود! طراحی شخصیتی آن را به انتخابی ویژه برای تولد و مهمانی تبدیل می‌کند.
 
-مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی.
+مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی. لباس‌های شخصیتی فقط یک پوشش نیستند؛ کودک را وارد قصه می‌کنند. لباس با تم زیبای خفته به دختر کوچولوی شما فرصت می‌دهد شخصیت محبوبش را با تمام جزئیات تجربه کند و بازی‌هایش را پرانرژی‌تر و خلاقانه‌تر ادامه دهد.
 
 ## مشخصات
 
@@ -50,5 +32,13 @@ images:
 - **تم / شخصیت:** زیبای خفته
 - **مناسب برای:** دخترانه
 - **سایزبندی:** 100، 110، 120، 130، 140
+
+## راهنمای انتخاب و ست کردن
+
+برای انتخاب سایز، به قد و اندازه‌ی واقعی کودک توجه کنید و فقط به سن او اکتفا نکنید؛ اندازه‌ی کودکان هم‌سن می‌تواند متفاوت باشد. اگر بین دو سایز مردد بودید، پیش از ثبت سفارش از طریق واتساپ مشورت بگیرید.
+
+برای تکمیل استایل می‌توانید این لباس را با تل‌تاج، دستکش، عصای جادویی یا ست اکسسوری پرنسسی از بخش اکسسوری‌ها و تاج و عصای فروشگاه ست کنید.
+
+این محصول هدیه‌ای دوست‌داشتنی برای تولد، عید یا هر مناسبت خاص است؛ هدیه‌ای که کودک با دیدنش ذوق می‌کند.
 
 <!-- AUTO:END -->

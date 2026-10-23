@@ -19,6 +19,7 @@ options:
     values: ["صورتی", "طلایی", "قرمز"]
 
 tags: ["ست اکسسوری پرنسسی", "ست اکسسوری آنا", "ست اکسسوری آنا دخترانه", "آنا", "فروزن", "السا و آنا", "اکسسوری دخترانه", "ست تاج و عصا", "هدیه کودک", "اکسسوری تم", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=1fd75138;g=342059ec;t=56b94ced"
 images:
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-1.webp
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-2.webp
