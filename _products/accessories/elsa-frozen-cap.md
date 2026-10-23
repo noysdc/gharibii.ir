@@ -24,7 +24,7 @@ images:
   - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-5.webp
   - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-6.webp
   - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-7.webp
-   - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-8.webp
+  - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-8.webp
 ---
 
 <!-- AUTO:START -->
