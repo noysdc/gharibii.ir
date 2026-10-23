@@ -18,7 +18,6 @@ auto_sig: "b=7ef4b947;d=1689f9d5;g=48a1c681;t=64b79ea7"
 images:
   - /assets/images/products/accessories/iron-man-face-mask/iron-man-face-mask-1.webp
   - /assets/images/products/accessories/iron-man-face-mask/iron-man-face-mask-2.webp
-
 ---
 
 <!-- AUTO:START -->
