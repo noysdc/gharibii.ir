@@ -1,4 +1,22 @@
+# --- Jekyll ---
 _site/
 .jekyll-cache/
 .sass-cache/
 Gemfile.lock
+
+# --- عکس‌های خام و خروجی‌های موقت (باعث دوتایی شدن عکس‌ها می‌شدند) ---
+assets/images/raw/
+assets/images/products_resized/
+_dupes_trash/
+
+# --- گزارش‌های تولیدشده توسط اسکریپت‌ها ---
+scripts/link_report.csv
+scripts/check_report.csv
+scripts/check_report.md
+
+# --- فایل‌های سیستمی ویندوز / پایتون ---
+desktop.ini
+Thumbs.db
+.DS_Store
+__pycache__/
+*.pyc
