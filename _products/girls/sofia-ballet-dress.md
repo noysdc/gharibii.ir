@@ -17,6 +17,11 @@ auto_sig: "b=3c82280d;d=a15e0185;g=24ea245f;t=6785bbb1"
 images:
   - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-1.webp
   - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-2.webp
+  - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-3.webp
+  - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-4.webp
+  - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-5.webp
+  - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-6.webp
+  - /assets/images/products/girls/sofia-ballet-dress/sofia-ballet-dress-7.webp
 ---
 
 <!-- AUTO:START -->

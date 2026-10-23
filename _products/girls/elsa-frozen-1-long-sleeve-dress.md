@@ -7,7 +7,7 @@ category: girls
 gender: girls
 price: "3,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/elsa-frozen-1-long-sleeve-dress/"]
+images_dirs: ["/assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/"]
 webzi_id: 45343
 old_slug: "پبراهن-مجلسی-دیزنی-السا-1فروزن-آستین-بلند"
 webzi_images: ["e2515e1ee40844358a1c0d6d2d7572c4.jpg", "5d80f1829d7944ccadefabd8de4c876d.jpg", "6285983aabe84186b51d88804bf0e7ba.png"]
@@ -16,6 +16,21 @@ options:
     values: ["110 - مناسب 3 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 7 تا 9 سال", "140 - مناسب 9 تا 10 سال", "150 - مناسب 11 تا 12 سال"]
 tags: ["پیراهن مجلسی السا فروزن ۱", "لباس السا", "لباس السا دخترانه", "السا", "فروزن", "السا و آنا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "کریسمس", "لباس کریسمس دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=71f9adcb;d=ed79cbc2;g=8049710e;t=f0e6c2db"
+
+images:
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-1.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-2.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-3.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-4.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-5.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-6.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-7.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-8.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-9.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-10.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-11.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-12.webp
+  - /assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/elsa-frozen-1-long-sleeve-dress-13.webp
 ---
 
 <!-- AUTO:START -->

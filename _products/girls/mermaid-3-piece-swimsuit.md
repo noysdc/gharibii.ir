@@ -30,6 +30,19 @@ images:
   - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-10.webp
   - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-11.webp
   - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-12.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-13.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-14.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-15.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-16.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-17.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-18.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-19.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-20.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-21.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-22.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-23.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-24.webp
+  - /assets/images/products/girls/mermaid-3-piece-swimsuit/mermaid-3-piece-swimsuit-25.webp
 ---
 
 <!-- AUTO:START -->
