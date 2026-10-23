@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "لباس پرنسسی زیبای خفته | دخترانه"
+title: "لباس پرنسسی اورورا  | لباس زیبای خفته"
 description: "لباس پرنسسی زیبای خفته؛ انتخابی عالی برای تولد، هالووین و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "sleeping-beauty-dress"
 category: girls
@@ -44,6 +44,25 @@ images:
   - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-28.webp
   - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-29.webp
   - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-30.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-31.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-32.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-33.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-34.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-35.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-36.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-37.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-38.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-39.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-40.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-41.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-42.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-43.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-44.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-45.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-46.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-47.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-48.webp
+  - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-49.webp
 ---
 
 <!-- AUTO:START -->

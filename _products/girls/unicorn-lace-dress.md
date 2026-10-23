@@ -7,7 +7,7 @@ category: girls
 gender: girls
 price: "1,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/unicorn-lace-dress/"]
+images_dirs: ["/assets/images/products/girls/unicorn-lace-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: unicorn-lace-dress
 webzi_id: 45429
 old_slug: "پیرهن-توری-تکشاخ-شخصیتی-فروشگاه-غریبی-کیش"
@@ -18,11 +18,17 @@ options:
   - name: "اندازه"
     values: ["100 - مناسب 3 تا 4 سال", "110 - مناسب 5 تا 6 سال", "120 - مناسب 6 تا 7 سال", "130 - مناسب 7 تا 8 سال", "140 - مناسب 8 تا 9 سال"]
 tags: ["پیراهن توری تکشاخ", "پیراهن توری تکشاخ دخترانه", "تکشاخ", "یونیکورن", "اسب تک شاخ", "پیراهن توری دخترانه", "لباس توری", "لباس مجلسی دخترانه", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
+
+images:
+  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-1.webp
+  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-2.webp
+  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-3.webp
+  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-4.webp
 ---
 
 <!-- AUTO:START -->
 
-جزئیات توری و تم تکشاخ این پیراهن را به انتخابی دلنشین برای دختر کوچولوی شما تبدیل کرده است.
+جزئیات توری و تم تکشاخ این پیراهن را به انتخابی دلنشین و رویایی برای دختر کوچولوی شما تبدیل کرده است.
 
 مناسب جشن تولد، مهمانی و عکاسی.
 

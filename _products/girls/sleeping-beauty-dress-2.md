@@ -1,13 +1,13 @@
 ---
 layout: product
-title: "پیراهن پرنسس اورورا | زیبای خفته"
+title: "پیراهن پرنسس اورورا | لباس زیبای خفته آستین بلند"
 description: "پیراهن پرنسس اورورا با طراحی الهام‌گرفته از زیبای خفته. مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "sleeping-beauty-dress-2"
 category: girls
 gender: girls
 price: "4,998,000"
 currency: IRT
-images_dirs: ["/assets/images/products/sleeping-beauty-dress-2/"]
+images_dirs: ["/assets/images/products/girls/sleeping-beauty-dress-2/"]
 webzi_id: 45341
 old_slug: "لباس-پرنسسی-زیبای-خفته"
 webzi_images: ["b668e6b196ce4ca998cc0b36425ff9d9.JPG", "6d955da59f8d4a1f8a9a858bbe960874.JPG", "f9a1f2b2ac2f484791f9e8960cc2a18c.JPG", "08203e701a9c484da1b6d13d935073d1.JPG", "53eda202021147029a3df333fc9a950d.JPG", "5bc7896e09f5459a8e64e133392f56c3.png"]
@@ -15,6 +15,27 @@ options:
   - name: "اندازه"
     values: ["100", "110", "120", "130", "140"]
 tags: ["پیراهن پرنسس اورورا", "لباس زیبای خفته", "لباس زیبای خفته دخترانه", "زیبای خفته", "پرنسس اورورا", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
+
+images:
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-1.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-2.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-3.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-4.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-5.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-6.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-7.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-8.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-9.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-10.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-11.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-12.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-13.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-14.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-15.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-16.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-17.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-18.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-19.webp
 ---
 
 <!-- AUTO:START -->
