@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "ناخن مصنوعی | چسب‌دار کودک"
+title: "ناخن مصنوعی | چسب‌دار"
 description: "ناخن مصنوعی السا؛ مناسب مهمانی، تولد و بازی‌های پرنسسی. سفارش از فروشگاه غریبی کیش."
 slug: "fake-nails"
 category: accessories
