@@ -17,7 +17,6 @@ auto_sig: "b=19f5beaa;d=919beed7;g=0ef2bffe;t=f65df14f"
 
 images:
   - /assets/images/products/accessories/hulk-face-mask/hulk-face-mask-1.webp
-
 ---
 
 <!-- AUTO:START -->
