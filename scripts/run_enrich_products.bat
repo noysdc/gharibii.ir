@@ -47,19 +47,21 @@ echo   2  Apply to ALL products
 echo   3  ONE product (preview first, then apply)
 echo   4  ONE product - FORCE (discard my manual edits)
 echo   5  Apply to ALL - FORCE (rebuild everything, discard ALL manual edits)
-echo   6  Exit
+echo   6  CHECK problems: broken images, duplicates (report only)
+echo   7  Exit
 echo ==============================================
 echo   Your manual edits are kept automatically.
 echo ==============================================
 set "CH="
-set /p CH=Choose 1-6: 
+set /p CH=Choose 1-7: 
 
 if "%CH%"=="1" goto preview_all
 if "%CH%"=="2" goto apply_all
 if "%CH%"=="3" goto one
 if "%CH%"=="4" goto one_force
 if "%CH%"=="5" goto force_all
-if "%CH%"=="6" goto end
+if "%CH%"=="6" goto check
+if "%CH%"=="7" goto end
 echo Invalid choice.
 goto menu
 
@@ -129,6 +131,18 @@ if /i not "%OK%"=="FORCE" goto menu
 %PY% scripts\enrich_products.py --force --report scripts\report.csv
 echo.
 echo Done. Check changes in GitHub Desktop or with git diff, then commit and push.
+pause
+goto menu
+
+:check
+echo.
+echo Checking images, duplicates and links. Nothing will be changed.
+%PY% scripts\check_products.py
+echo.
+echo Report: scripts\check_report.md  (open in Notepad)  and  scripts\check_report.csv  (open in Excel)
+set "OK="
+set /p OK=Open the report now? Type y: 
+if /i "%OK%"=="y" start "" notepad "scripts\check_report.md"
 pause
 goto menu
 

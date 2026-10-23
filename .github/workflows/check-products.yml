@@ -1,0 +1,37 @@
+# دکمه‌ی بررسی مشکلات:  Actions  ←  Check products (report only)  ←  Run workflow
+# فقط گزارش می‌دهد؛ هیچ فایلی تغییر نمی‌کند و چیزی کامیت نمی‌شود.
+name: Check products (report only)
+on:
+  workflow_dispatch:
+    inputs:
+      online:
+        description: "لینک‌های http(s) داخل متن محصولات را آنلاین هم بررسی کن"
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml pillow
+      - name: Run checks
+        env:
+          ONLINE: ${{ inputs.online }}
+        run: |
+          ARGS=()
+          if [ "$ONLINE" = "true" ]; then ARGS+=(--online); fi
+          python scripts/check_products.py "${ARGS[@]}"
+      - name: Summary
+        run: |
+          head -c 900000 scripts/check_report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: check-report
+          path: |
+            scripts/check_report.md
+            scripts/check_report.csv
