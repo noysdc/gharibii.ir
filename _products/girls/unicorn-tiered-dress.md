@@ -2,7 +2,7 @@
 layout: product
 title: "پیراهن توری تکشاخ | با دامن طبقه ای (پله ای)"
 description: "پیراهن توری تکشاخ؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
-slug: "unicorn-lace-dress"
+slug: "unicorn-tiered-dress"
 category: girls
 gender: girls
 price: "2,598,000"
