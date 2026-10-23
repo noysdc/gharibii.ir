@@ -19,7 +19,7 @@ auto_sig: "b=b0a64ca6;d=ed71613c;g=13ea84d0;t=f417a2d2"
 
 images:
   - /assets/images/products/accessories/minnie-mouse-cap/minnie-mouse-cap-1.webp
-     - /assets/images/products/accessories/minnie-mouse-cap/minnie-mouse-cap-1.webp
+     - /assets/images/products/accessories/minnie-mouse-cap/minnie-mouse-cap-2.webp
 ---
 
 <!-- AUTO:START -->
