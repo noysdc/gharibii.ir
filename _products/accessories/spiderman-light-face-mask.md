@@ -14,6 +14,11 @@ old_slug: "ماسک-صورت-شخصیتی-اسپایدرمن-چراغدار-فر
 webzi_images: ["48337a068f324992a7ac1d117196a96a.jpg", "f6b7f62ca35a448e93aff0e5202f0584.jpg", "c0d60767cb214450b1839062f371e57f.PNG", "d53853602cc54bebae87dabd55979ea3.JPG"]
 tags: ["ماسک صورت اسپایدرمن", "ماسک صورت اسپایدرمن پسرانه", "اسپایدرمن", "مرد عنکبوتی", "اسپایدرمن پسرانه", "ماسک صورت", "ماسک شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=9040f970;d=6fd10a6f;g=6dfcf9f0;t=01256d2a"
+
+images:
+  - /assets/images/products/accessories/spiderman-light-face-mask/spiderman-light-face-mask-1.webp
+  - /assets/images/products/accessories/spiderman-light-face-mask/spiderman-light-face-mask-2.webp
+
 ---
 
 <!-- AUTO:START -->
