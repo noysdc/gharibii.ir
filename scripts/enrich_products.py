@@ -33,7 +33,7 @@ import product_catalog as C
 
 START, END = "<!-- AUTO:START -->", "<!-- AUTO:END -->"
 MANUAL_BODY_MIN = 600           # بدنه‌ی دستیِ بلندتر از این، دست نمی‌خورد
-MAX_TAGS = 12
+MAX_TAGS = 18          # شامل ۲ هشتگ فروشگاه
 
 NUM_WORDS = {"یک": 1, "دو": 2, "سه": 3, "چهار": 4, "پنج": 5, "شش": 6, "هفت": 7, "هشت": 8,
              "نه": 9, "ده": 10, "یازده": 11, "دوازده": 12, "سیزده": 13, "چهارده": 14,
@@ -161,32 +161,115 @@ def compact_values(vals):
 def title_core(title):
     return re.split(r"\s*[|\-–]\s*", title)[0].strip() if "|" in title else title.strip()
 
-def make_tags(fm, kind, char, title, old_tags):
+def kind_group(kind):
+    return C.KIND_GROUP.get(kind["key"], "accessory")
+
+def occasions_for(slug, kind, char, fm):
+    """مناسبت‌های مرتبط با محصول (حداکثر ۶) بر اساس نوع، شخصیت و مخاطب."""
+    g = kind_group(kind)
+    k = kind["key"]
+    gender = fm.get("gender", "unisex")
+    ck = char["key"].split("|")[0] if char else ""
+    hallo = ck in C.HALLOWEEN_CHARS
+    winter = ck in C.WINTER_CHARS
+
+    if g == "swim":
+        occ = ["pool", "travel", "photo", "gift"]
+    elif k.startswith("ballet-shoes"):
+        occ = ["ballet", "stage", "gift"]
+    elif g == "carry":
+        occ = ["daily", "travel", "gift"]
+    elif g == "daily":
+        if k.startswith("skirt") and "ballet" in slug:
+            occ = ["ballet", "stage", "party", "photo", "gift"]
+        elif k.startswith("skirt"):
+            occ = ["party", "nowruz", "photo", "gift"]
+        elif k.startswith("shirt"):
+            occ = ["travel", "party", "photo", "gift"]
+        else:
+            occ = ["daily", "party", "gift"]
+    elif g == "costume":
+        if k.startswith("gymnastics"):
+            occ = ["ballet", "stage", "gift"]
+        elif k.startswith("bodysuit"):
+            occ = ["birthday", "photo", "party", "gift"]
+        elif k.startswith("muscle") or k.startswith("jumpsuit"):
+            occ = ["birthday", "halloween", "roleplay", "party", "photo"]
+        elif "comfort-set" in k and "comfort" in slug:
+            occ = ["daily", "travel", "gift"]
+        elif "harry-potter" in slug and k.startswith("moana-set"):
+            occ = ["birthday", "halloween", "stage", "roleplay", "photo"]
+        elif k.startswith("ballet"):
+            occ = ["ballet", "stage", "birthday", "photo", "party"]
+            if hallo: occ.insert(2, "halloween")
+        elif k.startswith(("formal", "lace")):
+            occ = (["birthday", "halloween", "party", "photo", "roleplay"] if hallo
+                   else ["birthday", "party", "nowruz", "wedding", "photo", "yalda"])
+        elif k.startswith("long-dress") and "linen" in slug:
+            occ = ["party", "nowruz", "travel", "photo"]
+        else:
+            occ = (["birthday", "halloween", "party", "photo", "roleplay"] if hallo
+                   else ["birthday", "party", "nowruz", "photo", "roleplay"])
+        if winter and "christmas" not in occ:
+            occ.insert(2, "christmas")
+        occ.append("gift")
+    else:  # accessory
+        if k.startswith(("face-mask", "cape-mask", "wings", "web-shooter")) or hallo:
+            occ = ["birthday", "halloween", "roleplay", "photo", "party"]
+        elif k.startswith(("crown", "hair-clip", "wig", "tinsel", "accessory-set", "gloves", "necklace", "nails")):
+            occ = ["birthday", "party", "nowruz", "photo", "roleplay"]
+        elif k.startswith("wand"):
+            occ = ["birthday", "halloween", "roleplay", "photo"]
+        elif k.startswith(("cap", "hat", "moving-ear")):
+            occ = ["daily", "party", "birthday"]
+        elif k.startswith("keychain"):
+            occ = ["gift", "daily", "birthday"]
+        else:
+            occ = ["birthday", "party", "photo", "roleplay"]
+        occ.append("gift")
+    seen, out = set(), []
+    for o in occ:
+        if o not in seen:
+            seen.add(o); out.append(o)
+    # gift همیشه آخر
+    if "gift" in out:
+        out.remove("gift"); out.append("gift")
+    return out[:6]
+
+def make_tags(fm, kind, char, title, old_tags, slug=""):
     gender = fm.get("gender", "unisex")
     aud = C.AUDIENCE_FA.get(gender, "")
-    cat = fm.get("category", "")
-    tags = []
+    g = kind_group(kind)
     core = title_core(title)
-    tags.append(core)
+    tags = [core]
     if char:
-        tags.append(f"{kind['name']} {char['name']}")
-        tags.append(f"{kind['name']} {char['name']} {aud}".strip())
+        tags += [f"{kind['name']} {char['name']}", f"{kind['name']} {char['name']} {aud}".strip()]
         tags += char["tags"][:3]
     else:
         tags.append(f"{kind['name']} {aud}".strip())
-    tags += kind["tags"][:3]
-    if cat == "accessories" or cat == "crown-wand":
-        tags += ["هدیه کودک", "اکسسوری تم"]
-    if cat in ("girls", "boys"):
-        tags += ["تم تولد", "لباس شخصیتی کودک"]
-    tags += [t for t in (old_tags or []) if t in C.KEEP_TAGS]
-    tags += C.STORE_TAGS
-    seen, out = set(), []
+    tags += kind["tags"][:2]
+    # مناسبت‌ها: هشتگ اصلی هر مناسبت + هشتگ ترکیبی («لباس هالووین پسرانه»)
+    for o in occasions_for(slug, kind, char, fm):
+        d = C.OCCASIONS[o]
+        tags.append(d["tags"][0])
+        if d["combo"] and g == "costume":
+            tags.append(f"لباس {d['combo']} {aud}".strip())
+        elif d["combo"] and g == "accessory":
+            tags.append(f"اکسسوری {d['combo']}")
+    for o in occasions_for(slug, kind, char, fm):
+        tags += C.OCCASIONS[o]["tags"][1:2]
+    kept = [t for t in (old_tags or []) if t in C.KEEP_TAGS]
+    seen, body = set(), []
     for t in tags:
         t = re.sub(r"\s+", " ", str(t)).strip()
         if t and t not in seen:
-            seen.add(t); out.append(t)
-    return out[:MAX_TAGS]
+            seen.add(t); body.append(t)
+    cap = MAX_TAGS - len(C.STORE_TAGS)
+    missing = [t for t in kept if t not in body[:cap]]
+    body = body[:cap - len(missing)]
+    out = body + [t for t in kept if t not in body]
+    out += [t for t in C.STORE_TAGS if t not in out]
+    return out
 
 def make_meta_description(fm, kind, char, title, slug=""):
     core = title_core(title)
@@ -218,24 +301,26 @@ def clean_legacy(body, old_title):
             out.append(t)
     return out
 
-def kind_group(kind):
-    return C.KIND_GROUP.get(kind["key"], "accessory")
-
 def build_auto_block(fm, slug, kind, char, options):
     gender = fm.get("gender", "unisex")
     ch = C.CHILD_FA.get(gender, "کودک شما")
     cname = char["name"] if char else "شخصیت‌های محبوب"
     world = char["world"] if char else C.GENERIC_WORLD
     fmt = dict(ch=ch, c=cname, w=world, k=kind["name"])
-    grp = C.GROUP_TEXT[kind_group(kind)]
+    gname = kind_group(kind)
+    grp = C.GROUP_TEXT[gname]
 
     intro = pick(kind["templates"], slug, "t").format(**fmt)
     if not intro.endswith((".", "!", "؛", "؟")):
         intro += "."
-    occ = pick(kind["occ"], slug, "o")
+    occ_sentence = pick(kind["occ"], slug, "o")
     detail = pick(grp["detail"], slug, "d").format(**fmt)
+    extra = pick(C.GROUP_EXTRA[gname], slug, "x").format(**fmt)
     style = grp["style"].get(gender, grp["style"]["unisex"])
     gift = pick(C.GIFT, slug, "g")
+
+    occ_keys = occasions_for(slug, kind, char, fm)
+    occ_lines = [C.OCCASIONS[o]["text"].format(**fmt) for o in occ_keys if C.OCCASIONS[o]["text"]]
 
     specs = [f"- **نوع محصول:** {kind['name']}"]
     if char:
@@ -251,10 +336,11 @@ def build_auto_block(fm, slug, kind, char, options):
     guide = [style]
     if has_size:
         guide.insert(0, pick(C.SIZE_ADVICE, slug, "s"))
-    guide.append(gift)
+    guide += [gift, C.ORDER_LINE]
 
     lines = [START, "",
-             "## درباره‌ی این محصول", "", intro, "", occ + " " + detail, "",
+             "## درباره‌ی این محصول", "", intro, "", occ_sentence + " " + detail, "", extra, "",
+             "## مناسب چه مناسبت‌هایی؟", ""] + [f"- {x}" for x in occ_lines] + ["",
              "## مشخصات", ""] + specs + ["",
              "## راهنمای انتخاب و ست کردن", ""] + [g + "\n" for g in guide] + [END]
     return "\n".join(lines)
@@ -362,7 +448,7 @@ def process(path, args):
     # ---- tags
     extras = [str(x) for x in (fm.get("extra_tags") or [])]
     cur_tags = [str(x) for x in (fm.get("tags") or [])]
-    gen_tags = make_tags(fm, kind, char, title_for_text, cur_tags)
+    gen_tags = make_tags(fm, kind, char, title_for_text, cur_tags, slug)
     gen_tags = gen_tags + [e for e in extras if e not in gen_tags]
     new_tags = gen_tags
     if "tags" in lock:

@@ -46,18 +46,20 @@ echo   1  Preview ALL products (no files changed)
 echo   2  Apply to ALL products
 echo   3  ONE product (preview first, then apply)
 echo   4  ONE product - FORCE (discard my manual edits)
-echo   5  Exit
+echo   5  Apply to ALL - FORCE (rebuild everything, discard ALL manual edits)
+echo   6  Exit
 echo ==============================================
 echo   Your manual edits are kept automatically.
 echo ==============================================
 set "CH="
-set /p CH=Choose 1-5: 
+set /p CH=Choose 1-6: 
 
 if "%CH%"=="1" goto preview_all
 if "%CH%"=="2" goto apply_all
 if "%CH%"=="3" goto one
 if "%CH%"=="4" goto one_force
-if "%CH%"=="5" goto end
+if "%CH%"=="5" goto force_all
+if "%CH%"=="6" goto end
 echo Invalid choice.
 goto menu
 
@@ -113,6 +115,20 @@ if /i not "%OK%"=="y" goto menu
 %PY% scripts\enrich_products.py --only "%P%" --force
 echo.
 echo Done.
+pause
+goto menu
+
+:force_all
+echo.
+echo WARNING: this rebuilds title, tags, description and the AUTO block of EVERY product
+echo and DISCARDS your manual edits in those parts. Text outside the AUTO block stays.
+echo Make sure you have a git commit first.
+set "OK="
+set /p OK=Type FORCE to continue: 
+if /i not "%OK%"=="FORCE" goto menu
+%PY% scripts\enrich_products.py --force --report scripts\report.csv
+echo.
+echo Done. Check changes in GitHub Desktop or with git diff, then commit and push.
 pause
 goto menu
 

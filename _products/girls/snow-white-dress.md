@@ -11,9 +11,9 @@ images_dirs: ["/assets/images/products/girls/snow-white-dress/"]
 webzi_id: 45332
 old_slug: "لباس-دخترانه-سفید-برفی"
 webzi_images: ["962a49ed55e84bb7abccf28b50289987.JPG", "49bd39e5673843a5aad81a844559aac4.jpg", "ce43dbfef4f2414cb24d4f15c6c725cc.jpg", "b0bbc7ff6e844468b0e15270b0d7c328.jpg", "4bd27f04238047449b4d21f8b0c923d7.jpeg", "aa33c5433fa545bfabcb6eb00d91a0fb.png"]
-tags: ["لباس پرنسسی سفید برفی", "لباس سفید برفی", "لباس سفید برفی دخترانه", "سفید برفی", "پرنسس سفید برفی", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "کریسمس", "فروش ویژه"]
+tags: ["لباس پرنسسی سفید برفی", "لباس سفید برفی", "لباس سفید برفی دخترانه", "سفید برفی", "پرنسس سفید برفی", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "کریسمس", "لباس کریسمس دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "فروش ویژه", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "d=c462b22d;g=9c045ea5;t=9ac1bd06"
+auto_sig: "d=c462b22d;g=ecd7d373;t=9ac1bd06"
 images:
   - /assets/images/products/girls/snow-white-dress/snow-white-dress-1.webp
   - /assets/images/products/girls/snow-white-dress/snow-white-dress-2.webp
