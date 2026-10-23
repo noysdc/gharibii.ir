@@ -18,7 +18,6 @@ auto_sig: "b=44fbfa30;d=1adf3edb;g=44c43eb1;t=1cf416c0"
 images:
 
   - /assets/images/products/accessories/batman-face-mask/batman-face-mask-1.webp
-
 ---
 
 <!-- AUTO:START -->
