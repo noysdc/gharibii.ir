@@ -21,29 +21,7 @@ images:
   - /assets/images/products/accessories/character-cap/character-cap-4.webp
   - /assets/images/products/accessories/character-cap/character-cap-5.webp
   - /assets/images/products/accessories/character-cap/character-cap-6.webp
-  - /assets/images/products/accessories/character-cap/character-cap-7.webp
-  - /assets/images/products/accessories/character-cap/character-cap-8.webp
-  - /assets/images/products/accessories/character-cap/character-cap-9.webp
-  - /assets/images/products/accessories/character-cap/character-cap-10.webp
-  - /assets/images/products/accessories/character-cap/character-cap-11.webp
-  - /assets/images/products/accessories/character-cap/character-cap-12.webp
-  - /assets/images/products/accessories/character-cap/character-cap-13.webp
-  - /assets/images/products/accessories/character-cap/character-cap-14.webp
-  - /assets/images/products/accessories/character-cap/character-cap-15.webp
-  - /assets/images/products/accessories/character-cap/character-cap-16.webp
-  - /assets/images/products/accessories/character-cap/character-cap-17.webp
-  - /assets/images/products/accessories/character-cap/character-cap-18.webp
-  - /assets/images/products/accessories/character-cap/character-cap-19.webp
-  - /assets/images/products/accessories/character-cap/character-cap-20.webp
-  - /assets/images/products/accessories/character-cap/character-cap-21.webp
-  - /assets/images/products/accessories/character-cap/character-cap-22.webp
-  - /assets/images/products/accessories/character-cap/character-cap-23.webp
-  - /assets/images/products/accessories/character-cap/character-cap-24.webp
-  - /assets/images/products/accessories/character-cap/character-cap-25.webp
-  - /assets/images/products/accessories/character-cap/character-cap-26.webp
-  - /assets/images/products/accessories/character-cap/character-cap-27.webp
-  - /assets/images/products/accessories/character-cap/character-cap-28.webp
-  - /assets/images/products/accessories/character-cap/character-cap-29.webp
+
 ---
 
 <!-- AUTO:START -->

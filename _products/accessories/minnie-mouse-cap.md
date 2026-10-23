@@ -16,6 +16,10 @@ options:
     values: ["صورتی تیره"]
 tags: ["کلاه کپ مینی موس", "کلاه کپ مینی موس دخترانه و پسرانه", "مینی موس", "میکی موس", "میکی ماوس", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=b0a64ca6;d=ed71613c;g=13ea84d0;t=f417a2d2"
+
+images:
+  - /assets/images/products/accessories/minnie-mouse-cap/minnie-mouse-cap-1.webp
+     - /assets/images/products/accessories/minnie-mouse-cap/minnie-mouse-cap-1.webp
 ---
 
 <!-- AUTO:START -->

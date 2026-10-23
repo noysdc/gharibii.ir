@@ -16,6 +16,15 @@ options:
     values: ["صورتی", "صورتی تیره", "صورتی روشن"]
 tags: ["کلاه کپ السا فروزن", "کلاه کپ السا", "کلاه کپ السا دخترانه و پسرانه", "السا", "فروزن", "السا و آنا", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=33152327;d=5cc5e4ef;g=386ce656;t=a4d6b74b"
+images:
+  - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-1.webp
+     - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-2.webp
+  - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-3.webp
+     - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-4.webp
+  - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-5.webp
+     - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-6.webp
+  - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-7.webp
+     - /assets/images/products/accessories/elsa-frozen-cap/elsa-frozen-cap-8.webp
 ---
 
 <!-- AUTO:START -->

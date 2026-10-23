@@ -16,6 +16,11 @@ options:
     values: ["قرمز"]
 tags: ["کلاه کپ آیرون من", "کلاه کپ آیرون من پسرانه", "آیرون من", "مرد آهنی", "اونجرز", "کلاه کپ", "کلاه کپ شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=a57e8ef7;d=13673600;g=e0c48a40;t=c9704afc"
+
+images:
+  - /assets/images/products/accessories/iron-man-cap/iron-man-cap-1.webp
+  - /assets/images/products/accessories/iron-man-cap/iron-man-cap-2.webp
+
 ---
 
 <!-- AUTO:START -->

@@ -16,6 +16,10 @@ options:
     values: ["صورتی روشن", "صورتی تیره"]
 tags: ["کلاه کپ لول", "کلاه کپ لول دخترانه و پسرانه", "لول", "عروسک لول", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=21e5b6e1;d=d90f5a78;g=fcc01cb2;t=9e7b759b"
+images:
+  - /assets/images/products/accessories/lol-cap/lol-cap-1.webp
+  - /assets/images/products/accessories/lol-cap/lol-cap-2.webp
+
 ---
 
 <!-- AUTO:START -->

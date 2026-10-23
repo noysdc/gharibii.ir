@@ -13,6 +13,15 @@ old_slug: "کلاه-کپ-دخترانه-سگها-ی-نگهبان-شخصیتی-ف
 webzi_images: ["237364e0198f4e639f46bd0ad01a3a07.JPG"]
 tags: ["کلاه کپ سگ‌های نگهبان", "کلاه کپ سگ‌های نگهبان دخترانه و پسرانه", "سگ های نگهبان", "پاو پاترول", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=abe05412;d=abb3dda6;g=f547f001;t=5170cae8"
+images:
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-1.webp
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-2.webp
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-3.webp
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-4.webp
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-5.webp
+  - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-6.webp
+
+
 ---
 
 <!-- AUTO:START -->
