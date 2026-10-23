@@ -14,8 +14,11 @@ old_slug: "ماسک-صورت-شخصیتی-قهرمانی-بت-من-فروشگا�
 webzi_images: ["c18ea1b2432f41b199ab06242e3cae66.PNG"]
 tags: ["ماسک صورت بتمن", "ماسک صورت بتمن پسرانه", "بتمن", "بت من", "مرد خفاشی", "ماسک صورت", "ماسک شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=44fbfa30;d=1adf3edb;g=44c43eb1;t=1cf416c0"
+
 images:
-  - /assets/images/products/accessories/batman-mask/batman-mask-1.webp
+
+  - /assets/images/products/accessories/batman-face-mask/batman-face-mask-1.webp
+
 ---
 
 <!-- AUTO:START -->
