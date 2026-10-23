@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "تاپ دخترانه نخی وارداتی"
+title: "تاپ نخی دخترانه | وارداتی"
+description: "تاپ نخی دخترانه؛ مناسب استایل روزمره و ست کردن با دامن و شلوار. سفارش از فروشگاه غریبی کیش."
 slug: "girls-cotton-top"
 category: girls
 gender: girls
@@ -10,7 +11,7 @@ images_dirs: ["/assets/images/products/girls/girls-cotton-top/"]
 webzi_id: 45348
 old_slug: "تاپ-دخترانه-نخی-وارداتی"
 webzi_images: ["c06ed08d483543fabe0961d5f99d27fb.jpg", "6eb3c406fe0a4db2899d5ccfcccfdcb1.jpg", "646ee4f113f84c22aad603c75b7e8c1a.jpg", "cc93c09731904379b33e01ce0a7a9051.jpg", "15f8319551554e9cafaf74996dcce323.jpg", "3ea8c4348aaf43e1830afa36b32288d1.jpg", "99e24f0ce4614329895294896ae15ab8.jpg", "6baba5df9036470187fa2ba30e764c4b.jpg", "34578e9f5d304113aa33faae14a0b55d.jpg"]
-tags: ["دیزنی", "تم", "تولد", "رقص", "مجلسی", "مرکزتجاری کیش", "دخترانه", "تاپ", "تاپ گره ایی دخترانه", "نخی", "وارداتی"]
+tags: ["تاپ نخی دخترانه", "تاپ دخترانه", "تاپ نخی", "لباس دخترانه", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
 
 images:
   - /assets/images/products/girls/girls-cotton-top/girls-cotton-top-1.webp
@@ -23,4 +24,15 @@ images:
   - /assets/images/products/girls/girls-cotton-top/girls-cotton-top-8.webp
 ---
 
+<!-- AUTO:START -->
 
+تاپ دخترانه‌ای برای هر روز؛ ساده و دوست‌داشتنی و مناسب دختر کوچولوی شما.
+
+مناسب استایل روزمره و ست کردن با دامن و شلوار.
+
+## مشخصات
+
+- **نوع محصول:** تاپ
+- **مناسب برای:** دخترانه
+
+<!-- AUTO:END -->

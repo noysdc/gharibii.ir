@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "پیراهن هاوایی پسرانه طرح ساحلی"
+title: "پیراهن هاوایی پسرانه | طرح ساحلی"
+description: "پیراهن هاوایی پسرانه؛ مناسب سفر، مهمانی و استایل تابستانی. سفارش از فروشگاه غریبی کیش."
 seo_keywords: ["پیراهن هاوایی پسرانه", "پیراهن طرح ساحلی", "پیراهن آستین کوتاه پسرانه", "لباس تابستانی پسرانه", "پیراهن گلدار پسرانه", "پیراهن تفریحی پسرانه", "پیراهن نخی پسرانه"]
 folder: "hawaiian-shirt"
 category: boys
@@ -12,11 +13,12 @@ images_dirs: ["/assets/images/products/boys/hawaiian-shirt/"]
 needs_review: true
 
 options:
-  - name: "سایز"
+  - name: "اندازه"
     values: ["2Y", "3Y", "4Y", "5Y", "6Y", "7Y", "8Y", "10Y", "12Y"]
   - name: "رنگ"
     values: ["آبی روشن"]
 
+tags: ["پیراهن هاوایی پسرانه", "پیراهن پسرانه", "پیراهن تابستانی", "لباس پسرانه", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
 images:
   - /assets/images/products/boys/hawaiian-shirt/hawaiian-shirt-1.webp
   - /assets/images/products/boys/hawaiian-shirt/hawaiian-shirt-2.webp

@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "ست اکسسوری پرنسسی دخترانه (تاج، عصا و دستکش)"
+title: "ست اکسسوری پرنسسی | تاج، عصا و دستکش"
+description: "ست اکسسوری پرنسسی با طراحی الهام‌گرفته از آنا. مناسب جشن تولد، مهمانی و ست کردن با لباس‌های پرنسسی. سفارش از فروشگاه غریبی کیش."
 seo_keywords: ["ست اکسسوری پرنسسی", "تاج پرنسسی دخترانه", "عصای جادویی دخترانه", "دستکش پرنسسی", "اکسسوری فانتزی دخترانه", "ست تاج و عصا", "لوازم جانبی لباس پرنسسی", "خرید اکسسوری کودک"]
 folder: "princess-anna-accessory-set"
 category: accessories
@@ -17,6 +18,7 @@ options:
   - name: "رنگ"
     values: ["صورتی", "طلایی", "قرمز"]
 
+tags: ["ست اکسسوری پرنسسی", "ست اکسسوری آنا", "ست اکسسوری آنا دخترانه", "آنا", "فروزن", "السا و آنا", "اکسسوری دخترانه", "ست تاج و عصا", "هدیه کودک", "اکسسوری تم", "فروشگاه غریبی کیش", "کیش"]
 images:
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-1.webp
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-2.webp

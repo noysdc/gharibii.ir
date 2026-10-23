@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "ست اکسسوری پرنسسی دخترانه"
+title: "ست اکسسوری پرنسسی | تاج، عصا، دستکش و زیورآلات"
+description: "ست اکسسوری پرنسسی؛ مناسب جشن تولد، مهمانی و ست کردن با لباس‌های پرنسسی. سفارش از فروشگاه غریبی کیش."
 slug: "princess-accessory-set"
 category: accessories
 gender: unisex
@@ -14,6 +15,7 @@ options:
   - name: "رنگ"
     values: ["صورتی", "آبی", "بنفش", "زرد"]
 
+tags: ["ست اکسسوری پرنسسی", "ست اکسسوری دخترانه و پسرانه", "اکسسوری دخترانه", "ست تاج و عصا", "هدیه کودک", "اکسسوری تم", "فروشگاه غریبی کیش", "کیش"]
 images:
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-1.webp
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-2.webp
@@ -62,4 +64,20 @@ images:
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-45.webp
 ---
 
-اقلام همراه : دستکش تاج عصا گردن بند گوشواره دست بند انگشتر
+<!-- AUTO:START -->
+
+همه چیز برای ساختن یک ظاهر پرنسسی کامل، در یک ست هماهنگ برای کودک شما.
+
+مناسب جشن تولد، مهمانی و ست کردن با لباس‌های پرنسسی.
+
+## مشخصات
+
+- **نوع محصول:** ست اکسسوری
+- **مناسب برای:** دخترانه و پسرانه
+- **رنگ‌بندی:** صورتی، آبی، بنفش، زرد
+
+<!-- AUTO:END -->
+
+## نکات مهم
+
+- اقلام همراه : دستکش تاج عصا گردن بند گوشواره دست بند انگشتر

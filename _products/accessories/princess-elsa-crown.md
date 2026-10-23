@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "تاج پرنسسی السا (طرح یخی)"
+title: "تاج پرنسسی السا | طرح یخی"
+description: "تاج پرنسسی السا؛ ست کردن با لباس‌های پرنسسی و تم‌دار. سفارش از فروشگاه غریبی کیش."
 seo_keywords: ["تاج السا", "تاج پرنسسی دخترانه", "تاج یخی", "اکسسوری السا", "تاج فانتزی دخترانه", "تاج نگین دار", "خرید تاج کودک", "لوازم جانبی لباس السا"]
 folder: "princess-elsa-crown"
 category: accessories
@@ -15,6 +16,7 @@ options:
   - name: "رنگ"
     values: ["نقره‌ای آبی"]
 
+tags: ["تاج پرنسسی السا", "تل تاج السا", "تل تاج السا دخترانه", "السا", "فروزن", "السا و آنا", "تل تاج", "تاج پرنسسی", "تاج دخترانه", "هدیه کودک", "اکسسوری تم", "فروشگاه غریبی کیش"]
 images:
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-1.webp
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-2.webp

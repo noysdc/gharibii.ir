@@ -1,6 +1,7 @@
 ---
 layout: product
-title: "لباس فانتزی دخترانه طرح السا (مجموعه یخی)"
+title: "لباس فانتزی السا | مجموعه یخی"
+description: "لباس فانتزی السا؛ انتخابی عالی برای تولد، هالووین و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 seo_keywords: ["لباس السا دخترانه", "لباس فانتزی دخترانه", "لباس یخی دخترانه", "لباس پرنسسی دخترانه", "لباس مجلسی دخترانه", "لباس تابستانی دخترانه", "لباس السا و آنا", "خرید لباس فانتزی کودک"]
 folder: "elsa-frozen-new-collection"
 category: girls
@@ -12,11 +13,12 @@ images_dirs: ["/assets/images/products/girls/elsa-frozen-new-collection/"]
 needs_review: true
 
 options:
-  - name: "سایز"
+  - name: "اندازه"
     values: ["2Y", "3Y", "4Y", "5Y", "6Y", "7Y", "8Y", "10Y", "12Y"]
   - name: "رنگ"
     values: ["آبی روشن", "آبی نفتی"]
 
+tags: ["لباس فانتزی السا", "لباس السا", "لباس السا دخترانه", "السا", "فروزن", "السا و آنا", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش"]
 images:
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-1.webp
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-2.webp
