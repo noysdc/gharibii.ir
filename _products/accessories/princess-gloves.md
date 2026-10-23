@@ -32,6 +32,16 @@ images:
   - /assets/images/products/accessories/princess-gloves/princess-gloves-14.webp
   - /assets/images/products/accessories/princess-gloves/princess-gloves-15.webp
   - /assets/images/products/accessories/princess-gloves/princess-gloves-16.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-17.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-18.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-19.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-20.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-21.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-22.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-23.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-24.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-25.webp
+  - /assets/images/products/accessories/princess-gloves/princess-gloves-26.webp
 ---
 
 
