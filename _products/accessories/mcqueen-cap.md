@@ -15,7 +15,6 @@ tags: ["کلاه کپ مک‌کوئین", "کلاه کپ مک‌کوئین پس�
 auto_sig: "b=cdd9bd45;d=1fcc5b8f;g=2b96620b;t=3319d209"
 images:
   - /assets/images/products/accessories/mcqueen-cap/mcqueen-cap-1.webp
-
 ---
 
 <!-- AUTO:START -->

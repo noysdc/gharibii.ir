@@ -19,7 +19,6 @@ auto_sig: "b=21e5b6e1;d=d90f5a78;g=fcc01cb2;t=9e7b759b"
 images:
   - /assets/images/products/accessories/lol-cap/lol-cap-1.webp
   - /assets/images/products/accessories/lol-cap/lol-cap-2.webp
-
 ---
 
 <!-- AUTO:START -->

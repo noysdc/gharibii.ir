@@ -20,7 +20,6 @@ auto_sig: "b=a57e8ef7;d=13673600;g=e0c48a40;t=c9704afc"
 images:
   - /assets/images/products/accessories/iron-man-cap/iron-man-cap-1.webp
   - /assets/images/products/accessories/iron-man-cap/iron-man-cap-2.webp
-
 ---
 
 <!-- AUTO:START -->
