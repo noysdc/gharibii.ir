@@ -31,6 +31,35 @@ images:
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-14.webp
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-15.webp
   - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-16.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-17.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-18.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-19.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-20.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-21.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-22.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-23.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-24.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-25.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-26.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-27.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-28.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-29.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-30.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-31.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-32.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-33.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-34.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-35.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-36.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-37.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-38.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-39.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-40.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-41.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-42.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-43.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-44.webp
+  - /assets/images/products/accessories/princess-accessory-set/princess-accessory-set-45.webp
 ---
 
 اقلام همراه : دستکش تاج عصا گردن بند گوشواره دست بند انگشتر
