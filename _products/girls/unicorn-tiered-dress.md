@@ -13,6 +13,7 @@ options:
   - name: "رنگ"
     values: ["آبی چندرنگ (طرح یونیکورن)"]
 tags: ["پیراهن توری تکشاخ", "لباس تکشاخ", "لباس تکشاخ دخترانه", "تکشاخ", "یونیکورن", "اسب تک شاخ", "لباس شخصیتی", "لباس کودک", "لباس تم", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش"]
+auto_sig: "d=b2d53341;g=6be2a46b"
 images:
   - /assets/images/products/girls/unicorn-tiered-dress/unicorn-tiered-dress-1.webp
   - /assets/images/products/girls/unicorn-tiered-dress/unicorn-tiered-dress-2.webp
