@@ -22,7 +22,6 @@ tags: ["پیراهن توری تکشاخ", "پیراهن توری تکشاخ د�
 images:
   - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-1.webp
   - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-2.webp
-
 ---
 
 <!-- AUTO:START -->
