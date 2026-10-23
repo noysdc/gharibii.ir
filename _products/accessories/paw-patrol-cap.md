@@ -20,8 +20,6 @@ images:
   - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-4.webp
   - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-5.webp
   - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-6.webp
-
-
 ---
 
 <!-- AUTO:START -->
