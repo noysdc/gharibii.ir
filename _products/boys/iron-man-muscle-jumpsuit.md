@@ -15,7 +15,6 @@ tags: ["سرهمی عضلانی آیرون من", "سرهمی عضلانی آی�
 
 images:
   - /assets/images/products/boys/iron-man-muscle-jumpsuit/iron-man-muscle-jumpsuit-1.webp
-
 ---
 
 <!-- AUTO:START -->
