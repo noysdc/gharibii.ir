@@ -16,6 +16,9 @@ options:
     values: ["بنفش", "مشکی"]
 tags: ["تل تاج جادوگری هالووین", "کلاه جادوگر", "کلاه جادوگر دخترانه و پسرانه", "جادوگر", "هالووین", "کلاه جادوگری", "کلاه شخصیتی", "کلاه تم", "تم تولد", "اکسسوری تولد", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=2c7c4a87;d=ade6ba6b;g=e297ac27;t=b318570e"
+images:
+  - /assets/images/products/accessories/halloween-witch-hat-2/halloween-witch-hat-2-1.webp
+  - /assets/images/products/accessories/halloween-witch-hat-2/halloween-witch-hat-2-2.webp
 ---
 
 <!-- AUTO:START -->

@@ -15,9 +15,6 @@ tags: ["کلاه جادوگری هالووین", "کلاه جادوگر", "کل�
 
 auto_sig: "b=436d9a0f;d=473ae4d0;g=805bde0d;t=e6658afb"
 images:
-
-  - /assets/images/products/accessories/halloween-witch-hat/halloween-witch-hat-3.webp
-  - /assets/images/products/accessories/halloween-witch-hat/halloween-witch-hat-4.webp
   - /assets/images/products/accessories/halloween-witch-hat/halloween-witch-hat-5.webp
   - /assets/images/products/accessories/halloween-witch-hat/halloween-witch-hat-6.webp
   - /assets/images/products/accessories/halloween-witch-hat/halloween-witch-hat-7.webp
