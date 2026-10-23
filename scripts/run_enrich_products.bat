@@ -2,36 +2,57 @@
 setlocal
 chcp 65001 >nul
 set PYTHONIOENCODING=utf-8
+title Gharibii - product updater
 cd /d "%~dp0"
 
+echo Working folder: %CD%
+echo.
+
 if not exist "_products" (
-  echo [ERROR] Folder _products not found. Put this file in the repo root, next to _products and scripts.
+  echo [ERROR] Folder _products not found in the folder above.
+  echo         Put this .bat file in the repo ROOT, next to the folders _products and scripts.
   pause
   exit /b 1
 )
 if not exist "scripts\enrich_products.py" (
   echo [ERROR] scripts\enrich_products.py not found.
+  echo         Copy the scripts folder from the zip into the repo root.
   pause
   exit /b 1
 )
 
+rem ---- find a Python that really runs (the Microsoft Store stub is skipped)
 set "PY="
-where python >nul 2>&1 && set "PY=python"
+python -c "import sys" >nul 2>&1
+if not errorlevel 1 set "PY=python"
 if not defined PY (
-  where py >nul 2>&1 && set "PY=py -3"
+  py -3 -c "import sys" >nul 2>&1
+  if not errorlevel 1 set "PY=py -3"
 )
 if not defined PY (
-  echo [ERROR] Python is not installed. Install it from python.org and tick "Add Python to PATH".
+  python3 -c "import sys" >nul 2>&1
+  if not errorlevel 1 set "PY=python3"
+)
+if not defined PY (
+  echo [ERROR] No working Python found.
+  echo         Install Python from https://www.python.org/downloads/
+  echo         and TICK "Add python.exe to PATH" in the installer.
+  echo         If Python is installed, turn OFF the Windows "App execution aliases" for python.exe.
   pause
   exit /b 1
 )
+echo Using: %PY%
+%PY% --version
+echo.
 
 %PY% -c "import yaml" >nul 2>&1
 if errorlevel 1 (
   echo Installing pyyaml, one time only...
-  %PY% -m pip install pyyaml
+  %PY% -m pip install --user pyyaml
+  %PY% -c "import yaml" >nul 2>&1
   if errorlevel 1 (
-    echo [ERROR] Could not install pyyaml.
+    echo [ERROR] Could not install pyyaml. Run this by hand and send me the message:
+    echo         %PY% -m pip install pyyaml
     pause
     exit /b 1
   )
@@ -46,7 +67,7 @@ echo   1  Preview ALL products (no files changed)
 echo   2  Apply to ALL products
 echo   3  ONE product (preview first, then apply)
 echo   4  ONE product - FORCE (discard my manual edits)
-echo   5  Apply to ALL - FORCE (rebuild everything, discard ALL manual edits)
+echo   5  Apply to ALL - FORCE (rebuild everything)
 echo   6  CHECK problems: broken images, duplicates (report only)
 echo   7  Exit
 echo ==============================================
@@ -67,6 +88,7 @@ goto menu
 
 :preview_all
 %PY% scripts\enrich_products.py --dry-run --report scripts\report.csv
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
 echo Report saved: scripts\report.csv
 pause
@@ -79,6 +101,7 @@ set "OK="
 set /p OK=Type y to continue: 
 if /i not "%OK%"=="y" goto menu
 %PY% scripts\enrich_products.py --report scripts\report.csv
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
 echo Done. Check changes in GitHub Desktop or with git diff, then commit and push.
 pause
@@ -92,6 +115,7 @@ set /p P=Product file:
 if "%P%"=="" goto menu
 set "P=%P:\=/%"
 %PY% scripts\enrich_products.py --only "%P%" --dry-run
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
 set "OK="
 set /p OK=Apply to this product? Type y to apply: 
@@ -104,7 +128,7 @@ goto menu
 
 :one_force
 echo.
-echo FORCE rebuilds the title, tags, description and AUTO block of ONE product
+echo FORCE rebuilds title, tags, description and the AUTO block of ONE product
 echo and discards your manual edits in those parts. Text outside the AUTO block stays.
 echo Example: girls\snow-white-dress.md
 set "P="
@@ -115,6 +139,7 @@ set "OK="
 set /p OK=Type y to force-rebuild this product: 
 if /i not "%OK%"=="y" goto menu
 %PY% scripts\enrich_products.py --only "%P%" --force
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
 echo Done.
 pause
@@ -129,6 +154,7 @@ set "OK="
 set /p OK=Type FORCE to continue: 
 if /i not "%OK%"=="FORCE" goto menu
 %PY% scripts\enrich_products.py --force --report scripts\report.csv
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
 echo Done. Check changes in GitHub Desktop or with git diff, then commit and push.
 pause
@@ -136,10 +162,16 @@ goto menu
 
 :check
 echo.
+if not exist "scripts\check_products.py" (
+  echo [ERROR] scripts\check_products.py not found. Copy the scripts folder from the newest zip.
+  pause
+  goto menu
+)
 echo Checking images, duplicates and links. Nothing will be changed.
 %PY% scripts\check_products.py
+if errorlevel 1 echo [ERROR] The script failed. Copy the text above and send it to me.
 echo.
-echo Report: scripts\check_report.md  (open in Notepad)  and  scripts\check_report.csv  (open in Excel)
+echo Report: scripts\check_report.md  and  scripts\check_report.csv
 set "OK="
 set /p OK=Open the report now? Type y: 
 if /i "%OK%"=="y" start "" notepad "scripts\check_report.md"
