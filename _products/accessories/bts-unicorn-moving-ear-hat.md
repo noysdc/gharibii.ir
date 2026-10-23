@@ -19,6 +19,7 @@ tags: ["کلاه پمپی تکشاخ بی‌تی‌اس", "کلاه پمپی گ�
 auto_sig: "b=fb08e696;d=61759340;g=ccf47722;t=d18fcc1d"
 
 images:
+
   - /assets/images/products/accessories/bts-unicorn-moving-ear-hat/bts-unicorn-moving-ear-hat-1.webp
 
 ---
