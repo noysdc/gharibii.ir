@@ -20,10 +20,8 @@ auto_sig: "b=1d581810;d=17d48a7c;g=18e511d0;t=44e2d1c5"
 images:
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-1.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-2.webp
-  - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-3.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-4.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-5.webp
-  - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-6.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-7.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-8.webp
   - /assets/images/products/boys/spiderman-black-muscle-jumpsuit/spiderman-black-muscle-jumpsuit-9.webp

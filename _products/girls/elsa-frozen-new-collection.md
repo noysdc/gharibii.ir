@@ -21,10 +21,6 @@ options:
 tags: ["لباس فانتزی السا", "لباس السا", "لباس السا دخترانه", "السا", "فروزن", "السا و آنا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "کریسمس", "لباس کریسمس دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "d=bf11bc0f;g=e03ec583;t=3a4807df"
 images:
-  - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-1.webp
-  - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-2.webp
-  - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-3.webp
-  - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-4.webp
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-5.webp
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-6.webp
   - /assets/images/products/girls/elsa-frozen-new-collection/elsa-frozen-new-collection-7.webp

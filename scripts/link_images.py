@@ -20,7 +20,12 @@ link_images.py — لینک‌کردن دقیق عکس‌ها به فایل‌ه
 
 خروجی: scripts/link_report.csv
 """
-import argparse, csv, hashlib, os, re, shutil, sys
+import argparse
+import csv
+import hashlib
+import re
+import shutil
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -30,7 +35,7 @@ IMG_ROOT = ROOT / "assets" / "images" / "products"
 URL_PREFIX = "/assets/images/products"
 IMG_EXT = {".webp", ".jpg", ".jpeg", ".png", ".gif", ".avif"}
 
-# پوشه‌ی md با پوشه‌ی عکس گاهی نام متفاوت دارد (در پروژه‌ی شما هر دو وجود دارند)
+# پوشه‌ی md با پوشه‌ی عکس گاهی نام متفاوت دارد
 CATEGORY_ALIASES = {
     "wands-crowns": ["wands-crowns", "crown-wand"],
     "crown-wand": ["crown-wand", "wands-crowns"],
@@ -52,8 +57,11 @@ def md5(path):
 
 def list_images(folder):
     """عکس‌های اصلی پوشه؛ thumbnail ها (-t.webp) و نسخه‌ی غیر-webp تکراری حذف می‌شوند."""
-    files = [p for p in folder.iterdir()
-             if p.is_file() and p.suffix.lower() in IMG_EXT and not p.stem.endswith("-t")]
+    files = [
+        p
+        for p in folder.iterdir()
+        if p.is_file() and p.suffix.lower() in IMG_EXT and not p.stem.endswith("-t")
+    ]
     webp_stems = {p.stem for p in files if p.suffix.lower() == ".webp"}
     files = [p for p in files if p.suffix.lower() == ".webp" or p.stem not in webp_stems]
     return sorted(files, key=lambda p: natural_key(p.name))
@@ -102,7 +110,7 @@ def current_images(lines, block):
     first = re.sub(r"^images\s*:\s*", "", lines[s]).strip()
     if first.startswith("["):  # حالت inline: images: ["a", "b"]
         out += [x.strip(" \"'") for x in first.strip("[]").split(",") if x.strip(" \"'")]
-    for l in lines[s + 1:e]:
+    for l in lines[s + 1 : e]:
         m = re.match(r"^\s+-\s+(.*)$", l)
         if m:
             out.append(m.group(1).strip().strip("\"'"))
@@ -110,10 +118,30 @@ def current_images(lines, block):
 
 
 def get_images_dirs(lines, end):
+    """پشتیبانی از هر دو حالت: inline [..] و لیست چندخطی YAML."""
     for i in range(1, end):
-        m = re.match(r"^images_dirs\s*:\s*\[(.*)\]", lines[i])
-        if m:
-            return [x.strip(" \"'") for x in m.group(1).split(",") if x.strip(" \"'")]
+        m = re.match(r"^images_dirs\s*:\s*(.*)$", lines[i])
+        if not m:
+            continue
+        rest = m.group(1).strip()
+        # حالت inline
+        if rest.startswith("["):
+            inner = rest.strip("[]")
+            return [x.strip(" \"'") for x in inner.split(",") if x.strip(" \"'")]
+        # حالت لیست چندخطی
+        dirs = []
+        j = i + 1
+        while j < end:
+            mline = re.match(r"^\s+-\s+(.*)$", lines[j])
+            if not mline:
+                # اگر خط غیر از آیتم بود، بلوک تمام است
+                if lines[j].strip() == "":
+                    j += 1
+                    continue
+                break
+            dirs.append(mline.group(1).strip().strip("\"'"))
+            j += 1
+        return dirs
     return []
 
 
@@ -122,7 +150,10 @@ def candidate_folders(cat, name, dirs_field):
     """به ترتیب اولویت: پوشه‌ی استاندارد، alias دسته، پوشه‌ی بدون دسته، images_dirs."""
     cands = []
     for c in CATEGORY_ALIASES.get(cat, [cat]):
-        cands.append((IMG_ROOT / c / name, "category/name" if c == cat else "alias-category"))
+        if c == cat:
+            cands.append((IMG_ROOT / c / name, "category/name"))
+        else:
+            cands.append((IMG_ROOT / c / name, "alias-category"))
     cands.append((IMG_ROOT / name, "flat (بدون دسته)"))
     for d in dirs_field:
         p = url_to_path(d.rstrip("/"))
@@ -147,8 +178,11 @@ def pick_folder(cat, name, dirs_field):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true", help="تغییرات را روی md ها اعمال کن")
-    ap.add_argument("--move-dupes", action="store_true",
-                    help="عکس‌های تکراریِ بدون استفاده را به _dupes_trash منتقل کن (حذف نمی‌کند)")
+    ap.add_argument(
+        "--move-dupes",
+        action="store_true",
+        help="عکس‌های تکراریِ بدون استفاده را به _dupes_trash منتقل کن (حذف نمی‌کند)",
+    )
     args = ap.parse_args()
 
     if not PRODUCTS_MD.is_dir():
@@ -174,15 +208,19 @@ def main():
 
             block = find_images_block(lines, end)
             old = current_images(lines, block)
-            broken = [u for u in old if not u.startswith("http") and not url_to_path(u).is_file()]
+            broken = [
+                u for u in old if not u.startswith("http") and not url_to_path(u).is_file()
+            ]
 
             found = pick_folder(cat, name, get_images_dirs(lines, end))
             if not found:
                 status = "no-folder" if not old else ("broken" if broken else "kept-no-folder")
                 if old and not broken:
                     referenced.update(old)
-                print(f"   ❌ {name}: پوشه‌ی عکس پیدا نشد"
-                      + (f" (لینک شکسته: {len(broken)})" if broken else ""))
+                print(
+                    f"   ❌ {name}: پوشه‌ی عکس پیدا نشد"
+                    + (f" (لینک شکسته: {len(broken)})" if broken else "")
+                )
                 rows.append([cat, name, status, "", len(old), len(broken), ""])
                 stats[status] += 1
                 continue
@@ -198,20 +236,36 @@ def main():
                 print(f"   ✅ {name}: {len(new)} عکس (بدون تغییر)")
             else:
                 status = "fixed" if old else "linked"
-                print(f"   🔗 {name}: {len(old)} → {len(new)} عکس"
-                      + (f" | شکسته بود: {len(broken)}" if broken else "")
-                      + (f" | منبع: {how}" if how != "category/name" else ""))
+                print(
+                    f"   🔗 {name}: {len(old)} → {len(new)} عکس"
+                    + (f" | شکسته بود: {len(broken)}" if broken else "")
+                    + (f" | منبع: {how}" if how != "category/name" else "")
+                )
                 if args.apply:
                     block_lines = ["images:"] + [f"  - {u}" for u in new]
                     if block:
-                        lines[block[0]:block[1]] = block_lines
+                        lines[block[0] : block[1]] = block_lines
                     else:
+                        # ✅ قبل از خط --- پایانی درج می‌شود، نه بعد از آن
                         lines[end:end] = block_lines
+                        end += len(block_lines)
                     out = eol.join(lines)
-                    md.write_bytes((b"\xef\xbb\xbf" if has_bom else b"") + out.encode("utf-8"))
+                    md.write_bytes(
+                        (b"\xef\xbb\xbf" if has_bom else b"") + out.encode("utf-8")
+                    )
             if extra:
                 print(f"      ⚠️  همین عکس‌ها جای دیگر هم هست: {', '.join(extra)}")
-            rows.append([cat, name, status, str(folder.relative_to(ROOT)), len(new), len(broken), " | ".join(extra)])
+            rows.append(
+                [
+                    cat,
+                    name,
+                    status,
+                    str(folder.relative_to(ROOT)),
+                    len(new),
+                    len(broken),
+                    " | ".join(extra),
+                ]
+            )
             stats[status] += 1
 
     # ───── تکراری‌ها ─────
@@ -229,7 +283,9 @@ def main():
         if keep:  # حداقل یک نسخه استفاده می‌شود؛ بقیه اضافه‌اند
             unused_dupes += drop
         print(f"   • {len(g)} نسخه: " + "  ,  ".join(str(p.relative_to(ROOT)) for p in g))
-    print(f"   مجموع گروه‌های تکراری: {len(dup_groups)} | فایل اضافه‌ی بی‌استفاده: {len(unused_dupes)}")
+    print(
+        f"   مجموع گروه‌های تکراری: {len(dup_groups)} | فایل اضافه‌ی بی‌استفاده: {len(unused_dupes)}"
+    )
 
     if args.move_dupes and unused_dupes:
         if not args.apply:
@@ -240,13 +296,26 @@ def main():
                 dest = trash / p.relative_to(IMG_ROOT)
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(p), str(dest))
-            print(f"   📦 {len(unused_dupes)} فایل به _dupes_trash منتقل شد (بعد از بررسی پوشه را پاک کنید)")
+            print(
+                f"   📦 {len(unused_dupes)} فایل به _dupes_trash منتقل شد (بعد از بررسی پوشه را پاک کنید)"
+            )
 
     # ───── گزارش ─────
     rep = ROOT / "scripts" / "link_report.csv"
+    rep.parent.mkdir(parents=True, exist_ok=True)
     with open(rep, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["category", "md", "status", "image_folder", "images", "broken_links_before", "duplicate_folders"])
+        w.writerow(
+            [
+                "category",
+                "md",
+                "status",
+                "image_folder",
+                "images",
+                "broken_links_before",
+                "duplicate_folders",
+            ]
+        )
         w.writerows(rows)
 
     print("\n" + "=" * 50)

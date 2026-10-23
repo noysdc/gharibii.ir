@@ -19,8 +19,6 @@ options:
 tags: ["تاج پرنسسی السا", "تل تاج السا", "تل تاج السا دخترانه", "السا", "فروزن", "السا و آنا", "تل تاج", "تاج پرنسسی", "تم تولد", "اکسسوری تولد", "مهمانی کودک", "اکسسوری مهمانی", "عید نوروز", "اکسسوری عید نوروز", "عکاسی کودک", "اکسسوری عکاسی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "d=d85c7453;g=6e867722;t=e664a597"
 images:
-  - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-1.webp
-  - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-2.webp
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-3.webp
   - /assets/images/products/girls/princess-elsa-crown/princess-elsa-crown-4.webp
 ---

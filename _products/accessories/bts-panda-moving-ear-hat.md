@@ -15,7 +15,6 @@ tags: ["کلاه پمپی پاندا بی‌تی‌اس", "کلاه پمپی گ�
 
 auto_sig: "b=ffeb55c8;d=97ebe9ee;g=6991bfe8;t=49d16837"
 images:
-
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-17.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-18.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-19.webp
@@ -25,7 +24,6 @@ images:
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-23.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-24.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-25.webp
-  - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-26.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-27.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-28.webp
   - /assets/images/products/accessories/bts-panda-moving-ear-hat/bts-panda-moving-ear-hat-29.webp

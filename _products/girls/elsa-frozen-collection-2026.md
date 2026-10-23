@@ -41,9 +41,7 @@ images:
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-21.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-22.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-23.webp
-  - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-24.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-25.webp
-  - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-26.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-27.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-28.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-29.webp
@@ -66,8 +64,6 @@ images:
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-46.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-47.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-48.webp
-  - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-49.webp
-  - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-50.webp
   - /assets/images/products/girls/elsa-frozen-collection-2026/elsa-frozen-collection-2026-51.webp
 ---
 

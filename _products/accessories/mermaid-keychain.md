@@ -20,7 +20,6 @@ auto_sig: "b=a3a1b35f;d=9e0936a2;g=df46759b;t=2f596480"
 images:
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-1.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-2.webp
-  - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-3.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-4.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-5.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-6.webp
@@ -28,11 +27,8 @@ images:
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-8.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-9.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-10.webp
-  - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-11.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-12.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-13.webp
-  - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-14.webp
-  - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-15.webp
   - /assets/images/products/accessories/mermaid-keychain/mermaid-keychain-16.webp
 ---
 

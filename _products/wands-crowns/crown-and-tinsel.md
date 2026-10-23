@@ -15,21 +15,10 @@ tags: ["ست تاج و تل پرنسسی", "تل تاج دخترانه", "تل �
 
 auto_sig: "b=d0b1913b;d=66f8a235;g=8c2ede04;t=036a9276"
 images:
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-1.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-2.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-3.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-4.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-5.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-6.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-7.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-8.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-9.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-10.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-11.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-12.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-13.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-14.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-15.webp
 ---
 
 <!-- AUTO:START -->

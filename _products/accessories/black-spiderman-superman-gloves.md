@@ -15,10 +15,7 @@ tags: ["ست دستکش تیرپرتاب‌کن اسپایدرمن سیاه و �
 
 auto_sig: "b=f8c895fc;d=51fde080;g=4c1e8621;t=cf93eeb8"
 images:
-
   - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-4.webp
-  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-5.webp
-  - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-6.webp
   - /assets/images/products/accessories/black-spiderman-superman-gloves/black-spiderman-superman-gloves-7.webp
 ---
 

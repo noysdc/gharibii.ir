@@ -15,48 +15,20 @@ tags: ["عصای جادویی دخترانه", "عصای جادویی", "عصا 
 
 auto_sig: "b=012d634f;d=4888f855;g=46318aa9;t=4060f793"
 images:
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-1.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-2.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-3.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-4.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-5.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-6.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-7.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-8.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-9.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-10.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-11.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-12.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-13.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-14.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-15.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-16.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-17.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-18.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-19.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-20.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-21.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-22.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-23.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-24.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-25.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-26.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-27.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-28.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-29.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-30.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-31.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-32.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-33.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-34.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-35.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-36.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-37.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-38.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-39.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-40.webp
   - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-41.webp
-  - /assets/images/products/wands-crowns/girls-magic-wand/girls-magic-wand-42.webp
 ---
 
 <!-- AUTO:START -->

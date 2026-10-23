@@ -16,33 +16,14 @@ tags: ["عصای جادویی هری پاتر", "عصای جادویی هری پ
 auto_sig: "b=39ae7be5;d=497522e7;g=d1cf8db1;t=683ceed8"
 images:
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-1.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-2.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-3.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-4.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-5.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-6.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-7.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-8.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-9.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-10.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-11.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-12.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-13.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-14.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-15.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-16.webp
   - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-17.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-18.webp
- 
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-10.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-11.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-12.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-13.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-14.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-15.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-16.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-17.webp
-  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-18.webp
 ---
 
 <!-- AUTO:START -->

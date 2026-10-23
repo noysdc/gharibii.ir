@@ -21,11 +21,6 @@ options:
 tags: ["ست اکسسوری پرنسسی", "ست اکسسوری آنا", "ست اکسسوری آنا دخترانه", "آنا", "فروزن", "السا و آنا", "اکسسوری دخترانه", "تم تولد", "اکسسوری تولد", "مهمانی کودک", "اکسسوری مهمانی", "عید نوروز", "اکسسوری عید نوروز", "عکاسی کودک", "اکسسوری عکاسی", "بازی نقش‌آفرینی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "d=1fd75138;g=20f86441;t=56b94ced"
 images:
-  - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-1.webp
-  - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-2.webp
-  - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-3.webp
-  - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-4.webp
-  - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-5.webp
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-6.webp
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-7.webp
   - /assets/images/products/girls/princess-anna-accessory-set/princess-anna-accessory-set-8.webp

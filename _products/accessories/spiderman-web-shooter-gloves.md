@@ -15,10 +15,7 @@ tags: ["ست دستکش تیرپرتاب‌کن اسپایدرمن", "ست دس�
 
 auto_sig: "b=8aa1129e;d=9fad4fd2;g=4408d0ba;t=00a24e01"
 images:
-
   - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-4.webp
-  - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-5.webp
-  - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-6.webp
   - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-7.webp
   - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-8.webp
   - /assets/images/products/accessories/spiderman-web-shooter-gloves/spiderman-web-shooter-gloves-9.webp

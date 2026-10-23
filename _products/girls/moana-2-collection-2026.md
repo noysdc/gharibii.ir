@@ -22,7 +22,6 @@ images:
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-2.webp
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-3.webp
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-4.webp
-  - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-5.webp
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-6.webp
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-7.webp
   - /assets/images/products/girls/moana-2-collection-2026/moana-2-collection-2026-8.webp

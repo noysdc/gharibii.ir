@@ -15,13 +15,9 @@ tags: ["ست شنل و ماسک اسپایدرمن", "ست شنل و ماسک ا
 
 auto_sig: "b=559d19b3;d=b1a68407;g=a4943846;t=9eb60d37"
 images:
-
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-22.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-23.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-24.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-25.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-26.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-27.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-28.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-29.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-30.webp
@@ -34,9 +30,6 @@ images:
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-37.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-38.webp
   - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-39.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-40.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-41.webp
-  - /assets/images/products/accessories/spiderman-hero-cape-mask/spiderman-hero-cape-mask-42.webp
 ---
 
 <!-- AUTO:START -->

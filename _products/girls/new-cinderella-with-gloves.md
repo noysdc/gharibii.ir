@@ -21,10 +21,6 @@ options:
 tags: ["پیراهن پرنسسی سیندرلا", "لباس سیندرلا", "لباس سیندرلا دخترانه", "سیندرلا", "پرنسس سیندرلا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "بازی نقش‌آفرینی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "d=8c360d51;g=4a982c78;t=f5a04724"
 images:
-  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-1.webp
-  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-2.webp
-  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-3.webp
-  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-4.webp
   - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-5.webp
   - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-6.webp
   - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-7.webp

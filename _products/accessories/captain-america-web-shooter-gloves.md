@@ -15,7 +15,6 @@ tags: ["ست دستکش تیرپرتاب‌کن کاپیتان آمریکا", "�
 
 auto_sig: "b=a9949769;d=81280831;g=2f40c682;t=e0bc1616"
 images:
-  - /assets/images/products/accessories/captain-america-web-shooter-gloves/1.webp
   - /assets/images/products/accessories/captain-america-web-shooter-gloves/captain-america-web-shooter-gloves-2.webp
 ---
 

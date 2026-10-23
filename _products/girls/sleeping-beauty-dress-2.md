@@ -16,6 +16,23 @@ options:
     values: ["100", "110", "120", "130", "140"]
 tags: ["پیراهن پرنسس اورورا", "لباس زیبای خفته", "لباس زیبای خفته دخترانه", "زیبای خفته", "پرنسس اورورا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "بازی نقش‌آفرینی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=b238eaf2;d=0cf81650;g=818e7152;t=775fee3c"
+images:
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-1.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-2.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-3.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-4.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-5.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-6.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-7.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-8.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-9.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-11.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-12.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-14.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-15.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-16.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-17.webp
+  - /assets/images/products/girls/sleeping-beauty-dress-2/sleeping-beauty-dress-2-18.webp
 ---
 
 <!-- AUTO:START -->

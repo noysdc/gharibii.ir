@@ -18,30 +18,14 @@ tags: ["تل تاج توری پرنسسی", "تل تاج دخترانه", "تل 
 
 auto_sig: "b=e79a7b97;d=c9135b1f;g=270b55f9;t=1b6cfa1a"
 images:
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-1.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-2.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-3.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-4.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-5.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-6.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-7.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-8.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-9.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-10.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-11.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-12.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-13.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-14.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-15.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-16.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-17.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-18.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-19.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-20.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-21.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-22.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-23.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-24.webp
 ---
 
 <!-- AUTO:START -->
