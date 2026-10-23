@@ -26,6 +26,22 @@ images:
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-6.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-7.webp
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-8.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-9.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-10.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-11.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-12.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-13.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-14.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-15.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-16.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-17.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-18.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-19.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-20.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-21.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-22.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-23.webp
+  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-24.webp
 ---
 
 <!-- AUTO:START -->

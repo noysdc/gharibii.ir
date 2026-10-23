@@ -20,6 +20,16 @@ images:
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-3.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-4.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-5.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-6.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-7.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-8.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-9.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-10.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-11.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-12.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-13.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-14.webp
+  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-15.webp
 ---
 
 <!-- AUTO:START -->

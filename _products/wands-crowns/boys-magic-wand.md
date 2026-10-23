@@ -21,6 +21,18 @@ images:
   - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-4.webp
   - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-5.webp
   - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-6.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-7.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-8.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-9.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-10.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-11.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-12.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-13.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-14.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-15.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-16.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-17.webp
+  - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-18.webp
 ---
 
 <!-- AUTO:START -->

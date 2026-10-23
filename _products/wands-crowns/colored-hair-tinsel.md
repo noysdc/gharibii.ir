@@ -41,6 +41,58 @@ images:
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-24.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-25.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-26.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-27.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-28.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-29.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-30.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-31.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-32.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-33.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-34.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-35.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-36.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-37.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-38.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-39.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-40.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-41.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-42.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-43.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-44.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-45.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-46.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-47.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-48.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-49.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-50.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-51.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-52.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-53.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-54.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-55.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-56.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-57.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-58.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-59.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-60.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-61.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-62.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-63.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-64.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-65.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-66.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-67.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-68.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-69.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-70.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-71.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-72.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-73.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-74.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-75.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-76.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-77.webp
+  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-78.webp
 ---
 
 <!-- AUTO:START -->
