@@ -5,7 +5,7 @@ description: "پیراهن توری تکشاخ؛ مناسب جشن تولد، م
 slug: "unicorn-lace-dress"
 category: girls
 gender: girls
-price: "1,998,000"
+price: "2,598,000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/unicorn-lace-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: unicorn-lace-dress
@@ -22,8 +22,7 @@ tags: ["پیراهن توری تکشاخ", "پیراهن توری تکشاخ د�
 images:
   - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-1.webp
   - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-2.webp
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-3.webp
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-4.webp
+
 ---
 
 <!-- AUTO:START -->

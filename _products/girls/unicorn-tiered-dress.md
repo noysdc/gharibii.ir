@@ -1,11 +1,11 @@
 ---
 layout: product
-title: "پیراهن توری تکشاخ | رنگ‌های متنوع"
+title: "پیراهن توری تکشاخ دامن | با دامن طبقه‌ای (پله‌ای)"
 description: "پیراهن توری تکشاخ؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
 slug: "unicorn-lace-dress"
 category: girls
 gender: girls
-price: "0"
+price: "2,598,000"
 currency: IRT
 options:
   - name: "اندازه"
@@ -14,10 +14,9 @@ options:
     values: ["آبی چندرنگ (طرح یونیکورن)"]
 tags: ["پیراهن توری تکشاخ", "پیراهن توری تکشاخ دخترانه", "تکشاخ", "یونیکورن", "اسب تک شاخ", "پیراهن توری دخترانه", "لباس توری", "لباس مجلسی دخترانه", "تم تولد", "لباس شخصیتی کودک", "فروشگاه غریبی کیش", "کیش"]
 images:
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-1.webp
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-2.webp
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-3.webp
-  - /assets/images/products/girls/unicorn-lace-dress/unicorn-lace-dress-4.webp
+  - /assets/images/products/girls/unicorn-tiered-dress/unicorn-tiered-dress-1.webp
+  - /assets/images/products/girls/unicorn-tiered-dress/unicorn-tiered-dress-2.webp
+
 ---
 
 # پیراهن توری تک شاخ دخترانه با دامن طبقه‌ای
