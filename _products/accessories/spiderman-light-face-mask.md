@@ -18,7 +18,6 @@ auto_sig: "b=9040f970;d=6fd10a6f;g=6dfcf9f0;t=01256d2a"
 images:
   - /assets/images/products/accessories/spiderman-light-face-mask/spiderman-light-face-mask-1.webp
   - /assets/images/products/accessories/spiderman-light-face-mask/spiderman-light-face-mask-2.webp
-
 ---
 
 <!-- AUTO:START -->
