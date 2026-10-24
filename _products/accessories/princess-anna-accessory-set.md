@@ -6,7 +6,7 @@ seo_keywords: ["ست اکسسوری پرنسسی", "تاج پرنسسی دختر
 folder: "princess-anna-accessory-set"
 category: accessories
 gender: girls
-price: "1998000"
+price: "1598000"
 price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/princess-anna-accessory-set/"]
