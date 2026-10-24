@@ -5,8 +5,8 @@ description: "لباس توری رنگین‌کمانی؛ مناسب جشن تو
 slug: "rainbow-lace-dress"
 category: girls
 gender: girls
-price: ""
-price_group: "tier_9"
+price: "798000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/rainbow-lace-dress/"]
 webzi_id: 45358
