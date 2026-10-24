@@ -36,6 +36,16 @@ sitemap: false
   </section>
 
   <section class="card">
+    <h2>پیام مشتری</h2>
+    <p class="muted small-note">پیام یا سبدی که مشتری فرستاده را اینجا paste کنید؛ محصولات پیدا و به لیست اضافه می‌شوند.</p>
+    <textarea id="f-paste" rows="4" placeholder="متن پیام مشتری (لینک محصولات، تعداد، سایز)…"></textarea>
+    <div class="row-between paste-row">
+      <button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به لیست</button>
+      <small class="muted" id="paste-res"></small>
+    </div>
+  </section>
+
+  <section class="card">
     <h2>افزودن محصول</h2>
     <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
     <div class="chips" id="chips"></div>
@@ -66,7 +76,7 @@ sitemap: false
   </section>
 
   <section class="card" id="out-card" hidden>
-    <h2>پیش‌فاکتور آماده است</h2>
+    <h2 id="out-title">پیش‌فاکتور آماده است</h2>
     <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت پیش‌فاکتور» را بزنید.</p>
     <div class="out-actions">
       <button type="button" class="btn btn-wa" id="o-wa">ارسال در واتساپ</button>

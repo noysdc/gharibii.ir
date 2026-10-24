@@ -6,7 +6,7 @@
 
   var BASE = (document.querySelector('meta[name="site-baseurl"]') || {}).content || '';
   var TZ = 'Asia/Tehran';
-  var VERSION = 1;
+  var VERSION = 1, VERSION2 = 2;
   var MAX_ITEMS = 120;
   var isTouch = !!(w.matchMedia && w.matchMedia('(hover: none) and (pointer: coarse)').matches);
 
@@ -63,7 +63,7 @@
     if (m && !d) out.push(nf(m) + ' دقیقه');
     return out.join(' و ') || 'کمتر از یک دقیقه';
   }
-  function isExpired(inv) { return Math.floor(Date.now() / 1000) >= inv.exp; }
+  function isExpired(inv) { return !inv.paid && Math.floor(Date.now() / 1000) >= inv.exp; }
 
   /* ---------- جمع‌ها ---------- */
   function totals(inv) {
@@ -90,36 +90,85 @@
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     return new TextDecoder().decode(bytes);
   }
-  function pack(inv) {
-    return b64Enc(JSON.stringify([
-      VERSION, inv.no, inv.ts, inv.exp, inv.cust, inv.sn, inv.sw, inv.fee, inv.disc, inv.note,
-      inv.items.map(function (i) { return [i.id, i.q, i.p, i.o, i.t]; })
-    ]));
+  /* کد کوتاه محصول: شناسه‌های بلند در لینک با یک هش ۶ حرفی جایگزین می‌شوند (با اطلاعات سایت دوباره به شناسه‌ی کامل برمی‌گردند) */
+  var curFeed = null;
+  function hash6(s) {
+    var h = 2166136261;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return ('000000' + (h % 2176782336).toString(36)).slice(-6);
   }
-  /* ورودی نامطمئن است (هر کسی می‌تواند لینک بسازد): همه‌چیز اعتبارسنجی و کوتاه می‌شود */
+  function shortId(id) {
+    if (!id || id.length <= 8 || !curFeed || !curFeed.short) return id;
+    var h = hash6(id);
+    return curFeed.short[h] === id && !curFeed.dup[h] ? '~' + h : id;
+  }
+  function fullId(tok) {
+    if (tok.charAt(0) !== '~') return tok;
+    var h = tok.slice(1);
+    return curFeed && curFeed.short && curFeed.short[h] && !curFeed.dup[h] ? curFeed.short[h] : tok;
+  }
+  function resolve(inv) { inv.items.forEach(function (i) { i.id = fullId(i.id); }); return inv; }
+  function titleOf(it, feed) {
+    var pr = feed && feed.byId && it.id ? feed.byId[it.id] : null;
+    return (pr && pr.t) || it.t || 'محصول';
+  }
+
+  /* نسخهٔ ۲ لینک: کوتاه‌تر (بدون نام محصولات کاتالوگ، شمارهٔ فاکتور از روی زمان ساخته می‌شود) */
+  function pack(inv) {
+    var ts = inv.ts, std = makeNo(new Date(ts * 1000));
+    var a = [VERSION2, ts.toString(36), Math.max(1, Math.round((inv.exp - ts) / 60)), inv.no === std ? '' : inv.no,
+      inv.cust, inv.sw, inv.fee, inv.disc, inv.note,
+      inv.items.map(function (i) { var r = [shortId(i.id), i.q, i.p, i.o]; if (!i.id) r.push(i.t); return r; }),
+      inv.rev > 1 ? inv.rev : 0, inv.paid ? inv.paid.ref : '', inv.paid ? inv.paid.at.toString(36) : ''];
+    while (a.length > 10 && !a[a.length - 1]) a.pop();
+    return b64Enc(JSON.stringify(a));
+  }
+  /* ورودی نامطمئن است (هر کسی می‌تواند لینک بسازد): همه‌چیز اعتبارسنجی و کوتاه می‌شود. لینک‌های قدیمی (نسخهٔ ۱) هم خوانده می‌شوند */
   function unpack(tok) {
     try {
       tok = String(tok || '').trim();
       var h = tok.indexOf('#');
       if (h >= 0) tok = tok.slice(h + 1);
+      var dot = tok.indexOf('.');
+      if (dot > 0) tok = tok.slice(0, dot);
       if (!tok) return null;
       var a = JSON.parse(b64Dec(tok));
-      if (!Array.isArray(a) || a[0] !== VERSION || !Array.isArray(a[10])) return null;
-      var inv = {
-        no: clip(a[1], 40), ts: Number(a[2]) || 0, exp: Number(a[3]) || 0,
-        cust: clip(a[4], 60), sn: clip(a[5], 40), sw: clip(a[6], 20).replace(/\D/g, ''),
-        fee: toNum(a[7]), disc: toNum(a[8]), note: clip(a[9], 300), items: []
-      };
-      if (!inv.ts || !inv.exp) return null;
-      a[10].slice(0, MAX_ITEMS).forEach(function (r) {
+      if (!Array.isArray(a)) return null;
+      var inv, rows;
+      if (a[0] === VERSION2 && Array.isArray(a[9])) {
+        var ts = parseInt(a[1], 36) || 0, vm = Number(a[2]) || 0;
+        if (!ts || vm <= 0) return null;
+        inv = {
+          no: clip(a[3], 40) || makeNo(new Date(ts * 1000)), ts: ts, exp: ts + vm * 60,
+          cust: clip(a[4], 60), sn: '', sw: clip(a[5], 20).replace(/\D/g, ''),
+          fee: toNum(a[6]), disc: toNum(a[7]), note: clip(a[8], 300), items: [],
+          rev: Math.min(99, Math.max(1, Math.round(Number(a[10]) || 1))), paid: null
+        };
+        if (a[11]) inv.paid = { ref: clip(a[11], 40), at: parseInt(a[12], 36) || ts };
+        rows = a[9];
+      } else if (a[0] === VERSION && Array.isArray(a[10])) {
+        inv = {
+          no: clip(a[1], 40), ts: Number(a[2]) || 0, exp: Number(a[3]) || 0,
+          cust: clip(a[4], 60), sn: clip(a[5], 40), sw: clip(a[6], 20).replace(/\D/g, ''),
+          fee: toNum(a[7]), disc: toNum(a[8]), note: clip(a[9], 300), items: [], rev: 1, paid: null
+        };
+        if (!inv.ts || !inv.exp) return null;
+        rows = a[10];
+      } else return null;
+      rows.slice(0, MAX_ITEMS).forEach(function (r) {
         if (!Array.isArray(r)) return;
         var q = Math.min(999, Math.max(1, Math.round(Number(r[1]) || 1)));
-        inv.items.push({ id: clip(r[0], 200), q: q, p: toNum(r[2]), o: clip(r[3], 120), t: clip(r[4], 120) || 'محصول' });
+        inv.items.push({ id: fullId(clip(r[0], 200)), q: q, p: toNum(r[2]), o: clip(r[3], 120), t: clip(r[4], 120) });
       });
       return inv.items.length ? inv : null;
     } catch (e) { return null; }
   }
-  function invoiceUrl(inv) { return location.origin + BASE + '/invoice/#' + pack(inv); }
+  /* آخر لینک، شمارهٔ فاکتور (تاریخ و ساعت) و نسخه می‌آید تا در چت راحت شناخته شود؛ هنگام خواندن نادیده گرفته می‌شود */
+  function linkOf(tok, no, rev) {
+    var suf = String(no || '').replace(/^PF-/, '').replace(/[^0-9A-Za-z-]/g, '') + (rev > 1 ? '-r' + rev : '');
+    return location.origin + BASE + '/invoice/#' + tok + (suf ? '.' + suf : '');
+  }
+  function invoiceUrl(inv) { return linkOf(pack(inv), inv.no, inv.rev); }
 
   /* ---------- داده‌ی سایت (قیمت‌های لحظه‌ای) ---------- */
   var feedPromise = null;
@@ -130,6 +179,12 @@
       .then(function (d) {
         d.byId = {};
         (d.products || []).forEach(function (p) { d.byId[p.id] = p; });
+        d.short = {}; d.dup = {};
+        (d.products || []).forEach(function (p) {
+          var k = hash6(String(p.id));
+          if (d.short[k] && d.short[k] !== p.id) d.dup[k] = true; else d.short[k] = p.id;
+        });
+        curFeed = d;
         d.loadedAt = Date.now();
         return d;
       });
@@ -146,14 +201,14 @@
   /* ---------- متن پیش‌فاکتور (برای واتساپ، تلگرام، بله، اینستاگرام) ---------- */
   function buildText(inv, feed, link) {
     var t = totals(inv), store = (feed && feed.store) || 'فروشگاه غریبی کیش';
-    var m = '🧾 پیش‌فاکتور ' + store + '\n';
-    m += 'شماره: ' + inv.no + '\n';
+    var m = (inv.paid ? '🧾 فاکتور نهایی ' : '🧾 پیش‌فاکتور ') + store + '\n';
+    m += 'شماره: ' + inv.no + (inv.rev > 1 ? ' (نسخه ' + nf(inv.rev) + ')' : '') + '\n';
     m += 'تاریخ: ' + fmtDate(inv.ts) + '\n';
-    m += 'اعتبار تا: ' + fmtDate(inv.exp) + '\n';
+    if (!inv.paid) m += 'اعتبار تا: ' + fmtDate(inv.exp) + '\n';
     if (inv.cust) m += 'مشتری: ' + inv.cust + '\n';
     m += '\n';
     inv.items.forEach(function (it, i) {
-      m += nf(i + 1) + '. ' + it.t + '\n';
+      m += nf(i + 1) + '. ' + titleOf(it, feed) + '\n';
       if (it.o) m += '   ' + it.o + '\n';
       if (it.p > 0) {
         m += '   ' + nf(it.q) + ' × ' + nf(it.p) + ' = ' + money(it.p * it.q) + '\n';
@@ -168,9 +223,14 @@
     m += '💳 جمع کل: ' + money(t.total) + '\n';
     if (t.unpriced > 0) m += '⚠️ قیمت ' + nf(t.unpriced) + ' قلم با فروشنده هماهنگ می‌شود.\n';
     if (inv.note) m += '\n📝 ' + inv.note + '\n';
-    m += '\n⚠️ این سند «پیش‌فاکتور» است و به منزله فاکتور نهایی نیست.';
-    m += ' تا ' + fmtDate(inv.exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
-    if (link) m += '\n\n🔗 مشاهده پیش‌فاکتور:\n' + link;
+    if (inv.paid) {
+      m += '\n✅ پرداخت تأیید شد. کد پیگیری: ' + inv.paid.ref + ' (' + fmtDate(inv.paid.at) + ')';
+    } else {
+      m += '\n⚠️ این سند «پیش‌فاکتور» است و به منزله فاکتور نهایی نیست.';
+      m += ' تا ' + fmtDate(inv.exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
+      m += ' پس از پرداخت و تأیید فروشنده، فاکتور نهایی صادر می‌شود.';
+    }
+    if (link) m += '\n\n🔗 مشاهده ' + (inv.paid ? 'فاکتور نهایی' : 'پیش‌فاکتور') + ':\n' + link;
     return m;
   }
 
@@ -192,7 +252,7 @@
         : '<span class="r-line r-contact">هماهنگی با فروشنده</span>';
       var calc = it.p > 0 ? nf(it.q) + ' × ' + nf(it.p) : nf(it.q) + ' عدد';
       return '<div class="inv-row" data-brk>' + thumb +
-        '<div class="r-info"><div class="r-title">' + nf(i + 1) + '. ' + esc(it.t) + '</div>' +
+        '<div class="r-info"><div class="r-title">' + nf(i + 1) + '. ' + esc(titleOf(it, feed)) + '</div>' +
         (it.o ? '<div class="r-opts">' + esc(it.o) + '</div>' : '') +
         '<div class="r-calc">' + calc + '</div></div>' + amount + '</div>';
     }).join('');
@@ -209,27 +269,35 @@
       : 'معتبر تا <b>' + esc(fmtDate(inv.exp)) + '</b>' + (o.live && rem ? ' (<span data-remain>' + esc(rem) + '</span> مانده)' : '');
 
     var meta = '<div class="m-item"><span>شماره</span><b dir="ltr">' + esc(inv.no) + '</b></div>' +
+      (inv.rev > 1 ? '<div class="m-item"><span>نسخه</span><b>' + nf(inv.rev) + '</b></div>' : '') +
       '<div class="m-item"><span>تاریخ صدور</span><b>' + esc(fmtDate(inv.ts)) + '</b></div>' +
       (inv.cust ? '<div class="m-item"><span>مشتری</span><b>' + esc(inv.cust) + '</b></div>' : '') +
-      (inv.sn ? '<div class="m-item"><span>فروشنده</span><b>' + esc(seller ? seller.name : inv.sn) + '</b></div>' : '');
+      ((seller || inv.sn) ? '<div class="m-item"><span>فروشنده</span><b>' + esc(seller ? seller.name : inv.sn) + '</b></div>' : '') +
+      (inv.paid ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '');
 
     var foot = [];
     if (feed && feed.phone) foot.push('☎ ' + esc(feed.phone));
     if (feed && feed.address) foot.push(esc(feed.address));
 
+    var notice = inv.paid
+      ? '<b>این سند، فاکتور نهایی است.</b><br>پرداخت در تاریخ <b>' + esc(fmtDate(inv.paid.at)) + '</b> تأیید شد.'
+      : '<b>این سند، پیش‌فاکتور است و به منزله فاکتور نهایی نیست.</b><br>' + validLine +
+        '<br>قیمت، موجودی، سایز و هزینه دقیق ارسال پس از تأیید فروشنده قطعی می‌شود.' +
+        '<br><b>پس از پرداخت و تأیید فروشنده، فاکتور نهایی صادر می‌شود.</b>' +
+        '<br>اگر فروشنده نسخهٔ جدیدتری فرستاد، فقط آخرین نسخه معتبر است.';
+
     return '<div class="inv-sheet' + (expired ? ' is-expired' : '') + '" dir="rtl">' +
       '<div class="inv-head" data-brk>' +
         '<img class="h-logo" src="' + BASE + '/assets/images/gharibii-store-logo.webp" alt="" width="64" height="64" crossorigin="anonymous">' +
-        '<div class="h-text"><div class="h-store">' + esc(store) + '</div><div class="h-title">پیش‌فاکتور</div></div>' +
+        '<div class="h-text"><div class="h-store">' + esc(store) + '</div><div class="h-title">' + (inv.paid ? 'فاکتور نهایی' : 'پیش‌فاکتور') + '</div></div>' +
       '</div>' +
       '<div class="inv-meta" data-brk>' + meta + '</div>' +
-      '<div class="inv-notice" data-brk><b>این سند، پیش‌فاکتور است و به منزله فاکتور نهایی نیست.</b><br>' + validLine +
-        '<br>قیمت، موجودی، سایز و هزینه دقیق ارسال پس از تأیید فروشنده قطعی می‌شود.</div>' +
+      '<div class="inv-notice" data-brk>' + notice + '</div>' +
       '<div class="inv-rows">' + rows + '</div>' +
       '<div class="inv-totals" data-brk>' + totalRows + '</div>' +
       (inv.note ? '<div class="inv-note" data-brk><b>توضیحات:</b> ' + esc(inv.note) + '</div>' : '') +
       '<div class="inv-foot" data-brk>' + (foot.length ? foot.join(' · ') + '<br>' : '') + 'با تشکر از اعتماد شما 🎀</div>' +
-      (expired ? '<div class="inv-stamp" aria-hidden="true">منقضی شده</div>' : '') +
+      (inv.paid ? '<div class="inv-stamp paid" aria-hidden="true">پرداخت شد</div>' : (expired ? '<div class="inv-stamp" aria-hidden="true">منقضی شده</div>' : '')) +
     '</div>';
   }
   function fixImages(root) {
@@ -417,6 +485,12 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2800);
   }
+  /* متنی که مشتری بعد از پرداخت برای فروشنده می‌فرستد */
+  function payMessage(inv, ref) {
+    var t = totals(inv);
+    return 'سلام، پرداخت انجام شد ✅\nشماره پیش‌فاکتور: ' + inv.no + (inv.rev > 1 ? ' (نسخه ' + nf(inv.rev) + ')' : '') +
+      '\nمبلغ: ' + money(t.total) + '\nکد پیگیری: ' + ref + '\nلطفاً پرداخت را تأیید و فاکتور نهایی را بفرستید. 🙏';
+  }
   function waUrl(number, text) { return 'https://wa.me/' + (number || '') + '?text=' + encodeURIComponent(text); }
   var MAX_WA_URL = 4000;
   /* پیام بلند: متن کامل کپی می‌شود و فقط چت باز می‌شود (مثل سبد خرید سایت) */
@@ -443,7 +517,7 @@
   w.GInvoice = {
     BASE: BASE, normDigits: normDigits, toNum: toNum, nf: nf, money: money, esc: esc, clip: clip, el: el,
     fmtDate: fmtDate, makeNo: makeNo, remainText: remainText, isExpired: isExpired, totals: totals,
-    pack: pack, unpack: unpack, invoiceUrl: invoiceUrl, loadFeed: loadFeed, sellerKnown: sellerKnown,
+    pack: pack, unpack: unpack, invoiceUrl: invoiceUrl, linkOf: linkOf, resolve: resolve, titleOf: titleOf, payMessage: payMessage, loadFeed: loadFeed, sellerKnown: sellerKnown,
     buildText: buildText, sheetHTML: sheetHTML, renderSheet: renderSheet, watchExpiry: watchExpiry,
     saveImage: saveImage, savePdf: savePdf, copyText: copyText, toast: toast, openWhatsApp: openWhatsApp,
     phoneToWa: phoneToWa, _makePdf: makePdf, _toCanvas: toCanvas
