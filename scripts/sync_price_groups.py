@@ -143,7 +143,8 @@ def main():
         with GROUPS_FILE.open("a", encoding="utf-8") as f:
             for k, g in new_groups.items():
                 f.write(f'\n  {k}:\n    label: "{g["count"]} محصول هم‌قیمت"\n'
-                        f'    price: {g["price"]}\n')
+                        f'    price: {g["price"]}\n'
+                        f'    # old_price: \n    # badge: ""\n')
 
     mode = "اعمال شد" if APPLY else "فقط گزارش (برای اعمال: --apply)"
     print(f"\n{changed} محصول تغییر می‌کند/کرد — {mode}")

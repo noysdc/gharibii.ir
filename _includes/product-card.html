@@ -21,7 +21,8 @@
 <article class="card{% if card_oos %} is-soldout{% endif %}"{% if total > 1 %} data-slider{% endif %}>
   <div class="card-img">
     <span class="card-ring" aria-hidden="true"></span>
-    {%- if item.badge %}<span class="card-badge">{{ item.badge }}</span>{% endif %}
+    {%- assign card_badge = item.badge -%}{%- if card_badge == nil and card_oos_grp.badge -%}{%- assign card_badge = card_oos_grp.badge -%}{%- endif -%}
+    {%- if card_badge and card_badge != "" %}<span class="card-badge">{{ card_badge }}</span>{% endif %}
     <div class="slides">
       {%- if total == 0 -%}
       <a class="slide" href="{{ item.url | relative_url }}" aria-label="{{ item.title | escape }}"><img src="{% include img.html src=no_img %}" alt="{{ item.title | escape }}" width="600" height="800"></a>

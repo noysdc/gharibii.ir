@@ -56,7 +56,10 @@
     <span class="price-value">تماس بگیرید</span>
   {%- endif -%}
 
-  {%- assign old_clean = product.old_price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+  {%- comment -%} قیمت قبلی: اگر در md نبود (nil) از گروه؛ old_price: 0 در md تخفیف گروه را برای آن محصول خاموش می‌کند {%- endcomment -%}
+  {%- assign old_raw = product.old_price -%}
+  {%- if old_raw == nil and price_grp.old_price -%}{%- assign old_raw = price_grp.old_price -%}{%- endif -%}
+  {%- assign old_clean = old_raw | append: "" | remove: "," | remove: "،" | remove: " " -%}
   {%- assign old_num = old_clean | plus: 0 -%}
   {%- if pr_num > 0 and old_num > pr_num -%}
     {%- capture old_fmt -%}{%- include num.html n=old_num -%}{%- endcapture -%}
