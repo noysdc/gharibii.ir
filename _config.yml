@@ -52,7 +52,7 @@ defaults:
     values: { category: boys }
   - scope: { path: "_products/bags-shoes", type: products }
     values: { category: bags-shoes }
-  - scope: { path: "_products/crown-wand", type: products }
+  - scope: { path: "_products/wands-crowns", type: products }
     values: { category: crown-wand }
   - scope: { path: "_products/accessories", type: products }
     values: { category: accessories }
