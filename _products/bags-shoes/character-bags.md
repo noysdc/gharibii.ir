@@ -6,7 +6,7 @@ slug: "character-bags"
 category: bags-shoes
 gender: girls
 price: ""
-price_group: "tier_9"
+price_group: "out_of_stock"
 price: ""
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/character-bags/"]
