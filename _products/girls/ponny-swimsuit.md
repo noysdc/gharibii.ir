@@ -1,11 +1,11 @@
 ---
 layout: product
-title: "لباس توری پونی | طرح دوم"
+title: "مایو پونی | طرح دوم"
 description: "پیراهن توری پونی؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
 slug: "ponny-swimsuit"
 category: girls
 gender: girls
-price: "798000"
+price: "998000"
 price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ponny-swimsuit/"]

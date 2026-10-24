@@ -6,7 +6,7 @@ slug: "ladybug-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_9"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-dress/"]
 webzi_id: 45370
