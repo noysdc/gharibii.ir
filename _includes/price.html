@@ -1,42 +1,67 @@
+{%- comment -%}
+  ترتیب اولویت نمایش قیمت:
+  1) اتمام موجودی  ← product.out_of_stock یا price_group: "out_of_stock"
+  2) قیمت دستی 0   ← «تماس بگیرید»
+  3) price_formatted
+  4) قیمت اختصاصی محصول (price)
+  5) قیمت گروه (price_group) ← فقط وقتی price خالی باشد
+  6) هیچ‌کدام      ← «تماس بگیرید»
+{%- endcomment -%}
 {%- assign product = include.product -%}
-{%- assign price_oos_grp = site.data.price_groups.groups[product.price_group] -%}{%- assign price_oos = product.out_of_stock -%}{%- if price_oos_grp.out_of_stock -%}{%- assign price_oos = true -%}{%- endif -%}
+{%- assign price_grp = site.data.price_groups.groups[product.price_group] -%}
+{%- assign price_oos = product.out_of_stock -%}
+{%- if price_grp.out_of_stock -%}{%- assign price_oos = true -%}{%- endif -%}
+
 {%- if price_oos -%}
   <span class="price-value out-of-stock-label">اتمام موجودی</span>
 {%- else -%}
-{%- assign pr_clean = product.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
-{%- assign pr_num = pr_clean | plus: 0 -%}
+  {%- assign pr_clean = product.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+  {%- assign pr_num = pr_clean | plus: 0 -%}
 
-{%- if product.price_formatted and product.price_formatted != "" -%}
-  <span class="price-value">{{ product.price_formatted }} تومان</span>
-{%- elsif pr_num > 0 -%}
-  {%- assign pr_str = pr_num | append: "" -%}
-  {%- assign pr_len = pr_str | size -%}
+  {%- comment -%} اگر price اصلاً پر شده باشد (حتی 0)، یعنی قیمت دستی است {%- endcomment -%}
+  {%- assign pr_manual = false -%}
+  {%- if pr_clean != "" -%}{%- assign pr_manual = true -%}{%- endif -%}
 
-  {%- if pr_len > 6 -%}
-    {%- assign pr_l1 = pr_len | minus: 6 -%}
-    {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
-    {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
-    {%- assign pr_c = pr_str | slice: -3, 3 -%}
-    <span class="price-value">{{ pr_a }}،{{ pr_b }}،{{ pr_c }} تومان</span>
-  {%- elsif pr_len > 3 -%}
-    {%- assign pr_l1 = pr_len | minus: 3 -%}
-    {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
-    {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
-    <span class="price-value">{{ pr_a }}،{{ pr_b }} تومان</span>
-  {%- else -%}
-    <span class="price-value">{{ pr_str }} تومان</span>
+  {%- comment -%} فقط وقتی price خالی است از گروه بخوان؛ 0 دستی دست‌نخورده می‌ماند {%- endcomment -%}
+  {%- if pr_manual == false and price_grp.price -%}
+    {%- assign pr_num = price_grp.price | append: "" | remove: "," | remove: "،" | remove: " " | plus: 0 -%}
   {%- endif -%}
 
-{%- else -%}
-  <span class="price-value">تماس بگیرید</span>
-{%- endif -%}
+  {%- if pr_manual and pr_num == 0 -%}
+    <span class="price-value">تماس بگیرید</span>
 
-{%- assign old_clean = product.old_price | append: "" | remove: "," | remove: "،" | remove: " " -%}
-{%- assign old_num = old_clean | plus: 0 -%}
-{%- if pr_num > 0 and old_num > pr_num -%}
-  {%- capture old_fmt -%}{%- include num.html n=old_num -%}{%- endcapture -%}
-  {%- assign off_pct = old_num | minus: pr_num | times: 100 | divided_by: old_num -%}
-  <s class="old-price">{{ old_fmt | strip }}</s>
-  <span class="discount-pill">{{ off_pct }}٪ تخفیف</span>
-{%- endif -%}
+  {%- elsif product.price_formatted and product.price_formatted != "" -%}
+    <span class="price-value">{{ product.price_formatted }} تومان</span>
+
+  {%- elsif pr_num > 0 -%}
+    {%- assign pr_str = pr_num | append: "" -%}
+    {%- assign pr_len = pr_str | size -%}
+
+    {%- if pr_len > 6 -%}
+      {%- assign pr_l1 = pr_len | minus: 6 -%}
+      {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
+      {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
+      {%- assign pr_c = pr_str | slice: -3, 3 -%}
+      <span class="price-value">{{ pr_a }}،{{ pr_b }}،{{ pr_c }} تومان</span>
+    {%- elsif pr_len > 3 -%}
+      {%- assign pr_l1 = pr_len | minus: 3 -%}
+      {%- assign pr_a = pr_str | slice: 0, pr_l1 -%}
+      {%- assign pr_b = pr_str | slice: pr_l1, 3 -%}
+      <span class="price-value">{{ pr_a }}،{{ pr_b }} تومان</span>
+    {%- else -%}
+      <span class="price-value">{{ pr_str }} تومان</span>
+    {%- endif -%}
+
+  {%- else -%}
+    <span class="price-value">تماس بگیرید</span>
+  {%- endif -%}
+
+  {%- assign old_clean = product.old_price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+  {%- assign old_num = old_clean | plus: 0 -%}
+  {%- if pr_num > 0 and old_num > pr_num -%}
+    {%- capture old_fmt -%}{%- include num.html n=old_num -%}{%- endcapture -%}
+    {%- assign off_pct = old_num | minus: pr_num | times: 100 | divided_by: old_num -%}
+    <s class="old-price">{{ old_fmt | strip }}</s>
+    <span class="discount-pill">{{ off_pct }}٪ تخفیف</span>
+  {%- endif -%}
 {%- endif -%}
