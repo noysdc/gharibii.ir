@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "لباس پرنسسی زیبای خفته اورورا | دخترانه"
-description: "لباس پرنسسی زیبای خفته؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
+description: "لباس پرنسسی زیبای خفته اورورا؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "sleeping-beauty-dress"
 category: girls
 gender: girls
@@ -12,9 +12,9 @@ images_dirs: ["/assets/images/products/girls/sleeping-beauty-dress/"]
 webzi_id: 45331
 old_slug: "لباس-دخترانه-زیبای-خفته"
 webzi_images: ["bd64b911f7264357bada30641226ea23.jpg", "74148908f96046afacd846e1fc605648.JPG", "f8d156d5d56846d9839c29615aad1e47.jpg", "aaf8b5e363a04325b5ea2bc17cc3b4dc.jpg", "560a8b53a21a4ac6a3a100d502927933.jpg", "b387113b0fbd44a49191e91b65638870.jpeg", "1eef70c7c71149b3b94fdef4b0ce33a7.jpg", "ba2b09b38d594c379e049372ad17bfd3.jpg", "91b1262bed4e4d2c983dbeb4cafca03f.jpeg"]
-tags: ["لباس پرنسسی زیبای خفته", "لباس زیبای خفته", "لباس زیبای خفته دخترانه", "زیبای خفته", "پرنسس اورورا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "کریسمس", "فروش ویژه", "فروشگاه غریبی کیش", "کیش"]
+tags: ["لباس پرنسسی زیبای خفته اورورا", "لباس زیبای خفته", "لباس زیبای خفته دخترانه", "زیبای خفته", "پرنسس اورورا", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "کریسمس", "فروش ویژه", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=82c99823;d=f8e253c2;g=d4273ad3;t=de3b32c3"
+auto_sig: "b=82c99823;d=6bf7f22c;g=6d668680;t=de3b32c3"
 images:
   - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-1.webp
   - /assets/images/products/girls/sleeping-beauty-dress/sleeping-beauty-dress-2.webp
