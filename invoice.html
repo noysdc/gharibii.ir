@@ -1,0 +1,24 @@
+---
+layout: tool
+title: پیش‌فاکتور
+body_class: inv-view-page
+permalink: /invoice/
+sitemap: false
+---
+<main class="view" id="view">
+  <div class="view-state" id="state">در حال بارگذاری پیش‌فاکتور…</div>
+  <div class="sheet-scroll"><div id="sheet"></div></div>
+  <div class="view-actions" id="actions" hidden>
+    <button type="button" class="btn btn-wa" id="v-confirm">تأیید و ادامه در واتساپ</button>
+    <div class="view-actions-row">
+      <button type="button" class="btn" id="v-text">کپی متن</button>
+      <button type="button" class="btn" id="v-img">عکس</button>
+      <button type="button" class="btn" id="v-pdf">PDF</button>
+    </div>
+    <p class="muted view-note">برای اطمینان، قیمت و موجودی نهایی را با فروشنده هماهنگ کنید.</p>
+  </div>
+  <p class="view-site"><a href="{{ '/' | relative_url }}">مشاهده فروشگاه غریبی کیش</a></p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="{{ '/assets/js/invoice.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ '/assets/js/invoice-view.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>

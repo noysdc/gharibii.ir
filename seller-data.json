@@ -1,0 +1,24 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign sorted = site.products | sort: 'sort_id' | reverse -%}
+{
+"store": {{ site.title | jsonify }},
+"phone": {{ site.phone_display | jsonify }},
+"address": {{ site.address | jsonify }},
+"fee": {{ site.shipping_customs_cost | default: 0 | plus: 0 }},
+"valid": {{ site.invoice_valid_minutes | default: 120 | plus: 0 }},
+"sellers": [{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+"products": [{% for p in sorted %}
+{%- assign grp = site.data.price_groups.groups[p.price_group] -%}
+{%- assign oos = p.out_of_stock -%}{%- if grp.out_of_stock -%}{%- assign oos = true -%}{%- endif -%}
+{%- assign praw = p.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- if praw == "" and grp.price -%}{%- assign praw = grp.price | append: "" -%}{%- endif -%}
+{%- assign oraw = p.old_price -%}
+{%- if oraw == nil and grp.old_price -%}{%- assign oraw = grp.old_price -%}{%- endif -%}
+{%- assign oraw = oraw | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- case p.category -%}{%- when 'girls' -%}{%- assign cfa = 'دخترانه' -%}{%- when 'boys' -%}{%- assign cfa = 'پسرانه' -%}{%- when 'bags-shoes' -%}{%- assign cfa = 'کیف و کفش' -%}{%- when 'crown-wand' -%}{%- assign cfa = 'تاج و عصا' -%}{%- else -%}{%- assign cfa = 'اکسسوری' -%}{%- endcase -%}
+{%- assign im = p.images[0] -%}
+{"id":{{ p.url | jsonify }},"t":{{ p.title | jsonify }},"c":{{ cfa | jsonify }},"im":{% if im %}{% capture u %}{% include thumb.html src=im %}{% endcapture %}{{ u | strip | jsonify }}{% else %}""{% endif %},"imf":{% if im %}{% capture u2 %}{% include img.html src=im %}{% endcapture %}{{ u2 | strip | jsonify }}{% else %}""{% endif %},"p":{{ praw | plus: 0 }},"op":{{ oraw | plus: 0 }},"oos":{% if oos %}true{% else %}false{% endif %},"opts":[{% for o in p.options %}{"n":{{ o.name | jsonify }},"v":{{ o.values | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}{% unless forloop.last %},{% endunless %}{% endfor %}]
+}

@@ -1,0 +1,100 @@
+---
+layout: tool
+title: ساخت پیش‌فاکتور
+body_class: inv-seller-page
+permalink: /seller/
+sitemap: false
+---
+<main class="app" id="app">
+  <header class="app-top">
+    <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="44" height="44" class="app-logo">
+    <div class="app-top-text">
+      <h1>ساخت پیش‌فاکتور</h1>
+      <p id="sync-status" class="muted">در حال دریافت قیمت‌ها از سایت…</p>
+    </div>
+    <button type="button" class="btn btn-ghost" id="btn-sync" title="به‌روزرسانی قیمت‌ها از سایت">⟳</button>
+  </header>
+
+  <section class="card">
+    <h2>اطلاعات پیش‌فاکتور</h2>
+    <div class="grid2">
+      <label class="field"><span>نام مشتری (اختیاری)</span><input type="text" id="f-cust" maxlength="60" autocomplete="off"></label>
+      <label class="field"><span>شماره واتساپ مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
+      <label class="field"><span>فروشنده</span><select id="f-seller"></select></label>
+      <label class="field"><span>مدت اعتبار پیش‌فاکتور</span>
+        <select id="f-valid">
+          <option value="30">۳۰ دقیقه</option>
+          <option value="60">۱ ساعت</option>
+          <option value="120">۲ ساعت</option>
+          <option value="360">۶ ساعت</option>
+          <option value="720">۱۲ ساعت</option>
+          <option value="1440">۲۴ ساعت</option>
+          <option value="2880">۴۸ ساعت</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>افزودن محصول</h2>
+    <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
+    <div class="chips" id="chips"></div>
+    <div class="picker" id="picker" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <div class="row-between">
+      <h2>لیست محصولات <span class="badge" id="count">۰</span></h2>
+      <button type="button" class="btn btn-ghost small" id="btn-custom">+ آیتم دلخواه</button>
+    </div>
+    <div id="lines"></div>
+    <p class="muted empty" id="lines-empty">هنوز محصولی انتخاب نشده. از بخش بالا اضافه کنید.</p>
+  </section>
+
+  <section class="card">
+    <h2>هزینه‌ها و توضیحات</h2>
+    <div class="grid2">
+      <label class="field"><span>هزینه ارسال و گمرک (تومان)</span>
+        <span class="inline"><input type="text" id="f-fee" dir="ltr" inputmode="numeric" autocomplete="off"><button type="button" class="btn btn-ghost small" id="btn-fee-reset" title="بازگشت به مبلغ پیش‌فرض">↺</button></span>
+        <small class="muted" id="fee-hint"></small>
+      </label>
+      <label class="field"><span>تخفیف کلی (تومان)</span><input type="text" id="f-disc" dir="ltr" inputmode="numeric" autocomplete="off" placeholder="۰"></label>
+    </div>
+    <label class="field"><span>توضیح برای مشتری (اختیاری)</span><textarea id="f-note" rows="2" maxlength="300" placeholder="مثلاً: ارسال تا دو روز کاری"></textarea></label>
+    <div class="totals" id="totals"></div>
+    <ul class="warns" id="warns"></ul>
+  </section>
+
+  <section class="card" id="out-card" hidden>
+    <h2>پیش‌فاکتور آماده است</h2>
+    <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت پیش‌فاکتور» را بزنید.</p>
+    <div class="out-actions">
+      <button type="button" class="btn btn-wa" id="o-wa">ارسال در واتساپ</button>
+      <button type="button" class="btn" id="o-text">کپی متن</button>
+      <button type="button" class="btn" id="o-link">کپی لینک</button>
+      <button type="button" class="btn" id="o-img">عکس (PNG)</button>
+      <button type="button" class="btn" id="o-pdf">PDF</button>
+    </div>
+    <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک پیش‌فاکتور به انتهای متن</label>
+    <div class="sheet-scroll"><div id="preview"></div></div>
+  </section>
+
+  <section class="card">
+    <h2>پیش‌فاکتورهای اخیر</h2>
+    <div id="history"></div>
+    <label class="field import"><span>باز کردن از لینک یا کد</span>
+      <span class="inline"><input type="text" id="f-import" dir="ltr" placeholder="لینک پیش‌فاکتور را اینجا paste کنید" autocomplete="off"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
+    </label>
+    <button type="button" class="btn btn-danger small" id="btn-new">شروع پیش‌فاکتور جدید (پاک کردن لیست)</button>
+  </section>
+  <div class="spacer"></div>
+</main>
+
+<div class="sticky" id="sticky">
+  <div class="sticky-sum"><b id="s-count">۰ قلم</b><span id="s-total">۰ تومان</span></div>
+  <button type="button" class="btn btn-primary" id="btn-build">ساخت پیش‌فاکتور</button>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="{{ '/assets/js/invoice.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
+<script src="{{ '/assets/js/seller.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
