@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "مایو بیکینی دختر کفشدوزکی"
+title: "مایو سرهمی دختر کفشدوزکی"
 description: "مایو بیکینی دختر کفشدوزکی؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
 slug: "ladybug-bikini"
 category: girls
@@ -16,6 +16,13 @@ options:
     values: ["S - مناسب 2 سال", "M - مناسب 3 سال", "L - مناسب 4 سال", "XL - مناسب 5 سال"]
 tags: ["مایو بیکینی دختر کفشدوزکی", "مایو دختر کفشدوزکی", "مایو دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=0c5d4d4b;d=4ba746e2;g=b29620f1;t=15d2b6b7"
+
+images:
+
+  - /assets/images/products/girls/ladybug-collection-2/ladybug-collection-2-4.webp
+  - /assets/images/products/girls/ladybug-collection-2/ladybug-collection-2-5.webp
+  - /assets/images/products/girls/ladybug-collection-2/ladybug-collection-2-6.webp
+
 ---
 
 <!-- AUTO:START -->

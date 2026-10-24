@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "ladybug-swimsuit (محصول نمونه)"
+title: "مایو دامن دار دختر کفشدوزکی"
 slug: "ladybug-swimsuit"
 category: girls
 gender: girls
