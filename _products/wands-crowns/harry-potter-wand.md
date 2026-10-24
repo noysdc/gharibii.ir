@@ -16,15 +16,15 @@ webzi_images: ["f7775571783e4df58c4f18bd6a310ba6.jpg", "5b5080cbf4ed4e2d8aa433b6
 tags: ["عصای جادویی هری پاتر", "عصای جادویی هری پاتر پسرانه", "هری پاتر", "هاگوارتز", "جادوگر", "عصای جادویی", "عصا جادویی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=39ae7be5;d=497522e7;g=d1cf8db1;t=683ceed8"
 images:
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-1.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-3.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-5.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-7.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-9.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-11.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-13.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-15.webp
-  - /assets/images/products/crown-wand/harry-potter-wand/harry-potter-wand-17.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-1.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-3.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-5.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-7.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-9.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-11.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-13.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-15.webp
+  - /assets/images/products/wands-crowns/harry-potter-wand/harry-potter-wand-17.webp
 ---
 
 <!-- AUTO:START -->

@@ -20,15 +20,15 @@ tags: ["تل تاج پرنسسی گیس‌دار", "تل تاج دخترانه",
 
 auto_sig: "b=1699c309;d=8d32e8c8;g=5c5237c8;t=96fe2929"
 images:
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-1.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-2.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-3.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-4.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-5.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-6.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-7.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-8.webp
-  - /assets/images/products/crown-wand/princess-braid-crown/princess-braid-crown-9.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-1.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-2.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-3.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-4.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-5.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-6.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-7.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-8.webp
+  - /assets/images/products/wands-crowns/princess-braid-crown/princess-braid-crown-9.webp
 ---
 
 <!-- AUTO:START -->
