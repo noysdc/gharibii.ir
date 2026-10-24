@@ -2,7 +2,7 @@
 layout: product
 title: "مایو سرهمی دختر کفشدوزکی"
 description: "مایو سرهمی دختر کفشدوزکی؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
-slug: "ladybug-bikini"
+slug: "ladybug-one-piece-wimsuit"
 category: girls
 gender: girls
 price: "498,000"
