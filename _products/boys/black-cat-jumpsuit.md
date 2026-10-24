@@ -5,7 +5,7 @@ description: "سرهمی گربه سیاه؛ مناسب جشن تولد، مهم
 slug: "black-cat-jumpsuit"
 category: boys
 gender: boys
-price: "0"
+price: ""
 price group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/black-cat-jumpsuit/"]
