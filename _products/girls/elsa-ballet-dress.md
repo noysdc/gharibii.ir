@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن باله السا | پرنسسی"
+title: "لباس باله السا | پرنسسی"
 description: "پیراهن باله السا؛ مناسب کلاس باله، اجرای روی صحنه، جشن تولد و مهمانی‌های تم‌دار. سفارش از فروشگاه غریبی کیش."
 slug: "elsa-ballet-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_13"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-ballet-dress/"]
 webzi_id: 45338

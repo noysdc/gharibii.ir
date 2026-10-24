@@ -6,7 +6,7 @@ slug: "ballet-dance-dress-2"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_4"
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ballet-dance-dress-2/"]
 webzi_id: 45432

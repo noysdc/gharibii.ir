@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "پیراهن پرنسسی السا فروزن | تک‌رنگ"
+title: "لباس پرنسسی السا فروزن | تک‌رنگ"
 description: "پیراهن پرنسسی السا فروزن؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "original-elsa-frozen-dress"
 category: girls

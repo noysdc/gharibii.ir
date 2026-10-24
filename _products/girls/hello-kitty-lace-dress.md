@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن توری هلو کیتی | دخترانه"
+title: "لباس توری هلو کیتی | دخترانه"
 description: "پیراهن توری هلو کیتی؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
 slug: "hello-kitty-lace-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_9"
+price_group: "p_2598000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/hello-kitty-lace-dress/"]
 webzi_id: 45424

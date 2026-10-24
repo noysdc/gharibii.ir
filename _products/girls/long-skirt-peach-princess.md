@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "دامن بلند پرنسس پیچ"
+title: "لباس پرنسس پیچ | دامن بلند"
 description: "دامن بلند پرنسس پیچ؛ مناسب مهمانی، رقص، تولد و استایل روزمره. سفارش از فروشگاه غریبی کیش."
 slug: "long-skirt-peach-princess"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_4"
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/long-skirt-peach-princess/"]
 webzi_id: 45371

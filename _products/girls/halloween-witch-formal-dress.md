@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن مجلسی جادوگر هالووین | دخترانه"
+title: "لباس مجلسی جادوگر هالووین | دخترانه"
 description: "پیراهن مجلسی جادوگر هالووین؛ انتخابی عالی برای تولد، عروسی و جشن‌های کودکانه. سفارش از فروشگاه غریبی کیش."
 slug: "halloween-witch-formal-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_9"
+price_group: "tier_10"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/halloween-witch-formal-dress/"]
 webzi_id: 45420

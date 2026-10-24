@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن توری تکشاخ | رنگ‌های متنوع"
+title: "لباس توری تکشاخ | رنگ‌های متنوع"
 description: "پیراهن توری تکشاخ؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
 slug: "unicorn-lace-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_9"
+price_group: "p_2598000"
 currency: IRT
 images_dirs: ["/assets/images/products/unicorn-lace-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: unicorn-lace-dress

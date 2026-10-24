@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن سگ‌های نگهبان | آستر نخی"
+title: "لباس سگ‌های نگهبان | آستر نخی"
 description: "پیراهن سگ‌های نگهبان؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "paw-patrol-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_5"
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/paw-patrol-dress/"]
 webzi_id: 45359

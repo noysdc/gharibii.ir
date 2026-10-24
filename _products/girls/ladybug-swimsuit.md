@@ -5,6 +5,7 @@ slug: "ladybug-swimsuit"
 category: girls
 gender: girls
 price: "0"
+price group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-swimsuit/"]
 needs_review: true

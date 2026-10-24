@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن باله پرنسسی | مخصوص رقص"
+title: "لباس باله پرنسسی | مخصوص رقص"
 description: "پیراهن باله پرنسسی؛ مناسب کلاس باله، اجرای روی صحنه، جشن تولد و مهمانی‌های تم‌دار. سفارش از فروشگاه غریبی کیش."
 slug: "princess-ballet-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_4"
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/princess-ballet-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: princess-ballet-dress

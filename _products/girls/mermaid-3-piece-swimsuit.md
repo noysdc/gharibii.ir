@@ -6,7 +6,7 @@ slug: "mermaid-3-piece-swimsuit"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_10"
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/mermaid-3-piece-swimsuit/"]
 webzi_id: 45422

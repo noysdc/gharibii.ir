@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن توری پونی | رنگ‌های متنوع"
+title: "لباس توری پونی | رنگ‌های متنوع"
 description: "پیراهن توری پونی؛ انتخابی زیبا برای تولد و مهمانی‌های کودکانه. سفارش از فروشگاه غریبی کیش."
 slug: "my-little-pony-lace-dress"
 category: girls
 gender: girls
-price: ""
-price_group: "tier_12"
+price: "798000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/my-little-pony-lace-dress/"]
 webzi_id: 45427

@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "پیراهن مجلسی ونزدی | پرنسسی"
+title: "لباس مجلسی ونزدی | پرنسسی"
 description: "پیراهن مجلسی ونزدی؛ مناسب جشن تولد، مهمانی‌های خانوادگی، عکاسی و مراسم خاص. سفارش از فروشگاه غریبی کیش."
 slug: "wednesday-formal-dress"
 category: girls

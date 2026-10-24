@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "پیراهن پرنسسی آنا | دخترانه"
+title: "لباس پرنسسی آنا | دخترانه"
 description: "پیراهن پرنسسی آنا؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "princess-anna-dress"
 category: girls

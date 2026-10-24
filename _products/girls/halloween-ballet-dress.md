@@ -1,11 +1,12 @@
 ---
 layout: product
-title: "پیراهن باله هالووین | دخترانه"
+title: "لباس باله هالووین | دخترانه"
 description: "پیراهن باله هالووین؛ انتخابی زیبا برای رقص، عکاسی و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "halloween-ballet-dress"
 category: girls
 gender: girls
-price: "1,698,000"
+price: "0"
+price group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/halloween-ballet-dress/"]
 webzi_id: 45342

@@ -5,8 +5,8 @@ description: "ست نخی راحتی؛ مناسب جشن تولد، مهمانی
 slug: "cotton-comfort-set"
 category: girls
 gender: girls
-price: ""
-price_group: "tier_3"
+price: "1298000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/cotton-comfort-set/"]
 webzi_id: 45351

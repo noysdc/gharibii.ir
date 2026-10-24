@@ -5,8 +5,8 @@ description: "بادی ژیمناستیک و باله دخترانه؛ مناس�
 slug: "girls-ballet-gymnastics-bodysuit"
 category: girls
 gender: girls
-price: ""
-price_group: "tier_5"
+price: "1998000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-ballet-gymnastics-bodysuit/"]
 webzi_id: 45394

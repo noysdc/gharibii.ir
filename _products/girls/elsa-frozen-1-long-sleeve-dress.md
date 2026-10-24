@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "پیراهن مجلسی السا فروزن ۱ | آستین بلند"
+title: "لباس مجلسی السا فروزن ۱ | آستین بلند"
 description: "پیراهن مجلسی السا فروزن ۱؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "elsa-frozen-1-long-sleeve-dress"
 category: girls

@@ -1,13 +1,13 @@
 ---
 layout: product
-title: "پیراهن پرنسسی سیندرلا | همراه دستکش"
+title: "لباس پرنسسی سیندرلا | همراه دستکش"
 description: "پیراهن پرنسسی سیندرلا؛ مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 seo_keywords: ["لباس سیندرلا دخترانه", "لباس پرنسسی دخترانه", "لباس فانتزی سیندرلا", "لباس مجلسی دخترانه", "لباس آبی پرنسسی", "لباس سیندرلا با دستکش", "لباس دیزنی دخترانه", "خرید لباس فانتزی کودک"]
 folder: "new-cinderella-with-gloves"
 category: girls
 gender: girls
-price_group: "in_stock"
-price: "0"
+price_group: "tier_1"
+price: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/new-cinderella-with-gloves/"]
 needs_review: true

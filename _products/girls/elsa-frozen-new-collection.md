@@ -6,8 +6,8 @@ seo_keywords: ["لباس السا دخترانه", "لباس فانتزی دخت
 folder: "elsa-frozen-new-collection"
 category: girls
 gender: girls
-price_group: "in_stock"
-price: "0"
+price_group: "tier_1"
+price: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-frozen-new-collection/"]
 needs_review: true

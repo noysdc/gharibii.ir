@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن آستین بلند السا | دامن توری تمام‌نخ"
+title: "لباس آستین بلند السا | دامن توری تمام‌نخ"
 description: "پیراهن آستین بلند السا؛ مناسب جشن تولد، مهمانی و عکاسی. سفارش از فروشگاه غریبی کیش."
 slug: "elsa-long-sleeve-lace-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_4"
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-long-sleeve-lace-dress/"]
 webzi_id: 45436

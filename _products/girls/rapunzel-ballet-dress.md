@@ -1,11 +1,12 @@
 ---
 layout: product
-title: "پیراهن باله راپونزل | پرنسسی"
+title: "باله باله راپونزل | پرنسسی"
 description: "پیراهن باله راپونزل؛ انتخابی زیبا برای رقص، عکاسی و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "rapunzel-ballet-dress"
 category: girls
 gender: girls
-price: "2,698,000"
+price: "0"
+price group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/rapunzel-ballet-dress/"]
 webzi_id: 45339

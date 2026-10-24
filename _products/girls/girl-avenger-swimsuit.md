@@ -1,11 +1,11 @@
 ---
 layout: product
-title: "مایو سرهمی اونجرز | دخترانه"
+title: "مایو سرهمی ال او ال | دخترانه"
 description: "مایو سرهمی اونجرز؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
 folder: "girl-avenger-swimsuit"
 category: girls
 gender: girls
-price: "0"
+price: "1998000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girl-avenger-swimsuit/"]
 needs_review: true

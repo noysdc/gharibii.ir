@@ -5,7 +5,7 @@ description: "بادی مجلسی نوزادی؛ مناسب جشن تولد و �
 slug: "baby-formal-bodysuit"
 category: girls
 gender: girls
-price: "2,498,000"
+price: "2598000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/baby-formal-bodysuit/"]
 webzi_id: 45335

@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن دختر کفشدوزکی | آستر نخی"
+title: "لباس دختر کفشدوزکی | آستر نخی"
 description: "پیراهن دختر کفشدوزکی؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "ladybug-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_5"
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-dress/"]
 webzi_id: 45370

@@ -6,7 +6,7 @@ slug: "bikini-elsa-swimsuit"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_5"
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/bikini-elsa-swimsuit/"]
 webzi_id: 45372

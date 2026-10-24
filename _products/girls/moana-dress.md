@@ -1,11 +1,11 @@
 ---
 layout: product
-title: "پیراهن پرنسس موانا | دخترانه"
+title: "لباس پرنسس موانا | دخترانه"
 description: "پیراهن پرنسس موانا؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "moana-dress"
 category: girls
 gender: girls
-price: "989,000"
+price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/moana-dress/"]
 webzi_id: 45421

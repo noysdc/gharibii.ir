@@ -6,7 +6,7 @@ slug: "paw-patrol-swimsuit"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_5"
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/paw-patrol-swimsuit/"]
 webzi_id: 45367

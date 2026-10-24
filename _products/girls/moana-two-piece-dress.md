@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "پیراهن دوتکه موانا | پرنسسی"
+title: "لباس دوتکه موانا | پرنسسی"
 description: "پیراهن دوتکه موانا؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "moana-two-piece-dress"
 category: girls

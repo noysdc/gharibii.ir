@@ -1,12 +1,12 @@
 ---
 layout: product
-title: "پیراهن باله پرنسس جاسمین | جنس نخی"
+title: "لباس باله پرنسس جاسمین | جنس نخی"
 description: "پیراهن باله پرنسس جاسمین؛ مناسب کلاس باله، اجرای روی صحنه، جشن تولد و مهمانی‌های تم‌دار. سفارش از فروشگاه غریبی کیش."
 slug: "jasmine-ballet-dress"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_4"
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/jasmine-ballet-dress/"]
 webzi_id: 45337

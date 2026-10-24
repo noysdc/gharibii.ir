@@ -6,7 +6,7 @@ slug: "girls-tutu-ballet-skirt"
 category: girls
 gender: girls
 price: ""
-price_group: "tier_11"
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-tutu-ballet-skirt/"]
 webzi_id: 45349
