@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "مایو سرهمی دختر کفشدوزکی"
-description: "مایو بیکینی دختر کفشدوزکی؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
+description: "مایو سرهمی دختر کفشدوزکی؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
 slug: "ladybug-bikini"
 category: girls
 gender: girls
@@ -14,15 +14,14 @@ webzi_images: ["72fb9ac38def4c13a5d14153324019ad.JPG", "82dbbe0e3e764848b9706569
 options:
   - name: "اندازه"
     values: ["S - مناسب 2 سال", "M - مناسب 3 سال", "L - مناسب 4 سال", "XL - مناسب 5 سال"]
-tags: ["مایو بیکینی دختر کفشدوزکی", "مایو دختر کفشدوزکی", "مایو دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
-auto_sig: "b=0c5d4d4b;d=4ba746e2;g=b29620f1;t=15d2b6b7"
+tags: ["مایو سرهمی دختر کفشدوزکی", "مایو دختر کفشدوزکی", "مایو دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "b=0c5d4d4b;d=9613b655;g=f656b9a0;t=15d2b6b7"
 
 images:
 
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-1.webp
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-2.webp
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-3.webp
-
 ---
 
 <!-- AUTO:START -->
