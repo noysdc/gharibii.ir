@@ -6,7 +6,7 @@ slug: "pirate-hat"
 category: accessories
 gender: boys
 price group: "out_of_stock"
-price: ""
+price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/pirate-hat/"]
 webzi_id: 45413
