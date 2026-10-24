@@ -16,9 +16,7 @@ options:
     values: ["S - مناسب 2 سال", "M - مناسب 3 سال", "L - مناسب 4 سال", "XL - مناسب 5 سال"]
 tags: ["مایو بیکینی دختر کفشدوزکی", "مایو دختر کفشدوزکی", "مایو دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=0c5d4d4b;d=4ba746e2;g=b29620f1;t=15d2b6b7"
-
 images:
-
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-1.webp
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-2.webp
   - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-3.webp
