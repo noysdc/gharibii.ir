@@ -6,7 +6,7 @@ slug: "ladybug-one-piece-swimsuit"
 category: girls
 gender: girls
 price: ""
-price group" "tier_9"
+price group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-one-piece-swimsuit/"]
 webzi_id: 45428
