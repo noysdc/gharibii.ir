@@ -5,8 +5,8 @@ description: "مایو سرهمی دختر کفشدوزکی؛ مناسب است�
 slug: "ladybug-one-piece-swimsuit"
 category: girls
 gender: girls
-price: ""
-price group: "tier_9"
+price: "1998000"
+price group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-one-piece-swimsuit/"]
 webzi_id: 45428
