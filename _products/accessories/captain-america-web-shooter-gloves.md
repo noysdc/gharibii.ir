@@ -5,7 +5,8 @@ description: "ست دستکش تیرپرتاب‌کن کاپیتان آمریک�
 slug: "captain-america-web-shooter-gloves"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/captain-america-web-shooter-gloves/"]
 webzi_id: 45389

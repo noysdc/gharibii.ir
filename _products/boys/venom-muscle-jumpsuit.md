@@ -5,7 +5,8 @@ description: "سرهمی عضلانی ونوم؛ انتخابی هیجان‌ا�
 slug: "venom-muscle-jumpsuit"
 category: boys
 gender: boys
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/venom-muscle-jumpsuit/"]
 webzi_id: 45384

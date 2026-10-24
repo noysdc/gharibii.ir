@@ -5,7 +5,8 @@ description: "مایو سرهمی اونجرز؛ انتخابی شاد برای 
 slug: "boy-avenger-swimsuit"
 category: boys
 gender: boys
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/boy-avenger-swimsuit/"]
 webzi_id: 45366

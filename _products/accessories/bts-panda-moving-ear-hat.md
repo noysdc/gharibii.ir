@@ -5,7 +5,8 @@ description: "کلاه پمپی پاندا بی‌تی‌اس؛ انتخابی �
 slug: "bts-panda-moving-ear-hat"
 category: accessories
 gender: unisex
-price: "898,000"
+price: ""
+price_group: "tier_8"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/bts-panda-moving-ear-hat/"]
 webzi_id: 45426

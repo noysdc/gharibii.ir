@@ -5,7 +5,8 @@ description: "ماسک صورت اسپایدرمن؛ مناسب جشن تولد�
 slug: "spiderman-light-face-mask"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/spiderman-light-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: spiderman-light-face-mask

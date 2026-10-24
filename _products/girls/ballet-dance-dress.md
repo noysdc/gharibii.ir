@@ -5,7 +5,8 @@ description: "پیراهن رقص باله؛ انتخابی زیبا برای ر
 slug: "ballet-dance-dress"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ballet-dance-dress/"]
 webzi_id: 45430

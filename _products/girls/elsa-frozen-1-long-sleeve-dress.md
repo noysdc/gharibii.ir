@@ -5,7 +5,8 @@ description: "پیراهن مجلسی السا فروزن ۱؛ انتخابی ع
 slug: "elsa-frozen-1-long-sleeve-dress"
 category: girls
 gender: girls
-price: "3,998,000"
+price: ""
+price_group: "tier_10"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/"]
 webzi_id: 45343

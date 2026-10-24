@@ -5,7 +5,8 @@ description: "مایو سگ‌های نگهبان؛ انتخابی شاد برا
 slug: "paw-patrol-swimsuit"
 category: girls
 gender: girls
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/paw-patrol-swimsuit/"]
 webzi_id: 45367

@@ -5,7 +5,8 @@ description: "پیراهن سگ‌های نگهبان؛ انتخابی عالی 
 slug: "paw-patrol-dress"
 category: girls
 gender: girls
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/paw-patrol-dress/"]
 webzi_id: 45359

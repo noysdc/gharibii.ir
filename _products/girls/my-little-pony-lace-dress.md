@@ -5,7 +5,8 @@ description: "پیراهن توری پونی؛ انتخابی زیبا برای 
 slug: "my-little-pony-lace-dress"
 category: girls
 gender: girls
-price: "598,000"
+price: ""
+price_group: "tier_12"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/my-little-pony-lace-dress/"]
 webzi_id: 45427

@@ -5,7 +5,8 @@ description: "پیراهن مجلسی تینکربل؛ مناسب جشن تول�
 slug: "tinkerbell-formal-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/tinkerbell-formal-dress/"]
 webzi_id: 45355

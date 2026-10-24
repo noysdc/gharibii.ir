@@ -5,7 +5,8 @@ description: "پیراهن پرنسسی راپونزل؛ انتخابی عالی
 slug: "rapunzel-disney-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/rapunzel-disney-dress/"]
 webzi_id: 45439

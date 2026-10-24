@@ -5,7 +5,8 @@ description: "پیراهن باله پرنسس جاسمین؛ مناسب کلا�
 slug: "jasmine-ballet-dress"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/jasmine-ballet-dress/"]
 webzi_id: 45337

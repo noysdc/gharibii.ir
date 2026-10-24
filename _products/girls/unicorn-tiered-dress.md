@@ -5,7 +5,8 @@ description: "پیراهن توری تکشاخ؛ مناسب جشن تولد، م
 slug: "unicorn-tiered-dress"
 category: girls
 gender: girls
-price: "2,598,000"
+price: ""
+price_group: "p_2598000"
 currency: IRT
 options:
   - name: "اندازه"

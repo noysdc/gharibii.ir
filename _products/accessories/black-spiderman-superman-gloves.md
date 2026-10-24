@@ -5,7 +5,8 @@ description: "ست دستکش تیرپرتاب‌کن اسپایدرمن سیا�
 slug: "black-spiderman-superman-gloves"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/black-spiderman-superman-gloves/"]
 webzi_id: 45388

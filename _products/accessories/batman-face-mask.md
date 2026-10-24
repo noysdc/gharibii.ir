@@ -5,7 +5,8 @@ description: "ماسک صورت بتمن؛ مناسب جشن تولد، مهما
 slug: "batman-face-mask"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/batman-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: batman-face-mask

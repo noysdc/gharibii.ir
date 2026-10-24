@@ -5,7 +5,8 @@ description: "گردنبند موانا؛ مناسب هدیه، مهمانی و 
 slug: "moana-necklace"
 category: accessories
 gender: unisex
-price: "198,000"
+price: ""
+price_group: "tier_6"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/moana-necklace/"]
 webzi_id: 45415

@@ -5,7 +5,8 @@ description: "عصای جادویی هری پاتر؛ مناسب جشن تولد
 slug: "harry-potter-wand"
 category: crown-wand
 gender: boys
-price: "198,000"
+price: ""
+price_group: "tier_6"
 currency: IRT
 images_dirs: ["/assets/images/products/crown-wand/harry-potter-wand/"]
 webzi_id: 45374

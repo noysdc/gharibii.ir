@@ -5,7 +5,8 @@ description: "ماسک صورت گربه؛ مناسب جشن تولد، مهما
 slug: "cat-mask"
 category: accessories
 gender: unisex
-price: "198,000"
+price: ""
+price_group: "tier_6"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/cat-mask/"]
 webzi_id: 45414

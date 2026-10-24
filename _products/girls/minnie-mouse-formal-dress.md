@@ -5,7 +5,8 @@ description: "پیراهن مجلسی مینی موس؛ مناسب جشن تول
 slug: "minnie-mouse-formal-dress"
 category: girls
 gender: girls
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/minnie-mouse-formal-dress/"]
 webzi_id: 45346

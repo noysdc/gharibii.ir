@@ -5,7 +5,8 @@ description: "لباس پرنسسی زیبای خفته؛ انتخابی عال�
 slug: "sleeping-beauty-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/sleeping-beauty-dress/"]
 webzi_id: 45331

@@ -5,7 +5,8 @@ description: "پیراهن مجلسی تکشاخ؛ مناسب جشن تولد، 
 slug: "unicorn-formal-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/unicorn-formal-dress/"]
 webzi_id: 45354

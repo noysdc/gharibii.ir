@@ -5,7 +5,8 @@ description: "لباس رومی هانتریکس با طراحی الهام‌گ
 slug: "kpop-huntrix-rumi-2"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/kpop-huntrix-rumi-2/"]
 webzi_id: 45447

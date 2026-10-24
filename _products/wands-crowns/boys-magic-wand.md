@@ -5,7 +5,8 @@ description: "عصای جادویی پسرانه؛ مناسب جشن تولد، 
 slug: "boys-magic-wand"
 category: crown-wand
 gender: boys
-price: "298,000"
+price: ""
+price_group: "tier_7"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/boys-magic-wand/"]
 webzi_id: 45364

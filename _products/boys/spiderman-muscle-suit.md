@@ -5,7 +5,8 @@ description: "لباس عضلانی اسپایدرمن؛ انتخابی هیجا
 slug: "spiderman-muscle-suit"
 category: boys
 gender: boys
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/spiderman-muscle-suit/"]
 webzi_id: 45390

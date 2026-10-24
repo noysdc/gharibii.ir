@@ -5,7 +5,8 @@ description: "تاپ نخی دخترانه؛ مناسب استایل روزمر�
 slug: "girls-cotton-top"
 category: girls
 gender: girls
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-cotton-top/"]
 webzi_id: 45348

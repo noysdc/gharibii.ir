@@ -5,7 +5,8 @@ description: "پیراهن مجلسی پرنسس جاسمین؛ انتخابی �
 slug: "jasmine-formal-dress"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/jasmine-formal-dress/"]
 webzi_id: 45340

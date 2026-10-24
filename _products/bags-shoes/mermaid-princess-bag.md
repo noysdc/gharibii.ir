@@ -5,7 +5,8 @@ description: "کیف پرنسسی پری دریایی؛ مناسب بیرون ر
 slug: "mermaid-princess-bag"
 category: bags-shoes
 gender: girls
-price: "298,000"
+price: ""
+price_group: "tier_7"
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/mermaid-princess-bag/"]
 webzi_id: 2

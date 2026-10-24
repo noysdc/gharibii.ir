@@ -5,7 +5,8 @@ description: "لباس پرنسسی السا فروزن؛ انتخابی عال�
 slug: "elsa-frozen-dress-with-cape"
 category: accessories
 gender: unisex
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/elsa-frozen-dress-with-cape/"]
 webzi_id: 45437

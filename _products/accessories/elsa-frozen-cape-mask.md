@@ -5,7 +5,8 @@ description: "ست شنل و ماسک السا فروزن؛ مناسب جشن ت
 slug: "elsa-frozen-cape-mask"
 category: accessories
 gender: unisex
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/elsa-frozen-cape-mask/"]
 webzi_id: 45404

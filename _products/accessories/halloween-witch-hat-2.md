@@ -5,7 +5,8 @@ description: "تل تاج جادوگری هالووین؛ مناسب مهمان�
 slug: "halloween-witch-hat-2"
 category: accessories
 gender: unisex
-price: "298,000"
+price: ""
+price_group: "tier_7"
 currency: IRT
 images_dirs: ["/assets/images/products/halloween-witch-hat-2/", "/assets/images/products/witch-halloween-hat-tinsel/"]
 webzi_id: 45395

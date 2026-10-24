@@ -5,7 +5,8 @@ description: "پیراهن مجلسی کرومی؛ انتخابی عالی بر�
 slug: "chrome-formal-dress"
 category: girls
 gender: girls
-price: "2,598,000"
+price: ""
+price_group: "p_2598000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/chrome-formal-dress/"]
 webzi_id: 45442

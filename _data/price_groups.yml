@@ -58,3 +58,7 @@ groups:
     label: "اتمام موجودی"
     out_of_stock: true
     price: 0
+
+  p_2598000:
+    label: "2 محصول هم‌قیمت"
+    price: 2598000

@@ -5,7 +5,8 @@ description: "سرهمی عضلانی اسپایدرمن سیاه؛ مناسب �
 slug: "spiderman-black-muscle-jumpsuit"
 category: boys
 gender: boys
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/spiderman-black-muscle-jumpsuit/"]
 webzi_id: 45378

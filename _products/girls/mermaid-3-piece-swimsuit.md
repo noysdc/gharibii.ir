@@ -5,7 +5,8 @@ description: "مایو سه‌تکه پری دریایی؛ انتخابی شاد
 slug: "mermaid-3-piece-swimsuit"
 category: girls
 gender: girls
-price: "3,998,000"
+price: ""
+price_group: "tier_10"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/mermaid-3-piece-swimsuit/"]
 webzi_id: 45422

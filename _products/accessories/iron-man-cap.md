@@ -5,7 +5,8 @@ description: "کلاه کپ آیرون من؛ مناسب بیرون رفتن، �
 slug: "iron-man-cap"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45400

@@ -5,7 +5,8 @@ description: "ست تاج و تل پرنسسی؛ مناسب جشن تولد، م
 slug: "crown-and-tinsel"
 category: crown-wand
 gender: girls
-price: "298,000"
+price: ""
+price_group: "tier_7"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/crown-and-tinsel/"]
 webzi_id: 45365

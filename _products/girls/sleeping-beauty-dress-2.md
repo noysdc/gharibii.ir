@@ -5,7 +5,8 @@ description: "پیراهن پرنسس اورورا با طراحی الهام‌
 slug: "sleeping-beauty-dress-2"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/sleeping-beauty-dress-2/"]
 webzi_id: 45341

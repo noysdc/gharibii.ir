@@ -5,7 +5,8 @@ description: "لباس موانا ۲؛ انتخابی عالی برای تولد
 slug: "moana-2-collection-2026"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/moana-2-collection-2026/"]
 webzi_id: 45444

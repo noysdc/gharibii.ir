@@ -5,7 +5,8 @@ description: "پیراهن باله السا؛ مناسب کلاس باله، ا
 slug: "elsa-ballet-dress"
 category: girls
 gender: girls
-price: "2,998,000"
+price: ""
+price_group: "tier_13"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-ballet-dress/"]
 webzi_id: 45338

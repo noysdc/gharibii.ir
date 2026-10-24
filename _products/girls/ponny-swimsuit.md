@@ -5,7 +5,8 @@ description: "پیراهن توری پونی؛ مناسب جشن تولد، مه
 slug: "ponny-swimsuit"
 category: girls
 gender: girls
-price: "598,000"
+price: ""
+price_group: "tier_12"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ponny-swimsuit/"]
 webzi_id: 99902

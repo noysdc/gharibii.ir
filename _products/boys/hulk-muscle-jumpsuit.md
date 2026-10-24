@@ -5,7 +5,8 @@ description: "سرهمی عضلانی هالک؛ مناسب جشن تولد، م
 slug: "hulk-muscle-jumpsuit"
 category: boys
 gender: boys
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/hulk-muscle-jumpsuit/"]
 webzi_id: 7

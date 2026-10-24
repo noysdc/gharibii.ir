@@ -5,7 +5,8 @@ description: "پیراهن پرنسس پیچ؛ مناسب جشن تولد، مه
 slug: "peach-princess-dress"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/peach-princess-dress/"]
 webzi_id: 5

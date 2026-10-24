@@ -5,7 +5,8 @@ description: "تل تاج پرنسسی گیس‌دار؛ ست کردن با لب
 slug: "princess-braid-crown"
 category: crown-wand
 gender: girls
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/crown-wand/princess-braid-crown/"]
 webzi_id: 45416

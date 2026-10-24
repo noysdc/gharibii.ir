@@ -5,7 +5,8 @@ description: "مایو السا فروزن؛ انتخابی شاد برای تا
 slug: "bikini-elsa-swimsuit"
 category: girls
 gender: girls
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/bikini-elsa-swimsuit/"]
 webzi_id: 45372

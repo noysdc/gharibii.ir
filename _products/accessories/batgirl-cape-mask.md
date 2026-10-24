@@ -5,7 +5,8 @@ description: "ست شنل و ماسک بتگرل؛ ست کامل‌کننده‌
 slug: "batgirl-cape-mask"
 category: accessories
 gender: unisex
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/batgirl-cape-mask/"]
 webzi_id: 45410

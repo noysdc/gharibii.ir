@@ -5,7 +5,8 @@ description: "سرهمی عضلانی فلش؛ انتخابی هیجان‌ان�
 slug: "flash-muscle-jumpsuit"
 category: boys
 gender: boys
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/flash-muscle-jumpsuit/"]
 webzi_id: 45379

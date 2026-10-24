@@ -5,7 +5,8 @@ description: "پیراهن السا فروزن ۲؛ انتخابی عالی بر
 slug: "elsa-frozen-2-dress"
 category: girls
 gender: girls
-price: "1,598,000"
+price: ""
+price_group: "tier_5"
 currency: IRT
 images_dirs: ["/assets/images/products/elsa-frozen-2-dress/"]
 webzi_id: 45393

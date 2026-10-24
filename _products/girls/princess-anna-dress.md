@@ -5,7 +5,8 @@ description: "پیراهن پرنسسی آنا؛ انتخابی عالی برا�
 slug: "princess-anna-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/princess-anna-dress/"]
 webzi_id: 45322

@@ -5,7 +5,8 @@ description: "پیراهن دوتکه موانا؛ انتخابی عالی بر�
 slug: "moana-two-piece-dress"
 category: girls
 gender: girls
-price: "3,998,000"
+price: ""
+price_group: "tier_10"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/moana-two-piece-dress/"]
 webzi_id: 4

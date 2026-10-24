@@ -5,7 +5,8 @@ description: "ست شنل و ماسک سوپرمن؛ مناسب جشن تولد�
 slug: "superman-cape-mask"
 category: accessories
 gender: boys
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/superman-cape-mask/"]
 webzi_id: 45407

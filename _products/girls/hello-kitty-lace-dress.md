@@ -5,7 +5,8 @@ description: "پیراهن توری هلو کیتی؛ مناسب جشن تولد
 slug: "hello-kitty-lace-dress"
 category: girls
 gender: girls
-price: "1,998,000"
+price: ""
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/hello-kitty-lace-dress/"]
 webzi_id: 45424

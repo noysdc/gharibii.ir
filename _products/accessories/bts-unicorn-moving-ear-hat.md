@@ -5,7 +5,8 @@ description: "کلاه پمپی تکشاخ بی‌تی‌اس؛ مناسب مه�
 slug: "bts-unicorn-moving-ear-hat"
 category: accessories
 gender: unisex
-price: "898,000"
+price: ""
+price_group: "tier_8"
 currency: IRT
 images_dirs: ["/assets/images/products/bts-unicorn-moving-ear-hat/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: bts-unicorn-moving-ear-hat

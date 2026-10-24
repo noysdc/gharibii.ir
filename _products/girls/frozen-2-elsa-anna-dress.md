@@ -5,7 +5,8 @@ description: "لباس پرنسسی فروزن ۲ با طراحی الهام‌�
 slug: "frozen-2-elsa-anna-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/frozen-2-elsa-anna-dress/"]
 webzi_id: 8

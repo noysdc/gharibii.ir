@@ -5,7 +5,8 @@ description: "تل موی رنگی؛ مناسب تولد، مهمانی و اس�
 slug: "colored-hair-tinsel"
 category: crown-wand
 gender: girls
-price: "298,000"
+price: ""
+price_group: "tier_7"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/colored-hair-tinsel/"]
 webzi_id: 45362

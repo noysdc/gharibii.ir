@@ -5,7 +5,8 @@ description: "پیراهن مجلسی جادوگر هالووین؛ انتخاب
 slug: "halloween-witch-formal-dress"
 category: girls
 gender: girls
-price: "1,998,000"
+price: ""
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/halloween-witch-formal-dress/"]
 webzi_id: 45420

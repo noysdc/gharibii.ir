@@ -5,7 +5,8 @@ description: "دامن بلند پرنسس پیچ؛ مناسب مهمانی، ر
 slug: "long-skirt-peach-princess"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/long-skirt-peach-princess/"]
 webzi_id: 45371

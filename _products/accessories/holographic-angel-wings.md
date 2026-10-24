@@ -5,7 +5,8 @@ description: "بال فرشته هولوگرامی؛ مناسب جشن تولد�
 slug: "holographic-angel-wings"
 category: accessories
 gender: unisex
-price: "598,000"
+price: ""
+price_group: "tier_12"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/holographic-angel-wings/"]
 webzi_id: 45369

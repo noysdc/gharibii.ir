@@ -5,7 +5,8 @@ description: "ست دستکش تیرپرتاب‌کن اسپایدرمن؛ من�
 slug: "spiderman-web-shooter-gloves"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/spiderman-web-shooter-gloves/"]
 webzi_id: 45386

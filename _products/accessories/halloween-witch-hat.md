@@ -5,7 +5,8 @@ description: "کلاه جادوگری هالووین؛ مناسب مهمانی �
 slug: "halloween-witch-hat"
 category: accessories
 gender: unisex
-price: "198,000"
+price: ""
+price_group: "tier_6"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/halloween-witch-hat/"]
 webzi_id: 45402

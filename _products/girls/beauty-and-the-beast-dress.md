@@ -5,7 +5,8 @@ description: "لباس پرنسسی دیو و دلبر؛ انتخابی عالی
 slug: "beauty-and-the-beast-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/beauty-and-the-beast-dress/"]
 webzi_id: 45330

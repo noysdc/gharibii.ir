@@ -5,7 +5,8 @@ description: "لباس پرنسسی سیندرلا؛ انتخابی عالی ب�
 slug: "disney-cinderella-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/disney-cinderella-dress/"]
 webzi_id: 45353

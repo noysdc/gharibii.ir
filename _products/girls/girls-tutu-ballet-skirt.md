@@ -5,7 +5,8 @@ description: "دامن توتو باله؛ مناسب مهمانی، رقص، ت
 slug: "girls-tutu-ballet-skirt"
 category: girls
 gender: girls
-price: "698,000"
+price: ""
+price_group: "tier_11"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-tutu-ballet-skirt/"]
 webzi_id: 45349

@@ -5,7 +5,8 @@ description: "ناخن مصنوعی با طراحی الهام‌گرفته از
 slug: "fake-nails"
 category: accessories
 gender: unisex
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/fake-nails/"]
 webzi_id: 45392

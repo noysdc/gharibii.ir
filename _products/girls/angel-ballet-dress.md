@@ -5,7 +5,8 @@ description: "پیراهن باله فرشته؛ مناسب کلاس باله، 
 slug: "angel-ballet-dress"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/angel-ballet-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: angel-ballet-dress

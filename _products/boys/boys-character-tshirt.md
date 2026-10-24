@@ -5,7 +5,8 @@ description: "تیشرت شخصیتی پسرانه؛ مناسب استایل ر�
 slug: "boys-character-tshirt"
 category: boys
 gender: boys
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/boys-character-tshirt/"]
 webzi_id: 45360

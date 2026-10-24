@@ -5,7 +5,8 @@ description: "لباس پرنسسی سفید برفی؛ مناسب جشن تول
 slug: "snow-white-dress"
 category: girls
 gender: girls
-price: "5,998,000"
+price: ""
+price_group: "tier_1"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/snow-white-dress/"]
 webzi_id: 45332

@@ -11,7 +11,9 @@ layout: default
 {%- assign related = site.products | where: 'category', page.category | sort: 'sort_id' | reverse -%}
 {%- assign main_image = page.images[0] -%}
 {%- assign page_oos_grp = site.data.price_groups.groups[page.price_group] -%}{%- assign page_oos = page.out_of_stock -%}{%- if page_oos_grp.out_of_stock -%}{%- assign page_oos = true -%}{%- endif -%}
-{%- assign p_num = page.price | append: "" | remove: "," | remove: "،" | remove: " " | plus: 0 -%}
+{%- assign p_raw = page.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- if p_raw == "" and page_oos_grp.price -%}{%- assign p_raw = page_oos_grp.price | append: "" -%}{%- endif -%}
+{%- assign p_num = p_raw | plus: 0 -%}
 <article class="wrap product">
   <nav class="crumbs" aria-label="مسیر">
     <a href="{{ '/' | relative_url }}">خانه</a> /

@@ -5,7 +5,8 @@ description: "دامن مجلسی دخترانه؛ مناسب مهمانی، ر�
 slug: "girls-formal-skirt"
 category: girls
 gender: girls
-price: "998,000"
+price: ""
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-formal-skirt/"]
 webzi_id: 45350

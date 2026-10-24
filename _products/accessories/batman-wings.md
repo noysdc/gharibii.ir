@@ -5,7 +5,8 @@ description: "بال بتمن پسرانه؛ مناسب جشن تولد، هال
 slug: "batman-wings"
 category: accessories
 gender: boys
-price: "398,000"
+price: ""
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/batman-wings/"]
 webzi_id: 45361

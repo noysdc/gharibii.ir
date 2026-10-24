@@ -5,7 +5,8 @@ description: "پیراهن رقص باله؛ مناسب کلاس باله، اج
 slug: "ballet-dance-dress-2"
 category: girls
 gender: girls
-price: "4,998,000"
+price: ""
+price_group: "tier_4"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ballet-dance-dress-2/"]
 webzi_id: 45432
