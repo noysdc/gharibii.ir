@@ -5,8 +5,8 @@ description: "کلاه کپ مک‌کوئین؛ انتخابی کاربردی ب
 slug: "mcqueen-cap"
 category: accessories
 gender: boys
-price: ""
-price_group: "tier_2"
+price: "498000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45409

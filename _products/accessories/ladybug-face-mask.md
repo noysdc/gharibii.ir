@@ -5,7 +5,8 @@ description: "ماسک صورت دختر کفشدوزکی؛ مناسب جشن ت
 slug: "ladybug-face-mask"
 category: accessories
 gender: unisex
-price: "88,000"
+price: ""
+price group" "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/ladybug-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: ladybug-face-mask

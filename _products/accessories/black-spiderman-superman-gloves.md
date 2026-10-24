@@ -6,7 +6,7 @@ slug: "black-spiderman-superman-gloves"
 category: accessories
 gender: boys
 price: ""
-price_group: "tier_2"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/black-spiderman-superman-gloves/"]
 webzi_id: 45388

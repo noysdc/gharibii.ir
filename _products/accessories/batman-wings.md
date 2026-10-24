@@ -6,7 +6,7 @@ slug: "batman-wings"
 category: accessories
 gender: boys
 price: ""
-price_group: "tier_2"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/batman-wings/"]
 webzi_id: 45361

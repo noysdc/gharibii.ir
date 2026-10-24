@@ -6,7 +6,7 @@ slug: "moana-necklace"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_6"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/moana-necklace/"]
 webzi_id: 45415

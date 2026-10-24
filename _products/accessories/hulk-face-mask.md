@@ -6,7 +6,7 @@ slug: "hulk-face-mask"
 category: accessories
 gender: boys
 price: ""
-price_group: "tier_2"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/hulk-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: hulk-face-mask

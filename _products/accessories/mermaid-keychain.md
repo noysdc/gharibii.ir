@@ -5,7 +5,7 @@ description: "جاسوئیچی پری دریایی؛ مناسب هدیه، کی�
 slug: "mermaid-keychain"
 category: accessories
 gender: unisex
-price: "168,000"
+price: "298000"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/mermaid-keychain/"]
 webzi_id: 3

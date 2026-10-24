@@ -6,7 +6,7 @@ slug: "stage-moving-ear-hat"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_8"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/stage-moving-ear-hat/"]
 webzi_id: 45425

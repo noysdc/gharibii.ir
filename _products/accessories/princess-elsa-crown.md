@@ -6,8 +6,8 @@ seo_keywords: ["تاج السا", "تاج پرنسسی دخترانه", "تاج 
 folder: "princess-elsa-crown"
 category: accessories
 gender: girls
-price_group: "in_stock"
-price: "0"
+price_group: ""
+price: "498000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/princess-elsa-crown/"]
 needs_review: true

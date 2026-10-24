@@ -5,7 +5,7 @@ description: "ست اکسسوری پرنسسی؛ مناسب جشن تولد، م
 slug: "princess-accessory-set"
 category: accessories
 gender: unisex
-price: "1,898,000"
+price: "1998000"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/princess-accessory-set/"]
 webzi_id: 45446

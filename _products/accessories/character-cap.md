@@ -6,7 +6,8 @@ slug: "character-cap"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_2"
+price_group: ""
+price: "498000"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/character-cap/"]
 webzi_id: 45368

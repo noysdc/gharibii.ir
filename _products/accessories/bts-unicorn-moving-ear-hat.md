@@ -6,7 +6,8 @@ slug: "bts-unicorn-moving-ear-hat"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_8"
+price_group: ""
+price: "1298000"
 currency: IRT
 images_dirs: ["/assets/images/products/bts-unicorn-moving-ear-hat/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: bts-unicorn-moving-ear-hat

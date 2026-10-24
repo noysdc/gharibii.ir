@@ -5,8 +5,8 @@ description: "کلاه کپ دختر کفشدوزکی؛ مناسب بیرون ر
 slug: "ladybug-cap"
 category: accessories
 gender: unisex
-price: ""
-price_group: "tier_2"
+price: "498000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45401

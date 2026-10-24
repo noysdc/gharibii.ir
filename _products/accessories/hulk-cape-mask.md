@@ -6,7 +6,7 @@ slug: "hulk-cape-mask"
 category: accessories
 gender: boys
 price: ""
-price_group: "tier_3"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/hulk-cape-mask/"]
 webzi_id: 45411

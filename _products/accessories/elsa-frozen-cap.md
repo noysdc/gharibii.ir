@@ -5,8 +5,8 @@ description: "کلاه کپ السا فروزن؛ مناسب بیرون رفتن
 slug: "elsa-frozen-cap"
 category: accessories
 gender: unisex
-price: ""
-price_group: "tier_2"
+price_group: ""
+price: "498000"
 currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45397

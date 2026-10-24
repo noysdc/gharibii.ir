@@ -5,8 +5,8 @@ description: "ماسک صورت آیرون من؛ مناسب جشن تولد، �
 slug: "iron-man-face-mask"
 category: accessories
 gender: boys
-price: ""
-price_group: "tier_2"
+price: "498000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/iron-man-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: iron-man-face-mask

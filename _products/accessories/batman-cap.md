@@ -7,6 +7,7 @@ category: accessories
 gender: boys
 price: ""
 price_group: "tier_2"
+price: "498000"
 currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45399

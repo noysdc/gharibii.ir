@@ -6,7 +6,7 @@ slug: "holographic-angel-wings"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_12"
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/holographic-angel-wings/"]
 webzi_id: 45369

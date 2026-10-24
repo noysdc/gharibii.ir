@@ -6,7 +6,7 @@ slug: "halloween-witch-hat"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_6"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/halloween-witch-hat/"]
 webzi_id: 45402

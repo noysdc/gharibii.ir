@@ -6,7 +6,7 @@ slug: "halloween-witch-hat-2"
 category: accessories
 gender: unisex
 price: ""
-price_group: "tier_7"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/halloween-witch-hat-2/", "/assets/images/products/witch-halloween-hat-tinsel/"]
 webzi_id: 45395

@@ -5,7 +5,7 @@ description: "دستکش پرنسسی؛ مناسب جشن تولد، مهمان�
 slug: "princess-gloves"
 category: accessories
 gender: unisex
-price: "798,000"
+price: "898,000"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/princess-gloves/"]
 webzi_id: 1
