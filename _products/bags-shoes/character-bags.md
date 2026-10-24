@@ -6,7 +6,8 @@ slug: "character-bags"
 category: bags-shoes
 gender: girls
 price: ""
-price_group: "tier_2"
+price_group: "tier_9"
+price: ""
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/character-bags/"]
 webzi_id: 45357

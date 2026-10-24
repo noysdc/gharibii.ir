@@ -6,7 +6,7 @@ slug: "girls-ballet-shoes"
 category: bags-shoes
 gender: girls
 price: ""
-price_group: "tier_11"
+price_group: "tier_3"
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/girls-ballet-shoes/"]
 webzi_id: 45433

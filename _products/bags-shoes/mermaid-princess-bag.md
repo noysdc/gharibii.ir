@@ -6,7 +6,7 @@ slug: "mermaid-princess-bag"
 category: bags-shoes
 gender: girls
 price: ""
-price_group: "tier_7"
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/mermaid-princess-bag/"]
 webzi_id: 2
