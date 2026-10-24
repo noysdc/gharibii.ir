@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "مایو سرهمی ال او ال | دخترانه"
-description: "مایو سرهمی اونجرز؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
+description: "مایو سرهمی ال او ال با طراحی الهام‌گرفته از اونجرز. انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
 folder: "girl-avenger-swimsuit"
 category: girls
 gender: girls
@@ -10,8 +10,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/girl-avenger-swimsuit/"]
 needs_review: true
 
-tags: ["مایو سرهمی اونجرز", "مایو اونجرز", "مایو اونجرز دخترانه", "اونجرز", "ابرقهرمانان", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
-auto_sig: "b=65cab9b8;d=199293df;g=6015ddc9;t=86e9d8a4"
+tags: ["مایو سرهمی ال او ال", "مایو اونجرز", "مایو اونجرز دخترانه", "اونجرز", "ابرقهرمانان", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "b=65cab9b8;d=845edfd2;g=3a7e7d5c;t=86e9d8a4"
 images:
   - /assets/images/products/girls/girl-avenger-swimsuit/girl-avenger-swimsuit-1.webp
   - /assets/images/products/girls/girl-avenger-swimsuit/girl-avenger-swimsuit-2.webp
