@@ -17,9 +17,9 @@ options:
 tags: ["مایو سرهمی دختر کفشدوزکی", "مایو دختر کفشدوزکی", "مایو دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=0c5d4d4b;d=9613b655;g=f656b9a0;t=15d2b6b7"
 images:
-  - /assets/images/products/girls/ladybug-one-piece-swimsuit/ladybug-one-piece-swimsuit-1.webp
-  - /assets/images/products/girls/ladybug-one-piece-swimsuit/ladybug-one-piece-swimsuit-2.webp
-  - /assets/images/products/girls/ladybug-one-piece-swimsuit/ladybug-one-piece-swimsuit-3.webp
+  - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-1.webp
+  - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-2.webp
+  - /assets/images/products/girls/ladybug-one-piece-wimsuit/ladybug-one-piece-wimsuit-3.webp
 ---
 
 <!-- AUTO:START -->
