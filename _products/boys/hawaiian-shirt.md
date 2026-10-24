@@ -7,7 +7,7 @@ folder: "hawaiian-shirt"
 category: boys
 gender: boys
 price_group: "tier_5"
-price: ""
+price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/hawaiian-shirt/"]
 needs_review: true
