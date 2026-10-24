@@ -10,7 +10,7 @@ price_group: "tier_5"
 price: ""
 old_price: 
 currency: IRT
-badge: "تست"
+badge: ""
 images_dirs: ["/assets/images/products/boys/hawaiian-shirt/"]
 needs_review: true
 
