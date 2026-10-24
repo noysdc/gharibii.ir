@@ -6,7 +6,7 @@ slug: "boy-avenger-swimsuit"
 category: boys
 gender: boys
 price: ""
-price_group: "tier_5"
+price_group: "tier_9"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/boy-avenger-swimsuit/"]
 webzi_id: 45366
