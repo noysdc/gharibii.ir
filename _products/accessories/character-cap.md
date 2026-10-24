@@ -5,7 +5,6 @@ description: "کلاه کپ شخصیتی کودک؛ انتخابی کاربرد�
 slug: "character-cap"
 category: accessories
 gender: unisex
-price: ""
 price_group: ""
 price: "498000"
 currency: IRT

@@ -6,7 +6,7 @@ slug: "ladybug-face-mask"
 category: accessories
 gender: unisex
 price: ""
-price group" "out_of_stock"
+price group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/ladybug-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: ladybug-face-mask
