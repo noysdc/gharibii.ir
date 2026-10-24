@@ -6,7 +6,8 @@ slug: "colored-hair-tinsel"
 category: crown-wand
 gender: girls
 price: ""
-price_group: "tier_7"
+price_group: ""
+price: "1298000"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/colored-hair-tinsel/"]
 webzi_id: 45362

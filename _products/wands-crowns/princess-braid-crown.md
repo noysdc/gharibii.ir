@@ -6,7 +6,8 @@ slug: "princess-braid-crown"
 category: crown-wand
 gender: girls
 price: ""
-price_group: "tier_2"
+price_group: ""
+price: "1298000"
 currency: IRT
 images_dirs: ["/assets/images/products/crown-wand/princess-braid-crown/"]
 webzi_id: 45416

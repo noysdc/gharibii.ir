@@ -6,7 +6,7 @@ slug: "harry-potter-wand"
 category: crown-wand
 gender: boys
 price: ""
-price_group: "tier_6"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/crown-wand/harry-potter-wand/"]
 webzi_id: 45374

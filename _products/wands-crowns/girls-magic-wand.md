@@ -6,7 +6,7 @@ slug: "girls-magic-wand"
 category: crown-wand
 gender: girls
 price: ""
-price_group: "tier_7"
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/girls-magic-wand/"]
 webzi_id: 45363

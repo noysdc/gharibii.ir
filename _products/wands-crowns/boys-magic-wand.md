@@ -6,7 +6,7 @@ slug: "boys-magic-wand"
 category: crown-wand
 gender: boys
 price: ""
-price_group: "tier_7"
+price_group: "tier_2"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/boys-magic-wand/"]
 webzi_id: 45364
