@@ -14,8 +14,8 @@ const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 /* ---------- ابزارها ---------- */
 function allowedOrigins(env) {
   const site = String(env.SITE_URL || '').replace(/\/+$/, '');
-  const list = [site, 'http://localhost:4000', 'http://127.0.0.1:4000'];
-  if (site.indexOf('://www.') < 0) list.push(site.replace('://', '://www.'));
+  const list = ['https://gharibii.ir', 'https://www.gharibii.ir', 'http://localhost:4000', 'http://127.0.0.1:4000'];
+  if (site) { list.push(site); if (site.indexOf('://www.') < 0) list.push(site.replace('://', '://www.')); }
   return list;
 }
 function corsHeaders(req, env) {
@@ -245,7 +245,11 @@ export default {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
         const tg = await sendTelegram(env, '✅ اتصال سایت غریبی به تلگرام برقرار است.', true);
         const em = await sendEmail(env, '✅ اتصال سایت غریبی به ایمیل برقرار است.', true);
-        return reply(req, env, { ok: true, telegram: tg, email: em });
+        let kv = false, kvErr = '';
+        try { if (env.INVOICES) { await env.INVOICES.list({ prefix: 'inv:', limit: 1 }); kv = true; } else kvErr = 'binding INVOICES missing'; } catch (e) { kvErr = String(e && e.message || e); }
+        let lastCron = null;
+        try { if (env.INVOICES) lastCron = await env.INVOICES.get('meta:lastcron', { type: 'json' }); } catch (e) {}
+        return reply(req, env, { ok: true, telegram: tg, email: em, kv: kv, kvErr: kvErr, siteUrl: env.SITE_URL || '', lastCron: lastCron });
       }
       if (path === '/invoices' && req.method === 'POST') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
@@ -259,8 +263,13 @@ export default {
       if (path === '/report' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
         const text = await makeReport(env, url.searchParams.get('period') === 'month' ? 'month' : 'week', new Date());
-        if (url.searchParams.get('send') === '1') await notify(env, ctx, text, 'report');
-        return reply(req, env, { text: text });
+        let sent = null;
+        if (url.searchParams.get('send') === '1') {
+          const tg = await sendTelegram(env, text, true);
+          const em = await sendEmail(env, text, true);
+          sent = { telegram: tg, email: em };
+        }
+        return reply(req, env, { text: text, sent: sent });
       }
       const m = path.match(/^\/invoices\/([^/]+)(\/report)?$/);
       if (m) {
@@ -275,16 +284,27 @@ export default {
       }
       return reply(req, env, { error: 'not_found' }, 404);
     } catch (e) {
-      return reply(req, env, { error: 'server_error' }, 500);
+      return reply(req, env, { error: 'server_error', detail: authed(req, env) ? String(e && e.message || e) : undefined }, 500);
     }
   },
 
   /* اجرای زمان‌بندی‌شده: شنبه → گزارش هفتگی | اول ماه شمسی → گزارش ماهانه */
   async scheduled(event, env, ctx) {
     const now = new Date(), t = tehran(now);
-    const jobs = [];
-    if (weekdayTehran(now) === 'Sat') jobs.push(makeReport(env, 'week', now).then((x) => notify(env, null, x, 'report')));
-    if (t.d === '01') jobs.push(makeReport(env, 'month', now).then((x) => notify(env, null, x, 'report')));
-    ctx.waitUntil(Promise.all(jobs));
+    const run = async () => {
+      const log = { at: Math.floor(now.getTime() / 1000), cron: event && event.cron || '', day: weekdayTehran(now), pd: t.d, sent: [] };
+      try {
+        if (weekdayTehran(now) === 'Sat') {
+          const x = await makeReport(env, 'week', now);
+          log.sent.push({ week: { telegram: await sendTelegram(env, x, true), email: await sendEmail(env, x, true) } });
+        }
+        if (t.d === '01') {
+          const x = await makeReport(env, 'month', now);
+          log.sent.push({ month: { telegram: await sendTelegram(env, x, true), email: await sendEmail(env, x, true) } });
+        }
+      } catch (e) { log.error = String(e && e.message || e); }
+      try { await env.INVOICES.put('meta:lastcron', JSON.stringify(log)); } catch (e) {}
+    };
+    ctx.waitUntil(run());
   }
 };
