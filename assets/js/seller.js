@@ -6,11 +6,11 @@
   var DKEY = 'gharibii_seller_v1', HKEY = 'gharibii_seller_hist_v1';
   var PAGE = 40;
 
-  var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '';
+  var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '', remote = Promise.resolve();
   var st = loadState();
 
   /* ---------- وضعیت و ذخیره‌سازی ---------- */
-  function fresh() { return { cust: '', phone: '', addr: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, pasted: [], items: [] }; }
+  function fresh() { return { cust: '', phone: '', addr: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, code: '', pasted: [], items: [] }; }
   function loadState() {
     var s = fresh();
     try {
@@ -106,6 +106,12 @@
     sel.innerHTML = list.map(function (s) { return '<option value="' + G.esc(s.number) + '">' + G.esc(s.name) + '</option>'; }).join('');
     if (!list.length) sel.innerHTML = '<option value="">—</option>';
     if (st.sw && list.some(function (s) { return s.number === st.sw; })) sel.value = st.sw; else st.sw = sel.value;
+    showSellerPhone();
+  }
+  /* موبایل فروشنده‌ی انتخاب‌شده (از تنظیمات سایت؛ فقط نمایش) */
+  function showSellerPhone() {
+    var f = $('f-seller-phone');
+    if (f) f.value = st.sw ? G.mobileFa(st.sw) : '';
   }
   function buildChips() {
     var seen = {}, cats = [];
@@ -271,10 +277,26 @@
     st.editNo = no; st.rev = rev; save();
     pushHist(built);
     showBuilt();
+    if (G.apiOn()) publishRemote(built);
+  }
+  /* ذخیرهٔ فاکتور روی سرور و گرفتن لینک کوتاه. ویرایش یک فاکتور همان لینک قبلی را به‌روز می‌کند.
+     اگر سرور در دسترس نبود، لینک بلند قدیمی کار می‌کند. */
+  function publishRemote(inv) {
+    var info = $('o-linkinfo');
+    info.textContent = 'در حال ساخت لینک کوتاه…';
+    var job = st.code ? G.apiRevise(st.code, inv).then(function () { return st.code; }) : G.apiCreate(inv);
+    remote = job.then(function (code) {
+      inv.code = code; st.code = code; save(); pushHist(inv); renderHistory();
+      info.textContent = 'لینک کوتاه: ' + G.shortUrl(code);
+    }, function (e) {
+      if (e && e.status === 404) st.code = '';
+      info.textContent = e && e.status === 401 ? 'رمز فروشنده درست نبود؛ فعلاً لینک بلند استفاده می‌شود. دوباره «ساخت فاکتور» را بزنید.' : 'اتصال به سرور برقرار نشد؛ فعلاً لینک بلند استفاده می‌شود.';
+    });
+    return remote;
   }
   function pushHist(inv) {
     var h = readHist().filter(function (x) { return x.no !== inv.no; });
-    h.unshift({ no: inv.no, rev: inv.rev || 1, paid: !!inv.paid, ts: inv.ts, exp: inv.exp, cust: inv.cust, total: G.totals(inv).total, tok: G.pack(inv) });
+    h.unshift({ no: inv.no, code: inv.code || '', rev: inv.rev || 1, paid: !!inv.paid, ts: inv.ts, exp: inv.exp, cust: inv.cust, total: G.totals(inv).total, tok: G.pack(inv) });
     writeHist(h);
   }
   function showBuilt() {
@@ -297,10 +319,23 @@
       if (ref === null) return;
       inv.paid = { ref: G.clip(G.normDigits(ref), 40), at: Math.floor(Date.now() / 1000) };
     }
-    built = inv; st.editNo = ''; st.rev = 0; save();
-    pushHist(inv);
-    showBuilt();
-    G.toast(inv.paid ? 'پرداخت تأیید شد ✅ — لینک تازه را برای مشتری بفرستید' : 'تأیید پرداخت برداشته شد');
+    function apply(msg) {
+      built = inv; st.editNo = ''; st.rev = 0; st.code = ''; save();
+      pushHist(inv);
+      showBuilt();
+      $('o-linkinfo').textContent = inv.code ? 'لینک کوتاه: ' + G.shortUrl(inv.code) : '';
+      G.toast(msg);
+    }
+    if (x.code && G.apiOn()) {                      /* روی همان لینک کوتاه ثبت می‌شود؛ مشتری لینک قبلی را باز کند وضعیت تازه را می‌بیند */
+      inv.code = x.code;
+      G.apiSetPaid(x.code, inv.paid).then(function () {
+        apply(inv.paid ? 'پرداخت تأیید شد ✅ — همان لینک قبلی برای مشتری به‌روز شد' : 'تأیید پرداخت برداشته شد — همان لینک به‌روز شد');
+      }, function (e) {
+        G.toast(e && e.status === 401 ? 'رمز فروشنده درست نبود' : 'ثبت روی سرور ناموفق بود؛ اینترنت را چک و دوباره تلاش کنید');
+      });
+      return;
+    }
+    apply(inv.paid ? 'پرداخت تأیید شد ✅ — لینک تازه را برای مشتری بفرستید' : 'تأیید پرداخت برداشته شد');
   }
   function outText() {
     var link = $('o-withlink').checked ? G.invoiceUrl(built) : '';
@@ -311,7 +346,7 @@
       if (busy) return;
       if (!built) { G.toast('اول «ساخت فاکتور» را بزنید'); return; }
       busy = true; btn.classList.add('busy');
-      Promise.resolve().then(fn).catch(function () { G.toast('خطا در ساخت فایل؛ دوباره تلاش کنید'); })
+      Promise.resolve(remote).then(fn).catch(function () { G.toast('خطا در ساخت فایل؛ دوباره تلاش کنید'); })
         .then(function () { busy = false; btn.classList.remove('busy'); });
     });
   }
@@ -323,17 +358,17 @@
     host.innerHTML = h.map(function (x, i) {
       var exp = !x.paid && Math.floor(Date.now() / 1000) >= x.exp;
       var tag = x.paid ? 'پرداخت‌شده ✅' : (exp ? 'منقضی' : 'معتبر');
-      return '<div class="h-row"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + '</small></div>' +
+      return '<div class="h-row"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + (x.code ? ' · <span dir="ltr">' + G.esc(x.code) + '</span>' : '') + '</small></div>' +
         '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : 'btn-in') + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : 'تأیید پرداخت') + '</button>' +
         '<button type="button" class="btn small" data-hopen="' + i + '">' + (x.paid ? 'مکمل' : 'ویرایش') + '</button>' +
         '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">لینک</button>' +
         '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف">✕</button></div>';
     }).join('');
   }
-  function loadInvoice(inv) {
+  function loadInvoice(inv, code) {
     var supp = !!inv.paid;
     if (supp) inv = { no: inv.no, cust: inv.cust, addr: inv.addr, ph: inv.ph, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
-    st.editNo = supp ? '' : inv.no; st.rev = supp ? 0 : (inv.rev || 1);
+    st.editNo = supp ? '' : inv.no; st.rev = supp ? 0 : (inv.rev || 1); st.code = supp ? '' : (code || inv.code || '');
     st.cust = inv.cust; st.addr = inv.addr || ''; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pasted = [];
     st.fee = feed && inv.fee === feed.fee ? null : inv.fee;
     if (inv.sw) st.sw = inv.sw;
@@ -358,6 +393,8 @@
     $('f-disc').value = fmtIn(st.disc);
     $('f-note').value = st.note || '';
     $('f-fee').value = fmtIn(feeVal());
+    if (st.sw && $('f-seller').value !== st.sw) $('f-seller').value = st.sw;
+    showSellerPhone();
   }
   function bindMoney(input, setter) {
     input.addEventListener('input', function () {
@@ -374,7 +411,7 @@
     $('f-cust').addEventListener('input', function (e) { st.cust = e.target.value; dirty(); });
     $('f-phone').addEventListener('input', function (e) { st.phone = e.target.value; dirty(); });
     $('f-addr').addEventListener('input', function (e) { st.addr = e.target.value; dirty(); });
-    $('f-seller').addEventListener('change', function (e) { st.sw = e.target.value; dirty(); });
+    $('f-seller').addEventListener('change', function (e) { st.sw = e.target.value; showSellerPhone(); dirty(); });
     $('f-valid').addEventListener('change', function (e) { st.valid = Number(e.target.value) || 120; dirty(); });
     $('f-note').addEventListener('input', function (e) { st.note = e.target.value; dirty(); });
     bindMoney($('f-fee'), function (n) { st.fee = n; });
@@ -457,11 +494,16 @@
       var h = readHist();
       var o = e.target.closest('[data-hopen]'), c = e.target.closest('[data-hcopy]'), d = e.target.closest('[data-hdel]'), pd = e.target.closest('[data-hpaid]');
       if (pd) { togglePaid(Number(pd.getAttribute('data-hpaid'))); return; }
-      if (o) { var inv = G.unpack(h[Number(o.getAttribute('data-hopen'))].tok); if (inv) loadInvoice(inv); }
-      if (c) { var hx = h[Number(c.getAttribute('data-hcopy'))]; G.copyText(G.linkOf(hx.tok, hx.no, hx.rev)).then(function () { G.toast('لینک کپی شد ✅'); }); }
+      if (o) { var hi = h[Number(o.getAttribute('data-hopen'))], inv = G.unpack(hi.tok); if (inv) loadInvoice(inv, hi.code); }
+      if (c) { var hx = h[Number(c.getAttribute('data-hcopy'))]; G.copyText(hx.code ? G.shortUrl(hx.code) : G.linkOf(hx.tok, hx.no, hx.rev)).then(function () { G.toast('لینک کپی شد ✅'); }); }
       if (d) { h.splice(Number(d.getAttribute('data-hdel')), 1); writeHist(h); renderHistory(); }
     });
     $('btn-import').addEventListener('click', function () {
+      var cd = G.codeIn($('f-import').value);
+      if (cd && G.apiOn()) {
+        G.apiGet(cd).then(function (inv) { $('f-import').value = ''; loadInvoice(inv, cd); }, function () { G.toast('فاکتور پیدا نشد یا اتصال برقرار نیست'); });
+        return;
+      }
       var inv = G.unpack($('f-import').value);
       if (!inv) { G.toast('لینک معتبر نیست'); return; }
       $('f-import').value = ''; loadInvoice(inv);
@@ -473,6 +515,22 @@
       built = null; $('out-card').hidden = true; save();
       initFields(); renderLines(); renderPicker(); updateTotals();
     });
+    if (G.apiOn()) {
+      $('srv-card').hidden = false;
+      $('btn-ping').addEventListener('click', function () {
+        $('srv-out').textContent = 'در حال بررسی…';
+        G.apiPing().then(function (r) {
+          $('srv-out').textContent = 'سرور وصل است ✅ · تلگرام: ' + (r.telegram ? 'پیام آزمایشی رسید' : 'تنظیم نشده/ناموفق') + ' · ایمیل: ' + (r.email ? 'ارسال شد' : 'تنظیم نشده');
+        }, function (e) { $('srv-out').textContent = e && e.status === 401 ? 'رمز فروشنده درست نیست.' : 'اتصال به سرور برقرار نشد.'; });
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-rep]'), function (b) {
+        b.addEventListener('click', function () {
+          $('srv-out').textContent = 'در حال ساخت گزارش…';
+          G.apiReportNow(b.getAttribute('data-rep')).then(function (r) { $('srv-out').textContent = r.text + '\n\n(در تلگرام/ایمیل هم فرستاده شد)'; },
+            function () { $('srv-out').textContent = 'ساخت گزارش ناموفق بود.'; });
+        });
+      });
+    }
     $('btn-paste').addEventListener('click', fromMessage);
     $('btn-undo').addEventListener('click', undoMessage);
     document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && feed) sync(false); });

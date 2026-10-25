@@ -12,6 +12,7 @@ sitemap: false
       <h1>ساخت فاکتور</h1>
       <p id="sync-status" class="muted">در حال دریافت قیمت‌ها از سایت…</p>
     </div>
+    <button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button>
     <button type="button" class="btn btn-ghost" id="btn-sync" title="به‌روزرسانی قیمت‌ها از سایت">⟳</button>
   </header>
 
@@ -21,6 +22,7 @@ sitemap: false
       <label class="field"><span>نام مشتری (اختیاری)</span><input type="text" id="f-cust" maxlength="60" autocomplete="off"></label>
       <label class="field"><span>موبایل مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
       <label class="field"><span>فروشنده</span><select id="f-seller"></select></label>
+      <label class="field"><span>موبایل فروشنده</span><input type="text" id="f-seller-phone" dir="ltr" readonly aria-readonly="true" placeholder="با انتخاب فروشنده پر می‌شود"></label>
       <label class="field"><span>مدت اعتبار فاکتور</span>
         <select id="f-valid">
           <option value="30">۳۰ دقیقه</option>
@@ -87,6 +89,7 @@ sitemap: false
       <button type="button" class="btn" id="o-pdf">PDF</button>
     </div>
     <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک فاکتور به انتهای متن</label>
+    <p class="muted small-note" id="o-linkinfo" dir="auto"></p>
     <div class="sheet-scroll"><div id="preview"></div></div>
   </section>
 
@@ -97,6 +100,15 @@ sitemap: false
       <span class="inline"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
     </label>
     <button type="button" class="btn btn-danger small" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
+  </section>
+  <section class="card" id="srv-card" hidden>
+    <h2>سرور، تلگرام و گزارش‌ها</h2>
+    <div class="out-actions">
+      <button type="button" class="btn small" id="btn-ping">تست اتصال</button>
+      <button type="button" class="btn small" data-rep="week">گزارش هفتگی</button>
+      <button type="button" class="btn small" data-rep="month">گزارش ماهانه</button>
+    </div>
+    <pre class="srv-out" id="srv-out" dir="rtl"></pre>
   </section>
   <div class="spacer"></div>
 </main>

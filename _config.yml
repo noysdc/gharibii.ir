@@ -14,10 +14,10 @@ whatsapp_numbers:
 
 # ---------- فروشنده‌ها (واتساپ) ----------
 whatsapp_sellers:
-  - name: "فروشنده ۱"
+  - name: "سمانه غریبی"
     number: "989347688356"
     photo: "/assets/images/sellers/seller-1.webp"
-  - name: "فروشنده ۲"
+  - name: "سمیه غریبی"
     number: "989179962005"
     photo: "/assets/images/sellers/seller-2.webp"
 
@@ -66,6 +66,7 @@ exclude:
   - README.md
   - CHANGES.md
   - scripts
+  - worker
   - Gemfile
   - Gemfile.lock
 
@@ -86,3 +87,8 @@ shipping_customs_cost: 450000
 # لینک پرداخت زرین‌پال (https://zarinp.al/...) را بین گیومه بگذار تا بخش «پرداخت آنلاین» در صفحهٔ فاکتور مشتری نشان داده شود.
 # خالی بماند = بخش پرداخت نمایش داده نمی‌شود.
 payment_link: ""
+
+# ---------- سرور فاکتور (Cloudflare Worker): لینک کوتاه، تأیید پرداخت روی همان لینک، گزارش تلگرام ----------
+# بعد از دیپلوی Worker آدرسش را اینجا بگذار، مثلاً "https://gharibii-invoices.نام‌شما.workers.dev"
+# خالی بماند = مثل قبل با لینک‌های بلند کار می‌کند.
+invoice_api: ""

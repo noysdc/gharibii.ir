@@ -320,7 +320,7 @@
     var el = document.getElementById('wa-sellers-data');
     sellers = el ? JSON.parse(el.textContent) : [];
   } catch (err) { sellers = []; }
-  if (!sellers.length) sellers = [{ name: 'فروشنده', number: '989347688356', photo: '' }];
+  if (!sellers.length) sellers = [{ name: 'سمانه غریبی', number: '989347688356', photo: '' }];
 
   function renderSellers() {
     var box = document.getElementById('cart-sellers');

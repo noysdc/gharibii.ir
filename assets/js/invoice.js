@@ -169,7 +169,60 @@
     var suf = String(no || '').replace(/^(?:PF|F)-/, '').replace(/[^0-9A-Za-z-]/g, '') + (rev > 1 ? '-r' + rev : '');
     return location.origin + BASE + '/invoice/#' + tok + (suf ? '.' + suf : '');
   }
-  function invoiceUrl(inv) { return linkOf(pack(inv), inv.no, inv.rev); }
+  function invoiceUrl(inv) { return inv.code ? shortUrl(inv.code) : linkOf(pack(inv), inv.no, inv.rev); }
+
+
+  /* ---------- سرور لینک کوتاه و گزارش (Cloudflare Worker) ----------
+     آدرس در _config.yml → invoice_api. اگر خالی باشد همه‌چیز مثل قبل با لینک بلند کار می‌کند. */
+  var API_RAW = String((document.querySelector('meta[name="invoice-api"]') || {}).content || '').trim();
+  var API = API_RAW === '/' ? '' : API_RAW.replace(/\/+$/, '');
+  var CODE_RE = /^\d{6}-\d{4}-[a-z2-9]{4}$/, KEYSTORE = 'gharibii_seller_key';
+  function apiOn() { return !!API_RAW; }
+  function isCode(s) { return CODE_RE.test(String(s || '')); }
+  function codeIn(s) { var m = String(s || '').match(/\d{6}-\d{4}-[a-z2-9]{4}/); return m ? m[0] : ''; }
+  function shortUrl(code) { return location.origin + BASE + '/f/' + code; }
+  function sellerKey(ask) {
+    var k = '';
+    try { k = localStorage.getItem(KEYSTORE) || ''; } catch (e) {}
+    if (!k && ask) {
+      k = String(w.prompt('رمز فروشنده را وارد کنید (روی همین دستگاه ذخیره می‌شود):') || '').trim();
+      if (k) { try { localStorage.setItem(KEYSTORE, k); } catch (e) {} }
+    }
+    return k;
+  }
+  function apiCall(method, path, body, auth) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (auth) {
+      var k = sellerKey(true);
+      if (!k) return Promise.reject({ status: 401 });
+      headers['X-Seller-Key'] = k;
+    }
+    return fetch(API + path, { method: method, headers: headers, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (r.status === 401) { try { localStorage.removeItem(KEYSTORE); } catch (e) {} }   /* رمز اشتباه: دفعهٔ بعد دوباره پرسیده می‌شود */
+          if (!r.ok) throw { status: r.status, data: j };
+          return j;
+        });
+      });
+  }
+  function noPaid(inv) { var c = {}; Object.keys(inv).forEach(function (k) { c[k] = inv[k]; }); c.paid = null; return c; }
+  function remoteBody(inv) { return { tok: pack(noPaid(inv)), no: inv.no, total: totals(inv).total, n: inv.items.length, cust: inv.cust, exp: inv.exp, ts: inv.ts }; }
+  function apiCreate(inv) { return apiCall('POST', '/api/invoices', remoteBody(inv), true).then(function (r) { return r.code; }); }
+  function apiRevise(code, inv) { return apiCall('PUT', '/api/invoices/' + code, remoteBody(inv), true); }
+  function apiSetPaid(code, paid) { return apiCall('PUT', '/api/invoices/' + code, { paid: paid ? { ref: paid.ref || '', at: paid.at } : null }, true); }
+  function apiGet(code) {
+    return apiCall('GET', '/api/invoices/' + code).then(function (rec) {
+      var inv = unpack(rec.tok);
+      if (!inv) throw { status: 422 };
+      inv.paid = rec.paid ? { ref: clip(rec.paid.ref, 40), at: Number(rec.paid.at) || inv.ts } : null;
+      inv.code = code; inv.rep = rec.rep || null;
+      return inv;
+    });
+  }
+  function apiReport(code, ref) { return apiCall('POST', '/api/invoices/' + code + '/report', { ref: ref || '' }); }
+  function apiPing() { return apiCall('GET', '/api/ping', null, true); }
+  function apiReportNow(period) { return apiCall('GET', '/api/report?period=' + period + '&send=1', null, true); }
 
   /* ---------- داده‌ی سایت (قیمت‌های لحظه‌ای) ---------- */
   var feedPromise = null;
@@ -207,11 +260,12 @@
     return d.length === 11 ? d.slice(0, 4) + ' ' + d.slice(4, 7) + ' ' + d.slice(7) : d;
   }
   /* شماره‌های موبایل فروشگاه (دو فروشنده) که زیر فاکتور چاپ می‌شود */
-  function storeMobiles(feed) {
+  function storeContacts(feed) {
     var out = [];
-    ((feed && feed.sellers) || []).forEach(function (s) { var m = mobileFa(s.number); if (m && out.indexOf(m) < 0) out.push(m); });
+    ((feed && feed.sellers) || []).forEach(function (s) { var m = mobileFa(s.number); if (m) out.push({ name: s.name, mobile: m }); });
     return out.slice(0, 2);
   }
+  function storeMobiles(feed) { return storeContacts(feed).map(function (c) { return c.mobile; }); }
 
   /* ---------- متن فاکتور (برای واتساپ، تلگرام، بله، اینستاگرام) ---------- */
   function buildText(inv, feed, link) {
@@ -222,6 +276,8 @@
     if (!inv.paid) m += 'اعتبار تا: ' + fmtDate(inv.exp) + '\n';
     if (inv.cust) m += 'مشتری: ' + inv.cust + '\n';
     if (inv.ph) m += 'شماره تماس: ' + mobileFa(inv.ph) + '\n';
+    var sl = sellerKnown(feed, inv.sw);
+    if (sl) m += 'فروشنده: ' + sl.name + ' — ' + mobileFa(sl.number) + '\n';
     if (inv.addr) m += 'آدرس: ' + inv.addr + '\n';
     m += '\n';
     inv.items.forEach(function (it, i) {
@@ -289,11 +345,12 @@
       (inv.cust ? '<div class="m-item"><span>مشتری</span><b>' + esc(inv.cust) + '</b></div>' : '') +
       (inv.ph ? '<div class="m-item"><span>شماره تماس</span><b dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
       ((seller || inv.sn) ? '<div class="m-item"><span>فروشنده</span><b>' + esc(seller ? seller.name : inv.sn) + '</b></div>' : '') +
+      (seller ? '<div class="m-item"><span>موبایل فروشنده</span><b dir="ltr">' + esc(mobileFa(seller.number)) + '</b></div>' : '') +
       (inv.paid && inv.paid.ref ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '') +
       (inv.addr ? '<div class="m-item m-wide"><span>آدرس تحویل</span><b>' + esc(inv.addr) + '</b></div>' : '');
 
-    var mobiles = storeMobiles(feed), foot = [];
-    if (mobiles.length) foot.push('☎ ' + mobiles.map(function (m) { return '<span dir="ltr">' + esc(m) + '</span>'; }).join(' · '));
+    var contacts = storeContacts(feed), foot = [];
+    if (contacts.length) foot.push('☎ ' + contacts.map(function (c) { return esc(c.name) + ' <span dir="ltr">' + esc(c.mobile) + '</span>'; }).join(' · '));
     if (feed && feed.address) foot.push(esc(feed.address));
 
     var notice = inv.paid
@@ -306,6 +363,7 @@
       '<div class="inv-head" data-brk>' +
         '<img class="h-logo" src="' + BASE + '/assets/images/gharibii-store-logo.webp" alt="" width="64" height="64" crossorigin="anonymous">' +
         '<div class="h-text"><div class="h-store">' + esc(store) + '</div><div class="h-title">فاکتور</div></div>' +
+        '<span class="h-status' + (inv.paid ? ' paid' : (expired ? ' late' : '')) + '">' + (inv.paid ? '✅ پرداخت‌شده' : (expired ? '⌛ مهلت تمام شده' : '⏳ در انتظار پرداخت')) + '</span>' +
       '</div>' +
       '<div class="inv-meta" data-brk>' + meta + '</div>' +
       '<div class="inv-notice' + (inv.paid ? ' is-paid' : '') + '" data-brk>' + notice + '</div>' +
@@ -378,11 +436,12 @@
       var sheet = renderSheet(holder, inv, feed, { live: false });
       var fonts = (document.fonts && document.fonts.load) ? Promise.all([document.fonts.load('400 16px Vazirmatn'), document.fonts.load('700 16px Vazirmatn')]).catch(function () {}) : Promise.resolve();
       return Promise.all([fonts, imagesReady(sheet)]).then(function () {
-        var scale = 2;
+        var scale = 2, off = sheet.offsetTop;
         var breaks = Array.prototype.map.call(sheet.querySelectorAll('[data-brk]'), function (n) {
-          return Math.round((n.offsetTop + n.offsetHeight) * scale);
+          return Math.round((off + n.offsetTop + n.offsetHeight) * scale);
         });
-        return w.html2canvas(sheet, { scale: scale, backgroundColor: '#ffffff', useCORS: true, logging: false }).then(function (canvas) {
+        var base = (w.getComputedStyle(holder).backgroundColor) || '#ffffff';
+        return w.html2canvas(holder, { scale: scale, backgroundColor: base, useCORS: true, logging: false }).then(function (canvas) {
           holder.remove();
           return { canvas: canvas, breaks: breaks };
         }, function (e) { holder.remove(); throw e; });
@@ -649,7 +708,8 @@
     pack: pack, unpack: unpack, invoiceUrl: invoiceUrl, linkOf: linkOf, resolve: resolve, titleOf: titleOf, payMessage: payMessage, loadFeed: loadFeed, sellerKnown: sellerKnown,
     buildText: buildText, sheetHTML: sheetHTML, renderSheet: renderSheet, watchExpiry: watchExpiry,
     saveImage: saveImage, savePdf: savePdf, copyText: copyText, toast: toast, openWhatsApp: openWhatsApp,
-    phoneToWa: phoneToWa, mobileFa: mobileFa, storeMobiles: storeMobiles, nzs: nzs, hash6: hash6,
+    phoneToWa: phoneToWa, apiOn: apiOn, isCode: isCode, codeIn: codeIn, shortUrl: shortUrl, apiCreate: apiCreate, apiRevise: apiRevise,
+    apiSetPaid: apiSetPaid, apiGet: apiGet, apiReport: apiReport, apiPing: apiPing, apiReportNow: apiReportNow, mobileFa: mobileFa, storeMobiles: storeMobiles, storeContacts: storeContacts, nzs: nzs, hash6: hash6,
     parseCustomerMessage: parseCustomerMessage, _makePdf: makePdf, _toCanvas: toCanvas
   };
 })(window);
