@@ -20,3 +20,5 @@ Thumbs.db
 .DS_Store
 __pycache__/
 *.pyc
+
+scripts/.telegram_channel.env

@@ -235,6 +235,160 @@ async function reportPayment(req, env, ctx, code) {
   return reply(req, env, { ok: true });
 }
 
+
+/* =====================  ارسال روزانهٔ محصول به کانال تلگرام  =====================
+   - هر روز (Cron) یک محصولِ «هنوز ارسال‌نشده» با عکس، توضیح، قیمت، دکمهٔ سفارش و هشتگ به کانال می‌رود
+   - محصول تازه (که در اجرای قبلی در سایت نبود) اولویت دارد؛ بقیه به نوبت بین دسته‌ها می‌چرخند
+   - اگر محصول جدیدی نباشد چیزی ارسال نمی‌شود؛ به‌محض اضافه‌شدن محصول تازه به سایت، روز بعد ارسال از سر گرفته می‌شود
+   - محصول ناموجود ارسال نمی‌شود
+   - لازم: secret با نام CHANNEL_CHAT_ID (مثل @gharibii_ir) و ادمین‌بودن ربات در کانال؛ ربات همان TELEGRAM_BOT_TOKEN است */
+const CH_CATS = ['girls', 'boys', 'accessories', 'crown-wand', 'bags-shoes'];
+const escHtml = (t) => String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const chDay = (d) => { const t = tehran(d); return t.y + '-' + t.mo + '-' + t.d; };
+
+async function chFeed(env) {
+  const site = String(env.SITE_URL || 'https://gharibii.ir').replace(/\/+$/, '');
+  const r = await fetch(site + '/telegram-feed.json?t=' + Date.now(), { headers: { 'Cache-Control': 'no-cache' } });
+  if (!r.ok) throw new Error('feed ' + r.status);
+  const j = await r.json();
+  if (!j || !Array.isArray(j.products)) throw new Error('feed invalid');
+  return j;
+}
+async function chPostedSet(env) {
+  const set = new Set(); let cursor;
+  for (let i = 0; i < 20; i++) {
+    const r = await env.INVOICES.list({ prefix: 'tg:p:', cursor: cursor, limit: 1000 });
+    r.keys.forEach((k) => set.add(k.name.slice(5)));
+    if (r.list_complete) break;
+    cursor = r.cursor;
+  }
+  return set;
+}
+function chHashtags(tags) {
+  const out = [], seen = new Set();
+  (Array.isArray(tags) ? tags : []).forEach((t) => {
+    let h = String(t || '').trim().replace(/\s+/g, '_').replace(/[^\p{L}\p{N}_\u200c]/gu, '').replace(/^_+|_+$/g, '');
+    if (h.length < 2 || h.length > 30 || seen.has(h)) return;
+    seen.add(h); out.push('#' + h);
+  });
+  return out.slice(0, 8).join(' ');
+}
+function chPick(items, seen, rot) {
+  const fresh = seen ? items.filter((x) => !seen.has(x.id)) : [];
+  if (fresh.length) return fresh[0];
+  const cats = CH_CATS.filter((c) => items.some((x) => x.cat === c));
+  items.forEach((x) => { if (cats.indexOf(x.cat) < 0) cats.push(x.cat); });
+  const cat = cats[rot % cats.length];
+  return items.find((x) => x.cat === cat) || items[0];
+}
+function chCaption(it, limit) {
+  const price = it.p > 0
+    ? '💰 قیمت: ' + (it.op > it.p ? '<s>' + fa(it.op) + '</s> ' : '') + '<b>' + fa(it.p) + ' تومان</b>'
+    : '💰 قیمت: برای استعلام پیام بدهید';
+  const sizes = it.sz && it.sz.length <= 140 ? '\n📏 سایز: ' + escHtml(it.sz) : '';
+  const tags = chHashtags(it.tags);
+  const head = '🛍 <b>' + escHtml(it.t) + '</b>\n\n';
+  const foot = '\n\n' + price + sizes + '\n🔗 <a href="' + escHtml(it.u) + '">مشاهده و سفارش در سایت</a>' + (tags ? '\n\n' + tags : '');
+  let d = String(it.d || '').replace(/\s+/g, ' ').trim();
+  const room = limit - head.length - foot.length - 8;
+  if (room < 40) d = '';
+  else if (d.length > room) { d = d.slice(0, room); d = d.slice(0, Math.max(d.lastIndexOf(' '), 20)).replace(/[\s،,.؛:]+$/, '') + '…'; }
+  return head + (d ? escHtml(d) : '') + foot;
+}
+async function chTg(env, method, body) {
+  const r = await fetch('https://api.telegram.org/bot' + env.TELEGRAM_BOT_TOKEN + '/' + method, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  });
+  const j = await r.json().catch(() => ({}));
+  return { ok: !!j.ok, res: j.result, err: j.description || ('http ' + r.status) };
+}
+async function chSend(env, feed, it) {
+  const chat = env.CHANNEL_CHAT_ID;
+  const wa = feed.wa ? 'https://wa.me/' + feed.wa + '?text=' + encodeURIComponent('سلام، درباره‌ی «' + it.t + '» می‌خواهم سفارش بدهم.\n' + it.u) : '';
+  const rows = [[{ text: '🛒 مشاهده و سفارش', url: it.u }]];
+  if (wa) rows.push([{ text: '💬 سفارش در واتساپ', url: wa }]);
+  const kb = { inline_keyboard: rows };
+  if (it.im) {
+    const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: chCaption(it, 1000), parse_mode: 'HTML', reply_markup: kb });
+    if (a.ok) return { ok: true, mode: 'photo', id: a.res && a.res.message_id };
+  }
+  /* اگر عکس ارسال نشد (مثلاً فرمت/اندازه) یا محصول عکس ندارد: متن + پیش‌نمایش لینک (عکس صفحه) */
+  const b = await chTg(env, 'sendMessage', {
+    chat_id: chat, text: chCaption(it, 3900), parse_mode: 'HTML', reply_markup: kb,
+    link_preview_options: { url: it.u, prefer_large_media: true, show_above_text: true }
+  });
+  return b.ok ? { ok: true, mode: 'text', id: b.res && b.res.message_id } : { ok: false, err: b.err };
+}
+/* opts: { dry: فقط نشان بده، force: حتی اگر امروز ارسال شده } */
+async function channelRun(env, opts) {
+  opts = opts || {};
+  const now = new Date(), today = chDay(now);
+  if (!env.CHANNEL_CHAT_ID && !opts.dry) return { sent: false, reason: 'missing CHANNEL_CHAT_ID' };
+  if (!env.TELEGRAM_BOT_TOKEN && !opts.dry) return { sent: false, reason: 'missing TELEGRAM_BOT_TOKEN' };
+  const last = await env.INVOICES.get('tg:last', { type: 'json' }).catch(() => null);
+  if (!opts.dry && !opts.force && last && last.ok && last.day === today) return { sent: false, reason: 'already_sent_today' };
+
+  const feed = await chFeed(env);
+  const prevSeen = await env.INVOICES.get('tg:seen', { type: 'json' }).catch(() => null);
+  const seen = Array.isArray(prevSeen) ? new Set(prevSeen) : null;     /* null = اولین اجرا: هیچ محصولی «تازه» حساب نمی‌شود */
+  const posted = await chPostedSet(env);
+  const all = feed.products.filter((x) => x && x.id && x.t);
+  const queue = all.filter((x) => !x.oos && !posted.has(x.id));
+  const stats = { total: all.length, posted: all.filter((x) => posted.has(x.id)).length, waiting: queue.length, soldOut: all.filter((x) => x.oos).length };
+
+  if (!opts.dry) await env.INVOICES.put('tg:seen', JSON.stringify(all.map((x) => x.id)));
+  if (!queue.length) {
+    if (!opts.dry) {
+      await env.INVOICES.put('tg:last', JSON.stringify({ at: Math.floor(now.getTime() / 1000), day: today, ok: false, reason: 'no_new' }));
+      if (!(await env.INVOICES.get('tg:empty'))) {      /* فقط یک‌بار به فروشنده خبر بده */
+        await env.INVOICES.put('tg:empty', '1');
+        await sendTelegram(env, '📢 همهٔ محصولات سایت به کانال ارسال شده‌اند. تا محصول تازه‌ای به سایت اضافه نشود، ارسال روزانه متوقف است.');
+      }
+    }
+    return { sent: false, reason: 'no_new', stats: stats };
+  }
+  const rot = Number(await env.INVOICES.get('tg:rot').catch(() => 0)) || 0;
+  const it = chPick(queue, seen, rot);
+  if (opts.dry) return { sent: false, dry: true, next: { id: it.id, title: it.t, cat: it.c, image: it.im, caption: chCaption(it, 1000) }, stats: stats };
+
+  const r = await chSend(env, feed, it);
+  if (!r.ok) {
+    await env.INVOICES.put('tg:last', JSON.stringify({ at: Math.floor(now.getTime() / 1000), day: today, ok: false, reason: 'telegram', err: r.err, id: it.id }));
+    return { sent: false, reason: 'telegram_error', err: r.err, id: it.id, stats: stats };
+  }
+  await env.INVOICES.put('tg:p:' + it.id, JSON.stringify({ at: Math.floor(now.getTime() / 1000), msg: r.id || 0, mode: r.mode }));
+  await env.INVOICES.put('tg:rot', String(rot + 1));
+  await env.INVOICES.delete('tg:empty');
+  await env.INVOICES.put('tg:last', JSON.stringify({ at: Math.floor(now.getTime() / 1000), day: today, ok: true, id: it.id, title: it.t, mode: r.mode }));
+  stats.posted += 1; stats.waiting -= 1;
+  return { sent: true, id: it.id, title: it.t, mode: r.mode, stats: stats };
+}
+async function channelMarkAll(env) {
+  const feed = await chFeed(env), now = Math.floor(Date.now() / 1000);
+  const posted = await chPostedSet(env);
+  let n = 0;
+  for (const x of feed.products) {
+    if (x && x.id && !posted.has(x.id)) { await env.INVOICES.put('tg:p:' + x.id, JSON.stringify({ at: now, msg: 0, mode: 'marked' })); n++; }
+  }
+  await env.INVOICES.put('tg:seen', JSON.stringify(feed.products.map((x) => x.id)));
+  return { marked: n };
+}
+async function channelReset(env) {
+  let n = 0, cursor;
+  for (let i = 0; i < 20; i++) {
+    const r = await env.INVOICES.list({ prefix: 'tg:', cursor: cursor, limit: 1000 });
+    for (const k of r.keys) { await env.INVOICES.delete(k.name); n++; }
+    if (r.list_complete) break;
+    cursor = r.cursor;
+  }
+  return { deleted: n };
+}
+async function channelStatus(env) {
+  const last = await env.INVOICES.get('tg:last', { type: 'json' }).catch(() => null);
+  const posted = await chPostedSet(env);
+  return { last: last, postedCount: posted.size, channelSet: !!env.CHANNEL_CHAT_ID, botSet: !!env.TELEGRAM_BOT_TOKEN };
+}
+
 export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
@@ -250,6 +404,26 @@ export default {
         let lastCron = null;
         try { if (env.INVOICES) lastCron = await env.INVOICES.get('meta:lastcron', { type: 'json' }); } catch (e) {}
         return reply(req, env, { ok: true, telegram: tg, email: em, kv: kv, kvErr: kvErr, siteUrl: env.SITE_URL || '', lastCron: lastCron });
+      }
+      if (path === '/channel/status' && req.method === 'GET') {
+        if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+        return reply(req, env, await channelStatus(env));
+      }
+      if (path === '/channel/next' && req.method === 'GET') {
+        if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+        return reply(req, env, await channelRun(env, { dry: true }));
+      }
+      if (path === '/channel/post' && req.method === 'POST') {
+        if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+        return reply(req, env, await channelRun(env, { force: url.searchParams.get('force') === '1' }));
+      }
+      if (path === '/channel/mark-all' && req.method === 'POST') {
+        if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+        return reply(req, env, await channelMarkAll(env));
+      }
+      if (path === '/channel/reset' && req.method === 'POST') {
+        if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+        return reply(req, env, await channelReset(env));
       }
       if (path === '/invoices' && req.method === 'POST') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
@@ -291,6 +465,16 @@ export default {
   /* اجرای زمان‌بندی‌شده: شنبه → گزارش هفتگی | اول ماه شمسی → گزارش ماهانه */
   async scheduled(event, env, ctx) {
     const now = new Date(), t = tehran(now);
+    /* Cron مخصوص کانال (پیش‌فرض ۱۹:۰۰ تهران = ۱۵:۳۰ UTC). هر Cron دیگر مثل قبل گزارش‌ها را اجرا می‌کند */
+    const chCron = env.CHANNEL_CRON || '30 15 * * *';
+    if (event && event.cron === chCron) {
+      ctx.waitUntil((async () => {
+        let out;
+        try { out = await channelRun(env, {}); } catch (e) { out = { sent: false, reason: 'error', err: String(e && e.message || e) }; }
+        if (out.reason === 'telegram_error' || out.reason === 'error') await sendTelegram(env, '⚠️ ارسال روزانهٔ کانال انجام نشد: ' + (out.err || out.reason));
+      })());
+      return;
+    }
     const run = async () => {
       const log = { at: Math.floor(now.getTime() / 1000), cron: event && event.cron || '', day: weekdayTehran(now), pd: t.d, sent: [] };
       try {

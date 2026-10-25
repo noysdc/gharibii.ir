@@ -1,0 +1,32 @@
+---
+layout: null
+sitemap: false
+permalink: /telegram-feed.json
+---
+{%- comment -%}
+  فید محصولات برای ارسال خودکار به کانال تلگرام (Worker هر روز این فایل را می‌خواند).
+  هر محصول: آدرس، عنوان، دسته، قیمت، عکس اول، متن توضیح (اولین پاراگراف بخش «درباره‌ی این محصول»)، سایزها و هشتگ‌ها.
+  محصولی که ناموجود باشد (oos) ارسال نمی‌شود.
+{%- endcomment -%}
+{%- assign sorted = site.products | sort: 'sort_id' | reverse -%}
+{
+"store": {{ site.title | jsonify }},
+"site": {{ site.url | jsonify }},
+"wa": {{ site.whatsapp_sellers[0].number | default: "" | jsonify }},
+"products": [{% for p in sorted %}
+{%- assign grp = site.data.price_groups.groups[p.price_group] -%}
+{%- assign oos = p.out_of_stock -%}{%- if grp.out_of_stock -%}{%- assign oos = true -%}{%- endif -%}
+{%- assign praw = p.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- if praw == "" and grp.price -%}{%- assign praw = grp.price | append: "" -%}{%- endif -%}
+{%- assign oraw = p.old_price -%}
+{%- if oraw == nil and grp.old_price -%}{%- assign oraw = grp.old_price -%}{%- endif -%}
+{%- assign oraw = oraw | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- case p.category -%}{%- when 'girls' -%}{%- assign cfa = 'دخترانه' -%}{%- when 'boys' -%}{%- assign cfa = 'پسرانه' -%}{%- when 'bags-shoes' -%}{%- assign cfa = 'کیف و کفش' -%}{%- when 'crown-wand' -%}{%- assign cfa = 'تاج و عصا' -%}{%- else -%}{%- assign cfa = 'اکسسوری' -%}{%- endcase -%}
+{%- assign parts = p.content | split: '</h2>' -%}
+{%- assign seg = parts[1] | default: p.content -%}
+{%- assign firstp = seg | split: '</p>' | first | strip_html | strip_newlines | normalize_whitespace | strip -%}
+{%- assign im = p.images[0] -%}
+{%- assign sizes = '' -%}
+{%- for o in p.options -%}{%- if o.name contains 'اندازه' or o.name contains 'سایز' -%}{%- capture sizes -%}{{ o.values | join: '، ' }}{%- endcapture -%}{%- endif -%}{%- endfor -%}
+{"id":{{ p.url | jsonify }},"u":{{ p.url | absolute_url | jsonify }},"t":{{ p.title | jsonify }},"cat":{{ p.category | jsonify }},"c":{{ cfa | jsonify }},"p":{{ praw | plus: 0 }},"op":{{ oraw | plus: 0 }},"oos":{% if oos %}true{% else %}false{% endif %},"im":{% if im %}{% capture u %}{% include img.html src=im %}{% endcapture %}{% assign uu = u | strip %}{% if uu contains '://' %}{{ uu | jsonify }}{% else %}{{ uu | prepend: site.url | jsonify }}{% endif %}{% else %}""{% endif %},"d":{{ firstp | default: p.description | jsonify }},"sz":{{ sizes | jsonify }},"tags":{{ p.tags | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+}
