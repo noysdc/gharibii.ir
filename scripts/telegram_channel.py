@@ -14,7 +14,7 @@ Worker هر روز خودش یک محصول می‌فرستد؛ این اسکر�
 
 تنظیم (یکی از دو راه):
   1) متغیرهای محیطی  WORKER_URL  و  SELLER_KEY
-  2) فایل scripts/.telegram_channel.env با دو خط:
+  2) فایل scripts/telegram_channel.env (یا با نقطهٔ اول) با دو خط:
        WORKER_URL=https://gharibii-invoices.xxx.workers.dev
        SELLER_KEY=رمز-فروشنده
      (این فایل را کامیت نکنید؛ در .gitignore گذاشته شده)
@@ -29,9 +29,12 @@ import urllib.request
 
 def load_cfg():
     cfg = {"WORKER_URL": os.environ.get("WORKER_URL", ""), "SELLER_KEY": os.environ.get("SELLER_KEY", "")}
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".telegram_channel.env")
-    if os.path.exists(path):
-        with open(path, encoding="utf-8") as f:
+    here = os.path.dirname(os.path.abspath(__file__))
+    for name in ("telegram_channel.env", ".telegram_channel.env"):
+        path = os.path.join(here, name)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8-sig") as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("#") and "=" in line:
@@ -68,9 +71,14 @@ def main():
         print(__doc__)
         return 1
     cfg = load_cfg()
-    if not cfg["WORKER_URL"] or not cfg["SELLER_KEY"]:
-        print("WORKER_URL و SELLER_KEY تنظیم نشده‌اند (بالای همین فایل توضیح داده شده).")
+    if not cfg["WORKER_URL"]:
+        print("WORKER_URL تنظیم نشده است (بالای همین فایل توضیح داده شده).")
         return 1
+    if not cfg["SELLER_KEY"] or cfg["SELLER_KEY"].startswith("PUT-YOUR"):
+        import getpass
+        cfg["SELLER_KEY"] = getpass.getpass("Seller key (typing is hidden): ").strip()   # رمز فقط برای همین اجرا، بدون ذخیره
+        if not cfg["SELLER_KEY"]:
+            return 1
     cmd = args[0]
     if cmd == "status":
         show(call(cfg, "GET", "/channel/status"))
