@@ -9,6 +9,7 @@
   ۲. عکس‌ها را به  assets/images/products/<category>/<slug>/  منتقل می‌کند (جابه‌جایی، نه کپی)،
      با نام‌های <slug>-1.webp ، <slug>-2.webp ، ... (اگر فقط یک عکس باشد <slug>.webp)  و در md زیر کلید  images:  لینک می‌دهد.
   ۳. عکس‌هایی که منتقل شدند از پوشه raw حذف می‌شوند؛ آن‌هایی که منتقل نشدند همان‌جا می‌مانند.
+  (تامبنیل -t.webp ساخته نمی‌شود؛ MAKE_THUMBS = False)
   ۴. پوشه‌هایی که هیچ md ای ندارند: یک md نمونه در  _products/samples/  ساخته می‌شود
      (قیمت 0 و needs_review) و عکس‌ها به آن وصل می‌شوند تا بعداً مشخصات را وارد کنید.
 
@@ -56,7 +57,7 @@ CONVERT_TO_WEBP = True   # عکس‌ها هنگام انتقال به webp تب�
 WEBP_QUALITY = 80
 LOW_RES_MIN_WIDTH = 700  # عکسی که پس از برش ۳:۴ کمتر از این عرض داشته باشد در گالری مات دیده می‌شود
 LOWRES = []              # (مسیر مقصد، عرض، ارتفاع)
-MAKE_THUMBS = True       # کنار هر عکس webp یک <name>-t.webp کوچک هم ساخته شود (برای کارت‌ها/جستجو؛ سایت را سریع می‌کند)
+MAKE_THUMBS = False      # خاموش: دیگر <name>-t.webp ساخته نمی‌شود (اگر لازم شد، بعداً make_thumbs.py را جدا اجرا کنید)
 THUMB_SIZE = (540, 720)
 THUMB_QUALITY = 78
 IMG_EXT = {".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".webp", ".gif", ".bmp", ".tif", ".tiff", ".avif", ".heic", ".heif"}
@@ -349,7 +350,7 @@ def next_number(dest_dir, known_urls):
     nums = [0]
     if dest_dir.exists():
         for f in dest_dir.iterdir():
-            if f.is_file():
+            if f.is_file() and not f.stem.endswith("-t"):
                 nums.append(_num_of(f.stem, base))
     for u in known_urls:
         if Path(u).parent.name == base:
@@ -418,6 +419,8 @@ def put_image(src, dest_dir, name):
 def is_candidate(p):
     """آیا این فایل احتمالاً عکس است؟ (پسوند شناخته‌شده یا بدون پسوند)"""
     if p.name.lower() in JUNK_FILES:
+        return False
+    if p.stem.lower().endswith("-t"):   # تامبنیل‌ها هرگز عکس محصول حساب نمی‌شوند
         return False
     ext = p.suffix.lower()
     return ext in IMG_EXT or ext == ""
