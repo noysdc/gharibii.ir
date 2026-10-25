@@ -91,8 +91,10 @@ async function sendEmail(env, text) {
     return r.ok;
   } catch (e) { return false; }
 }
-function notify(env, ctx, text) {
-  const job = Promise.all([sendTelegram(env, text), sendEmail(env, text)]);
+/* تلگرام: همهٔ اعلان‌ها. ایمیل: فقط گزارش‌ها (kind = 'report')، مگر MAIL_ALL=1 تنظیم شده باشد */
+function notify(env, ctx, text, kind) {
+  const mail = kind === 'report' || env.MAIL_ALL === '1';
+  const job = Promise.all([sendTelegram(env, text), mail ? sendEmail(env, text) : Promise.resolve(false)]);
   if (ctx && ctx.waitUntil) ctx.waitUntil(job);
   return job;
 }
@@ -238,7 +240,7 @@ export default {
       if (path === '/report' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
         const text = await makeReport(env, url.searchParams.get('period') === 'month' ? 'month' : 'week', new Date());
-        if (url.searchParams.get('send') === '1') await notify(env, ctx, text);
+        if (url.searchParams.get('send') === '1') await notify(env, ctx, text, 'report');
         return reply(req, env, { text: text });
       }
       const m = path.match(/^\/invoices\/([^/]+)(\/report)?$/);
@@ -262,8 +264,8 @@ export default {
   async scheduled(event, env, ctx) {
     const now = new Date(), t = tehran(now);
     const jobs = [];
-    if (weekdayTehran(now) === 'Sat') jobs.push(makeReport(env, 'week', now).then((x) => notify(env, null, x)));
-    if (t.d === '01') jobs.push(makeReport(env, 'month', now).then((x) => notify(env, null, x)));
+    if (weekdayTehran(now) === 'Sat') jobs.push(makeReport(env, 'week', now).then((x) => notify(env, null, x, 'report')));
+    if (t.d === '01') jobs.push(makeReport(env, 'month', now).then((x) => notify(env, null, x, 'report')));
     ctx.waitUntil(Promise.all(jobs));
   }
 };
