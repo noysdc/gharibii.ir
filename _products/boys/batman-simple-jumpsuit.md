@@ -15,13 +15,11 @@ options:
 tags: ["لباس سرهمی ساده بتمن", "سرهمی بتمن", "سرهمی بتمن پسرانه", "بتمن", "بت من", "مرد خفاشی", "سرهمی شخصیتی", "سرهمی پسرانه", "تم تولد", "لباس تولد پسرانه", "هالووین", "لباس هالووین پسرانه", "بازی نقش‌آفرینی", "مهمانی کودک", "لباس مهمانی پسرانه", "عکاسی کودک", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "d=0f204444;g=01514264"
 images:
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-1.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-2.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-3.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-4.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-5.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-6.webp
-  - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-7.webp
+  - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-1.webp
+  - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-2.webp
+  - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-3.webp
+  - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-4.webp
+
 ---
 
 # لباس سرهمی ساده بتمن
