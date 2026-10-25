@@ -16,7 +16,7 @@ sitemap: false
     <ol class="pay-steps">
       <li>مبلغ <b id="pay-amount"></b> را در صفحهٔ پرداخت وارد کنید. <button type="button" class="link" id="pay-copy-amount">کپی مبلغ</button></li>
       <li>اگر صفحهٔ پرداخت قسمت توضیحات دارد، شمارهٔ فاکتور (<span dir="ltr" id="pay-no"></span>) را بنویسید. <button type="button" class="link" id="pay-copy-no">کپی شماره</button></li>
-      <li>بعد از پرداخت، «ارسال به فروشنده» را بزنید. وارد کردن «کد پیگیری» اختیاری است ولی تأیید را سریع‌تر می‌کند.</li>
+      <li>بعد از پرداخت با دکمهٔ «برگشت» گوشی یا مرورگر به همین صفحه برگردید و «ارسال به فروشنده» را بزنید. وارد کردن «کد پیگیری» اختیاری است ولی تأیید را سریع‌تر می‌کند.</li>
     </ol>
     <p class="pay-warn" id="pay-warn" hidden></p>
     <button type="button" class="btn btn-primary" id="pay-go">پرداخت آنلاین</button>
@@ -26,11 +26,19 @@ sitemap: false
         <button type="button" class="btn btn-wa" id="pay-send">ارسال به فروشنده</button>
         <button type="button" class="btn" id="pay-copy">کپی متن پرداخت</button>
       </div>
+      <div class="view-actions-row two" id="pay-alt" hidden>
+        <button type="button" class="btn" id="pay-send-bale">ارسال در بله</button>
+        <button type="button" class="btn" id="pay-send-tg">ارسال در تلگرام</button>
+      </div>
     </div>
     <p class="pay-after" id="pay-after" hidden>✅ پیام پرداخت برای فروشنده آماده شد. بعد از تأیید، فروشنده «فاکتور تأییدشده» را برایتان می‌فرستد؛ همان لینک را باز کنید و PDF یا عکسش را ذخیره کنید.</p>
   </section>
   <div class="view-actions" id="actions" hidden>
     <button type="button" class="btn btn-wa" id="v-confirm">تأیید و ادامه در واتساپ</button>
+    <div class="view-actions-row two" id="v-alt" hidden>
+      <button type="button" class="btn" id="v-bale">تأیید در بله</button>
+      <button type="button" class="btn" id="v-tg">تأیید در تلگرام</button>
+    </div>
     <div class="view-actions-row">
       <button type="button" class="btn" id="v-text">کپی متن</button>
       <button type="button" class="btn" id="v-img">عکس</button>

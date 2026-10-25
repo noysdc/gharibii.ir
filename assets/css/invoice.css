@@ -211,3 +211,13 @@ textarea{resize:vertical}
 /* پیام «تأیید پرداخت» */
 .inv-notice.is-paid{background:var(--v-ok);color:var(--v-ok-ink);border-color:var(--v-ok-b)}
 .pay-after{margin:10px 0 0;padding:.5rem .75rem;background:var(--v-ok);color:var(--v-ok-ink);border:1px solid var(--v-ok-b);border-radius:14px;font-size:.88rem;line-height:1.8}
+
+/* دکمه‌های کنار هم روی گوشی‌های کوچک: متن بشکند، بریده نشود؛ زیر ۳۶۰px زیر هم بیایند */
+.view-actions-row>.btn,.pay-report .view-actions-row>.btn,.pay-box>.btn{white-space:normal;text-align:center;line-height:1.5;min-width:0;padding-inline:.7rem}
+.pay-report .view-actions-row{margin-top:8px}
+.pay-report .view-actions-row:first-of-type{margin-top:0}
+@media (max-width:360px){
+  .view-actions-row,.view-actions-row.two{grid-template-columns:1fr}
+  .view{padding-inline:8px}
+  .pay-box{padding:12px}
+}

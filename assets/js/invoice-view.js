@@ -56,12 +56,43 @@
     $('pay-warn').hidden = !why;
     $('pay-go').classList.toggle('busy', !!why);
   }
+  /* ---------- بله و تلگرام: متن کپی می‌شود (این دو پیام از پیش‌نوشته را قبول نمی‌کنند) و چت باز می‌شود ---------- */
+  function chatUrl(kind) {
+    var s = officialSeller();
+    if (kind === 'bale') { var b = s && s.bale; return b ? 'https://ble.ir/' + b : ''; }
+    var t = (feed && feed.telegram) || '';
+    return t ? 'https://t.me/' + t : '';
+  }
+  function sendVia(kind, text) {
+    var url = chatUrl(kind);
+    if (!url) { G.toast('این راه ارتباطی فعال نیست'); return Promise.resolve(); }
+    var name = kind === 'bale' ? 'بله' : 'تلگرام';
+    G.copyText(text).then(function (ok) {
+      G.toast(ok ? 'متن کپی شد؛ در ' + name + ' paste کنید ✅' : 'متن کپی نشد؛ دستی بنویسید');
+    });
+    var w = window.open(url, '_blank', 'noopener');
+    if (!w) location.href = url;
+    return Promise.resolve();
+  }
+  function updateAlt() {
+    var b = !!chatUrl("bale");
+    var show = b || !!chatUrl('telegram');
+    ['pay-alt', 'v-alt'].forEach(function (id) { if ($(id)) $(id).hidden = !show; });
+    [['pay-send-bale', b], ['v-bale', b], ['pay-send-tg', !!chatUrl('telegram')], ['v-tg', !!chatUrl('telegram')]].forEach(function (x) {
+      if ($(x[0])) $(x[0]).hidden = !x[1];
+    });
+  }
   function refValue() { return G.clip(G.normDigits($('pay-ref').value), 40); }
   function bindPay() {
     if (!$('pay-box')) return;
     $('pay-go').addEventListener('click', function () {
       if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }
-      window.open(payUrl, '_blank', 'noopener');
+      /* مبلغ (تومان) کپی می‌شود و بعد همان صفحه به درگاه می‌رود؛ با دکمهٔ «برگشت» مشتری به همین فاکتور برمی‌گردد */
+      var amount = G.totals(inv).total;
+      G.copyText(String(amount)).then(function (ok) {
+        G.toast(ok ? 'مبلغ کپی شد؛ در صفحهٔ پرداخت paste کنید ✅' : 'مبلغ کپی نشد؛ دستی وارد کنید: ' + G.money(amount));
+        setTimeout(function () { location.href = payUrl; }, ok ? 900 : 1800);
+      });
     });
     $('pay-copy-amount').addEventListener('click', function () {
       if (!inv) return;
@@ -78,6 +109,15 @@
       G.openWhatsApp(s ? s.number : '', G.payMessage(inv, refValue()));
       if (inv.code) G.apiReport(inv.code, refValue()).catch(function () {});     /* اعلان تلگرام برای فروشنده */
       $('pay-after').hidden = false;
+    });
+    ['bale', 'telegram'].forEach(function (kind) {
+      $(kind === 'bale' ? 'pay-send-bale' : 'pay-send-tg').addEventListener('click', function () {
+        if (!inv) return;
+        if (payBlock()) { G.toast(payBlock()); return; }
+        sendVia(kind, G.payMessage(inv, refValue()));
+        if (inv.code) G.apiReport(inv.code, refValue()).catch(function () {});
+        $('pay-after').hidden = false;
+      });
     });
     $('pay-copy').addEventListener('click', function () {
       if (!inv) return;
@@ -138,6 +178,7 @@
       state.textContent = 'شماره فروشنده این فاکتور در فهرست رسمی فروشگاه نیست. برای اطمینان، با شماره‌های رسمی همین سایت تماس بگیرید.';
     }
     updatePay();
+    updateAlt();
     document.title = 'فاکتور ' + inv.no + ' | ' + ((feed && feed.store) || 'فروشگاه غریبی کیش');
   }
 
@@ -153,6 +194,8 @@
     var s = officialSeller();
     return G.openWhatsApp(s ? s.number : '', confirmText());
   });
+  guard($('v-bale'), function () { return sendVia('bale', confirmText()); });
+  guard($('v-tg'), function () { return sendVia('telegram', confirmText()); });
   guard($('v-text'), function () {
     return G.copyText(G.buildText(inv, feed, '')).then(function (ok) { G.toast(ok ? 'متن کپی شد ✅' : 'کپی نشد'); });
   });
