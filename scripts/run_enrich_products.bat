@@ -3,14 +3,14 @@ setlocal
 chcp 65001 >nul
 set PYTHONIOENCODING=utf-8
 title Gharibii - product updater
-cd /d "%~dp0"
+cd /d "%~dp0.."
 
 echo Working folder: %CD%
 echo.
 
 if not exist "_products" (
   echo [ERROR] Folder _products not found in the folder above.
-  echo         Put this .bat file in the repo ROOT, next to the folders _products and scripts.
+  echo         Keep this .bat file inside the scripts folder of the repo (the repo root has _products).
   pause
   exit /b 1
 )

@@ -1,0 +1,108 @@
+﻿راهنمای پوشهٔ scripts — فروشگاه غریبی (gharibii.ir)
+=====================================================
+
+نکتهٔ مهم: پوشهٔ assets/images/raw در .gitignore است و روی گیت‌هاب وجود ندارد.
+برای همین انتقال عکس‌ها از raw به products فقط روی کامپیوتر خودتان اجرا می‌شود، نه در Actions.
+
+
+۱) چیدمان عکس‌ها و لینک به md  (مهم‌ترین بخش)
+-----------------------------------------------
+organize_images_final.py
+    اسکریپت اصلی. هر پوشهٔ داخل assets/images/raw/01 را با md محصولات تطبیق می‌دهد،
+    عکس‌ها را به webp تبدیل می‌کند، به assets/images/products/<دسته>/<slug>/ می‌برد
+    (نام‌ها: slug-1.webp، slug-2.webp، ... و برای یک عکس تنها slug.webp)
+    و لینک‌ها را در فیلد images: همان md می‌نویسد. تامبنیل (-t.webp) ساخته نمی‌شود.
+    اگر برای پوشه‌ای md نباشد، یک md نمونه در _products/samples/ می‌سازد.
+    ← با دو فایل .bat پایین اجرا می‌شود.
+
+RUN_IMAGES_DRYRUN.bat
+    اجرای آزمایشی organize_images_final.py: فقط گزارش می‌دهد، هیچ چیزی تغییر نمی‌کند.
+    همیشه اول این را بزنید.
+
+RUN_IMAGES_FINAL.bat
+    اجرای واقعی organize_images_final.py (انتقال عکس‌ها و لینک کردن در md).
+
+folder_map.csv
+    نگاشت «نام پوشهٔ فارسی در raw ← slug محصول». ورودی organize_images_final.py است.
+    پاکش نکنید. اگر پوشه‌ای شناخته نشود، خود اسکریپت ردیف خالی برایش اضافه می‌کند؛
+    ستون slug را پر کنید و دوباره اجرا کنید.
+
+link_images.py
+    لینک‌های images: در md ها را با عکس‌های واقعی هر پوشه مقایسه می‌کند.
+    لینک شکسته و عکس تکراری را گزارش می‌دهد. پیش‌فرض فقط گزارش است؛
+    با --apply لینک‌ها را اصلاح می‌کند. (فایل‌های -t را نادیده می‌گیرد.)
+
+RUN_LINK_IMAGES.bat
+    اجرای link_images.py: اول گزارش، بعد می‌پرسد اعمال شود یا نه (y/n).
+
+
+۲) بررسی و تولید محتوای محصولات
+--------------------------------
+check_products.py
+    فقط گزارش می‌دهد و چیزی را تغییر نمی‌دهد: عکس خراب یا خالی، محصول بدون عکس،
+    slug و عنوان تکراری، عکس مشترک بین چند محصول، لینک‌های مشکل‌دار.
+    خروجی: check_report.md و check_report.csv
+
+enrich_products.py
+    فایل‌های محصول (_products/**/*.md) را خودکار کامل می‌کند: عنوان، هشتگ‌ها، توضیحات
+    (فقط بین <!-- AUTO:START --> و <!-- AUTO:END -->)، قالب سایز/رنگ و description گوگل.
+    ویرایش‌های دستی شما پاک نمی‌شود.
+
+product_catalog.py
+    دادهٔ enrich_products.py (شخصیت‌ها، نوع محصول‌ها، عنوان‌های دستی). فقط ویرایش می‌شود؛
+    اجرای مستقیم ندارد. حذفش نکنید، enrich بدون آن کار نمی‌کند.
+
+summarize_report.py
+    گزارش report.csv را برای خلاصهٔ Actions به جدول تبدیل می‌کند. workflow مربوط به enrich
+    به آن نیاز دارد؛ حذفش نکنید.
+
+run_enrich_products.bat
+    منوی محلی: پیش‌نمایش یا اعمال enrich روی همهٔ محصولات یا یک محصول،
+    حالت FORCE، و گزینهٔ ۶ برای اجرای check_products.py.
+
+
+۳) قیمت
+--------
+sync_price_groups.py
+    گروه‌های قیمتی فایل _data/price_groups.yml را همگام می‌کند: برای قیمت‌های مشترک
+    گروه جدید می‌سازد و در md ها price_group می‌نویسد. گروه‌های موجود را حذف نمی‌کند.
+    پیش‌فرض فقط گزارش است؛ با --apply اعمال می‌کند.
+
+RUN_SYNC_PRICES.bat
+    اجرای sync_price_groups.py: اول گزارش، بعد می‌پرسد اعمال شود یا نه (y/n).
+
+
+۴) اختیاری
+-----------
+resize.py  /  RUN_RESIZE.bat
+    عکس‌های products را به ۹۰۰×۱۲۰۰ (نسبت ۳:۴) برش می‌دهد و در assets/images/products_resized
+    می‌گذارد (این پوشه ignore شده). فقط در صورت نیاز.
+
+make_icons.py  /  run_make_icons.bat
+    آیکون‌های اپ (PWA) و تصاویر لودینگ آیفون را از لوگوی فروشگاه می‌سازد.
+    فقط وقتی لوگو عوض شود لازم است. نیاز: pip install pillow numpy
+
+
+۵) تب Actions در گیت‌هاب  (فایل‌ها در .github/workflows در ریشهٔ ریپو)
+------------------------------------------------------------------------
+Images: link photos to product md (check / fix)
+    اجرای link_images.py. حالت check فقط گزارش می‌دهد؛ حالت fix لینک‌های md را
+    اصلاح و کامیت می‌کند.
+Prices: sync price groups (check / apply)
+    اجرای sync_price_groups.py. حالت check فقط گزارش؛ حالت apply اعمال و کامیت.
+Check products (report only)
+    اجرای check_products.py؛ فقط گزارش.
+Enrich products (manual)
+    اجرای دستی enrich_products.py (preview یا apply).
+Enrich products (auto on push)
+    بعد از هر push که md محصولی را تغییر دهد، enrich خودکار اجرا و نتیجه کامیت می‌شود.
+    اگر نمی‌خواهید خودکار باشد، فایل enrich-products-auto.yml را حذف کنید.
+
+
+روند معمول افزودن محصول جدید
+-----------------------------
+۱. md محصول را در _products/<دسته>/ بسازید.
+۲. پوشهٔ عکس‌ها را (با نام انگلیسی هم‌نام slug) داخل assets/images/raw/01 بگذارید.
+۳. RUN_IMAGES_DRYRUN.bat را بزنید و گزارش را ببینید.
+۴. RUN_IMAGES_FINAL.bat را بزنید.
+۵. commit و push کنید. اگر خواستید، از تب Actions گزینهٔ «Images: link photos ... (check)» را بزنید.

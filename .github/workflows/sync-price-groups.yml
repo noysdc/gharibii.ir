@@ -1,0 +1,40 @@
+# Actions  ←  "Prices: sync price groups (check / apply)"  ←  Run workflow
+#   check = فقط گزارش | apply = گروه قیمتی جدید بساز و در md ها اعمال کن و کامیت کن
+name: "Prices: sync price groups (check / apply)"
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = فقط گزارش | apply = اعمال و کامیت"
+        type: choice
+        options: [check, apply]
+        default: check
+permissions:
+  contents: write
+concurrency:
+  group: price-groups
+  cancel-in-progress: false
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Run sync_price_groups.py
+        env:
+          MODE: ${{ inputs.mode }}
+        run: |
+          ARGS=()
+          if [ "$MODE" = "apply" ]; then ARGS+=(--apply); fi
+          python scripts/sync_price_groups.py "${ARGS[@]}" | tee price_log.txt
+          { echo "## Price groups (${MODE})"; echo '```'; tail -n 60 price_log.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit changes
+        if: ${{ inputs.mode == 'apply' }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A _products _data
+          git diff --cached --quiet && echo "تغییری وجود ندارد" || (git commit -m "همگام‌سازی گروه‌های قیمتی (اجرای دستی)" && git push)

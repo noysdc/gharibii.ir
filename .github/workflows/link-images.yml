@@ -1,0 +1,64 @@
+# Actions  ←  "Images: link photos to product md (check / fix)"  ←  Run workflow
+# عکس‌هایی که همین الان در ریپو هستند (assets/images/products/...) را با فیلد images: فایل‌های md مقایسه می‌کند.
+#   check = فقط گزارش (هیچ فایلی تغییر نمی‌کند)
+#   fix   = لینک‌های images: در md ها اصلاح می‌شود و کامیت می‌شود
+# توجه: انتقال عکس از پوشهٔ raw به products باید روی کامپیوتر خودتان انجام شود (RUN_IMAGES_FINAL.bat)،
+#       چون پوشهٔ assets/images/raw در .gitignore است و روی گیت‌هاب وجود ندارد.
+name: "Images: link photos to product md (check / fix)"
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check = فقط گزارش | fix = اصلاح لینک‌ها در md و کامیت"
+        type: choice
+        options: [check, fix]
+        default: check
+permissions:
+  contents: write
+concurrency:
+  group: images-link
+  cancel-in-progress: false
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run link_images.py
+        env:
+          MODE: ${{ inputs.mode }}
+        run: |
+          ARGS=()
+          if [ "$MODE" = "fix" ]; then ARGS+=(--apply); fi
+          python scripts/link_images.py "${ARGS[@]}" | tee link_log.txt
+      - name: Summary
+        run: |
+          {
+            echo "## Images → md links (${{ inputs.mode }})"
+            echo
+            echo "| status | count |"
+            echo "|---|---|"
+            python - <<'PY'
+          import csv, collections
+          c = collections.Counter(r["status"] for r in csv.DictReader(open("scripts/link_report.csv", encoding="utf-8-sig")))
+          for k, v in sorted(c.items()):
+              print(f"| {k} | {v} |")
+          PY
+            echo
+            echo "- ok = سالم | linked/fixed = لینک ساخته/اصلاح شد | no-folder = پوشهٔ عکس پیدا نشد | broken = لینک شکسته"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: link-report
+          path: |
+            scripts/link_report.csv
+            link_log.txt
+      - name: Commit changes
+        if: ${{ inputs.mode == 'fix' }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A _products
+          git diff --cached --quiet && echo "تغییری وجود ندارد" || (git commit -m "اصلاح لینک عکس‌ها در md (اجرای دستی)" && git push)
