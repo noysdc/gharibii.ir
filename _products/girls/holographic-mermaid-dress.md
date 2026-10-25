@@ -54,9 +54,7 @@ images:
   - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-37.webp
   - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-38.webp
   - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-39.webp
-  - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-40.webp
-  - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-41.webp
-  - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-42.webp
+
 ---
 
 # لباس پری دریایی هولوگرامی دخترانه
