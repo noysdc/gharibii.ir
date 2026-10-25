@@ -1,0 +1,58 @@
+---
+layout: product
+title: "لباس پری دریایی هولوگرامی سبز | درخشان و فانتزی"
+slug: green-holographic-mermaid-dress
+category: girls
+gender: girls
+price: "5998000"
+currency: IRT
+options:
+  - name: "اندازه"
+    values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
+  - name: "رنگ"
+    values: ["سبز/فیروزه‌ای هولوگرامی"]
+images:
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-1.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-2.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-3.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-4.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-5.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-6.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-7.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-8.webp
+  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-9.webp
+---
+
+# لباس پری دریایی هولوگرامی سبز
+
+اگر به دنبال یک لباس جادویی، درخشان و متفاوت برای کوچولوی خود هستید، این لباس پری دریایی هولوگرامی سبز دقیقاً همان چیزی است که نیاز دارید. این لباس با پارچه‌ای خاص و منحصربه‌فرد طراحی شده که در برابر نور، رنگ‌های مختلفی از جمله سبز، فیروزه‌ای و آبی را بازتاب می‌دهد و جلوه‌ای رویایی و افسانه‌ای به استایل کودک شما می‌بخشد. این لباس با الهام از دنیای زیر آب و شخصیت‌های فانتزی، انتخابی عالی برای مهمانی‌ها، جشن‌های خاص و عکاسی است.
+
+طراحی این لباس به گونه‌ای است که با دامن پری دریایی (Mermaid) و بالاتنه‌ای ساده و زیبا به رنگ صورتی، فرمی جذاب و دخترانه را به کودک هدیه می‌دهد. پارچه هولوگرامی به کار رفته در آن علاوه بر زیبایی و درخشش، سبک و راحت است و به کودک اجازه می‌دهد آزادانه به بازی و فعالیت بپردازد. برش‌های دقیق و دوخت تمیز این لباس باعث می‌شود که در حین پوشیدن، احساس راحتی کامل داشته باشد و برای مدت طولانی قابل استفاده باشد.
+
+این لباس را می‌توانید برای جشن‌های تولد، مهمانی‌های تم‌دار، عکاسی‌های آتلیه‌ای و یا حتی بازی‌های روزمره در خانه استفاده کنید. با توجه به طراحی منحصر به فرد و پارچه درخشان آن، این لباس به سرعت به یکی از لباس‌های محبوب کمد لباس کودک شما تبدیل خواهد شد و لحظات شاد و خاطره‌انگیزی را برای او رقم خواهد زد. ست کردن این لباس با تاج و عصای جادویی، استایل او را کامل‌تر خواهد کرد.
+
+## ویژگی‌ها:
+- طراحی فانتزی و خاص با تم پری دریایی
+- پارچه هولوگرامی با درخشش و بازتاب رنگ‌های زیبای سبز و فیروزه‌ای
+- دامن پری دریایی (Mermaid) با فرم زیبا و دخترانه
+- سبک و راحت برای تحرک آزادانه کودک
+- مناسب برای مهمانی، عکاسی، جشن تولد و بازی
+- دوخت باکیفیت و جزئیات ظریف
+
+## مشخصات:
+- **رنگ:** سبز/فیروزه‌ای هولوگرامی (دامن) و صورتی (بالاتنه)
+- **جنس:** پارچه هولوگرامی (نامشخص)
+- **جنسیت:** دخترانه
+- **سبک:** فانتزی / پری دریایی
+- **یقه:** نامشخص
+- **آستین:** نامشخص
+- **ابعاد:** نامشخص
+
+## اندازه‌ها:
+- **سایز 110** — مناسب 2 تا 4 سال
+- **سایز 120** — مناسب 4 تا 6 سال
+- **سایز 130** — مناسب 6 تا 8 سال
+- **سایز 140** — مناسب 8 تا 10 سال
+
+## هشتگ‌ها:
+#لباس_پری_دریایی #پارچه_هولوگرامی #لباس_فانتزی_دخترانه #لباس_سبز #پوشاک_دخترانه #مهمانی_کودک #عکاسی_کودک #هدیه_دخترانه #لباس_تم_دار #مد_کودک
