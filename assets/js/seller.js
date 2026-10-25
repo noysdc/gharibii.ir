@@ -517,17 +517,28 @@
     });
     if (G.apiOn()) {
       $('srv-card').hidden = false;
+      function why(e) {
+        if (!e) return 'نامشخص';
+        if (e.status === 401) return 'رمز فروشنده درست نیست.';
+        if (e.status) return 'پاسخ سرور ' + e.status + (e.data && (e.data.detail || e.data.error) ? ' — ' + (e.data.detail || e.data.error) : '');
+        return 'مرورگر به Worker نرسید (CORS / آدرس Worker / فیلتر بودن workers.dev).';
+      }
+      function sendState(v) { return v === true ? 'ارسال شد ✅' : (v ? 'ناموفق ❌ ' + v : 'ناموفق ❌'); }
       $('btn-ping').addEventListener('click', function () {
         $('srv-out').textContent = 'در حال بررسی…';
         G.apiPing().then(function (r) {
-          $('srv-out').textContent = 'سرور وصل است ✅ · تلگرام: ' + (r.telegram ? 'پیام آزمایشی رسید' : 'تنظیم نشده/ناموفق') + ' · ایمیل: ' + (r.email ? 'ارسال شد' : 'تنظیم نشده');
-        }, function (e) { $('srv-out').textContent = e && e.status === 401 ? 'رمز فروشنده درست نیست.' : 'اتصال به سرور برقرار نشد.'; });
+          $('srv-out').textContent = 'سرور وصل است ✅\nتلگرام: ' + sendState(r.telegram) + '\nایمیل: ' + sendState(r.email) +
+            '\nKV (INVOICES): ' + (r.kv ? 'وصل ✅' : 'مشکل ❌ ' + (r.kvErr || '')) + '\nSITE_URL: ' + (r.siteUrl || '— تنظیم نشده —') +
+            '\nآخرین اجرای زمان‌بندی: ' + (r.lastCron ? JSON.stringify(r.lastCron) : 'هنوز هیچ‌وقت اجرا نشده (Cron Trigger تنظیم نیست؟)');
+        }, function (e) { $('srv-out').textContent = why(e); });
       });
       Array.prototype.forEach.call(document.querySelectorAll('[data-rep]'), function (b) {
         b.addEventListener('click', function () {
           $('srv-out').textContent = 'در حال ساخت گزارش…';
-          G.apiReportNow(b.getAttribute('data-rep')).then(function (r) { $('srv-out').textContent = r.text + '\n\n(در تلگرام/ایمیل هم فرستاده شد)'; },
-            function () { $('srv-out').textContent = 'ساخت گزارش ناموفق بود.'; });
+          G.apiReportNow(b.getAttribute('data-rep')).then(function (r) {
+            var s = r.sent || {};
+            $('srv-out').textContent = r.text + '\n\nتلگرام: ' + sendState(s.telegram) + '\nایمیل: ' + sendState(s.email);
+          }, function (e) { $('srv-out').textContent = 'ساخت گزارش ناموفق بود: ' + why(e); });
         });
       });
     }
