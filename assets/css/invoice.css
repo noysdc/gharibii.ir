@@ -1,4 +1,4 @@
-/* ابزار پیش‌فاکتور غریبی کیش — صفحهٔ فروشنده + صفحهٔ پیش‌فاکتور مشتری */
+/* ابزار فاکتور غریبی کیش — صفحهٔ فروشنده + صفحهٔ فاکتور مشتری */
 @font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-RD-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Vazirmatn";src:url("../fonts/Vazirmatn-RD-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 :root{--bg:#F3F7F8;--surface:#fff;--ink:#10222C;--muted:#5A6E78;--line:#D7E1E5;--sea:#0A6670;--sea-deep:#073E45;--wa:#0F7F63;--rose:#F3DDE3;--warn:#FFF4D6;--warn-ink:#7a5200;--bad:#C0283E}
@@ -117,7 +117,7 @@ textarea{resize:vertical}
 .view-site{text-align:center;margin:18px 0 0;font-size:.88rem}
 .sheet-scroll{overflow-x:auto}
 
-/* ---------- خود پیش‌فاکتور (صفحه، عکس و PDF) — بدون media query تا همه‌جا یکسان باشد ---------- */
+/* ---------- خود فاکتور (صفحه، عکس و PDF) — بدون media query تا همه‌جا یکسان باشد ---------- */
 .inv-sheet{position:relative;max-width:760px;margin:0 auto;background:#fff;color:#10222C;padding:22px 22px 18px;border-radius:16px;border:1px solid var(--line);border-top:6px solid #0A6670;line-height:1.7;overflow:hidden}
 .inv-head{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid #0A6670}
 .h-logo{width:60px;height:60px;border-radius:50%;object-fit:cover;flex:none;border:1px solid #D7E1E5}
@@ -152,3 +152,9 @@ textarea{resize:vertical}
 .inv-sheet.is-expired .inv-rows{opacity:.75}
 .inv-export{position:fixed;left:-10000px;top:0;width:760px;z-index:-1;background:#fff}
 .inv-export .inv-sheet{max-width:none;width:760px;margin:0;border-radius:0;border:0;border-top:6px solid #0A6670}
+
+/* آدرس تحویل در فاکتور: تمام عرض */
+.m-wide{flex-basis:100%}
+/* پیام «تأیید پرداخت» */
+.inv-notice.is-paid{background:#E3F6EE;color:#0b5a45;border-color:#b6e3d1}
+.pay-after{margin:10px 0 0;padding:.5rem .75rem;background:#E3F6EE;color:#0b5a45;border-radius:10px;font-size:.88rem;line-height:1.8}

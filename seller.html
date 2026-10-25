@@ -1,6 +1,6 @@
 ---
 layout: tool
-title: ساخت پیش‌فاکتور
+title: ساخت فاکتور
 body_class: inv-seller-page
 permalink: /seller/
 sitemap: false
@@ -9,19 +9,19 @@ sitemap: false
   <header class="app-top">
     <img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="44" height="44" class="app-logo">
     <div class="app-top-text">
-      <h1>ساخت پیش‌فاکتور</h1>
+      <h1>ساخت فاکتور</h1>
       <p id="sync-status" class="muted">در حال دریافت قیمت‌ها از سایت…</p>
     </div>
     <button type="button" class="btn btn-ghost" id="btn-sync" title="به‌روزرسانی قیمت‌ها از سایت">⟳</button>
   </header>
 
   <section class="card">
-    <h2>اطلاعات پیش‌فاکتور</h2>
+    <h2>اطلاعات فاکتور</h2>
     <div class="grid2">
       <label class="field"><span>نام مشتری (اختیاری)</span><input type="text" id="f-cust" maxlength="60" autocomplete="off"></label>
-      <label class="field"><span>شماره واتساپ مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
+      <label class="field"><span>موبایل مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
       <label class="field"><span>فروشنده</span><select id="f-seller"></select></label>
-      <label class="field"><span>مدت اعتبار پیش‌فاکتور</span>
+      <label class="field"><span>مدت اعتبار فاکتور</span>
         <select id="f-valid">
           <option value="30">۳۰ دقیقه</option>
           <option value="60">۱ ساعت</option>
@@ -33,14 +33,15 @@ sitemap: false
         </select>
       </label>
     </div>
+    <label class="field"><span>آدرس تحویل (اختیاری)</span><textarea id="f-addr" rows="2" maxlength="300" placeholder="استان، شهر، خیابان، پلاک، کد پستی…"></textarea></label>
   </section>
 
   <section class="card">
     <h2>پیام مشتری</h2>
-    <p class="muted small-note">پیام یا سبدی که مشتری فرستاده را اینجا paste کنید؛ محصولات پیدا و به لیست اضافه می‌شوند.</p>
-    <textarea id="f-paste" rows="4" placeholder="متن پیام مشتری (لینک محصولات، تعداد، سایز)…"></textarea>
+    <p class="muted small-note">پیام مشتری را اینجا paste کنید و «تبدیل» بزنید: محصولات، سایز/رنگ/اندازه هر محصول، نام، موبایل، آدرس و یادداشت خودکار جایگذاری می‌شوند. اگر مشتری چند پیام فرستاد، هر کدام را جدا paste کنید؛ پیام تکراری دوباره اضافه نمی‌شود و فیلدهای پر دست نمی‌خورند.</p>
+    <textarea id="f-paste" rows="5" placeholder="متن پیام مشتری (لینک محصولات، سایز، رنگ، نام، شماره، آدرس…)"></textarea>
     <div class="row-between paste-row">
-      <button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به لیست</button>
+      <span class="inline"><button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به فاکتور</button><button type="button" class="btn btn-ghost small" id="btn-undo" hidden>برگرداندن</button></span>
       <small class="muted" id="paste-res"></small>
     </div>
   </section>
@@ -70,14 +71,14 @@ sitemap: false
       </label>
       <label class="field"><span>تخفیف کلی (تومان)</span><input type="text" id="f-disc" dir="ltr" inputmode="numeric" autocomplete="off" placeholder="۰"></label>
     </div>
-    <label class="field"><span>توضیح برای مشتری (اختیاری)</span><textarea id="f-note" rows="2" maxlength="300" placeholder="مثلاً: ارسال تا دو روز کاری"></textarea></label>
+    <label class="field"><span>یادداشت (در فاکتور چاپ می‌شود، اختیاری)</span><textarea id="f-note" rows="2" maxlength="300" placeholder="مثلاً: ارسال تا دو روز کاری"></textarea></label>
     <div class="totals" id="totals"></div>
     <ul class="warns" id="warns"></ul>
   </section>
 
   <section class="card" id="out-card" hidden>
-    <h2 id="out-title">پیش‌فاکتور آماده است</h2>
-    <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت پیش‌فاکتور» را بزنید.</p>
+    <h2 id="out-title">فاکتور آماده است</h2>
+    <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت فاکتور» را بزنید.</p>
     <div class="out-actions">
       <button type="button" class="btn btn-wa" id="o-wa">ارسال در واتساپ</button>
       <button type="button" class="btn" id="o-text">کپی متن</button>
@@ -85,24 +86,24 @@ sitemap: false
       <button type="button" class="btn" id="o-img">عکس (PNG)</button>
       <button type="button" class="btn" id="o-pdf">PDF</button>
     </div>
-    <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک پیش‌فاکتور به انتهای متن</label>
+    <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک فاکتور به انتهای متن</label>
     <div class="sheet-scroll"><div id="preview"></div></div>
   </section>
 
   <section class="card">
-    <h2>پیش‌فاکتورهای اخیر</h2>
+    <h2>فاکتورهای اخیر</h2>
     <div id="history"></div>
     <label class="field import"><span>باز کردن از لینک یا کد</span>
-      <span class="inline"><input type="text" id="f-import" dir="ltr" placeholder="لینک پیش‌فاکتور را اینجا paste کنید" autocomplete="off"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
+      <span class="inline"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
     </label>
-    <button type="button" class="btn btn-danger small" id="btn-new">شروع پیش‌فاکتور جدید (پاک کردن لیست)</button>
+    <button type="button" class="btn btn-danger small" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
   </section>
   <div class="spacer"></div>
 </main>
 
 <div class="sticky" id="sticky">
   <div class="sticky-sum"><b id="s-count">۰ قلم</b><span id="s-total">۰ تومان</span></div>
-  <button type="button" class="btn btn-primary" id="btn-build">ساخت پیش‌فاکتور</button>
+  <button type="button" class="btn btn-primary" id="btn-build">ساخت فاکتور</button>
 </div>
 <div class="toast" id="toast" role="status"></div>
 

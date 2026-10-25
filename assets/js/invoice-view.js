@@ -1,4 +1,4 @@
-/* صفحهٔ پیش‌فاکتور برای مشتری: پیش‌فاکتور را از خود لینک (بعد از #) می‌خواند و نمایش می‌دهد.
+/* صفحهٔ فاکتور برای مشتری: فاکتور را از خود لینک (بعد از #) می‌خواند و نمایش می‌دهد.
    اگر payment_link در _config.yml تنظیم شده باشد، بخش «پرداخت آنلاین» هم نشان داده می‌شود */
 (function () {
   'use strict';
@@ -27,21 +27,21 @@
   function confirmText() {
     var t = G.totals(inv);
     if (inv.paid) {
-      return 'سلام، فاکتور نهایی شماره ' + inv.no + ' را دیدم. 🙏';
+      return 'سلام، فاکتور شماره ' + inv.no + ' را دیدم. 🙏';
     }
     if (G.isExpired(inv)) {
-      return 'سلام، پیش‌فاکتور شماره ' + noLabel() + ' منقضی شده است. لطفاً قیمت و موجودی به‌روز را اعلام کنید. 🙏';
+      return 'سلام، مهلت پرداخت فاکتور شماره ' + noLabel() + ' تمام شده است. لطفاً قیمت و موجودی به‌روز را اعلام کنید. 🙏';
     }
-    return 'سلام، پیش‌فاکتور شماره ' + noLabel() + ' (جمع کل ' + G.money(t.total) + ') را دیدم و می‌خواهم سفارش را نهایی کنم. 🙏';
+    return 'سلام، فاکتور شماره ' + noLabel() + ' (جمع کل ' + G.money(t.total) + ') را دیدم و می‌خواهم سفارش را نهایی کنم. 🙏';
   }
 
   /* ---------- پرداخت آنلاین ---------- */
   function payBlock() {
     if (!inv || inv.paid) return '';
     var t = G.totals(inv);
-    if (G.isExpired(inv)) return 'این پیش‌فاکتور منقضی شده؛ برای پرداخت، پیش‌فاکتور جدید از فروشنده بگیرید.';
+    if (G.isExpired(inv)) return 'مهلت پرداخت این فاکتور تمام شده؛ برای پرداخت، فاکتور جدید از فروشنده بگیرید.';
     if (t.unpriced > 0) return 'قیمت بعضی اقلام هنوز قطعی نیست؛ قبل از پرداخت با فروشنده هماهنگ کنید.';
-    if (t.total <= 0) return 'مبلغ پیش‌فاکتور صفر است.';
+    if (t.total <= 0) return 'مبلغ فاکتور صفر است.';
     return '';
   }
   function updatePay() {
@@ -60,7 +60,7 @@
   function bindPay() {
     if (!$('pay-box')) return;
     $('pay-go').addEventListener('click', function () {
-      if (!inv || payBlock()) { G.toast(payBlock() || 'پیش‌فاکتور معتبر نیست'); return; }
+      if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }
       window.open(payUrl, '_blank', 'noopener');
     });
     $('pay-copy-amount').addEventListener('click', function () {
@@ -69,27 +69,26 @@
     });
     $('pay-copy-no').addEventListener('click', function () {
       if (!inv) return;
-      G.copyText(inv.no).then(function (ok) { G.toast(ok ? 'شماره پیش‌فاکتور کپی شد ✅' : 'کپی نشد'); });
+      G.copyText(inv.no).then(function (ok) { G.toast(ok ? 'شماره فاکتور کپی شد ✅' : 'کپی نشد'); });
     });
     $('pay-send').addEventListener('click', function () {
       if (!inv) return;
-      var ref = refValue();
-      if (!ref) { G.toast('کد پیگیری پرداخت را وارد کنید'); return; }
+      if (payBlock()) { G.toast(payBlock()); return; }
       var s = officialSeller();
-      G.openWhatsApp(s ? s.number : '', G.payMessage(inv, ref));
+      G.openWhatsApp(s ? s.number : '', G.payMessage(inv, refValue()));
+      $('pay-after').hidden = false;
     });
     $('pay-copy').addEventListener('click', function () {
       if (!inv) return;
-      var ref = refValue();
-      if (!ref) { G.toast('کد پیگیری پرداخت را وارد کنید'); return; }
-      G.copyText(G.payMessage(inv, ref)).then(function (ok) { G.toast(ok ? 'متن پرداخت کپی شد ✅' : 'کپی نشد'); });
+      G.copyText(G.payMessage(inv, refValue())).then(function (ok) { G.toast(ok ? 'متن پرداخت کپی شد ✅' : 'کپی نشد'); });
+      $('pay-after').hidden = false;
     });
   }
 
   function show() {
     inv = G.unpack(location.hash);
     if (!inv) {
-      fail('این لینک پیش‌فاکتور معتبر نیست یا ناقص کپی شده است. لطفاً لینک را دوباره از فروشنده بگیرید.');
+      fail('این لینک فاکتور معتبر نیست یا ناقص کپی شده است. لطفاً لینک را دوباره از فروشنده بگیرید.');
       return;
     }
     G.resolve(inv);
@@ -99,18 +98,19 @@
     actions.hidden = false;
     state.hidden = true;
     $('v-confirm').textContent = inv.paid ? 'ارسال پیام به فروشنده در واتساپ' : 'تأیید و ادامه در واتساپ';
+    $('v-pdf').classList.toggle('btn-primary', !!inv.paid);   /* بعد از پرداخت، ذخیرهٔ PDF مهم‌ترین کار مشتری است */
     if (inv.paid) {
       state.hidden = false; state.className = 'view-state';
-      state.textContent = 'این فاکتور نهایی و پرداخت‌شده است ✅';
+      state.textContent = 'پرداخت این فاکتور تأیید شده است ✅ — می‌توانید PDF یا عکس آن را ذخیره کنید.';
     } else if (G.isExpired(inv)) {
       state.hidden = false; state.className = 'view-state bad';
-      state.textContent = 'این پیش‌فاکتور منقضی شده است. برای قیمت به‌روز با فروشنده هماهنگ کنید.';
+      state.textContent = 'مهلت پرداخت این فاکتور تمام شده است. برای قیمت به‌روز با فروشنده هماهنگ کنید.';
     } else if (feed && inv.sw && !G.sellerKnown(feed, inv.sw)) {
       state.hidden = false; state.className = 'view-state warn';
-      state.textContent = 'شماره فروشنده این پیش‌فاکتور در فهرست رسمی فروشگاه نیست. برای اطمینان، با شماره‌های رسمی همین سایت تماس بگیرید.';
+      state.textContent = 'شماره فروشنده این فاکتور در فهرست رسمی فروشگاه نیست. برای اطمینان، با شماره‌های رسمی همین سایت تماس بگیرید.';
     }
     updatePay();
-    document.title = (inv.paid ? 'فاکتور ' : 'پیش‌فاکتور ') + inv.no + ' | ' + ((feed && feed.store) || 'فروشگاه غریبی کیش');
+    document.title = 'فاکتور ' + inv.no + ' | ' + ((feed && feed.store) || 'فروشگاه غریبی کیش');
   }
 
   function guard(btn, fn) {

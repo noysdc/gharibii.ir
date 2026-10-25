@@ -287,6 +287,19 @@
     return Promise.resolve(fallback());
   }
 
+  /* اینستاگرام: لینک ig.me فقط دایرکت را باز می‌کند و متن آماده پشتیبانی نمی‌شود؛
+     پس متن سفارش کپی می‌شود و مشتری در دایرکت paste می‌کند */
+  var IG_USER = (document.querySelector('meta[name="order-instagram"]') || {}).content || '';
+  function openInstagram(user, kind) {
+    var msg = messageFor(kind);
+    if (kind === 'cart' && !msg) { showMiniToast('سبد خرید خالی است!'); return; }
+    var copied = msg ? copyText(msg) : Promise.resolve(false);   /* کپی را قبل از باز شدن اپ شروع می‌کنیم */
+    window.open('https://ig.me/m/' + encodeURIComponent(user), '_blank', 'noopener');
+    copied.then(function (ok) {
+      showMiniToast(ok ? 'متن سفارش کپی شد ✅ — در دایرکت اینستاگرام paste کنید' : 'کپی نشد؛ متن سفارش را دستی بنویسید');
+    });
+  }
+
   function openWhatsApp(number, kind) {
     var msg = messageFor(kind);
     if (kind === 'cart' && !msg) { showMiniToast('سبد خرید خالی است!'); return; }
@@ -355,6 +368,7 @@
           <div id="cart-note-slot"></div>
           <button class="cart-checkout" id="cart-checkout" type="button">ارسال سفارش در واتساپ</button>
           <div class="wa-sellers cart-sellers" id="cart-sellers" hidden></div>
+          ${IG_USER ? `<button class="cart-checkout btn-ig" id="cart-ig" type="button" data-ig-user="${esc(IG_USER)}" data-kind="cart">ارسال سفارش در اینستاگرام</button>` : ''}
           <div id="cart-alt-slot"></div>
         </div>
       </div>
@@ -392,6 +406,7 @@
     var alt = document.querySelector('#cart-modal .order-alt-box');
     if (clearBtn) clearBtn.hidden = empty;
     if (checkout) checkout.hidden = empty;
+    var igb = document.getElementById('cart-ig'); if (igb) igb.hidden = empty;
     if (alt) alt.hidden = empty;
     if (empty) {
       var sb = document.getElementById('cart-sellers'); if (sb) sb.hidden = true;
@@ -474,6 +489,10 @@
       waMenu.style.display = waMenu.style.display === 'none' ? 'block' : 'none';
       return;
     }
+
+    /* دکمهٔ اینستاگرام (صفحهٔ محصول و سبد) */
+    var igBtn = t.closest('[data-ig-user]');
+    if (igBtn) { e.preventDefault(); openInstagram(igBtn.getAttribute('data-ig-user'), igBtn.getAttribute('data-kind') || 'product'); return; }
 
     /* انتخاب فروشنده (صفحهٔ محصول و سبد) → همین قالب پیام */
     var sel = t.closest('[data-wa-number]');

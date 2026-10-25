@@ -505,3 +505,16 @@ html[data-theme="dark"]:root:root:root .add-to-cart-btn:not(.is-soldout-btn){
   html:root:root:root .add-to-cart-btn:hover{transform:none}
 }
 html:root:root:root .add-to-cart-btn{position:relative;z-index:5}
+
+/* ---------- دکمهٔ «ارسال سفارش در اینستاگرام» (کنار دکمهٔ واتساپ) ---------- */
+html:root:root:root :is(.btn-wa,.cart-checkout).btn-ig{
+  background:linear-gradient(45deg,#f58529,#dd2a7b 55%,#8134af) !important;
+  border:1px solid rgba(255,255,255,.35) !important;
+  box-shadow:0 6px 18px rgba(221,42,123,.28) !important;
+  color:#fff !important;
+}
+html:root:root:root :is(.btn-wa,.cart-checkout).btn-ig:hover{
+  background:linear-gradient(45deg,#e97a1f,#cf1f70 55%,#7329a3) !important;
+  color:#fff !important;
+}
+html:root:root:root .cart-checkout.btn-ig{margin-top:.6rem}

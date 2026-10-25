@@ -47,6 +47,13 @@
     {% include order-note.html %}
   </div>
 
+  <!-- دکمه اینستاگرام: متن سفارش کپی می‌شود و دایرکت فروشگاه باز می‌شود (اینستاگرام اجازهٔ پر شدن خودکار متن را نمی‌دهد) -->
+  {%- if site.order_instagram -%}
+  <button type="button" class="btn-wa btn-ig" id="open-ig" data-ig-user="{{ site.order_instagram }}" data-kind="product">
+    <span>📸</span> ثبت سفارش در اینستاگرام
+  </button>
+  {%- endif -%}
+
   <!-- روش‌های دیگر سفارش: فقط یک‌جا -->
   {% include order-alt.html kind="product" %}
 

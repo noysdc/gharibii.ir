@@ -1,5 +1,5 @@
-/* ابزار پیش‌فاکتور فروشگاه غریبی کیش — ماژول مشترک (صفحهٔ فروشنده + صفحهٔ پیش‌فاکتور مشتری)
-   - پیش‌فاکتور داخل خود لینک ذخیره می‌شود (بعد از #) و هیچ‌جا به سرور فرستاده نمی‌شود
+/* ابزار فاکتور فروشگاه غریبی کیش — ماژول مشترک (صفحهٔ فروشنده + صفحهٔ فاکتور مشتری)
+   - فاکتور داخل خود لینک ذخیره می‌شود (بعد از #) و هیچ‌جا به سرور فرستاده نمی‌شود
    - قیمت‌ها و محصولات از /seller-data.json (همان منبع سایت) خوانده می‌شود */
 (function (w) {
   'use strict';
@@ -49,8 +49,8 @@
       }).formatToParts(d);
       var m = {};
       parts.forEach(function (p) { m[p.type] = p.value; });
-      return 'PF-' + m.year + m.month + m.day + '-' + m.hour + m.minute + m.second;
-    } catch (e) { return 'PF-' + d.getTime().toString(36).toUpperCase(); }
+      return 'F-' + m.year + m.month + m.day + '-' + m.hour + m.minute + m.second;
+    } catch (e) { return 'F-' + d.getTime().toString(36).toUpperCase(); }
   }
   function remainText(exp) {
     var s = exp - Math.floor(Date.now() / 1000);
@@ -77,7 +77,7 @@
     return { count: count, lines: inv.items.length, sub: sub, disc: disc, fee: fee, total: sub - disc + fee, unpriced: unpriced };
   }
 
-  /* ---------- لینک (پیش‌فاکتور داخل خود لینک) ---------- */
+  /* ---------- لینک (فاکتور داخل خود لینک) ---------- */
   function b64Enc(str) {
     var bytes = new TextEncoder().encode(str), bin = '';
     for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
@@ -119,7 +119,8 @@
     var a = [VERSION2, ts.toString(36), Math.max(1, Math.round((inv.exp - ts) / 60)), inv.no === std ? '' : inv.no,
       inv.cust, inv.sw, inv.fee, inv.disc, inv.note,
       inv.items.map(function (i) { var r = [shortId(i.id), i.q, i.p, i.o]; if (!i.id) r.push(i.t); return r; }),
-      inv.rev > 1 ? inv.rev : 0, inv.paid ? inv.paid.ref : '', inv.paid ? inv.paid.at.toString(36) : ''];
+      inv.rev > 1 ? inv.rev : 0, inv.paid ? (inv.paid.ref || '') : '', inv.paid ? inv.paid.at.toString(36) : '',
+      inv.addr || '', inv.ph || ''];
     while (a.length > 10 && !a[a.length - 1]) a.pop();
     return b64Enc(JSON.stringify(a));
   }
@@ -140,16 +141,16 @@
         if (!ts || vm <= 0) return null;
         inv = {
           no: clip(a[3], 40) || makeNo(new Date(ts * 1000)), ts: ts, exp: ts + vm * 60,
-          cust: clip(a[4], 60), sn: '', sw: clip(a[5], 20).replace(/\D/g, ''),
+          cust: clip(a[4], 60), sn: '', sw: clip(a[5], 20).replace(/\D/g, ''), addr: clip(a[13], 300), ph: clip(a[14], 15).replace(/\D/g, ''),
           fee: toNum(a[6]), disc: toNum(a[7]), note: clip(a[8], 300), items: [],
           rev: Math.min(99, Math.max(1, Math.round(Number(a[10]) || 1))), paid: null
         };
-        if (a[11]) inv.paid = { ref: clip(a[11], 40), at: parseInt(a[12], 36) || ts };
+        if (a[12]) inv.paid = { ref: clip(a[11], 40), at: parseInt(a[12], 36) || ts };   /* کد پیگیری اختیاری است؛ تاریخ تأیید نشانهٔ پرداخت است */
         rows = a[9];
       } else if (a[0] === VERSION && Array.isArray(a[10])) {
         inv = {
           no: clip(a[1], 40), ts: Number(a[2]) || 0, exp: Number(a[3]) || 0,
-          cust: clip(a[4], 60), sn: clip(a[5], 40), sw: clip(a[6], 20).replace(/\D/g, ''),
+          cust: clip(a[4], 60), sn: clip(a[5], 40), sw: clip(a[6], 20).replace(/\D/g, ''), addr: '', ph: '',
           fee: toNum(a[7]), disc: toNum(a[8]), note: clip(a[9], 300), items: [], rev: 1, paid: null
         };
         if (!inv.ts || !inv.exp) return null;
@@ -165,7 +166,7 @@
   }
   /* آخر لینک، شمارهٔ فاکتور (تاریخ و ساعت) و نسخه می‌آید تا در چت راحت شناخته شود؛ هنگام خواندن نادیده گرفته می‌شود */
   function linkOf(tok, no, rev) {
-    var suf = String(no || '').replace(/^PF-/, '').replace(/[^0-9A-Za-z-]/g, '') + (rev > 1 ? '-r' + rev : '');
+    var suf = String(no || '').replace(/^(?:PF|F)-/, '').replace(/[^0-9A-Za-z-]/g, '') + (rev > 1 ? '-r' + rev : '');
     return location.origin + BASE + '/invoice/#' + tok + (suf ? '.' + suf : '');
   }
   function invoiceUrl(inv) { return linkOf(pack(inv), inv.no, inv.rev); }
@@ -198,14 +199,30 @@
     return null;
   }
 
-  /* ---------- متن پیش‌فاکتور (برای واتساپ، تلگرام، بله، اینستاگرام) ---------- */
+  /* شماره موبایل برای نمایش: 989347688356 یا 09347688356 → 0934 768 8356 */
+  function mobileFa(v) {
+    var d = normDigits(v).replace(/\D/g, '');
+    if (d.indexOf('98') === 0 && d.length === 12) d = '0' + d.slice(2);
+    if (d.length === 10 && d.charAt(0) === '9') d = '0' + d;
+    return d.length === 11 ? d.slice(0, 4) + ' ' + d.slice(4, 7) + ' ' + d.slice(7) : d;
+  }
+  /* شماره‌های موبایل فروشگاه (دو فروشنده) که زیر فاکتور چاپ می‌شود */
+  function storeMobiles(feed) {
+    var out = [];
+    ((feed && feed.sellers) || []).forEach(function (s) { var m = mobileFa(s.number); if (m && out.indexOf(m) < 0) out.push(m); });
+    return out.slice(0, 2);
+  }
+
+  /* ---------- متن فاکتور (برای واتساپ، تلگرام، بله، اینستاگرام) ---------- */
   function buildText(inv, feed, link) {
     var t = totals(inv), store = (feed && feed.store) || 'فروشگاه غریبی کیش';
-    var m = (inv.paid ? '🧾 فاکتور نهایی ' : '🧾 پیش‌فاکتور ') + store + '\n';
+    var m = '🧾 فاکتور ' + store + '\n';
     m += 'شماره: ' + inv.no + (inv.rev > 1 ? ' (نسخه ' + nf(inv.rev) + ')' : '') + '\n';
     m += 'تاریخ: ' + fmtDate(inv.ts) + '\n';
     if (!inv.paid) m += 'اعتبار تا: ' + fmtDate(inv.exp) + '\n';
     if (inv.cust) m += 'مشتری: ' + inv.cust + '\n';
+    if (inv.ph) m += 'شماره تماس: ' + mobileFa(inv.ph) + '\n';
+    if (inv.addr) m += 'آدرس: ' + inv.addr + '\n';
     m += '\n';
     inv.items.forEach(function (it, i) {
       m += nf(i + 1) + '. ' + titleOf(it, feed) + '\n';
@@ -224,17 +241,15 @@
     if (t.unpriced > 0) m += '⚠️ قیمت ' + nf(t.unpriced) + ' قلم با فروشنده هماهنگ می‌شود.\n';
     if (inv.note) m += '\n📝 ' + inv.note + '\n';
     if (inv.paid) {
-      m += '\n✅ پرداخت تأیید شد. کد پیگیری: ' + inv.paid.ref + ' (' + fmtDate(inv.paid.at) + ')';
+      m += '\n✅ پرداخت تأیید شد' + (inv.paid.ref ? '. کد پیگیری: ' + inv.paid.ref : '') + ' (' + fmtDate(inv.paid.at) + ')';
     } else {
-      m += '\n⚠️ این سند «پیش‌فاکتور» است و به منزله فاکتور نهایی نیست.';
-      m += ' تا ' + fmtDate(inv.exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
-      m += ' پس از پرداخت و تأیید فروشنده، فاکتور نهایی صادر می‌شود.';
+      m += '\n⏳ در انتظار پرداخت. این فاکتور تا ' + fmtDate(inv.exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
     }
-    if (link) m += '\n\n🔗 مشاهده ' + (inv.paid ? 'فاکتور نهایی' : 'پیش‌فاکتور') + ':\n' + link;
+    if (link) m += '\n\n🔗 مشاهده فاکتور:\n' + link;
     return m;
   }
 
-  /* ---------- ظاهر پیش‌فاکتور (همان ظاهر در صفحه، عکس و PDF) ---------- */
+  /* ---------- ظاهر فاکتور (همان ظاهر در صفحه، عکس و PDF) ---------- */
   function sheetHTML(inv, feed, o) {
     o = o || {};
     var t = totals(inv), expired = isExpired(inv);
@@ -265,38 +280,39 @@
 
     var rem = remainText(inv.exp);
     var validLine = expired
-      ? '<b class="v-expired">این پیش‌فاکتور منقضی شده است.</b> برای قیمت و موجودی به‌روز با فروشنده هماهنگ کنید.'
-      : 'معتبر تا <b>' + esc(fmtDate(inv.exp)) + '</b>' + (o.live && rem ? ' (<span data-remain>' + esc(rem) + '</span> مانده)' : '');
+      ? '<b class="v-expired">مهلت پرداخت این فاکتور تمام شده است.</b> برای قیمت و موجودی به‌روز با فروشنده هماهنگ کنید.'
+      : 'مهلت پرداخت تا <b>' + esc(fmtDate(inv.exp)) + '</b>' + (o.live && rem ? ' (<span data-remain>' + esc(rem) + '</span> مانده)' : '');
 
     var meta = '<div class="m-item"><span>شماره</span><b dir="ltr">' + esc(inv.no) + '</b></div>' +
       (inv.rev > 1 ? '<div class="m-item"><span>نسخه</span><b>' + nf(inv.rev) + '</b></div>' : '') +
       '<div class="m-item"><span>تاریخ صدور</span><b>' + esc(fmtDate(inv.ts)) + '</b></div>' +
       (inv.cust ? '<div class="m-item"><span>مشتری</span><b>' + esc(inv.cust) + '</b></div>' : '') +
+      (inv.ph ? '<div class="m-item"><span>شماره تماس</span><b dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
       ((seller || inv.sn) ? '<div class="m-item"><span>فروشنده</span><b>' + esc(seller ? seller.name : inv.sn) + '</b></div>' : '') +
-      (inv.paid ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '');
+      (inv.paid && inv.paid.ref ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '') +
+      (inv.addr ? '<div class="m-item m-wide"><span>آدرس تحویل</span><b>' + esc(inv.addr) + '</b></div>' : '');
 
-    var foot = [];
-    if (feed && feed.phone) foot.push('☎ ' + esc(feed.phone));
+    var mobiles = storeMobiles(feed), foot = [];
+    if (mobiles.length) foot.push('☎ ' + mobiles.map(function (m) { return '<span dir="ltr">' + esc(m) + '</span>'; }).join(' · '));
     if (feed && feed.address) foot.push(esc(feed.address));
 
     var notice = inv.paid
-      ? '<b>این سند، فاکتور نهایی است.</b><br>پرداخت در تاریخ <b>' + esc(fmtDate(inv.paid.at)) + '</b> تأیید شد.'
-      : '<b>این سند، پیش‌فاکتور است و به منزله فاکتور نهایی نیست.</b><br>' + validLine +
-        '<br>قیمت، موجودی، سایز و هزینه دقیق ارسال پس از تأیید فروشنده قطعی می‌شود.' +
-        '<br><b>پس از پرداخت و تأیید فروشنده، فاکتور نهایی صادر می‌شود.</b>' +
+      ? '<b>پرداخت این فاکتور تأیید شده است.</b><br>تاریخ تأیید: <b>' + esc(fmtDate(inv.paid.at)) + '</b>'
+      : '<b>وضعیت: در انتظار پرداخت.</b><br>' + validLine +
+        '<br>قیمت، موجودی، سایز و هزینهٔ دقیق ارسال پس از تأیید فروشنده قطعی می‌شود و سفارش بعد از پرداخت و تأیید فروشنده ثبت می‌شود.' +
         '<br>اگر فروشنده نسخهٔ جدیدتری فرستاد، فقط آخرین نسخه معتبر است.';
 
     return '<div class="inv-sheet' + (expired ? ' is-expired' : '') + '" dir="rtl">' +
       '<div class="inv-head" data-brk>' +
         '<img class="h-logo" src="' + BASE + '/assets/images/gharibii-store-logo.webp" alt="" width="64" height="64" crossorigin="anonymous">' +
-        '<div class="h-text"><div class="h-store">' + esc(store) + '</div><div class="h-title">' + (inv.paid ? 'فاکتور نهایی' : 'پیش‌فاکتور') + '</div></div>' +
+        '<div class="h-text"><div class="h-store">' + esc(store) + '</div><div class="h-title">فاکتور</div></div>' +
       '</div>' +
       '<div class="inv-meta" data-brk>' + meta + '</div>' +
-      '<div class="inv-notice" data-brk>' + notice + '</div>' +
+      '<div class="inv-notice' + (inv.paid ? ' is-paid' : '') + '" data-brk>' + notice + '</div>' +
       '<div class="inv-rows">' + rows + '</div>' +
       '<div class="inv-totals" data-brk>' + totalRows + '</div>' +
       (inv.note ? '<div class="inv-note" data-brk><b>توضیحات:</b> ' + esc(inv.note) + '</div>' : '') +
-      '<div class="inv-foot" data-brk>' + (foot.length ? foot.join(' · ') + '<br>' : '') + 'با تشکر از اعتماد شما 🎀</div>' +
+      '<div class="inv-foot" data-brk>' + (foot.length ? foot.join('<br>') + '<br>' : '') + 'با تشکر از اعتماد شما 🎀</div>' +
       (inv.paid ? '<div class="inv-stamp paid" aria-hidden="true">پرداخت شد</div>' : (expired ? '<div class="inv-stamp" aria-hidden="true">منقضی شده</div>' : '')) +
     '</div>';
   }
@@ -485,11 +501,12 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2800);
   }
-  /* متنی که مشتری بعد از پرداخت برای فروشنده می‌فرستد */
+  /* متنی که مشتری بعد از پرداخت برای فروشنده می‌فرستد (کد پیگیری اختیاری است) */
   function payMessage(inv, ref) {
     var t = totals(inv);
-    return 'سلام، پرداخت انجام شد ✅\nشماره پیش‌فاکتور: ' + inv.no + (inv.rev > 1 ? ' (نسخه ' + nf(inv.rev) + ')' : '') +
-      '\nمبلغ: ' + money(t.total) + '\nکد پیگیری: ' + ref + '\nلطفاً پرداخت را تأیید و فاکتور نهایی را بفرستید. 🙏';
+    return 'سلام، پرداخت انجام شد ✅\nشماره فاکتور: ' + inv.no + (inv.rev > 1 ? ' (نسخه ' + nf(inv.rev) + ')' : '') +
+      '\nمبلغ: ' + money(t.total) + (ref ? '\nکد پیگیری: ' + ref : '') +
+      '\nلطفاً پرداخت را تأیید کنید و فاکتور تأییدشده را برایم بفرستید. 🙏';
   }
   function waUrl(number, text) { return 'https://wa.me/' + (number || '') + '?text=' + encodeURIComponent(text); }
   var MAX_WA_URL = 4000;
@@ -514,12 +531,125 @@
     return d;
   }
 
+
+  /* ---------- خواندن پیام مشتری (محصولات، سایز/رنگ/اندازه، نام، موبایل، آدرس، یادداشت) ---------- */
+  function fa(s) {   /* یکسان‌سازی ارقام و حروف عربی/فارسی */
+    return normDigits(s).replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '');
+  }
+  function nzs(s) { return fa(s).toLowerCase().replace(/[\u200c\u064b-\u065f]/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function decU(x) { try { return decodeURIComponent(x); } catch (e) { return x; } }
+  function pathOf(url) {
+    try {
+      var path = decU(new URL(url).pathname);
+      if (path.indexOf('/products/') < 0) return '';
+      return path.slice(-1) === '/' ? path : path + '/';
+    } catch (e) { return ''; }
+  }
+  function findByPath(feed, path) {
+    var best = null, bs = 0;
+    feed.products.forEach(function (p) {
+      var id = decU(String(p.id)), sc = 0;
+      if (id === path) sc = 4;
+      else if (path.slice(-id.length) === id) sc = 3;
+      if (sc > bs) { bs = sc; best = p; }
+    });
+    return best;
+  }
+  function qtyIn(s) {
+    var m = s.match(/(?:^|\s)(\d{1,3})\s*[×xX]\s*[\d,٬]/) || s.match(/[×xX*]\s*(\d{1,3})(?!\d)/) ||
+      s.match(/(\d{1,3})\s*عدد/) || s.match(/تعداد\s*[:：]?\s*(\d{1,3})/);
+    return m ? Math.min(99, Math.max(1, Number(m[1]))) : 0;
+  }
+  /* موبایل ایران: 09…، +98…، 0098… ؛ در خط «شماره/موبایل» حتی بدون صفر اول (۹۱۲…) */
+  function phoneIn(s, loose, skip) {
+    var d = fa(s).replace(/[\s\-().]/g, ''), re = /(^|\D)((?:\+?98|0098|0)?9\d{9})(?!\d)/g, m;
+    while ((m = re.exec(d))) {
+      var raw = m[2], strict = /^(?:\+?98|0098|0)/.test(raw);
+      if (!strict && !loose) continue;
+      var ten = raw.replace(/^\+?(?:98|0098)|^0/, '');
+      if (ten.length !== 10) continue;
+      var out = '0' + ten;
+      if (skip && skip.indexOf(out) >= 0) continue;
+      return out;
+    }
+    return '';
+  }
+  var OPT_RE = /(^|[\s،,|(\[\-–—])(سایز|اندازه|رنگ|سن|قد|وزن|طرح|مدل|جنس|پارچه|توضیحات|توضیح)\s*(?:[:：=]\s*|\s+)/g;
+  /* همهٔ «کلید: مقدار»های محصول در یک خط: سایز ۶ - رنگ آبی - ۲ عدد */
+  function optsIn(line) {
+    var res = {}, hits = [], m;
+    OPT_RE.lastIndex = 0;
+    while ((m = OPT_RE.exec(line))) hits.push({ k: m[2], at: m.index + m[1].length, vs: OPT_RE.lastIndex });
+    hits.forEach(function (h, i) {
+      var v = line.slice(h.vs, i + 1 < hits.length ? hits[i + 1].at : line.length);
+      v = v.split(/\s[-–—]\s|[،,|]|×|تعداد|\d+\s*عدد/)[0];
+      v = clip(v.replace(/^[\s:：=]+|[\s:：=]+$/g, ''), 40);
+      if (v) res[h.k === 'توضیحات' ? 'توضیح' : h.k] = v;
+    });
+    if (!res['سایز'] && !res['سن']) {
+      var age = line.match(/(\d{1,2})\s*(?:ساله|سال)(?!\S)/);
+      if (age) res['سن'] = age[1] + ' سال';
+    }
+    return res;
+  }
+  var RX_NAME = /^(?:نام(?:\s*و\s*نام\s*خانوادگی)?|اسم(?:\s*و\s*فامیل)?|نام\s*گیرنده|تحویل\s*گیرنده|گیرنده)\s*[:：]\s*(.*)$/;
+  var RX_PHONE = /^(?:شماره(?:\s*(?:تماس|موبایل|همراه|تلفن|واتساپ))?|تلفن|موبایل|همراه|تماس|واتساپ)\s*[:：]\s*(.*)$/;
+  var RX_ADDR = /^(?:آدرس|ادرس|نشانی)(?:\s*(?:کامل|تحویل|ارسال|گیرنده))?\s*[:：]?\s*(.*)$/;
+  var RX_POST = /^کد\s*پستی\s*[:：]?\s*(\d[\d\s-]*)$/;
+  var RX_NOTE = /^(?:یادداشت|نکته|توضیحات|پیام)\s*[:：]\s*(.*)$/;
+  var RX_STOP = /^[━🧾🚚💳⚠💰🔗🙏🌸🛍]/;
+
+  function parseCustomerMessage(text, feed) {
+    var out = { items: [], lost: 0, name: '', phone: '', addr: '', note: '' };
+    var skip = ((feed && feed.sellers) || []).map(function (s) { return '0' + String(s.number).slice(-10); });
+    var addr = [], note = [], cur = null, mode = '';
+    var lines = fa(text).split(/\r?\n/);
+    lines.forEach(function (raw) {
+      var ln = raw.trim(), m;
+      if (!ln) { mode = ''; return; }
+      var urls = ln.match(/https?:\/\/[^\s)>\]]+/g) || [];
+      if (urls.length) {
+        mode = '';
+        urls.forEach(function (u) {
+          var path = pathOf(u);
+          if (!path) return;
+          var p = feed && feed.products ? findByPath(feed, path) : null;
+          if (p) { cur = { p: p, q: 1, o: {} }; out.items.push(cur); } else { cur = null; out.lost++; }
+        });
+        ln = ln.replace(/https?:\/\/\S+/g, ' ').trim();
+        if (!ln) return;
+      }
+      if (RX_STOP.test(ln)) { mode = ''; return; }
+      if ((m = ln.match(RX_NAME))) { out.name = clip(m[1], 60); cur = null; mode = ''; return; }
+      if ((m = ln.match(RX_PHONE))) { var ph = phoneIn(m[1], true, skip); if (ph && !out.phone) out.phone = ph; cur = null; mode = ''; return; }
+      if ((m = ln.match(RX_POST))) { addr.push('کد پستی: ' + m[1].replace(/\D/g, '')); cur = null; return; }
+      if ((m = ln.match(RX_ADDR))) { if (m[1]) addr.push(m[1]); cur = null; mode = 'addr'; return; }
+      if ((m = ln.match(RX_NOTE))) { if (m[1]) note.push(m[1]); cur = null; mode = 'note'; return; }
+      if (mode === 'addr') { addr.push(ln); return; }
+      if (mode === 'note') { note.push(ln); return; }
+      var ph2 = phoneIn(ln, false, skip);
+      if (ph2 && !out.phone) out.phone = ph2;
+      if (!cur) return;
+      var q = qtyIn(ln); if (q) cur.q = q;
+      var o = optsIn(ln);
+      Object.keys(o).forEach(function (k) { cur.o[k] = o[k]; });
+    });
+    if (!out.items.length && !out.lost && feed && feed.products) {
+      var nt = nzs(text);
+      feed.products.forEach(function (p) { var t = nzs(p.t); if (t.length >= 8 && nt.indexOf(t) >= 0) out.items.push({ p: p, q: 1, o: {} }); });
+    }
+    out.addr = clip(addr.join('، '), 300);
+    out.note = clip(note.join(' · '), 300);
+    return out;
+  }
+
   w.GInvoice = {
     BASE: BASE, normDigits: normDigits, toNum: toNum, nf: nf, money: money, esc: esc, clip: clip, el: el,
     fmtDate: fmtDate, makeNo: makeNo, remainText: remainText, isExpired: isExpired, totals: totals,
     pack: pack, unpack: unpack, invoiceUrl: invoiceUrl, linkOf: linkOf, resolve: resolve, titleOf: titleOf, payMessage: payMessage, loadFeed: loadFeed, sellerKnown: sellerKnown,
     buildText: buildText, sheetHTML: sheetHTML, renderSheet: renderSheet, watchExpiry: watchExpiry,
     saveImage: saveImage, savePdf: savePdf, copyText: copyText, toast: toast, openWhatsApp: openWhatsApp,
-    phoneToWa: phoneToWa, _makePdf: makePdf, _toCanvas: toCanvas
+    phoneToWa: phoneToWa, mobileFa: mobileFa, storeMobiles: storeMobiles, nzs: nzs, hash6: hash6,
+    parseCustomerMessage: parseCustomerMessage, _makePdf: makePdf, _toCanvas: toCanvas
   };
 })(window);

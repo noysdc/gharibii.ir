@@ -1,4 +1,4 @@
-/* صفحهٔ فروشنده: انتخاب سریع محصول، ویرایش قیمت/ارسال، ساخت پیش‌فاکتور و خروجی (متن، لینک، عکس، PDF) */
+/* صفحهٔ فروشنده: انتخاب سریع محصول، ویرایش قیمت/ارسال، ساخت فاکتور و خروجی (متن، لینک، عکس، PDF) */
 (function () {
   'use strict';
   var G = window.GInvoice;
@@ -6,11 +6,11 @@
   var DKEY = 'gharibii_seller_v1', HKEY = 'gharibii_seller_hist_v1';
   var PAGE = 40;
 
-  var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false;
+  var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '';
   var st = loadState();
 
   /* ---------- وضعیت و ذخیره‌سازی ---------- */
-  function fresh() { return { cust: '', phone: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, items: [] }; }
+  function fresh() { return { cust: '', phone: '', addr: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, pasted: [], items: [] }; }
   function loadState() {
     var s = fresh();
     try {
@@ -42,6 +42,20 @@
       if (ix > 0) { var k = part.slice(0, ix).trim(), v = part.slice(ix + 1).trim(); if (k && v) o[k] = v; }
     });
     return o;
+  }
+  /* موبایل مشتری به شکل 09xxxxxxxxx (اگر معتبر نبود خالی) */
+  function phoneNorm(v) {
+    var d = G.normDigits(v).replace(/\D/g, '');
+    if (d.indexOf('98') === 0 && d.length === 12) d = '0' + d.slice(2);
+    else if (d.length === 10 && d.charAt(0) === '9') d = '0' + d;
+    return d.length === 11 && d.indexOf('09') === 0 ? d : '';
+  }
+  function optNames(pr) { return pr && pr.opts ? pr.opts.map(function (o) { return o.n; }) : []; }
+  /* گزینه‌هایی که در لیست سایز/رنگ آن محصول نیستند (مثل «اندازه» یا «توضیح») */
+  function extraOpts(it, pr) {
+    var names = optNames(pr), rest = {};
+    Object.keys(it.o || {}).forEach(function (k) { if (it.o[k] && names.indexOf(k) < 0) rest[k] = it.o[k]; });
+    return rest;
   }
   function invOf() {
     return { items: st.items.map(function (i) { return { q: i.q, p: i.p }; }), fee: feeVal(), disc: st.disc };
@@ -155,9 +169,13 @@
     if (pr && pr.opts && pr.opts.length) {
       opts = '<div class="line-opts">' + pr.opts.map(function (op) {
         var cur = (it.o && it.o[op.n]) || '';
+        var vals = op.v.map(String);
+        if (cur && vals.indexOf(cur) < 0) vals.push(cur);      /* مقدار خوانده‌شده از پیام مشتری، حتی اگر در لیست سایت نباشد */
         return '<select data-f="opt" data-n="' + G.esc(op.n) + '"><option value="">' + G.esc(op.n) + '…</option>' +
-          op.v.map(function (v) { return '<option' + (String(v) === cur ? ' selected' : '') + '>' + G.esc(v) + '</option>'; }).join('') + '</select>';
-      }).join('') + '</div>';
+          vals.map(function (v) { return '<option' + (v === cur ? ' selected' : '') + '>' + G.esc(v) + '</option>'; }).join('') + '</select>';
+      }).join('') +
+        '<input type="text" data-f="optextra" maxlength="100" placeholder="سایر توضیحات (مثلاً اندازه: ۵۲)" value="' + G.esc(optString({ o: extraOpts(it, pr) })) + '">' +
+        '</div>';
     } else if (it.c || (!pr && it.id)) {
       opts = '<div class="line-opts"><input type="text" data-f="optfree" maxlength="100" placeholder="سایز / رنگ / توضیح (اختیاری)" value="' + G.esc(optString(it)) + '"></div>';
     }
@@ -231,7 +249,7 @@
     if (built) $('stale').hidden = false;
   }
 
-  /* ---------- ساخت پیش‌فاکتور ---------- */
+  /* ---------- ساخت فاکتور ---------- */
   function build() {
     if (!st.items.length) { G.toast('اول محصولی اضافه کنید'); return; }
     if (built && !built.paid && !$('out-card').hidden && $('stale').hidden) {
@@ -246,7 +264,7 @@
     if (!seller && list.length) seller = list[0];
     built = {
       no: no, rev: rev, paid: null, ts: now, exp: now + st.valid * 60,
-      cust: G.clip(st.cust, 60), sn: seller ? seller.name : '', sw: seller ? seller.number : '',
+      cust: G.clip(st.cust, 60), addr: G.clip(st.addr, 300), ph: phoneNorm(st.phone), sn: seller ? seller.name : '', sw: seller ? seller.number : '',
       fee: feeVal(), disc: st.disc, note: G.clip(st.note, 300),
       items: st.items.map(function (i) { return { id: i.c ? '' : i.id, q: i.q, p: i.p, o: optString(i), t: G.clip(i.t, 120) }; })
     };
@@ -261,23 +279,28 @@
   }
   function showBuilt() {
     $('out-card').hidden = false; $('stale').hidden = true;
-    $('out-title').textContent = built.paid ? 'فاکتور نهایی آماده است' : 'پیش‌فاکتور آماده است';
+    $('out-title').textContent = built.paid ? 'فاکتور (پرداخت‌شده) آماده است' : 'فاکتور آماده است';
     G.renderSheet($('preview'), built, feed, { live: false });
     renderHistory();
     $('out-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  /* بعد از دیدن پرداخت در پنل زرین‌پال: پیش‌فاکتور به فاکتور نهایی تبدیل می‌شود */
-  function confirmPaid(i) {
+  /* تأیید پرداخت (کد زرین‌پال اختیاری است) و برداشتن تأیید.
+     توجه: وضعیت پرداخت داخل خود لینک است؛ تأیید/لغو یک لینک تازه می‌سازد و لینک‌های قبلی مشتری عوض نمی‌شوند */
+  function togglePaid(i) {
     var h = readHist(), x = h[i], inv = x && G.unpack(x.tok);
     if (!inv) return;
-    var ref = prompt('کد پیگیری پرداخت را از پنل زرین‌پال وارد کنید.\nمبلغ باید دقیقاً ' + G.money(G.totals(inv).total) + ' باشد:');
-    if (ref === null) return;
-    ref = G.clip(G.normDigits(ref), 40);
-    if (!ref) { G.toast('کد پیگیری وارد نشد'); return; }
-    inv.paid = { ref: ref, at: Math.floor(Date.now() / 1000) };
+    if (inv.paid) {
+      if (!confirm('تأیید پرداخت این فاکتور برداشته شود؟\nیک لینک تازهٔ «در انتظار پرداخت» ساخته می‌شود.')) return;
+      inv.paid = null;
+    } else {
+      var ref = prompt('تأیید پرداخت فاکتور به مبلغ ' + G.money(G.totals(inv).total) + '\nکد پیگیری زرین‌پال (اختیاری — برای تأیید بدون کد، خالی بگذارید و OK بزنید):', '');
+      if (ref === null) return;
+      inv.paid = { ref: G.clip(G.normDigits(ref), 40), at: Math.floor(Date.now() / 1000) };
+    }
     built = inv; st.editNo = ''; st.rev = 0; save();
     pushHist(inv);
     showBuilt();
+    G.toast(inv.paid ? 'پرداخت تأیید شد ✅ — لینک تازه را برای مشتری بفرستید' : 'تأیید پرداخت برداشته شد');
   }
   function outText() {
     var link = $('o-withlink').checked ? G.invoiceUrl(built) : '';
@@ -286,22 +309,22 @@
   function run(btn, fn) {
     btn.addEventListener('click', function () {
       if (busy) return;
-      if (!built) { G.toast('اول «ساخت پیش‌فاکتور» را بزنید'); return; }
+      if (!built) { G.toast('اول «ساخت فاکتور» را بزنید'); return; }
       busy = true; btn.classList.add('busy');
       Promise.resolve().then(fn).catch(function () { G.toast('خطا در ساخت فایل؛ دوباره تلاش کنید'); })
         .then(function () { busy = false; btn.classList.remove('busy'); });
     });
   }
 
-  /* ---------- سابقه و بازکردن پیش‌فاکتور قبلی ---------- */
+  /* ---------- سابقه و بازکردن فاکتور قبلی ---------- */
   function renderHistory() {
     var h = readHist(), host = $('history');
-    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز پیش‌فاکتوری نساخته‌اید.</p>'; return; }
+    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; return; }
     host.innerHTML = h.map(function (x, i) {
       var exp = !x.paid && Math.floor(Date.now() / 1000) >= x.exp;
       var tag = x.paid ? 'پرداخت‌شده ✅' : (exp ? 'منقضی' : 'معتبر');
       return '<div class="h-row"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + '</small></div>' +
-        (x.paid ? '' : '<button type="button" class="btn small btn-in" data-hpaid="' + i + '">پرداخت شد</button>') +
+        '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : 'btn-in') + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : 'تأیید پرداخت') + '</button>' +
         '<button type="button" class="btn small" data-hopen="' + i + '">' + (x.paid ? 'مکمل' : 'ویرایش') + '</button>' +
         '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">لینک</button>' +
         '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف">✕</button></div>';
@@ -309,9 +332,9 @@
   }
   function loadInvoice(inv) {
     var supp = !!inv.paid;
-    if (supp) inv = { no: inv.no, cust: inv.cust, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
+    if (supp) inv = { no: inv.no, cust: inv.cust, addr: inv.addr, ph: inv.ph, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
     st.editNo = supp ? '' : inv.no; st.rev = supp ? 0 : (inv.rev || 1);
-    st.cust = inv.cust; st.disc = inv.disc; st.note = inv.note;
+    st.cust = inv.cust; st.addr = inv.addr || ''; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pasted = [];
     st.fee = feed && inv.fee === feed.fee ? null : inv.fee;
     if (inv.sw) st.sw = inv.sw;
     st.items = inv.items.map(function (r) {
@@ -322,7 +345,7 @@
     });
     built = null; $('out-card').hidden = true;
     save(); initFields(); renderLines(); renderPicker(); updateTotals();
-    G.toast(supp ? 'فاکتور پرداخت‌شده تغییر نمی‌کند؛ اقلام جدید را اضافه کنید (فاکتور مکمل)' : 'پیش‌فاکتور باز شد. تغییر دهید و دوباره «ساخت پیش‌فاکتور» بزنید (نسخهٔ بعدی ساخته می‌شود)');
+    G.toast(supp ? 'فاکتور پرداخت‌شده تغییر نمی‌کند؛ اقلام جدید را اضافه کنید (فاکتور مکمل)' : 'فاکتور باز شد. تغییر دهید و دوباره «ساخت فاکتور» بزنید (نسخهٔ بعدی ساخته می‌شود)');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -330,6 +353,7 @@
   function initFields() {
     $('f-cust').value = st.cust || '';
     $('f-phone').value = st.phone || '';
+    $('f-addr').value = st.addr || '';
     $('f-valid').value = String(st.valid || 120);
     $('f-disc').value = fmtIn(st.disc);
     $('f-note').value = st.note || '';
@@ -348,7 +372,8 @@
   /* ---------- رویدادها ---------- */
   function bind() {
     $('f-cust').addEventListener('input', function (e) { st.cust = e.target.value; dirty(); });
-    $('f-phone').addEventListener('input', function (e) { st.phone = e.target.value; save(); });
+    $('f-phone').addEventListener('input', function (e) { st.phone = e.target.value; dirty(); });
+    $('f-addr').addEventListener('input', function (e) { st.addr = e.target.value; dirty(); });
     $('f-seller').addEventListener('change', function (e) { st.sw = e.target.value; dirty(); });
     $('f-valid').addEventListener('change', function (e) { st.valid = Number(e.target.value) || 120; dirty(); });
     $('f-note').addEventListener('input', function (e) { st.note = e.target.value; dirty(); });
@@ -389,6 +414,11 @@
         var n = G.toNum(e.target.value);
         it.p = n; it.ed = it.c ? true : n !== it.sp; it.ch = false;
         var s = fmtIn(n); if (e.target.value !== s) e.target.value = s;
+      } else if (f === 'optextra') {
+        var prx = feed && it.id ? feed.byId[it.id] : null, keep = optNames(prx), add = parseOpts(e.target.value);
+        Object.keys(it.o || {}).forEach(function (k) { if (keep.indexOf(k) < 0) delete it.o[k]; });
+        if (!Object.keys(add).length && e.target.value.trim()) add = { 'توضیح': e.target.value.trim().slice(0, 100) };
+        Object.keys(add).forEach(function (k) { it.o[k] = add[k]; });
       } else if (f === 'optfree') {
         it.o = parseOpts(e.target.value);
         if (!Object.keys(it.o).length && e.target.value.trim()) it.o = { 'توضیح': e.target.value.trim().slice(0, 100) };
@@ -426,7 +456,7 @@
     $('history').addEventListener('click', function (e) {
       var h = readHist();
       var o = e.target.closest('[data-hopen]'), c = e.target.closest('[data-hcopy]'), d = e.target.closest('[data-hdel]'), pd = e.target.closest('[data-hpaid]');
-      if (pd) { confirmPaid(Number(pd.getAttribute('data-hpaid'))); return; }
+      if (pd) { togglePaid(Number(pd.getAttribute('data-hpaid'))); return; }
       if (o) { var inv = G.unpack(h[Number(o.getAttribute('data-hopen'))].tok); if (inv) loadInvoice(inv); }
       if (c) { var hx = h[Number(c.getAttribute('data-hcopy'))]; G.copyText(G.linkOf(hx.tok, hx.no, hx.rev)).then(function () { G.toast('لینک کپی شد ✅'); }); }
       if (d) { h.splice(Number(d.getAttribute('data-hdel')), 1); writeHist(h); renderHistory(); }
@@ -437,80 +467,70 @@
       $('f-import').value = ''; loadInvoice(inv);
     });
     $('btn-new').addEventListener('click', function () {
-      if (st.items.length && !confirm('لیست فعلی پاک شود و پیش‌فاکتور جدید شروع شود؟')) return;
-      var keep = { sw: st.sw, valid: st.valid, phone: '' };
+      if (st.items.length && !confirm('لیست فعلی پاک شود و فاکتور جدید شروع شود؟')) return;
+      var keep = { sw: st.sw, valid: st.valid };
       st = fresh(); st.sw = keep.sw; st.valid = keep.valid;
       built = null; $('out-card').hidden = true; save();
       initFields(); renderLines(); renderPicker(); updateTotals();
     });
     $('btn-paste').addEventListener('click', fromMessage);
+    $('btn-undo').addEventListener('click', undoMessage);
     document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && feed) sync(false); });
     setInterval(function () { if (document.visibilityState === 'visible') sync(false); }, 5 * 60 * 1000);
   }
 
-  /* ---------- تبدیل پیام مشتری به لیست ---------- */
-  function dec(x) { try { return decodeURIComponent(x); } catch (e) { return x; } }
-  /* مسیر صفحه‌ی محصول از لینک (با / آخر)؛ id محصولات در سایت همان آدرس صفحه‌شان است */
-  function pathOf(url) {
-    try {
-      var path = dec(new URL(url).pathname);
-      if (path.indexOf('/products/') < 0) return '';
-      return path.slice(-1) === '/' ? path : path + '/';
-    } catch (e) { return ''; }
-  }
-  function findByPath(path) {
-    var best = null, bs = 0;
-    feed.products.forEach(function (p) {
-      var id = dec(String(p.id)), s = 0;
-      if (id === path) s = 4;
-      else if (path.slice(-id.length) === id) s = 3;          // لینک با baseurl یا دامنه‌ی دیگر
-      if (s > bs) { bs = s; best = p; }
-    });
-    return best;
-  }
-  function qtyIn(s) {
-    var m = s.match(/(?:^|\s)(\d{1,3})\s*[×xX]\s*[\d,٬]/) || s.match(/[×xX*]\s*(\d{1,3})(?!\d)/) ||
-      s.match(/(\d{1,3})\s*عدد/) || s.match(/تعداد\s*[:：]?\s*(\d{1,3})/);
-    return m ? Math.min(99, Math.max(1, Number(m[1]))) : 0;
-  }
-  function parseMessage(text) {
-    var out = [], lost = 0, cur = null;
-    G.normDigits(text).split(/\r?\n/).forEach(function (ln) {
-      (ln.match(/https?:\/\/[^\s)>\]]+/g) || []).forEach(function (u) {
-        var path = pathOf(u);
-        if (!path) return;
-        var p = findByPath(path);
-        if (p) { cur = { p: p, q: 1, o: {} }; out.push(cur); } else { cur = null; lost++; }
-      });
-      if (!cur) return;
-      var rest = ln.replace(/https?:\/\/\S+/g, ' ');
-      var q = qtyIn(rest); if (q) cur.q = q;
-      var sz = rest.match(/سایز\s*[:：]?\s*([^\n،,|]+)/); if (sz) cur.o['سایز'] = G.clip(sz[1].split(/\s[-–—]\s|تعداد|رنگ|×/)[0], 30);
-      var cl = rest.match(/رنگ\s*[:：]?\s*([^\n،,|]+)/); if (cl) cur.o['رنگ'] = G.clip(cl[1].split(/\s[-–—]\s|تعداد|سایز|×/)[0], 30);
-    });
-    if (!out.length && !lost) {
-      var nt = nz(text);
-      feed.products.forEach(function (p) { var t = nz(p.t); if (t.length >= 8 && nt.indexOf(t) >= 0) out.push({ p: p, q: 1, o: {} }); });
-    }
-    return { items: out, lost: lost };
+  /* ---------- تبدیل پیام مشتری به فاکتور ----------
+     چند بار می‌شود پیام paste کرد: پیام تکراری نادیده گرفته می‌شود، فیلدهای پر دست نمی‌خورند،
+     محصول تکراری (با همان سایز/رنگ) تعدادش بالا می‌رود، و «برگرداندن» آخرین تبدیل را لغو می‌کند */
+  function undoMessage() {
+    if (!undoSnap) return;
+    try { st = JSON.parse(undoSnap); } catch (e) { return; }
+    st.items.forEach(function (i) { i.k = ++seq; });
+    undoSnap = ''; $('btn-undo').hidden = true;
+    initFields(); renderLines(); renderPicker(); dirty();
+    $('paste-res').textContent = 'آخرین تبدیل برگردانده شد';
+    G.toast('آخرین تبدیل برگردانده شد');
   }
   function fromMessage() {
     if (!feed) { G.toast('قیمت‌ها هنوز دریافت نشده'); return; }
     var txt = $('f-paste').value;
     if (!txt.trim()) { G.toast('متن پیام را paste کنید'); return; }
-    var r = parseMessage(txt), added = 0;
+    var fp = G.hash6(G.nzs(txt));
+    st.pasted = st.pasted || [];
+    if (st.pasted.indexOf(fp) >= 0) {
+      var dup = 'این پیام قبلاً برای همین فاکتور اضافه شده؛ دوباره اضافه نشد';
+      $('paste-res').textContent = dup; G.toast(dup); return;
+    }
+    var r = G.parseCustomerMessage(txt, feed);
+    if (!r.items.length && !r.name && !r.phone && !r.addr && !r.note) {
+      var none = 'چیزی در پیام پیدا نشد' + (r.lost ? ' · ' + G.nf(r.lost) + ' لینک شناسایی نشد' : '');
+      $('paste-res').textContent = none; G.toast(none); return;
+    }
+    undoSnap = JSON.stringify(st);
+    var added = 0, more = 0, filled = [], kept = [];
     r.items.forEach(function (f) {
       var pr = f.p, key = JSON.stringify(f.o), ex = null;
       st.items.forEach(function (i) { if (!ex && i.id === pr.id && !i.c && JSON.stringify(i.o || {}) === key) ex = i; });
-      if (ex) ex.q = Math.min(999, ex.q + f.q);
-      else st.items.push({ k: ++seq, id: pr.id, t: pr.t, im: pr.im, imf: pr.imf, q: f.q, p: pr.p, sp: pr.p, ed: false, ch: false, o: f.o, c: false, oos: pr.oos });
-      added++;
+      if (ex) { ex.q = Math.min(999, ex.q + f.q); more++; }
+      else { st.items.push({ k: ++seq, id: pr.id, t: pr.t, im: pr.im, imf: pr.imf, q: f.q, p: pr.p, sp: pr.p, ed: false, ch: false, o: f.o, c: false, oos: pr.oos }); added++; }
     });
-    var msg = added ? G.nf(added) + ' محصول به لیست اضافه شد' : 'محصولی پیدا نشد';
-    if (r.lost) msg += ' · ' + G.nf(r.lost) + ' لینک شناسایی نشد';
-    $('paste-res').textContent = msg;
-    G.toast(msg);
-    if (added) { $('f-paste').value = ''; dirty(); renderLines(); renderPicker(); }
+    function fill(key, val, label) {
+      if (!val) return;
+      if (!String(st[key] || '').trim()) { st[key] = val; filled.push(label); }
+      else if (G.nzs(st[key]) !== G.nzs(val)) kept.push(label);
+    }
+    fill('cust', r.name, 'نام'); fill('phone', r.phone, 'موبایل'); fill('addr', r.addr, 'آدرس'); fill('note', r.note, 'یادداشت');
+    st.pasted.push(fp); st.pasted = st.pasted.slice(-30);
+    var parts = [];
+    if (added) parts.push(G.nf(added) + ' محصول اضافه شد');
+    if (more) parts.push('تعداد ' + G.nf(more) + ' محصول زیاد شد');
+    if (filled.length) parts.push(filled.join('، ') + ' جایگذاری شد');
+    if (kept.length) parts.push(kept.join('، ') + ' از قبل پر بود و عوض نشد');
+    if (r.lost) parts.push(G.nf(r.lost) + ' لینک شناسایی نشد');
+    var msg = parts.join(' · ');
+    $('paste-res').textContent = msg; G.toast(msg);
+    $('f-paste').value = ''; $('btn-undo').hidden = false;
+    initFields(); dirty(); renderLines(); renderPicker();
   }
 
   /* ---------- شروع ---------- */
