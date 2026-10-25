@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس رقص باله مشکی مدل ۵ | مجلسی و فانتزی دخترانه"
+description: "لباس رقص باله مشکی مدل ۵؛ مناسب کلاس باله، اجرای روی صحنه، جشن تولد و مهمانی‌های تم‌دار. سفارش از فروشگاه غریبی کیش."
 slug: black-ballet-dress-model-5
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["مشکی"]
+tags: ["لباس رقص باله مشکی مدل ۵", "باله دخترانه", "لباس باله", "پیراهن باله", "کلاس باله", "اجرای نمایش", "تم تولد", "لباس تولد دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "هدیه تولد", "اجرای رقص", "نمایش مدرسه", "جشن تولد", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=bf3ae31d;g=3c0440dc"
 images:
   - /assets/images/products/girls/black-ballet-dress-model-5/black-ballet-dress-model-5-1.webp
   - /assets/images/products/girls/black-ballet-dress-model-5/black-ballet-dress-model-5-2.webp

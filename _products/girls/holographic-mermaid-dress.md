@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس پری دریایی هولوگرامی دخترانه | درخشان و فانتزی"
+description: "لباس پری دریایی هولوگرامی دخترانه؛ مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: holographic-mermaid-dress
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["بنفش/آبی هولوگرامی"]
+tags: ["لباس پری دریایی هولوگرامی دخترانه", "لباس پری دریایی", "لباس پری دریایی دخترانه", "پری دریایی", "آریل", "تم دریایی", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=27b6bf59;g=8fb080e2"
 images:
   - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-1.webp
   - /assets/images/products/girls/holographic-mermaid-dress/holographic-mermaid-dress-2.webp

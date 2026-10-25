@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس پری دریایی هولوگرامی سبز | درخشان و فانتزی"
+description: "لباس پری دریایی هولوگرامی سبز؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: green-holographic-mermaid-dress
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["سبز/فیروزه‌ای هولوگرامی"]
+tags: ["لباس پری دریایی هولوگرامی سبز", "لباس پری دریایی", "لباس پری دریایی دخترانه", "پری دریایی", "آریل", "تم دریایی", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=a5e79546;g=9c5ac9c7"
 images:
   - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-1.webp
   - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-2.webp

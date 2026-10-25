@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس پری دریایی پارچه لمه سبز | فانتزی و درخشان"
+description: "لباس پری دریایی پارچه لمه سبز؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: mermaid-lame-dress-green
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["سبز", "صورتی/یاس بنفش"]
+tags: ["لباس پری دریایی پارچه لمه سبز", "لباس پری دریایی", "لباس پری دریایی دخترانه", "پری دریایی", "آریل", "تم دریایی", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=0a558f51;g=4d56a36a"
 images:
   - /assets/images/products/girls/mermaid-lame-dress-green/mermaid-lame-dress-green-1.webp
   - /assets/images/products/girls/mermaid-lame-dress-green/mermaid-lame-dress-green-2.webp

@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "ماسک فانتزی پر کارناوال | مناسب مهمانی و عکاسی"
+description: "ماسک فانتزی پر کارناوال؛ مناسب جشن تولد، مهمانی تم‌دار، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: feather-carnival-mask
 category: accessories
 gender: girls
@@ -9,6 +10,8 @@ currency: IRT
 options:
   - name: "رنگ"
     values: ["صورتی", "آبی فیروزه‌ای"]
+tags: ["ماسک فانتزی پر کارناوال", "ماسک صورت دخترانه", "ماسک صورت", "ماسک شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "هدیه تولد", "جشن تولد", "مهمانی هالووین", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=1699a309;g=efdf4abe"
 images:
   - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-1.webp
   - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-2.webp

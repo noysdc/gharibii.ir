@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "ست مایو پری دریایی صورتی و سبز | استخر و ساحل"
+description: "ست مایو پری دریایی صورتی و سبز؛ مناسب جشن تولد، مهمانی تم‌دار و استفاده‌ی روزمره. سفارش از فروشگاه غریبی کیش."
 slug: mermaid-swimwear-set-pink-green
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["صورتی و سبز"]
+tags: ["ست مایو پری دریایی صورتی و سبز", "ست پری دریایی", "ست پری دریایی دخترانه", "پری دریایی", "آریل", "تم دریایی", "ست کودک", "ست شخصیتی", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=3accfb83;g=d25be219"
 images:
   - /assets/images/products/girls/mermaid-swimwear-set-pink-green/mermaid-swimwear-set-pink-green-1.webp
   - /assets/images/products/girls/mermaid-swimwear-set-pink-green/mermaid-swimwear-set-pink-green-2.webp

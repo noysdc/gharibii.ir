@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس رقص باله مدل ۲ | لباس مجلسی و فانتزی دخترانه"
+description: "لباس رقص باله مدل ۲؛ مناسب کلاس باله، اجرای روی صحنه، جشن تولد و مهمانی‌های تم‌دار. سفارش از فروشگاه غریبی کیش."
 slug: ballet-dress-model-2
 category: girls
 gender: girls
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["آبی"]
+tags: ["لباس رقص باله مدل ۲", "باله دخترانه", "لباس باله", "پیراهن باله", "کلاس باله", "اجرای نمایش", "تم تولد", "لباس تولد دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "هدیه تولد", "اجرای رقص", "نمایش مدرسه", "جشن تولد", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=c9b79de8;g=fa9a5c17"
 images:
   - /assets/images/products/girls/ballet-dress-model-2/ballet-dress-model-2-1.webp
   - /assets/images/products/girls/ballet-dress-model-2/ballet-dress-model-2-2.webp
