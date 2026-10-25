@@ -1,6 +1,7 @@
 ---
 layout: product
 title: "لباس سرهمی ساده بتمن | لباس ابرقهرمانی کودک"
+description: "لباس سرهمی ساده بتمن؛ مناسب جشن تولد، مهمانی تم‌دار، هالووین و بازی‌های قهرمانی. سفارش از فروشگاه غریبی کیش."
 slug: batman-simple-jumpsuit
 category: boys
 gender: boys
@@ -11,6 +12,8 @@ options:
     values: ["110 - مناسب 2 تا 4 سال", "120 - مناسب 4 تا 6 سال", "130 - مناسب 6 تا 8 سال", "140 - مناسب 8 تا 10 سال"]
   - name: "رنگ"
     values: ["مشکی"]
+tags: ["لباس سرهمی ساده بتمن", "سرهمی بتمن", "سرهمی بتمن پسرانه", "بتمن", "بت من", "مرد خفاشی", "سرهمی شخصیتی", "سرهمی پسرانه", "تم تولد", "لباس تولد پسرانه", "هالووین", "لباس هالووین پسرانه", "بازی نقش‌آفرینی", "مهمانی کودک", "لباس مهمانی پسرانه", "عکاسی کودک", "فروشگاه غریبی کیش", "کیش"]
+auto_sig: "d=0f204444;g=01514264"
 images:
   - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-1.webp
   - /assets/images/products/girls/batman-simple-jumpsuit/batman-simple-jumpsuit-2.webp
