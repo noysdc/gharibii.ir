@@ -18,7 +18,6 @@ images:
   - /assets/images/products/girls/mermaid-swimwear-set-pink-green/mermaid-swimwear-set-pink-green-1.webp
   - /assets/images/products/girls/mermaid-swimwear-set-pink-green/mermaid-swimwear-set-pink-green-2.webp
   - /assets/images/products/girls/mermaid-swimwear-set-pink-green/mermaid-swimwear-set-pink-green-3.webp
-
 ---
 
 # ست مایو پری دریایی صورتی و سبز

@@ -23,7 +23,6 @@ auto_sig: "b=62495158;d=13a42aca;g=2edd7cfd;t=b925b4a0"
 images:
   - /assets/images/products/girls/ballet-dance-dress-2/ballet-dance-dress-2-1.webp
   - /assets/images/products/girls/ballet-dance-dress-2/ballet-dance-dress-2-1.webp
-
 ---
 
 <!-- AUTO:START -->
