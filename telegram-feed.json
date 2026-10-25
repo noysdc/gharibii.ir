@@ -24,7 +24,9 @@ permalink: /telegram-feed.json
 {%- case p.category -%}{%- when 'girls' -%}{%- assign cfa = 'دخترانه' -%}{%- when 'boys' -%}{%- assign cfa = 'پسرانه' -%}{%- when 'bags-shoes' -%}{%- assign cfa = 'کیف و کفش' -%}{%- when 'crown-wand' -%}{%- assign cfa = 'تاج و عصا' -%}{%- else -%}{%- assign cfa = 'اکسسوری' -%}{%- endcase -%}
 {%- assign parts = p.content | split: '</h2>' -%}
 {%- assign seg = parts[1] | default: p.content -%}
-{%- assign firstp = seg | split: '</p>' | first | strip_html | strip_newlines | normalize_whitespace | strip -%}
+{%- assign chunks = seg | split: '</p>' -%}
+{%- assign firstp = '' -%}{%- assign np = 0 -%}
+{%- for ch in chunks -%}{%- if np < 3 and ch contains '<p' -%}{%- assign one = ch | strip_html | strip_newlines | normalize_whitespace | strip -%}{%- if one != '' -%}{%- if firstp == '' -%}{%- assign firstp = one -%}{%- else -%}{%- capture firstp -%}{{ firstp }} ||| {{ one }}{%- endcapture -%}{%- endif -%}{%- assign np = np | plus: 1 -%}{%- endif -%}{%- endif -%}{%- endfor -%}
 {%- assign im = p.images[0] -%}
 {%- assign sizes = '' -%}
 {%- for o in p.options -%}{%- if o.name contains 'اندازه' or o.name contains 'سایز' -%}{%- capture sizes -%}{{ o.values | join: '، ' }}{%- endcapture -%}{%- endif -%}{%- endfor -%}

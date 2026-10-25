@@ -237,7 +237,7 @@ async function reportPayment(req, env, ctx, code) {
 
 
 /* =====================  ارسال روزانهٔ محصول به کانال تلگرام  =====================
-   - هر روز (Cron) یک محصولِ «هنوز ارسال‌نشده» با عکس، توضیح، قیمت، دکمهٔ سفارش و هشتگ به کانال می‌رود
+   - هر روز (Cron) یک محصولِ «هنوز ارسال‌نشده» با عکس، توضیح، سایز، دکمهٔ سفارش و هشتگ (بدون قیمت) به کانال می‌رود
    - محصول تازه (که در اجرای قبلی در سایت نبود) اولویت دارد؛ بقیه به نوبت بین دسته‌ها می‌چرخند
    - اگر محصول جدیدی نباشد چیزی ارسال نمی‌شود؛ به‌محض اضافه‌شدن محصول تازه به سایت، روز بعد ارسال از سر گرفته می‌شود
    - محصول ناموجود ارسال نمی‌شود
@@ -281,19 +281,36 @@ function chPick(items, seen, rot) {
   const cat = cats[rot % cats.length];
   return items.find((x) => x.cat === cat) || items[0];
 }
-function chCaption(it, limit) {
-  const price = it.p > 0
-    ? '💰 قیمت: ' + (it.op > it.p ? '<s>' + fa(it.op) + '</s> ' : '') + '<b>' + fa(it.p) + ' تومان</b>'
-    : '💰 قیمت: برای استعلام پیام بدهید';
-  const sizes = it.sz && it.sz.length <= 140 ? '\n📏 سایز: ' + escHtml(it.sz) : '';
+/* توضیح: چند پاراگراف (جداشده با |||) → پاراگراف‌های تمیز؛ اگر از حد بلندتر بود در مرز پاراگراف/جمله بریده می‌شود */
+function chDesc(d, max) {
+  const paras = String(d || '').split('|||').map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  let out = '';
+  for (const para of paras) {
+    const next = out ? out + '\n\n' + para : para;
+    if (next.length <= max) { out = next; continue; }
+    if (!out) {
+      let cut = para.slice(0, max);
+      const dot = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('؟ '), cut.lastIndexOf('.'));
+      cut = dot > max * 0.5 ? cut.slice(0, dot + 1) : cut.slice(0, Math.max(cut.lastIndexOf(' '), 20)).replace(/[\s،,.؛:]+$/, '') + '…';
+      out = cut;
+    }
+    break;
+  }
+  return out;
+}
+/* قطعات پست (بدون قیمت): سر = عنوان، بدنه = توضیح، پا = سایز + لینک + هشتگ */
+function chParts(it) {
+  const sizes = it.sz && it.sz.length <= 140 ? '📏 سایز: ' + escHtml(it.sz) + '\n' : '';
   const tags = chHashtags(it.tags);
-  const head = '🛍 <b>' + escHtml(it.t) + '</b>\n\n';
-  const foot = '\n\n' + price + sizes + '\n🔗 <a href="' + escHtml(it.u) + '">مشاهده و سفارش در سایت</a>' + (tags ? '\n\n' + tags : '');
-  let d = String(it.d || '').replace(/\s+/g, ' ').trim();
-  const room = limit - head.length - foot.length - 8;
-  if (room < 40) d = '';
-  else if (d.length > room) { d = d.slice(0, room); d = d.slice(0, Math.max(d.lastIndexOf(' '), 20)).replace(/[\s،,.؛:]+$/, '') + '…'; }
-  return head + (d ? escHtml(d) : '') + foot;
+  const head = '🛍 <b>' + escHtml(it.t) + '</b>';
+  const foot = sizes + '🔗 <a href="' + escHtml(it.u) + '">مشاهده و سفارش در سایت</a>' + (tags ? '\n\n' + tags : '');
+  return { head: head, foot: foot };
+}
+function chCaption(it, limit) {          /* یک پیام واحد (برای حالت بدون عکس یا کپشن کوتاه) */
+  const x = chParts(it);
+  const room = limit - x.head.length - x.foot.length - 8;
+  const d = room > 60 ? chDesc(it.d, room) : '';
+  return x.head + '\n\n' + (d ? escHtml(d) + '\n\n' : '') + x.foot;
 }
 async function chTg(env, method, body) {
   const r = await fetch('https://api.telegram.org/bot' + env.TELEGRAM_BOT_TOKEN + '/' + method, {
@@ -309,8 +326,26 @@ async function chSend(env, feed, it) {
   if (wa) rows.push([{ text: '💬 سفارش در واتساپ', url: wa }]);
   const kb = { inline_keyboard: rows };
   if (it.im) {
-    const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: chCaption(it, 1000), parse_mode: 'HTML', reply_markup: kb });
-    if (a.ok) return { ok: true, mode: 'photo', id: a.res && a.res.message_id };
+    const full = chCaption(it, 1000);
+    const needsMore = chDesc(it.d, 4000).length > chDesc(it.d, 1000 - 250).length;     /* توضیح در کپشن (حداکثر ۱۰۲۴) جا نمی‌شود؟ */
+    if (!needsMore) {
+      const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: full, parse_mode: 'HTML', reply_markup: kb });
+      if (a.ok) return { ok: true, mode: 'photo', id: a.res && a.res.message_id };
+    } else {
+      /* عکس با عنوان؛ بعد توضیح کامل + سایز + لینک + هشتگ در پیام بعدی (ریپلای روی همان عکس) */
+      const x = chParts(it);
+      const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: x.head, parse_mode: 'HTML' });
+      if (a.ok) {
+        const room = 3900 - x.foot.length - 10;
+        const d = chDesc(it.d, Math.min(room, 2200));
+        const t = await chTg(env, 'sendMessage', {
+          chat_id: chat, text: (d ? escHtml(d) + '\n\n' : '') + x.foot, parse_mode: 'HTML', reply_markup: kb,
+          reply_parameters: { message_id: a.res && a.res.message_id, allow_sending_without_reply: true },
+          link_preview_options: { is_disabled: true }
+        });
+        return { ok: true, mode: t.ok ? 'photo+text' : 'photo-only', id: a.res && a.res.message_id, err: t.ok ? undefined : t.err };
+      }
+    }
   }
   /* اگر عکس ارسال نشد (مثلاً فرمت/اندازه) یا محصول عکس ندارد: متن + پیش‌نمایش لینک (عکس صفحه) */
   const b = await chTg(env, 'sendMessage', {
@@ -349,7 +384,7 @@ async function channelRun(env, opts) {
   }
   const rot = Number(await env.INVOICES.get('tg:rot').catch(() => 0)) || 0;
   const it = chPick(queue, seen, rot);
-  if (opts.dry) return { sent: false, dry: true, next: { id: it.id, title: it.t, cat: it.c, image: it.im, caption: chCaption(it, 1000) }, stats: stats };
+  if (opts.dry) return { sent: false, dry: true, next: { id: it.id, title: it.t, cat: it.c, image: it.im, caption: chCaption(it, 3900) }, stats: stats };
 
   const r = await chSend(env, feed, it);
   if (!r.ok) {
