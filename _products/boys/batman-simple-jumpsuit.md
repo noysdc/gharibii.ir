@@ -19,7 +19,6 @@ images:
   - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-2.webp
   - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-3.webp
   - /assets/images/products/boys/batman-simple-jumpsuit/batman-simple-jumpsuit-4.webp
-
 ---
 
 # لباس سرهمی ساده بتمن
