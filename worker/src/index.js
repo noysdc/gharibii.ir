@@ -72,15 +72,16 @@ function rand4() {
 }
 
 /* ---------- اعلان‌ها (تلگرام + ایمیل اختیاری) ---------- */
-async function sendTelegram(env, text) {
-  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return false;
+async function sendTelegram(env, text, dbg) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return dbg ? 'missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID' : false;
   try {
     const r = await fetch('https://api.telegram.org/bot' + env.TELEGRAM_BOT_TOKEN + '/sendMessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text: text.slice(0, 4000), disable_web_page_preview: true })
     });
+    if (dbg && !r.ok) { const j = await r.json().catch(() => ({})); return 'telegram: ' + (j.description || r.status); }
     return r.ok;
-  } catch (e) { return false; }
+  } catch (e) { return dbg ? 'telegram error: ' + (e.message || e) : false; }
 }
 function b64(str) {
   const bytes = new TextEncoder().encode(str);
@@ -88,8 +89,8 @@ function b64(str) {
   for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
   return btoa(bin);
 }
-async function sendEmail(env, text) {
-  if (!env.EMAIL || !env.MAIL_TO) return false;
+async function sendEmail(env, text, dbg) {
+  if (!env.EMAIL || !env.MAIL_TO) return dbg ? 'missing EMAIL binding or MAIL_TO' : false;
   const from = env.MAIL_FROM || 'noreply@gharibii.ir';
   const subject = text.split('\n')[0].slice(0, 120);
   const raw = [
@@ -107,7 +108,7 @@ async function sendEmail(env, text) {
   try {
     await env.EMAIL.send(new EmailMessage(from, env.MAIL_TO, raw));
     return true;
-  } catch (e) { return false; }
+  } catch (e) { return dbg ? 'email: ' + (e.message || e) : false; }
 }
 /* تلگرام: همهٔ اعلان‌ها. ایمیل: فقط گزارش‌ها (kind = 'report')، مگر MAIL_ALL=1 تنظیم شده باشد */
 function notify(env, ctx, text, kind) {
@@ -242,8 +243,8 @@ export default {
     try {
       if (path === '/ping' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
-        const tg = await sendTelegram(env, '✅ اتصال سایت غریبی به تلگرام برقرار است.');
-        const em = await sendEmail(env, '✅ اتصال سایت غریبی به ایمیل برقرار است.');
+        const tg = await sendTelegram(env, '✅ اتصال سایت غریبی به تلگرام برقرار است.', true);
+        const em = await sendEmail(env, '✅ اتصال سایت غریبی به ایمیل برقرار است.', true);
         return reply(req, env, { ok: true, telegram: tg, email: em });
       }
       if (path === '/invoices' && req.method === 'POST') {
