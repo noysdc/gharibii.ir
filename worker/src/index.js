@@ -321,9 +321,15 @@ async function chTg(env, method, body) {
 }
 async function chSend(env, feed, it) {
   const chat = env.CHANNEL_CHAT_ID;
-  const wa = feed.wa ? 'https://wa.me/' + feed.wa + '?text=' + encodeURIComponent('سلام، درباره‌ی «' + it.t + '» می‌خواهم سفارش بدهم.\n' + it.u) : '';
-  const rows = [[{ text: '🛒 مشاهده و سفارش', url: it.u }]];
-  if (wa) rows.push([{ text: '💬 سفارش در واتساپ', url: wa }]);
+  const msg = 'سلام، درباره‌ی «' + it.t + '» می‌خواهم سفارش بدهم.\n' + it.u;
+  const first = (n) => String(n || '').replace('فروشنده', '').trim().split(/\s+/)[0] || '';
+  const sellers = Array.isArray(feed.sellers) && feed.sellers.length ? feed.sellers : (feed.wa ? [{ n: '', w: feed.wa, b: '' }] : []);
+  const rows = [[{ text: '🛒 مشاهده و سفارش در سایت', url: it.u }]];
+  const waRow = sellers.filter((s) => s.w).map((s) => ({ text: '💬 واتساپ ' + first(s.n), url: 'https://wa.me/' + s.w + '?text=' + encodeURIComponent(msg) }));
+  const baleRow = sellers.filter((s) => s.b).map((s) => ({ text: '🟦 بله ' + first(s.n), url: 'https://ble.ir/' + s.b }));
+  if (waRow.length) rows.push(waRow);
+  if (baleRow.length) rows.push(baleRow);
+  if (feed.ig) rows.push([{ text: '📸 سفارش در اینستاگرام', url: 'https://ig.me/m/' + feed.ig }]);
   const kb = { inline_keyboard: rows };
   if (it.im) {
     const full = chCaption(it, 1000);
