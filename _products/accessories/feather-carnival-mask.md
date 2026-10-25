@@ -16,9 +16,7 @@ images:
   - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-4.webp
   - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-5.webp
   - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-6.webp
-  - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-7.webp
-  - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-8.webp
-  - /assets/images/products/accessories/feather-carnival-mask/feather-carnival-mask-9.webp
+
 ---
 
 # ماسک فانتزی پر کارناوال
