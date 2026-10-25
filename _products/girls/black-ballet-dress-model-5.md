@@ -16,7 +16,6 @@ tags: ["لباس رقص باله مشکی مدل ۵", "باله دخترانه",
 auto_sig: "d=bf3ae31d;g=3c0440dc"
 images:
   - /assets/images/products/girls/black-ballet-dress-model-5/black-ballet-dress-model-5-1.webp
-
 ---
 
 # لباس رقص باله مشکی مدل ۵

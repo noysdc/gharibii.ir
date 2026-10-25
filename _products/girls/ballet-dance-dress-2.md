@@ -21,9 +21,14 @@ tags: ["پیراهن رقص باله", "باله دخترانه", "لباس با
 auto_sig: "b=62495158;d=13a42aca;g=2edd7cfd;t=b925b4a0"
 
 images:
+<<<<<<< HEAD
   - /assets/images/products/girls/ballet-dance-dress-2/ballet-dance-dress-2.webp
   
 
+=======
+  - /assets/images/products/girls/ballet-dance-dress-2/ballet-dance-dress-2-1.webp
+  - /assets/images/products/girls/ballet-dance-dress-2/ballet-dance-dress-2-1.webp
+>>>>>>> 0cb82819839cfec34223a2bb2f20328032468e24
 ---
 
 <!-- AUTO:START -->

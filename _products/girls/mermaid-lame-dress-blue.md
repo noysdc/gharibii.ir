@@ -33,7 +33,6 @@ images:
   - /assets/images/products/girls/mermaid-lame-dress-blue/mermaid-lame-dress-blue-16.webp
   - /assets/images/products/girls/mermaid-lame-dress-blue/mermaid-lame-dress-blue-17.webp
   - /assets/images/products/girls/mermaid-lame-dress-blue/mermaid-lame-dress-blue-18.webp
-
 ---
 
 # لباس پری دریایی پارچه لمه آبی

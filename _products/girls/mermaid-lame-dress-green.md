@@ -36,7 +36,6 @@ images:
   - /assets/images/products/girls/mermaid-lame-dress-green/mermaid-lame-dress-green-19.webp
   - /assets/images/products/girls/mermaid-lame-dress-green/mermaid-lame-dress-green-20.webp
   - /assets/images/products/girls/mermaid-lame-dress-green/mermaid-lame-dress-green-21.webp
-
 ---
 
 # لباس پری دریایی پارچه لمه سبز
