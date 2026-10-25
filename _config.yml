@@ -91,4 +91,4 @@ payment_link: ""
 # ---------- سرور فاکتور (Cloudflare Worker): لینک کوتاه، تأیید پرداخت روی همان لینک، گزارش تلگرام ----------
 # بعد از دیپلوی Worker آدرسش را اینجا بگذار، مثلاً "https://gharibii-invoices.نام‌شما.workers.dev"
 # خالی بماند = مثل قبل با لینک‌های بلند کار می‌کند.
-invoice_api: ""
+invoice_api: "https://gharibii-invoices.samaneh-gharibi1982.workers.dev"

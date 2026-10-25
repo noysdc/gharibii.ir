@@ -1,3 +1,5 @@
+import { EmailMessage } from 'cloudflare:email';
+
 /* Worker فاکتورهای فروشگاه غریبی کیش
    - ذخیرهٔ فاکتور در KV با کد کوتاهِ تاریخ‌دار:  050803-1432-k7q2  (سال‌ماه‌روز شمسی - ساعت‌دقیقه - ۴ حرف تصادفی)
    - تأیید/لغو پرداخت روی همان لینک (مشتری همان لینک قبلی را باز می‌کند و وضعیت تازه را می‌بیند)
@@ -80,15 +82,31 @@ async function sendTelegram(env, text) {
     return r.ok;
   } catch (e) { return false; }
 }
+function b64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
 async function sendEmail(env, text) {
-  if (!env.RESEND_API_KEY || !env.MAIL_TO || !env.MAIL_FROM) return false;
+  if (!env.EMAIL || !env.MAIL_TO) return false;
+  const from = env.MAIL_FROM || 'noreply@gharibii.ir';
+  const subject = text.split('\n')[0].slice(0, 120);
+  const raw = [
+    'From: Gharibii <' + from + '>',
+    'To: ' + env.MAIL_TO,
+    'Subject: =?UTF-8?B?' + b64(subject) + '?=',
+    'Message-ID: <' + crypto.randomUUID() + '@gharibii.ir>',
+    'Date: ' + new Date().toUTCString(),
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    b64(text).replace(/.{1,76}/g, '$&\r\n').trim()
+  ].join('\r\n');
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: env.MAIL_FROM, to: [env.MAIL_TO], subject: text.split('\n')[0].slice(0, 120), text: text })
-    });
-    return r.ok;
+    await env.EMAIL.send(new EmailMessage(from, env.MAIL_TO, raw));
+    return true;
   } catch (e) { return false; }
 }
 /* تلگرام: همهٔ اعلان‌ها. ایمیل: فقط گزارش‌ها (kind = 'report')، مگر MAIL_ALL=1 تنظیم شده باشد */
