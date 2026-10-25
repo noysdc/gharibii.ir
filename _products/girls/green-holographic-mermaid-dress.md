@@ -21,9 +21,7 @@ images:
   - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-4.webp
   - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-5.webp
   - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-6.webp
-  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-7.webp
-  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-8.webp
-  - /assets/images/products/girls/green-holographic-mermaid-dress/green-holographic-mermaid-dress-9.webp
+
 ---
 
 # لباس پری دریایی هولوگرامی سبز
