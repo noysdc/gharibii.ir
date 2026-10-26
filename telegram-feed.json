@@ -6,7 +6,7 @@ permalink: /telegram-feed.json
 {%- comment -%}
   فید محصولات برای ارسال خودکار به کانال تلگرام (Worker هر روز این فایل را می‌خواند).
   هر محصول: آدرس، عنوان، دسته، قیمت، عکس اول، متن توضیح (اولین پاراگراف بخش «درباره‌ی این محصول»)، سایزها و هشتگ‌ها.
-  محصولی که ناموجود باشد (oos) ارسال نمی‌شود.
+  محصول ناموجود (oos) هم برای معرفی ارسال می‌شود (با برچسب «فعلاً ناموجود»).
 {%- endcomment -%}
 {%- assign sorted = site.products | sort: 'sort_id' | reverse -%}
 {
@@ -14,6 +14,7 @@ permalink: /telegram-feed.json
 "site": {{ site.url | jsonify }},
 "wa": {{ site.whatsapp_sellers[0].number | default: "" | jsonify }},
 "ig": {{ site.order_instagram | default: "" | jsonify }},
+"tgch": {{ site.channel_telegram | default: "" | jsonify }},
 "sellers": [{% for s in site.whatsapp_sellers %}{"n":{{ s.name | jsonify }},"w":{{ s.number | jsonify }},"b":{{ site.order_bale[forloop.index0] | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
 "products": [{% for p in sorted %}
 {%- assign grp = site.data.price_groups.groups[p.price_group] -%}
