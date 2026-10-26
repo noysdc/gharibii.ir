@@ -123,6 +123,75 @@ function detOf(b) {
   return { ph: clip(String((b && b.ph) || '').replace(/\D/g, ''), 15), addr: clip(b && b.addr, 300), items: items };
 }
 const rawMsg = (v) => String(v == null ? '' : v).replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3400);
+/* ---------- ساخت متن کامل فاکتور داخل خود Worker (از روی توکن لینک) ----------
+   اگر مرورگر متن آماده نفرستاد (مثلاً نسخهٔ قدیمی اسکریپت)، Worker خودش توکن را می‌خواند و همان متن را می‌سازد */
+const VERSION = '2026-10-26-text-v3';
+function hash6(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return ('000000' + (h % 2176782336).toString(36)).slice(-6);
+}
+function b64uDecode(s) {
+  s = String(s).replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  const bin = atob(s), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+function mobileFa(v) {
+  let d = String(v || '').replace(/\D/g, '');
+  if (d.indexOf('98') === 0 && d.length === 12) d = '0' + d.slice(2);
+  if (d.length === 10 && d.charAt(0) === '9') d = '0' + d;
+  return d.length === 11 ? d.slice(0, 4) + ' ' + d.slice(4, 7) + ' ' + d.slice(7) : d;
+}
+const ltrIso = (s) => (s ? '\u2066' + s + '\u2069' : s);
+async function textFromTok(env, b) {
+  try {
+    const a = JSON.parse(b64uDecode(b.tok));
+    if (!Array.isArray(a) || a[0] !== 2 || !Array.isArray(a[9])) return '';
+    const site = String(env.SITE_URL || 'https://gharibii.ir').replace(/\/+$/, '');
+    let feed = null;
+    try { const r = await fetch(site + '/seller-data.json?t=' + Date.now()); if (r.ok) feed = await r.json(); } catch (e) {}
+    const byId = {}, short = {}, dup = {};
+    ((feed && feed.products) || []).forEach((p) => { byId[p.id] = p; const k = hash6(String(p.id)); if (short[k] && short[k] !== p.id) dup[k] = true; else short[k] = p.id; });
+    const full = (id) => (String(id).charAt(0) === '~' && short[id.slice(1)] && !dup[id.slice(1)] ? short[id.slice(1)] : String(id));
+    const ts = parseInt(a[1], 36) || Math.floor(Date.now() / 1000), exp = ts + (Number(a[2]) || 120) * 60;
+    const items = a[9].slice(0, 120).map((r) => {
+      const id = full(clip(r[0], 200)), p = byId[id];
+      return { t: (p && p.t) || clip(r[4], 120) || 'محصول', q: Math.min(999, Math.max(1, num(r[1]) || 1)), p: num(r[2]), o: clip(r[3], 120) };
+    });
+    let sub = 0, unpriced = 0;
+    items.forEach((i) => { if (i.p > 0) sub += i.p * i.q; else unpriced++; });
+    const disc = Math.min(num(a[7]), sub), fee = num(a[6]), total = sub - disc + fee;
+    const rev = Math.max(1, num(a[10]) || num(b.rev) || 1);
+    const sw = String(a[5] || '').replace(/\D/g, '');
+    const seller = ((feed && feed.sellers) || []).find((s) => s.number === sw);
+    const store = (feed && feed.store) || 'فروشگاه غریبی کیش';
+    let m = '🧾 فاکتور ' + store + '\n';
+    m += 'شماره: ' + clip(b.no, 40) + (rev > 1 ? ' (نسخه ' + fa(rev) + ')' : '') + '\n';
+    m += 'تاریخ: ' + faDate(ts) + '\n';
+    m += 'اعتبار تا: ' + faDate(exp) + '\n';
+    if (a[4]) m += 'مشتری: ' + clip(a[4], 60) + '\n';
+    if (a[14]) m += 'شماره تماس: ' + ltrIso(mobileFa(a[14])) + '\n';
+    if (seller) m += 'فروشنده: ' + seller.name + ' — ' + ltrIso(mobileFa(seller.number)) + '\n';
+    if (a[13]) m += 'آدرس: ' + clip(a[13], 300) + '\n';
+    m += '\n';
+    items.forEach((it, i) => {
+      m += fa(i + 1) + '. ' + it.t + '\n';
+      if (it.o) m += '   ' + it.o + '\n';
+      m += it.p > 0 ? '   ' + fa(it.q) + ' × ' + fa(it.p) + ' = ' + money(it.p * it.q) + '\n' : '   ' + fa(it.q) + ' عدد — قیمت با فروشنده هماهنگ می‌شود\n';
+    });
+    m += '━━━━━━━━━━━━━━\n';
+    m += '🛍️ جمع کالاها: ' + money(sub) + '\n';
+    if (disc > 0) m += '🎁 تخفیف: ' + money(disc) + '\n';
+    if (fee > 0) m += '🚚 هزینه ارسال و گمرک: ' + money(fee) + '\n';
+    m += '💳 جمع کل: ' + money(total) + '\n';
+    if (unpriced > 0) m += '⚠️ قیمت ' + fa(unpriced) + ' قلم با فروشنده هماهنگ می‌شود.\n';
+    if (a[8]) m += '\n📝 ' + clip(a[8], 300) + '\n';
+    m += '\n⏳ در انتظار پرداخت. این فاکتور تا ' + faDate(exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
+    return rawMsg(m.split('\n').map((l) => (l ? '\u200F' + l : l)).join('\n'));
+  } catch (e) { return ''; }
+}
 function detContact(d) {
   if (!d) return '';
   return (d.ph ? '\n📞 شماره مشتری: ' + d.ph : '') + (d.addr ? '\n📍 آدرس: ' + d.addr : '');
@@ -200,7 +269,7 @@ async function createInvoice(req, env, ctx) {
   if (!code) return reply(req, env, { error: 'busy' }, 503);
   const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0 };
   await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
-  const det = detOf(b), full = rawMsg(b.msg);
+  const det = detOf(b), full = rawMsg(b.msg) || (await textFromTok(env, b));
   notify(env, ctx, full ? '🆕 فاکتور جدید\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
   return reply(req, env, { code: code });
 }
@@ -232,7 +301,7 @@ async function updateInvoice(req, env, ctx, code) {
   await putRec(env, code, rec, m);
   if (b.tok !== undefined) {      /* ویرایش فاکتور (افزودن/حذف محصول، تغییر مشتری یا مبلغ) */
     const rv = num(b.rev);
-    const full = rawMsg(b.msg);
+    const full = rawMsg(b.msg) || (await textFromTok(env, b));
     const head = '✏️ فاکتور ویرایش شد' + (rv > 1 ? ' (نسخه ' + fa(rv) + ')' : '');
     notify(env, ctx, full ? head + '\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : head + '\nفاکتور: ' + (clip(m.no, 40) || code) + '\nمشتری: ' + (clip(m.cust, 40) || '—') + detContact(rec.det) + '\nمبلغ: ' + money(num(m.total)) + ' (' + fa(num(m.n)) + ' قلم)' + detItems(rec.det) + '\n\n🔗 ' + linkOf(env, code));
   }
@@ -453,7 +522,7 @@ async function channelReset(env) {
 async function channelStatus(env) {
   const last = await env.INVOICES.get('tg:last', { type: 'json' }).catch(() => null);
   const posted = await chPostedSet(env);
-  return { last: last, postedCount: posted.size, channelSet: !!env.CHANNEL_CHAT_ID, botSet: !!env.TELEGRAM_BOT_TOKEN };
+  return { ver: VERSION, last: last, postedCount: posted.size, channelSet: !!env.CHANNEL_CHAT_ID, botSet: !!env.TELEGRAM_BOT_TOKEN };
 }
 
 export default {
@@ -470,7 +539,7 @@ export default {
         try { if (env.INVOICES) { await env.INVOICES.list({ prefix: 'inv:', limit: 1 }); kv = true; } else kvErr = 'binding INVOICES missing'; } catch (e) { kvErr = String(e && e.message || e); }
         let lastCron = null;
         try { if (env.INVOICES) lastCron = await env.INVOICES.get('meta:lastcron', { type: 'json' }); } catch (e) {}
-        return reply(req, env, { ok: true, telegram: tg, email: em, kv: kv, kvErr: kvErr, siteUrl: env.SITE_URL || '', lastCron: lastCron });
+        return reply(req, env, { ok: true, ver: VERSION, telegram: tg, email: em, kv: kv, kvErr: kvErr, siteUrl: env.SITE_URL || '', lastCron: lastCron });
       }
       if (path === '/channel/status' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
