@@ -600,3 +600,47 @@ textarea{line-height:1.8;min-height:92px}
 /* دکمهٔ «نمایش همه» فاکتورها */
 .hist-more{width:100%;margin-top:2px}
 .hist-card #history>.hist-more{flex:none}
+
+/* =====================================================================
+   v5 — بالای فاکتور مرتب: اطلاعات فاکتور و مشخصات گیرنده (صفحهٔ مشتری، پیش‌نمایش فروشنده، عکس و PDF)
+   ===================================================================== */
+.inv-sheet .ltr,.inv-sheet b[dir="ltr"]{text-align:right}
+
+/* اطلاعات فاکتور: یک باکس، دو ستون هم‌تراز، برچسب بالا و مقدار پایین */
+.inv-sheet .inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin:0 0 10px;padding:4px 16px;border-radius:18px;
+  background:var(--g-card);border:1px solid var(--g-border);box-shadow:var(--g-edge);font-size:14px}
+.inv-sheet .m-item{display:flex;flex-direction:column;gap:0;min-width:0;padding:8px 0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow-wrap:anywhere;flex:none}
+.inv-sheet .m-item:nth-child(n+3){border-top:1px dashed var(--v-line)}
+.inv-sheet .m-item:last-child:nth-child(odd){grid-column:1/-1}
+.inv-sheet .m-item span{margin:0;font-size:12.5px;color:var(--v-muted);line-height:1.6}
+.inv-sheet .m-item b{font-size:14.5px;line-height:1.7}
+
+/* مشخصات گیرنده: ردیف‌های «برچسب | مقدار» با عرض برچسب ثابت */
+.inv-sheet .inv-cust{margin:0 0 10px;padding:10px 16px 6px}
+.inv-sheet .ic-title{margin-bottom:2px;font-size:13.5px}
+.inv-sheet .ic-row{display:flex;align-items:baseline;gap:12px;padding:7px 0;border-top:1px dashed var(--v-line);font-size:14.5px}
+.inv-sheet .ic-title+.ic-row{border-top:0}
+.inv-sheet .ic-row span{flex:0 0 4.6em;color:var(--v-muted);font-size:13px}
+.inv-sheet .ic-row b{flex:1;min-width:0;text-align:start;line-height:1.8;overflow-wrap:anywhere}
+.inv-sheet .ic-row b.ltr{text-align:right}
+
+/* سربرگ فاکتور */
+.inv-sheet .inv-head{padding-bottom:14px;margin-bottom:2px;border-bottom:1px solid var(--v-line);margin-bottom:12px}
+.inv-sheet .h-status{align-self:flex-start;margin-top:6px}
+
+/* نوار بالای صفحهٔ مشتری */
+.view-top{justify-content:space-between;gap:10px;margin-bottom:12px;padding:6px 6px 6px 12px;border-radius:999px;background:var(--g-panel);border:1px solid var(--g-border);
+  box-shadow:var(--g-edge),var(--g-shadow);-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur)}
+.view-brand{display:flex;align-items:center;gap:10px;min-width:0;color:var(--sea-deep);font-weight:700;font-size:.95rem;text-decoration:none}
+.view-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;background:#fff;border:1px solid var(--g-border)}
+.view-brand span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.view-top .theme-toggle{min-height:40px;min-width:40px;border-radius:50%;padding:0}
+
+/* پیش‌نمایش در صفحهٔ فروشنده: گزینه‌ها و لینک مرتب */
+#out-card .check{padding:10px 14px;border:1px solid var(--g-border);border-radius:14px;background:var(--g-card);margin:6px 0 10px;color:var(--ink)}
+#o-linkinfo{margin:0 0 14px;padding:9px 14px;border:1px dashed var(--v-line);border-radius:14px;background:var(--field-bg);font-size:.82rem;line-height:1.9;overflow-wrap:anywhere;word-break:break-all}
+#out-card .sheet-scroll{padding-top:4px}
+@media (max-width:520px){
+  .inv-sheet .inv-meta{gap:0 12px;padding:2px 12px}
+  .sheet-scroll .inv-sheet .ic-row span{flex-basis:4em}
+}

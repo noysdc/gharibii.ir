@@ -355,24 +355,24 @@
       ? '<b class="v-expired">مهلت پرداخت این فاکتور تمام شده است.</b> برای قیمت و موجودی به‌روز با فروشنده هماهنگ کنید.'
       : 'مهلت پرداخت تا <b>' + esc(fmtDate(inv.exp)) + '</b>' + (o.live && rem ? ' (<span data-remain>' + esc(rem) + '</span> مانده)' : '');
 
-    var meta = '<div class="m-item"><span>شماره</span><b dir="ltr">' + esc(inv.no) + '</b></div>' +
+    var meta = '<div class="m-item"><span>شماره</span><b class="ltr" dir="ltr">' + esc(inv.no) + '</b></div>' +
       (inv.rev > 1 ? '<div class="m-item"><span>نسخه</span><b>' + nf(inv.rev) + '</b></div>' : '') +
       '<div class="m-item"><span>تاریخ صدور</span><b>' + esc(fmtDate(inv.ts)) + '</b></div>' +
       ((seller || inv.sn) ? '<div class="m-item"><span>فروشنده</span><b>' + esc(seller ? seller.name : inv.sn) + '</b></div>' : '') +
-      (seller ? '<div class="m-item"><span>موبایل فروشنده</span><b dir="ltr">' + esc(mobileFa(seller.number)) + '</b></div>' : '') +
-      (inv.paid && inv.paid.ref ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '');
+      (seller ? '<div class="m-item"><span>موبایل فروشنده</span><b class="ltr" dir="ltr">' + esc(mobileFa(seller.number)) + '</b></div>' : '') +
+      (inv.paid && inv.paid.ref ? '<div class="m-item"><span>کد پیگیری پرداخت</span><b class="ltr" dir="ltr">' + esc(inv.paid.ref) + '</b></div>' : '');
 
     /* مشخصات گیرنده: نام، تلفن، آدرس و کد پستی (کد پستی از انتهای آدرس جدا می‌شود) */
     var pm = String(inv.addr || '').match(/(?:[،,]\s*)?کد\s*پستی\s*[:：]?\s*([0-9۰-۹]{10})/);
     var addrText = pm ? String(inv.addr).replace(pm[0], '').replace(/^[\s،,]+|[\s،,]+$/g, '') : String(inv.addr || '').trim();
     var postal = pm ? normDigits(pm[1]).replace(/\d/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(Number(d)); }) : '';
     var custBox = (inv.cust || inv.ph || addrText || postal)
-      ? '<div class="inv-cust" data-brk><div class="ic-title">مشخصات گیرنده</div><div class="ic-grid">' +
-          (inv.cust ? '<div class="ic-item"><span>نام</span><b>' + esc(inv.cust) + '</b></div>' : '') +
-          (inv.ph ? '<div class="ic-item"><span>تلفن</span><b dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
-          (addrText ? '<div class="ic-item ic-wide"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
-          (postal ? '<div class="ic-item"><span>کد پستی</span><b dir="ltr">' + postal + '</b></div>' : '') +
-        '</div></div>' : '';
+      ? '<div class="inv-cust" data-brk><div class="ic-title">مشخصات گیرنده</div>' +
+          (inv.cust ? '<div class="ic-row"><span>نام</span><b>' + esc(inv.cust) + '</b></div>' : '') +
+          (inv.ph ? '<div class="ic-row"><span>تلفن</span><b class="ltr" dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
+          (addrText ? '<div class="ic-row"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
+          (postal ? '<div class="ic-row"><span>کد پستی</span><b class="ltr" dir="ltr">' + postal + '</b></div>' : '') +
+        '</div>' : '';
 
     var contacts = storeContacts(feed), foot = [];
     if (contacts.length) foot.push('☎ ' + contacts.map(function (c) { return esc(c.name) + ' <span dir="ltr">' + esc(c.mobile) + '</span>'; }).join(' · '));

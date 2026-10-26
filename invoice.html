@@ -6,7 +6,7 @@ permalink: /invoice/
 sitemap: false
 ---
 <main class="view" id="view">
-  <div class="view-top"><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
+  <div class="view-top"><a class="view-brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="32" height="32"><span>فروشگاه غریبی کیش</span></a><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
   <div class="view-state" id="state">در حال بارگذاری فاکتور…</div>
   <div class="sheet-scroll"><div id="sheet"></div></div>
   <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" data-gateway="{% if site.payment_gateway and site.invoice_api != '' %}1{% endif %}" data-sheba="{{ site.bank_sheba | escape }}" data-card="{{ site.bank_card | escape }}" hidden></div>
