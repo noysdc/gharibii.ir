@@ -12,6 +12,10 @@
   var gatewayOn = !!(cfg && cfg.getAttribute('data-gateway'));
   var sheba = cfg ? String(cfg.getAttribute('data-sheba') || '').replace(/\s|-/g, '').toUpperCase() : '';
   if (!/^IR\d{24}$/.test(sheba)) sheba = '';
+  var card = cfg ? String(cfg.getAttribute('data-card') || '').replace(/\D/g, '') : '';
+  if (!/^\d{16}$/.test(card)) card = '';
+  var hasBank = !!(card || sheba);
+  function cardPretty(v) { return v.replace(/(\d{4})(?=\d)/g, '$1 '); }
   function shebaPretty(v) { return v.slice(0, 4) + ' ' + v.slice(4).replace(/(\d{4})(?=\d)/g, '$1 '); }
 
   function fail(msg) {
@@ -53,7 +57,7 @@
     if (!box) return;
     var online = gatewayOn && !!(inv && inv.code);          /* درگاه فقط برای فاکتورِ لینک‌کوتاه (ذخیره‌شده روی سرور) */
     var link = !online && !!payUrl;
-    if (!inv || inv.paid || (!online && !link && !sheba)) { box.hidden = true; return; }
+    if (!inv || inv.paid || (!online && !link && !hasBank)) { box.hidden = true; return; }
     var t = G.totals(inv), why = payBlock();
     box.hidden = false;
     $('pay-amount').textContent = G.money(t.total);
@@ -62,9 +66,12 @@
     $('pay-warn').hidden = !why;
     $('pay-m-online').hidden = !online;
     $('pay-m-link').hidden = !link;
-    $('pay-m-sheba').hidden = !sheba;
-    $('pay-m-sheba-title').textContent = (online || link ? '۲) ' : '') + 'واریز به شماره شبا';
-    if (sheba) { $('sheba-show').textContent = shebaPretty(sheba); }
+    $('pay-m-sheba').hidden = !hasBank;
+    $('pay-m-sheba-title').textContent = (online || link ? '۲) ' : '') + 'کارت‌به‌کارت';
+    $('card-row').hidden = !card; $('card-copy').hidden = !card;
+    $('sheba-row').hidden = !sheba; $('sheba-copy-row').hidden = !sheba;
+    if (card) $('card-show').textContent = cardPretty(card);
+    if (sheba) $('sheba-show').textContent = shebaPretty(sheba);
     $('pay-go').classList.toggle('busy', !!why);
     $('pay-go-link').classList.toggle('busy', !!why);
   }
@@ -123,7 +130,10 @@
         setTimeout(function () { location.href = payUrl; }, ok ? 900 : 1800);
       });
     });
-    /* شبا */
+    /* کارت و شبا */
+    $('card-copy').addEventListener('click', function () {
+      G.copyText(card).then(function (ok) { G.toast(ok ? 'شماره کارت کپی شد ✅' : 'کپی نشد؛ دستی وارد کنید: ' + card); });
+    });
     $('sheba-copy').addEventListener('click', function () {
       G.copyText(sheba).then(function (ok) { G.toast(ok ? 'شماره شبا کپی شد ✅' : 'کپی نشد؛ دستی وارد کنید: ' + sheba); });
     });

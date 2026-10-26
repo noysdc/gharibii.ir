@@ -9,7 +9,7 @@ sitemap: false
   <div class="view-top"><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
   <div class="view-state" id="state">در حال بارگذاری فاکتور…</div>
   <div class="sheet-scroll"><div id="sheet"></div></div>
-  <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" data-gateway="{% if site.payment_gateway and site.invoice_api != '' %}1{% endif %}" data-sheba="{{ site.bank_sheba | escape }}" hidden></div>
+  <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" data-gateway="{% if site.payment_gateway and site.invoice_api != '' %}1{% endif %}" data-sheba="{{ site.bank_sheba | escape }}" data-card="{{ site.bank_card | escape }}" hidden></div>
   <section class="pay-box" id="pay-box" hidden>
     <h2>پرداخت</h2>
     <p class="pay-rule">مبلغ فاکتور: <b id="pay-amount"></b> — شمارهٔ فاکتور: <b dir="ltr" id="pay-no"></b></p>
@@ -22,14 +22,19 @@ sitemap: false
     </div>
 
     <div class="pay-method" id="pay-m-sheba" hidden>
-      <h3 id="pay-m-sheba-title">۲) واریز به شماره شبا</h3>
+      <h3 id="pay-m-sheba-title">۲) کارت‌به‌کارت</h3>
       <div class="sheba-card">
+        <div class="sheba-row"><span>بانک</span><b>{{ site.bank_name }}</b></div>
         <div class="sheba-row"><span>به نام</span><b id="sheba-owner">{{ site.bank_owner }}</b></div>
-        <div class="sheba-row"><span>شماره شبا</span><b dir="ltr" id="sheba-show"></b></div>
+        <div class="sheba-row" id="card-row"><span>شماره کارت</span><b dir="ltr" id="card-show"></b></div>
+        <div class="sheba-row" id="sheba-row"><span>شماره شبا</span><b dir="ltr" id="sheba-show"></b></div>
       </div>
       <div class="view-actions-row two">
-        <button type="button" class="btn" id="sheba-copy">کپی شماره شبا</button>
+        <button type="button" class="btn" id="card-copy">کپی شماره کارت</button>
         <button type="button" class="btn" id="sheba-copy-amount">کپی مبلغ</button>
+      </div>
+      <div class="view-actions-row" id="sheba-copy-row" hidden>
+        <button type="button" class="btn" id="sheba-copy">کپی شماره شبا</button>
       </div>
       <p class="pay-hint">بعد از واریز، «ارسال به فروشنده» را بزنید (کد پیگیری اختیاری است) تا فروشنده پرداخت را تأیید کند و فاکتور تأییدشده را برایتان بفرستد.</p>
     </div>
@@ -39,7 +44,7 @@ sitemap: false
     </div>
 
     <div class="pay-report">
-      <h3>اعلام پرداخت به فروشنده <small>(برای واریز شبا)</small></h3>
+      <h3>اعلام پرداخت به فروشنده <small>(برای کارت‌به‌کارت)</small></h3>
       <label class="field"><span>کد پیگیری پرداخت (اختیاری)</span><input type="text" id="pay-ref" dir="ltr" inputmode="numeric" autocomplete="off" placeholder="اگر دارید بعد از پرداخت وارد کنید"></label>
       <div class="view-actions-row two">
         <button type="button" class="btn btn-wa" id="pay-send">ارسال به فروشنده</button>
