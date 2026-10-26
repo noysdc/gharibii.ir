@@ -24,7 +24,10 @@
   }
   function save() { try { localStorage.setItem(DKEY, JSON.stringify(st)); } catch (e) {} }
   function readHist() { try { var h = JSON.parse(localStorage.getItem(HKEY)); return Array.isArray(h) ? h : []; } catch (e) { return []; } }
-  function writeHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(0, 20))); } catch (e) {} }
+  function writeHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(0, 60))); } catch (e) {} }
+  var HIDKEY = 'gharibii_seller_hidden_v1';     /* فاکتورهایی که فروشنده فقط از لیست همین دستگاه پنهان کرده */
+  function readHidden() { try { var h = JSON.parse(localStorage.getItem(HIDKEY)); return Array.isArray(h) ? h : []; } catch (e) { return []; } }
+  function hideCode(c) { var h = readHidden(); if (h.indexOf(c) < 0) h.push(c); try { localStorage.setItem(HIDKEY, JSON.stringify(h.slice(-300))); } catch (e) {} }
 
   function feeVal() { return st.fee == null ? (feed ? feed.fee : 0) : st.fee; }
   function fmtIn(n) { return n ? Number(n).toLocaleString('en-US') : ''; }
@@ -309,7 +312,13 @@
   /* تأیید پرداخت (کد زرین‌پال اختیاری است) و برداشتن تأیید.
      توجه: وضعیت پرداخت داخل خود لینک است؛ تأیید/لغو یک لینک تازه می‌سازد و لینک‌های قبلی مشتری عوض نمی‌شوند */
   function togglePaid(i) {
-    var h = readHist(), x = h[i], inv = x && G.unpack(x.tok);
+    var h = readHist(), x = h[i];
+    if (!x) return;
+    if (!x.tok && x.code) {                          /* ردیفی که از لیست مشترک آمده: اول فاکتور را از سرور بگیر */
+      G.apiGet(x.code).then(function (iv) { x.tok = G.pack(iv); writeHist(h); togglePaid(i); }, function () { G.toast('فاکتور پیدا نشد یا اتصال برقرار نیست'); });
+      return;
+    }
+    var inv = G.unpack(x.tok);
     if (!inv) return;
     if (inv.paid) {
       if (!confirm('تأیید پرداخت این فاکتور برداشته شود؟\nیک لینک تازهٔ «در انتظار پرداخت» ساخته می‌شود.')) return;
@@ -355,15 +364,49 @@
   function renderHistory() {
     var h = readHist(), host = $('history');
     if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; return; }
-    host.innerHTML = h.map(function (x, i) {
-      var exp = !x.paid && Math.floor(Date.now() / 1000) >= x.exp;
-      var tag = x.paid ? 'پرداخت‌شده ✅' : (exp ? 'منقضی' : 'معتبر');
-      return '<div class="h-row"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + (x.code ? ' · <span dir="ltr">' + G.esc(x.code) + '</span>' : '') + '</small></div>' +
-        '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : 'btn-in') + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : 'تأیید پرداخت') + '</button>' +
+    var now = Math.floor(Date.now() / 1000);
+    var todo = h.filter(function (x) { return (x.paid && x.pvia === 'zp' && !x.ok) || (!x.paid && x.rep && now < x.exp + 86400 * 3); }).length;
+    var banner = todo ? '<p class="h-todo">🔔 ' + G.nf(todo) + ' فاکتور منتظر بررسی شماست</p>' : '';
+    host.innerHTML = banner + h.map(function (x, i) {
+      var exp = !x.paid && now >= x.exp;
+      var online = x.paid && x.pvia === 'zp';
+      var tag = online ? '✅ پرداخت آنلاین (زرین‌پال)' + (x.pref ? ' · کد پیگیری <span dir="ltr">' + G.esc(x.pref) + '</span>' : '') + (x.ok ? ' · بررسی‌شده' : ' · <b class="h-warn">منتظر بررسی شما</b>')
+        : x.paid ? 'پرداخت‌شده ✅'
+        : (exp ? 'منقضی' : (x.rep ? '<b class="h-warn">💬 مشتری اعلام پرداخت کرد (کارت‌به‌کارت) — بررسی و تأیید کنید</b>' : 'معتبر · در انتظار پرداخت'));
+      var cls = 'h-row' + ((online && !x.ok) || (!x.paid && x.rep && !exp) ? ' h-attn' : '');
+      var btns = '';
+      if (online) btns += x.ok ? '' : '<button type="button" class="btn small btn-primary" data-hok="' + i + '">بررسی کردم ✓</button>';
+      else btns += '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : (x.rep ? 'btn-primary' : 'btn-in')) + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : 'تأیید پرداخت') + '</button>';
+      return '<div class="' + cls + '"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + (x.code ? ' · <span dir="ltr">' + G.esc(x.code) + '</span>' : '') + '</small></div>' +
+        btns +
         '<button type="button" class="btn small" data-hopen="' + i + '">' + (x.paid ? 'مکمل' : 'ویرایش') + '</button>' +
         '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">لینک</button>' +
         '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف">✕</button></div>';
     }).join('');
+  }
+  /* لیست مشترک: فاکتورهای هر دو فروشنده و وضعیت پرداخت‌شان با «یک» درخواست از سرور می‌آید.
+     پرداخت درگاه خودکار ثبت می‌شود؛ فروشنده فقط «بررسی کردم» (آنلاین) یا «تأیید پرداخت» (کارت‌به‌کارت) می‌زند */
+  var syncing = false;
+  function syncList() {
+    if (syncing || !G.apiOn()) return;
+    syncing = true;
+    G.apiList().then(function (r) {
+      syncing = false;
+      var rows = (r && r.items) || [], h = readHist(), hid = readHidden(), fresh = [], byCode = {};
+      h.forEach(function (x) { if (x.code) byCode[x.code] = x; });
+      rows.forEach(function (m) {
+        if (hid.indexOf(m.code) >= 0) return;
+        var x = byCode[m.code], isNew = !x;
+        if (!x) { x = { no: m.no, code: m.code, tok: '' }; h.push(x); byCode[m.code] = x; }
+        var was = !!x.paid;
+        x.no = m.no || x.no; x.rev = m.rv || x.rev || 1; x.ts = m.ts || x.ts; x.exp = m.exp || x.exp; x.cust = m.cust || x.cust || ''; x.total = m.total || x.total;
+        x.paid = !!m.paid; x.pvia = m.pv ? 'zp' : ''; x.pref = m.rf || ''; x.rep = m.rp || 0; x.ok = !!m.ck;
+        if (m.pv && !was && !isNew) fresh.push(x.no);
+      });
+      h.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+      writeHist(h); renderHistory();
+      if (fresh.length) G.toast('✅ پرداخت آنلاین ثبت شد: ' + fresh.join('، '));
+    }, function () { syncing = false; });
   }
   function loadInvoice(inv, code) {
     var supp = !!inv.paid;
@@ -493,10 +536,23 @@
     $('history').addEventListener('click', function (e) {
       var h = readHist();
       var o = e.target.closest('[data-hopen]'), c = e.target.closest('[data-hcopy]'), d = e.target.closest('[data-hdel]'), pd = e.target.closest('[data-hpaid]');
+      var ok = e.target.closest('[data-hok]');
+      if (ok) {
+        var hk = h[Number(ok.getAttribute('data-hok'))];
+        if (hk) {
+          hk.ok = true; writeHist(h); renderHistory();
+          if (hk.code && G.apiOn()) G.apiCheck(hk.code).catch(function () { G.toast('ثبت «بررسی شد» روی سرور ناموفق بود'); });   /* برای فروشندهٔ دیگر هم ثبت می‌شود */
+        }
+        return;
+      }
       if (pd) { togglePaid(Number(pd.getAttribute('data-hpaid'))); return; }
-      if (o) { var hi = h[Number(o.getAttribute('data-hopen'))], inv = G.unpack(hi.tok); if (inv) loadInvoice(inv, hi.code); }
-      if (c) { var hx = h[Number(c.getAttribute('data-hcopy'))]; G.copyText(hx.code ? G.shortUrl(hx.code) : G.linkOf(hx.tok, hx.no, hx.rev)).then(function () { G.toast('لینک کپی شد ✅'); }); }
-      if (d) { h.splice(Number(d.getAttribute('data-hdel')), 1); writeHist(h); renderHistory(); }
+      if (o) {
+        var hi = h[Number(o.getAttribute('data-hopen'))], inv = hi && hi.tok ? G.unpack(hi.tok) : null;
+        if (inv) loadInvoice(inv, hi.code);
+        else if (hi && hi.code && G.apiOn()) G.apiGet(hi.code).then(function (iv) { loadInvoice(iv, hi.code); }, function () { G.toast('فاکتور پیدا نشد یا اتصال برقرار نیست'); });
+      }
+      if (c) { var hx = h[Number(c.getAttribute('data-hcopy'))]; if (hx && (hx.code || hx.tok)) G.copyText(hx.code ? G.shortUrl(hx.code) : G.linkOf(hx.tok, hx.no, hx.rev)).then(function () { G.toast('لینک کپی شد ✅'); }); }
+      if (d) { var gone = h.splice(Number(d.getAttribute('data-hdel')), 1)[0]; if (gone && gone.code) hideCode(gone.code); writeHist(h); renderHistory(); }
     });
     $('btn-import').addEventListener('click', function () {
       var cd = G.codeIn($('f-import').value);
@@ -546,6 +602,9 @@
     $('btn-undo').addEventListener('click', undoMessage);
     document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && feed) sync(false); });
     setInterval(function () { if (document.visibilityState === 'visible') sync(false); }, 5 * 60 * 1000);
+    setInterval(function () { if (document.visibilityState === 'visible') syncList(); }, 60 * 1000);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') syncList(); });
+    setTimeout(syncList, 800);
   }
 
   /* ---------- تبدیل پیام مشتری به فاکتور ----------

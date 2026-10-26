@@ -7,7 +7,7 @@ import { EmailMessage } from 'cloudflare:email';
    - گزارش هفتگی (شنبه‌ها) و ماهانه (اول هر ماه شمسی) + گزارش دستی */
 
 const TZ = 'Asia/Tehran';
-const CODE_RE = /^\d{6}-\d{4}-[a-z2-9]{4}$/;
+const CODE_RE = /^\d{6}-\d{4}-[a-z2-9]{4,16}$/;     /* کدهای قدیمی ۴ حرفی هنوز معتبرند؛ کدهای جدید ۱۲ حرفی‌اند */
 const TOK_RE = /^[A-Za-z0-9_-]{10,8000}$/;
 const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 
@@ -65,8 +65,8 @@ function newCodeBase(d) {
   const t = tehran(d);
   return t.y.slice(-2) + t.mo + t.d + '-' + t.h + t.mi;
 }
-function rand4() {
-  const b = new Uint8Array(4);
+function randN(n) {
+  const b = new Uint8Array(n);
   crypto.getRandomValues(b);
   return Array.from(b, (x) => ALPHA[x % ALPHA.length]).join('');
 }
@@ -125,7 +125,7 @@ function detOf(b) {
 const rawMsg = (v) => String(v == null ? '' : v).replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3400);
 /* ---------- ساخت متن کامل فاکتور داخل خود Worker (از روی توکن لینک) ----------
    اگر مرورگر متن آماده نفرستاد (مثلاً نسخهٔ قدیمی اسکریپت)، Worker خودش توکن را می‌خواند و همان متن را می‌سازد */
-const VERSION = '2026-10-26-zarinpal-v1';
+const VERSION = '2026-10-26-shared-v2';
 function hash6(s) {
   let h = 2166136261;
   for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
@@ -205,11 +205,46 @@ const linkOf = (env, code) => String(env.SITE_URL || '').replace(/\/+$/, '') + '
 /* ---------- ذخیره‌سازی ---------- */
 const kvKey = (code) => 'inv:' + code;
 function metaOf(m) {
-  return { ts: num(m.ts), exp: num(m.exp), total: num(m.total), n: num(m.n), no: clip(m.no, 40), cust: clip(m.cust, 40), paid: m.paid ? 1 : 0, pa: num(m.pa) };
+  return { ts: num(m.ts), exp: num(m.exp), total: num(m.total), n: num(m.n), no: clip(m.no, 40), cust: clip(m.cust, 40), paid: m.paid ? 1 : 0, pa: num(m.pa),
+    rv: num(m.rv), pv: m.pv ? 1 : 0, rf: clip(m.rf, 40), rp: num(m.rp), ck: m.ck ? 1 : 0 };     /* rv نسخه | pv پرداخت با درگاه | rf کد پیگیری | rp اعلام مشتری | ck بررسی‌شدهٔ فروشنده */
+}
+/* ماندگاری فاکتورها در KV (پیش‌فرض ۱۸۰ روز؛ با متغیر INVOICE_KEEP_DAYS قابل تغییر). متن فاکتورها در تلگرام پاک نمی‌شود. */
+const keepSec = (env) => Math.max(30, Number(env.INVOICE_KEEP_DAYS) || 180) * 86400;
+/* ایندکس فاکتورهای اخیر (یک کلید): لیست مشترک فروشنده‌ها بدون عملیات list گران KV */
+const IDX = 'meta:idx';
+async function idxBuild(env) {
+  const rows = {};
+  (await listAll(env)).forEach((r) => { rows[r.code] = metaOf(r.m); });
+  const v = { rows: rows };
+  await env.INVOICES.put(IDX, JSON.stringify(v));
+  return v;
+}
+async function idxRead(env) {
+  const v = await env.INVOICES.get(IDX, { type: 'json' }).catch(() => null);
+  return v && v.rows ? v : idxBuild(env);
+}
+async function idxSet(env, code, m) {
+  const v = await idxRead(env);
+  v.rows[code] = metaOf(m);
+  const keys = Object.keys(v.rows);
+  if (keys.length > 300) {
+    keys.sort((a, b) => (v.rows[b].ts || 0) - (v.rows[a].ts || 0)).slice(300).forEach((k) => { delete v.rows[k]; });
+  }
+  await env.INVOICES.put(IDX, JSON.stringify(v));
+}
+async function purgeOld(env, nowSec) {
+  const cut = nowSec - keepSec(env); let n = 0;
+  for (const r of await listAll(env)) {
+    if (r.m && r.m.ts && r.m.ts < cut) { await env.INVOICES.delete(kvKey(r.code)); n++; }
+  }
+  await idxBuild(env);                 /* ایندکس هر هفته از نو ساخته می‌شود (خودترمیم) */
+  return n;
 }
 async function getRec(env, code) { return env.INVOICES.get(kvKey(code), { type: 'json' }); }
 async function putRec(env, code, rec, meta) {
-  await env.INVOICES.put(kvKey(code), JSON.stringify(rec), { metadata: metaOf(meta) });
+  const m = metaOf(meta);
+  await env.INVOICES.put(kvKey(code), JSON.stringify(rec), { metadata: m, expirationTtl: keepSec(env) });
+  await idxSet(env, code, m);
 }
 async function listAll(env) {
   const out = []; let cursor;
@@ -263,11 +298,11 @@ async function createInvoice(req, env, ctx) {
   const now = new Date(), base = newCodeBase(now);
   let code = '';
   for (let i = 0; i < 6 && !code; i++) {
-    const c = base + '-' + rand4();
+    const c = base + '-' + randN(12);
     if (!(await env.INVOICES.get(kvKey(c)))) code = c;
   }
   if (!code) return reply(req, env, { error: 'busy' }, 503);
-  const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0 };
+  const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0, rv: b.rev };
   await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
   const det = detOf(b), full = rawMsg(b.msg) || (await textFromTok(env, b));
   notify(env, ctx, full ? '🆕 فاکتور جدید\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
@@ -292,11 +327,14 @@ async function updateInvoice(req, env, ctx, code) {
     if (!TOK_RE.test(String(b.tok))) return reply(req, env, { error: 'bad_token' }, 400);
     rec.tok = b.tok;
     ['exp', 'total', 'n', 'no', 'cust'].forEach((k) => { if (b[k] !== undefined) m[k] = b[k]; });
+    if (b.rev !== undefined) m.rv = num(b.rev);
     if (b.items !== undefined || b.ph !== undefined || b.addr !== undefined) rec.det = detOf(b);
   }
   if (b.paid !== undefined) {
     rec.paid = b.paid ? { ref: clip(b.paid.ref, 40), at: num(b.paid.at) || Math.floor(Date.now() / 1000) } : null;
     m.paid = rec.paid ? 1 : 0; m.pa = rec.paid ? rec.paid.at : 0;
+    m.rf = rec.paid ? clip(rec.paid.ref, 40) : ''; m.pv = 0;
+    rec.ck = !!rec.paid; m.ck = rec.paid ? 1 : 0;        /* تأیید دستی یعنی همان لحظه بررسی شده */
   }
   await putRec(env, code, rec, m);
   if (b.tok !== undefined) {      /* ویرایش فاکتور (افزودن/حذف محصول، تغییر مشتری یا مبلغ) */
@@ -320,8 +358,9 @@ async function reportPayment(req, env, ctx, code) {
   const ref = clip(String(b.ref || '').replace(/[^\dA-Za-z]/g, ''), 40);
   rec.rep = { ref: ref, at: now };
   const old = await env.INVOICES.getWithMetadata(kvKey(code));
-  await putRec(env, code, rec, old.metadata || {});
   const m = metaOf(old.metadata || {});
+  m.rp = now;
+  await putRec(env, code, rec, m);
   if (!recent) notify(env, ctx, '💬 مشتری اعلام پرداخت کرد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (ref ? '\nکد پیگیری: ' + ref : '\nکد پیگیری: وارد نشده') + detItems(rec.det) + '\n\n' + '\nلطفاً در پنل زرین‌پال چک و در صفحهٔ فروشنده «تأیید پرداخت» را بزنید.\n🔗 ' + linkOf(env, code));
   return reply(req, env, { ok: true });
 }
@@ -381,7 +420,7 @@ async function payCallback(req, env, ctx, url) {
   if (c !== 100 && c !== 101) return back(false);
   const now = Math.floor(Date.now() / 1000);
   rec.paid = { ref: clip(v.data.ref_id, 40), at: now, via: 'zp' };
-  m.paid = 1; m.pa = now;
+  m.paid = 1; m.pa = now; m.pv = 1; m.rf = rec.paid.ref;
   await putRec(env, code, rec, m);
   notify(env, ctx, '✅ پرداخت آنلاین انجام شد (درگاه زرین‌پال)\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + '\nکد پیگیری: ' + rec.paid.ref + detItems(rec.det));
   return back(true);
@@ -628,8 +667,11 @@ export default {
       }
       if (path === '/invoices' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
-        const all = (await listAll(env)).slice(-50).reverse();
-        return reply(req, env, { items: all.map((r) => Object.assign({ code: r.code }, r.m)) });
+        const v = url.searchParams.get('rebuild') === '1' ? await idxBuild(env) : await idxRead(env);
+        const cut = Math.floor(Date.now() / 1000) - keepSec(env);
+        const items = Object.keys(v.rows).map((c) => Object.assign({ code: c }, v.rows[c])).filter((r) => !r.ts || r.ts > cut)
+          .sort((a, b) => (b.ts || 0) - (a.ts || 0)).slice(0, 60);
+        return reply(req, env, { items: items });
       }
       if (path === '/report' && req.method === 'GET') {
         if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
@@ -643,11 +685,20 @@ export default {
         return reply(req, env, { text: text, sent: sent });
       }
       if (path === '/pay/callback' && req.method === 'GET') return await payCallback(req, env, ctx, url);
-      const m = path.match(/^\/invoices\/([^/]+)(\/report|\/pay)?$/);
+      const m = path.match(/^\/invoices\/([^/]+)(\/report|\/pay|\/check)?$/);
       if (m) {
         const code = m[1];
         if (!CODE_RE.test(code)) return reply(req, env, { error: 'bad_code' }, 400);
         if (m[2] === '/pay') { if (req.method === 'POST') return await payStart(req, env, code); }
+        else if (m[2] === '/check') {
+          if (req.method !== 'PUT') return reply(req, env, { error: 'not_found' }, 404);
+          if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);
+          const old = await env.INVOICES.getWithMetadata(kvKey(code), { type: 'json' });
+          if (!old || !old.value) return reply(req, env, { error: 'not_found' }, 404);
+          const mm = metaOf(old.metadata || {}); mm.ck = 1; old.value.ck = true;
+          await putRec(env, code, old.value, mm);
+          return reply(req, env, { ok: true });
+        }
         else if (m[2]) { if (req.method === 'POST') return await reportPayment(req, env, ctx, code); }
         else if (req.method === 'GET') return await getInvoice(req, env, code);
         else if (req.method === 'PUT') {
@@ -678,6 +729,7 @@ export default {
       const log = { at: Math.floor(now.getTime() / 1000), cron: event && event.cron || '', day: weekdayTehran(now), pd: t.d, sent: [] };
       try {
         if (weekdayTehran(now) === 'Sat') {
+          log.purged = await purgeOld(env, log.at);
           const x = await makeReport(env, 'week', now);
           log.sent.push({ week: { telegram: await sendTelegram(env, x, true), email: await sendEmail(env, x, true) } });
         }

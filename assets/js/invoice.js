@@ -176,10 +176,10 @@
      آدرس در _config.yml → invoice_api. اگر خالی باشد همه‌چیز مثل قبل با لینک بلند کار می‌کند. */
   var API_RAW = String((document.querySelector('meta[name="invoice-api"]') || {}).content || '').trim();
   var API = API_RAW === '/' ? '' : API_RAW.replace(/\/+$/, '');
-  var CODE_RE = /^\d{6}-\d{4}-[a-z2-9]{4}$/, KEYSTORE = 'gharibii_seller_key';
+  var CODE_RE = /^\d{6}-\d{4}-[a-z2-9]{4,16}$/, KEYSTORE = 'gharibii_seller_key';
   function apiOn() { return !!API_RAW; }
   function isCode(s) { return CODE_RE.test(String(s || '')); }
-  function codeIn(s) { var m = String(s || '').match(/\d{6}-\d{4}-[a-z2-9]{4}/); return m ? m[0] : ''; }
+  function codeIn(s) { var m = String(s || '').match(/\d{6}-\d{4}-[a-z2-9]{4,16}/); return m ? m[0] : ''; }
   function shortUrl(code) { return location.origin + BASE + '/f/' + code; }
   function sellerKey(ask) {
     var k = '';
@@ -222,11 +222,13 @@
     return apiCall('GET', '/api/invoices/' + code).then(function (rec) {
       var inv = unpack(rec.tok);
       if (!inv) throw { status: 422 };
-      inv.paid = rec.paid ? { ref: clip(rec.paid.ref, 40), at: Number(rec.paid.at) || inv.ts } : null;
+      inv.paid = rec.paid ? { ref: clip(rec.paid.ref, 40), at: Number(rec.paid.at) || inv.ts, via: rec.paid.via === 'zp' ? 'zp' : '' } : null;
       inv.code = code; inv.rep = rec.rep || null;
       return inv;
     });
   }
+  function apiList() { return apiCall('GET', '/api/invoices', null, true); }
+  function apiCheck(code) { return apiCall('PUT', '/api/invoices/' + code + '/check', {}, true); }
   function apiPay(code) { return apiCall('POST', '/api/invoices/' + code + '/pay', {}); }
   function apiReport(code, ref) { return apiCall('POST', '/api/invoices/' + code + '/report', { ref: ref || '' }); }
   function apiPing() { return apiCall('GET', '/api/ping', null, true); }
@@ -370,8 +372,7 @@
     var notice = inv.paid
       ? '<b>پرداخت این فاکتور تأیید شده است.</b><br>تاریخ تأیید: <b>' + esc(fmtDate(inv.paid.at)) + '</b>'
       : '<b>وضعیت: در انتظار پرداخت.</b><br>' + validLine +
-        '<br>قیمت، موجودی، سایز و هزینهٔ دقیق ارسال پس از تأیید فروشنده قطعی می‌شود و سفارش بعد از پرداخت و تأیید فروشنده ثبت می‌شود.' +
-        '<br>اگر فروشنده نسخهٔ جدیدتری فرستاد، فقط آخرین نسخه معتبر است.';
+        '<br>سفارش بعد از پرداخت و تأیید فروشنده ثبت می‌شود. اگر فروشنده نسخهٔ جدیدتری فرستاد، فقط آخرین نسخه معتبر است.';
 
     return '<div class="inv-sheet' + (expired ? ' is-expired' : '') + '" dir="rtl">' +
       '<div class="inv-head" data-brk>' +
@@ -723,7 +724,7 @@
     buildText: buildText, sheetHTML: sheetHTML, renderSheet: renderSheet, watchExpiry: watchExpiry,
     saveImage: saveImage, savePdf: savePdf, copyText: copyText, toast: toast, openWhatsApp: openWhatsApp,
     phoneToWa: phoneToWa, apiOn: apiOn, isCode: isCode, codeIn: codeIn, shortUrl: shortUrl, apiCreate: apiCreate, apiRevise: apiRevise,
-    apiSetPaid: apiSetPaid, apiGet: apiGet, apiReport: apiReport, apiPay: apiPay, apiPing: apiPing, apiReportNow: apiReportNow, mobileFa: mobileFa, storeMobiles: storeMobiles, storeContacts: storeContacts, nzs: nzs, hash6: hash6,
+    apiSetPaid: apiSetPaid, apiGet: apiGet, apiReport: apiReport, apiPay: apiPay, apiList: apiList, apiCheck: apiCheck, apiPing: apiPing, apiReportNow: apiReportNow, mobileFa: mobileFa, storeMobiles: storeMobiles, storeContacts: storeContacts, nzs: nzs, hash6: hash6,
     parseCustomerMessage: parseCustomerMessage, _makePdf: makePdf, _toCanvas: toCanvas
   };
 })(window);

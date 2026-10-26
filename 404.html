@@ -14,7 +14,7 @@ sitemap: false
   var map = {{ site.data.redirects | jsonify }} || [];
   var base = {{ site.baseurl | jsonify }};
   /* لینک کوتاه فاکتور:  gharibii.ir/f/050803-1432-k7q2  ← صفحهٔ فاکتور */
-  var sm = location.pathname.match(/\/f\/(\d{6}-\d{4}-[a-z2-9]{4})\/?$/);
+  var sm = location.pathname.match(/\/f\/(\d{6}-\d{4}-[a-z2-9]{4,16})\/?$/);
   if (sm) { document.documentElement.style.visibility = 'hidden'; location.replace(base + '/invoice/#' + sm[1]); return; }
   var here = decodeURIComponent(location.pathname + location.search).replace(/\/+$/, '');
   if (base && here.indexOf(base) === 0) here = here.slice(base.length);
