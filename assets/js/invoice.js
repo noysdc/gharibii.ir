@@ -207,7 +207,13 @@
       });
   }
   function noPaid(inv) { var c = {}; Object.keys(inv).forEach(function (k) { c[k] = inv[k]; }); c.paid = null; return c; }
-  function remoteBody(inv) { return { tok: pack(noPaid(inv)), no: inv.no, total: totals(inv).total, n: inv.items.length, cust: inv.cust, exp: inv.exp, ts: inv.ts }; }
+  function remoteBody(inv) {
+    return {
+      tok: pack(noPaid(inv)), no: inv.no, total: totals(inv).total, n: inv.items.length, cust: inv.cust, exp: inv.exp, ts: inv.ts,
+      ph: inv.ph || '', addr: inv.addr || '',
+      items: inv.items.map(function (i) { return { t: titleOf(i, curFeed), q: i.q, o: i.o || '' }; })
+    };
+  }
   function apiCreate(inv) { return apiCall('POST', '/api/invoices', remoteBody(inv), true).then(function (r) { return r.code; }); }
   function apiRevise(code, inv) { return apiCall('PUT', '/api/invoices/' + code, remoteBody(inv), true); }
   function apiSetPaid(code, paid) { return apiCall('PUT', '/api/invoices/' + code, { paid: paid ? { ref: paid.ref || '', at: paid.at } : null }, true); }
