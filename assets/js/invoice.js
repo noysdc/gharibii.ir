@@ -275,6 +275,12 @@
   function storeMobiles(feed) { return storeContacts(feed).map(function (c) { return c.mobile; }); }
 
   /* ---------- متن فاکتور (برای واتساپ، تلگرام، بله، اینستاگرام) ---------- */
+  /* شماره‌های لاتین داخل متن فارسی: جداکننده‌ها (فاصله) در پاراگراف راست‌به‌چپ جابه‌جا نشوند */
+  function ltrIso(s) { return s ? '\u2066' + s + '\u2069' : s; }
+  /* هر خط با نشانهٔ راست‌به‌چپ شروع می‌شود تا ترتیب اعداد و علامت‌ها (× و =) در تلگرام و واتساپ برعکس نشود */
+  function rtlLines(text) {
+    return text.split('\n').map(function (l) { return l && l.indexOf('http') !== 0 ? '\u200F' + l : l; }).join('\n');
+  }
   function buildText(inv, feed, link) {
     var t = totals(inv), store = (feed && feed.store) || 'فروشگاه غریبی کیش';
     var m = '🧾 فاکتور ' + store + '\n';
@@ -282,9 +288,9 @@
     m += 'تاریخ: ' + fmtDate(inv.ts) + '\n';
     if (!inv.paid) m += 'اعتبار تا: ' + fmtDate(inv.exp) + '\n';
     if (inv.cust) m += 'مشتری: ' + inv.cust + '\n';
-    if (inv.ph) m += 'شماره تماس: ' + mobileFa(inv.ph) + '\n';
+    if (inv.ph) m += 'شماره تماس: ' + ltrIso(mobileFa(inv.ph)) + '\n';
     var sl = sellerKnown(feed, inv.sw);
-    if (sl) m += 'فروشنده: ' + sl.name + ' — ' + mobileFa(sl.number) + '\n';
+    if (sl) m += 'فروشنده: ' + sl.name + ' — ' + ltrIso(mobileFa(sl.number)) + '\n';
     if (inv.addr) m += 'آدرس: ' + inv.addr + '\n';
     m += '\n';
     inv.items.forEach(function (it, i) {
@@ -309,7 +315,7 @@
       m += '\n⏳ در انتظار پرداخت. این فاکتور تا ' + fmtDate(inv.exp) + ' معتبر است و قیمت و موجودی نهایی پس از تأیید فروشنده قطعی می‌شود.';
     }
     if (link) m += '\n\n🔗 مشاهده فاکتور:\n' + link;
-    return m;
+    return rtlLines(m);
   }
 
   /* ---------- ظاهر فاکتور (همان ظاهر در صفحه، عکس و PDF) ---------- */

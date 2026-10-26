@@ -201,7 +201,7 @@ async function createInvoice(req, env, ctx) {
   const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0 };
   await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
   const det = detOf(b), full = rawMsg(b.msg);
-  notify(env, ctx, full ? '🧾 فاکتور جدید\n\n' + full + '\n\n🔗 ' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
+  notify(env, ctx, full ? '🆕 فاکتور جدید\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
   return reply(req, env, { code: code });
 }
 
@@ -234,7 +234,7 @@ async function updateInvoice(req, env, ctx, code) {
     const rv = num(b.rev);
     const full = rawMsg(b.msg);
     const head = '✏️ فاکتور ویرایش شد' + (rv > 1 ? ' (نسخه ' + fa(rv) + ')' : '');
-    notify(env, ctx, full ? head + '\n\n' + full + '\n\n🔗 ' + linkOf(env, code) : head + '\nفاکتور: ' + (clip(m.no, 40) || code) + '\nمشتری: ' + (clip(m.cust, 40) || '—') + detContact(rec.det) + '\nمبلغ: ' + money(num(m.total)) + ' (' + fa(num(m.n)) + ' قلم)' + detItems(rec.det) + '\n\n🔗 ' + linkOf(env, code));
+    notify(env, ctx, full ? head + '\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : head + '\nفاکتور: ' + (clip(m.no, 40) || code) + '\nمشتری: ' + (clip(m.cust, 40) || '—') + detContact(rec.det) + '\nمبلغ: ' + money(num(m.total)) + ' (' + fa(num(m.n)) + ' قلم)' + detItems(rec.det) + '\n\n🔗 ' + linkOf(env, code));
   }
   if (!wasPaid && rec.paid) notify(env, ctx, '✅ پرداخت تأیید شد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (rec.paid.ref ? '\nکد پیگیری: ' + rec.paid.ref : '') + detItems(rec.det));
   if (wasPaid && !rec.paid) notify(env, ctx, '↩️ تأیید پرداخت برداشته شد\nفاکتور: ' + (m.no || code) + ' — مبلغ ' + money(m.total));
