@@ -93,14 +93,17 @@ sitemap: false
     <div class="sheet-scroll"><div id="preview"></div></div>
   </section>
 
-  <section class="card">
+  <section class="card hist-card">
     <h2>فاکتورهای اخیر</h2>
     <div id="history"></div>
-    <label class="field import"><span>باز کردن از لینک یا کد</span>
-      <span class="inline"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
-    </label>
-    <button type="button" class="btn btn-danger small" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
   </section>
+
+  <section class="card">
+    <h2>باز کردن فاکتور قبلی</h2>
+    <p class="muted small-note">لینک یا کد فاکتور را اینجا paste کنید تا برای ویرایش یا ساخت فاکتور مکمل باز شود.</p>
+    <span class="inline import-row"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off" aria-label="لینک یا کد فاکتور"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
+  </section>
+
   <section class="card" id="srv-card" hidden>
     <h2>سرور، تلگرام و گزارش‌ها</h2>
     <div class="out-actions">
@@ -109,6 +112,9 @@ sitemap: false
       <button type="button" class="btn small" data-rep="month">گزارش ماهانه</button>
     </div>
     <pre class="srv-out" id="srv-out" dir="rtl"></pre>
+  </section>
+  <section class="card card-new">
+    <button type="button" class="btn btn-danger" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
   </section>
   <div class="spacer"></div>
 </main>

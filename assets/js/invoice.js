@@ -522,17 +522,54 @@
   }
 
   function fileName(inv, ext) { return inv.no + '.' + ext; }
-  /* روی موبایل از منوی اشتراک‌گذاری (مستقیم به واتساپ) استفاده می‌شود، روی کامپیوتر دانلود */
+  /* کامپیوتر: دانلود مستقیم. موبایل: یک برگهٔ پایین‌صفحه با پیش‌نمایش و دو راه روشن —
+     «ذخیره» (دانلود در گالری/فایل‌ها) و «ارسال» (منوی اشتراک‌گذاری)؛ قبلاً فقط منوی اشتراک باز می‌شد و گزینهٔ ذخیره نبود */
   function deliver(blob, name, mime) {
     var file = null;
     try { file = new File([blob], name, { type: mime }); } catch (e) {}
-    if (isTouch && file && navigator.canShare && navigator.canShare({ files: [file] })) {
-      return navigator.share({ files: [file], title: name }).then(function () { return 'shared'; }, function (e) {
-        if (e && e.name === 'AbortError') return 'cancel';
-        return download(blob, name);
-      });
-    }
+    if (isTouch) return Promise.resolve(saveSheet(blob, name, mime, file));
     return Promise.resolve(download(blob, name));
+  }
+  function saveSheet(blob, name, mime, file) {
+    var old = document.querySelector('.save-sheet');
+    if (old) old.remove();
+    var url = URL.createObjectURL(blob), isImg = /^image\//.test(mime);
+    var canShare = !!(file && navigator.canShare && navigator.canShare({ files: [file] }));
+    var el = document.createElement('div');
+    el.className = 'save-sheet';
+    el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true');
+    el.innerHTML = '<div class="ss-back" data-ss="close"></div><div class="ss-panel">' +
+      '<div class="ss-grip" aria-hidden="true"></div>' +
+      '<h3>' + (isImg ? 'عکس فاکتور آماده است' : 'PDF فاکتور آماده است') + '</h3>' +
+      (isImg ? '<div class="ss-prev"><img alt="" src="' + url + '"></div>' : '<div class="ss-file">📄 <b dir="ltr">' + esc(name) + '</b></div>') +
+      '<p class="ss-hint">' + (isImg
+        ? 'روی «ذخیره» بزنید. اگر عکس در گالری نیامد، انگشت را روی عکس نگه دارید و «ذخیره تصویر» را بزنید.'
+        : 'روی «ذخیره» بزنید تا فایل در دانلودهای گوشی بیاید.') + '</p>' +
+      '<div class="ss-actions">' +
+        '<a class="btn btn-primary" data-ss="save" role="button">⬇ ذخیره</a>' +
+        (canShare ? '<button type="button" class="btn" data-ss="share">ارسال…</button>' : '') +
+        '<button type="button" class="btn btn-ghost" data-ss="close">بستن</button>' +
+      '</div></div>';
+    document.body.appendChild(el);
+    var a = el.querySelector('[data-ss="save"]');
+    a.href = url; a.download = name;
+    document.documentElement.classList.add('ss-open');
+    function close() {
+      el.remove(); document.documentElement.classList.remove('ss-open');
+      document.removeEventListener('keydown', onKey);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    document.addEventListener('keydown', onKey);
+    el.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('[data-ss]') : null;
+      if (!t) return;
+      var k = t.getAttribute('data-ss');
+      if (k === 'close') close();
+      else if (k === 'save') { toast('در حال ذخیره…'); setTimeout(close, 1200); }
+      else if (k === 'share') navigator.share({ files: [file], title: name }).then(close, function () {});
+    });
+    return 'sheet';
   }
   function download(blob, name) {
     var url = URL.createObjectURL(blob);

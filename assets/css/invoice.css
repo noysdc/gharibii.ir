@@ -441,3 +441,110 @@ select option{background:var(--surface);color:var(--ink)}
 
 /* حرکت کمتر برای کسانی که در دستگاه فعال کرده‌اند */
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:active{transform:none}}
+
+/* =====================================================================
+   v3 — کارت بانکی، پرداخت، برگهٔ ذخیره (موبایل)، فاکتورهای اخیر، دکمه‌های غیرفعال
+   ===================================================================== */
+
+/* --- دکمهٔ غیرفعال (فاکتور منقضی و ...) --- */
+.btn:disabled,.btn[disabled]{opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(.6);box-shadow:none}
+
+/* --- خلاصهٔ پرداخت --- */
+.pay-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+.pay-sum>div{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:16px;background:var(--g-card);border:1px solid var(--g-border);box-shadow:var(--g-edge);min-width:0}
+.pay-sum small{color:var(--muted);font-size:.78rem}
+.pay-sum b{font-size:1.05rem;color:var(--sea-deep);overflow-wrap:anywhere}
+.pay-sum>div:first-child b{font-size:1.2rem}
+
+/* --- کارت بانکی --- */
+.bank-card{position:relative;overflow:hidden;margin:0 0 12px;padding:16px 18px 14px;border-radius:22px;color:#fff;direction:rtl;
+  background:linear-gradient(135deg,#0a6670 0%,#0b8a96 38%,#7b4fd6 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 14px 30px rgba(10,102,112,.30),0 3px 8px rgba(88,64,160,.18);
+  aspect-ratio:1.62/1;max-height:230px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;transition:filter .3s,opacity .3s}
+.bank-card::before{content:"";position:absolute;inset:-40% -30% auto auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 68%);pointer-events:none}
+.bank-card::after{content:"";position:absolute;inset:auto auto -45% -25%;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,176,214,.30),transparent 68%);pointer-events:none}
+.bank-card>*{position:relative;z-index:1}
+.bc-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bc-bank{font-weight:700;font-size:1.05rem;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.bc-chip{width:42px;height:32px;border-radius:8px;background:linear-gradient(135deg,#f6e3a1,#d9b44f 55%,#f3dc8b);box-shadow:inset 0 0 0 1px rgba(120,90,20,.35);
+  background-image:linear-gradient(135deg,#f6e3a1,#d9b44f 55%,#f3dc8b),linear-gradient(90deg,transparent 48%,rgba(120,90,20,.35) 49% 51%,transparent 52%)}
+.bc-num{font-size:clamp(1.15rem,5.6vw,1.55rem);font-weight:700;letter-spacing:.09em;text-align:center;direction:ltr;text-shadow:0 1px 3px rgba(0,0,0,.30);
+  font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all;white-space:nowrap}
+.bc-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.bc-owner small,.bc-sheba small{display:block;font-size:.7rem;opacity:.78;line-height:1.3}
+.bc-owner b{font-size:.98rem}
+.bc-sheba{display:flex;align-items:center;gap:8px;direction:rtl;font-size:.82rem;border-top:1px solid rgba(255,255,255,.22);padding-top:6px}
+.bc-sheba small{display:inline}
+.bc-sheba span{direction:ltr;letter-spacing:.04em;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+.bc-badge{padding:2px 12px;border-radius:999px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.55);font-size:.8rem;font-weight:700}
+/* فاکتور منقضی: کارت کمرنگ و غیرقابل انتخاب */
+.bank-card.is-off{filter:grayscale(.85) brightness(.9);opacity:.6}
+.bank-card.is-off .bc-num,.bank-card.is-off .bc-sheba span{user-select:none;-webkit-user-select:none}
+.pay-method>.bank-card{margin-top:.5rem}
+@media (max-width:360px){.bank-card{padding:14px;aspect-ratio:auto;min-height:170px}.bc-num{letter-spacing:.04em}}
+
+/* --- برگهٔ ذخیرهٔ عکس/PDF روی موبایل --- */
+.save-sheet{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-end;justify-content:center}
+.ss-back{position:absolute;inset:0;background:rgba(20,16,40,.52);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:ss-fade .2s ease}
+.ss-panel{position:relative;width:100%;max-width:520px;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:10px 16px calc(16px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;background:var(--surface);color:var(--ink);
+  border:1px solid var(--g-border);border-bottom:0;box-shadow:0 -12px 40px rgba(0,0,0,.28);animation:ss-up .28s cubic-bezier(.2,.8,.2,1)}
+html[data-theme="dark"] .ss-panel{background:#162231}
+.ss-grip{width:44px;height:5px;border-radius:999px;background:var(--line);margin:0 auto 10px}
+.ss-panel h3{margin:0 0 10px;font-size:1.02rem;text-align:center;color:var(--sea-deep)}
+.ss-prev{max-height:46dvh;overflow:auto;border-radius:16px;border:1px solid var(--line);background:var(--field-bg);padding:6px;text-align:center}
+.ss-prev img{max-width:100%;max-height:44dvh;width:auto;height:auto;margin:0 auto;border-radius:12px;-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
+.ss-file{padding:18px;text-align:center;border:1px dashed var(--line);border-radius:16px}
+.ss-hint{margin:10px 2px;font-size:.82rem;color:var(--muted);text-align:center;line-height:1.8}
+.ss-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ss-actions [data-ss="save"]{grid-column:1/-1;text-decoration:none}
+.ss-actions .btn-ghost{grid-column:1/-1}
+.ss-actions .btn-ghost:nth-child(2){grid-column:auto}
+html.ss-open,html.ss-open body{overflow:hidden}
+@keyframes ss-up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes ss-fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.ss-panel,.ss-back{animation:none}}
+@media (min-width:768px){.save-sheet{align-items:center}.ss-panel{border-radius:26px;border-bottom:1px solid var(--g-border)}}
+
+/* --- فاکتورهای اخیر: هر فاکتور یک باکس مستقل --- */
+.hist-card #history{display:flex;flex-direction:column;gap:10px}
+.hist-card .empty{margin:0}
+.hist-card .h-row{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:12px;border:1px solid var(--g-border);border-radius:18px;
+  background:var(--g-card);box-shadow:var(--g-edge);margin:0}
+.hist-card .h-row.h-attn{background:var(--v-warn);border-color:var(--v-warn-b)}
+.h-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.h-no{font-size:1rem;color:var(--sea-deep);letter-spacing:.02em}
+.h-chip{padding:2px 11px;border-radius:999px;font-size:.78rem;font-weight:700;border:1px solid var(--g-border);line-height:1.8;white-space:nowrap}
+.h-chip.h-ok{background:var(--v-ok);border-color:var(--v-ok-b);color:var(--v-ok-ink)}
+.h-chip.h-warn{background:var(--v-warn);border-color:var(--v-warn-b);color:var(--v-warn-ink)}
+.h-chip.h-wait{background:var(--btn-bg);color:var(--muted)}
+.h-chip.h-off{background:rgba(192,40,62,.10);border-color:rgba(192,40,62,.35);color:var(--bad)}
+.hist-card .h-info{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;flex:none}
+.h-amount{font-weight:700;font-size:1.02rem}
+.hist-card .h-info small{color:var(--muted);font-size:.8rem}
+.h-ref{flex-basis:100%;font-size:.8rem;color:var(--muted)}
+.h-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.h-actions .btn.small{flex:1 1 calc(50% - 8px);min-height:42px;white-space:normal;padding-inline:.5rem}
+.h-actions .btn-primary,.h-actions .btn-in{flex:1 1 100%}      /* «تأیید پرداخت» اصلی‌ترین دکمه: تمام‌عرض */
+.h-actions .x{flex:none;width:42px;height:42px}
+@media (min-width:768px){
+  .h-actions{justify-content:flex-end}
+  .h-actions .btn.small,.h-actions .btn-primary,.h-actions .btn-in{flex:none;white-space:nowrap}
+  .hist-card .h-row{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .hist-card .h-head{flex:1 1 100%}
+  .hist-card .h-info{flex:1 1 220px}
+  .hist-card .h-actions{flex:0 1 auto;margin-inline-start:auto}
+}
+
+/* --- باکس‌های پایین صفحهٔ فروشنده --- */
+.import-row{display:flex;gap:8px;align-items:center}
+.import-row input{flex:1;min-width:0}
+.card-new{background:transparent;border-style:dashed;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:10px}
+.card-new .btn{width:100%}
+.card h2{display:flex;align-items:center;gap:8px}
+.card .row-between h2{flex:1}
+@media (max-width:520px){.import-row{flex-direction:column;align-items:stretch}.import-row .btn{width:100%}}
+
+/* --- صفحهٔ مشتری: دکمه‌های کم‌شده، فضای بهتر --- */
+.view-actions-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+.view-note{max-width:60ch;margin-inline:auto;line-height:1.9}

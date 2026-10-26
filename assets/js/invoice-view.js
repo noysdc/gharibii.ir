@@ -72,36 +72,15 @@
     $('sheba-row').hidden = !sheba; $('sheba-copy-row').hidden = !sheba;
     if (card) $('card-show').textContent = cardPretty(card);
     if (sheba) $('sheba-show').textContent = shebaPretty(sheba);
-    $('pay-go').classList.toggle('busy', !!why);
-    $('pay-go-link').classList.toggle('busy', !!why);
-  }
-  /* ---------- بله و تلگرام: متن کپی می‌شود (این دو پیام از پیش‌نوشته را قبول نمی‌کنند) و چت باز می‌شود ---------- */
-  function chatUrl(kind) {
-    var s = officialSeller();
-    if (kind === 'bale') { var b = s && s.bale; return b ? 'https://ble.ir/' + b : ''; }
-    var t = (feed && feed.telegram) || '';
-    return t ? 'https://t.me/' + t : '';
-  }
-  function sendVia(kind, text) {
-    var url = chatUrl(kind);
-    if (!url) { G.toast('این راه ارتباطی فعال نیست'); return Promise.resolve(); }
-    var name = kind === 'bale' ? 'بله' : 'تلگرام';
-    G.copyText(text).then(function (ok) {
-      G.toast(ok ? 'متن کپی شد؛ در ' + name + ' paste کنید ✅' : 'متن کپی نشد؛ دستی بنویسید');
+    /* فاکتور منقضی / قیمت‌نامشخص: همهٔ دکمه‌های پرداخت و کپی غیرفعال می‌شود و کارت کمرنگ می‌شود */
+    var off = !!why, expired = G.isExpired(inv);
+    ['pay-go', 'pay-go-link', 'card-copy', 'sheba-copy', 'sheba-copy-amount'].forEach(function (id) {
+      var el = $(id); if (el) el.disabled = off;
     });
-    var w = window.open(url, '_blank', 'noopener');
-    if (!w) location.href = url;
-    return Promise.resolve();
+    var bc = $('bank-card');
+    if (bc) bc.classList.toggle('is-off', off);
+    if ($('bc-state')) { $('bc-state').hidden = !off; $('bc-state').textContent = expired ? 'منقضی' : 'غیرفعال'; }
   }
-  function updateAlt() {
-    var b = !!chatUrl("bale");
-    var show = b || !!chatUrl('telegram');
-    ['pay-alt', 'v-alt'].forEach(function (id) { if ($(id)) $(id).hidden = !show; });
-    [['pay-send-bale', b], ['v-bale', b], ['pay-send-tg', !!chatUrl('telegram')], ['v-tg', !!chatUrl('telegram')]].forEach(function (x) {
-      if ($(x[0])) $(x[0]).hidden = !x[1];
-    });
-  }
-  function refValue() { return G.clip(G.normDigits($('pay-ref').value), 40); }
   function bindPay() {
     if (!$('pay-box')) return;
     /* پرداخت آنلاین: مبلغ را Worker از خود فاکتور می‌خواند و آدرس صفحهٔ بانک را برمی‌گرداند؛ همان تب به بانک می‌رود */
@@ -141,29 +120,6 @@
       if (!inv) return;
       G.copyText(String(G.totals(inv).total)).then(function (ok) { G.toast(ok ? 'مبلغ (تومان) کپی شد ✅' : 'کپی نشد'); });
     });
-    $('pay-send').addEventListener('click', function () {
-      if (!inv) return;
-      if (payBlock()) { G.toast(payBlock()); return; }
-      var s = officialSeller();
-      G.openWhatsApp(s ? s.number : '', G.payMessage(inv, refValue()));
-      if (inv.code) G.apiReport(inv.code, refValue()).catch(function () {});     /* اعلان تلگرام برای فروشنده */
-      $('pay-after').hidden = false;
-    });
-    ['bale', 'telegram'].forEach(function (kind) {
-      $(kind === 'bale' ? 'pay-send-bale' : 'pay-send-tg').addEventListener('click', function () {
-        if (!inv) return;
-        if (payBlock()) { G.toast(payBlock()); return; }
-        sendVia(kind, G.payMessage(inv, refValue()));
-        if (inv.code) G.apiReport(inv.code, refValue()).catch(function () {});
-        $('pay-after').hidden = false;
-      });
-    });
-    $('pay-copy').addEventListener('click', function () {
-      if (!inv) return;
-      G.copyText(G.payMessage(inv, refValue())).then(function (ok) { G.toast(ok ? 'متن پرداخت کپی شد ✅' : 'کپی نشد'); });
-      if (inv.code) G.apiReport(inv.code, refValue()).catch(function () {});
-      $('pay-after').hidden = false;
-    });
   }
 
   /* لینک کوتاه (#کد) از سرور خوانده می‌شود؛ لینک بلند قدیمی هنوز مستقیم از خود لینک */
@@ -192,6 +148,29 @@
     if (G.isCode(h)) { loadRemote(h, 0); return; }
     render(G.unpack(location.hash));
   }
+  /* بنر وضعیت + جملهٔ زیر فاکتور + دکمهٔ تماس: بر اساس وضعیت فعلی (پرداخت‌شده / منقضی / منتظر پرداخت) */
+  function paintStatus() {
+    if (!inv) return;
+    var expired = !inv.paid && G.isExpired(inv);
+    $('v-pdf').classList.toggle('btn-primary', !!inv.paid);   /* بعد از پرداخت، ذخیرهٔ PDF مهم‌ترین کار مشتری است */
+    $('v-contact').hidden = !expired;
+    $('view-note').textContent = inv.paid
+      ? 'این فاکتور تأیید و پرداخت‌شده است. برای نگهداری، عکس یا PDF آن را ذخیره کنید.'
+      : expired
+        ? 'مهلت پرداخت تمام شده؛ برای قیمت و موجودی به‌روز، فاکتور جدید از فروشنده بگیرید.'
+        : 'قیمت و موجودی نهایی با فروشنده هماهنگ می‌شود. بعد از پرداخت، فروشنده آن را تأیید می‌کند و فاکتور تأییدشده (با مهر «پرداخت شد») برایتان ارسال می‌شود.';
+    state.hidden = true;
+    if (inv.paid) {
+      state.hidden = false; state.className = 'view-state';
+      state.textContent = 'پرداخت این فاکتور تأیید شده است ✅ — می‌توانید PDF یا عکس آن را ذخیره کنید.';
+    } else if (expired) {
+      state.hidden = false; state.className = 'view-state bad';
+      state.textContent = 'مهلت پرداخت این فاکتور تمام شده است. برای قیمت به‌روز با فروشنده هماهنگ کنید.';
+    } else if (feed && inv.sw && !G.sellerKnown(feed, inv.sw)) {
+      state.hidden = false; state.className = 'view-state warn';
+      state.textContent = 'شماره فروشنده این فاکتور در فهرست رسمی فروشگاه نیست. برای اطمینان، با شماره‌های رسمی همین سایت تماس بگیرید.';
+    }
+  }
   function render(i) {
     inv = i;
     if (!inv) {
@@ -201,23 +180,11 @@
     G.resolve(inv);
     if (timer) clearInterval(timer);
     G.renderSheet(host, inv, feed, { live: true });
-    timer = G.watchExpiry(host, inv, feed, function () { updatePay(); });
+    timer = G.watchExpiry(host, inv, feed, function () { updatePay(); paintStatus(); });
     actions.hidden = false;
     state.hidden = true;
-    $('v-confirm').textContent = inv.paid ? 'ارسال پیام به فروشنده در واتساپ' : 'تأیید و ادامه در واتساپ';
-    $('v-pdf').classList.toggle('btn-primary', !!inv.paid);   /* بعد از پرداخت، ذخیرهٔ PDF مهم‌ترین کار مشتری است */
-    if (inv.paid) {
-      state.hidden = false; state.className = 'view-state';
-      state.textContent = 'پرداخت این فاکتور تأیید شده است ✅ — می‌توانید PDF یا عکس آن را ذخیره کنید.';
-    } else if (G.isExpired(inv)) {
-      state.hidden = false; state.className = 'view-state bad';
-      state.textContent = 'مهلت پرداخت این فاکتور تمام شده است. برای قیمت به‌روز با فروشنده هماهنگ کنید.';
-    } else if (feed && inv.sw && !G.sellerKnown(feed, inv.sw)) {
-      state.hidden = false; state.className = 'view-state warn';
-      state.textContent = 'شماره فروشنده این فاکتور در فهرست رسمی فروشگاه نیست. برای اطمینان، با شماره‌های رسمی همین سایت تماس بگیرید.';
-    }
+    paintStatus();
     updatePay();
-    updateAlt();
     document.title = 'فاکتور ' + inv.no + ' | ' + ((feed && feed.store) || 'فروشگاه غریبی کیش');
   }
 
@@ -229,12 +196,10 @@
         .then(function () { busy = false; btn.classList.remove('busy'); });
     });
   }
-  guard($('v-confirm'), function () {
+  guard($('v-contact'), function () {
     var s = officialSeller();
     return G.openWhatsApp(s ? s.number : '', confirmText());
   });
-  guard($('v-bale'), function () { return sendVia('bale', confirmText()); });
-  guard($('v-tg'), function () { return sendVia('telegram', confirmText()); });
   guard($('v-text'), function () {
     return G.copyText(G.buildText(inv, feed, '')).then(function (ok) { G.toast(ok ? 'متن کپی شد ✅' : 'کپی نشد'); });
   });

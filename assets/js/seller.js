@@ -4,7 +4,7 @@
   var G = window.GInvoice;
   var $ = function (id) { return document.getElementById(id); };
   var DKEY = 'gharibii_seller_v1', HKEY = 'gharibii_seller_hist_v1';
-  var PAGE = 40;
+  var PAGE = (window.matchMedia && window.matchMedia('(max-width:767px)').matches) ? 20 : 40;   /* موبایل: لیست کوتاه‌تر، با «نمایش بیشتر» ادامه می‌یابد */
 
   var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '', remote = Promise.resolve();
   var st = loadState();
@@ -370,18 +370,26 @@
     host.innerHTML = banner + h.map(function (x, i) {
       var exp = !x.paid && now >= x.exp;
       var online = x.paid && x.pvia === 'zp';
-      var tag = online ? '✅ پرداخت آنلاین (زرین‌پال)' + (x.pref ? ' · کد پیگیری <span dir="ltr">' + G.esc(x.pref) + '</span>' : '') + (x.ok ? ' · بررسی‌شده' : ' · <b class="h-warn">منتظر بررسی شما</b>')
-        : x.paid ? 'پرداخت‌شده ✅'
-        : (exp ? 'منقضی' : (x.rep ? '<b class="h-warn">💬 مشتری اعلام پرداخت کرد (کارت‌به‌کارت) — بررسی و تأیید کنید</b>' : 'معتبر · در انتظار پرداخت'));
-      var cls = 'h-row' + ((online && !x.ok) || (!x.paid && x.rep && !exp) ? ' h-attn' : '');
-      var btns = '';
-      if (online) btns += x.ok ? '' : '<button type="button" class="btn small btn-primary" data-hok="' + i + '">بررسی کردم ✓</button>';
-      else btns += '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : (x.rep ? 'btn-primary' : 'btn-in')) + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : 'تأیید پرداخت') + '</button>';
-      return '<div class="' + cls + '"><div class="h-info"><b dir="ltr">' + G.esc(x.no) + '</b><small>' + (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + G.money(x.total) + ' · ' + tag + (x.code ? ' · <span dir="ltr">' + G.esc(x.code) + '</span>' : '') + '</small></div>' +
-        btns +
-        '<button type="button" class="btn small" data-hopen="' + i + '">' + (x.paid ? 'مکمل' : 'ویرایش') + '</button>' +
-        '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">لینک</button>' +
-        '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف">✕</button></div>';
+      var attn = (online && !x.ok) || (!x.paid && x.rep && !exp);
+      /* نشان وضعیت: یک برچسب رنگی به‌جای جملهٔ طولانی */
+      var st = online ? (x.ok ? ['ok', '✅ پرداخت آنلاین · بررسی‌شده'] : ['warn', '🔔 پرداخت آنلاین · منتظر بررسی شما'])
+        : x.paid ? ['ok', '✅ پرداخت‌شده']
+        : exp ? ['off', '⌛ منقضی']
+        : x.rep ? ['warn', '💬 مشتری اعلام پرداخت کرد']
+        : ['wait', '⏳ در انتظار پرداخت'];
+      var meta = (x.rev > 1 ? 'نسخه ' + G.nf(x.rev) + ' · ' : '') + (x.cust ? G.esc(x.cust) + ' · ' : '') + (x.code ? '<span dir="ltr">' + G.esc(x.code) + '</span>' : '');
+      var extra = online && x.pref ? '<span class="h-ref">کد پیگیری <span dir="ltr">' + G.esc(x.pref) + '</span></span>' : '';
+      var pay = '';
+      if (online) pay = x.ok ? '' : '<button type="button" class="btn small btn-primary" data-hok="' + i + '">✓ بررسی کردم</button>';
+      else pay = '<button type="button" class="btn small ' + (x.paid ? 'btn-ghost' : (x.rep ? 'btn-primary' : 'btn-in')) + '" data-hpaid="' + i + '">' + (x.paid ? 'لغو تأیید پرداخت' : '✓ تأیید پرداخت') + '</button>';
+      return '<article class="h-row' + (attn ? ' h-attn' : '') + '">' +
+        '<div class="h-head"><b class="h-no" dir="ltr">' + G.esc(x.no) + '</b><span class="h-chip h-' + st[0] + '">' + st[1] + '</span></div>' +
+        '<div class="h-info"><span class="h-amount">' + G.money(x.total) + '</span>' + (meta ? '<small>' + meta + '</small>' : '') + extra + '</div>' +
+        '<div class="h-actions">' + pay +
+          '<button type="button" class="btn small" data-hopen="' + i + '" title="' + (x.paid ? 'ساخت فاکتور مکمل برای اقلام جدید (فاکتور پرداخت‌شده تغییر نمی‌کند)' : 'ویرایش و ساخت نسخهٔ بعدی') + '">' + (x.paid ? '＋ فاکتور مکمل' : '✎ ویرایش') + '</button>' +
+          '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">🔗 کپی لینک</button>' +
+          '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف از لیست">✕</button>' +
+        '</div></article>';
     }).join('');
   }
   /* لیست مشترک: فاکتورهای هر دو فروشنده و وضعیت پرداخت‌شان با «یک» درخواست از سرور می‌آید.
