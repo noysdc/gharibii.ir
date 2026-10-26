@@ -9,6 +9,10 @@
   var cfg = $('pay-cfg');
   var payUrl = cfg ? String(cfg.getAttribute('data-url') || '').trim() : '';
   if (!/^https:\/\//i.test(payUrl)) payUrl = '';
+  var gatewayOn = !!(cfg && cfg.getAttribute('data-gateway'));
+  var sheba = cfg ? String(cfg.getAttribute('data-sheba') || '').replace(/\s|-/g, '').toUpperCase() : '';
+  if (!/^IR\d{24}$/.test(sheba)) sheba = '';
+  function shebaPretty(v) { return v.slice(0, 4) + ' ' + v.slice(4).replace(/(\d{4})(?=\d)/g, '$1 '); }
 
   function fail(msg) {
     host.innerHTML = '';
@@ -47,14 +51,22 @@
   function updatePay() {
     var box = $('pay-box');
     if (!box) return;
-    if (!inv || inv.paid || !payUrl) { box.hidden = true; return; }
+    var online = gatewayOn && !!(inv && inv.code);          /* درگاه فقط برای فاکتورِ لینک‌کوتاه (ذخیره‌شده روی سرور) */
+    var link = !online && !!payUrl;
+    if (!inv || inv.paid || (!online && !link && !sheba)) { box.hidden = true; return; }
     var t = G.totals(inv), why = payBlock();
     box.hidden = false;
     $('pay-amount').textContent = G.money(t.total);
     $('pay-no').textContent = noLabel();
     $('pay-warn').textContent = why;
     $('pay-warn').hidden = !why;
+    $('pay-m-online').hidden = !online;
+    $('pay-m-link').hidden = !link;
+    $('pay-m-sheba').hidden = !sheba;
+    $('pay-m-sheba-title').textContent = (online || link ? '۲) ' : '') + 'واریز به شماره شبا';
+    if (sheba) { $('sheba-show').textContent = shebaPretty(sheba); }
     $('pay-go').classList.toggle('busy', !!why);
+    $('pay-go-link').classList.toggle('busy', !!why);
   }
   /* ---------- بله و تلگرام: متن کپی می‌شود (این دو پیام از پیش‌نوشته را قبول نمی‌کنند) و چت باز می‌شود ---------- */
   function chatUrl(kind) {
@@ -85,22 +97,39 @@
   function refValue() { return G.clip(G.normDigits($('pay-ref').value), 40); }
   function bindPay() {
     if (!$('pay-box')) return;
+    /* پرداخت آنلاین: مبلغ را Worker از خود فاکتور می‌خواند و آدرس صفحهٔ بانک را برمی‌گرداند؛ همان تب به بانک می‌رود */
     $('pay-go').addEventListener('click', function () {
       if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }
-      /* مبلغ (تومان) کپی می‌شود و بعد همان صفحه به درگاه می‌رود؛ با دکمهٔ «برگشت» مشتری به همین فاکتور برمی‌گردد */
+      if (!inv.code || busy) return;
+      var btn = $('pay-go'), label = btn.textContent;
+      busy = true; btn.classList.add('busy'); btn.textContent = 'در حال اتصال به درگاه…';
+      G.apiPay(inv.code).then(function (r) {
+        if (r && /^https:\/\/payment\.zarinpal\.com\//.test(r.url || '')) { location.href = r.url; return; }
+        throw {};
+      }).catch(function (e) {
+        var d = (e && e.data && e.data.error) || '';
+        G.toast(d === 'expired' ? 'مهلت پرداخت فاکتور تمام شده است'
+          : d === 'already_paid' ? 'این فاکتور قبلاً پرداخت شده است'
+          : 'اتصال به درگاه انجام نشد؛ دوباره تلاش کنید یا با شبا پرداخت کنید');
+        busy = false; btn.classList.remove('busy'); btn.textContent = label;
+      });
+    });
+    /* لینک قدیمی زرین‌پال (فقط وقتی درگاه خاموش است) */
+    $('pay-go-link').addEventListener('click', function () {
+      if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }
       var amount = G.totals(inv).total;
       G.copyText(String(amount)).then(function (ok) {
         G.toast(ok ? 'مبلغ کپی شد؛ در صفحهٔ پرداخت paste کنید ✅' : 'مبلغ کپی نشد؛ دستی وارد کنید: ' + G.money(amount));
         setTimeout(function () { location.href = payUrl; }, ok ? 900 : 1800);
       });
     });
-    $('pay-copy-amount').addEventListener('click', function () {
-      if (!inv) return;
-      G.copyText(String(G.totals(inv).total)).then(function (ok) { G.toast(ok ? 'مبلغ کپی شد ✅' : 'کپی نشد'); });
+    /* شبا */
+    $('sheba-copy').addEventListener('click', function () {
+      G.copyText(sheba).then(function (ok) { G.toast(ok ? 'شماره شبا کپی شد ✅' : 'کپی نشد؛ دستی وارد کنید: ' + sheba); });
     });
-    $('pay-copy-no').addEventListener('click', function () {
+    $('sheba-copy-amount').addEventListener('click', function () {
       if (!inv) return;
-      G.copyText(inv.no).then(function (ok) { G.toast(ok ? 'شماره فاکتور کپی شد ✅' : 'کپی نشد'); });
+      G.copyText(String(G.totals(inv).total)).then(function (ok) { G.toast(ok ? 'مبلغ (تومان) کپی شد ✅' : 'کپی نشد'); });
     });
     $('pay-send').addEventListener('click', function () {
       if (!inv) return;
@@ -203,6 +232,15 @@
   guard($('v-pdf'), function () { return G.savePdf(inv, feed); });
   bindPay();
 
+  /* بازگشت از بانک: ?pay=ok یا ?pay=fail */
+  (function () {
+    var m = location.search.match(/[?&]pay=(ok|fail)/);
+    if (!m) return;
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+    setTimeout(function () {
+      G.toast(m[1] === 'ok' ? 'پرداخت با موفقیت انجام شد ✅' : 'پرداخت انجام نشد. اگر مبلغی کسر شده، تا ۷۲ ساعت به حساب برمی‌گردد؛ یا دوباره تلاش کنید.');
+    }, 1200);
+  })();
   window.addEventListener('hashchange', show);
   G.loadFeed().then(function (f) { feed = f; }, function () { feed = null; }).then(show);
 })();

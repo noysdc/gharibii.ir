@@ -125,7 +125,7 @@ function detOf(b) {
 const rawMsg = (v) => String(v == null ? '' : v).replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3400);
 /* ---------- ساخت متن کامل فاکتور داخل خود Worker (از روی توکن لینک) ----------
    اگر مرورگر متن آماده نفرستاد (مثلاً نسخهٔ قدیمی اسکریپت)، Worker خودش توکن را می‌خواند و همان متن را می‌سازد */
-const VERSION = '2026-10-26-text-v3';
+const VERSION = '2026-10-26-zarinpal-v1';
 function hash6(s) {
   let h = 2166136261;
   for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
@@ -324,6 +324,67 @@ async function reportPayment(req, env, ctx, code) {
   const m = metaOf(old.metadata || {});
   if (!recent) notify(env, ctx, '💬 مشتری اعلام پرداخت کرد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (ref ? '\nکد پیگیری: ' + ref : '\nکد پیگیری: وارد نشده') + detItems(rec.det) + '\n\n' + '\nلطفاً در پنل زرین‌پال چک و در صفحهٔ فروشنده «تأیید پرداخت» را بزنید.\n🔗 ' + linkOf(env, code));
   return reply(req, env, { ok: true });
+}
+
+
+/* =====================  پرداخت آنلاین (زرین‌پال)  =====================
+   - مبلغ از خود فاکتور در KV خوانده می‌شود (نه از مرورگر مشتری)
+   - POST /api/invoices/:code/pay  → آدرس صفحهٔ بانک را برمی‌گرداند
+   - GET  /api/pay/callback        → بازگشت از بانک؛ پرداخت را verify می‌کند و فاکتور را «پرداخت‌شده» می‌کند
+   - Secret لازم: MERCHANT_ID   |  متغیر پیشنهادی: PAY_CALLBACK_BASE (مثل https://pay.gharibii.ir) */
+const ZP = 'https://payment.zarinpal.com/pg/v4/payment';
+async function zpCall(env, path, body) {
+  const r = await fetch(ZP + path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(Object.assign({ merchant_id: env.MERCHANT_ID }, body))
+  });
+  return r.json().catch(() => ({}));
+}
+const siteOf = (env) => String(env.SITE_URL || 'https://gharibii.ir').replace(/\/+$/, '');
+
+async function payStart(req, env, code) {
+  if (!env.MERCHANT_ID) return reply(req, env, { error: 'gateway_off' }, 503);
+  const old = await env.INVOICES.getWithMetadata(kvKey(code), { type: 'json' });
+  const rec = old && old.value;
+  if (!rec) return reply(req, env, { error: 'not_found' }, 404);
+  const m = metaOf(old.metadata || {});
+  if (rec.paid) return reply(req, env, { error: 'already_paid' }, 409);
+  if (m.exp && Math.floor(Date.now() / 1000) >= m.exp) return reply(req, env, { error: 'expired' }, 410);
+  if (!m.total || m.total < 1000) return reply(req, env, { error: 'bad_amount' }, 400);
+  const base = String(env.PAY_CALLBACK_BASE || new URL(req.url).origin).replace(/\/+$/, '');
+  const r = await zpCall(env, '/request.json', {
+    amount: m.total * 10,                                   /* تومان ← ریال */
+    callback_url: base + '/api/pay/callback?c=' + encodeURIComponent(code),
+    description: 'فاکتور ' + (m.no || code)
+  });
+  const au = r && r.data && r.data.code === 100 ? String(r.data.authority || '') : '';
+  if (!au) return reply(req, env, { error: 'gateway_error' }, 502);
+  rec.pay = { au: au, at: Math.floor(Date.now() / 1000) };
+  await putRec(env, code, rec, old.metadata || {});
+  return reply(req, env, { url: 'https://payment.zarinpal.com/pg/StartPay/' + au });
+}
+
+async function payCallback(req, env, ctx, url) {
+  const code = url.searchParams.get('c') || '';
+  const au = url.searchParams.get('Authority') || '';
+  const back = (ok) => Response.redirect(siteOf(env) + '/invoice/?pay=' + (ok ? 'ok' : 'fail') + '#' + code, 302);
+  if (!CODE_RE.test(code) || !au || !env.MERCHANT_ID) return back(false);
+  const old = await env.INVOICES.getWithMetadata(kvKey(code), { type: 'json' });
+  const rec = old && old.value;
+  if (!rec || !rec.pay || rec.pay.au !== au) return back(false);
+  if (rec.paid) return back(true);
+  if (url.searchParams.get('Status') !== 'OK') return back(false);
+  const m = metaOf(old.metadata || {});
+  const v = await zpCall(env, '/verify.json', { amount: m.total * 10, authority: au });
+  const c = v && v.data && v.data.code;
+  if (c !== 100 && c !== 101) return back(false);
+  const now = Math.floor(Date.now() / 1000);
+  rec.paid = { ref: clip(v.data.ref_id, 40), at: now, via: 'zp' };
+  m.paid = 1; m.pa = now;
+  await putRec(env, code, rec, m);
+  notify(env, ctx, '✅ پرداخت آنلاین انجام شد (درگاه زرین‌پال)\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + '\nکد پیگیری: ' + rec.paid.ref + detItems(rec.det));
+  return back(true);
 }
 
 
@@ -581,11 +642,13 @@ export default {
         }
         return reply(req, env, { text: text, sent: sent });
       }
-      const m = path.match(/^\/invoices\/([^/]+)(\/report)?$/);
+      if (path === '/pay/callback' && req.method === 'GET') return await payCallback(req, env, ctx, url);
+      const m = path.match(/^\/invoices\/([^/]+)(\/report|\/pay)?$/);
       if (m) {
         const code = m[1];
         if (!CODE_RE.test(code)) return reply(req, env, { error: 'bad_code' }, 400);
-        if (m[2]) { if (req.method === 'POST') return await reportPayment(req, env, ctx, code); }
+        if (m[2] === '/pay') { if (req.method === 'POST') return await payStart(req, env, code); }
+        else if (m[2]) { if (req.method === 'POST') return await reportPayment(req, env, ctx, code); }
         else if (req.method === 'GET') return await getInvoice(req, env, code);
         else if (req.method === 'PUT') {
           if (!authed(req, env)) return reply(req, env, { error: 'unauthorized' }, 401);

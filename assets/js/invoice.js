@@ -227,6 +227,7 @@
       return inv;
     });
   }
+  function apiPay(code) { return apiCall('POST', '/api/invoices/' + code + '/pay', {}); }
   function apiReport(code, ref) { return apiCall('POST', '/api/invoices/' + code + '/report', { ref: ref || '' }); }
   function apiPing() { return apiCall('GET', '/api/ping', null, true); }
   function apiReportNow(period) { return apiCall('GET', '/api/report?period=' + period + '&send=1', null, true); }
@@ -722,7 +723,7 @@
     buildText: buildText, sheetHTML: sheetHTML, renderSheet: renderSheet, watchExpiry: watchExpiry,
     saveImage: saveImage, savePdf: savePdf, copyText: copyText, toast: toast, openWhatsApp: openWhatsApp,
     phoneToWa: phoneToWa, apiOn: apiOn, isCode: isCode, codeIn: codeIn, shortUrl: shortUrl, apiCreate: apiCreate, apiRevise: apiRevise,
-    apiSetPaid: apiSetPaid, apiGet: apiGet, apiReport: apiReport, apiPing: apiPing, apiReportNow: apiReportNow, mobileFa: mobileFa, storeMobiles: storeMobiles, storeContacts: storeContacts, nzs: nzs, hash6: hash6,
+    apiSetPaid: apiSetPaid, apiGet: apiGet, apiReport: apiReport, apiPay: apiPay, apiPing: apiPing, apiReportNow: apiReportNow, mobileFa: mobileFa, storeMobiles: storeMobiles, storeContacts: storeContacts, nzs: nzs, hash6: hash6,
     parseCustomerMessage: parseCustomerMessage, _makePdf: makePdf, _toCanvas: toCanvas
   };
 })(window);

@@ -105,6 +105,18 @@
       <a class="trust-box" href="https://logo.samandehi.ir/Verify.aspx?id=364139&amp;p=xlaogvkaaodsrfthxlaopfvl" target="_blank" rel="noopener" referrerpolicy="origin" aria-label="ساماندهی رسانه‌های دیجیتال">
         <img src="{{ '/assets/images/trust/samandehi.png' | relative_url }}" alt="ساماندهی رسانه‌های دیجیتال" width="96" height="96" loading="lazy" decoding="async">
       </a>
+
+      {%- if site.payment_gateway or site.bank_sheba %}
+      <!-- درگاه پرداخت امن (زرین‌پال) — اگر لوگوی رسمی را از پنل زرین‌پال دانلود کردی، این بلوک را با <img> آن جایگزین کن -->
+      <a class="trust-box trust-box-pay" href="https://www.zarinpal.com" target="_blank" rel="noopener nofollow" aria-label="پرداخت امن با درگاه زرین‌پال">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6L12 3z"/>
+          <path d="m8.8 12.2 2.4 2.4 4.2-4.6"/>
+        </svg>
+        <span class="trust-pay-title">پرداخت امن</span>
+        <small>درگاه زرین‌پال</small>
+      </a>
+      {%- endif %}
     </div>
     <div class="holo-divider" role="presentation"></div>
 

@@ -852,3 +852,9 @@ html[data-theme="dark"]:root:root:root .add-to-cart-btn:not(.is-soldout-btn){
   html:root:root:root .add-to-cart-btn:hover{transform:none}
 }
 html:root:root:root .add-to-cart-btn{position:relative;z-index:5}
+
+/* ---------- نماد درگاه پرداخت امن (فوتر) ---------- */
+.trust-box-pay{gap:.35rem;text-align:center}
+.trust-box-pay svg{width:3.2rem;height:3.2rem;color:#2e9e6a}
+.trust-box-pay .trust-pay-title{font-size:.78rem;font-weight:700;line-height:1.5}
+.trust-box-pay small{font-size:.68rem;opacity:.75;line-height:1.4}

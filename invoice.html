@@ -9,18 +9,37 @@ sitemap: false
   <div class="view-top"><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
   <div class="view-state" id="state">در حال بارگذاری فاکتور…</div>
   <div class="sheet-scroll"><div id="sheet"></div></div>
-  <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" hidden></div>
+  <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" data-gateway="{% if site.payment_gateway and site.invoice_api != '' %}1{% endif %}" data-sheba="{{ site.bank_sheba | escape }}" hidden></div>
   <section class="pay-box" id="pay-box" hidden>
-    <h2>پرداخت آنلاین</h2>
-    <p class="pay-rule">بعد از پرداخت، پیام پرداخت را برای فروشنده بفرستید؛ فروشنده پرداخت را تأیید می‌کند و <b>فاکتور تأییدشده (با مهر «پرداخت شد»)</b> را برایتان می‌فرستد.</p>
-    <ol class="pay-steps">
-      <li>مبلغ <b id="pay-amount"></b> را در صفحهٔ پرداخت وارد کنید. <button type="button" class="link" id="pay-copy-amount">کپی مبلغ</button></li>
-      <li>اگر صفحهٔ پرداخت قسمت توضیحات دارد، شمارهٔ فاکتور (<span dir="ltr" id="pay-no"></span>) را بنویسید. <button type="button" class="link" id="pay-copy-no">کپی شماره</button></li>
-      <li>بعد از پرداخت با دکمهٔ «برگشت» گوشی یا مرورگر به همین صفحه برگردید و «ارسال به فروشنده» را بزنید. وارد کردن «کد پیگیری» اختیاری است ولی تأیید را سریع‌تر می‌کند.</li>
-    </ol>
+    <h2>پرداخت</h2>
+    <p class="pay-rule">مبلغ فاکتور: <b id="pay-amount"></b> — شمارهٔ فاکتور: <b dir="ltr" id="pay-no"></b></p>
     <p class="pay-warn" id="pay-warn" hidden></p>
-    <button type="button" class="btn btn-primary" id="pay-go">پرداخت آنلاین</button>
+
+    <div class="pay-method" id="pay-m-online" hidden>
+      <h3>۱) پرداخت آنلاین با درگاه امن</h3>
+      <p class="pay-hint">با کارت بانکی. بعد از پرداخت خودکار به همین صفحه برمی‌گردید و فاکتور «پرداخت شد» می‌شود؛ نیازی به ارسال پیام نیست.</p>
+      <button type="button" class="btn btn-primary" id="pay-go">پرداخت آنلاین</button>
+    </div>
+
+    <div class="pay-method" id="pay-m-sheba" hidden>
+      <h3 id="pay-m-sheba-title">۲) واریز به شماره شبا</h3>
+      <div class="sheba-card">
+        <div class="sheba-row"><span>به نام</span><b id="sheba-owner">{{ site.bank_owner }}</b></div>
+        <div class="sheba-row"><span>شماره شبا</span><b dir="ltr" id="sheba-show"></b></div>
+      </div>
+      <div class="view-actions-row two">
+        <button type="button" class="btn" id="sheba-copy">کپی شماره شبا</button>
+        <button type="button" class="btn" id="sheba-copy-amount">کپی مبلغ</button>
+      </div>
+      <p class="pay-hint">بعد از واریز، «ارسال به فروشنده» را بزنید (کد پیگیری اختیاری است) تا فروشنده پرداخت را تأیید کند و فاکتور تأییدشده را برایتان بفرستد.</p>
+    </div>
+
+    <div class="pay-method" id="pay-m-link" hidden>
+      <button type="button" class="btn" id="pay-go-link">پرداخت با لینک زرین‌پال</button>
+    </div>
+
     <div class="pay-report">
+      <h3>اعلام پرداخت به فروشنده <small>(برای واریز شبا)</small></h3>
       <label class="field"><span>کد پیگیری پرداخت (اختیاری)</span><input type="text" id="pay-ref" dir="ltr" inputmode="numeric" autocomplete="off" placeholder="اگر دارید بعد از پرداخت وارد کنید"></label>
       <div class="view-actions-row two">
         <button type="button" class="btn btn-wa" id="pay-send">ارسال به فروشنده</button>

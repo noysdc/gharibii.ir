@@ -221,3 +221,17 @@ textarea{resize:vertical}
   .view{padding-inline:8px}
   .pay-box{padding:12px}
 }
+
+/* ---------- روش‌های پرداخت: درگاه / شبا ---------- */
+.pay-method{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:16px}
+.pay-method[hidden]{display:none}
+.pay-method h3{font-size:.95rem;margin:0 0 .4rem}
+.pay-hint{margin:.5rem 0 0;font-size:.84rem;line-height:1.8;opacity:.85;overflow-wrap:anywhere}
+.pay-method>.btn{width:100%;margin-top:.4rem}
+.sheba-card{display:grid;gap:6px;margin:0 0 10px;padding:10px 12px;border-radius:12px;background:rgba(127,127,127,.09)}
+.sheba-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:.9rem}
+.sheba-row span{opacity:.75}
+.sheba-row b{overflow-wrap:anywhere;letter-spacing:.02em}
+#sheba-show{font-size:.98rem;user-select:all}
+.pay-report h3{font-size:.92rem;margin:0 0 .5rem}
+.pay-report h3 small{font-weight:400;opacity:.7}
