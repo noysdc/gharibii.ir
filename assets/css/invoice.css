@@ -235,3 +235,209 @@ textarea{resize:vertical}
 #sheba-show{font-size:.98rem;user-select:all}
 .pay-report h3{font-size:.92rem;margin:0 0 .5rem}
 .pay-report h3 small{font-weight:400;opacity:.7}
+
+/* =====================================================================
+   v2 — هماهنگی با سایت (شیشه‌ای)، موبایل/تبلت، و اسکرول راحت‌تر
+   این بخش عمداً در انتهای فایل است تا روی قواعد قبلی غلبه کند.
+   قواعد موبایل برای خود فاکتور فقط روی «.sheet-scroll .inv-sheet» اعمال می‌شود
+   تا خروجی عکس/PDF (.inv-export) همیشه ۷۶۰ پیکسلی و یک‌شکل بماند.
+   ===================================================================== */
+:root{
+  --field-bg:rgba(255,255,255,.62);
+  --btn-bg:linear-gradient(160deg,rgba(255,255,255,.80) 0%,rgba(255,255,255,.36) 55%,rgba(255,255,255,.52) 100%);
+  --btn-bg-hover:linear-gradient(160deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.52) 55%,rgba(255,255,255,.68) 100%);
+  --btn-pri:linear-gradient(160deg,rgba(24,160,124,.92) 0%,rgba(15,127,99,.80) 100%);
+  --btn-sea:linear-gradient(160deg,rgba(18,130,142,.94) 0%,rgba(10,102,112,.82) 100%);
+  --btn-shadow:0 5px 14px rgba(88,64,160,.14),0 1px 3px rgba(88,64,160,.08);
+  --row-line:rgba(16,34,44,.10);
+}
+html[data-theme="dark"]{
+  --field-bg:rgba(255,255,255,.07);
+  --btn-bg:linear-gradient(160deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.08) 55%,rgba(255,255,255,.14) 100%);
+  --btn-bg-hover:linear-gradient(160deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.14) 55%,rgba(255,255,255,.22) 100%);
+  --btn-sea:linear-gradient(160deg,rgba(42,163,177,.78) 0%,rgba(10,102,112,.66) 100%);
+  --btn-shadow:0 6px 16px rgba(0,0,0,.40),0 1px 3px rgba(0,0,0,.30);
+  --row-line:rgba(255,255,255,.12);
+}
+
+/* --- پایه: جلوگیری از اسکرول افقی، فاصلهٔ امن برای نوار پایین --- */
+html{scroll-padding-bottom:120px;overscroll-behavior-y:auto}
+.app,.view{min-width:0}
+.app>*,.view>*{min-width:0}
+
+/* --- کارت‌ها: همان شیشهٔ سایت (قاعدهٔ قدیمی .card آن را با رنگ ساده پوشانده بود) --- */
+.card{background:var(--g-panel);border:1px solid var(--g-border);box-shadow:var(--g-edge),var(--g-shadow);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);border-radius:22px;padding:16px;margin-bottom:14px}
+.card h2,.pay-box h2{color:var(--sea-deep)}
+.pay-method,.custom-form,.line,.sheba-card{background:var(--g-card);border-color:var(--g-border);box-shadow:var(--g-edge)}
+.line.no-price{background:var(--v-warn);border-color:var(--v-warn-b)}
+.line{border-radius:16px}
+
+/* --- فیلدها --- */
+input[type=text],input[type=tel],input[type=search],select,textarea{background:var(--field-bg);border-color:var(--g-border);
+  box-shadow:inset 0 1px 2px rgba(16,34,44,.06);border-radius:14px;min-height:46px}
+html[data-theme="dark"] input[type=text],html[data-theme="dark"] input[type=tel],html[data-theme="dark"] input[type=search],
+html[data-theme="dark"] select,html[data-theme="dark"] textarea{border-color:var(--line);box-shadow:none}
+select option{background:var(--surface);color:var(--ink)}
+.field{gap:6px}
+.field>span:first-child{font-weight:700;font-size:.86rem}
+
+/* --- دکمه‌ها: پیل شیشه‌ای مثل دکمه‌های سایت --- */
+.btn{min-height:46px;padding:.45rem 1.1rem;border:1px solid var(--g-border);background:var(--btn-bg);color:var(--sea-deep);
+  box-shadow:var(--g-edge),var(--btn-shadow);-webkit-backdrop-filter:blur(12px) saturate(170%);backdrop-filter:blur(12px) saturate(170%);
+  white-space:normal;text-align:center;line-height:1.5;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{background:var(--btn-bg-hover)}
+.btn:active{transform:scale(.97)}
+.btn.small{min-height:40px;padding:.25rem .9rem;white-space:nowrap}
+.btn-primary{background:var(--btn-sea);color:#fff;border-color:rgba(255,255,255,.45)}
+.btn-primary:hover{background:var(--btn-sea);filter:brightness(1.08)}
+.btn-wa{background:var(--btn-pri);color:#fff;border-color:rgba(255,255,255,.50);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 10px 24px rgba(15,127,99,.30)}
+.btn-wa:hover{background:var(--btn-pri);filter:brightness(1.08)}
+.btn-ghost{background:var(--btn-bg);color:var(--ink);font-weight:400;border-color:var(--g-border)}
+.btn-in{background:var(--v-ok);border-color:var(--v-ok-b);color:var(--v-ok-ink)}
+.btn-danger{background:var(--btn-bg);border-color:rgba(192,40,62,.35);color:var(--bad)}
+.btn:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.theme-toggle,#btn-sync{min-width:46px;padding:.3rem;font-size:1.15rem}
+
+/* --- هدر صفحهٔ فروشنده --- */
+.app-top{flex-wrap:nowrap;padding:6px 2px 14px}
+.app-top-text h1{color:var(--sea-deep)}
+.app-top-text p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* --- چیپ‌ها: اسکرول افقی نرم، بدون مزاحمت برای اسکرول عمودی صفحه --- */
+.chips{scrollbar-width:none;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding-bottom:10px}
+.chips::-webkit-scrollbar{display:none}
+.chip{scroll-snap-align:start;min-height:38px;background:var(--btn-bg);border-color:var(--g-border);color:var(--ink)}
+.chip.on{background:var(--btn-sea);color:#fff}
+
+/* --- فهرست انتخاب محصول: روی موبایل اسکرول داخلی ندارد (صفحه اسکرول می‌شود)؛
+       دکمهٔ «نمایش بیشتر» ادامه را می‌آورد. --- */
+.picker{max-height:none;overflow:visible;border-top:1px solid var(--row-line)}
+.p-row,.h-row{border-bottom-color:var(--row-line);padding:10px 0}
+.p-row:last-child,.h-row:last-child{border-bottom:0}
+.p-img,.l-img{background:var(--field-bg)}
+.tag.oos{background:var(--v-warn);color:var(--v-warn-ink)}
+.picker .btn-ghost{margin:10px 0 2px}
+
+/* --- آیتم‌های لیست: ردیف تعداد/قیمت مرتب و شکستنی --- */
+.line-top{align-items:flex-start}
+.line-row{flex-wrap:wrap;gap:8px 12px}
+.price{flex:1 1 170px;max-width:none}
+.qty{flex:none}
+.qty button{width:44px;height:44px}
+.line-foot{flex-wrap:wrap}
+.x{width:40px;height:40px;background:var(--btn-bg);border-color:var(--g-border)}
+
+/* --- جمع‌ها --- */
+.t-row{border-bottom-color:var(--row-line)}
+
+/* --- خروجی: دکمهٔ واتساپ تمام‌عرض، بقیه دو‌تا‌دو --- */
+.out-actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.out-actions .btn-wa{grid-column:1/-1}
+#srv-card .out-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+#srv-card .out-actions .btn{padding-inline:.4rem}
+
+/* --- فاکتورهای اخیر: متن بالا، دکمه‌ها یک ردیف مرتب پایین --- */
+.h-todo{margin:0 0 8px;padding:.4rem .8rem;border-radius:12px;background:var(--v-warn);border:1px solid var(--v-warn-b);color:var(--v-warn-ink);font-size:.88rem}
+.h-warn{color:var(--v-warn-ink)}
+.h-row{gap:8px}
+.h-row .h-info{flex:1 1 100%}
+.h-row .btn.small{flex:1 1 auto}
+.h-row .x{flex:none}
+.h-row.h-attn{background:var(--v-warn);border-radius:14px;padding-inline:10px;border-bottom-color:transparent;margin-bottom:6px}
+.import .inline{flex-wrap:nowrap}
+
+/* --- نوار پایین (جمع کل + ساخت فاکتور): هم‌عرض محتوا، وسط‌چین روی تبلت --- */
+.sticky{max-width:860px;margin-inline:auto;left:0;right:0;padding-inline:max(14px,env(safe-area-inset-left),env(safe-area-inset-right))}
+.sticky .btn{flex:none;min-width:150px}
+.spacer{height:calc(104px + env(safe-area-inset-bottom))}
+.toast{bottom:calc(96px + env(safe-area-inset-bottom))}
+.inv-view-page .toast{bottom:calc(24px + env(safe-area-inset-bottom))}
+
+/* --- صفحهٔ مشتری --- */
+.view{padding:14px 12px calc(30px + env(safe-area-inset-bottom))}
+.view-top{align-items:center}
+.view-actions{gap:10px}
+.view-actions>.btn-wa{width:100%}
+.view-actions-row{gap:10px}
+.view-actions-row>.btn{min-height:48px}
+.view-actions-row.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pay-box{padding:16px}
+.pay-box>.btn,.pay-method>.btn{width:100%}
+.pay-method{border-radius:18px}
+.pay-method h3,.pay-report h3{color:var(--sea-deep)}
+.sheba-row{flex-wrap:nowrap;align-items:flex-start}
+.sheba-row span{flex:none}
+.sheba-row b{min-width:0;text-align:end;word-break:break-all}
+.pay-report{border-top-color:var(--row-line)}
+.view-state.bad{background:var(--v-warn);border-color:var(--v-bad);color:var(--v-bad)}
+.view-site{padding-bottom:6px}
+.sheet-scroll{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+
+/* ========================  تبلت (≥ 768px)  ======================== */
+@media (min-width:768px){
+  .app{max-width:860px;padding:18px 20px 0}
+  .view{max-width:820px;padding:22px 20px 40px}
+  .card{padding:20px}
+  .grid2{gap:14px}
+  .out-actions{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .view-actions{flex-direction:column}
+  /* فهرست محصول: دو ستون، و اسکرول داخلی با «زنجیره‌شدن» به صفحه */
+  .picker{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;max-height:min(62vh,540px);overflow-y:auto;overscroll-behavior:auto;-webkit-overflow-scrolling:touch}
+  .picker>.empty,.picker>.btn-ghost{grid-column:1/-1}
+  .h-row .h-info{flex:1 1 220px}
+  .h-row .btn.small{flex:none}
+}
+@media (min-width:1100px){
+  .app{max-width:920px}
+}
+
+/* ========================  موبایل (≤ 520px)  ======================== */
+@media (max-width:520px){
+  .app{padding:10px 10px 0}
+  .view{padding:12px 10px calc(28px + env(safe-area-inset-bottom))}
+  .card,.pay-box{padding:14px;border-radius:20px}
+  .app-logo{width:40px;height:40px}
+  .sticky{border-radius:20px 20px 0 0;gap:10px}
+  .sticky .btn{min-width:0;flex:1 1 46%}
+  .sticky-sum{flex:1 1 40%}
+  .line-top .l-img,.p-img{width:48px;height:60px}
+  .price{flex-basis:100%}
+  .qty{margin-inline:auto 0}
+  .row-between{flex-wrap:wrap}
+  .paste-row{flex-direction:column;align-items:stretch}
+  .paste-row .inline{width:100%}
+  .paste-row .inline .btn{flex:1}
+  .import .inline{flex-direction:column;align-items:stretch}
+  .import .inline .btn{width:100%}
+  .sheba-row{font-size:.86rem}
+  /* دکمه‌های ردیف فاکتور اخیر: دو ستون مرتب */
+  .h-row .btn.small{flex:1 1 calc(50% - 8px)}
+  .h-row .x{margin-inline-start:auto}
+  /* خود فاکتور (فقط نمایش صفحه، نه خروجی عکس/PDF) */
+  .sheet-scroll .inv-sheet{padding:16px 12px 14px;border-radius:22px}
+  .sheet-scroll .inv-head{flex-wrap:wrap;gap:10px}
+  .sheet-scroll .h-logo{width:48px;height:48px}
+  .sheet-scroll .h-title{font-size:21px}
+  .sheet-scroll .h-store{font-size:13px}
+  .sheet-scroll .inv-meta{gap:6px;font-size:13px}
+  .sheet-scroll .m-item{flex:1 1 calc(50% - 6px);padding:5px 10px}
+  .sheet-scroll .m-wide{flex-basis:100%}
+  .sheet-scroll .inv-row{padding:10px;gap:6px 10px}
+  .sheet-scroll .r-img{width:48px;height:60px}
+  .sheet-scroll .r-title{font-size:14px}
+  .sheet-scroll .r-line{flex:1 1 100%;text-align:end;margin-inline-start:0;padding-top:4px;border-top:1px dashed var(--v-line);font-size:14px}
+  .sheet-scroll .r-contact{max-width:none;flex:1 1 100%}
+  .sheet-scroll .inv-totals{padding:8px 12px}
+  .sheet-scroll .inv-totals .t-grand{font-size:17px}
+  .sheet-scroll .inv-stamp{font-size:32px;border-width:4px;padding:2px 16px}
+}
+@media (max-width:360px){
+  .view-actions-row,.view-actions-row.two{grid-template-columns:1fr}
+  .out-actions,#srv-card .out-actions{grid-template-columns:1fr}
+  .sheet-scroll .m-item{flex-basis:100%}
+}
+
+/* حرکت کمتر برای کسانی که در دستگاه فعال کرده‌اند */
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:active{transform:none}}

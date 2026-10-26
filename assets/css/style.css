@@ -1338,7 +1338,7 @@ html.splash-on .app-splash{display:flex}
   padding:1rem 1.1rem;border-radius:1.2rem;
   background:var(--surface);border:1px solid var(--line);
   box-shadow:0 8px 28px rgba(168,85,247,.12);
-  scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  scrollbar-width:thin;-webkit-overflow-scrolling:touch;overscroll-behavior:auto; /* auto: وقتی به انتهای باکس رسید، اسکرول به صفحه منتقل شود */
 }
 .info-box h1{font-size:calc(1.3rem * var(--font-scale));line-height:1.7;margin:0 0 .25rem}
 .info-box .desc{margin:.5rem 0 0}
@@ -1347,6 +1347,15 @@ html.splash-on .app-splash{display:flex}
 /* حداکثر ارتفاع = دقیقاً ارتفاع عکس اصلی (نسبت ۳:۴)؛ متن کوتاه جمع می‌شود، متن بلند اسکرول می‌خورد */
 .info{container-type:inline-size}
 @supports (width:1cqw){.info-box{max-height:calc(100cqw * 4 / 3)}}
+/* موبایل و تبلت عمودی (یک‌ستونه): باکس متن اسکرول داخلی ندارد و با صفحه اسکرول می‌شود.
+   اسکرول تو در تو روی لمسی «گیر می‌کند»؛ فقط در دسکتاپ (دو ستون، کنار عکس) باکس ارتفاع‌محدود می‌ماند. */
+@media (max-width:819.98px){
+  .info-box{max-height:none !important;overflow:visible !important}
+}
+/* دسکتاپ: لبهٔ محو پایین باکس نشان می‌دهد متن ادامه دارد */
+@media (min-width:820px){
+  .info-box{scrollbar-gutter:stable;scroll-padding-block:1rem}
+}
 /* تبلت: سه کارت «محصولات دیگر» به‌جای چهار (جلوگیری از کارت تنها) */
 @media (min-width:760px) and (max-width:1039px){.more .grid > :nth-child(4){display:none}}
 
