@@ -117,6 +117,19 @@ function notify(env, ctx, text, kind) {
   if (ctx && ctx.waitUntil) ctx.waitUntil(job);
   return job;
 }
+/* جزئیات مشتری برای پیام‌های تلگرام: شماره، آدرس، فهرست محصولات */
+function detOf(b) {
+  const items = Array.isArray(b && b.items) ? b.items.slice(0, 120).map((i) => ({ t: clip(i && i.t, 120), q: Math.min(999, Math.max(1, num(i && i.q) || 1)), o: clip(i && i.o, 120) })) : [];
+  return { ph: clip(String((b && b.ph) || '').replace(/\D/g, ''), 15), addr: clip(b && b.addr, 300), items: items };
+}
+function detContact(d) {
+  if (!d) return '';
+  return (d.ph ? '\n📞 شماره مشتری: ' + d.ph : '') + (d.addr ? '\n📍 آدرس: ' + d.addr : '');
+}
+function detItems(d) {
+  if (!d || !d.items || !d.items.length) return '';
+  return '\n\n📦 محصولات:\n' + d.items.map((i, k) => fa(k + 1) + '. ' + (i.t || 'محصول') + (i.o ? ' (' + i.o + ')' : '') + ' × ' + fa(i.q)).join('\n');
+}
 const linkOf = (env, code) => String(env.SITE_URL || '').replace(/\/+$/, '') + '/f/' + code;
 
 /* ---------- ذخیره‌سازی ---------- */
@@ -185,8 +198,9 @@ async function createInvoice(req, env, ctx) {
   }
   if (!code) return reply(req, env, { error: 'busy' }, 503);
   const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0 };
-  await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null }, meta);
-  notify(env, ctx, '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)\n🔗 ' + linkOf(env, code));
+  await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
+  const det = detOf(b);
+  notify(env, ctx, '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
   return reply(req, env, { code: code });
 }
 
@@ -208,13 +222,14 @@ async function updateInvoice(req, env, ctx, code) {
     if (!TOK_RE.test(String(b.tok))) return reply(req, env, { error: 'bad_token' }, 400);
     rec.tok = b.tok;
     ['exp', 'total', 'n', 'no', 'cust'].forEach((k) => { if (b[k] !== undefined) m[k] = b[k]; });
+    if (b.items !== undefined || b.ph !== undefined || b.addr !== undefined) rec.det = detOf(b);
   }
   if (b.paid !== undefined) {
     rec.paid = b.paid ? { ref: clip(b.paid.ref, 40), at: num(b.paid.at) || Math.floor(Date.now() / 1000) } : null;
     m.paid = rec.paid ? 1 : 0; m.pa = rec.paid ? rec.paid.at : 0;
   }
   await putRec(env, code, rec, m);
-  if (!wasPaid && rec.paid) notify(env, ctx, '✅ پرداخت تأیید شد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + '\nمبلغ: ' + money(m.total) + (rec.paid.ref ? '\nکد پیگیری: ' + rec.paid.ref : ''));
+  if (!wasPaid && rec.paid) notify(env, ctx, '✅ پرداخت تأیید شد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (rec.paid.ref ? '\nکد پیگیری: ' + rec.paid.ref : '') + detItems(rec.det));
   if (wasPaid && !rec.paid) notify(env, ctx, '↩️ تأیید پرداخت برداشته شد\nفاکتور: ' + (m.no || code) + ' — مبلغ ' + money(m.total));
   return reply(req, env, { ok: true, paid: rec.paid || null });
 }
@@ -231,7 +246,7 @@ async function reportPayment(req, env, ctx, code) {
   const old = await env.INVOICES.getWithMetadata(kvKey(code));
   await putRec(env, code, rec, old.metadata || {});
   const m = metaOf(old.metadata || {});
-  if (!recent) notify(env, ctx, '💬 مشتری اعلام پرداخت کرد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + '\nمبلغ: ' + money(m.total) + (ref ? '\nکد پیگیری: ' + ref : '\nکد پیگیری: وارد نشده') + '\nلطفاً در پنل زرین‌پال چک و در صفحهٔ فروشنده «تأیید پرداخت» را بزنید.\n🔗 ' + linkOf(env, code));
+  if (!recent) notify(env, ctx, '💬 مشتری اعلام پرداخت کرد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (ref ? '\nکد پیگیری: ' + ref : '\nکد پیگیری: وارد نشده') + detItems(rec.det) + '\n\n' + '\nلطفاً در پنل زرین‌پال چک و در صفحهٔ فروشنده «تأیید پرداخت» را بزنید.\n🔗 ' + linkOf(env, code));
   return reply(req, env, { ok: true });
 }
 
@@ -240,7 +255,7 @@ async function reportPayment(req, env, ctx, code) {
    - هر روز (Cron) یک محصولِ «هنوز ارسال‌نشده» با عکس، توضیح، سایز، دکمهٔ سفارش و هشتگ (بدون قیمت) به کانال می‌رود
    - محصول تازه (که در اجرای قبلی در سایت نبود) اولویت دارد؛ بقیه به نوبت بین دسته‌ها می‌چرخند
    - اگر محصول جدیدی نباشد چیزی ارسال نمی‌شود؛ به‌محض اضافه‌شدن محصول تازه به سایت، روز بعد ارسال از سر گرفته می‌شود
-   - محصول ناموجود ارسال نمی‌شود
+   - محصول ناموجود هم برای معرفی ارسال می‌شود (با برچسب «فعلاً ناموجود»)
    - لازم: secret با نام CHANNEL_CHAT_ID (مثل @gharibii_ir) و ادمین‌بودن ربات در کانال؛ ربات همان TELEGRAM_BOT_TOKEN است */
 const CH_CATS = ['girls', 'boys', 'accessories', 'crown-wand', 'bags-shoes'];
 const escHtml = (t) => String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -299,15 +314,19 @@ function chDesc(d, max) {
   return out;
 }
 /* قطعات پست (بدون قیمت): سر = عنوان، بدنه = توضیح، پا = سایز + لینک + هشتگ */
-function chParts(it) {
+function chParts(it, feed) {
   const sizes = it.sz && it.sz.length <= 140 ? '📏 سایز: ' + escHtml(it.sz) + '\n' : '';
   const tags = chHashtags(it.tags);
-  const head = '🛍 <b>' + escHtml(it.t) + '</b>';
-  const foot = sizes + '🔗 <a href="' + escHtml(it.u) + '">مشاهده و سفارش در سایت</a>' + (tags ? '\n\n' + tags : '');
+  const head = '🛍 <b>' + escHtml(it.t) + '</b>' + (it.oos ? '\n⛔ فعلاً ناموجود — برای اطلاع از موجود شدن مجدد پیام بدهید' : '');
+  const soc = [];
+  if (feed && feed.ig) soc.push('<a href="https://instagram.com/' + escHtml(feed.ig) + '">اینستاگرام</a>');
+  if (feed && feed.tgch) soc.push('<a href="https://t.me/' + escHtml(feed.tgch) + '">کانال تلگرام</a>');
+  const socLine = soc.length ? '\n📲 ' + soc.join(' | ') : '';
+  const foot = sizes + '🔗 <a href="' + escHtml(it.u) + '">مشاهده و سفارش در سایت</a>' + socLine + (tags ? '\n\n' + tags : '');
   return { head: head, foot: foot };
 }
-function chCaption(it, limit) {          /* یک پیام واحد (برای حالت بدون عکس یا کپشن کوتاه) */
-  const x = chParts(it);
+function chCaption(it, limit, feed) {          /* یک پیام واحد (برای حالت بدون عکس یا کپشن کوتاه) */
+  const x = chParts(it, feed);
   const room = limit - x.head.length - x.foot.length - 8;
   const d = room > 60 ? chDesc(it.d, room) : '';
   return x.head + '\n\n' + (d ? escHtml(d) + '\n\n' : '') + x.foot;
@@ -332,14 +351,14 @@ async function chSend(env, feed, it) {
   if (feed.ig) rows.push([{ text: '📸 سفارش در اینستاگرام', url: 'https://ig.me/m/' + feed.ig }]);
   const kb = { inline_keyboard: rows };
   if (it.im) {
-    const full = chCaption(it, 1000);
+    const full = chCaption(it, 1000, feed);
     const needsMore = chDesc(it.d, 4000).length > chDesc(it.d, 1000 - 250).length;     /* توضیح در کپشن (حداکثر ۱۰۲۴) جا نمی‌شود؟ */
     if (!needsMore) {
       const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: full, parse_mode: 'HTML', reply_markup: kb });
       if (a.ok) return { ok: true, mode: 'photo', id: a.res && a.res.message_id };
     } else {
       /* عکس با عنوان؛ بعد توضیح کامل + سایز + لینک + هشتگ در پیام بعدی (ریپلای روی همان عکس) */
-      const x = chParts(it);
+      const x = chParts(it, feed);
       const a = await chTg(env, 'sendPhoto', { chat_id: chat, photo: it.im, caption: x.head, parse_mode: 'HTML' });
       if (a.ok) {
         const room = 3900 - x.foot.length - 10;
@@ -355,7 +374,7 @@ async function chSend(env, feed, it) {
   }
   /* اگر عکس ارسال نشد (مثلاً فرمت/اندازه) یا محصول عکس ندارد: متن + پیش‌نمایش لینک (عکس صفحه) */
   const b = await chTg(env, 'sendMessage', {
-    chat_id: chat, text: chCaption(it, 3900), parse_mode: 'HTML', reply_markup: kb,
+    chat_id: chat, text: chCaption(it, 3900, feed), parse_mode: 'HTML', reply_markup: kb,
     link_preview_options: { url: it.u, prefer_large_media: true, show_above_text: true }
   });
   return b.ok ? { ok: true, mode: 'text', id: b.res && b.res.message_id } : { ok: false, err: b.err };
@@ -374,7 +393,7 @@ async function channelRun(env, opts) {
   const seen = Array.isArray(prevSeen) ? new Set(prevSeen) : null;     /* null = اولین اجرا: هیچ محصولی «تازه» حساب نمی‌شود */
   const posted = await chPostedSet(env);
   const all = feed.products.filter((x) => x && x.id && x.t);
-  const queue = all.filter((x) => !x.oos && !posted.has(x.id));
+  const queue = all.filter((x) => !posted.has(x.id));     /* ناموجودها هم برای معرفی ارسال می‌شوند (با برچسب ناموجود) */
   const stats = { total: all.length, posted: all.filter((x) => posted.has(x.id)).length, waiting: queue.length, soldOut: all.filter((x) => x.oos).length };
 
   if (!opts.dry) await env.INVOICES.put('tg:seen', JSON.stringify(all.map((x) => x.id)));
@@ -390,7 +409,7 @@ async function channelRun(env, opts) {
   }
   const rot = Number(await env.INVOICES.get('tg:rot').catch(() => 0)) || 0;
   const it = chPick(queue, seen, rot);
-  if (opts.dry) return { sent: false, dry: true, next: { id: it.id, title: it.t, cat: it.c, image: it.im, caption: chCaption(it, 3900) }, stats: stats };
+  if (opts.dry) return { sent: false, dry: true, next: { id: it.id, title: it.t, cat: it.c, image: it.im, caption: chCaption(it, 3900, feed) }, stats: stats };
 
   const r = await chSend(env, feed, it);
   if (!r.ok) {
