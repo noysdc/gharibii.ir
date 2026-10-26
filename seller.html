@@ -18,11 +18,21 @@ sitemap: false
 
   <section class="card">
     <h2>اطلاعات فاکتور</h2>
-    <div class="grid2">
-      <label class="field"><span>نام مشتری (اختیاری)</span><input type="text" id="f-cust" maxlength="60" autocomplete="off"></label>
-      <label class="field"><span>موبایل مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
-      <label class="field"><span>فروشنده</span><select id="f-seller"></select></label>
-      <label class="field"><span>موبایل فروشنده</span><input type="text" id="f-seller-phone" dir="ltr" readonly aria-readonly="true" placeholder="با انتخاب فروشنده پر می‌شود"></label>
+    <fieldset class="fgroup">
+      <legend>مشخصات مشتری</legend>
+      <div class="grid2">
+        <label class="field"><span>نام مشتری (اختیاری)</span><input type="text" id="f-cust" maxlength="60" autocomplete="off"></label>
+        <label class="field"><span>موبایل مشتری (اختیاری)</span><input type="tel" id="f-phone" dir="ltr" inputmode="tel" placeholder="09…" autocomplete="off"></label>
+      </div>
+      <label class="field"><span>آدرس تحویل (اختیاری) <em class="fcount" data-count-for="f-addr" data-max="300"></em></span><textarea id="f-addr" rows="3" maxlength="300" placeholder="استان، شهر، خیابان، پلاک، واحد…"></textarea></label>
+      <label class="field field-post"><span>کد پستی (اختیاری)</span><input type="text" id="f-post" dir="ltr" inputmode="numeric" maxlength="10" placeholder="۱۰ رقم" autocomplete="off"></label>
+    </fieldset>
+    <fieldset class="fgroup">
+      <legend>فروشنده و اعتبار</legend>
+      <div class="grid2">
+        <label class="field"><span>فروشنده</span><select id="f-seller"></select></label>
+        <label class="field"><span>موبایل فروشنده</span><input type="text" id="f-seller-phone" dir="ltr" readonly aria-readonly="true" placeholder="با انتخاب فروشنده پر می‌شود"></label>
+      </div>
       <label class="field"><span>مدت اعتبار فاکتور</span>
         <select id="f-valid">
           <option value="30">۳۰ دقیقه</option>
@@ -34,8 +44,7 @@ sitemap: false
           <option value="2880">۴۸ ساعت</option>
         </select>
       </label>
-    </div>
-    <label class="field"><span>آدرس تحویل (اختیاری)</span><textarea id="f-addr" rows="2" maxlength="300" placeholder="استان، شهر، خیابان، پلاک، کد پستی…"></textarea></label>
+    </fieldset>
   </section>
 
   <section class="card">
@@ -48,11 +57,15 @@ sitemap: false
     </div>
   </section>
 
-  <section class="card">
-    <h2>افزودن محصول</h2>
-    <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
-    <div class="chips" id="chips"></div>
-    <div class="picker" id="picker" aria-live="polite"></div>
+  <section class="card acc-card" id="add-card">
+    <button type="button" class="acc-head" id="add-toggle" aria-expanded="false" aria-controls="add-body">
+      <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true">▾</span>
+    </button>
+    <div class="acc-body" id="add-body" hidden>
+      <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
+      <div class="chips" id="chips"></div>
+      <div class="picker" id="picker" aria-live="polite"></div>
+    </div>
   </section>
 
   <section class="card">
@@ -73,7 +86,7 @@ sitemap: false
       </label>
       <label class="field"><span>تخفیف کلی (تومان)</span><input type="text" id="f-disc" dir="ltr" inputmode="numeric" autocomplete="off" placeholder="۰"></label>
     </div>
-    <label class="field"><span>یادداشت (در فاکتور چاپ می‌شود، اختیاری)</span><textarea id="f-note" rows="2" maxlength="300" placeholder="مثلاً: ارسال تا دو روز کاری"></textarea></label>
+    <label class="field"><span>یادداشت (در فاکتور چاپ می‌شود، اختیاری) <em class="fcount" data-count-for="f-note" data-max="300"></em></span><textarea id="f-note" rows="3" maxlength="300" placeholder="مثلاً: ارسال تا دو روز کاری"></textarea></label>
     <div class="totals" id="totals"></div>
     <ul class="warns" id="warns"></ul>
   </section>
@@ -94,7 +107,7 @@ sitemap: false
   </section>
 
   <section class="card hist-card">
-    <h2>فاکتورهای اخیر</h2>
+    <div class="row-between"><h2>فاکتورهای اخیر <span class="badge" id="hist-count">۰</span></h2></div>
     <div id="history"></div>
   </section>
 

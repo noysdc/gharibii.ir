@@ -6,11 +6,12 @@
   var DKEY = 'gharibii_seller_v1', HKEY = 'gharibii_seller_hist_v1';
   var PAGE = (window.matchMedia && window.matchMedia('(max-width:767px)').matches) ? 20 : 40;   /* موبایل: لیست کوتاه‌تر، با «نمایش بیشتر» ادامه می‌یابد */
 
+  var histOpen = false;
   var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '', remote = Promise.resolve();
   var st = loadState();
 
   /* ---------- وضعیت و ذخیره‌سازی ---------- */
-  function fresh() { return { cust: '', phone: '', addr: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, code: '', pasted: [], items: [] }; }
+  function fresh() { return { cust: '', phone: '', addr: '', post: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, code: '', pasted: [], items: [] }; }
   function loadState() {
     var s = fresh();
     try {
@@ -31,6 +32,18 @@
 
   function feeVal() { return st.fee == null ? (feed ? feed.fee : 0) : st.fee; }
   function fmtIn(n) { return n ? Number(n).toLocaleString('en-US') : ''; }
+  /* کد پستی جدا از آدرس ذخیره می‌شود و موقع ساخت فاکتور به انتهای آدرس می‌چسبد («، کد پستی: ۱۲۳…») تا ساختار فاکتور/سرور عوض نشود */
+  var RX_POSTAL = /(?:[،,]\s*)?کد\s*پستی\s*[:：]?\s*([0-9۰-۹]{10})/;
+  function splitPost(a) {
+    a = String(a || '');
+    var m = a.match(RX_POSTAL);
+    if (!m) return { a: a.trim(), p: '' };
+    return { a: a.replace(m[0], '').replace(/^[\s،,]+|[\s،,]+$/g, ''), p: G.normDigits(m[1]) };
+  }
+  function joinAddr(a, p) {
+    a = String(a || '').trim(); p = String(p || '').replace(/\D/g, '');
+    return p.length === 10 ? (a ? a + '، ' : '') + 'کد پستی: ' + p : a;
+  }
   function nz(s) {
     return G.normDigits(s).toLowerCase().replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/[\u200c\u064b-\u065f]/g, ' ').replace(/\s+/g, ' ').trim();
   }
@@ -273,7 +286,7 @@
     if (!seller && list.length) seller = list[0];
     built = {
       no: no, rev: rev, paid: null, ts: now, exp: now + st.valid * 60,
-      cust: G.clip(st.cust, 60), addr: G.clip(st.addr, 300), ph: phoneNorm(st.phone), sn: seller ? seller.name : '', sw: seller ? seller.number : '',
+      cust: G.clip(st.cust, 60), addr: G.clip(joinAddr(st.addr, st.post), 300), ph: phoneNorm(st.phone), sn: seller ? seller.name : '', sw: seller ? seller.number : '',
       fee: feeVal(), disc: st.disc, note: G.clip(st.note, 300),
       items: st.items.map(function (i) { return { id: i.c ? '' : i.id, q: i.q, p: i.p, o: optString(i), t: G.clip(i.t, 120) }; })
     };
@@ -367,6 +380,8 @@
     var now = Math.floor(Date.now() / 1000);
     var todo = h.filter(function (x) { return (x.paid && x.pvia === 'zp' && !x.ok) || (!x.paid && x.rep && now < x.exp + 86400 * 3); }).length;
     var banner = todo ? '<p class="h-todo">🔔 ' + G.nf(todo) + ' فاکتور منتظر بررسی شماست</p>' : '';
+    var cnt = $('hist-count'); if (cnt) cnt.textContent = G.nf(h.length);
+    var HLIM = 3;
     host.innerHTML = banner + h.map(function (x, i) {
       var exp = !x.paid && now >= x.exp;
       var online = x.paid && x.pvia === 'zp';
@@ -390,7 +405,9 @@
           '<button type="button" class="btn small btn-ghost" data-hcopy="' + i + '">🔗 کپی لینک</button>' +
           '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف از لیست">✕</button>' +
         '</div></article>';
-    }).join('');
+    }).join('') + (h.length > HLIM ? '<button type="button" class="btn btn-ghost hist-more" data-hmore aria-expanded="' + (histOpen ? 'true' : 'false') + '">' + (histOpen ? 'جمع کردن لیست ▴' : 'نمایش همه ' + G.nf(h.length) + ' فاکتور ▾') + '</button>' : '');
+    /* پیش‌فرض فقط ۳ فاکتور آخر (و فاکتورهای منتظر بررسی) دیده می‌شود؛ بقیه با دکمه باز می‌شود */
+    if (!histOpen) Array.prototype.forEach.call(host.querySelectorAll('.h-row'), function (row, i) { if (i >= HLIM && !row.classList.contains('h-attn')) row.hidden = true; });
   }
   /* لیست مشترک: فاکتورهای هر دو فروشنده و وضعیت پرداخت‌شان با «یک» درخواست از سرور می‌آید.
      پرداخت درگاه خودکار ثبت می‌شود؛ فروشنده فقط «بررسی کردم» (آنلاین) یا «تأیید پرداخت» (کارت‌به‌کارت) می‌زند */
@@ -420,7 +437,7 @@
     var supp = !!inv.paid;
     if (supp) inv = { no: inv.no, cust: inv.cust, addr: inv.addr, ph: inv.ph, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
     st.editNo = supp ? '' : inv.no; st.rev = supp ? 0 : (inv.rev || 1); st.code = supp ? '' : (code || inv.code || '');
-    st.cust = inv.cust; st.addr = inv.addr || ''; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pasted = [];
+    var sp0 = splitPost(inv.addr); st.cust = inv.cust; st.addr = sp0.a; st.post = sp0.p; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pasted = [];
     st.fee = feed && inv.fee === feed.fee ? null : inv.fee;
     if (inv.sw) st.sw = inv.sw;
     st.items = inv.items.map(function (r) {
@@ -440,6 +457,7 @@
     $('f-cust').value = st.cust || '';
     $('f-phone').value = st.phone || '';
     $('f-addr').value = st.addr || '';
+    $('f-post').value = st.post || '';
     $('f-valid').value = String(st.valid || 120);
     $('f-disc').value = fmtIn(st.disc);
     $('f-note').value = st.note || '';
@@ -462,6 +480,11 @@
     $('f-cust').addEventListener('input', function (e) { st.cust = e.target.value; dirty(); });
     $('f-phone').addEventListener('input', function (e) { st.phone = e.target.value; dirty(); });
     $('f-addr').addEventListener('input', function (e) { st.addr = e.target.value; dirty(); });
+    $('f-post').addEventListener('input', function (e) {
+      var v = G.normDigits(e.target.value).replace(/\D/g, '').slice(0, 10);
+      if (e.target.value !== v) e.target.value = v;
+      st.post = v; dirty();
+    });
     $('f-seller').addEventListener('change', function (e) { st.sw = e.target.value; showSellerPhone(); dirty(); });
     $('f-valid').addEventListener('change', function (e) { st.valid = Number(e.target.value) || 120; dirty(); });
     $('f-note').addEventListener('input', function (e) { st.note = e.target.value; dirty(); });
@@ -542,6 +565,7 @@
     run($('o-pdf'), function () { G.toast('در حال ساخت PDF…'); return G.savePdf(built, feed); });
 
     $('history').addEventListener('click', function (e) {
+      if (e.target.closest('[data-hmore]')) { histOpen = !histOpen; renderHistory(); return; }
       var h = readHist();
       var o = e.target.closest('[data-hopen]'), c = e.target.closest('[data-hcopy]'), d = e.target.closest('[data-hdel]'), pd = e.target.closest('[data-hpaid]');
       var ok = e.target.closest('[data-hok]');
@@ -655,7 +679,7 @@
       if (!String(st[key] || '').trim()) { st[key] = val; filled.push(label); }
       else if (G.nzs(st[key]) !== G.nzs(val)) kept.push(label);
     }
-    fill('cust', r.name, 'نام'); fill('phone', r.phone, 'موبایل'); fill('addr', r.addr, 'آدرس'); fill('note', r.note, 'یادداشت');
+    fill('cust', r.name, 'نام'); fill('phone', r.phone, 'موبایل'); var spp = splitPost(r.addr); fill('addr', spp.a, 'آدرس'); fill('post', spp.p, 'کد پستی'); fill('note', r.note, 'یادداشت');
     st.pasted.push(fp); st.pasted = st.pasted.slice(-30);
     var parts = [];
     if (added) parts.push(G.nf(added) + ' محصول اضافه شد');
@@ -678,4 +702,27 @@
     '<button type="button" class="btn btn-primary small" id="c-add">افزودن به لیست</button></div>');
   initFields(); bind(); renderLines(); updateTotals(); renderHistory();
   sync(false);
+
+  /* ---------- باکس «افزودن محصول»: با کلیک باز/بسته می‌شود؛ وقتی لیست خالی است باز است ---------- */
+  (function () {
+    var t = $('add-toggle'), b = $('add-body');
+    if (!t || !b) return;
+    function set(open) { b.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); t.classList.toggle('open', open); }
+    set(!(st.items && st.items.length));
+    t.addEventListener('click', function () {
+      set(b.hidden);
+      if (!b.hidden) { try { b.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} }
+    });
+    $('btn-new').addEventListener('click', function () { if (!st.items.length) set(true); });
+  })();
+  /* شمارندهٔ نویسه برای آدرس و یادداشت */
+  (function () {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-count-for]'), function (em) {
+      var inp = $(em.getAttribute('data-count-for')), max = Number(em.getAttribute('data-max')) || 300;
+      if (!inp) return;
+      function upd() { em.textContent = G.nf(inp.value.length) + ' / ' + G.nf(max); }
+      inp.addEventListener('input', upd); upd();
+      setInterval(upd, 1500);   /* وقتی مقدار با دکمه‌هایی مثل «تبدیل پیام» پر می‌شود */
+    });
+  })();
 })();
