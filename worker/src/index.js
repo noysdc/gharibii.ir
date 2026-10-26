@@ -122,6 +122,7 @@ function detOf(b) {
   const items = Array.isArray(b && b.items) ? b.items.slice(0, 120).map((i) => ({ t: clip(i && i.t, 120), q: Math.min(999, Math.max(1, num(i && i.q) || 1)), o: clip(i && i.o, 120) })) : [];
   return { ph: clip(String((b && b.ph) || '').replace(/\D/g, ''), 15), addr: clip(b && b.addr, 300), items: items };
 }
+const rawMsg = (v) => String(v == null ? '' : v).replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3400);
 function detContact(d) {
   if (!d) return '';
   return (d.ph ? '\n📞 شماره مشتری: ' + d.ph : '') + (d.addr ? '\n📍 آدرس: ' + d.addr : '');
@@ -199,8 +200,8 @@ async function createInvoice(req, env, ctx) {
   if (!code) return reply(req, env, { error: 'busy' }, 503);
   const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0 };
   await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
-  const det = detOf(b);
-  notify(env, ctx, '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
+  const det = detOf(b), full = rawMsg(b.msg);
+  notify(env, ctx, full ? '🧾 فاکتور جدید\n\n' + full + '\n\n🔗 ' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
   return reply(req, env, { code: code });
 }
 
@@ -229,6 +230,12 @@ async function updateInvoice(req, env, ctx, code) {
     m.paid = rec.paid ? 1 : 0; m.pa = rec.paid ? rec.paid.at : 0;
   }
   await putRec(env, code, rec, m);
+  if (b.tok !== undefined) {      /* ویرایش فاکتور (افزودن/حذف محصول، تغییر مشتری یا مبلغ) */
+    const rv = num(b.rev);
+    const full = rawMsg(b.msg);
+    const head = '✏️ فاکتور ویرایش شد' + (rv > 1 ? ' (نسخه ' + fa(rv) + ')' : '');
+    notify(env, ctx, full ? head + '\n\n' + full + '\n\n🔗 ' + linkOf(env, code) : head + '\nفاکتور: ' + (clip(m.no, 40) || code) + '\nمشتری: ' + (clip(m.cust, 40) || '—') + detContact(rec.det) + '\nمبلغ: ' + money(num(m.total)) + ' (' + fa(num(m.n)) + ' قلم)' + detItems(rec.det) + '\n\n🔗 ' + linkOf(env, code));
+  }
   if (!wasPaid && rec.paid) notify(env, ctx, '✅ پرداخت تأیید شد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (rec.paid.ref ? '\nکد پیگیری: ' + rec.paid.ref : '') + detItems(rec.det));
   if (wasPaid && !rec.paid) notify(env, ctx, '↩️ تأیید پرداخت برداشته شد\nفاکتور: ' + (m.no || code) + ' — مبلغ ' + money(m.total));
   return reply(req, env, { ok: true, paid: rec.paid || null });

@@ -211,6 +211,7 @@
     return {
       tok: pack(noPaid(inv)), no: inv.no, total: totals(inv).total, n: inv.items.length, cust: inv.cust, exp: inv.exp, ts: inv.ts,
       ph: inv.ph || '', addr: inv.addr || '', rev: inv.rev || 1,
+      msg: buildText(inv, curFeed, ''),
       items: inv.items.map(function (i) { return { t: titleOf(i, curFeed), q: i.q, o: i.o || '' }; })
     };
   }
