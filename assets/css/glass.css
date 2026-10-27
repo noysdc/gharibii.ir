@@ -518,3 +518,10 @@ html:root:root:root :is(.btn-wa,.cart-checkout).btn-ig:hover{
   color:#fff !important;
 }
 html:root:root:root .cart-checkout.btn-ig{margin-top:.6rem}
+
+
+/* ---------- عملکرد: بدون backdrop-filter روی کارت‌های محصول ----------
+   پشت کارت‌ها فقط پس‌زمینهٔ ساده است و بلور تفاوت دیدنی ندارد، ولی با ده‌ها کارت اسکرول را کند می‌کرد. */
+html:root:root:root :is(.card,.cat-grid .card,.grid .card){
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+}

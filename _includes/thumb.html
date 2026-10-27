@@ -1,7 +1,6 @@
 {%- comment -%}
-  آدرس تصویر کوچک (thumbnail): اسم فایل + "-t.webp"  (با scripts/make_thumbs.py ساخته می‌شود)
-  استفاده:  {% include thumb.html src=im %}
-  فایل‌های خارجی و svg بدون تغییر برگردانده می‌شوند.
+  آدرس تصویر کارت‌ها. عکس‌های کوچک (-t) دیگر ساخته نمی‌شوند؛ همان عکس اصلی برگردانده می‌شود
+  تا مرورگر برای هر عکس یک درخواست ۴۰۴ اضافه نفرستد و بعد دوباره عکس کامل را نگیرد.
 {%- endcomment -%}
 {%- assign th_full = include.src | default: '/assets/images/placeholder.svg' -%}
-{%- if th_full contains '://' or th_full contains '.svg' -%}{{ th_full }}{%- else -%}{{ th_full | replace: '.webp', '-t.webp' | relative_url }}{%- endif -%}
+{%- if th_full contains '://' -%}{{ th_full }}{%- else -%}{{ th_full | relative_url }}{%- endif -%}

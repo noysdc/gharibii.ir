@@ -80,6 +80,7 @@
   <meta name="twitter:title" content="{{ pv_title | escape }}">
   <meta name="twitter:description" content="{{ pv_desc | strip | escape }}">
   <meta name="twitter:image" content="{{ pv_img_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-RD-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
   <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
   <link rel="stylesheet" href="{{ '/assets/css/glass.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">

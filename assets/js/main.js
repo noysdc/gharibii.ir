@@ -612,25 +612,31 @@
       var idx = 0, timer = null, hold = false, visible = false;
       var dir = (window.getComputedStyle(track).direction === 'rtl') ? -1 : 1;
       function mark() { dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); }); }
+      /* عکس‌های بعدی کارت فقط وقتی لازم شدند گرفته می‌شوند (نه همه‌ی ۵ عکسِ همه‌ی کارت‌ها موقع باز شدن صفحه) */
+      function ensure(k) {
+        var s = slides[(k + slides.length) % slides.length], im = s && s.querySelector('img[data-src]');
+        if (im) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+      }
       function go(i) {
         idx = (i + slides.length) % slides.length;
+        ensure(idx); ensure(idx + 1);
         track.scrollTo({ left: dir * idx * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
         mark();
       }
       track.addEventListener('scroll', function () {
         var w = track.clientWidth || 1;
         var i = Math.round(Math.abs(track.scrollLeft) / w);
-        if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); }
+        if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); ensure(idx); ensure(idx + 1); }
       }, { passive: true });
       function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
       function startAuto() { if (reduce || timer || !visible) return; timer = setInterval(function () { if (!hold) go(idx + 1); }, 3200 + Math.random() * 1500); }
       function bind(btn, step) { if (!btn) return; btn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); go(idx + step); }); }
       bind(prev, -1); bind(next, 1);
-      card.addEventListener('mouseenter', function () { hold = true; });
+      card.addEventListener('mouseenter', function () { ensure(1); hold = true; });
       card.addEventListener('mouseleave', function () { hold = false; });
       card.addEventListener('focusin', function () { hold = true; });
       card.addEventListener('focusout', function () { hold = false; });
-      card.addEventListener('touchstart', function () { hold = true; clearTimeout(card._resume); card._resume = setTimeout(function () { hold = false; }, 6000); }, { passive: true });
+      card.addEventListener('touchstart', function () { ensure(1); hold = true; clearTimeout(card._resume); card._resume = setTimeout(function () { hold = false; }, 6000); }, { passive: true });
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; if (visible) startAuto(); else stopAuto(); }, { threshold: 0.35 }).observe(card);
       } else { visible = true; startAuto(); }
