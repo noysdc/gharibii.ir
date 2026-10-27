@@ -5,7 +5,7 @@ description: "کلاه دزدان دریایی؛ مناسب مهمانی تم‌
 slug: "pirate-hat"
 category: accessories
 gender: boys
-price group: "out_of_stock"
+price_group: "out_of_stock"
 price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/accessories/pirate-hat/"]
