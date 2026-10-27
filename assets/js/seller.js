@@ -246,8 +246,8 @@
       '<div class="t-row t-grand"><span>جمع کل</span><b>' + G.money(t.total) + '</b></div>';
     $('totals').innerHTML = rows;
     $('count').textContent = G.nf(st.items.length);
-    $('s-count').textContent = G.nf(st.items.length);
-    var fab = $('btn-build-fab'); if (fab) fab.hidden = !st.items.length;
+    $('s-count').textContent = G.nf(st.items.length) + ' قلم';
+    $('s-total').textContent = G.money(t.total);
     var w = [];
     var noPrice = st.items.filter(function (i) { return i.p <= 0; }).length;
     var oos = st.items.filter(function (i) { return i.oos || i.miss; }).length;
@@ -376,12 +376,11 @@
   /* ---------- سابقه و بازکردن فاکتور قبلی ---------- */
   function renderHistory() {
     var h = readHist(), host = $('history');
-    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; if ($('hist-count')) $('hist-count').textContent = G.nf(0); if ($('hist-dot')) $('hist-dot').hidden = true; return; }
+    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; return; }
     var now = Math.floor(Date.now() / 1000);
     var todo = h.filter(function (x) { return (x.paid && x.pvia === 'zp' && !x.ok) || (!x.paid && x.rep && now < x.exp + 86400 * 3); }).length;
     var banner = todo ? '<p class="h-todo">🔔 ' + G.nf(todo) + ' فاکتور منتظر بررسی شماست</p>' : '';
     var cnt = $('hist-count'); if (cnt) cnt.textContent = G.nf(h.length);
-    var dot = $('hist-dot'); if (dot) dot.hidden = !todo;
     var HLIM = 3;
     host.innerHTML = banner + h.map(function (x, i) {
       var exp = !x.paid && now >= x.exp;
@@ -559,7 +558,6 @@
     $('c-price').addEventListener('input', function (e) { var s = fmtIn(G.toNum(e.target.value)); if (e.target.value !== s) e.target.value = s; });
 
     $('btn-build').addEventListener('click', build);
-    $('btn-build-fab').addEventListener('click', build);
     run($('o-text'), function () { return G.copyText(outText()).then(function (ok) { G.toast(ok ? 'متن کپی شد ✅' : 'کپی نشد؛ دستی کپی کنید'); }); });
     run($('o-link'), function () { return G.copyText(G.invoiceUrl(built)).then(function (ok) { G.toast(ok ? 'لینک کپی شد ✅' : 'کپی نشد'); }); });
     run($('o-wa'), function () { return G.openWhatsApp(G.phoneToWa(st.phone), outText()); });
@@ -607,7 +605,6 @@
     });
     if (G.apiOn()) {
       $('srv-card').hidden = false;
-      if ($('srv-divider')) $('srv-divider').hidden = false;
       function why(e) {
         if (!e) return 'نامشخص';
         if (e.status === 401) return 'رمز فروشنده درست نیست.';
@@ -717,15 +714,6 @@
       if (!b.hidden) { try { b.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} }
     });
     $('btn-new').addEventListener('click', function () { if (!st.items.length) set(true); });
-  })();
-  /* باکس «فاکتورهای اخیر»: پیش‌فرض بسته است تا صفحه (به‌خصوص موبایل) شلوغ نشود */
-  (function () {
-    var t = $('hist-toggle'), b = $('hist-body');
-    if (!t || !b) return;
-    t.addEventListener('click', function () {
-      var open = b.hidden;
-      b.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); t.classList.toggle('open', open);
-    });
   })();
   /* شمارندهٔ نویسه برای آدرس و یادداشت */
   (function () {

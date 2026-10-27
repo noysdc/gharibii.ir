@@ -1,0 +1,26 @@
+{%- comment -%}
+  متاتگ‌های ترب (Torob) — فقط برای صفحهٔ محصول و بدون نیاز به جاوااسکریپت.
+  همهٔ مقادیر از همان فیلدهای md/گروه قیمت ساخته می‌شود؛ نیازی به تغییر فایل‌های محصول نیست.
+  قیمت‌ها به تومان‌اند (مثل نمایش خود سایت).
+{%- endcomment -%}
+{%- assign t_grp = site.data.price_groups.groups[page.price_group] -%}
+{%- assign t_oos = page.out_of_stock -%}
+{%- if t_grp.out_of_stock -%}{%- assign t_oos = true -%}{%- endif -%}
+{%- assign t_raw = page.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- if t_raw == "" and t_grp.price -%}
+  {%- assign t_raw = t_grp.price | append: "" | remove: "," | remove: "،" | remove: " " -%}
+{%- endif -%}
+{%- assign t_price = t_raw | plus: 0 -%}
+{%- assign t_old_raw = page.old_price -%}
+{%- if t_old_raw == nil and t_grp.old_price -%}{%- assign t_old_raw = t_grp.old_price -%}{%- endif -%}
+{%- assign t_old = t_old_raw | append: "" | remove: "," | remove: "،" | remove: " " | plus: 0 -%}
+{%- assign t_id = page.webzi_id | default: page.slug -%}
+  <meta name="product_id" content="{{ t_id | escape }}">
+  <meta name="product_name" content="{{ page.title | escape }}">
+  {%- if t_price > 0 %}
+  <meta name="product_price" content="{{ t_price }}">
+  {%- if t_old > t_price %}
+  <meta name="product_old_price" content="{{ t_old }}">
+  {%- endif %}
+  {%- endif %}
+  <meta name="availability" content="{% if t_oos or t_price <= 0 %}outofstock{% else %}instock{% endif %}">

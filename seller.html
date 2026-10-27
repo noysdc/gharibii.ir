@@ -17,16 +17,6 @@ sitemap: false
   </header>
 
   <section class="card">
-    <h2>پیام مشتری</h2>
-    <p class="muted small-note">پیام مشتری را اینجا paste کنید و «تبدیل» بزنید: محصولات، سایز/رنگ/اندازه هر محصول، نام، موبایل، آدرس و یادداشت خودکار جایگذاری می‌شوند. اگر مشتری چند پیام فرستاد، هر کدام را جدا paste کنید؛ پیام تکراری دوباره اضافه نمی‌شود و فیلدهای پر دست نمی‌خورند.</p>
-    <textarea id="f-paste" rows="5" placeholder="متن پیام مشتری (لینک محصولات، سایز، رنگ، نام، شماره، آدرس…)"></textarea>
-    <div class="row-between paste-row">
-      <span class="inline"><button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به فاکتور</button><button type="button" class="btn btn-ghost small" id="btn-undo" hidden>برگرداندن</button></span>
-      <small class="muted" id="paste-res"></small>
-    </div>
-  </section>
-
-  <section class="card">
     <h2>اطلاعات فاکتور</h2>
     <fieldset class="fgroup">
       <legend>مشخصات مشتری</legend>
@@ -57,9 +47,19 @@ sitemap: false
     </fieldset>
   </section>
 
+  <section class="card">
+    <h2>پیام مشتری</h2>
+    <p class="muted small-note">پیام مشتری را اینجا paste کنید و «تبدیل» بزنید: محصولات، سایز/رنگ/اندازه هر محصول، نام، موبایل، آدرس و یادداشت خودکار جایگذاری می‌شوند. اگر مشتری چند پیام فرستاد، هر کدام را جدا paste کنید؛ پیام تکراری دوباره اضافه نمی‌شود و فیلدهای پر دست نمی‌خورند.</p>
+    <textarea id="f-paste" rows="5" placeholder="متن پیام مشتری (لینک محصولات، سایز، رنگ، نام، شماره، آدرس…)"></textarea>
+    <div class="row-between paste-row">
+      <span class="inline"><button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به فاکتور</button><button type="button" class="btn btn-ghost small" id="btn-undo" hidden>برگرداندن</button></span>
+      <small class="muted" id="paste-res"></small>
+    </div>
+  </section>
+
   <section class="card acc-card" id="add-card">
     <button type="button" class="acc-head" id="add-toggle" aria-expanded="false" aria-controls="add-body">
-      <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+      <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true">▾</span>
     </button>
     <div class="acc-body" id="add-body" hidden>
       <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
@@ -78,7 +78,7 @@ sitemap: false
   </section>
 
   <section class="card">
-    <h2>هزینه‌های ارسال و توضیحات</h2>
+    <h2>هزینه‌ها و توضیحات</h2>
     <div class="grid2">
       <label class="field"><span>هزینه ارسال و گمرک (تومان)</span>
         <span class="inline"><input type="text" id="f-fee" dir="ltr" inputmode="numeric" autocomplete="off"><button type="button" class="btn btn-ghost small" id="btn-fee-reset" title="بازگشت به مبلغ پیش‌فرض">↺</button></span>
@@ -90,11 +90,6 @@ sitemap: false
     <div class="totals" id="totals"></div>
     <ul class="warns" id="warns"></ul>
   </section>
-
-  <div class="main-actions">
-    <button type="button" class="btn btn-primary btn-xl" id="btn-build">ساخت فاکتور</button>
-    <button type="button" class="btn btn-ghost btn-reset" id="btn-new">ریست کردن فاکتور</button>
-  </div>
 
   <section class="card" id="out-card" hidden>
     <h2 id="out-title">فاکتور آماده است</h2>
@@ -111,14 +106,9 @@ sitemap: false
     <div class="sheet-scroll"><div id="preview"></div></div>
   </section>
 
-  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
-  <section class="card acc-card hist-card" id="hist-card">
-    <button type="button" class="acc-head" id="hist-toggle" aria-expanded="false" aria-controls="hist-body">
-      <span class="acc-title">فاکتورهای اخیر <span class="badge" id="hist-count">۰</span><i class="acc-dot" id="hist-dot" hidden title="فاکتور منتظر بررسی"></i></span><span class="acc-sub">برای دیدن لیست، باز کنید</span><span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
-    </button>
-    <div class="acc-body" id="hist-body" hidden>
-      <div id="history"></div>
-    </div>
+  <section class="card hist-card">
+    <div class="row-between"><h2>فاکتورهای اخیر <span class="badge" id="hist-count">۰</span></h2></div>
+    <div id="history"></div>
   </section>
 
   <section class="card">
@@ -127,7 +117,6 @@ sitemap: false
     <span class="inline import-row"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off" aria-label="لینک یا کد فاکتور"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
   </section>
 
-  <div class="sec-divider" id="srv-divider" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <section class="card" id="srv-card" hidden>
     <h2>سرور، تلگرام و گزارش‌ها</h2>
     <div class="out-actions">
@@ -137,14 +126,16 @@ sitemap: false
     </div>
     <pre class="srv-out" id="srv-out" dir="rtl"></pre>
   </section>
+  <section class="card card-new">
+    <button type="button" class="btn btn-danger" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
+  </section>
   <div class="spacer"></div>
 </main>
 
-<button type="button" class="fab-build" id="btn-build-fab" aria-label="ساخت فاکتور" title="ساخت فاکتور" hidden>
-  <span class="fab-ico" aria-hidden="true">🧾</span>
-  <span class="fab-txt">ساخت فاکتور</span>
-  <span class="fab-badge" id="s-count">۰</span>
-</button>
+<div class="sticky" id="sticky">
+  <div class="sticky-sum"><b id="s-count">۰ قلم</b><span id="s-total">۰ تومان</span></div>
+  <button type="button" class="btn btn-primary" id="btn-build">ساخت فاکتور</button>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="{{ '/assets/js/invoice.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>

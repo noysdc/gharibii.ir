@@ -19,18 +19,13 @@ sitemap: false
     <p class="pay-warn" id="pay-warn" hidden></p>
 
     <div class="pay-method" id="pay-m-online" hidden>
-      <h3>پرداخت آنلاین با درگاه امن</h3>
+      <h3>۱) پرداخت آنلاین با درگاه امن</h3>
       <p class="pay-hint">با کارت بانکی. بعد از پرداخت خودکار به همین صفحه برمی‌گردید و فاکتور «پرداخت شد» می‌شود؛ نیازی به ارسال پیام نیست.</p>
       <button type="button" class="btn btn-primary" id="pay-go">پرداخت آنلاین</button>
     </div>
 
-    <div class="pay-method pay-acc" id="pay-m-sheba" hidden>
-      <button type="button" class="pay-acc-head" id="pay-acc-toggle" aria-expanded="false" aria-controls="pay-acc-body">
-        <span class="pay-acc-title" id="pay-m-sheba-title">کارت‌به‌کارت</span>
-        <span class="pay-acc-sub">روش دیگر پرداخت</span>
-        <span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
-      </button>
-      <div class="pay-acc-body" id="pay-acc-body" hidden>
+    <div class="pay-method" id="pay-m-sheba" hidden>
+      <h3 id="pay-m-sheba-title">۲) کارت‌به‌کارت</h3>
       <div class="bank-card" id="bank-card">
         <span class="bc-shine" aria-hidden="true"></span>
         <div class="bc-top"><span class="bc-bank">{{ site.bank_name }}</span><span class="bc-chip" aria-hidden="true"></span></div>
@@ -49,7 +44,6 @@ sitemap: false
         <button type="button" class="btn" id="sheba-copy">کپی شماره شبا</button>
       </div>
       <p class="pay-hint">بعد از واریز، نیازی به ارسال پیام نیست؛ فروشنده پرداخت را از بانک دریافت و تأیید می‌کند و همین صفحه به «پرداخت شد» تغییر می‌کند.</p>
-      </div>
     </div>
 
     <div class="pay-method" id="pay-m-link" hidden>
@@ -58,10 +52,10 @@ sitemap: false
   </section>
   <div class="view-actions" id="actions" hidden>
     <button type="button" class="btn btn-wa" id="v-contact" hidden>گفتگو با فروشنده در واتساپ</button>
-    <div class="view-actions-row share-row">
-      <button type="button" class="btn" id="v-text"><span class="va-ico" aria-hidden="true">📋</span><span>کپی متن</span></button>
-      <button type="button" class="btn" id="v-img"><span class="va-ico" aria-hidden="true">🖼️</span><span>ذخیره عکس</span></button>
-      <button type="button" class="btn" id="v-pdf"><span class="va-ico" aria-hidden="true">📄</span><span>ذخیره PDF</span></button>
+    <div class="view-actions-row">
+      <button type="button" class="btn" id="v-text">کپی متن</button>
+      <button type="button" class="btn" id="v-img">ذخیره عکس</button>
+      <button type="button" class="btn" id="v-pdf">ذخیره PDF</button>
     </div>
     <p class="muted view-note" id="view-note"></p>
   </div>
