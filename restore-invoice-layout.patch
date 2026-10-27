@@ -1,0 +1,371 @@
+diff --git a/_layouts/default.html b/_layouts/default.html
+index bc53a38..a82d530 100644
+--- a/_layouts/default.html
++++ b/_layouts/default.html
+@@ -81,6 +81,7 @@
+   <meta name="twitter:title" content="{{ pv_title | escape }}">
+   <meta name="twitter:description" content="{{ pv_desc | strip | escape }}">
+   <meta name="twitter:image" content="{{ pv_img_url }}">
++  <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-RD-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+   <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+   <link rel="stylesheet" href="{{ '/assets/css/glass.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+diff --git a/assets/css/invoice.css b/assets/css/invoice.css
+index 92ba98c..8cc58eb 100644
+--- a/assets/css/invoice.css
++++ b/assets/css/invoice.css
+@@ -644,3 +644,89 @@ textarea{line-height:1.8;min-height:92px}
+   .inv-sheet .inv-meta{gap:0 12px;padding:2px 12px}
+   .sheet-scroll .inv-sheet .ic-row span{flex-basis:4em}
+ }
++
++
++/* =====================================================================
++   چیدمان جدید صفحهٔ فروشنده + صفحهٔ مشتری (۱۴۰۵)
++   ===================================================================== */
++
++/* --- فلش بازشونده: دایرهٔ شیشه‌ای با فلش SVG که نرم می‌چرخد --- */
++.acc-chev{width:38px;height:38px;color:#fff;border:1px solid rgba(255,255,255,.55);
++  background:linear-gradient(160deg,rgba(18,140,152,.92) 0%,rgba(10,102,112,.78) 100%);
++  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 6px 14px rgba(10,102,112,.28);
++  transition:transform .28s cubic-bezier(.4,.2,.2,1),box-shadow .2s}
++.acc-chev svg{display:block}
++.acc-head:hover .acc-chev{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 8px 18px rgba(10,102,112,.38)}
++.acc-head.open .acc-chev,.pay-acc-head.open .acc-chev{transform:rotate(180deg)}
++html[data-theme="dark"] .acc-chev{background:linear-gradient(160deg,rgba(40,170,184,.55) 0%,rgba(10,77,85,.7) 100%);border-color:rgba(255,255,255,.28)}
++.acc-body[hidden]{display:none}
++.acc-title .badge{margin-inline-start:6px;vertical-align:middle}
++.acc-dot{display:inline-block;width:10px;height:10px;margin-inline-start:8px;border-radius:50%;background:#e6a100;box-shadow:0 0 0 4px rgba(230,161,0,.22);vertical-align:middle}
++.acc-dot[hidden]{display:none}
++
++/* --- جداکننده بین بخش‌ها --- */
++.sec-divider{display:flex;align-items:center;gap:12px;margin:18px 6px}
++.sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
++.sec-divider .sd-dot{width:9px;height:9px;border-radius:50%;background:var(--sea);opacity:.75;box-shadow:0 0 0 4px rgba(42,163,177,.18)}
++.sec-divider[hidden]{display:none}
++
++/* --- دکمه‌های ساخت / ریست زیر باکس هزینه‌ها --- */
++.main-actions{display:flex;flex-direction:column;gap:10px;margin:0 0 14px}
++.main-actions .btn{width:100%}
++.btn-xl{min-height:54px;font-size:1.08rem;border-radius:18px}
++.btn-reset{border:1px dashed var(--g-border);color:var(--muted)}
++
++/* --- دکمهٔ شناور «ساخت فاکتور» مثل دکمهٔ سبد خرید سایت --- */
++.fab-build{position:fixed;bottom:1.25rem;left:1.25rem;z-index:60;display:flex;align-items:center;justify-content:center;gap:.5rem;
++  min-width:3.4rem;height:3.4rem;padding:0 .95rem;border-radius:999px;font:inherit;font-weight:700;font-size:1rem;color:#fff;cursor:pointer;
++  background:linear-gradient(160deg,rgba(18,140,152,.9) 0%,rgba(10,102,112,.78) 100%);
++  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);border:1px solid rgba(255,255,255,.55);
++  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(0,0,0,.1),0 12px 28px rgba(10,102,112,.38);
++  transition:transform .2s ease,opacity .2s;margin-bottom:env(safe-area-inset-bottom,0px)}
++.fab-build:hover{transform:scale(1.05)}
++.fab-build:active{transform:scale(.96)}
++.fab-build[hidden]{display:none}
++.fab-ico{font-size:1.25rem;line-height:1}
++.fab-txt{display:none}
++.fab-badge{position:absolute;top:-4px;right:-4px;min-width:1.3rem;height:1.3rem;padding:0 .3rem;border-radius:999px;background:#ffb8d6;color:#5a1633;font-size:.72rem;font-weight:800;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}
++html[data-theme="dark"] .fab-build{background:linear-gradient(160deg,rgba(40,170,184,.55) 0%,rgba(10,77,85,.7) 100%);border-color:rgba(255,255,255,.28)}
++@media (min-width:769px){.fab-txt{display:inline}.fab-build{padding:0 1.2rem 0 1.1rem}}
++@media (max-width:520px){.fab-build{bottom:.9rem;left:.9rem;min-width:3rem;height:3rem}}
++.spacer{height:calc(70px + env(safe-area-inset-bottom))}
++.sticky{display:none !important}
++
++/* --- فاکتورهای اخیر داخل باکس بازشونده --- */
++.hist-card .acc-body{padding-top:4px}
++.hist-card .acc-head .acc-title{flex:0 1 auto}
++
++/* --- صفحهٔ مشتری: مشخصات گیرنده دوستونه --- */
++.inv-sheet .inv-cust{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;padding:10px 16px 8px}
++.inv-sheet .inv-cust .ic-title{grid-column:1/-1}
++.inv-sheet .inv-cust .ic-row{flex-direction:column;align-items:stretch;gap:1px;padding:7px 0;min-width:0}
++.inv-sheet .inv-cust .ic-row span{flex:none;font-size:12px}
++.inv-sheet .inv-cust .ic-row b{flex:none;font-size:14px;line-height:1.7}
++.inv-sheet .inv-cust .ic-title+.ic-row,.inv-sheet .inv-cust .ic-title+.ic-row+.ic-row{border-top:0}
++/* آدرس همیشه تمام عرض؛ بقیه دوتا دوتا */
++.inv-sheet .inv-cust .ic-row.ic-wide{grid-column:1/-1}
++.inv-sheet .inv-cust .ic-row.ic-wide{border-top:1px dashed var(--v-line)}
++@media (max-width:520px){.sheet-scroll .inv-sheet .ic-row span{flex-basis:auto}}
++
++/* --- کارت‌به‌کارت کشویی --- */
++.pay-acc{padding:0;overflow:hidden}
++.pay-acc-head{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:10px 14px;border:0;background:transparent;color:var(--ink);font:inherit;text-align:start;cursor:pointer}
++.pay-acc-title{font-weight:700;font-size:.98rem;color:var(--sea-deep)}
++.pay-acc-sub{flex:1;min-width:0;font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
++.pay-acc-head:focus-visible{outline:3px solid var(--sea);outline-offset:-3px;border-radius:18px}
++.pay-acc-body{padding:0 12px 12px}
++.pay-acc-body[hidden]{display:none}
++.pay-acc-body>.bank-card{margin-top:2px}
++@media (max-width:420px){.pay-acc-sub{display:none}.pay-acc-title{flex:1}}
++/* پرداخت آنلاین: شاخص‌ترین دکمهٔ صفحه */
++#pay-m-online{border-color:var(--sea);background:var(--g-card)}
++#pay-go{min-height:54px;font-size:1.08rem;border-radius:18px}
++
++/* --- دکمه‌های ذخیره / کپی: سه‌تایی جمع‌وجور با آیکون، حتی در موبایل --- */
++.view-actions-row.share-row{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:8px}
++.share-row>.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:60px;padding:8px 4px;font-size:.84rem;line-height:1.4}
++.share-row .va-ico{font-size:1.25rem;line-height:1}
++@media (prefers-reduced-motion:reduce){.acc-chev,.fab-build{transition:none}}
+diff --git a/assets/js/invoice-view.js b/assets/js/invoice-view.js
+index 8201c49..8633399 100644
+--- a/assets/js/invoice-view.js
++++ b/assets/js/invoice-view.js
+@@ -67,7 +67,9 @@
+     $('pay-m-online').hidden = !online;
+     $('pay-m-link').hidden = !link;
+     $('pay-m-sheba').hidden = !hasBank;
+-    $('pay-m-sheba-title').textContent = (online || link ? '۲) ' : '') + 'کارت‌به‌کارت';
++    $('pay-m-sheba-title').textContent = 'کارت‌به‌کارت';
++    /* کارت‌به‌کارت: اگر پرداخت آنلاین/لینک هست، بسته می‌ماند تا دکمهٔ پرداخت آنلاین اول دیده شود؛ اگر تنها راه است، باز است */
++    if (!accTouched) setAcc(!(online || link));
+     $('card-row').hidden = !card; $('card-copy').hidden = !card;
+     $('sheba-row').hidden = !sheba; $('sheba-copy-row').hidden = !sheba;
+     if (card) $('card-show').textContent = cardPretty(card);
+@@ -81,8 +83,15 @@
+     if (bc) bc.classList.toggle('is-off', off);
+     if ($('bc-state')) { $('bc-state').hidden = !off; $('bc-state').textContent = expired ? 'منقضی' : 'غیرفعال'; }
+   }
++  var accTouched = false;
++  function setAcc(open) {
++    var t = $('pay-acc-toggle'), b = $('pay-acc-body');
++    if (!t || !b) return;
++    b.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); t.classList.toggle('open', open);
++  }
+   function bindPay() {
+     if (!$('pay-box')) return;
++    $('pay-acc-toggle').addEventListener('click', function () { accTouched = true; setAcc($('pay-acc-body').hidden); });
+     /* پرداخت آنلاین: مبلغ را Worker از خود فاکتور می‌خواند و آدرس صفحهٔ بانک را برمی‌گرداند؛ همان تب به بانک می‌رود */
+     $('pay-go').addEventListener('click', function () {
+       if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }
+diff --git a/assets/js/invoice.js b/assets/js/invoice.js
+index adb22b6..c8a994a 100644
+--- a/assets/js/invoice.js
++++ b/assets/js/invoice.js
+@@ -370,7 +370,7 @@
+       ? '<div class="inv-cust" data-brk><div class="ic-title">مشخصات گیرنده</div>' +
+           (inv.cust ? '<div class="ic-row"><span>نام</span><b>' + esc(inv.cust) + '</b></div>' : '') +
+           (inv.ph ? '<div class="ic-row"><span>تلفن</span><b class="ltr" dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
+-          (addrText ? '<div class="ic-row"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
++          (addrText ? '<div class="ic-row ic-wide"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
+           (postal ? '<div class="ic-row"><span>کد پستی</span><b class="ltr" dir="ltr">' + postal + '</b></div>' : '') +
+         '</div>' : '';
+ 
+diff --git a/assets/js/seller.js b/assets/js/seller.js
+index e3baf8c..f06ce3c 100644
+--- a/assets/js/seller.js
++++ b/assets/js/seller.js
+@@ -246,8 +246,8 @@
+       '<div class="t-row t-grand"><span>جمع کل</span><b>' + G.money(t.total) + '</b></div>';
+     $('totals').innerHTML = rows;
+     $('count').textContent = G.nf(st.items.length);
+-    $('s-count').textContent = G.nf(st.items.length) + ' قلم';
+-    $('s-total').textContent = G.money(t.total);
++    $('s-count').textContent = G.nf(st.items.length);
++    var fab = $('btn-build-fab'); if (fab) fab.hidden = !st.items.length;
+     var w = [];
+     var noPrice = st.items.filter(function (i) { return i.p <= 0; }).length;
+     var oos = st.items.filter(function (i) { return i.oos || i.miss; }).length;
+@@ -376,11 +376,12 @@
+   /* ---------- سابقه و بازکردن فاکتور قبلی ---------- */
+   function renderHistory() {
+     var h = readHist(), host = $('history');
+-    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; return; }
++    if (!h.length) { host.innerHTML = '<p class="muted empty">هنوز فاکتوری نساخته‌اید.</p>'; if ($('hist-count')) $('hist-count').textContent = G.nf(0); if ($('hist-dot')) $('hist-dot').hidden = true; return; }
+     var now = Math.floor(Date.now() / 1000);
+     var todo = h.filter(function (x) { return (x.paid && x.pvia === 'zp' && !x.ok) || (!x.paid && x.rep && now < x.exp + 86400 * 3); }).length;
+     var banner = todo ? '<p class="h-todo">🔔 ' + G.nf(todo) + ' فاکتور منتظر بررسی شماست</p>' : '';
+     var cnt = $('hist-count'); if (cnt) cnt.textContent = G.nf(h.length);
++    var dot = $('hist-dot'); if (dot) dot.hidden = !todo;
+     var HLIM = 3;
+     host.innerHTML = banner + h.map(function (x, i) {
+       var exp = !x.paid && now >= x.exp;
+@@ -558,6 +559,7 @@
+     $('c-price').addEventListener('input', function (e) { var s = fmtIn(G.toNum(e.target.value)); if (e.target.value !== s) e.target.value = s; });
+ 
+     $('btn-build').addEventListener('click', build);
++    $('btn-build-fab').addEventListener('click', build);
+     run($('o-text'), function () { return G.copyText(outText()).then(function (ok) { G.toast(ok ? 'متن کپی شد ✅' : 'کپی نشد؛ دستی کپی کنید'); }); });
+     run($('o-link'), function () { return G.copyText(G.invoiceUrl(built)).then(function (ok) { G.toast(ok ? 'لینک کپی شد ✅' : 'کپی نشد'); }); });
+     run($('o-wa'), function () { return G.openWhatsApp(G.phoneToWa(st.phone), outText()); });
+@@ -605,6 +607,7 @@
+     });
+     if (G.apiOn()) {
+       $('srv-card').hidden = false;
++      if ($('srv-divider')) $('srv-divider').hidden = false;
+       function why(e) {
+         if (!e) return 'نامشخص';
+         if (e.status === 401) return 'رمز فروشنده درست نیست.';
+@@ -715,6 +718,15 @@
+     });
+     $('btn-new').addEventListener('click', function () { if (!st.items.length) set(true); });
+   })();
++  /* باکس «فاکتورهای اخیر»: پیش‌فرض بسته است تا صفحه (به‌خصوص موبایل) شلوغ نشود */
++  (function () {
++    var t = $('hist-toggle'), b = $('hist-body');
++    if (!t || !b) return;
++    t.addEventListener('click', function () {
++      var open = b.hidden;
++      b.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); t.classList.toggle('open', open);
++    });
++  })();
+   /* شمارندهٔ نویسه برای آدرس و یادداشت */
+   (function () {
+     Array.prototype.forEach.call(document.querySelectorAll('[data-count-for]'), function (em) {
+diff --git a/invoice.html b/invoice.html
+index 2209b6f..a947658 100644
+--- a/invoice.html
++++ b/invoice.html
+@@ -19,13 +19,18 @@ sitemap: false
+     <p class="pay-warn" id="pay-warn" hidden></p>
+ 
+     <div class="pay-method" id="pay-m-online" hidden>
+-      <h3>۱) پرداخت آنلاین با درگاه امن</h3>
++      <h3>پرداخت آنلاین با درگاه امن</h3>
+       <p class="pay-hint">با کارت بانکی. بعد از پرداخت خودکار به همین صفحه برمی‌گردید و فاکتور «پرداخت شد» می‌شود؛ نیازی به ارسال پیام نیست.</p>
+       <button type="button" class="btn btn-primary" id="pay-go">پرداخت آنلاین</button>
+     </div>
+ 
+-    <div class="pay-method" id="pay-m-sheba" hidden>
+-      <h3 id="pay-m-sheba-title">۲) کارت‌به‌کارت</h3>
++    <div class="pay-method pay-acc" id="pay-m-sheba" hidden>
++      <button type="button" class="pay-acc-head" id="pay-acc-toggle" aria-expanded="false" aria-controls="pay-acc-body">
++        <span class="pay-acc-title" id="pay-m-sheba-title">کارت‌به‌کارت</span>
++        <span class="pay-acc-sub">روش دیگر پرداخت</span>
++        <span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
++      </button>
++      <div class="pay-acc-body" id="pay-acc-body" hidden>
+       <div class="bank-card" id="bank-card">
+         <span class="bc-shine" aria-hidden="true"></span>
+         <div class="bc-top"><span class="bc-bank">{{ site.bank_name }}</span><span class="bc-chip" aria-hidden="true"></span></div>
+@@ -44,6 +49,7 @@ sitemap: false
+         <button type="button" class="btn" id="sheba-copy">کپی شماره شبا</button>
+       </div>
+       <p class="pay-hint">بعد از واریز، نیازی به ارسال پیام نیست؛ فروشنده پرداخت را از بانک دریافت و تأیید می‌کند و همین صفحه به «پرداخت شد» تغییر می‌کند.</p>
++      </div>
+     </div>
+ 
+     <div class="pay-method" id="pay-m-link" hidden>
+@@ -52,10 +58,10 @@ sitemap: false
+   </section>
+   <div class="view-actions" id="actions" hidden>
+     <button type="button" class="btn btn-wa" id="v-contact" hidden>گفتگو با فروشنده در واتساپ</button>
+-    <div class="view-actions-row">
+-      <button type="button" class="btn" id="v-text">کپی متن</button>
+-      <button type="button" class="btn" id="v-img">ذخیره عکس</button>
+-      <button type="button" class="btn" id="v-pdf">ذخیره PDF</button>
++    <div class="view-actions-row share-row">
++      <button type="button" class="btn" id="v-text"><span class="va-ico" aria-hidden="true">📋</span><span>کپی متن</span></button>
++      <button type="button" class="btn" id="v-img"><span class="va-ico" aria-hidden="true">🖼️</span><span>ذخیره عکس</span></button>
++      <button type="button" class="btn" id="v-pdf"><span class="va-ico" aria-hidden="true">📄</span><span>ذخیره PDF</span></button>
+     </div>
+     <p class="muted view-note" id="view-note"></p>
+   </div>
+diff --git a/seller.html b/seller.html
+index e627197..733cee6 100644
+--- a/seller.html
++++ b/seller.html
+@@ -16,6 +16,16 @@ sitemap: false
+     <button type="button" class="btn btn-ghost" id="btn-sync" title="به‌روزرسانی قیمت‌ها از سایت">⟳</button>
+   </header>
+ 
++  <section class="card">
++    <h2>پیام مشتری</h2>
++    <p class="muted small-note">پیام مشتری را اینجا paste کنید و «تبدیل» بزنید: محصولات، سایز/رنگ/اندازه هر محصول، نام، موبایل، آدرس و یادداشت خودکار جایگذاری می‌شوند. اگر مشتری چند پیام فرستاد، هر کدام را جدا paste کنید؛ پیام تکراری دوباره اضافه نمی‌شود و فیلدهای پر دست نمی‌خورند.</p>
++    <textarea id="f-paste" rows="5" placeholder="متن پیام مشتری (لینک محصولات، سایز، رنگ، نام، شماره، آدرس…)"></textarea>
++    <div class="row-between paste-row">
++      <span class="inline"><button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به فاکتور</button><button type="button" class="btn btn-ghost small" id="btn-undo" hidden>برگرداندن</button></span>
++      <small class="muted" id="paste-res"></small>
++    </div>
++  </section>
++
+   <section class="card">
+     <h2>اطلاعات فاکتور</h2>
+     <fieldset class="fgroup">
+@@ -47,19 +57,9 @@ sitemap: false
+     </fieldset>
+   </section>
+ 
+-  <section class="card">
+-    <h2>پیام مشتری</h2>
+-    <p class="muted small-note">پیام مشتری را اینجا paste کنید و «تبدیل» بزنید: محصولات، سایز/رنگ/اندازه هر محصول، نام، موبایل، آدرس و یادداشت خودکار جایگذاری می‌شوند. اگر مشتری چند پیام فرستاد، هر کدام را جدا paste کنید؛ پیام تکراری دوباره اضافه نمی‌شود و فیلدهای پر دست نمی‌خورند.</p>
+-    <textarea id="f-paste" rows="5" placeholder="متن پیام مشتری (لینک محصولات، سایز، رنگ، نام، شماره، آدرس…)"></textarea>
+-    <div class="row-between paste-row">
+-      <span class="inline"><button type="button" class="btn btn-primary small" id="btn-paste">تبدیل پیام به فاکتور</button><button type="button" class="btn btn-ghost small" id="btn-undo" hidden>برگرداندن</button></span>
+-      <small class="muted" id="paste-res"></small>
+-    </div>
+-  </section>
+-
+   <section class="card acc-card" id="add-card">
+     <button type="button" class="acc-head" id="add-toggle" aria-expanded="false" aria-controls="add-body">
+-      <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true">▾</span>
++      <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+     </button>
+     <div class="acc-body" id="add-body" hidden>
+       <input type="search" id="q" class="search" placeholder="جستجوی محصول… (مثلاً السا، پیراهن، تاج)" autocomplete="off">
+@@ -78,7 +78,7 @@ sitemap: false
+   </section>
+ 
+   <section class="card">
+-    <h2>هزینه‌ها و توضیحات</h2>
++    <h2>هزینه‌های ارسال و توضیحات</h2>
+     <div class="grid2">
+       <label class="field"><span>هزینه ارسال و گمرک (تومان)</span>
+         <span class="inline"><input type="text" id="f-fee" dir="ltr" inputmode="numeric" autocomplete="off"><button type="button" class="btn btn-ghost small" id="btn-fee-reset" title="بازگشت به مبلغ پیش‌فرض">↺</button></span>
+@@ -91,6 +91,11 @@ sitemap: false
+     <ul class="warns" id="warns"></ul>
+   </section>
+ 
++  <div class="main-actions">
++    <button type="button" class="btn btn-primary btn-xl" id="btn-build">ساخت فاکتور</button>
++    <button type="button" class="btn btn-ghost btn-reset" id="btn-new">ریست کردن فاکتور</button>
++  </div>
++
+   <section class="card" id="out-card" hidden>
+     <h2 id="out-title">فاکتور آماده است</h2>
+     <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت فاکتور» را بزنید.</p>
+@@ -106,9 +111,14 @@ sitemap: false
+     <div class="sheet-scroll"><div id="preview"></div></div>
+   </section>
+ 
+-  <section class="card hist-card">
+-    <div class="row-between"><h2>فاکتورهای اخیر <span class="badge" id="hist-count">۰</span></h2></div>
+-    <div id="history"></div>
++  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
++  <section class="card acc-card hist-card" id="hist-card">
++    <button type="button" class="acc-head" id="hist-toggle" aria-expanded="false" aria-controls="hist-body">
++      <span class="acc-title">فاکتورهای اخیر <span class="badge" id="hist-count">۰</span><i class="acc-dot" id="hist-dot" hidden title="فاکتور منتظر بررسی"></i></span><span class="acc-sub">برای دیدن لیست، باز کنید</span><span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
++    </button>
++    <div class="acc-body" id="hist-body" hidden>
++      <div id="history"></div>
++    </div>
+   </section>
+ 
+   <section class="card">
+@@ -117,6 +127,7 @@ sitemap: false
+     <span class="inline import-row"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off" aria-label="لینک یا کد فاکتور"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
+   </section>
+ 
++  <div class="sec-divider" id="srv-divider" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
+   <section class="card" id="srv-card" hidden>
+     <h2>سرور، تلگرام و گزارش‌ها</h2>
+     <div class="out-actions">
+@@ -126,16 +137,14 @@ sitemap: false
+     </div>
+     <pre class="srv-out" id="srv-out" dir="rtl"></pre>
+   </section>
+-  <section class="card card-new">
+-    <button type="button" class="btn btn-danger" id="btn-new">شروع فاکتور جدید (پاک کردن لیست)</button>
+-  </section>
+   <div class="spacer"></div>
+ </main>
+ 
+-<div class="sticky" id="sticky">
+-  <div class="sticky-sum"><b id="s-count">۰ قلم</b><span id="s-total">۰ تومان</span></div>
+-  <button type="button" class="btn btn-primary" id="btn-build">ساخت فاکتور</button>
+-</div>
++<button type="button" class="fab-build" id="btn-build-fab" aria-label="ساخت فاکتور" title="ساخت فاکتور" hidden>
++  <span class="fab-ico" aria-hidden="true">🧾</span>
++  <span class="fab-txt">ساخت فاکتور</span>
++  <span class="fab-badge" id="s-count">۰</span>
++</button>
+ <div class="toast" id="toast" role="status"></div>
+ 
+ <script src="{{ '/assets/js/invoice.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}"></script>
