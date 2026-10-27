@@ -370,7 +370,7 @@
       ? '<div class="inv-cust" data-brk><div class="ic-title">مشخصات گیرنده</div>' +
           (inv.cust ? '<div class="ic-row"><span>نام</span><b>' + esc(inv.cust) + '</b></div>' : '') +
           (inv.ph ? '<div class="ic-row"><span>تلفن</span><b class="ltr" dir="ltr">' + esc(mobileFa(inv.ph)) + '</b></div>' : '') +
-          (addrText ? '<div class="ic-row"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
+          (addrText ? '<div class="ic-row ic-wide"><span>آدرس</span><b>' + esc(addrText) + '</b></div>' : '') +
           (postal ? '<div class="ic-row"><span>کد پستی</span><b class="ltr" dir="ltr">' + postal + '</b></div>' : '') +
         '</div>' : '';
 

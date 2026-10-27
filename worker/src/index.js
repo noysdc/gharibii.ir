@@ -120,7 +120,7 @@ function notify(env, ctx, text, kind) {
 /* جزئیات مشتری برای پیام‌های تلگرام: شماره، آدرس، فهرست محصولات */
 function detOf(b) {
   const items = Array.isArray(b && b.items) ? b.items.slice(0, 120).map((i) => ({ t: clip(i && i.t, 120), q: Math.min(999, Math.max(1, num(i && i.q) || 1)), o: clip(i && i.o, 120) })) : [];
-  return { ph: clip(String((b && b.ph) || '').replace(/\D/g, ''), 15), addr: clip(b && b.addr, 300), items: items };
+  return { ph: clip(String((b && b.ph) || '').replace(/\D/g, ''), 15), addr: clip(b && b.addr, 300), items: items, msg: String((b && b.msg) || '').replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3000) };
 }
 const rawMsg = (v) => String(v == null ? '' : v).replace(/\r/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3400);
 /* ---------- ساخت متن کامل فاکتور داخل خود Worker (از روی توکن لینک) ----------
@@ -201,6 +201,24 @@ function detItems(d) {
   return '\n\n📦 محصولات:\n' + d.items.map((i, k) => fa(k + 1) + '. ' + (i.t || 'محصول') + (i.o ? ' (' + i.o + ')' : '') + ' × ' + fa(i.q)).join('\n');
 }
 const linkOf = (env, code) => String(env.SITE_URL || '').replace(/\/+$/, '') + '/f/' + code;
+/* بایگانی تلگرام: فقط وقتی فاکتور «پرداخت‌شده» می‌شود فرستاده می‌شود (تأیید فروشنده یا پرداخت آنلاین).
+   ساخت/ویرایش فاکتور و کپی متن دیگر پیام تلگرام نمی‌فرستد. */
+async function paidArchive(env, ctx, code, rec, m, head) {
+  let full = (rec.det && rec.det.msg) || '';
+  if (!full && rec.tok) full = await textFromTok(env, { tok: rec.tok });
+  full = rawMsg(full).slice(0, 3000);
+  const p = rec.paid || {};
+  const t = p.at ? tehran(new Date(p.at * 1000)) : null;
+  const when = t ? t.y + '/' + t.mo + '/' + t.d + ' ' + t.h + ':' + t.mi : '';
+  const info = '🧾 فاکتور: ' + (m.no || code) + (m.rv > 1 ? ' (نسخه ' + fa(m.rv) + ')' : '') +
+    '\n👤 مشتری: ' + (m.cust || '—') + detContact(rec.det) +
+    '\n💰 مبلغ: ' + money(m.total) +
+    (p.ref ? '\n🔖 کد پیگیری: ' + p.ref : '') +
+    (when ? '\n🕒 زمان پرداخت: ' + when : '') +
+    '\n🔗 ' + linkOf(env, code);
+  const body = full ? full + '\n\n— — —\n' + info : info + detItems(rec.det);
+  return notify(env, ctx, head + '\n\n' + body);
+}
 
 /* ---------- ذخیره‌سازی ---------- */
 const kvKey = (code) => 'inv:' + code;
@@ -304,8 +322,7 @@ async function createInvoice(req, env, ctx) {
   if (!code) return reply(req, env, { error: 'busy' }, 503);
   const meta = { ts: num(b.ts) || Math.floor(now.getTime() / 1000), exp: b.exp, total: b.total, n: b.n, no: b.no, cust: b.cust, paid: 0, pa: 0, rv: b.rev };
   await putRec(env, code, { v: 1, tok: b.tok, paid: null, rep: null, det: detOf(b) }, meta);
-  const det = detOf(b), full = rawMsg(b.msg) || (await textFromTok(env, b));
-  notify(env, ctx, full ? '🆕 فاکتور جدید\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : '🧾 فاکتور جدید ' + clip(b.no, 40) + '\nمشتری: ' + (clip(b.cust, 40) || '—') + detContact(det) + '\nمبلغ: ' + money(num(b.total)) + ' (' + fa(num(b.n)) + ' قلم)' + detItems(det) + '\n\n🔗 ' + linkOf(env, code));
+  /* بدون پیام تلگرام: تلگرام فقط برای فاکتور پرداخت‌شده است */
   return reply(req, env, { code: code });
 }
 
@@ -337,13 +354,7 @@ async function updateInvoice(req, env, ctx, code) {
     rec.ck = !!rec.paid; m.ck = rec.paid ? 1 : 0;        /* تأیید دستی یعنی همان لحظه بررسی شده */
   }
   await putRec(env, code, rec, m);
-  if (b.tok !== undefined) {      /* ویرایش فاکتور (افزودن/حذف محصول، تغییر مشتری یا مبلغ) */
-    const rv = num(b.rev);
-    const full = rawMsg(b.msg) || (await textFromTok(env, b));
-    const head = '✏️ فاکتور ویرایش شد' + (rv > 1 ? ' (نسخه ' + fa(rv) + ')' : '');
-    notify(env, ctx, full ? head + '\n\n' + full + '\n\n🔗 مشاهده فاکتور:\n' + linkOf(env, code) : head + '\nفاکتور: ' + (clip(m.no, 40) || code) + '\nمشتری: ' + (clip(m.cust, 40) || '—') + detContact(rec.det) + '\nمبلغ: ' + money(num(m.total)) + ' (' + fa(num(m.n)) + ' قلم)' + detItems(rec.det) + '\n\n🔗 ' + linkOf(env, code));
-  }
-  if (!wasPaid && rec.paid) notify(env, ctx, '✅ پرداخت تأیید شد\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + (rec.paid.ref ? '\nکد پیگیری: ' + rec.paid.ref : '') + detItems(rec.det));
+  if (!wasPaid && rec.paid) await paidArchive(env, ctx, code, rec, m, '✅ فاکتور پرداخت شد (تأیید فروشنده) — بایگانی');
   if (wasPaid && !rec.paid) notify(env, ctx, '↩️ تأیید پرداخت برداشته شد\nفاکتور: ' + (m.no || code) + ' — مبلغ ' + money(m.total));
   return reply(req, env, { ok: true, paid: rec.paid || null });
 }
@@ -422,7 +433,7 @@ async function payCallback(req, env, ctx, url) {
   rec.paid = { ref: clip(v.data.ref_id, 40), at: now, via: 'zp' };
   m.paid = 1; m.pa = now; m.pv = 1; m.rf = rec.paid.ref;
   await putRec(env, code, rec, m);
-  notify(env, ctx, '✅ پرداخت آنلاین انجام شد (درگاه زرین‌پال)\nفاکتور: ' + (m.no || code) + '\nمشتری: ' + (m.cust || '—') + detContact(rec.det) + '\nمبلغ: ' + money(m.total) + '\nکد پیگیری: ' + rec.paid.ref + detItems(rec.det));
+  await paidArchive(env, ctx, code, rec, m, '✅ فاکتور پرداخت شد (پرداخت آنلاین زرین‌پال) — بایگانی');
   return back(true);
 }
 

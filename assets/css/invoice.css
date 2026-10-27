@@ -644,3 +644,89 @@ textarea{line-height:1.8;min-height:92px}
   .inv-sheet .inv-meta{gap:0 12px;padding:2px 12px}
   .sheet-scroll .inv-sheet .ic-row span{flex-basis:4em}
 }
+
+
+/* =====================================================================
+   چیدمان جدید صفحهٔ فروشنده + صفحهٔ مشتری (۱۴۰۵)
+   ===================================================================== */
+
+/* --- فلش بازشونده: دایرهٔ شیشه‌ای با فلش SVG که نرم می‌چرخد --- */
+.acc-chev{width:38px;height:38px;color:#fff;border:1px solid rgba(255,255,255,.55);
+  background:linear-gradient(160deg,rgba(18,140,152,.92) 0%,rgba(10,102,112,.78) 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 6px 14px rgba(10,102,112,.28);
+  transition:transform .28s cubic-bezier(.4,.2,.2,1),box-shadow .2s}
+.acc-chev svg{display:block}
+.acc-head:hover .acc-chev{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 8px 18px rgba(10,102,112,.38)}
+.acc-head.open .acc-chev,.pay-acc-head.open .acc-chev{transform:rotate(180deg)}
+html[data-theme="dark"] .acc-chev{background:linear-gradient(160deg,rgba(40,170,184,.55) 0%,rgba(10,77,85,.7) 100%);border-color:rgba(255,255,255,.28)}
+.acc-body[hidden]{display:none}
+.acc-title .badge{margin-inline-start:6px;vertical-align:middle}
+.acc-dot{display:inline-block;width:10px;height:10px;margin-inline-start:8px;border-radius:50%;background:#e6a100;box-shadow:0 0 0 4px rgba(230,161,0,.22);vertical-align:middle}
+.acc-dot[hidden]{display:none}
+
+/* --- جداکننده بین بخش‌ها --- */
+.sec-divider{display:flex;align-items:center;gap:12px;margin:18px 6px}
+.sec-divider::before,.sec-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.sec-divider .sd-dot{width:9px;height:9px;border-radius:50%;background:var(--sea);opacity:.75;box-shadow:0 0 0 4px rgba(42,163,177,.18)}
+.sec-divider[hidden]{display:none}
+
+/* --- دکمه‌های ساخت / ریست زیر باکس هزینه‌ها --- */
+.main-actions{display:flex;flex-direction:column;gap:10px;margin:0 0 14px}
+.main-actions .btn{width:100%}
+.btn-xl{min-height:54px;font-size:1.08rem;border-radius:18px}
+.btn-reset{border:1px dashed var(--g-border);color:var(--muted)}
+
+/* --- دکمهٔ شناور «ساخت فاکتور» مثل دکمهٔ سبد خرید سایت --- */
+.fab-build{position:fixed;bottom:1.25rem;left:1.25rem;z-index:60;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  min-width:3.4rem;height:3.4rem;padding:0 .95rem;border-radius:999px;font:inherit;font-weight:700;font-size:1rem;color:#fff;cursor:pointer;
+  background:linear-gradient(160deg,rgba(18,140,152,.9) 0%,rgba(10,102,112,.78) 100%);
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);border:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(0,0,0,.1),0 12px 28px rgba(10,102,112,.38);
+  transition:transform .2s ease,opacity .2s;margin-bottom:env(safe-area-inset-bottom,0px)}
+.fab-build:hover{transform:scale(1.05)}
+.fab-build:active{transform:scale(.96)}
+.fab-build[hidden]{display:none}
+.fab-ico{font-size:1.25rem;line-height:1}
+.fab-txt{display:none}
+.fab-badge{position:absolute;top:-4px;right:-4px;min-width:1.3rem;height:1.3rem;padding:0 .3rem;border-radius:999px;background:#ffb8d6;color:#5a1633;font-size:.72rem;font-weight:800;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+html[data-theme="dark"] .fab-build{background:linear-gradient(160deg,rgba(40,170,184,.55) 0%,rgba(10,77,85,.7) 100%);border-color:rgba(255,255,255,.28)}
+@media (min-width:769px){.fab-txt{display:inline}.fab-build{padding:0 1.2rem 0 1.1rem}}
+@media (max-width:520px){.fab-build{bottom:.9rem;left:.9rem;min-width:3rem;height:3rem}}
+.spacer{height:calc(70px + env(safe-area-inset-bottom))}
+.sticky{display:none !important}
+
+/* --- فاکتورهای اخیر داخل باکس بازشونده --- */
+.hist-card .acc-body{padding-top:4px}
+.hist-card .acc-head .acc-title{flex:0 1 auto}
+
+/* --- صفحهٔ مشتری: مشخصات گیرنده دوستونه --- */
+.inv-sheet .inv-cust{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;padding:10px 16px 8px}
+.inv-sheet .inv-cust .ic-title{grid-column:1/-1}
+.inv-sheet .inv-cust .ic-row{flex-direction:column;align-items:stretch;gap:1px;padding:7px 0;min-width:0}
+.inv-sheet .inv-cust .ic-row span{flex:none;font-size:12px}
+.inv-sheet .inv-cust .ic-row b{flex:none;font-size:14px;line-height:1.7}
+.inv-sheet .inv-cust .ic-title+.ic-row,.inv-sheet .inv-cust .ic-title+.ic-row+.ic-row{border-top:0}
+/* آدرس همیشه تمام عرض؛ بقیه دوتا دوتا */
+.inv-sheet .inv-cust .ic-row.ic-wide{grid-column:1/-1}
+.inv-sheet .inv-cust .ic-row.ic-wide{border-top:1px dashed var(--v-line)}
+@media (max-width:520px){.sheet-scroll .inv-sheet .ic-row span{flex-basis:auto}}
+
+/* --- کارت‌به‌کارت کشویی --- */
+.pay-acc{padding:0;overflow:hidden}
+.pay-acc-head{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:10px 14px;border:0;background:transparent;color:var(--ink);font:inherit;text-align:start;cursor:pointer}
+.pay-acc-title{font-weight:700;font-size:.98rem;color:var(--sea-deep)}
+.pay-acc-sub{flex:1;min-width:0;font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pay-acc-head:focus-visible{outline:3px solid var(--sea);outline-offset:-3px;border-radius:18px}
+.pay-acc-body{padding:0 12px 12px}
+.pay-acc-body[hidden]{display:none}
+.pay-acc-body>.bank-card{margin-top:2px}
+@media (max-width:420px){.pay-acc-sub{display:none}.pay-acc-title{flex:1}}
+/* پرداخت آنلاین: شاخص‌ترین دکمهٔ صفحه */
+#pay-m-online{border-color:var(--sea);background:var(--g-card)}
+#pay-go{min-height:54px;font-size:1.08rem;border-radius:18px}
+
+/* --- دکمه‌های ذخیره / کپی: سه‌تایی جمع‌وجور با آیکون، حتی در موبایل --- */
+.view-actions-row.share-row{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:8px}
+.share-row>.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:60px;padding:8px 4px;font-size:.84rem;line-height:1.4}
+.share-row .va-ico{font-size:1.25rem;line-height:1}
+@media (prefers-reduced-motion:reduce){.acc-chev,.fab-build{transition:none}}
