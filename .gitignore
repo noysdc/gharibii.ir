@@ -22,3 +22,4 @@ __pycache__/
 *.pyc
 
 scripts/.telegram_channel.env
+scripts/telegram_channel.env
