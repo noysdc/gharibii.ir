@@ -713,19 +713,24 @@
     }
     return res;
   }
-  var RX_NAME = /^(?:نام(?:\s*و\s*نام\s*خانوادگی)?|اسم(?:\s*و\s*فامیل)?|نام\s*گیرنده|تحویل\s*گیرنده|گیرنده)\s*[:：]\s*(.*)$/;
-  var RX_PHONE = /^(?:شماره(?:\s*(?:تماس|موبایل|همراه|تلفن|واتساپ))?|تلفن|موبایل|همراه|تماس|واتساپ)\s*[:：]\s*(.*)$/;
-  var RX_ADDR = /^(?:آدرس|ادرس|نشانی)(?:\s*(?:کامل|تحویل|ارسال|گیرنده))?\s*[:：]?\s*(.*)$/;
-  var RX_POST = /^کد\s*پستی\s*[:：]?\s*(\d[\d\s-]*)$/;
+  /* برچسب‌ها: دونقطه اختیاری است («اسم و فامیل علی رضایی»)، و ایموجی/شمارهٔ ابتدای خط نادیده گرفته می‌شود */
+  var RX_NAME = /^(?:نام(?:\s*و\s*نام\s*خانوادگی)?(?:\s*(?:گیرنده|مشتری|خریدار))?|اسم(?:\s*و\s*فامیل(?:ی)?)?(?:\s*(?:گیرنده|مشتری))?|تحویل\s*گیرنده|گیرنده|مشتری|خریدار|به\s*نام)(?:\s*[:：\-–]\s*|\s+)(?!محصول|کالا|فروشگاه)(.+)$/;
+  var RX_PHONE = /^(?:شماره(?:\s*(?:تماس|موبایل|همراه|تلفن|واتساپ))?|تلفن|موبایل|همراه|تماس|واتساپ)\s*[:：\-–]?\s*(.*)$/;
+  var RX_ADDR = /^(?:آدرس|ادرس|نشانی)(?:\s*(?:کامل|تحویل|ارسال|گیرنده|پستی))?\s*[:：\-–]?\s*(.*)$/;
+  var RX_POST = /^کد[\s\u200c]*پستی\s*[:：\-–]?\s*(\d[\d\s-]*)$/;
   var RX_NOTE = /^(?:یادداشت|نکته|توضیحات|پیام)\s*[:：]\s*(.*)$/;
-  var RX_STOP = /^[━🧾🚚💳⚠💰🔗🙏🌸🛍]/;
+  /* نشانه‌های آدرس برای پیام‌های بدون برچسب */
+  var RX_ADDR_HINT = /(?:استان|شهرستان|شهر|خیابان|خ\s|کوچه|کوچ|بلوار|میدان|پلاک|واحد|طبقه|منطقه|محله|جاده|بزرگراه|اتوبان|فلکه|بن\s*بست|شهرک|روستا|کوی|ساختمان|ط\s*\d|پ\s*\d|تهران|اصفهان|شیراز|مشهد|تبریز|کرج|اهواز|قم|کیش|رشت|ساری|یزد|کرمان|ارومیه|زاهدان|همدان|اراک|بندرعباس|قزوین|گرگان|سنندج|کرمانشاه|خرم\s*آباد|بوشهر|ایلام|اردبیل|زنجان|سمنان|بیرجند|یاسوج|شهرکرد|بجنورد)/;
+  var RX_NOT_NAME = /(?:سلام|ممنون|متشکر|مرسی|تشکر|ببخشید|لطفا|لطفاً|خواهش|سفارش|محصول|قیمت|ارسال|هزینه|سایز|رنگ|عدد|تومان|فاکتور|پرداخت|کارت|حساب|موجود|ممنونم|خسته|درود|وقت\s*بخیر|عرض\s*ادب|جمع|تخفیف|تعداد|لینک|واتساپ|تلگرام|موبایل|شماره|تلفن|کد|آدرس|ادرس|نشانی)/;
+  var RX_STOP = /^(?:━|🧾|🚚|💳|⚠|💰|🔗|🙏|🌸|🛍)/;   /* ⚠ به‌صورت گروه: داخل [] ایموجی‌ها نیم‌کاراکتر می‌شدند و 👤📞📍 هم «پایان» حساب می‌شدند */
 
   function parseCustomerMessage(text, feed) {
     var out = { items: [], lost: 0, name: '', phone: '', addr: '', note: '' };
     var skip = ((feed && feed.sellers) || []).map(function (s) { return '0' + String(s.number).slice(-10); });
-    var addr = [], note = [], cur = null, mode = '';
+    var titles = ((feed && feed.products) || []).map(function (p) { return nzs(p.t); });
+    var addr = [], note = [], cur = null, mode = '', free = [], phoneAt = -1, postal = '';
     var lines = fa(text).split(/\r?\n/);
-    lines.forEach(function (raw) {
+    lines.forEach(function (raw, idx) {
       var ln = raw.trim(), m;
       if (!ln) { mode = ''; return; }
       var urls = ln.match(/https?:\/\/[^\s)>\]]+/g) || [];
@@ -741,20 +746,69 @@
         if (!ln) return;
       }
       if (RX_STOP.test(ln)) { mode = ''; return; }
-      if ((m = ln.match(RX_NAME))) { out.name = clip(m[1], 60); cur = null; mode = ''; return; }
-      if ((m = ln.match(RX_PHONE))) { var ph = phoneIn(m[1], true, skip); if (ph && !out.phone) out.phone = ph; cur = null; mode = ''; return; }
-      if ((m = ln.match(RX_POST))) { addr.push('کد پستی: ' + m[1].replace(/\D/g, '')); cur = null; return; }
+      /* ایموجی، بولت و علامت‌های ابتدای خط («📍آدرس:»، «- نام:») حذف می‌شود؛ شمارهٔ فهرست («1.») نه، تا عنوان محصولات با نام اشتباه نشود */
+      var numbered = /^\s*\d{1,2}\s*[.)\-]\s*\S/.test(ln);
+      ln = ln.replace(/^[^\u0600-\u06FFA-Za-z0-9]+/, '').trim();
+      if (!ln) return;
+      if ((m = ln.match(RX_NAME)) && !numbered) { out.name = clip(m[1].replace(phoneRe, ' '), 60); cur = null; mode = ''; return; }
+      if ((m = ln.match(RX_PHONE))) { var ph = phoneIn(m[1], true, skip); if (ph && !out.phone) { out.phone = ph; phoneAt = idx; } cur = null; mode = ''; return; }
+      if ((m = ln.match(RX_POST))) { postal = m[1].replace(/\D/g, ''); addr.push('کد پستی: ' + postal); cur = null; return; }
       if ((m = ln.match(RX_ADDR))) { if (m[1]) addr.push(m[1]); cur = null; mode = 'addr'; return; }
       if ((m = ln.match(RX_NOTE))) { if (m[1]) note.push(m[1]); cur = null; mode = 'note'; return; }
       if (mode === 'addr') { addr.push(ln); return; }
       if (mode === 'note') { note.push(ln); return; }
       var ph2 = phoneIn(ln, false, skip);
-      if (ph2 && !out.phone) out.phone = ph2;
-      if (!cur) return;
-      var q = qtyIn(ln); if (q) cur.q = q;
-      var o = optsIn(ln);
-      Object.keys(o).forEach(function (k) { cur.o[k] = o[k]; });
+      if (ph2 && !out.phone) { out.phone = ph2; phoneAt = idx; }
+      var used = false;
+      if (cur) {
+        var q = qtyIn(ln); if (q) { cur.q = q; used = true; }
+        var o = optsIn(ln);
+        Object.keys(o).forEach(function (k) { cur.o[k] = o[k]; used = true; });
+      }
+      if (!used && !numbered) free.push({ i: idx, ln: ln, ph: !!ph2 });
     });
+
+    /* ---- پیام بدون برچسب: نام، آدرس و کد پستی از روی شکل خط‌ها حدس زده می‌شود ---- */
+    function cleaned(ln) {   /* خط بدون موبایل، کد پستی و علامت‌ها */
+      return ln.replace(phoneRe, ' ').replace(/\b\d{10}\b/g, ' ').replace(/[\d:：،,.\-–_()\[\]|/\\]+/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    function isTitle(ln) {
+      var n = nzs(ln);
+      return n.length >= 6 && titles.some(function (t) { return t.indexOf(n) >= 0 || n.indexOf(t) >= 0; });
+    }
+    var rest = [];
+    free.forEach(function (f) {
+      var ln = f.ln;
+      /* کد پستی بدون برچسب: ۱۰ رقم که با ۰ و (در خط بدون برچسب) با ۹ شروع نشود */
+      var pm = ln.match(/(?:^|\D)([1-8]\d{9})(?!\d)/);
+      if (!pm && !postal && out.phone && /^\d{10}$/.test(ln.replace(/\s/g, ''))) pm = [0, ln.replace(/\s/g, '')];   /* خط فقط ۱۰ رقم و موبایل قبلاً پیدا شده → کد پستی (حتی اگر با ۹ شروع شود) */
+      if (pm && !postal) { postal = pm[1]; ln = ln.replace(pm[1], ' ').trim(); if (!cleaned(ln)) return; }
+      f.ln = ln;
+      rest.push(f);
+    });
+    if (!addr.length) {
+      var picked = rest.filter(function (f) { return RX_ADDR_HINT.test(f.ln) && !isTitle(f.ln) && !/سلام|سفارش|فروشگاه|محصول|لطفا|ممنون|راهنمایی/.test(f.ln); });
+      if (picked.length) {
+        picked.forEach(function (f) { addr.push(f.ln.replace(phoneRe, ' ').replace(/\s+/g, ' ').trim()); });
+        rest = rest.filter(function (f) { return picked.indexOf(f) < 0; });
+      }
+      if (postal && addr.length) addr.push('کد پستی: ' + postal);
+    } else if (postal && !addr.some(function (a) { return a.indexOf(postal) >= 0; })) {
+      addr.push('کد پستی: ' + postal);
+    }
+    if (!out.name) {
+      var cands = rest.filter(function (f) {
+        var c = cleaned(f.ln), wc = c ? c.split(' ').length : 0;
+        if (!c || c.length > 40 || RX_NOT_NAME.test(c) || RX_ADDR_HINT.test(c) || isTitle(f.ln)) return false;
+        if (/[?؟!]/.test(f.ln) || /[a-zA-Z]/.test(c)) return false;
+        return wc >= 2 && wc <= 4 || (wc === 1 && phoneAt >= 0 && Math.abs(f.i - phoneAt) <= 1);
+      });
+      if (cands.length) {
+        var near = cands.filter(function (f) { return phoneAt >= 0 && Math.abs(f.i - phoneAt) <= 1; })[0];
+        out.name = clip(cleaned((near || cands[0]).ln), 60);
+      }
+    }
+
     if (!out.items.length && !out.lost && feed && feed.products) {
       var nt = nzs(text);
       feed.products.forEach(function (p) { var t = nzs(p.t); if (t.length >= 8 && nt.indexOf(t) >= 0) out.items.push({ p: p, q: 1, o: {} }); });
@@ -763,6 +817,7 @@
     out.note = clip(note.join(' · '), 300);
     return out;
   }
+  var phoneRe = /(?:\+?98|0098|0)?9\d{9}(?!\d)/g;
 
   w.GInvoice = {
     BASE: BASE, normDigits: normDigits, toNum: toNum, nf: nf, money: money, esc: esc, clip: clip, el: el,
