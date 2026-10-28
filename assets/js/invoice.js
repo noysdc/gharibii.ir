@@ -721,7 +721,7 @@
   var RX_NOTE = /^(?:(?:یادداشت|نکته|توضیحات|توضیح|ملاحظات|پیام|درخواست(?:\s*خاص)?)\s*[:：\-–]\s*|(?:یادداشت|ملاحظات)\s+)(.*)$/;
   var RX_CHAT = /(?:^|\s)(?:سلام|درود|وقت\s*بخیر|روز\s*بخیر|عصر\s*بخیر|شب\s*بخیر|عرض\s*ادب|ممنونم?|مرسی|متشکرم?|تشکر|سپاس|خسته\s*نباشید|دمت\s*گرم|ببخشید|لطفا|لطفاً|باتشکر|با\s*تشکر|خواهش\s*می‌?کنم)(?=\s|$|[،,.!؟?:])/g;
   var RX_NOTE_WORDS = /لطفا|لطفاً|عجله|سریع|هرچه\s*زودتر|باشه|بشه|بسته|هدیه|زنگ|تماس|نمی.?خوام|قبل\s*از|بعد\s*از|ساعت/;
-  var RX_TEMPLATE = /می.?خوام\s*این|سفارش\s*بدم|نهایی.?سازی|راهنمایی.?ام|فروشگاه\s*غریبی/;
+  var RX_TEMPLATE = /مشخصات\s*ارسال|بعد\s*از\s*«|می.?خوام\s*این|سفارش\s*بدم|نهایی.?سازی|راهنمایی.?ام|فروشگاه\s*غریبی/;
   /* نشانه‌های آدرس برای پیام‌های بدون برچسب */
   var RX_ADDR_HINT = /(?:استان|شهرستان|شهر|خیابان|خ\s|کوچه|کوچ|بلوار|میدان|پلاک|واحد|طبقه|منطقه|محله|جاده|بزرگراه|اتوبان|فلکه|بن\s*بست|شهرک|روستا|کوی|ساختمان|ط\s*\d|پ\s*\d|تهران|اصفهان|شیراز|مشهد|تبریز|کرج|اهواز|قم|کیش|رشت|ساری|یزد|کرمان|ارومیه|زاهدان|همدان|اراک|بندرعباس|قزوین|گرگان|سنندج|کرمانشاه|خرم\s*آباد|بوشهر|ایلام|اردبیل|زنجان|سمنان|بیرجند|یاسوج|شهرکرد|بجنورد)/;
   var RX_NOT_NAME = /(?:سلام|ممنون|متشکر|مرسی|تشکر|ببخشید|لطفا|لطفاً|خواهش|سفارش|محصول|قیمت|ارسال|هزینه|سایز|رنگ|عدد|تومان|فاکتور|پرداخت|کارت|حساب|موجود|ممنونم|خسته|درود|وقت\s*بخیر|عرض\s*ادب|جمع|تخفیف|تعداد|لینک|واتساپ|تلگرام|موبایل|شماره|تلفن|کد|آدرس|ادرس|نشانی)/;
@@ -753,21 +753,15 @@
       var numbered = /^\s*\d{1,2}\s*[.)\-]\s*\S/.test(ln);
       ln = ln.replace(/^[^\u0600-\u06FFA-Za-z0-9]+/, '').trim();
       if (!ln) return;
+      /* برچسبِ خالی (قالب پر نشده): فقط حالت را تنظیم می‌کند؛ «آدرس:» خالی یعنی خط‌های بعدی تا برچسب بعدی آدرس‌اند */
+      if (/^(?:نام(?:\s*و\s*نام\s*خانوادگی)?|اسم(?:\s*و\s*فامیل)?|شماره(?:\s*(?:تماس|موبایل|همراه))?|موبایل|تلفن|کد[\s\u200c]*پستی|آدرس|ادرس|نشانی|یادداشت|توضیحات|ملاحظات)\s*[:：]\s*$/.test(ln)) { mode = /^(?:آدرس|ادرس|نشانی)/.test(ln) ? 'addr' : /^(?:یادداشت|توضیحات|ملاحظات)/.test(ln) ? 'note' : ''; cur = null; return; }
       if ((m = ln.match(RX_NAME)) && !numbered) { out.name = clip(m[1].replace(phoneRe, ' '), 60); cur = null; mode = ''; return; }
       if ((m = ln.match(RX_PHONE))) { var ph = phoneIn(m[1], true, skip); if (ph && !out.phone) { out.phone = ph; phoneAt = idx; } cur = null; mode = ''; return; }
       if ((m = ln.match(RX_POST))) { postal = m[1].replace(/\D/g, ''); addr.push('کد پستی: ' + postal); cur = null; return; }
       if ((m = ln.match(RX_ADDR))) { if (m[1]) addr.push(m[1]); cur = null; mode = 'addr'; return; }
       if ((m = ln.match(RX_NOTE))) { if (m[1]) note.push(m[1]); cur = null; mode = 'note'; return; }
-      if (mode === 'addr') {
-        /* زیر «آدرس:» جملهٔ درخواستی (عجله، لطفاً، زنگ نزنید…) بدون نشانهٔ آدرس = یادداشت */
-        if (RX_NOTE_WORDS.test(ln) && !RX_ADDR_HINT.test(ln)) { mode = 'note'; note.push(ln); return; }
-        addr.push(ln); return;
-      }
-      if (mode === 'note') {
-        /* زیر «یادداشت:» ممکن است آدرس هم نوشته شده باشد (کلمات آدرس بدون جملهٔ درخواستی) → به آدرس می‌رود */
-        if (RX_ADDR_HINT.test(ln) && !RX_NOTE_WORDS.test(ln) && !RX_TEMPLATE.test(ln)) { addr.push(ln.replace(/^ارسال\s*به\s*/, '')); return; }
-        note.push(ln); return;
-      }
+      if (mode === 'addr') { addr.push(ln); return; }   /* زیر «آدرس:» هر خطی تا برچسب بعدی جزو آدرس است، به همان ترتیبی که نوشته شده */
+      if (mode === 'note') { note.push(ln); return; }
       var ph2 = phoneIn(ln, false, skip);
       if (ph2 && !out.phone) { out.phone = ph2; phoneAt = idx; }
       var used = false;
@@ -822,14 +816,15 @@
     }
 
     /* هر خط باقی‌مانده (نه نام، نه آدرس، نه موبایل/کد پستی، نه سلام و تشکر و متن خود سایت) یادداشت است */
-    if (!note.length) {
+    var extra = [];
+    {
       rest.forEach(function (f) {
         if (f.used) return;
         var ln = f.ln;
         if (RX_TEMPLATE.test(ln) || isTitle(ln)) return;
         var body = ln.replace(phoneRe, ' ').replace(RX_CHAT, ' ').replace(/[\s:：،,.!؟?\-–_()\[\]|/\\]+/g, ' ').trim();
         if (body.replace(/\d/g, '').length < 3) return;
-        note.push(ln.replace(phoneRe, ' ').replace(/\s+/g, ' ').trim());
+        extra.push(ln.replace(phoneRe, ' ').replace(/\s+/g, ' ').trim());
       });
     }
 
@@ -839,8 +834,8 @@
     }
     /* باکس یادداشت حذف شد: هر چیزی که آدرس/نام/موبایل نبود به همان آدرس اضافه می‌شود (کد پستی آخر) */
     var pc = addr.filter(function (a) { return /^کد پستی:/.test(a); }), ad = addr.filter(function (a) { return !/^کد پستی:/.test(a); });
-    out.addr = clip(ad.concat(note, pc).join('، '), 300);
-    out.note = '';
+    out.addr = clip(ad.concat(extra, pc).join('، '), 300);
+    out.note = clip(note.join(' · '), 300);
     return out;
   }
   var phoneRe = /(?:\+?98|0098|0)?9\d{9}(?!\d)/g;
