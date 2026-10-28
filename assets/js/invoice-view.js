@@ -68,8 +68,6 @@
     $('pay-m-link').hidden = !link;
     $('pay-m-sheba').hidden = !hasBank;
     $('pay-m-sheba-title').textContent = 'کارت‌به‌کارت';
-    /* کارت‌به‌کارت: اگر پرداخت آنلاین/لینک هست، بسته می‌ماند تا دکمهٔ پرداخت آنلاین اول دیده شود؛ اگر تنها راه است، باز است */
-    if (!accTouched) setAcc(!(online || link));
     $('card-row').hidden = !card; $('card-copy').hidden = !card;
     $('sheba-row').hidden = !sheba; $('sheba-copy-row').hidden = !sheba;
     if (card) $('card-show').textContent = cardPretty(card);
@@ -83,15 +81,8 @@
     if (bc) bc.classList.toggle('is-off', off);
     if ($('bc-state')) { $('bc-state').hidden = !off; $('bc-state').textContent = expired ? 'منقضی' : 'غیرفعال'; }
   }
-  var accTouched = false;
-  function setAcc(open) {
-    var t = $('pay-acc-toggle'), b = $('pay-acc-body');
-    if (!t || !b) return;
-    b.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); t.classList.toggle('open', open);
-  }
   function bindPay() {
     if (!$('pay-box')) return;
-    $('pay-acc-toggle').addEventListener('click', function () { accTouched = true; setAcc($('pay-acc-body').hidden); });
     /* پرداخت آنلاین: مبلغ را Worker از خود فاکتور می‌خواند و آدرس صفحهٔ بانک را برمی‌گرداند؛ همان تب به بانک می‌رود */
     $('pay-go').addEventListener('click', function () {
       if (!inv || payBlock()) { G.toast(payBlock() || 'فاکتور معتبر نیست'); return; }

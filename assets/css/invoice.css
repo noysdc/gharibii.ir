@@ -730,3 +730,5 @@ html[data-theme="dark"] .fab-build{background:linear-gradient(160deg,rgba(40,170
 .share-row>.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:60px;padding:8px 4px;font-size:.84rem;line-height:1.4}
 .share-row .va-ico{font-size:1.25rem;line-height:1}
 @media (prefers-reduced-motion:reduce){.acc-chev,.fab-build{transition:none}}
+
+.pay-acc-head.static{cursor:default}
