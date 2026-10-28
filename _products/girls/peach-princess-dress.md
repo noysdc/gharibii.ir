@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/peach-princess-dress/"]
 webzi_id: 5
 old_slug: "تي-شرت-نخي-يقه-گرد-زنانه"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P5-تي-شرت-نخي-يقه-گرد-زنانه.html"
 webzi_images: ["14aaeb96f506450193298ff4700a7bd6.jpg", "a3a86d28196c4b1f9e292569eff23b5c.jpg", "ce4602d5f04a411e9a1bc2b7d62c621c.jpg", "d0981402cb7d437f9da153f23950c210.PNG", "ab06673698dd41319fa6cc1a3117a16a.jpg", "51d3e97c24c242d495a9a74df8f805e6.jpg", "9150d33e15bc443282d1aa9cf58c36bd.png"]
 options:
   - name: "رنگ"

@@ -12,6 +12,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45399
 old_slug: "کلاه-کپ-بتمن-شخصیت-دیزنی-قهرمانی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کلاه/P45399-کلاه-کپ-بتمن-شخصیت-دیزنی-قهرمانی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["22c678cb66ca4d26be1c89f842ead6da.PNG"]
 options:
   - name: "رنگ"

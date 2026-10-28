@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/boys/spiderman-muscle-suit/"]
 webzi_id: 45390
 old_slug: "یکسره-عضلانی-قهرمانی-شخصیت-اسپایدرمن-فروشگاه-غریبی"
+redirect_from:
+  - "/shop/شخصیتی-پسرانه/P45390-یکسره-عضلانی-قهرمانی-شخصیت-اسپایدرمن-فروشگاه-غریبی.html"
 webzi_images: ["1e279f7311f546448072c5d4d6a5d500.PNG", "ca6844f3afc64e86b8738e2cac7ef2ae.jpg", "9b844b42c28d4791bf64bf08c3546763.jpg", "b898e9681dff4696b4ae3fdf696d8799.jpg", "c618220af8c04e2a80aca5ca4d0c2b72.jpg", "9a97a53f91fb42a8813663cbf70288fb.PNG", "7bf9f8a4dd7e4816941fbb6a22983628.jpg", "cb9ad6ab07784d78a06844ce6fb5839c.JPG"]
 options:
   - name: "سن و سال"

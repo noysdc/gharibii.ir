@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/halloween-witch-formal-dress/"]
 webzi_id: 45420
 old_slug: "پیرهن-مجلسی-هالووین-جادوگری-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/پیراهن-مجلسی/P45420-پیرهن-مجلسی-هالووین-جادوگری-فروشگاه-غریبی-کیش.html"
 webzi_images: ["8e32ee8785b24556814983e1456a0523.PNG", "3fe0a5e6ef264634976fbb9ea2356b52.PNG", "07df70fa65dc454f90a1be1d4e4bff51.PNG", "ae2312c30a7244ef832767c5b1f55677.PNG", "189812debbfa4cb2b5f48ed6d42a1d86.PNG", "5b0f8b6dada24f9b8c1e61b7aacd5bab.PNG"]
 options:
   - name: "رنگ"

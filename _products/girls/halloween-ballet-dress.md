@@ -6,11 +6,13 @@ slug: "halloween-ballet-dress"
 category: girls
 gender: girls
 price: "0"
-price group: "out_of_stock"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/halloween-ballet-dress/"]
 webzi_id: 45342
 old_slug: "پبراهن-باله-تم-هالووین"
+redirect_from:
+  - "/shop/باله/P45342-پبراهن-باله-تم-هالووین.html"
 webzi_images: ["b8546a51443f40ec8b11a6cce1cb6186.PNG", "a53ace57a1ee483ea29ad03ac44c69fc.jpg", "db08164b4f434402b9ff065615f40494.jpg", "6a63f0348c7b4f5ca454e3a1694e2f83.jpg", "40ea11fc756b4fabb35f369654b5e9b4.png"]
 tags: ["لباس باله هالووین", "باله هالووین", "باله هالووین دخترانه", "هالووین", "تم هالووین", "لباس باله", "پیراهن باله", "کلاس باله", "اجرای نمایش", "لباس هالووین دخترانه", "تم تولد", "لباس تولد دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "فروشگاه غریبی کیش", "کیش"]
 

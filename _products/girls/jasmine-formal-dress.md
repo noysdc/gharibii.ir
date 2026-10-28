@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/jasmine-formal-dress/"]
 webzi_id: 45340
 old_slug: "پبراهن-مجلسی-دیزنی-جاسمین"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45340-پبراهن-مجلسی-دیزنی-جاسمین.html"
 webzi_images: ["cbee181fe67e44ad813522b1a3a2b6d0.JPG", "4febcb3fbcd34142befcf29242da903e.JPG", "0a701411c35a44ffbd9b3d12819d22a7.JPG", "0334ff0e7e3f49acad996e5e9b58fd54.jpg", "d34c8ad4efea49acb90f75cc95af1fd0.jpg", "ac66be1bc20a4daaa362f98c7006dac1.png"]
 options:
   - name: "اندازه"

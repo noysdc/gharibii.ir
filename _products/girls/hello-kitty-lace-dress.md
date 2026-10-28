@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/hello-kitty-lace-dress/"]
 webzi_id: 45424
 old_slug: "پیرهن-توری-کیتی-دخترانه-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45424-پیرهن-توری-کیتی-دخترانه-فروشگاه-غریبی-کیش.html"
 webzi_images: ["77dedaf39fdb4884830aaff1251cecec.JPG", "8270759d151942b8ba7f87f746c334e7.PNG", "8fe52df6db244af691a1517d6566954c.JPG"]
 options:
   - name: "رنگ"

@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-ballet-dress/"]
 webzi_id: 45338
 old_slug: "پیرهن-باله-تم-السا"
+redirect_from:
+  - "/shop/باله/P45338-پیرهن-باله-تم-السا.html"
 webzi_images: ["5511985ab3e340c689bda9003165b2cd.JPG", "e638aafdca964ebf89c39d4a0528fb8d.png"]
 options:
   - name: "اندازه"

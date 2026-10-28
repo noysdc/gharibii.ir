@@ -12,6 +12,8 @@ images_dirs: ["/assets/images/products/angel-ballet-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: angel-ballet-dress
 webzi_id: 45431
 old_slug: "پیراهن-رقص-باله-تم-فرشته-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/باله/P45431-پیراهن-رقص-باله-تم-فرشته-فروشگاه-غریبی-کیش.html"
 webzi_images: ["4741300181b1413b941be2312c489d77.jpg"]
 options:
   - name: "رنگ"

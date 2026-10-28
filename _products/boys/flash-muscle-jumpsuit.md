@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/boys/flash-muscle-jumpsuit/"]
 webzi_id: 45379
 old_slug: "پسرانه-سرهمی-عضلانی-قهرمانی-فلش-فروشگاه-غریبی"
+redirect_from:
+  - "/shop/شخصیتی-پسرانه/P45379-پسرانه-سرهمی-عضلانی-قهرمانی-فلش-فروشگاه-غریبی.html"
 webzi_images: ["e9f17d1a2c0943b7832c0a03872407fd.jpg"]
 options:
   - name: "اندازه"

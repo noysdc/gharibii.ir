@@ -10,6 +10,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/moana-dress/"]
 webzi_id: 45421
 old_slug: "پیرهن-مووانا-دیزنی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45421-پیرهن-مووانا-دیزنی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["e84019ad35ad4fd0bba56a34aa8d48ca.jpg", "b0e6512dccd94bdba21ecc9a5dfc820f.jpg", "d1b35a8e3bfa474b8d30ea94c06f2486.jpg"]
 options:
   - name: "اندازه"

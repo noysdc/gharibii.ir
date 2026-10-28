@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/wednesday-formal-dress/"]
 webzi_id: 6
 old_slug: "پیراهن-مجلسی-ونزدی-فروشگاه-غریبی"
+redirect_from:
+  - "/shop/پیراهن-مجلسی/P6-پیراهن-مجلسی-ونزدی-فروشگاه-غریبی.html"
 webzi_images: ["0738376d6b2a469090e8f3390da3fbb1.jpg", "b1ce763de90048999cde20548ecd966b.JPG", "16d013f00ca1400789fce168baca2d49.jpg", "869fc5c0881b45098b4fd0435502a2a1.jpg", "156804bbeeed4e91a65775d4df047b0a.jpg", "c35ef86d038142b8be42b65e05abf0d1.jpg", "cf002c5303334771ad3f35bd613a70c0.jpg", "cce23379055d454c9dfc2c90c1148dcb.jpg", "426369fe92744a4f907259cbd36569a6.jpg", "c163af26e38d4079aaf68257358ada93.jpg", "7e02b87ad1ba49c785d782e6516c44c7.png"]
 options:
   - name: "اندازه"

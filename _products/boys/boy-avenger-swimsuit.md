@@ -11,6 +11,9 @@ currency: IRT
 images_dirs: ["/assets/images/products/boys/boy-avenger-swimsuit/"]
 webzi_id: 45366
 old_slug: "مایو-لباسی-شخصیتی-پسرانه"
+redirect_from:
+  - "/shop/شخصیتی-پسرانه/P45366-مایو-لباسی-شخصیتی-پسرانه.html"
+  - "/shop/مایو/P45366-مایو-لباسی-شخصیتی-پسرانه.html"
 webzi_images: ["bf012026659d44a5a9e23f51f548b8e3.JPG", "1fa3788d17c74339bd96f445f54bebd1.JPG", "d7803516076e4967af85878cf4c3f118.JPG"]
 options:
   - name: "رنگ"

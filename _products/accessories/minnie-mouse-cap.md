@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45403
 old_slug: "کلاه-کپ-دخترانه-شخصیتی-میکی-موس-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کلاه/P45403-کلاه-کپ-دخترانه-شخصیتی-میکی-موس-فروشگاه-غریبی-کیش.html"
 webzi_images: ["4b8b4cca44e449829ea86c2583439aa7.jpeg"]
 options:
   - name: "رنگ"

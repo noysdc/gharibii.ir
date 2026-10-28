@@ -12,6 +12,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/crown-wand/princess-braid-crown/"]
 webzi_id: 45416
 old_slug: "تل-تاج-پرنسسی-گیس-دار-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/اکسسوری/P45416-تل-تاج-پرنسسی-گیس-دار-فروشگاه-غریبی-کیش.html"
 webzi_images: ["aa12dbf5ffc4400f9a8ef42c947fe190.jpg"]
 options:
   - name: "رنگ"

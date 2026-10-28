@@ -10,6 +10,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/accessories/mermaid-keychain/"]
 webzi_id: 3
 old_slug: "پالتو-بلند-زنانه"
+redirect_from:
+  - "/shop/اکسسوری/P3-پالتو-بلند-زنانه.html"
 webzi_images: ["fe5bb406dca74074bd334178cd801d1d.jpg", "029aaac35d234514b88d393c475521ac.jpg", "3f3ffd9a9f914ccbb4ae6bb74fa48000.PNG"]
 options:
   - name: "رنگ"

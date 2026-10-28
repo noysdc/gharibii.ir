@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/accessories/thor-cape-mask/"]
 webzi_id: 45434
 old_slug: "شنل-ماسک-شخصیتی-قهرمانی-ثور-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/اکسسوری/P45434-شنل-ماسک-شخصیتی-قهرمانی-ثور-فروشگاه-غریبی-کیش.html"
 webzi_images: ["f081adb84a9145f4a4801681a4f7882a.JPG"]
 options:
   - name: "اندازه"

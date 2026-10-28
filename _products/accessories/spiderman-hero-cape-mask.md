@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/accessories/spiderman-hero-cape-mask/"]
 webzi_id: 45327
 old_slug: "شنل-شخصیتی-همراه-با-ماسک-دخترانه-و-پسرانه-فروشگاه-غریبی"
+redirect_from:
+  - "/shop/اکسسوری/P45327-شنل-شخصیتی-همراه-با-ماسک-دخترانه-و-پسرانه-فروشگاه-غریبی.html"
 webzi_images: ["2f3dfedf2b47409593b229de5e1427e9.jpg", "bdd5fcfafe414eea89e3e6ef26b89e6d.jpg", "81f85265bbe84414aeb26cf5b91e9d8e.jpg", "88cefc25c3c84eca9df4d02b90378f2c.jpg", "f71bad04b6654916995150b5bf709bfc.JPG", "e2f81683a875430a93f63f57189f0b66.jpg", "b26ad6a81d6441eaaa677932b3a9f600.jpg", "f0877576e29c42c58ac1cd621e9715cd.jpg", "394b2144be84430abfc28d8c160a69a9.jpg", "a62ba44b0ca3489b8b34ca36b5d34a4c.jpg", "86205676cd3f44cb8e761bd80c2ab8fa.jpg", "271eb6c541a948b0baf75ad830fd8a7b.jpg", "a37d85084993418a850e23f6b313fbbb.jpg"]
 tags: ["ست شنل و ماسک اسپایدرمن", "ست شنل و ماسک اسپایدرمن پسرانه", "اسپایدرمن", "مرد عنکبوتی", "اسپایدرمن پسرانه", "شنل و ماسک", "شنل شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "کریسمس", "فروش ویژه", "فروشگاه غریبی کیش", "کیش"]
 

@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/accessories/character-cap/"]
 webzi_id: 45368
 old_slug: "کلاه-کپ-شخصیتی"
+redirect_from:
+  - "/shop/کلاه/P45368-کلاه-کپ-شخصیتی.html"
 webzi_images: ["d2a10a012e6848ba8645fbe349c4134e.JPG", "1d5a92a0a8814e60a7b76f2402dbfe00.JPG", "54a00e637f344d09b798d0ef7398cd2e.JPG", "257b83a63e634bd0924268e016d6e532.JPG", "de4bc7bd05f84b34acac5cfdaa8c5f53.JPG", "efa2fe0a3eea4689aa249c096975e456.JPG", "4ac99394161c47e8922e60ac55dbbc55.jpeg", "d48cd7a613f345a5a54ff5a5310803e3.JPG", "f670252fca0a455ca862ab09853fba43.jpeg", "964e6b4a39604cdbb7a489d07418d8f6.JPG", "0ddf92a2f41a435ab7e64f8d6e4b469e.jpeg", "fb0b62dbc2b849619efe1dc67aea02f0.JPG"]
 tags: ["کلاه کپ شخصیتی کودک", "کلاه کپ دخترانه و پسرانه", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 

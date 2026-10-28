@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/mermaid-3-piece-swimsuit/"]
 webzi_id: 45422
 old_slug: "مایو-پری-دریایی-سه-تیکه-دیزنی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/مایو/P45422-مایو-پری-دریایی-سه-تیکه-دیزنی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["3d069396c64c4b28b7ea6f4e66f711c8.jpg", "b426dbd022004d2b802d372d0cddddfc.jpg", "b38e53a25a234a3b8175ef682bbb8099.PNG", "ed8aa000a4ce4fb3929b36c08a9897f5.JPG", "9592da40c6a0487ba33812c047efa2ef.PNG", "44a76f30bbae4d5ca5b38958d0ad8591.jpg"]
 options:
   - name: "اندازه"

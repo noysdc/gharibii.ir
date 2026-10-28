@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/girls-ballet-gymnastics-bodysuit/"]
 webzi_id: 45394
 old_slug: "بادی-ژیمناستیک-دخترانه-دکمه-دار-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/باله/P45394-بادی-ژیمناستیک-دخترانه-دکمه-دار-فروشگاه-غریبی-کیش.html"
 webzi_images: ["af79771c7f2f43178527d14f31d8c8c0.jpg", "3d595edeb47b4688a905103bfeb6a19d.jpg"]
 options:
   - name: "اندازه"

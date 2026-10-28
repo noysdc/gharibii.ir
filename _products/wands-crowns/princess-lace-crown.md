@@ -12,6 +12,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/princess-lace-crown/"]
 webzi_id: 45417
 old_slug: "تل-تاج-توری-پرنسسی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/اکسسوری/P45417-تل-تاج-توری-پرنسسی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["c9974324223e45949ab2f8acb9febfa9.jpg"]
 options:
   - name: "رنگ"

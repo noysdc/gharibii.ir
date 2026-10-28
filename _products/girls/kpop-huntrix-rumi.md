@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/kpop-huntrix-rumi/"]
 webzi_id: 45445
 old_slug: "لباس-شخصیتی-شکارچیان-شیاطین-رومی-rumi"
+redirect_from:
+  - "/shop/شخصیتی-دخترانه/P45445-لباس-شخصیتی-شکارچیان-شیاطین-رومی-rumi.html"
 webzi_images: ["b1691abe63314a0a86f49445b2b39aab.JPG", "f9a3ae23c223466d94467bc40e99e421.jpg", "b5bfdfdddda04e138765c01d44b117a3.JPG", "408cb142b3364fc7a1648983f3588337.JPG", "50713d9271634367acebe233b2ff7ebf.JPG", "156092e665e242c89e8002437227c28a.JPG", "048a4c492fb8474aae581ad63b3833fe.JPG", "f63aa7d6cdfe4daa9614aee176c47469.JPG", "db7503850b774a8198e8afef427afb58.JPG", "b9ffc50642974709b50f737358cdd77a.JPG", "4557d2a287d1465188297994983e603d.JPG", "dbeaa73e4b58423993ad454685a83101.jpg"]
 options:
   - name: "اندازه"

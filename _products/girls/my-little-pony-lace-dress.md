@@ -11,6 +11,9 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/my-little-pony-lace-dress/"]
 webzi_id: 45427
 old_slug: "مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/مایو/P45427-مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش.html"
+  - "/shop/لباس-پرنسسی/P45427-مایو-بیکینی-دخترکفشدوزکی-شخصیتی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["c3b642f75eee4fee971b9d5f4689d9cb.JPG", "625fe47186604d938b73723e901b7b67.JPG", "59b7f4ae5257458d87eb1a06fc4684f2.JPG", "9bc653dcab4a4c62bf19144899cbf5d9.JPG", "de046a070b4b454eacb75b5d2e11b46b.JPG"]
 options:
   - name: "رنگ"

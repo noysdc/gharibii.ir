@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/elsa-frozen-1-long-sleeve-dress/"]
 webzi_id: 45343
 old_slug: "پبراهن-مجلسی-دیزنی-السا-1فروزن-آستین-بلند"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45343-پبراهن-مجلسی-دیزنی-السا-1فروزن-آستین-بلند.html"
 webzi_images: ["e2515e1ee40844358a1c0d6d2d7572c4.jpg", "5d80f1829d7944ccadefabd8de4c876d.jpg", "6285983aabe84186b51d88804bf0e7ba.png"]
 options:
   - name: "اندازه"

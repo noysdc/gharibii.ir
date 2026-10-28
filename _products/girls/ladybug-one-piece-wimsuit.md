@@ -6,11 +6,14 @@ slug: "ladybug-one-piece-swimsuit"
 category: girls
 gender: girls
 price: "1998000"
-price group: ""
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/ladybug-one-piece-swimsuit/"]
 webzi_id: 45428
 old_slug: "مایو-بیکینی-دخترکفشدوزکی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/مایو/P45428-مایو-بیکینی-دخترکفشدوزکی-فروشگاه-غریبی-کیش.html"
+  - "/shop/اکسسوری/P45428-مایو-بیکینی-دخترکفشدوزکی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["72fb9ac38def4c13a5d14153324019ad.JPG", "82dbbe0e3e764848b9706569cca2d10c.jpg"]
 options:
   - name: "اندازه"

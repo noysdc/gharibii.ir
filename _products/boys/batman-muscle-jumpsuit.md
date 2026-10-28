@@ -11,6 +11,9 @@ currency: IRT
 images_dirs: ["/assets/images/products/boys/batman-muscle-jumpsuit/"]
 webzi_id: 45328
 old_slug: "لباس-پسرانه-یکسره-بتمن-عضلانی"
+redirect_from:
+  - "/shop/شخصیتی-پسرانه/P45328-لباس-پسرانه-یکسره-بتمن-عضلانی.html"
+  - "/shop/پیراهن-پسرانه/P45328-لباس-پسرانه-یکسره-بتمن-عضلانی.html"
 webzi_images: ["17647fba3a6c4f1d86b727da330e8e84.jpg", "7f9cd54f182b4d63b7621b2f77a9641a.jpg"]
 options:
   - name: "اندازه"

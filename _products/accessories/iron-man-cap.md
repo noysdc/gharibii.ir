@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45400
 old_slug: "کلاه-کپ-آیرون-من-شخصیت-دیزنی-قهرمانی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کلاه/P45400-کلاه-کپ-آیرون-من-شخصیت-دیزنی-قهرمانی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["5aa2de06086440829da8aa94565a7f8a.JPG"]
 options:
   - name: "رنگ"

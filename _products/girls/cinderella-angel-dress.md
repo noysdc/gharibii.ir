@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/cinderella-angel-dress/"]
 webzi_id: 45333
 old_slug: "لباس-دخترانه-ی-فرشته-ی-سیندرلا"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45333-لباس-دخترانه-ی-فرشته-ی-سیندرلا.html"
 webzi_images: ["3eb4082424e94a0f8b02903eac8ed6d3.jpg", "02b85799734a4713bff1041043f52f89.JPG", "39ead9dea1a84e868310b5c00bbb2ac3.jpg", "f91fef103cd848179426cfb5c2e506bc.jpg", "4a1282d4833140348ebaaf22db9aa8cb.jpg", "38056d9c7941402abd340580dd683411.jpg", "3ce46a3de5c042558b972091965a73c5.jpg", "6951d75cf39e4daea865121c85fec002.jpg", "ceac8dffe02447a0b61b66109ce1827b.png"]
 options:
   - name: "سن و سال"

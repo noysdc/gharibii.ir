@@ -6,12 +6,14 @@ slug: "ladybug-face-mask"
 category: accessories
 gender: unisex
 price: "0"
-price group: "out_of_stock"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/ladybug-face-mask/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: ladybug-face-mask
 webzi_id: 45385
 old_slug: "ماسک-صورت-شخصیتی-دخترکفشدوزکی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/اکسسوری/P45385-ماسک-صورت-شخصیتی-دخترکفشدوزکی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["78393d2b98844da9930db824943866a1.jpg"]
 tags: ["ماسک صورت دختر کفشدوزکی", "ماسک صورت دختر کفشدوزکی دخترانه و پسرانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "ماسک صورت", "ماسک شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 auto_sig: "b=91f212e1;d=01f25676;g=df4737a3;t=28d06433"

@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45397
 old_slug: "کلاه-کپ-السا-فروزن-شخصیت-دیزنی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کلاه/P45397-کلاه-کپ-السا-فروزن-شخصیت-دیزنی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["bc9927b314d946f59f73f370462cb89c.jpeg", "8c3e60e3b2b348698f6dc080c41f703b.JPG", "8a3670684b5a4812b91cee40ecebd080.JPG", "1c55bf8991964531ade819777bc7603a.JPG", "5a35fc9aceff47178b2444713dfd0c75.JPG"]
 options:
   - name: "رنگ"

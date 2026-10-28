@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/boys/venom-muscle-jumpsuit/"]
 webzi_id: 45384
 old_slug: "پسرانه-سرهمی-عضلانی-شخصیتی-ونوم-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/شخصیتی-پسرانه/P45384-پسرانه-سرهمی-عضلانی-شخصیتی-ونوم-فروشگاه-غریبی-کیش.html"
 webzi_images: ["d91d12db9fc94cab8de608c77d2a7e57.jpg"]
 options:
   - name: "اندازه"

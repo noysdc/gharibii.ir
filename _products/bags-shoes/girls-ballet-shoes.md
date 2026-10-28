@@ -11,6 +11,11 @@ currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/girls-ballet-shoes/"]
 webzi_id: 45433
 old_slug: "کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کفش/P45433-کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش.html"
+  - "/shop/اکسسوری/P45433-کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش.html"
+  - "/shop/کیف-و-کفش/P45433-کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش.html"
+  - "/shop/باله/P45433-کفش-رقص-باله-دخترانه-فروشگاه-غریبی-کیش.html"
 webzi_images: ["066d88e40ec34b5fbd2cea8cfd0de1a0.jpg", "d0cc01ba0b564b8b99e6d3113e81ca99.jpg", "29d922ecbda14029ab59f24a2906548e.jpg"]
 options:
   - name: "رنگ"

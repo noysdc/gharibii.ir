@@ -6,7 +6,7 @@ folder: "boys-moana-set"
 category: boys
 gender: boys
 price: ""
-price group: "out_of_stock"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/boys/boys-moana-set/"]
 needs_review: true

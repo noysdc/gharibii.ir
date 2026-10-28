@@ -6,7 +6,7 @@ folder: "linen-long-dress"
 category: girls
 gender: girls
 price: "0"
-price group: "out_of_stock"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/linen-long-dress/"]
 needs_review: true

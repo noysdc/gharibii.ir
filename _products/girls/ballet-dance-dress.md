@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/girls/ballet-dance-dress/"]
 webzi_id: 45430
 old_slug: "پیراهن-رقص-باله-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/باله/P45430-پیراهن-رقص-باله-فروشگاه-غریبی-کیش.html"
 webzi_images: ["446b6f197f474976a47668ab35f30f29.jpg", "679bd48aeced4959bbcec7bd08a966bb.JPG", "488939ea918b4dfa8f8cb46b53cc0f10.JPG", "0555070e7efe40a2912755a3a72b49e3.JPG", "7578f90320ef44868da00f4e62147be8.JPG", "32ece28a6ff7481eb4c8440d4bfdb96f.JPG", "87b295a1a3e14ccfa15d57f644eb91a2.JPG", "13c8827aba9d4913bdc87e41b0170263.JPG"]
 options:
   - name: "رنگ"

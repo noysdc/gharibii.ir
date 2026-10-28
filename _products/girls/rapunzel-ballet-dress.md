@@ -6,11 +6,13 @@ slug: "rapunzel-ballet-dress"
 category: girls
 gender: girls
 price: "0"
-price group: "out_of_stock"
+price_group: "out_of_stock"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/rapunzel-ballet-dress/"]
 webzi_id: 45339
 old_slug: "پبراهن-باله-تم-راپونزل"
+redirect_from:
+  - "/shop/لباس-پرنسسی/P45339-پبراهن-باله-تم-راپونزل.html"
 webzi_images: ["710e4860e1d949eea946d486a801321f.PNG", "4b76fc88482a43409c5d93677660b18d.jpg", "4a45ef83016f479ab71ed25e5f57cc2e.PNG", "e638aafdca964ebf89c39d4a0528fb8d.png"]
 options:
   - name: "اندازه"

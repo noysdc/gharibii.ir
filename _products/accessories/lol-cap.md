@@ -11,6 +11,8 @@ currency: IRT
 images_dirs: ["/assets/images/products/character-cap/"]
 webzi_id: 45398
 old_slug: "کلاه-کپ-لول-شخصیت-دیزنی-فروشگاه-غریبی-کیش"
+redirect_from:
+  - "/shop/کلاه/P45398-کلاه-کپ-لول-شخصیت-دیزنی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["67efb19ae2d8480dbdefa90f71cc7bd6.PNG"]
 options:
   - name: "رنگ"
