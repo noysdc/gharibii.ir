@@ -1,6 +1,7 @@
 ---
 layout: default
-title: صفحه پیدا نشد
+title: فاکتور جهت پرداخت
+description: برای مشاهده و پرداخت فاکتور سفارش خود روی لینک بزنید
 permalink: /404.html
 sitemap: false
 ---
@@ -11,6 +12,8 @@ sitemap: false
 </div>
 <script>
 (function () {
+  /* عنوان بالا برای پیش‌نمایش لینک فاکتور (/f/…) است؛ برای بازدیدکنندهٔ صفحهٔ واقعاً گم‌شده برمی‌گردد */
+  if (!/\/f\/\d{6}-\d{4}-/.test(location.pathname)) { document.title = 'صفحه پیدا نشد | ' + (document.title.split(' | ')[1] || ''); }
   var map = {{ site.data.redirects | jsonify }} || [];
   var base = {{ site.baseurl | jsonify }};
   /* لینک کوتاه فاکتور:  gharibii.ir/f/050803-1432-k7q2  ← صفحهٔ فاکتور */
