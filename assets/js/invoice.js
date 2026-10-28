@@ -720,6 +720,7 @@
   var RX_POST = /^کد[\s\u200c]*پستی\s*[:：\-–]?\s*(\d[\d\s-]*)$/;
   var RX_NOTE = /^(?:(?:یادداشت|نکته|توضیحات|توضیح|ملاحظات|پیام|درخواست(?:\s*خاص)?)\s*[:：\-–]\s*|(?:یادداشت|ملاحظات)\s+)(.*)$/;
   var RX_CHAT = /(?:^|\s)(?:سلام|درود|وقت\s*بخیر|روز\s*بخیر|عصر\s*بخیر|شب\s*بخیر|عرض\s*ادب|ممنونم?|مرسی|متشکرم?|تشکر|سپاس|خسته\s*نباشید|دمت\s*گرم|ببخشید|لطفا|لطفاً|باتشکر|با\s*تشکر|خواهش\s*می‌?کنم)(?=\s|$|[،,.!؟?:])/g;
+  var RX_NOTE_WORDS = /لطفا|لطفاً|عجله|سریع|هرچه\s*زودتر|باشه|بشه|بسته|هدیه|زنگ|تماس|نمی.?خوام|قبل\s*از|بعد\s*از|ساعت/;
   var RX_TEMPLATE = /می.?خوام\s*این|سفارش\s*بدم|نهایی.?سازی|راهنمایی.?ام|فروشگاه\s*غریبی/;
   /* نشانه‌های آدرس برای پیام‌های بدون برچسب */
   var RX_ADDR_HINT = /(?:استان|شهرستان|شهر|خیابان|خ\s|کوچه|کوچ|بلوار|میدان|پلاک|واحد|طبقه|منطقه|محله|جاده|بزرگراه|اتوبان|فلکه|بن\s*بست|شهرک|روستا|کوی|ساختمان|ط\s*\d|پ\s*\d|تهران|اصفهان|شیراز|مشهد|تبریز|کرج|اهواز|قم|کیش|رشت|ساری|یزد|کرمان|ارومیه|زاهدان|همدان|اراک|بندرعباس|قزوین|گرگان|سنندج|کرمانشاه|خرم\s*آباد|بوشهر|ایلام|اردبیل|زنجان|سمنان|بیرجند|یاسوج|شهرکرد|بجنورد)/;
@@ -757,8 +758,16 @@
       if ((m = ln.match(RX_POST))) { postal = m[1].replace(/\D/g, ''); addr.push('کد پستی: ' + postal); cur = null; return; }
       if ((m = ln.match(RX_ADDR))) { if (m[1]) addr.push(m[1]); cur = null; mode = 'addr'; return; }
       if ((m = ln.match(RX_NOTE))) { if (m[1]) note.push(m[1]); cur = null; mode = 'note'; return; }
-      if (mode === 'addr') { addr.push(ln); return; }
-      if (mode === 'note') { note.push(ln); return; }
+      if (mode === 'addr') {
+        /* زیر «آدرس:» جملهٔ درخواستی (عجله، لطفاً، زنگ نزنید…) بدون نشانهٔ آدرس = یادداشت */
+        if (RX_NOTE_WORDS.test(ln) && !RX_ADDR_HINT.test(ln)) { mode = 'note'; note.push(ln); return; }
+        addr.push(ln); return;
+      }
+      if (mode === 'note') {
+        /* زیر «یادداشت:» ممکن است آدرس هم نوشته شده باشد (کلمات آدرس بدون جملهٔ درخواستی) → به آدرس می‌رود */
+        if (RX_ADDR_HINT.test(ln) && !RX_NOTE_WORDS.test(ln) && !RX_TEMPLATE.test(ln)) { addr.push(ln.replace(/^ارسال\s*به\s*/, '')); return; }
+        note.push(ln); return;
+      }
       var ph2 = phoneIn(ln, false, skip);
       if (ph2 && !out.phone) { out.phone = ph2; phoneAt = idx; }
       var used = false;
@@ -789,9 +798,9 @@
       rest.push(f);
     });
     if (!addr.length) {
-      var picked = rest.filter(function (f) { return RX_ADDR_HINT.test(f.ln) && !isTitle(f.ln) && !/سلام|سفارش|فروشگاه|محصول|لطفا|ممنون|راهنمایی/.test(f.ln); });
+      var picked = rest.filter(function (f) { return RX_ADDR_HINT.test(f.ln) && !isTitle(f.ln) && !/سلام|سفارش|فروشگاه|محصول|لطفا|ممنون|راهنمایی/.test(f.ln) && !RX_NOTE_WORDS.test(f.ln); });
       if (picked.length) {
-        picked.forEach(function (f) { addr.push(f.ln.replace(phoneRe, ' ').replace(/\s+/g, ' ').trim()); });
+        picked.forEach(function (f) { addr.push(f.ln.replace(phoneRe, ' ').replace(/^ارسال\s*به\s*/, '').replace(/\s+/g, ' ').trim()); });
         rest = rest.filter(function (f) { return picked.indexOf(f) < 0; });
       }
       if (postal && addr.length) addr.push('کد پستی: ' + postal);
