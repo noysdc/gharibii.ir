@@ -837,8 +837,10 @@
       var nt = nzs(text);
       feed.products.forEach(function (p) { var t = nzs(p.t); if (t.length >= 8 && nt.indexOf(t) >= 0) out.items.push({ p: p, q: 1, o: {} }); });
     }
-    out.addr = clip(addr.join('، '), 300);
-    out.note = clip(note.join(' · '), 300);
+    /* باکس یادداشت حذف شد: هر چیزی که آدرس/نام/موبایل نبود به همان آدرس اضافه می‌شود (کد پستی آخر) */
+    var pc = addr.filter(function (a) { return /^کد پستی:/.test(a); }), ad = addr.filter(function (a) { return !/^کد پستی:/.test(a); });
+    out.addr = clip(ad.concat(note, pc).join('، '), 300);
+    out.note = '';
     return out;
   }
   var phoneRe = /(?:\+?98|0098|0)?9\d{9}(?!\d)/g;
