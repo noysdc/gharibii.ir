@@ -140,10 +140,12 @@
     pollT = setInterval(check, 25000);
     document.addEventListener('visibilitychange', check);
   }
+  var early = null;   /* درخواست فاکتور هم‌زمان با دریافت فهرست محصولات شروع می‌شود، نه بعد از آن */
   function loadRemote(code, tries) {
     if (!G.apiOn()) { fail('این لینک کوتاه روی این سایت فعال نیست. لینک را دوباره از فروشنده بگیرید.'); return; }
     state.hidden = false; state.className = 'view-state'; state.textContent = 'در حال دریافت فاکتور…';
-    G.apiGet(code).then(function (i) { render(i); startPoll(code); }, function (e) {
+    var first = tries === 0 && early ? early : G.apiGet(code); early = null;
+    first.then(function (i) { render(i); startPoll(code); }, function (e) {
       if (e && e.status === 404 && tries < 4) { setTimeout(function () { loadRemote(code, tries + 1); }, 2500); return; }   /* فاکتور تازه ساخته شده و هنوز به همه‌جا نرسیده */
       fail(e && e.status === 404 ? 'این فاکتور پیدا نشد؛ لینک را دوباره از فروشنده بگیرید.' : 'دریافت فاکتور ناموفق بود؛ اینترنت را چک کنید و صفحه را دوباره باز کنید.');
     });
@@ -222,5 +224,9 @@
     }, 1200);
   })();
   window.addEventListener('hashchange', show);
-  G.loadFeed().then(function (f) { feed = f; }, function () { feed = null; }).then(show);
+  (function () {
+    var h0 = location.hash.replace(/^#/, '').split('.')[0];
+    if (G.isCode(h0) && G.apiOn()) { early = G.apiGet(h0); early.catch(function () {}); }
+    G.loadFeed(false, true).then(function (f) { feed = f; }, function () { feed = null; }).then(show);
+  })();
 })();

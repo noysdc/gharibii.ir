@@ -1,29 +1,73 @@
 ---
-layout: default
-title: فاکتور جهت پرداخت
-description: برای مشاهده و پرداخت فاکتور سفارش خود روی لینک بزنید
+layout: null
 permalink: /404.html
 sitemap: false
 ---
-<div class="wrap notfound">
-  <h1>این صفحه پیدا نشد</h1>
-  <p class="lead">ممکن است آدرس قدیمی باشد. از این‌جا ادامه دهید:</p>
-  <p><a class="btn" href="{{ '/' | relative_url }}">صفحه اصلی</a> <a class="btn alt" href="{{ '/girls/' | relative_url }}">دخترانه</a> <a class="btn alt" href="{{ '/boys/' | relative_url }}">پسرانه</a></p>
-</div>
+{%- assign pv_title = "فاکتور جهت پرداخت | " | append: site.title -%}
+{%- assign pv_desc = "برای مشاهده و پرداخت فاکتور سفارش خود روی لینک بزنید" -%}
+{%- assign pv_img = "/assets/images/og-card.jpg" | absolute_url -%}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
+/* این صفحه عمداً سبک است (بدون استایل و اسکریپت سایت): لینک کوتاه فاکتور (/f/…) همین‌جا و فوری به صفحهٔ فاکتور می‌رود.
+   قبلاً قالب کامل سایت اول بارگیری می‌شد و تغییر مسیر بعد از آن اجرا می‌شد، که مشتری را چند ثانیه معطل می‌کرد */
 (function () {
-  /* عنوان بالا برای پیش‌نمایش لینک فاکتور (/f/…) است؛ برای بازدیدکنندهٔ صفحهٔ واقعاً گم‌شده برمی‌گردد */
-  if (!/\/f\/\d{6}-\d{4}-/.test(location.pathname)) { document.title = 'صفحه پیدا نشد | ' + (document.title.split(' | ')[1] || ''); }
-  var map = {{ site.data.redirects | jsonify }} || [];
   var base = {{ site.baseurl | jsonify }};
-  /* لینک کوتاه فاکتور:  gharibii.ir/f/050803-1432-k7q2  ← صفحهٔ فاکتور */
   var sm = location.pathname.match(/\/f\/(\d{6}-\d{4}-[a-z2-9]{4,16})\/?$/);
-  if (sm) { document.documentElement.style.visibility = 'hidden'; location.replace(base + '/invoice/#' + sm[1]); return; }
+  if (sm) { location.replace(base + '/invoice/#' + sm[1]); return; }
+  var map = {{ site.data.redirects | jsonify }} || [];
   var here = decodeURIComponent(location.pathname + location.search).replace(/\/+$/, '');
   if (base && here.indexOf(base) === 0) here = here.slice(base.length);
   for (var i = 0; i < map.length; i++) {
     var from = decodeURIComponent(map[i].from).replace(/\/+$/, '');
     if (from === here) { location.replace(base + map[i].to); return; }
   }
+  window.__nf = true;
 })();
 </script>
+<title>{{ pv_title | escape }}</title>
+<meta name="description" content="{{ pv_desc }}">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a6670">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ pv_title | escape }}">
+<meta property="og:description" content="{{ pv_desc }}">
+<meta property="og:image" content="{{ pv_img }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ pv_title | escape }}">
+<meta name="twitter:description" content="{{ pv_desc }}">
+<meta name="twitter:image" content="{{ pv_img }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/icons/icon-192.png' | relative_url }}">
+<style>
+html{background:#0b1d2a;color:#eaf3f5}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Vazirmatn,Tahoma,system-ui,sans-serif;text-align:center;padding:24px;box-sizing:border-box}
+.nf{max-width:420px}
+.nf h1{font-size:1.5rem;margin:0 0 8px}
+.nf p{margin:0 0 18px;opacity:.8}
+.nf a{display:inline-block;margin:4px;padding:10px 18px;border-radius:14px;background:#0b8a96;color:#fff;text-decoration:none;font-weight:700}
+.nf a.alt{background:rgba(255,255,255,.12)}
+</style>
+</head>
+<body>
+<div class="nf" id="nf">
+  <h1 id="nf-t">در حال انتقال…</h1>
+  <p id="nf-p">لطفاً چند لحظه صبر کنید.</p>
+  <p><a href="{{ '/' | relative_url }}">صفحه اصلی</a> <a class="alt" href="{{ '/girls/' | relative_url }}">دخترانه</a> <a class="alt" href="{{ '/boys/' | relative_url }}">پسرانه</a></p>
+</div>
+<script>
+/* اگر تغییر مسیر انجام نشد، یعنی صفحه واقعاً گم شده است */
+if (window.__nf) {
+  document.title = 'صفحه پیدا نشد | {{ site.title | escape }}';
+  document.getElementById('nf-t').textContent = 'این صفحه پیدا نشد';
+  document.getElementById('nf-p').textContent = 'ممکن است آدرس قدیمی باشد. از این‌جا ادامه دهید:';
+}
+</script>
+</body>
+</html>

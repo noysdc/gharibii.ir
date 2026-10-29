@@ -6,6 +6,7 @@ body_class: inv-view-page
 permalink: /invoice/
 sitemap: false
 ---
+{% if site.invoice_api != '' %}<link rel="preconnect" href="{{ site.invoice_api }}" crossorigin>{% endif %}
 <main class="view" id="view">
   <div class="view-top"><a class="view-brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="32" height="32"><span>فروشگاه غریبی کیش</span></a><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
   <div class="view-state" id="state">در حال بارگذاری فاکتور…</div>

@@ -192,8 +192,11 @@
     return k;
   }
   function apiCall(method, path, body, auth) {
-    var headers = { 'Content-Type': 'application/json' };
+    /* GET بدون رمز «درخواست ساده» است و مرورگر قبلش درخواست OPTIONS (یک رفت‌وبرگشت اضافه) نمی‌فرستد؛ هدر JSON فقط وقتی بدنه داریم */
+    var headers = {};
+    if (body) headers['Content-Type'] = 'application/json';
     if (auth) {
+      if (!body) headers['Content-Type'] = 'application/json';
       var k = sellerKey(true);
       if (!k) return Promise.reject({ status: 401 });
       headers['X-Seller-Key'] = k;
@@ -237,9 +240,10 @@
 
   /* ---------- داده‌ی سایت (قیمت‌های لحظه‌ای) ---------- */
   var feedPromise = null;
-  function loadFeed(force) {
+  /* soft: صفحهٔ مشتری از کش مرورگر هم می‌خواند (نیازی به لحظه‌ای بودن نیست)؛ صفحهٔ فروشنده همیشه تازه می‌گیرد */
+  function loadFeed(force, soft) {
     if (feedPromise && !force) return feedPromise;
-    feedPromise = fetch(BASE + '/seller-data.json?t=' + Date.now(), { cache: 'no-store' })
+    feedPromise = (soft ? fetch(BASE + '/seller-data.json') : fetch(BASE + '/seller-data.json?t=' + Date.now(), { cache: 'no-store' }))
       .then(function (r) { if (!r.ok) throw new Error('feed ' + r.status); return r.json(); })
       .then(function (d) {
         d.byId = {};
