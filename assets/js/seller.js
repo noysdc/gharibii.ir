@@ -11,7 +11,7 @@
   var st = loadState();
 
   /* ---------- وضعیت و ذخیره‌سازی ---------- */
-  function fresh() { return { cust: '', phone: '', addr: '', post: '', sw: '', valid: 120, fee: null, disc: 0, note: '', editNo: '', rev: 0, code: '', pasted: [], items: [] }; }
+  function fresh() { return { cust: '', phone: '', addr: '', post: '', sw: '', valid: 120, pm: '', fee: null, disc: 0, note: '', editNo: '', rev: 0, code: '', pasted: [], items: [] }; }
   function loadState() {
     var s = fresh();
     try {
@@ -287,7 +287,7 @@
     built = {
       no: no, rev: rev, paid: null, ts: now, exp: now + st.valid * 60,
       cust: G.clip(st.cust, 60), addr: G.clip(joinAddr(st.addr, st.post), 300), ph: phoneNorm(st.phone), sn: seller ? seller.name : '', sw: seller ? seller.number : '',
-      fee: feeVal(), disc: st.disc, note: G.clip(st.note, 300),
+      fee: feeVal(), disc: st.disc, note: G.clip(st.note, 300), pm: st.pm || '',
       items: st.items.map(function (i) { return { id: i.c ? '' : i.id, q: i.q, p: i.p, o: optString(i), t: G.clip(i.t, 120) }; })
     };
     st.editNo = no; st.rev = rev; save();
@@ -436,9 +436,9 @@
   }
   function loadInvoice(inv, code) {
     var supp = !!inv.paid;
-    if (supp) inv = { no: inv.no, cust: inv.cust, addr: inv.addr, ph: inv.ph, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
+    if (supp) inv = { no: inv.no, cust: inv.cust, addr: inv.addr, ph: inv.ph, sw: inv.sw, fee: feed ? feed.fee : 0, disc: 0, pm: inv.pm || '', note: G.clip('مکمل فاکتور ' + inv.no, 300), items: [] };
     st.editNo = supp ? '' : inv.no; st.rev = supp ? 0 : (inv.rev || 1); st.code = supp ? '' : (code || inv.code || '');
-    var sp0 = splitPost(inv.addr); st.cust = inv.cust; st.addr = sp0.a; st.post = sp0.p; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pasted = [];
+    var sp0 = splitPost(inv.addr); st.cust = inv.cust; st.addr = sp0.a; st.post = sp0.p; st.phone = inv.ph || ''; st.disc = inv.disc; st.note = inv.note; st.pm = inv.pm || ''; st.pasted = [];
     st.fee = feed && inv.fee === feed.fee ? null : inv.fee;
     if (inv.sw) st.sw = inv.sw;
     st.items = inv.items.map(function (r) {
@@ -460,6 +460,7 @@
     $('f-addr').value = st.addr || '';
     $('f-post').value = st.post || '';
     $('f-valid').value = String(st.valid || 120);
+    $('f-pm').value = st.pm || '';
     $('f-disc').value = fmtIn(st.disc);
     $('f-note').value = st.note || '';
     $('f-fee').value = fmtIn(feeVal());
@@ -488,6 +489,7 @@
     });
     $('f-seller').addEventListener('change', function (e) { st.sw = e.target.value; showSellerPhone(); dirty(); });
     $('f-valid').addEventListener('change', function (e) { st.valid = Number(e.target.value) || 120; dirty(); });
+    $('f-pm').addEventListener('change', function (e) { st.pm = e.target.value; dirty(); });
     $('f-note').addEventListener('input', function (e) { st.note = e.target.value; dirty(); });
     bindMoney($('f-fee'), function (n) { st.fee = n; });
     bindMoney($('f-disc'), function (n) { st.disc = n; });

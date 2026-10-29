@@ -120,7 +120,7 @@
       inv.cust, inv.sw, inv.fee, inv.disc, inv.note,
       inv.items.map(function (i) { var r = [shortId(i.id), i.q, i.p, i.o]; if (!i.id) r.push(i.t); return r; }),
       inv.rev > 1 ? inv.rev : 0, inv.paid ? (inv.paid.ref || '') : '', inv.paid ? inv.paid.at.toString(36) : '',
-      inv.addr || '', inv.ph || ''];
+      inv.addr || '', inv.ph || '', inv.pm || ''];
     while (a.length > 10 && !a[a.length - 1]) a.pop();
     return b64Enc(JSON.stringify(a));
   }
@@ -143,7 +143,8 @@
           no: clip(a[3], 40) || makeNo(new Date(ts * 1000)), ts: ts, exp: ts + vm * 60,
           cust: clip(a[4], 60), sn: '', sw: clip(a[5], 20).replace(/\D/g, ''), addr: clip(a[13], 300), ph: clip(a[14], 15).replace(/\D/g, ''),
           fee: toNum(a[6]), disc: toNum(a[7]), note: clip(a[8], 300), items: [],
-          rev: Math.min(99, Math.max(1, Math.round(Number(a[10]) || 1))), paid: null
+          rev: Math.min(99, Math.max(1, Math.round(Number(a[10]) || 1))), paid: null,
+          pm: a[15] === 'o' || a[15] === 'c' ? a[15] : ''     /* روش پرداخت: ''=هر دو، o=فقط درگاه آنلاین، c=فقط کارت‌به‌کارت */
         };
         if (a[12]) inv.paid = { ref: clip(a[11], 40), at: parseInt(a[12], 36) || ts };   /* کد پیگیری اختیاری است؛ تاریخ تأیید نشانهٔ پرداخت است */
         rows = a[9];

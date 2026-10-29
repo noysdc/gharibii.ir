@@ -57,7 +57,11 @@
     if (!box) return;
     var online = gatewayOn && !!(inv && inv.code);          /* درگاه فقط برای فاکتورِ لینک‌کوتاه (ذخیره‌شده روی سرور) */
     var link = !online && !!payUrl;
-    if (!inv || inv.paid || (!online && !link && !hasBank)) { box.hidden = true; return; }
+    /* روشی که فروشنده انتخاب کرده: ''=هر دو، 'o'=فقط آنلاین، 'c'=فقط کارت. اگر روش انتخابی در دسترس نباشد، روش دیگر نشان داده می‌شود تا مشتری بی‌راه نماند */
+    var pm = inv && inv.pm, showOn = (online || link) && pm !== 'c', showCard = hasBank && pm !== 'o';
+    if (!showOn && !showCard) { showOn = online || link; showCard = hasBank; }
+    online = online && showOn; link = link && showOn;
+    if (!inv || inv.paid || (!online && !link && !showCard)) { box.hidden = true; return; }
     var t = G.totals(inv), why = payBlock();
     box.hidden = false;
     $('pay-amount').textContent = G.money(t.total);
@@ -66,8 +70,9 @@
     $('pay-warn').hidden = !why;
     $('pay-m-online').hidden = !online;
     $('pay-m-link').hidden = !link;
-    $('pay-m-sheba').hidden = !hasBank;
+    $('pay-m-sheba').hidden = !showCard;
     $('pay-m-sheba-title').textContent = 'کارت‌به‌کارت';
+    var sub = $('pay-m-sheba-sub'); if (sub) sub.textContent = (online || link) ? 'روش دیگر پرداخت' : 'پرداخت به شماره کارت زیر';
     $('card-row').hidden = !card; $('card-copy').hidden = !card;
     $('sheba-row').hidden = !sheba; $('sheba-copy-row').hidden = !sheba;
     if (card) $('card-show').textContent = cardPretty(card);
