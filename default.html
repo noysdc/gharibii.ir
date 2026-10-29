@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="site-baseurl" content="{{ site.baseurl }}">
+  {%- if page.early_redirect %}
+  <script>
+  /* صفحهٔ ۴۰۴: لینک کوتاه فاکتور (/f/…) و آدرس‌های قدیمی همین‌جا، قبل از بارگیری استایل‌ها، منتقل می‌شوند (اسکریپت‌های پایین صفحه منتظر استایل می‌مانند و مشتری را معطل می‌کردند) */
+  (function () {
+    var base = {{ site.baseurl | jsonify }};
+    var sm = location.pathname.match(/\/f\/(\d{6}-\d{4}-[a-z2-9]{4,16})\/?$/);
+    if (sm) { window.__redirected = true; location.replace(base + '/invoice/#' + sm[1]); return; }
+    var map = {{ site.data.redirects | jsonify }} || [];
+    var here = decodeURIComponent(location.pathname + location.search).replace(/\/+$/, '');
+    if (base && here.indexOf(base) === 0) here = here.slice(base.length);
+    for (var i = 0; i < map.length; i++) {
+      var from = decodeURIComponent(map[i].from).replace(/\/+$/, '');
+      if (from === here) { window.__redirected = true; location.replace(base + map[i].to); return; }
+    }
+  })();
+  </script>
+  {%- endif %}
+  {% if site.order_instagram %}<meta name="order-instagram" content="{{ site.order_instagram }}">{% endif %}
+  <link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
+  <meta name="theme-color" content="#0a6670">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="غریبی کیش">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/icons/icon-192.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+  {% include ios-splash.html %}
+  <script>
+  /* خیلی زود اجرا می‌شود (قبل از نمایش صفحه): حالت شب، تشخیص اپ نصب‌شده برای صفحهٔ لودینگ،
+     و نگه داشتن رویداد نصب اندروید تا main.js آماده شود */
+  (function () {
+    var d = document.documentElement;
+    try { if (localStorage.getItem('gharibii-theme') === 'dark') d.setAttribute('data-theme', 'dark'); } catch (e) {}
+    var app = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+    if (app) {
+      d.classList.add('is-app');
+      var seen = false;
+      try { seen = !!sessionStorage.getItem('gharibii-splash'); } catch (e) {}
+      if (!seen) d.classList.add('splash-on');
+    }
+    window.__bip = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); window.__bip = e; });
+  })();
+  </script>
+{%- comment -%}
+  ===== پیش‌نمایش لینک (واتساپ / تلگرام / گوگل) =====
+  عنوان : «عنوان صفحه | فروشگاه غریبی کیش»
+  توضیح : description همان صفحه (فرانت‌متر)؛ برای محصول: متن توضیحات، و اگر خالی/نمونه بود یک جملهٔ خودکار با قیمت
+  عکس   : محصول → عکس اول خودش ؛ بقیهٔ صفحه‌ها → /assets/images/og-card.jpg
+{%- endcomment -%}
+  {%- assign pv_title = site.title -%}
+  {%- if page.title -%}{%- assign pv_title = page.title | append: ' | ' | append: site.title -%}{%- endif -%}
+  {%- assign pv_desc = page.description | default: '' -%}
+  {%- if pv_desc == '' and page.layout == 'product' -%}
+    {%- assign pv_body = page.content | strip_html | strip_newlines | normalize_whitespace | strip -%}
+    {%- assign pv_ok = false -%}
+    {%- if pv_body.size > 30 -%}{%- assign pv_ok = true -%}{%- endif -%}
+    {%- if pv_body contains 'توضیحات محصول را اینجا' -%}{%- assign pv_ok = false -%}{%- endif -%}
+    {%- if pv_ok -%}
+      {%- assign pv_desc = pv_body | truncate: 155 -%}
+    {%- else -%}
+      {%- capture pv_price_html -%}{%- include price.html product=page -%}{%- endcapture -%}
+      {%- assign pv_price = pv_price_html | split: '</span>' | first | strip_html | strip -%}
+      {%- capture pv_desc -%}{{ page.title }} — {{ pv_price }} | سفارش در واتساپ یا تماس تلفنی، فروشگاه غریبی کیش{%- endcapture -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if pv_desc == '' -%}{%- assign pv_desc = site.description -%}{%- endif -%}
+  {%- assign pv_img = page.images[0] -%}
+  {%- if pv_img -%}
+    {%- capture pv_img_rel -%}{% include img.html src=pv_img %}{%- endcapture -%}
+    {%- assign pv_img_url = pv_img_rel | strip | prepend: site.url -%}
+    {%- assign pv_img_w = 900 -%}{%- assign pv_img_h = 1200 -%}
+  {%- else -%}
+    {%- assign pv_img_url = '/assets/images/og-card.jpg' | absolute_url -%}
+    {%- assign pv_img_w = 1200 -%}{%- assign pv_img_h = 630 -%}
+  {%- endif -%}
+  <title>{{ pv_title | escape }}</title>
+  <meta name="description" content="{{ pv_desc | strip | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ pv_title | escape }}">
+  <meta property="og:description" content="{{ pv_desc | strip | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ pv_img_url }}">
+  <meta property="og:image:width" content="{{ pv_img_w }}">
+  <meta property="og:image:height" content="{{ pv_img_h }}">
+  <meta property="og:image:alt" content="{{ page.title | default: site.title | escape }}">
+  {%- if page.layout == 'product' %}{% include torob-meta.html %}{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ pv_title | escape }}">
+  <meta name="twitter:description" content="{{ pv_desc | strip | escape }}">
+  <meta name="twitter:image" content="{{ pv_img_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-RD-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+  <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+  <link rel="stylesheet" href="{{ '/assets/css/glass.css' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
+  {%- if page.url == '/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": {{ site.title | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "url": {{ site.url | jsonify }},
+    "image": {{ '/assets/icons/icon-512.png' | absolute_url | jsonify }},
+    "telephone": {{ site.phone_e164 | jsonify }},
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "بازار عرب‌ها",
+      "addressLocality": "کیش",
+      "addressRegion": "هرمزگان",
+      "addressCountry": "IR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": {{ site.map_lat | jsonify }},
+      "longitude": {{ site.map_lng | jsonify }}
+    },
+    "hasMap": {{ site.map_url | jsonify }},
+    "sameAs": ["https://instagram.com/storegaribi16", "https://t.me/gharibii_ir"]
+  }
+  </script>
+  {%- endif %}
+</head>
+<body{% if page.layout == 'product' %} class="is-product"{% endif %}>
+  <!-- صفحهٔ لودینگ اپ نصب‌شده: همان لوگو و تم هولوگرامی هدر (فقط داخل اپ و یک بار در هر نشست دیده می‌شود) -->
+  <div class="app-splash" id="app-splash" aria-hidden="true">
+    <div class="app-splash-inner">
+      <span class="holo-logo"><img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="160" height="160" fetchpriority="high"></span>
+      <div class="holo-divider" role="presentation"></div>
+      <p class="store-name">فروشگاه غریبی کیش</p>
+      <p class="store-tagline">لباس شخصیتی - تم دیزنی و پرنسسی</p>
+      <div class="holo-divider" role="presentation"></div>
+    </div>
+  </div>
+  {% include header.html %}
+  <main>{{ content }}</main>
+  {% include footer.html %}
+  <script type="application/json" id="wa-sellers-data">[{% if site.whatsapp_sellers %}{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }},"photo":{% if s.photo %}{{ s.photo | relative_url | jsonify }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}{% else %}{% for n in site.whatsapp_numbers %}{"name":"شماره {{ forloop.index }}","number":{{ n | jsonify }},"photo":""}{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}]</script>
+  <script type="application/json" id="order-config">{"shippingCustoms":{{ site.shipping_customs_cost | default: 0 }}}</script>
+  <!-- قالب‌های مشترک: main.js از این‌ها در سبد خرید و صفحهٔ اصلی کپی می‌گیرد (یک متن، یک ظاهر) -->
+  <template id="tpl-order-note">{% include order-note.html %}</template>
+  <template id="tpl-order-alt">{% include order-alt.html kind="home" %}</template>
+  {% include mobile-tabbar.html %}
+  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+  <script src="{{ '/assets/js/extra.js' | relative_url }}?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+</body>
+</html>
