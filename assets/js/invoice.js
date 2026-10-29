@@ -181,7 +181,8 @@
   function apiOn() { return !!API_RAW; }
   function isCode(s) { return CODE_RE.test(String(s || '')); }
   function codeIn(s) { var m = String(s || '').match(/\d{6}-\d{4}-[a-z2-9]{4,16}/); return m ? m[0] : ''; }
-  function shortUrl(code) { return location.origin + BASE + '/f/' + code; }
+  /* لینک مستقیم به صفحهٔ واقعی فاکتور (بدون پیمودن ۴۰۴)؛ لینک‌های قدیمی /f/… هنوز از طریق ۴۰۴ کار می‌کنند */
+  function shortUrl(code) { return location.origin + BASE + '/invoice/#' + code; }
   function sellerKey(ask) {
     var k = '';
     try { k = localStorage.getItem(KEYSTORE) || ''; } catch (e) {}

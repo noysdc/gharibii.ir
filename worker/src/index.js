@@ -200,7 +200,7 @@ function detItems(d) {
   if (!d || !d.items || !d.items.length) return '';
   return '\n\n📦 محصولات:\n' + d.items.map((i, k) => fa(k + 1) + '. ' + (i.t || 'محصول') + (i.o ? ' (' + i.o + ')' : '') + ' × ' + fa(i.q)).join('\n');
 }
-const linkOf = (env, code) => String(env.SITE_URL || '').replace(/\/+$/, '') + '/f/' + code;
+const linkOf = (env, code) => String(env.SITE_URL || '').replace(/\/+$/, '') + '/invoice/#' + code;
 /* بایگانی تلگرام: فقط وقتی فاکتور «پرداخت‌شده» می‌شود فرستاده می‌شود (تأیید فروشنده یا پرداخت آنلاین).
    ساخت/ویرایش فاکتور و کپی متن دیگر پیام تلگرام نمی‌فرستد. */
 async function paidArchive(env, ctx, code, rec, m, head) {
