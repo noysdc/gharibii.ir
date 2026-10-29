@@ -732,3 +732,7 @@ html[data-theme="dark"] .fab-build{background:linear-gradient(160deg,rgba(40,170
 @media (prefers-reduced-motion:reduce){.acc-chev,.fab-build{transition:none}}
 
 .pay-acc-head.static{cursor:default}
+
+/* دکمهٔ ریست فاکتور: اول صفحه، قبل از «پیام مشتری» */
+.top-reset{display:flex;margin:0 0 10px}
+.top-reset .btn-reset{width:100%;justify-content:center}
