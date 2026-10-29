@@ -475,7 +475,7 @@
     });
   }
   /* یک نسخهٔ ۷۶۰ پیکسلی خارج از صفحه می‌سازد تا عکس/PDF همیشه یک اندازه باشد */
-  function toCanvas(inv, feed) {
+  function toCanvas(inv, feed, sc) {
     return ensureH2C().then(function () {
       var holder = document.createElement('div');
       holder.className = 'inv-export';
@@ -483,7 +483,7 @@
       var sheet = renderSheet(holder, inv, feed, { live: false });
       var fonts = (document.fonts && document.fonts.load) ? Promise.all([document.fonts.load('400 16px Vazirmatn'), document.fonts.load('700 16px Vazirmatn')]).catch(function () {}) : Promise.resolve();
       return Promise.all([fonts, imagesReady(sheet)]).then(function () {
-        var scale = 2, off = sheet.offsetTop;
+        var scale = sc || 2, off = sheet.offsetTop;
         var breaks = Array.prototype.map.call(sheet.querySelectorAll('[data-brk]'), function (n) {
           return Math.round((off + n.offsetTop + n.offsetHeight) * scale);
         });
@@ -536,7 +536,7 @@
       var cx = c.getContext('2d');
       cx.fillStyle = '#ffffff'; cx.fillRect(0, 0, c.width, c.height);
       cx.drawImage(canvas, 0, pg[0], canvas.width, sh, 0, 0, canvas.width, sh);
-      var jpg = b64ToBytes(c.toDataURL('image/jpeg', 0.92).split(',')[1]);
+      var jpg = b64ToBytes(c.toDataURL('image/jpeg', 0.85).split(',')[1]);
       var hPt = sh / pxPerPt, id = 3 + 3 * k;
       obj(id, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + A4W + ' ' + A4H + '] /Resources << /XObject << /Im0 ' + (id + 2) + ' 0 R >> >> /Contents ' + (id + 1) + ' 0 R >>');
       var content = 'q ' + A4W + ' 0 0 ' + hPt.toFixed(2) + ' 0 ' + (A4H - hPt).toFixed(2) + ' cm /Im0 Do Q';
@@ -612,8 +612,15 @@
     return 'downloaded';
   }
   function saveImage(inv, feed) {
-    return toCanvas(inv, feed).then(function (r) { return canvasBlob(r.canvas, 'image/png'); })
-      .then(function (b) { return deliver(b, fileName(inv, 'png'), 'image/png'); });
+    /* PNG بدون افت کیفیت است و برای فاکتور (عکس محصول + پس‌زمینهٔ گرادیان) چند مگابایت می‌شد؛ JPEG با کیفیت ۸۶٪ حدود ۵ تا ۱۰ برابر کوچک‌تر و برای متن هنوز تمیز است */
+    return toCanvas(inv, feed, 1.5).then(function (r) {
+      var c = document.createElement('canvas');
+      c.width = r.canvas.width; c.height = r.canvas.height;
+      var cx = c.getContext('2d');
+      cx.fillStyle = '#ffffff'; cx.fillRect(0, 0, c.width, c.height);
+      cx.drawImage(r.canvas, 0, 0);
+      return canvasBlob(c, 'image/jpeg', 0.86);
+    }).then(function (b) { return deliver(b, fileName(inv, 'jpg'), 'image/jpeg'); });
   }
   function savePdf(inv, feed) {
     return toCanvas(inv, feed).then(function (r) { return deliver(makePdf(r.canvas, r.breaks), fileName(inv, 'pdf'), 'application/pdf'); });
