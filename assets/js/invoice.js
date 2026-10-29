@@ -382,11 +382,14 @@
       if (inv.pm === 'o') {
         payBox = '<div class="inv-cust" data-brk><div class="ic-title">روش پرداخت</div><div class="ic-row ic-wide"><b>پرداخت آنلاین از طریق لینک این فاکتور انجام می‌شود.</b></div></div>';
       } else {
+        /* همان کارت بانکی صفحهٔ مشتری (گرادیان و تراشه)، تا در عکس/PDF هم شبیه کارت واقعی دیده شود */
         payBox = '<div class="inv-cust inv-pay" data-brk><div class="ic-title">پرداخت کارت‌به‌کارت</div>' +
-          (bank.name ? '<div class="ic-row"><span>بانک</span><b>' + esc(bank.name) + '</b></div>' : '') +
-          (bank.owner ? '<div class="ic-row"><span>به نام</span><b>' + esc(bank.owner) + '</b></div>' : '') +
-          '<div class="ic-row ic-wide"><span>شماره کارت</span><b class="ltr" dir="ltr">' + fa10(bcard.replace(/(\d{4})(?=\d)/g, '$1 ')) + '</b></div>' +
-          '<div class="ic-row ic-wide"><span>مبلغ</span><b>' + money(t.total) + '</b></div>' +
+          '<div class="bank-card">' +
+            '<div class="bc-top"><span class="bc-bank">' + esc(bank.name || '') + '</span><span class="bc-chip" aria-hidden="true"></span></div>' +
+            '<div class="bc-num" dir="ltr">' + bcard.replace(/(\d{4})(?=\d)/g, '$1 ') + '</div>' +
+            '<div class="bc-bottom"><div class="bc-owner"><small>به نام</small><b>' + esc(bank.owner || '') + '</b></div></div>' +
+          '</div>' +
+          '<div class="ic-row ic-wide"><span>مبلغ قابل پرداخت</span><b>' + money(t.total) + '</b></div>' +
           (inv.pm === 'c' ? '<div class="ic-row ic-wide"><b>پرداخت این فاکتور فقط از طریق کارت‌به‌کارت انجام می‌شود.</b></div>' : '') +
         '</div>';
       }
