@@ -375,14 +375,31 @@
           (postal ? '<div class="ic-row"><span>کد پستی</span><b class="ltr" dir="ltr">' + postal + '</b></div>' : '') +
         '</div>' : '';
 
+    /* اطلاعات پرداخت داخل خود فاکتور (برای عکس/PDF که فروشنده می‌فرستد؛ صفحهٔ زندهٔ مشتری کادر پرداخت جدا دارد) */
+    var bank = feed && feed.bank, bcard = bank ? String(bank.card || '').replace(/\D/g, '') : '', payBox = '';
+    if (!o.live && !inv.paid && !expired && /^\d{16}$/.test(bcard)) {
+      var fa10 = function (x) { return String(x).replace(/\d/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(Number(d)); }); };
+      if (inv.pm === 'o') {
+        payBox = '<div class="inv-cust" data-brk><div class="ic-title">روش پرداخت</div><div class="ic-row ic-wide"><b>پرداخت آنلاین از طریق لینک این فاکتور انجام می‌شود.</b></div></div>';
+      } else {
+        payBox = '<div class="inv-cust inv-pay" data-brk><div class="ic-title">پرداخت کارت‌به‌کارت</div>' +
+          (bank.name ? '<div class="ic-row"><span>بانک</span><b>' + esc(bank.name) + '</b></div>' : '') +
+          (bank.owner ? '<div class="ic-row"><span>به نام</span><b>' + esc(bank.owner) + '</b></div>' : '') +
+          '<div class="ic-row ic-wide"><span>شماره کارت</span><b class="ltr" dir="ltr">' + fa10(bcard.replace(/(\d{4})(?=\d)/g, '$1 ')) + '</b></div>' +
+          '<div class="ic-row ic-wide"><span>مبلغ</span><b>' + money(t.total) + '</b></div>' +
+          (inv.pm === 'c' ? '<div class="ic-row ic-wide"><b>پرداخت این فاکتور فقط از طریق کارت‌به‌کارت انجام می‌شود.</b></div>' : '') +
+        '</div>';
+      }
+    }
+
     var contacts = storeContacts(feed), foot = [];
-    if (contacts.length) foot.push('☎ ' + contacts.map(function (c) { return esc(c.name) + ' <span dir="ltr">' + esc(c.mobile) + '</span>'; }).join(' · '));
+    if (contacts.length && !seller) foot.push('☎ ' + contacts.map(function (c) { return esc(c.name) + ' <span dir="ltr">' + esc(c.mobile) + '</span>'; }).join(' · '));
     if (feed && feed.address) foot.push(esc(feed.address));
 
     var notice = inv.paid
       ? '<b>پرداخت این فاکتور تأیید شده است.</b><br>تاریخ تأیید: <b>' + esc(fmtDate(inv.paid.at)) + '</b>'
       : '<b>وضعیت: در انتظار پرداخت.</b><br>' + validLine +
-        '<br>سفارش بعد از پرداخت و تأیید فروشنده ثبت می‌شود. اگر فروشنده نسخهٔ جدیدتری فرستاد، فقط آخرین نسخه معتبر است.';
+        '<br>سفارش بعد از پرداخت و تأیید فروشنده ثبت می‌شود.' + (inv.rev > 1 ? ' این نسخهٔ ' + nf(inv.rev) + ' است؛ فقط آخرین نسخه معتبر است.' : '');
 
     return '<div class="inv-sheet' + (expired ? ' is-expired' : '') + '" dir="rtl">' +
       '<div class="inv-head" data-brk>' +
@@ -395,6 +412,7 @@
       '<div class="inv-notice' + (inv.paid ? ' is-paid' : '') + '" data-brk>' + notice + '</div>' +
       '<div class="inv-rows">' + rows + '</div>' +
       '<div class="inv-totals" data-brk>' + totalRows + '</div>' +
+      payBox +
       (inv.note ? '<div class="inv-note" data-brk><b>یادداشت:</b> ' + esc(inv.note) + '</div>' : '') +
       '<div class="inv-foot" data-brk>' + (foot.length ? foot.join('<br>') + '<br>' : '') + 'با تشکر از اعتماد شما 🎀</div>' +
       (inv.paid ? '<div class="inv-stamp paid" aria-hidden="true">پرداخت شد</div>' : (expired ? '<div class="inv-stamp" aria-hidden="true">منقضی شده</div>' : '')) +

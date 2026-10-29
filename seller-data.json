@@ -10,6 +10,7 @@ sitemap: false
 "fee": {{ site.shipping_customs_cost | default: 0 | plus: 0 }},
 "valid": {{ site.invoice_valid_minutes | default: 120 | plus: 0 }},
 "telegram": {{ site.order_telegram | default: "" | jsonify }},
+"bank": {"name": {{ site.bank_name | default: "" | jsonify }}, "owner": {{ site.bank_owner | default: "" | jsonify }}, "card": {{ site.bank_card | default: "" | jsonify }}},
 "sellers": [{% for s in site.whatsapp_sellers %}{"name":{{ s.name | jsonify }},"number":{{ s.number | jsonify }},"bale":{{ site.order_bale[forloop.index0] | default: "" | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
 "products": [{% for p in sorted %}
 {%- assign grp = site.data.price_groups.groups[p.price_group] -%}
