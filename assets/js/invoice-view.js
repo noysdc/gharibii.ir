@@ -18,10 +18,18 @@
   function cardPretty(v) { return v.replace(/(\d{4})(?=\d)/g, '$1 '); }
   function shebaPretty(v) { return v.slice(0, 4) + ' ' + v.slice(4).replace(/(\d{4})(?=\d)/g, '$1 '); }
 
+  /* جداکننده‌ها فقط وقتی دیده می‌شوند که بخش کنارشان دیده شود (مثلاً فاکتور پرداخت‌شده «پرداخت» ندارد) */
+  function paintDividers() {
+    var pb = $('pay-box');
+    if ($('div-pay')) $('div-pay').hidden = !pb || pb.hidden;
+    if ($('div-act')) $('div-act').hidden = actions.hidden;
+    if ($('div-site')) $('div-site').hidden = actions.hidden;
+  }
   function fail(msg) {
     host.innerHTML = '';
     actions.hidden = true;
     if ($('pay-box')) $('pay-box').hidden = true;
+    paintDividers();
     state.hidden = false;
     state.className = 'view-state bad';
     state.textContent = msg;
@@ -61,9 +69,10 @@
     var pm = inv && inv.pm, showOn = (online || link) && pm !== 'c', showCard = hasBank && pm !== 'o';
     if (!showOn && !showCard) { showOn = online || link; showCard = hasBank; }
     online = online && showOn; link = link && showOn;
-    if (!inv || inv.paid || (!online && !link && !showCard)) { box.hidden = true; return; }
+    if (!inv || inv.paid || (!online && !link && !showCard)) { box.hidden = true; paintDividers(); return; }
     var t = G.totals(inv), why = payBlock();
     box.hidden = false;
+    paintDividers();
     $('pay-amount').textContent = G.money(t.total);
     $('pay-no').textContent = noLabel();
     $('pay-warn').textContent = why;
@@ -192,6 +201,7 @@
     state.hidden = true;
     paintStatus();
     updatePay();
+    paintDividers();
     document.title = 'فاکتور ' + inv.no + ' | ' + ((feed && feed.store) || 'فروشگاه غریبی کیش');
   }
 

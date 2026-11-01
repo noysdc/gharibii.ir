@@ -315,8 +315,15 @@
     h.unshift({ no: inv.no, code: inv.code || '', rev: inv.rev || 1, paid: !!inv.paid, ts: inv.ts, exp: inv.exp, cust: inv.cust, total: G.totals(inv).total, tok: G.pack(inv) });
     writeHist(h);
   }
+  /* نمایش/پنهان کردن کارت فاکتور همراه با جداکنندهٔ بالایش */
+  function setOut(on) {
+    $('out-card').hidden = !on;
+    if ($('out-divider')) $('out-divider').hidden = !on;
+  }
   function showBuilt() {
-    $('out-card').hidden = false; $('stale').hidden = true;
+    setOut(true); $('stale').hidden = true;
+    /* فاکتور پرداخت‌شده: دکمه‌های ارسال/ذخیره زیر فاکتور می‌آیند تا بعد از دیدن فاکتور در دسترس باشند (چیدمان با CSS و کلاس is-paid) */
+    $('out-card').classList.toggle('is-paid', !!built.paid);
     $('out-title').textContent = built.paid ? 'فاکتور (پرداخت‌شده) آماده است' : 'فاکتور آماده است';
     G.renderSheet($('preview'), built, feed, { live: false });
     renderHistory();
@@ -447,10 +454,34 @@
       if (pr) return { k: ++seq, id: r.id, t: pr.t, im: pr.im, imf: pr.imf, q: r.q, p: r.p, sp: pr.p, ed: r.p !== pr.p, ch: false, o: o, c: false, oos: pr.oos };
       return { k: ++seq, id: '', t: r.t, im: '', imf: '', q: r.q, p: r.p, sp: null, ed: true, ch: false, o: o, c: true, oos: false };
     });
-    built = null; $('out-card').hidden = true;
+    built = null; setOut(false);
     save(); initFields(); renderLines(); renderPicker(); updateTotals();
     G.toast(supp ? 'فاکتور پرداخت‌شده تغییر نمی‌کند؛ اقلام جدید را اضافه کنید (فاکتور مکمل)' : 'فاکتور باز شد. تغییر دهید و دوباره «ساخت فاکتور» بزنید (نسخهٔ بعدی ساخته می‌شود)');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---------- آیتم دلخواه (چیزی که در فهرست سایت نیست) ---------- */
+  function openCustom() {
+    var f = $('custom-form'), b = $('btn-custom');
+    f.hidden = false; b.setAttribute('aria-expanded', 'true'); b.textContent = '✕ بستن';
+    try { f.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
+    $('c-title').focus({ preventScroll: true });
+  }
+  function closeCustom() {
+    var f = $('custom-form'), b = $('btn-custom');
+    if (!f || !b) return;
+    f.hidden = true; b.setAttribute('aria-expanded', 'false'); b.textContent = '+ آیتم دلخواه';
+  }
+  function addCustom() {
+    var t = G.clip($('c-title').value, 120);
+    if (!t) { G.toast('عنوان آیتم را بنویسید'); $('c-title').focus(); return; }
+    st.items.push({ k: ++seq, id: '', t: t, im: '', imf: '', q: Math.max(1, Math.min(999, G.toNum($('c-qty').value) || 1)), p: G.toNum($('c-price').value), sp: null, ed: true, ch: false, o: {}, c: true, oos: false });
+    $('c-title').value = ''; $('c-price').value = ''; $('c-qty').value = '1';
+    closeCustom();
+    dirty(); renderLines(); renderPicker();
+    G.toast('«' + t + '» به لیست اضافه شد');
+    var last = $('lines').lastElementChild;
+    if (last) { try { last.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} }
   }
 
   /* ---------- فیلدهای بالای صفحه ---------- */
@@ -547,16 +578,17 @@
       dirty(); renderPicker();
     });
 
+    /* آیتم دلخواه: فرم داخل کارت «لیست محصولات» است (در seller.html)، نه زیر «پیام مشتری» */
     $('btn-custom').addEventListener('click', function () {
-      var f = $('custom-form'); f.hidden = !f.hidden;
-      if (!f.hidden) $('c-title').focus();
+      if ($('custom-form').hidden) openCustom(); else closeCustom();
     });
-    $('c-add').addEventListener('click', function () {
-      var t = G.clip($('c-title').value, 120);
-      if (!t) { G.toast('عنوان آیتم را بنویسید'); return; }
-      st.items.push({ k: ++seq, id: '', t: t, im: '', imf: '', q: Math.max(1, G.toNum($('c-qty').value) || 1), p: G.toNum($('c-price').value), sp: null, ed: true, ch: false, o: {}, c: true, oos: false });
-      $('c-title').value = ''; $('c-price').value = ''; $('c-qty').value = '1'; $('custom-form').hidden = true;
-      dirty(); renderLines();
+    $('c-cancel').addEventListener('click', closeCustom);
+    $('c-add').addEventListener('click', addCustom);
+    ['c-title', 'c-price', 'c-qty'].forEach(function (id) {
+      $(id).addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); addCustom(); }
+        else if (e.key === 'Escape') { closeCustom(); $('btn-custom').focus(); }
+      });
     });
     $('c-price').addEventListener('input', function (e) { var s = fmtIn(G.toNum(e.target.value)); if (e.target.value !== s) e.target.value = s; });
 
@@ -604,8 +636,9 @@
       if (st.items.length && !confirm('لیست فعلی پاک شود و فاکتور جدید شروع شود؟')) return;
       var keep = { sw: st.sw, valid: st.valid };
       st = fresh(); st.sw = keep.sw; st.valid = keep.valid;
-      built = null; $('out-card').hidden = true; save();
+      built = null; setOut(false); save();
       initFields(); renderLines(); renderPicker(); updateTotals();
+      closeCustom();
     });
     if (G.apiOn()) {
       $('srv-card').hidden = false;
@@ -706,12 +739,6 @@
   }
 
   /* ---------- شروع ---------- */
-  document.querySelector('.card .row-between').insertAdjacentHTML('afterend',
-    '<div class="custom-form" id="custom-form" hidden>' +
-    '<input type="text" id="c-title" maxlength="120" placeholder="عنوان آیتم (مثلاً: هزینه بسته‌بندی هدیه)">' +
-    '<div class="grid2"><input type="text" id="c-price" dir="ltr" inputmode="numeric" placeholder="قیمت واحد (تومان)">' +
-    '<input type="text" id="c-qty" dir="ltr" inputmode="numeric" value="1" placeholder="تعداد"></div>' +
-    '<button type="button" class="btn btn-primary small" id="c-add">افزودن به لیست</button></div>');
   initFields(); bind(); renderLines(); updateTotals(); renderHistory();
   sync(false);
 

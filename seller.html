@@ -30,6 +30,7 @@ sitemap: false
     </div>
   </section>
 
+  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <section class="card">
     <h2>اطلاعات فاکتور</h2>
     <fieldset class="fgroup">
@@ -68,6 +69,7 @@ sitemap: false
     </fieldset>
   </section>
 
+  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <section class="card acc-card" id="add-card">
     <button type="button" class="acc-head" id="add-toggle" aria-expanded="false" aria-controls="add-body">
       <span class="acc-title">＋ افزودن محصول</span><span class="acc-sub">جستجو و انتخاب از فهرست سایت</span><span class="acc-chev" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -79,15 +81,30 @@ sitemap: false
     </div>
   </section>
 
-  <section class="card">
-    <div class="row-between">
+  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
+  <section class="card" id="lines-card">
+    <div class="row-between lines-head">
       <h2>لیست محصولات <span class="badge" id="count">۰</span></h2>
-      <button type="button" class="btn btn-ghost small" id="btn-custom">+ آیتم دلخواه</button>
+      <button type="button" class="btn btn-ghost small" id="btn-custom" aria-expanded="false" aria-controls="custom-form">+ آیتم دلخواه</button>
+    </div>
+    <!-- فرم آیتم دلخواه: همین‌جا، زیر عنوان «لیست محصولات»؛ نه زیر «پیام مشتری» -->
+    <div class="custom-form" id="custom-form" hidden>
+      <p class="cf-title">آیتم دلخواه <small class="muted">برای چیزی که در فهرست سایت نیست</small></p>
+      <label class="field"><span>عنوان آیتم</span><input type="text" id="c-title" maxlength="120" placeholder="مثلاً: هزینه بسته‌بندی هدیه" autocomplete="off"></label>
+      <div class="grid2">
+        <label class="field"><span>قیمت واحد (تومان)</span><input type="text" id="c-price" dir="ltr" inputmode="numeric" placeholder="۰" autocomplete="off"></label>
+        <label class="field"><span>تعداد</span><input type="text" id="c-qty" dir="ltr" inputmode="numeric" value="1" placeholder="۱" autocomplete="off"></label>
+      </div>
+      <div class="cf-actions">
+        <button type="button" class="btn btn-primary small" id="c-add">افزودن به لیست</button>
+        <button type="button" class="btn btn-ghost small" id="c-cancel">انصراف</button>
+      </div>
     </div>
     <div id="lines"></div>
     <p class="muted empty" id="lines-empty">هنوز محصولی انتخاب نشده. از بخش بالا اضافه کنید.</p>
   </section>
 
+  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <section class="card">
     <h2>هزینه‌های ارسال و توضیحات</h2>
     <div class="grid2">
@@ -102,22 +119,29 @@ sitemap: false
     <ul class="warns" id="warns"></ul>
   </section>
 
+  <div class="sec-divider" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <div class="main-actions">
     <button type="button" class="btn btn-primary btn-xl" id="btn-build">ساخت فاکتور</button>
   </div>
 
-  <section class="card" id="out-card" hidden>
+  <div class="sec-divider" id="out-divider" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
+  <!-- کارت فاکتور: برای فاکتور «پرداخت‌شده» دکمه‌ها زیر فاکتور می‌آیند (کلاس is-paid)؛ برای فاکتور تازه بالای فاکتور می‌مانند -->
+  <section class="card out-card" id="out-card" hidden>
     <h2 id="out-title">فاکتور آماده است</h2>
     <p class="stale" id="stale" hidden>⚠️ بعد از ساخت، لیست تغییر کرده. دوباره «ساخت فاکتور» را بزنید.</p>
-    <div class="out-actions">
-      <button type="button" class="btn btn-wa" id="o-wa">ارسال در واتساپ</button>
-      <button type="button" class="btn" id="o-text">کپی متن</button>
-      <button type="button" class="btn" id="o-link">کپی لینک</button>
-      <button type="button" class="btn" id="o-img">عکس (PNG)</button>
-      <button type="button" class="btn" id="o-pdf">PDF</button>
+    <div class="out-tools" id="out-tools">
+      <p class="out-cap">ارسال یا ذخیرهٔ فاکتور</p>
+      <div class="out-actions">
+        <button type="button" class="btn btn-wa" id="o-wa">ارسال در واتساپ</button>
+        <button type="button" class="btn" id="o-text">کپی متن</button>
+        <button type="button" class="btn" id="o-link">کپی لینک</button>
+        <button type="button" class="btn" id="o-img">عکس (PNG)</button>
+        <button type="button" class="btn" id="o-pdf">PDF</button>
+      </div>
+      <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک فاکتور به انتهای متن</label>
+      <p class="muted small-note" id="o-linkinfo" dir="auto"></p>
     </div>
-    <label class="check"><input type="checkbox" id="o-withlink" checked> افزودن لینک فاکتور به انتهای متن</label>
-    <p class="muted small-note" id="o-linkinfo" dir="auto"></p>
+    <div class="sec-divider out-sep" role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
     <div class="sheet-scroll"><div id="preview"></div></div>
   </section>
 
@@ -131,14 +155,16 @@ sitemap: false
     </div>
   </section>
 
-  <section class="card">
+  <!-- بخش‌های انتهایی (باز کردن فاکتور قبلی و گزارش‌ها): با فاصله و جداکنندهٔ پررنگ از «فاکتورهای اخیر» جدا شده‌اند -->
+  <div class="sec-break" role="separator" aria-hidden="true"><span class="sd-dot"></span><span class="sd-label">ابزارهای بیشتر</span><span class="sd-dot"></span></div>
+  <section class="card tool-card">
     <h2>باز کردن فاکتور قبلی</h2>
     <p class="muted small-note">لینک یا کد فاکتور را اینجا paste کنید تا برای ویرایش یا ساخت فاکتور مکمل باز شود.</p>
     <span class="inline import-row"><input type="text" id="f-import" dir="ltr" placeholder="لینک فاکتور را اینجا paste کنید" autocomplete="off" aria-label="لینک یا کد فاکتور"><button type="button" class="btn small" id="btn-import">باز کن</button></span>
   </section>
 
-  <div class="sec-divider" id="srv-divider" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
-  <section class="card" id="srv-card" hidden>
+  <div class="sec-divider sec-divider-wide" id="srv-divider" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
+  <section class="card tool-card" id="srv-card" hidden>
     <h2>سرور، تلگرام و گزارش‌ها</h2>
     <div class="out-actions">
       <button type="button" class="btn small" id="btn-ping">تست اتصال</button>

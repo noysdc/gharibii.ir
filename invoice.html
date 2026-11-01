@@ -11,6 +11,7 @@ sitemap: false
   <div class="view-top"><a class="view-brand" href="{{ '/' | relative_url }}"><img src="{{ '/assets/images/gharibii-store-logo.webp' | relative_url }}" alt="" width="32" height="32"><span>فروشگاه غریبی کیش</span></a><button type="button" class="btn btn-ghost theme-toggle" data-theme-toggle title="حالت شب / روز" aria-label="حالت شب / روز">🌙</button></div>
   <div class="view-state" id="state">در حال بارگذاری فاکتور…</div>
   <div class="sheet-scroll"><div id="sheet"></div></div>
+  <div class="sec-divider" id="div-pay" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <div id="pay-cfg" data-url="{{ site.payment_link | escape }}" data-gateway="{% if site.payment_gateway and site.invoice_api != '' %}1{% endif %}" data-sheba="{{ site.bank_sheba | escape }}" data-card="{{ site.bank_card | escape }}" hidden></div>
   <section class="pay-box" id="pay-box" hidden>
     <h2>پرداخت</h2>
@@ -57,6 +58,7 @@ sitemap: false
       <button type="button" class="btn" id="pay-go-link">پرداخت با لینک زرین‌پال</button>
     </div>
   </section>
+  <div class="sec-divider" id="div-act" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <div class="view-actions" id="actions" hidden>
     <button type="button" class="btn btn-wa" id="v-contact" hidden>گفتگو با فروشنده در واتساپ</button>
     <div class="view-actions-row share-row">
@@ -66,6 +68,7 @@ sitemap: false
     </div>
     <p class="muted view-note" id="view-note"></p>
   </div>
+  <div class="sec-divider" id="div-site" hidden role="separator" aria-hidden="true"><span class="sd-dot"></span></div>
   <p class="view-site"><a href="{{ '/' | relative_url }}">مشاهده فروشگاه غریبی کیش</a></p>
 </main>
 <div class="toast" id="toast" role="status"></div>
