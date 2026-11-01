@@ -679,17 +679,24 @@
       if (ex) { ex.q = Math.min(999, ex.q + f.q); more++; }
       else { st.items.push({ k: ++seq, id: pr.id, t: pr.t, im: pr.im, imf: pr.imf, q: f.q, p: pr.p, sp: pr.p, ed: false, ch: false, o: f.o, c: false, oos: pr.oos }); added++; }
     });
-    function fill(key, val, label) {
+    /* force: موبایل و کد پستی قالب مشخصی دارند (۱۱ و ۱۰ رقم) و حدسی نیستند؛ پس اگر با مقدار فعلی فرق داشتند جایگزین می‌شوند («برگرداندن» هم هست) */
+    function fill(key, val, label, force) {
       if (!val) return;
       if (!String(st[key] || '').trim()) { st[key] = val; filled.push(label); }
-      else if (G.nzs(st[key]) !== G.nzs(val)) kept.push(label);
+      else {
+        var same = key === 'phone' ? phoneNorm(st[key]) === val : G.nzs(st[key]) === G.nzs(val);
+        if (same) return;
+        if (force) { st[key] = val; replaced.push(label); } else kept.push(label);
+      }
     }
-    fill('cust', r.name, 'نام'); fill('phone', r.phone, 'موبایل'); var spp = splitPost(r.addr); fill('addr', spp.a, 'آدرس'); fill('post', spp.p, 'کد پستی'); fill('note', r.note, 'یادداشت');
+    var replaced = [];
+    fill('cust', r.name, 'نام'); fill('phone', r.phone, 'موبایل', true); var spp = splitPost(r.addr); fill('addr', spp.a, 'آدرس'); fill('post', spp.p, 'کد پستی', true); fill('note', r.note, 'یادداشت');
     st.pasted.push(fp); st.pasted = st.pasted.slice(-30);
     var parts = [];
     if (added) parts.push(G.nf(added) + ' محصول اضافه شد');
     if (more) parts.push('تعداد ' + G.nf(more) + ' محصول زیاد شد');
     if (filled.length) parts.push(filled.join('، ') + ' جایگذاری شد');
+    if (replaced.length) parts.push(replaced.join('، ') + ' با مقدار پیام جایگزین شد');
     if (kept.length) parts.push(kept.join('، ') + ' از قبل پر بود و عوض نشد');
     if (r.lost) parts.push(G.nf(r.lost) + ' لینک شناسایی نشد');
     var msg = parts.join(' · ');
