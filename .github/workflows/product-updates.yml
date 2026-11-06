@@ -1,0 +1,66 @@
+name: Product updates (auto apply and sync)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "product-updates.md"
+      - "_products/**/*.md"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "sync = refresh inventory | apply = apply entered changes"
+        type: choice
+        options: [sync, apply]
+        default: sync
+
+permissions:
+  contents: write
+
+concurrency:
+  group: product-updates
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pyyaml
+      - name: Detect operation
+        id: operation
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "mode=sync" >> "$GITHUB_OUTPUT"
+          elif git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -qx 'product-updates.md'; then
+            echo "mode=apply" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=sync" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Apply or sync
+        env:
+          REQUESTED_MODE: ${{ inputs.mode }}
+        run: |
+          MODE="${{ steps.operation.outputs.mode }}"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then MODE="$REQUESTED_MODE"; fi
+          python scripts/product_updates.py --mode "$MODE"
+      - name: Commit results
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A _products product-updates.md product-updates-history.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Apply product updates and refresh inventory [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
