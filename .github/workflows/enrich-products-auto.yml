@@ -9,7 +9,8 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: enrich-products
+  # Same lock as product-updates.yml because both workflows write to _products.
+  group: product-content-writes
   cancel-in-progress: false
 jobs:
   enrich:
@@ -26,4 +27,17 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add -A _products
-          git diff --cached --quiet || (git commit -m "به‌روزرسانی خودکار محصولات" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "به‌روزرسانی خودکار محصولات"
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              echo "Push attempt ${attempt} failed; retrying after refresh."
+              sleep 2
+            done
+            echo "Unable to push enriched products after 3 attempts."
+            exit 1
+          fi
