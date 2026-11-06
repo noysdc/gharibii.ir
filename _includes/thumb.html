@@ -1,6 +1,14 @@
 {%- comment -%}
-  آدرس تصویر کارت‌ها. عکس‌های کوچک (-t) دیگر ساخته نمی‌شوند؛ همان عکس اصلی برگردانده می‌شود
-  تا مرورگر برای هر عکس یک درخواست ۴۰۴ اضافه نفرستد و بعد دوباره عکس کامل را نگیرد.
+  تصاویر پیش‌نمایش محصولات از نسخه‌های سبک (-t.webp) استفاده می‌کنند.
+  فایل اصلی دست‌نخورده می‌ماند و در صورت نبود بندانگشتی، onerror تصویر اصلی را جایگزین می‌کند.
 {%- endcomment -%}
 {%- assign th_full = include.src | default: '/assets/images/placeholder.svg' -%}
-{%- if th_full contains '://' -%}{{ th_full }}{%- else -%}{{ th_full | relative_url }}{%- endif -%}
+{%- if th_full contains '://' -%}
+  {{ th_full }}
+{%- else -%}
+  {%- assign th_path = th_full -%}
+  {%- if th_full contains '.webp' -%}
+    {%- assign th_path = th_full | replace: '.webp', '-t.webp' -%}
+  {%- endif -%}
+  {{ th_path | relative_url }}
+{%- endif -%}
