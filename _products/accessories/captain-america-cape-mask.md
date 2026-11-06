@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "ست شنل و ماسک کاپیتان آمریکا | قهرمانی"
-description: "ست شنل و ماسک کاپیتان آمریکا؛ ست کامل‌کننده‌ای برای لباس شخصیتی و بازی‌های قهرمانی. سفارش از فروشگاه غریبی کیش."
+description: "ست شنل و ماسک با تم کاپیتان آمریکا. ست کامل‌کننده‌ای برای لباس شخصیتی و بازی‌های قهرمانی. سفارش از فروشگاه غریبی کیش."
 slug: "captain-america-cape-mask"
 category: accessories
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["fe450bd3e91b4307920bd07884e275e1.JPG", "18920bef9e5e4954ab4119cf0d195b0e.JPG"]
 tags: ["ست شنل و ماسک کاپیتان آمریکا", "ست شنل و ماسک کاپیتان آمریکا پسرانه", "کاپیتان آمریکا", "کاپتان آمریکا", "اونجرز", "شنل و ماسک", "شنل شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=9a48217f;d=b70afa50;g=f8e5ecf6;t=907bfcb2"
+auto_sig: "b=9a48217f;d=36555f0d;g=f8e5ecf6"
 images:
   - /assets/images/products/accessories/captain-america-cape-mask/captain-america-cape-mask-1.webp
   - /assets/images/products/accessories/captain-america-cape-mask/captain-america-cape-mask-2.webp

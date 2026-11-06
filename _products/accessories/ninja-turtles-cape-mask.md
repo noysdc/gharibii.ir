@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "ست شنل و ماسک لاک‌پشت‌های نینجا"
-description: "ست شنل و ماسک لاک‌پشت‌های نینجا؛ ست کامل‌کننده‌ای برای لباس شخصیتی و بازی‌های قهرمانی. سفارش از فروشگاه غریبی کیش."
+description: "ست شنل و ماسک با تم لاک‌پشت‌های نینجا. ست کامل‌کننده‌ای برای لباس شخصیتی و بازی‌های قهرمانی. سفارش از فروشگاه غریبی کیش."
 slug: "ninja-turtles-cape-mask"
 category: accessories
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["fd6db75fce78411499b032ceb3906ddb.JPG", "d1198b4059ab4ea19ad6ee5ba27bfee7.JPG"]
 tags: ["ست شنل و ماسک لاک‌پشت‌های نینجا", "ست شنل و ماسک لاک‌پشت‌های نینجا پسرانه", "لاکپشت های نینجا", "نینجا", "شنل و ماسک", "شنل شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "هدیه تولد", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=ff548c0b;d=d4efce93;g=8c10a0df;t=b08f2c56"
+auto_sig: "b=ff548c0b;d=b26c4501;g=8c10a0df"
 images:
   - /assets/images/products/accessories/ninja-turtles-cape-mask/ninja-turtles-cape-mask-1.webp
   - /assets/images/products/accessories/ninja-turtles-cape-mask/ninja-turtles-cape-mask-2.webp

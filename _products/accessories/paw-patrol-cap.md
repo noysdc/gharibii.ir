@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "کلاه کپ سگ‌های نگهبان"
-description: "کلاه کپ سگ‌های نگهبان؛ مناسب بیرون رفتن، سفر، تولد و ست کردن با لباس‌های شخصیتی. سفارش از فروشگاه غریبی کیش."
+description: "کلاه کپ با تم سگ‌های نگهبان. مناسب بیرون رفتن، سفر، تولد و ست کردن با لباس‌های شخصیتی. سفارش از فروشگاه غریبی کیش."
 slug: "paw-patrol-cap"
 category: accessories
 gender: unisex
@@ -15,7 +15,7 @@ redirect_from:
   - "/shop/کلاه/P45396-کلاه-کپ-دخترانه-سگها-ی-نگهبان-شخصیتی-فروشگاه-غریبی-کیش.html"
 webzi_images: ["237364e0198f4e639f46bd0ad01a3a07.JPG"]
 tags: ["کلاه کپ سگ‌های نگهبان", "کلاه کپ سگ‌های نگهبان دخترانه و پسرانه", "سگ های نگهبان", "پاو پاترول", "کلاه کپ", "کلاه کپ شخصیتی", "استایل روزمره", "مهمانی کودک", "اکسسوری مهمانی", "تم تولد", "اکسسوری تولد", "هدیه تولد", "مهمانی تم‌دار", "جشن تولد", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
-auto_sig: "b=abe05412;d=abb3dda6;g=f547f001;t=5170cae8"
+auto_sig: "b=abe05412;d=d169eaf1;g=f547f001"
 images:
   - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-1.webp
   - /assets/images/products/accessories/paw-patrol-cap/paw-patrol-cap-2.webp

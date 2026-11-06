@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "کلاه دزدان دریایی | پسرانه"
-description: "کلاه دزدان دریایی؛ مناسب مهمانی تم‌دار، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
+description: "کلاه با تم دزدان دریایی. مناسب مهمانی تم‌دار، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "pirate-hat"
 category: accessories
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["7e1e8c06567c451bb43fd1c67d43c242.JPG", "066621d47ff549d89ffca68e9b5c93c7.JPG", "419b79dedea9405dabf28b5f7cf6ba1a.JPG", "935afe179d0440dbb1698ad7a17fbfb5.JPG"]
 tags: ["کلاه دزدان دریایی", "کلاه دزدان دریایی پسرانه", "دزد دریایی", "دزدان دریایی", "کلاه شخصیتی", "کلاه تم", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "هدیه تولد", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=816cf3de;d=0f07fe14;g=a3dba0fe;t=72e22f8c"
+auto_sig: "b=816cf3de;d=b1391982;g=a3dba0fe"
 images:
 
   - /assets/images/products/accessories/pirate-hat/pirate-hat-5.webp

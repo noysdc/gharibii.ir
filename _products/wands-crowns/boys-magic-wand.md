@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "عصای جادویی پسرانه | مجیک"
-description: "عصای جادویی پسرانه؛ مناسب جشن تولد، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
+description: "عصای جادویی کودک؛ مناسب جشن تولد، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "boys-magic-wand"
 category: crown-wand
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["742979caa58840799868f5f637f2fac2.JPG", "7b9a0d72ffb24cbf9c158476fc4cf931.JPG", "d3d76cbcfcc0422fa415486cedc78969.JPG", "6a99766d4370465eadc10efc82d7c7f4.JPG", "767206b40fdb4c58bca8d01c2e9b802a.JPG"]
 tags: ["عصای جادویی پسرانه", "عصای جادویی", "عصا جادویی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "هدیه تولد", "جشن تولد", "مهمانی هالووین", "کاسپلی کودک", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=34ef9a26;d=110c60b2;g=981e417a;t=2078e515"
+auto_sig: "b=34ef9a26;d=7a84cce4;g=981e417a"
 images:
   - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-7.webp
   - /assets/images/products/wands-crowns/boys-magic-wand/boys-magic-wand-11.webp

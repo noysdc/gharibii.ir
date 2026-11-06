@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "لباس دختر کفشدوزکی | آستر نخی"
-description: "لباس دختر کفشدوزکی؛ انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
+description: "لباس با تم دختر کفشدوزکی. انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "ladybug-dress"
 category: girls
 gender: girls
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["ed54b684a9b54fb4b8fc1e62371f4d47.JPG", "5790bd751b0644ffbea5d8f2fc3004ee.JPG", "0b0997e1999b41b8bcdd0f9e2a17b6c6.JPG"]
 tags: ["لباس دختر کفشدوزکی", "لباس دختر کفشدوزکی دخترانه", "دختر کفشدوزکی", "کفشدوزک", "لیدی باگ", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "هالووین", "لباس هالووین دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "بازی نقش‌آفرینی", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=5b6af12d;d=467ec0aa;g=818db221;t=50e1fbe3"
+auto_sig: "b=5b6af12d;d=82c70bca;g=818db221"
 images:
   - /assets/images/products/girls/ladybug-dress/ladybug-dress-1.webp
   - /assets/images/products/girls/ladybug-dress/ladybug-dress-2.webp
