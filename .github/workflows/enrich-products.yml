@@ -14,7 +14,7 @@ on:
         required: false
         default: ""
       force:
-        description: "ویرایش‌های دستی را نادیده بگیر و دوباره تولید کن (فقط با تعیین محصول توصیه می‌شود)"
+        description: "بازنویسی متن، تگ و متای تولیدشده؛ عنوان و گزینه‌ها هرگز تغییر نمی‌کنند"
         type: boolean
         default: false
 permissions:
