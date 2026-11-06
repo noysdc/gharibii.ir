@@ -14,11 +14,7 @@ on:
         required: false
         default: ""
       force:
-        description: "ویرایش‌های دستی را نادیده بگیر و دوباره تولید کن (فقط با تعیین محصول توصیه می‌شود)"
-        type: boolean
-        default: false
-      retitle:
-        description: "برای محصولاتی که عنوان دستی ندارند هم عنوان بساز"
+        description: "بازنویسی متن، تگ و متای تولیدشده؛ عنوان و گزینه‌ها هرگز تغییر نمی‌کنند"
         type: boolean
         default: false
 permissions:
@@ -40,7 +36,6 @@ jobs:
           MODE: ${{ inputs.mode }}
           PRODUCT: ${{ inputs.product }}
           FORCE: ${{ inputs.force }}
-          RETITLE: ${{ inputs.retitle }}
         run: |
           ARGS=(--report scripts/report.csv)
           if [ "$MODE" != "apply" ]; then ARGS+=(--dry-run); fi
@@ -49,7 +44,6 @@ jobs:
             ARGS+=(--only "$PRODUCT")
           fi
           if [ "$FORCE" = "true" ]; then ARGS+=(--force); fi
-          if [ "$RETITLE" = "true" ]; then ARGS+=(--retitle); fi
           python scripts/enrich_products.py "${ARGS[@]}"
       - name: Summary
         run: python scripts/summarize_report.py scripts/report.csv
