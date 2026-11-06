@@ -39,7 +39,7 @@ jobs:
         run: |
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             echo "mode=sync" >> "$GITHUB_OUTPUT"
-          elif git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -qx 'product-updates.md'; then
+          elif git diff-tree --no-commit-id --name-only -r --first-parent "$GITHUB_SHA" | grep -qx 'product-updates.md'; then
             echo "mode=apply" >> "$GITHUB_OUTPUT"
           else
             echo "mode=sync" >> "$GITHUB_OUTPUT"
