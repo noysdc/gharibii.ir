@@ -17,7 +17,6 @@ auto_sig: "d=eae45e5a;g=4049eb72"
 images:
   - /assets/images/products/girls/ballet-dress-model-2/ballet-dress-model-2-1.webp
   - /assets/images/products/girls/ballet-dress-model-2/ballet-dress-model-2-2.webp
-
 ---
 
 # لباس رقص باله مدل ۲
