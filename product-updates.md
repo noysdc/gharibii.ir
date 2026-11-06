@@ -292,7 +292,7 @@ products:
 - file: _products/accessories/princess-accessory-set.md
   category: accessories
   category_name: اکسسوری
-  current_title: ست اکسسوری پرنسسی | تاج، عصا، دستکش و زیورآلات
+  current_title: ست اکسسوری هفت تیکه پرنسسی | تاج، عصا، دستکش و زیورآلات
   title: ''
   sizes: []
   colors: []
@@ -300,7 +300,7 @@ products:
 - file: _products/accessories/princess-anna-accessory-set.md
   category: accessories
   category_name: اکسسوری
-  current_title: ست اکسسوری پرنسسی | تاج، عصا و دستکش
+  current_title: ست اکسسوری پرنسسی آنا | تاج، عصا و دستکش
   title: ''
   sizes: []
   colors: []
@@ -1084,7 +1084,7 @@ products:
 - file: _products/wands-crowns/colored-hair-tinsel.md
   category: wands-crowns
   category_name: تاج و عصا
-  current_title: تل موی رنگی | شخصیتی دخترانه
+  current_title: بافت موی پونی | شخصیتی دخترانه
   title: ''
   sizes: []
   colors: []
@@ -1092,7 +1092,7 @@ products:
 - file: _products/wands-crowns/crown-and-tinsel.md
   category: wands-crowns
   category_name: تاج و عصا
-  current_title: ست تاج و تل پرنسسی
+  current_title: تاج پرنسسی
   title: ''
   sizes: []
   colors: []
