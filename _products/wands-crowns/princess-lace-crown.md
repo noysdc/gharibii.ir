@@ -23,13 +23,6 @@ tags: ["تل تاج توری پرنسسی", "تل تاج دخترانه", "تل 
 auto_sig: "b=e79a7b97;d=c9135b1f;g=270b55f9;t=1b6cfa1a"
 images:
   - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-9.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-11.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-13.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-15.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-17.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-19.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-21.webp
-  - /assets/images/products/wands-crowns/princess-lace-crown/princess-lace-crown-23.webp
 ---
 
 <!-- AUTO:START -->

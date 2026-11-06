@@ -1,13 +1,13 @@
 ---
 layout: product
-title: "تل موی رنگی | شخصیتی دخترانه"
+title: "بافت موی پونی | شخصیتی دخترانه"
 description: "تل موی رنگی؛ مناسب تولد، مهمانی و استایل شاد روزمره. سفارش از فروشگاه غریبی کیش."
 slug: "colored-hair-tinsel"
 category: crown-wand
 gender: girls
 price: ""
-price_group: ""
-price: "1298000"
+price_group: "out_of_stock"
+price: "0"
 currency: IRT
 images_dirs: ["/assets/images/products/wands-crowns/colored-hair-tinsel/"]
 webzi_id: 45362
@@ -19,16 +19,11 @@ tags: ["تل موی رنگی", "تل موی رنگی دخترانه", "اکسس�
 
 auto_sig: "b=9761e114;d=d86c505e;g=47a7b7f9;t=f6efa0fc"
 images:
-  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-27.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-29.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-33.webp
-  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-35.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-37.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-39.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-41.webp
-  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-43.webp
-  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-45.webp
-  - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-47.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-49.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-51.webp
   - /assets/images/products/wands-crowns/colored-hair-tinsel/colored-hair-tinsel-53.webp

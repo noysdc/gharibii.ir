@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "ست تاج و تل پرنسسی"
+title: "تاج پرنسسی"
 description: "ست تاج و تل پرنسسی؛ مناسب جشن تولد، مهمانی، عکاسی و بازی پرنسسی. سفارش از فروشگاه غریبی کیش."
 slug: "crown-and-tinsel"
 category: crown-wand
@@ -19,8 +19,6 @@ tags: ["ست تاج و تل پرنسسی", "تل تاج دخترانه", "تل �
 
 auto_sig: "b=d0b1913b;d=66f8a235;g=8c2ede04;t=036a9276"
 images:
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-6.webp
-  - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-8.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-10.webp
   - /assets/images/products/wands-crowns/crown-and-tinsel/crown-and-tinsel-12.webp
 ---

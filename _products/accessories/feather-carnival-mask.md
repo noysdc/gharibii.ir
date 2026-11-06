@@ -5,7 +5,8 @@ description: "ماسک فانتزی پر کارناوال؛ مناسب جشن ت
 slug: feather-carnival-mask
 category: accessories
 gender: girls
-price: "498000"
+price: ""
+price_group: "out_of_stock"
 currency: IRT
 options:
   - name: "رنگ"
