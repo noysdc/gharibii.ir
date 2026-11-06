@@ -4,17 +4,17 @@
 enrich_products.py — به‌روزرسانی خودکار فایل‌های محصول (_products/**/*.md)
 
 چه چیزهایی ساخته می‌شود (فقط روی فایل‌های محصول):
-  1. عنوان (title)  : برای slugهایی که در product_catalog.TITLES عنوان دارند.
-  2. هشتگ‌ها (tags) : از نوع محصول + شخصیت + مخاطب؛ هشتگ‌های شخصی را در  extra_tags  بنویسید.
-  3. توضیحات (body) : فقط بین  <!-- AUTO:START -->  و  <!-- AUTO:END -->
-  4. سایز/رنگ (options): نام گزینه‌ها و قالب سایزها یکدست می‌شود.
-  5. description    : متای گوگل.
+  1. عنوان (title)  : کاملاً دستی؛ اسکریپت هرگز آن را تغییر نمی‌دهد یا مبنای تولید قرار نمی‌دهد.
+  2. هشتگ‌ها (tags) : از نوع محصول + شخصیت + مخاطب؛ هشتگ‌های شخصی را در extra_tags بنویسید.
+  3. توضیحات (body) : فقط بین <!-- AUTO:START --> و <!-- AUTO:END -->
+  4. description    : متای گوگل، بدون استفاده از عنوان محصول.
+  5. options        : کاملاً دستی؛ نام گزینه‌ها و مقادیر سایز/رنگ عیناً حفظ می‌شوند.
 
 ویرایش دستی شما هرگز پاک نمی‌شود:
   • هر چیزی بیرون از نشانگرهای AUTO دست‌نخورده می‌ماند.
-  • اگر title / tags / description یا متن داخل بلوک AUTO را خودتان تغییر دهید، اسکریپت آن بخش را
-    تشخیص می‌دهد (با auto_sig در front matter) و دیگر بازنویسی نمی‌کند.
-  • قفل صریح:   lock: [title, tags, description, options, body]   یا   lock: all
+  • title و options همیشه دست‌نخورده می‌مانند.
+  • ویرایش دستی tags / description یا متن داخل بلوک AUTO با auto_sig تشخیص داده می‌شود.
+  • قفل صریح برای بخش‌های قابل‌تولید: lock: [tags, description, body] یا lock: all
   • کل فایل را کنار بگذار:   auto: false
   • بازگشت به حالت خودکار برای یک محصول:   --only مسیر --force
 
@@ -236,12 +236,12 @@ def occasions_for(slug, kind, char, fm):
         out.remove("gift"); out.append("gift")
     return out[:6]
 
-def make_tags(fm, kind, char, title, old_tags, slug=""):
+def make_tags(fm, kind, char, old_tags, slug=""):
     gender = fm.get("gender", "unisex")
     aud = C.AUDIENCE_FA.get(gender, "")
     g = kind_group(kind)
-    core = title_core(title)
-    tags = [core]
+    # عنوان دستی محصول عمداً وارد تولید هشتگ نمی‌شود.
+    tags = []
     if char:
         tags += [f"{kind['name']} {char['name']}", f"{kind['name']} {char['name']} {aud}".strip()]
         tags += char["tags"][:3]
@@ -271,12 +271,13 @@ def make_tags(fm, kind, char, title, old_tags, slug=""):
     out += [t for t in C.STORE_TAGS if t not in out]
     return out
 
-def make_meta_description(fm, kind, char, title, slug=""):
-    core = title_core(title)
+def make_meta_description(fm, kind, char, slug=""):
+    # متای گوگل بر اساس نوع و شخصیت محصول ساخته می‌شود، نه عنوان دستی.
+    core = kind["name"]
     occ = pick(kind["occ"], slug, "o")
-    if char and char["name"] not in core:
-        return f"{core} با طراحی الهام‌گرفته از {char['name']}. {occ} سفارش از {C.STORE_NAME}."
-    return f"{core}؛ {occ} سفارش از {C.STORE_NAME}."
+    if char:
+        return f"{core} با تم {char['name']}. {occ} سفارش از {C.STORE_NAME}."
+    return f"{core} کودک؛ {occ} سفارش از {C.STORE_NAME}."
 
 def clean_legacy(body, old_title):
     """خطوط توضیح قدیمی که واقعیت‌های محصول هستند را نگه می‌دارد."""
@@ -329,7 +330,8 @@ def build_auto_block(fm, slug, kind, char, options):
     has_size = False
     for o in options or []:
         label = {"اندازه": "سایزبندی", "سن و سال": "سن و سال", "رنگ": "رنگ‌بندی"}.get(o["name"], o["name"])
-        specs.append(f"- **{label}:** {compact_values(o['values'])}")
+        # مقادیر گزینه‌ها، به‌ویژه سایزها، دقیقاً مطابق نوشته‌ی صاحب فروشگاه نمایش داده می‌شوند.
+        specs.append(f"- **{label}:** {', '.join(str(v) for v in o['values'])}")
         if o["name"] in ("اندازه", "سن و سال"):
             has_size = True
 
@@ -416,39 +418,17 @@ def process(path, args):
         forced, forced_char = forced
     char = char_by_key(forced_char) if forced_char else find_char(slug)
     kind = find_kind(slug)
-    gen_title = None
-    if forced:
-        gen_title = forced.replace(" | ", C.TITLE_SEP)
-    elif args.retitle:
-        aud = C.AUDIENCE_FA.get(fm.get("gender", "unisex"), "")
-        gen_title = f"{kind['name']} {char['name'] if char else ''} {C.TITLE_SEP.strip()} {aud}".replace("  ", " ").strip()
-    elif not char:
+    if not char:
         flags.append("شخصیت شناسایی نشد (توضیح عمومی)")
 
-    # ---- options (همیشه یکدست می‌شود، مگر قفل باشد)
-    opts_old = fm.get("options")
-    if "options" in lock:
-        opts_new, opts_changed = opts_old, False
-        kept.append("options(lock)")
-    else:
-        opts_new, opts_changed = normalize_options(opts_old)
-
-    # ---- title
-    new_title = old_title
-    if gen_title is not None:
-        if "title" in lock:
-            kept.append("title(lock)")
-        elif user_edited("t", old_title):
-            kept.append("title(ویرایش دستی)")
-        else:
-            new_title = gen_title
-            new_sig["t"] = h(gen_title)
-    title_for_text = new_title
+    # عنوان و گزینه‌ها کاملاً دستی هستند و هیچ‌گاه تغییر نمی‌کنند.
+    opts_new = fm.get("options")
+    opts_changed = False
 
     # ---- tags
     extras = [str(x) for x in (fm.get("extra_tags") or [])]
     cur_tags = [str(x) for x in (fm.get("tags") or [])]
-    gen_tags = make_tags(fm, kind, char, title_for_text, cur_tags, slug)
+    gen_tags = make_tags(fm, kind, char, cur_tags, slug)
     gen_tags = gen_tags + [e for e in extras if e not in gen_tags]
     new_tags = gen_tags
     if "tags" in lock:
@@ -460,7 +440,7 @@ def process(path, args):
 
     # ---- description (متای گوگل)
     cur_desc = str(fm.get("description", "") or "")
-    gen_desc = make_meta_description(fm, kind, char, title_for_text, slug)
+    gen_desc = make_meta_description(fm, kind, char, slug)
     new_desc = gen_desc
     if "description" in lock:
         new_desc = cur_desc; kept.append("description(lock)")
@@ -496,8 +476,6 @@ def process(path, args):
 
     # ---- front matter text edits
     fmt = fm_text
-    if new_title != old_title:
-        fmt = set_scalar(fmt, "title", f"title: {dq(new_title)}") or fmt
     tag_line = f"tags: [{', '.join(dq(x) for x in new_tags)}]\n"
     tag_pat = re.compile(r"^tags:[^\n]*\n(?:[ \t]+-[^\n]*\n)*", re.M)
     if tag_pat.search(fmt):
@@ -510,9 +488,6 @@ def process(path, args):
         fmt = desc_pat.sub(lambda m: desc_line, fmt, count=1)
     else:
         fmt = re.sub(r"^(title:[^\n]*\n)", lambda m: m.group(1) + desc_line, fmt, count=1, flags=re.M)
-    if opts_old and opts_changed:
-        opt_pat = re.compile(r"^options:\n(?:[ \t]+[^\n]*\n)+", re.M)
-        fmt = opt_pat.sub(lambda m: options_block(opts_new), fmt, count=1)
     sig_line = 'auto_sig: "' + ";".join(f"{k}={v}" for k, v in sorted(new_sig.items())) + '"\n'
     sig_pat = re.compile(r"^auto_sig:[^\n]*\n", re.M)
     if sig_pat.search(fmt):
@@ -525,7 +500,7 @@ def process(path, args):
     if crlf:
         out = out.replace("\n", "\r\n")
 
-    info = dict(slug=slug, old_title=old_title, new_title=new_title,
+    info = dict(slug=slug, old_title=old_title, new_title=old_title,
                 old_tags=len(cur_tags), new_tags=len(new_tags),
                 options_changed=opts_changed, body=body_note, char=char["name"] if char else "",
                 kind=kind["name"], kept_manual=", ".join(kept), flags="; ".join(flags))
@@ -537,7 +512,6 @@ def main():
     ap.add_argument("--dir", default="_products")
     ap.add_argument("--only", help="فقط یک فایل، مثل girls/snow-white-dress.md")
     ap.add_argument("--dry-run", action="store_true")
-    ap.add_argument("--retitle", action="store_true", help="برای محصولاتی که عنوان دستی ندارند هم عنوان بسازد")
     ap.add_argument("--force", action="store_true", help="ویرایش‌های دستی را نادیده بگیر و دوباره تولید کن (lock حفظ می‌شود)")
     ap.add_argument("--report")
     args = ap.parse_args()
