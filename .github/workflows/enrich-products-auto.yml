@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  # Same lock as product-updates.yml because both workflows write to _products.
+  # Separate workflow lock; rebase-and-retry handles concurrent product writes.
   group: enrich-products
   cancel-in-progress: false
 jobs:
