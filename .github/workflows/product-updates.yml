@@ -19,7 +19,7 @@ permissions:
 
 concurrency:
   # Share one lock with the enrichment workflow: both write to _products.
-  group: product-content-writes
+  group: product-updates
   cancel-in-progress: false
 
 jobs:
