@@ -5,7 +5,6 @@ description: "تل موی رنگی کودک؛ مناسب تولد، مهمانی
 slug: "colored-hair-tinsel"
 category: crown-wand
 gender: girls
-price: ""
 price_group: "out_of_stock"
 price: "0"
 currency: IRT
