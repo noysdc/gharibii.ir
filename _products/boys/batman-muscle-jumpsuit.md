@@ -23,8 +23,6 @@ tags: ["لباس سرهمی عضلانی بتمن", "سرهمی عضلانی ب�
 auto_sig: "b=f1f1c169;d=5d2ee0a3;g=c9a35c28;t=8b3afdeb"
 images:
   - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-1.webp
-  - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-2.webp
-  - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-3.webp
   - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-4.webp
   - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-5.webp
   - /assets/images/products/boys/batman-muscle-jumpsuit/batman-muscle-jumpsuit-6.webp

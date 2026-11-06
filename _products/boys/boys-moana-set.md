@@ -5,8 +5,8 @@ description: "ست پسرانه موانا؛ مناسب جشن تولد، مهم
 folder: "boys-moana-set"
 category: boys
 gender: boys
-price: ""
-price_group: "out_of_stock"
+price: "1298000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/boys/boys-moana-set/"]
 needs_review: true
