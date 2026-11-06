@@ -617,14 +617,6 @@ products:
   sizes: []
   colors: []
   images: []
-- file: _products/girls/elsa-dress-model-2.md
-  category: girls
-  category_name: لباس دخترانه
-  current_title: پیراهن السا مدل ۲ | لباس فانتزی و مجلسی دخترانه
-  title: ''
-  sizes: []
-  colors: []
-  images: []
 - file: _products/girls/elsa-frozen-1-long-sleeve-dress.md
   category: girls
   category_name: لباس دخترانه
@@ -652,7 +644,7 @@ products:
 - file: _products/girls/elsa-frozen-new-collection.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس فانتزی السا | مجموعه یخی
+  current_title: لباس پرنسسی السا | نیوکالکشن
   title: ''
   sizes: []
   colors: []
@@ -660,7 +652,7 @@ products:
 - file: _products/girls/elsa-long-sleeve-lace-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس آستین بلند السا | دامن توری تمام‌نخ
+  current_title: لباس آستین بلند تصویردار السا | دامن توری تمام‌نخ
   title: ''
   sizes: []
   colors: []
@@ -668,7 +660,7 @@ products:
 - file: _products/girls/frozen-2-elsa-anna-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی فروزن ۲ | السا و آنا
+  current_title: لباس پرنسسی السا یخی
   title: ''
   sizes: []
   colors: []
@@ -897,18 +889,10 @@ products:
   sizes: []
   colors: []
   images: []
-- file: _products/girls/new-cinderella-with-gloves.md
-  category: girls
-  category_name: لباس دخترانه
-  current_title: لباس پرنسسی سیندرلا | همراه دستکش
-  title: ''
-  sizes: []
-  colors: []
-  images: []
 - file: _products/girls/original-elsa-frozen-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی السا فروزن | تک‌رنگ
+  current_title: لباس پرنسسی السا فروزن | نیوکالکشن مدل 2
   title: ''
   sizes: []
   colors: []
@@ -932,7 +916,7 @@ products:
 - file: _products/girls/peach-princess-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسس پیچ | دخترانه
+  current_title: لباس پرنسس پیچ | دامن کوتاه
   title: ''
   sizes: []
   colors: []
@@ -980,7 +964,7 @@ products:
 - file: _products/girls/rapunzel-disney-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی راپونزل | گیسوکمند
+  current_title: لباس پرنسسی راپونزل | گیسوکمند - نیوکالکشن
   title: ''
   sizes: []
   colors: []
@@ -1004,7 +988,7 @@ products:
 - file: _products/girls/sleeping-beauty-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی زیبای خفته اورورا | دخترانه
+  current_title: لباس پرنسسی زیبای خفته اورورا | آستین کوتاه
   title: ''
   sizes: []
   colors: []
@@ -1044,7 +1028,7 @@ products:
 - file: _products/girls/unicorn-formal-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس مجلسی تکشاخ | دخترانه
+  current_title: لباس مجلسی تکشاخ | سه تیکه یونیکورن
   title: ''
   sizes: []
   colors: []
