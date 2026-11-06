@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "لباس پرنسسی السا فروزن | تک‌رنگ"
+title: "لباس پرنسسی السا فروزن | نیوکالکشن مدل 2"
 description: "لباس با تم السا. انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
 slug: "original-elsa-frozen-dress"
 category: girls
@@ -22,44 +22,56 @@ tags: ["لباس السا", "لباس السا دخترانه", "السا", "ف�
 
 auto_sig: "b=317c81c7;d=1407fdcb;g=a92bb194"
 images:
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-1.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-2.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-3.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-4.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-5.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-6.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-7.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-8.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-9.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-10.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-11.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-12.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-13.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-14.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-15.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-16.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-17.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-18.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-19.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-20.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-21.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-22.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-23.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-24.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-25.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-26.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-27.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-28.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-29.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-30.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-31.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-32.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-33.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-34.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-35.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-36.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-37.webp
-  - /assets/images/products/girls/original-elsa-frozen-dress/original-elsa-frozen-dress-38.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-1.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-2.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-3.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-4.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-5.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-6.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-7.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-8.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-9.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-10.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-11.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-12.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-13.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-14.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-15.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-16.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-17.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-18.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-19.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-20.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-21.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-22.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-23.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-24.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-25.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-26.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-27.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-28.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-29.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-30.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-31.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-32.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-33.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-34.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-35.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-36.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-37.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-38.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-39.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-40.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-41.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-42.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-43.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-44.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-45.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-46.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-47.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-48.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-49.webp
+  - /assets/images/products/girls/elsa-dress-model-2/elsa-dress-model-2-50.webp
 ---
 
 <!-- AUTO:START -->

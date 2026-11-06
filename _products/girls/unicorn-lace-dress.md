@@ -5,8 +5,8 @@ description: "پیراهن توری با تم تکشاخ. مناسب جشن تو
 slug: "unicorn-lace-dress"
 category: girls
 gender: girls
-price: ""
-price_group: "p_2598000"
+price: "2998000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/unicorn-lace-dress/"]
 needs_folder: true   # برای این محصول پوشه‌ی عکس بساز: unicorn-lace-dress

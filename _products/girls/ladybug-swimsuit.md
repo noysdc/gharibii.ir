@@ -15,9 +15,7 @@ needs_review: true
 images:
 
   - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-5.webp
-  - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-6.webp
-  - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-7.webp
-  - /assets/images/products/girls/ladybug-swimsuit/ladybug-swimsuit-8.webp
+
 ---
 
 توضیحات محصول را اینجا بنویسید...

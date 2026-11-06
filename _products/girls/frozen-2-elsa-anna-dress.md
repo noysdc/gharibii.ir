@@ -1,6 +1,6 @@
 ---
 layout: product
-title: "لباس پرنسسی فروزن ۲ | السا و آنا"
+title: "لباس پرنسسی السا یخی"
 description: "لباس با تم السا و آنا. مناسب جشن تولد، مهمانی تم‌دار، عکاسی و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "frozen-2-elsa-anna-dress"
 category: girls
@@ -29,14 +29,11 @@ images:
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-4.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-5.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-6.webp
-  - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-7.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-8.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-9.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-10.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-11.webp
-  - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-12.webp
   - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-13.webp
-  - /assets/images/products/girls/frozen-2-elsa-anna-dress/frozen-2-elsa-anna-dress-14.webp
 ---
 
 <!-- AUTO:START -->

@@ -21,7 +21,6 @@ tags: ["لباس آنا", "لباس آنا دخترانه", "آنا", "فروز�
 
 auto_sig: "b=69f3bdf7;d=d8b23669;g=bba95daf"
 images:
-  - /assets/images/products/girls/princess-anna-dress/princess-anna-dress-1.webp
   - /assets/images/products/girls/princess-anna-dress/princess-anna-dress-2.webp
   - /assets/images/products/girls/princess-anna-dress/princess-anna-dress-3.webp
   - /assets/images/products/girls/princess-anna-dress/princess-anna-dress-4.webp

@@ -37,46 +37,72 @@ images:
   - /assets/images/products/girls/cinderella-new-design-dress/cinderella-new-design-dress-14.webp
   - /assets/images/products/girls/cinderella-new-design-dress/cinderella-new-design-dress-15.webp
   - /assets/images/products/girls/cinderella-new-design-dress/cinderella-new-design-dress-16.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-5.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-6.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-7.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-8.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-9.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-10.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-11.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-12.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-13.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-14.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-15.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-16.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-17.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-18.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-19.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-20.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-21.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-22.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-23.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-24.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-25.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-26.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-27.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-28.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-29.webp
+  - /assets/images/products/girls/new-cinderella-with-gloves/new-cinderella-with-gloves-30.webp
 ---
 
 <!-- AUTO:START -->
+# لباس پرنسسی سیندرلا دخترانه همراه با دستکش
 
-## درباره‌ی این محصول
+اگر به دنبال یک لباس مجلسی و رویایی برای کوچولوی خود هستید، این لباس پرنسسی سیندرلا با طراحی خیره‌کننده و رنگ آبی روشن، دقیقاً همان انتخاب جادویی است. این لباس با الهام از شخصیت محبوب سیندرلا (Cinderella) طراحی شده و همراه با یک جفت دستکش سفید بلند ارائه می‌شود تا استایل پرنسسی را کامل کند. طرح پارچه شامل تورهای ظریف، دامن چندلایه و جزئیات درخشان است که آن را به گزینه‌ای ایده‌آل برای مهمانی‌های تولد، جشن‌های کودکانه و مراسم خاص تبدیل می‌کند.
 
-وقتی دنیای افسانه‌ای سیندرلا به لباس تبدیل می‌شود! طراحی الهام‌گرفته از سیندرلا برای دختر کوچولوی شما که شخصیت محبوبش را دوست دارد.
+دوخت تمیز، دامن پفی و تورهای لطیف این لباس، ظاهری باشکوه و در عین حال راحت را برای کودک به ارمغان می‌آورد. پارچه سبک و خنک آن باعث می‌شود کودک در طول مراسم احساس گرما نکند و بتواند آزادانه به بازی و حرکت بپردازد. برش خاص و طراحی فانتزی این لباس، آن را از یک لباس معمولی متمایز می‌کند و حس یک پرنسس واقعی را به دختر شما هدیه می‌دهد.
 
-انتخابی عالی برای تولد و مهمانی‌های خاص. اگر دنبال لباسی هستید که کودک با دیدنش ذوق کند، لباس الهام‌گرفته از سیندرلا انتخاب خوبی است؛ ظاهری جذاب و تم‌دار برای روزهایی که قرار است خاص باشند.
+این لباس را می‌توانید با اکسسوری‌های طرح سیندرلا مانند تاج، عصای جادویی یا کفش‌های براق ست کنید تا یک استایل کامل و جادویی بسازید. با توجه به محبوبیت بالای شخصیت سیندرلا و طراحی چشم‌نواز این لباس، به‌سرعت به یکی از لباس‌های محبوب کمد لباس کودک تبدیل خواهد شد.
 
-انتخاب لباس برای یک مراسم کودکانه فقط درباره‌ی ظاهر نیست؛ درباره‌ی ذوق و خاطره‌ای است که کودک از آن روز می‌سازد. این لباس با تم سیندرلا کمک می‌کند آن روز، یک روز خاص و به‌یادماندنی باشد.
+## ویژگی‌ها:
+- طرح فانتزی و جادویی الهام‌گرفته از سیندرلا
+- رنگ‌بندی آبی روشن با تورهای ظریف و درخشان
+- دامن چندلایه و پفی برای ظاهری پرنسسی
+- همراه با یک جفت دستکش سفید بلند
+- پارچه سبک و لطیف با قابلیت تنفس بالا
+- مناسب برای مهمانی، جشن تولد و مراسم خاص
 
-## مناسب چه مناسبت‌هایی؟
-
-- **جشن تولد و تم تولد:** لباس با تم سیندرلا انتخابی عالی برای تولدهای تم‌دار است؛ دختر کوچولوی شما در عکس‌ها و برنامه‌ی جشن، ستاره‌ی اصلی ماجرا می‌شود.
-- **مهمانی و دورهمی:** برای مهمانی‌های خانوادگی و دوستانه که کودک می‌خواهد جلوه‌ی خاصی داشته باشد.
-- **نوروز و دید و بازدید:** برای روزهای عید و مهمانی‌های خانوادگی، ظاهری شاد، رنگی و متفاوت به دختر کوچولوی شما می‌دهد.
-- **عکاسی و آتلیه:** رنگ و جزئیات تم‌دار آن برای عکس‌های یادگاری و آتلیه‌ی کودک مناسب است.
-- **بازی نقش‌آفرینی:** برای بازی‌های خیال‌پردازانه در خانه، مهدکودک و دورهمی‌های کودکانه.
-
-## مشخصات
-
-- **نوع محصول:** لباس
-- **تم / شخصیت:** سیندرلا
-- **مناسب برای:** دخترانه
-- **سایزبندی:** 120 - مناسب 3 تا 5 سال, 130 - مناسب 6 تا 7 سال, 140 - مناسب 8 تا 9 سال, 150 - مناسب 9 تا 10 سال
-
-## راهنمای انتخاب و ست کردن
-
-برای انتخاب سایز، به قد و اندازه‌ی واقعی کودک توجه کنید و فقط به سن او اکتفا نکنید؛ اندازه‌ی کودکان هم‌سن می‌تواند متفاوت باشد. اگر بین دو سایز مردد بودید، پیش از ثبت سفارش از طریق واتساپ مشورت بگیرید.
-
-برای تکمیل استایل می‌توانید این لباس را با تل‌تاج، دستکش، عصای جادویی یا ست اکسسوری پرنسسی از بخش اکسسوری‌ها و تاج و عصای فروشگاه ست کنید.
-
-اگر برای تولد یا یک مناسبت خاص دنبال هدیه می‌گردید، این محصول انتخاب خوبی است؛ هم کاربردی است و هم کودک را شاد می‌کند.
-
-برای ثبت سفارش یا پرسش درباره‌ی موجودی، از طریق واتساپ با فروشگاه غریبی کیش در ارتباط باشید.
+## مشخصات:
+- **رنگ:** آبی روشن
+- **جنس:** نامشخص (احتمالاً پلی‌استر و تور)
+- **جنسیت:** دخترانه
+- **سبک:** فانتزی / پرنسسی / دیزنی
+- **یقه:** گرد
+- **آستین:** حلقه‌ای / کوتاه
+- **ابعاد:** نامشخص
 
 <!-- AUTO:END -->
 
-## نکات مهم
+## اندازه‌ها:
+- **سایز 2Y** — مناسب 2 سال
+- **سایز 3Y** — مناسب 3 سال
+- **سایز 4Y** — مناسب 4 سال
+- **سایز 5Y** — مناسب 5 سال
+- **سایز 6Y** — مناسب 6 سال
+- **سایز 7Y** — مناسب 7 سال
+- **سایز 8Y** — مناسب 8 سال
+- **سایز 10Y** — مناسب 10 سال
+- **سایز 12Y** — مناسب 12 سال
 
-- تک رنگ
-- مناسب سنین 3 تا 10 سال
+## هشتگ‌ها:
+#لباس_سیندرلا #لباس_پرنسسی_دخترانه #لباس_فانتزی #لباس_یخی #مد_کودک #پوشاک_دخترانه #استایل_فانتزی #لباس_مجلسی_دخترانه #خرید_لباس_بچگانه #دیزنی_لند

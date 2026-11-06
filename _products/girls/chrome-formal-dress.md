@@ -5,8 +5,8 @@ description: "پیراهن مجلسی کودک؛ انتخابی عالی برا�
 slug: "chrome-formal-dress"
 category: girls
 gender: girls
-price: ""
-price_group: "p_2598000"
+price: "2998000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/chrome-formal-dress/"]
 webzi_id: 45442
