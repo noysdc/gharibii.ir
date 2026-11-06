@@ -10,7 +10,7 @@ permissions:
   contents: write
 concurrency:
   # Same lock as product-updates.yml because both workflows write to _products.
-  group: product-content-writes
+  group: enrich-products
   cancel-in-progress: false
 jobs:
   enrich:
