@@ -5,7 +5,6 @@ description: "تل تاج کودک؛ مناسب جشن تولد، مهمانی،
 slug: "crown-and-tinsel"
 category: crown-wand
 gender: girls
-price: ""
 price_group: ""
 price: "1298000"
 currency: IRT
