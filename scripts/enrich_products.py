@@ -351,7 +351,7 @@ def build_auto_block(fm, slug, kind, char, options):
 # ------------------------------------------------------------------ file i/o
 FM_RE = re.compile(r"^---\n(.*?)\n---\n?(.*)$", re.S)
 BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END), re.S)
-ALL_FIELDS = {"title", "tags", "description", "options", "body"}
+ALL_FIELDS = {"tags", "description", "body"}
 
 def h(s):
     return hashlib.md5(s.encode("utf-8")).hexdigest()[:8]
@@ -406,6 +406,7 @@ def process(path, args):
     lock = get_lock(fm)
     sig = parse_sig(fm.get("auto_sig"))
     new_sig = dict(sig)
+    new_sig.pop("t", None)  # امضای قدیمی عنوان دیگر استفاده نمی‌شود.
 
     def user_edited(key, current):
         """اگر مقدار فعلی با آخرین مقدارِ تولیدشده‌ی اسکریپت فرق کند، یعنی خودتان ویرایش کرده‌اید."""
