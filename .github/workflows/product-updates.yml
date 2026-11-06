@@ -57,7 +57,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A _products product-updates.md product-updates-history.md
+          git add -A _products product-updates.md
+          if [ -f product-updates-history.md ]; then git add -A product-updates-history.md; fi
           if ! git diff --cached --quiet; then
             git commit -m "Apply product updates and refresh inventory [skip ci]"
             git push
