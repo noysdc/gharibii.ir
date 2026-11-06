@@ -63,6 +63,8 @@ plugins:
   - jekyll-redirect-from
 
 exclude:
+  - product-updates.md
+  - product-updates-history.md
   - README.md
   - CHANGES.md
   - scripts
