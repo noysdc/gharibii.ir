@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "ست دستکش تیرپرتاب‌کن آیرون من"
-description: "ست دستکش تیرپرتاب‌کن آیرون من؛ مناسب جشن تولد، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
+description: "ست دستکش تیرپرتاب‌کن با تم آیرون من. مناسب جشن تولد، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "iron-man-web-shooter-gloves"
 category: accessories
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["c9495b03753a446bbc0d8c55bb4b3cb0.JPG", "e9f948f38ae04e73b14408c5a27718cc.jpg"]
 tags: ["ست دستکش تیرپرتاب‌کن آیرون من", "ست دستکش تیرپرتاب‌کن آیرون من پسرانه", "آیرون من", "مرد آهنی", "اونجرز", "دستکش تیرپرتاب کن", "دستکش ابرقهرمانی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=20dfdceb;d=234ae0a4;g=c49b69dc;t=00c5c75e"
+auto_sig: "b=20dfdceb;d=0e78e8bd;g=c49b69dc"
 images:
   - /assets/images/products/accessories/iron-man-web-shooter-gloves/iron-man-web-shooter-gloves.webp
 ---

@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "مایو سگ‌های نگهبان | ضد کلر"
-description: "مایو سگ‌های نگهبان؛ انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
+description: "مایو با تم سگ‌های نگهبان. انتخابی شاد برای تابستان، استخر و سفرهای تفریحی. سفارش از فروشگاه غریبی کیش."
 slug: "paw-patrol-swimsuit"
 category: girls
 gender: girls
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["c4b15d42e7ed4acc98989e39e11524f3.JPG", "f250d72cfbac4d89a197ff49b28ab966.JPG", "be0620a8bec54e84a3a63bf0e0d30271.JPG", "b7c53664ccb64f93870d38f86555dfe9.JPG", "065f22f5a3cd465e96c8efae0411f76a.JPG", "12ca9db404414bc0a7a22ae565a13cc1.JPG", "3f6a9cc6b7b345fa9257e39d60f1e554.JPG"]
 tags: ["مایو سگ‌های نگهبان", "مایو سگ‌های نگهبان دخترانه", "سگ های نگهبان", "پاو پاترول", "مایو کودک", "مایو شخصیتی", "استخر", "سفر", "عکاسی کودک", "هدیه تولد", "آب‌بازی", "تعطیلات تابستان", "آتلیه کودک", "هدیه کودک", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=5d9d1150;d=3217eea1;g=a5b55498;t=4b766d1c"
+auto_sig: "b=5d9d1150;d=b4d5fa9c;g=a5b55498"
 images:
 
   - /assets/images/products/girls/paw-patrol-swimsuit/paw-patrol-swimsuit-3.webp

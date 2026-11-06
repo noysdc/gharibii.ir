@@ -1,7 +1,7 @@
 ---
 layout: product
 title: "ست شنل و ماسک سوپرمن | قهرمانی"
-description: "ست شنل و ماسک سوپرمن؛ مناسب جشن تولد، مهمانی تم‌دار، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
+description: "ست شنل و ماسک با تم سوپرمن. مناسب جشن تولد، مهمانی تم‌دار، هالووین و بازی نقش‌آفرینی. سفارش از فروشگاه غریبی کیش."
 slug: "superman-cape-mask"
 category: accessories
 gender: boys
@@ -16,7 +16,7 @@ redirect_from:
 webzi_images: ["08fd574cae1c42fe8bfc89093389cfa5.JPG", "eb17d96dc3b3465fb3797a9f0a5498da.JPG", "cf782ecd7b6c4201abf9e3250a6de961.JPG", "b8dafb761a4d455e9c203e262c9b53f1.JPG"]
 tags: ["ست شنل و ماسک سوپرمن", "ست شنل و ماسک سوپرمن پسرانه", "سوپرمن", "سوپر من", "شنل و ماسک", "شنل شخصیتی", "تم تولد", "اکسسوری تولد", "هالووین", "اکسسوری هالووین", "بازی نقش‌آفرینی", "عکاسی کودک", "اکسسوری عکاسی", "مهمانی کودک", "اکسسوری مهمانی", "هدیه تولد", "فروشگاه غریبی کیش", "کیش"]
 
-auto_sig: "b=eea9fd74;d=4ffe93b9;g=117bd20f;t=349d9e22"
+auto_sig: "b=eea9fd74;d=81e9102c;g=117bd20f"
 images:
   - /assets/images/products/accessories/superman-cape-mask/superman-cape-mask-1.webp
   - /assets/images/products/accessories/superman-cape-mask/superman-cape-mask-2.webp
