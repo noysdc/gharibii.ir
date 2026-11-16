@@ -525,3 +525,32 @@ html:root:root:root .cart-checkout.btn-ig{margin-top:.6rem}
 html:root:root:root :is(.card,.cat-grid .card,.grid .card){
   -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
 }
+
+
+/* ---------- اصلاح نهایی کادر پیشنهادهای جستجو ---------- */
+html:root:root:root .control-box{
+  position:relative;z-index:1000;overflow:visible;
+}
+html:root:root:root .search-box{
+  position:relative;z-index:1001;overflow:visible;
+}
+html:root:root:root .search-results{
+  z-index:1002;box-sizing:border-box;max-height:min(70vh,28rem);overflow-x:hidden;overflow-y:auto;
+  width:min(30rem,calc(100vw - 2rem));left:0;right:auto;transform:none;
+}
+html:root:root:root .search-results .search-item{
+  display:flex;align-items:center;min-width:0;
+}
+html:root:root:root .search-results .search-item img{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:3rem;height:4rem;min-width:3rem;max-width:3rem;object-fit:cover;flex:0 0 3rem;
+}
+html:root:root:root .search-results .search-item-info{min-width:0;flex:1 1 auto;}
+@media(max-width:699px){
+  html:root:root:root .search-box{position:relative;}
+  html:root:root:root .search-results{
+    left:50%;right:auto;transform:translateX(-50%);
+    width:min(94vw,30rem);max-width:calc(100vw - 1rem);
+    max-height:min(65dvh,26rem);
+  }
+}
