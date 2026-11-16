@@ -547,13 +547,15 @@ html:root:root:root .search-results .search-item img{
 }
 html:root:root:root .search-results .search-item-info{min-width:0;flex:1 1 auto;}
 @media(max-width:699px){
-  /* والد موقعیت منو در موبایل خود نوار بالایی است، نه کادر کوچک جستجو */
+  /* منوی پیشنهادها دقیقاً هم‌اندازهٔ باکسِ شامل جستجو و دکمه‌هاست */
   html:root:root:root .sticky-bar{position:sticky;z-index:1100;overflow:visible;}
-  html:root:root:root .control-box,
+  html:root:root:root .control-box{
+    position:relative;z-index:1101;overflow:visible;
+  }
   html:root:root:root .search-box{position:static;z-index:auto;overflow:visible;}
   html:root:root:root .search-results{
-    position:absolute;top:100%;left:0;right:0;transform:none;
-    width:100%;max-width:none;min-width:0;
+    position:absolute;top:calc(100% + .5rem);left:0;right:0;transform:none;
+    width:auto;max-width:none;min-width:0;
     box-sizing:border-box;
     max-height:min(65dvh,26rem);
     border-radius:0 0 1.2rem 1.2rem;
