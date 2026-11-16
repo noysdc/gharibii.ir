@@ -93,15 +93,15 @@
   }
   function normalize(str) {
     return (str || '').toString().toLowerCase()
-      .replace(/[\\u064A\\u0649]/g, '\\u06CC')
-      .replace(/\\u0643/g, '\\u06A9')
-      .replace(/[\\u0622\\u0623\\u0625]/g, '\\u0627')
-      .replace(/\\u0629/g, '\\u0647')
-      .replace(/\\u0640/g, '')
-      .replace(/[\\u064B-\\u065F\\u0670]/g, '')
-      .replace(/[\\u200c\\u200d]/g, ' ')
-      .replace(/[^\\u0600-\\u06FFa-z0-9]+/gi, ' ')
-      .replace(/\\s+/g, ' ').trim();
+      .replace(/[\u064A\u0649]/g, '\u06CC')
+      .replace(/\u0643/g, '\u06A9')
+      .replace(/[\u0622\u0623\u0625]/g, '\u0627')
+      .replace(/\u0629/g, '\u0647')
+      .replace(/\u0640/g, '')
+      .replace(/[\u064B-\u065F\u0670]/g, '')
+      .replace(/[\u200c\u200d]/g, ' ')
+      .replace(/[^\u0600-\u06FFa-z0-9]+/gi, ' ')
+      .replace(/\s+/g, ' ').trim();
   }
   function searchEscape(str) {
     return String(str == null ? '' : str).replace(/[&<>"]/g, function (c) {
@@ -117,7 +117,7 @@
     }
     searchResults.innerHTML = list.slice(0, 8).map(function (p) {
       var img = p.image ? '<img src="' + searchEscape(p.image) + '" alt="" loading="lazy">' : '';
-      var price = Number(String(p.price).replace(/[,\\s]/g, ''));
+      var price = Number(String(p.price).replace(/[,\s]/g, ''));
       return '<a class="search-item" href="' + searchEscape(p.url) + '">' + img + '<span class="search-item-info"><strong>' + searchEscape(p.title) + '</strong><small>' + (price > 0 ? price.toLocaleString('fa-IR') + ' تومان' : '') + '</small></span></a>';
     }).join('');
     searchResults.hidden = false;
