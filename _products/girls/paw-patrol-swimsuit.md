@@ -5,8 +5,8 @@ description: "مایو با تم سگ‌های نگهبان. انتخابی شا
 slug: "paw-patrol-swimsuit"
 category: girls
 gender: girls
-price: ""
-price_group: "tier_9"
+price: "2598000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/girls/paw-patrol-swimsuit/"]
 webzi_id: 45367

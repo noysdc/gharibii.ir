@@ -5,8 +5,8 @@ description: "کفش باله کودک؛ مناسب کلاس باله، اجرا
 slug: "girls-ballet-shoes"
 category: bags-shoes
 gender: girls
-price: ""
-price_group: "tier_3"
+price: "1298000"
+price_group: ""
 currency: IRT
 images_dirs: ["/assets/images/products/bags-shoes/girls-ballet-shoes/"]
 webzi_id: 45433
