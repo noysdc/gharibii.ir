@@ -9,6 +9,7 @@
   var histOpen = false;
   var pickerSearchTimer = null;
   var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '', remote = Promise.resolve();
+  var feedSyncing = null, lastFeedSyncAt = 0;
   var st = loadState();
 
   /* ---------- وضعیت و ذخیره‌سازی ---------- */
@@ -105,15 +106,36 @@
     var s = $('sync-status');
     s.textContent = msg; s.classList.toggle('bad', !!bad);
   }
+  function sameFeed(a, b) {
+    if (!a || !b || a.fee !== b.fee || a.products.length !== b.products.length ||
+        JSON.stringify(a.sellers || []) !== JSON.stringify(b.sellers || [])) return false;
+    for (var i = 0; i < b.products.length; i++) {
+      var p = b.products[i], old = a.byId && a.byId[p.id];
+      if (!old || old.t !== p.t || old.c !== p.c || old.s !== p.s || old.im !== p.im || old.imf !== p.imf ||
+          old.p !== p.p || old.op !== p.op || old.oos !== p.oos ||
+          JSON.stringify(old.opts || []) !== JSON.stringify(p.opts || [])) return false;
+    }
+    return true;
+  }
   function sync(manual) {
+    if (!manual && feed && Date.now() - lastFeedSyncAt < 4 * 60 * 1000) return Promise.resolve(feed);
+    if (feedSyncing) return feedSyncing;
     if (manual) setStatus('در حال دریافت قیمت‌ها از سایت…');
-    return G.loadFeed(true).then(function (f) {
+    var task = G.loadFeed(true).then(function (f) {
+      var feedChanged = !sameFeed(feed, f);
+      feed = f;
+      if (!feedChanged) {
+        lastFeedSyncAt = Date.now();
+        setStatus('قیمت‌ها از سایت به‌روز است · ' + G.nf(f.products.length) + ' محصول · ساعت ' +
+          new Date(f.loadedAt).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }));
+        return f;
+      }
       f.products.forEach(function (p) {
         /* همان متن جست‌وجوی سایت اصلی + گزینه‌های اختصاصی محصول در فاکتور */
         var opts = (p.opts || []).map(function (o) { return [o.n].concat(o.v || []).join(' '); }).join(' ');
         p._s = nz([p.s || '', p.t, p.c, p.id, opts].join(' '));
       });
-      feed = f;
+      lastFeedSyncAt = Date.now();
       var changed = reconcile();
       save();
       setStatus('قیمت‌ها از سایت به‌روز است · ' + G.nf(f.products.length) + ' محصول · ساعت ' +
@@ -121,10 +143,14 @@
       buildSellers(); buildChips(); renderPicker(); renderLines(); renderHistory(); updateTotals();
       if (changed) G.toast('قیمت ' + G.nf(changed) + ' قلم از سایت به‌روز شد');
       else if (manual) G.toast('قیمت‌ها به‌روز است ✅');
+      return f;
     }, function () {
       setStatus('دریافت قیمت‌ها ناموفق بود؛ اینترنت را چک کنید و ⟳ را بزنید', true);
       $('picker').innerHTML = '<p class="muted empty">فهرست محصولات دریافت نشد.</p>';
+      throw new Error('feed sync failed');
     });
+    feedSyncing = task.then(function (value) { feedSyncing = null; return value; }, function () { feedSyncing = null; return null; });
+    return feedSyncing;
   }
 
   /* ---------- فروشنده‌ها و دسته‌ها ---------- */
@@ -166,7 +192,7 @@
     var html = list.slice(0, shown).map(function (p) {
       var n = qtyOf(p.id);
       var price = p.oos ? '<span class="tag oos">ناموجود</span>' : (p.p > 0 ? G.money(p.p) : 'قیمت: تماس بگیرید');
-      return '<div class="p-row"><img class="p-img" loading="lazy" src="' + G.esc(p.im) + '" data-f="' + G.esc(p.imf) + '" alt="" width="52" height="66">' +
+      return '<div class="p-row"><img class="p-img" loading="lazy" decoding="async" fetchpriority="low" src="' + G.esc(p.im) + '" data-f="' + G.esc(p.imf) + '" alt="" width="52" height="66">' +
         '<div class="p-info"><b>' + G.esc(p.t) + '</b><small>' + G.esc(p.c) + ' · ' + price + '</small></div>' +
         '<button type="button" class="btn small' + (n ? ' btn-in' : '') + '" data-add="' + G.esc(p.id) + '">' + (n ? '✓ ' + G.nf(n) + ' · ' : '') + '+ افزودن</button></div>';
     }).join('');
@@ -175,12 +201,25 @@
     fixImgs(host);
   }
   function fixImgs(root) {
-    Array.prototype.forEach.call(root.querySelectorAll('img[data-f]'), function (img) {
-      img.addEventListener('error', function onerr() {
-        img.removeEventListener('error', onerr);
-        var f = img.getAttribute('data-f');
-        if (f && img.src.indexOf(f) < 0) img.src = f; else img.style.visibility = 'hidden';
-      });
+    if (root.__imgFallbackBound) return;
+    root.__imgFallbackBound = true;
+    root.addEventListener('error', function (e) {
+      var img = e.target;
+      if (!img || !img.matches || !img.matches('img[data-f]')) return;
+      var f = img.getAttribute('data-f');
+      if (f && img.src.indexOf(f) < 0) img.src = f;
+      else img.style.visibility = 'hidden';
+    }, true);
+  }
+  function refreshPickerBadges() {
+    var host = $('picker');
+    if (!host) return;
+    var counts = Object.create(null);
+    st.items.forEach(function (it) { if (it.id) counts[it.id] = (counts[it.id] || 0) + it.q; });
+    Array.prototype.forEach.call(host.querySelectorAll('[data-add]'), function (button) {
+      var n = counts[button.getAttribute('data-add')] || 0;
+      button.classList.toggle('btn-in', n > 0);
+      button.textContent = (n ? '✓ ' + G.nf(n) + ' · ' : '') + '+ افزودن';
     });
   }
   function addProduct(id) {
@@ -190,7 +229,7 @@
     st.items.forEach(function (i) { if (!ex && i.id === id && !i.c && !hasOpts(i)) ex = i; });
     if (ex) ex.q = Math.min(999, ex.q + 1);
     else st.items.push({ k: ++seq, id: id, t: pr.t, im: pr.im, imf: pr.imf, q: 1, p: pr.p, sp: pr.p, ed: false, ch: false, o: {}, c: false, oos: pr.oos });
-    dirty(); renderLines(); renderPicker();
+    dirty(); renderLines(); refreshPickerBadges();
     G.toast('«' + pr.t + '» اضافه شد');
   }
 
@@ -212,7 +251,7 @@
     } else if (it.c || (!pr && it.id)) {
       opts = '<div class="line-opts"><input type="text" data-f="optfree" maxlength="100" placeholder="سایز / رنگ / توضیح (اختیاری)" value="' + G.esc(optString(it)) + '"></div>';
     }
-    var img = it.im ? '<img class="l-img" src="' + G.esc(it.im) + '" data-f="' + G.esc(it.imf || '') + '" alt="" width="52" height="66">' : '<span class="l-img l-noimg">🎀</span>';
+    var img = it.im ? '<img class="l-img" loading="lazy" decoding="async" fetchpriority="low" src="' + G.esc(it.im) + '" data-f="' + G.esc(it.imf || '') + '" alt="" width="52" height="66">' : '<span class="l-img l-noimg">🎀</span>';
     return '<div class="line" data-k="' + it.k + '">' +
       '<div class="line-top">' + img + '<div class="line-title">' + G.esc(it.t) + '<span data-tags></span></div>' +
       '<button type="button" class="x" data-act="rm" aria-label="حذف">✕</button></div>' + opts +
@@ -466,7 +505,7 @@
       return { k: ++seq, id: '', t: r.t, im: '', imf: '', q: r.q, p: r.p, sp: null, ed: true, ch: false, o: o, c: true, oos: false };
     });
     built = null; setOut(false);
-    save(); initFields(); renderLines(); renderPicker(); updateTotals();
+    save(); initFields(); renderLines(); refreshPickerBadges(); updateTotals();
     G.toast(supp ? 'فاکتور پرداخت‌شده تغییر نمی‌کند؛ اقلام جدید را اضافه کنید (فاکتور مکمل)' : 'فاکتور باز شد. تغییر دهید و دوباره «ساخت فاکتور» بزنید (نسخهٔ بعدی ساخته می‌شود)');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -489,7 +528,7 @@
     st.items.push({ k: ++seq, id: '', t: t, im: '', imf: '', q: Math.max(1, Math.min(999, G.toNum($('c-qty').value) || 1)), p: G.toNum($('c-price').value), sp: null, ed: true, ch: false, o: {}, c: true, oos: false });
     $('c-title').value = ''; $('c-price').value = ''; $('c-qty').value = '1';
     closeCustom();
-    dirty(); renderLines(); renderPicker();
+    dirty(); renderLines(); refreshPickerBadges();
     G.toast('«' + t + '» به لیست اضافه شد');
     var last = $('lines').lastElementChild;
     if (last) { try { last.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} }
@@ -562,11 +601,11 @@
       var node = b.closest('.line'); var it = node && findItem(Number(node.getAttribute('data-k')));
       if (!it) return;
       var act = b.getAttribute('data-act');
-      if (act === 'rm') { st.items = st.items.filter(function (x) { return x !== it; }); dirty(); renderLines(); renderPicker(); return; }
+      if (act === 'rm') { st.items = st.items.filter(function (x) { return x !== it; }); dirty(); renderLines(); refreshPickerBadges(); return; }
       if (act === 'inc') it.q = Math.min(999, it.q + 1);
       if (act === 'dec') it.q = Math.max(1, it.q - 1);
       if (act === 'resetp') { it.p = it.sp; it.ed = false; it.ch = false; node.querySelector('[data-f="price"]').value = fmtIn(it.p); }
-      refreshLine(it); dirty(); renderPicker();
+      refreshLine(it); dirty(); refreshPickerBadges();
     });
     lines.addEventListener('input', function (e) {
       var f = e.target.getAttribute('data-f'); if (!f) return;
@@ -592,7 +631,7 @@
       var node = e.target.closest('.line'); var it = node && findItem(Number(node.getAttribute('data-k')));
       if (!it) return;
       it.o = it.o || {}; it.o[e.target.getAttribute('data-n')] = e.target.value;
-      dirty(); renderPicker();
+      dirty();
     });
 
     /* آیتم دلخواه: فرم داخل کارت «لیست محصولات» است (در seller.html)، نه زیر «پیام مشتری» */
@@ -654,7 +693,7 @@
       var keep = { sw: st.sw, valid: st.valid };
       st = fresh(); st.sw = keep.sw; st.valid = keep.valid;
       built = null; setOut(false); save();
-      initFields(); renderLines(); renderPicker(); updateTotals();
+      initFields(); renderLines(); refreshPickerBadges(); updateTotals();
       closeCustom();
     });
     if (G.apiOn()) {
@@ -702,7 +741,7 @@
     try { st = JSON.parse(undoSnap); } catch (e) { return; }
     st.items.forEach(function (i) { i.k = ++seq; });
     undoSnap = ''; $('btn-undo').hidden = true;
-    initFields(); renderLines(); renderPicker(); dirty();
+    initFields(); renderLines(); refreshPickerBadges(); dirty();
     $('paste-res').textContent = 'آخرین تبدیل برگردانده شد';
     G.toast('آخرین تبدیل برگردانده شد');
   }
@@ -752,7 +791,7 @@
     var msg = parts.join(' · ');
     $('paste-res').textContent = msg; G.toast(msg);
     $('f-paste').value = ''; $('btn-undo').hidden = false;
-    initFields(); dirty(); renderLines(); renderPicker();
+    initFields(); dirty(); renderLines(); refreshPickerBadges();
   }
 
   /* ---------- شروع ---------- */
