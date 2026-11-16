@@ -527,7 +527,7 @@ html:root:root:root :is(.card,.cat-grid .card,.grid .card){
 }
 
 
-/* ---------- اصلاح نهایی کادر پیشنهادهای جستجو ---------- */
+/* ---------- منوی پیشنهادهای جستجو: تمام‌عرض در موبایل ---------- */
 html:root:root:root .control-box{
   position:relative;z-index:1000;overflow:visible;
 }
@@ -547,19 +547,18 @@ html:root:root:root .search-results .search-item img{
 }
 html:root:root:root .search-results .search-item-info{min-width:0;flex:1 1 auto;}
 @media(max-width:699px){
-  /* منوی پیشنهادها از لبهٔ چپ صفحه تا لبهٔ راست؛ مستقل از عرض/موقعیت نوار کنترل */
-  html:root:root:root .control-box{position:relative;}
-  html:root:root:root .search-box{position:static;}
+  /* والد موقعیت منو در موبایل خود نوار بالایی است، نه کادر کوچک جستجو */
+  html:root:root:root .sticky-bar{position:sticky;z-index:1100;overflow:visible;}
+  html:root:root:root .control-box,
+  html:root:root:root .search-box{position:static;z-index:auto;overflow:visible;}
   html:root:root:root .search-results{
-    left:calc(50% - 50vw);right:auto;transform:none;
-    width:100vw;max-width:100vw;min-width:100vw;
+    position:absolute;top:100%;left:0;right:0;transform:none;
+    width:100%;max-width:none;min-width:0;
     box-sizing:border-box;
     max-height:min(65dvh,26rem);
     border-radius:0 0 1.2rem 1.2rem;
   }
 }
-
-
 /* ---------- بهینه‌سازی اجرای پس‌زمینه بدون تغییر ظاهر ---------- */
 /* جلوه‌های بصری در زمان مخفی بودن تب متوقف می‌شوند؛ در حالت عادی هیچ تغییری در ظاهر ندارند */
 html.page-hidden *,
