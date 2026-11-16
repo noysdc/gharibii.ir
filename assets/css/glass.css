@@ -547,11 +547,15 @@ html:root:root:root .search-results .search-item img{
 }
 html:root:root:root .search-results .search-item-info{min-width:0;flex:1 1 auto;}
 @media(max-width:699px){
-  html:root:root:root .search-box{position:relative;}
+  /* منوی پیشنهادها از لبهٔ چپ صفحه تا لبهٔ راست؛ مستقل از عرض/موقعیت نوار کنترل */
+  html:root:root:root .control-box{position:relative;}
+  html:root:root:root .search-box{position:static;}
   html:root:root:root .search-results{
-    left:50%;right:auto;transform:translateX(-50%);
-    width:min(94vw,30rem);max-width:calc(100vw - 1rem);
+    left:calc(50% - 50vw);right:auto;transform:none;
+    width:100vw;max-width:100vw;min-width:100vw;
+    box-sizing:border-box;
     max-height:min(65dvh,26rem);
+    border-radius:0 0 1.2rem 1.2rem;
   }
 }
 
