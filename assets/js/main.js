@@ -129,7 +129,7 @@
       var run = ++searchRun;
       timer = setTimeout(function () {
         var q = normalize(searchInput.value);
-        if (q.length < 2) { searchResults.hidden = true; return; }
+        if (q.length < 1) { searchResults.hidden = true; return; }
         var terms = q.split(' ').filter(Boolean);
         loadProducts().then(function (products) {
           if (run !== searchRun || !searchInput.value.trim()) return;
