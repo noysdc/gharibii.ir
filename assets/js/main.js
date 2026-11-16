@@ -4,6 +4,11 @@
   var root = document.documentElement;
   var BASE = (document.querySelector('meta[name="site-baseurl"]') || {}).content || '';
 
+  /* انیمیشن‌های تزئینی در تب پس‌زمینه اجرا نمی‌شوند؛ هنگام بازگشت دقیقاً ادامه پیدا می‌کنند */
+  document.addEventListener('visibilitychange', function () {
+    root.classList.toggle('page-hidden', document.visibilityState !== 'visible');
+  });
+
   /* ذخیره‌سازی امن: در حالت خصوصی سافاری یا وقتی ذخیره‌سازی بسته است، خطا نمی‌دهد */
   function mkStore(area) {
     return {
@@ -637,6 +642,7 @@
     var cards = document.querySelectorAll('[data-slider]');
     if (!cards.length) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sliderControllers = [];
     cards.forEach(function (card) {
       var track = card.querySelector('.slides');
       var slides = card.querySelectorAll('.slide');
@@ -664,7 +670,14 @@
         if (i !== idx && i >= 0 && i < slides.length) { idx = i; mark(); ensure(idx); ensure(idx + 1); }
       }, { passive: true });
       function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
-      function startAuto() { if (reduce || timer || !visible) return; timer = setInterval(function () { if (!hold) go(idx + 1); }, 3200 + Math.random() * 1500); }
+      function startAuto() {
+        if (reduce || timer || !visible || document.visibilityState !== 'visible') return;
+        timer = setInterval(function () {
+          if (document.visibilityState !== 'visible') { stopAuto(); return; }
+          if (!hold) go(idx + 1);
+        }, 3200 + Math.random() * 1500);
+      }
+      sliderControllers.push({ start: startAuto, stop: stopAuto });
       function bind(btn, step) { if (!btn) return; btn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); go(idx + step); }); }
       bind(prev, -1); bind(next, 1);
       card.addEventListener('mouseenter', function () { ensure(1); hold = true; });
@@ -675,6 +688,13 @@
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; if (visible) startAuto(); else stopAuto(); }, { threshold: 0.35 }).observe(card);
       } else { visible = true; startAuto(); }
+    });
+    /* هنگام رفتن به تب دیگر، تایمرهای اسلایدر کاملاً متوقف می‌شوند و با بازگشت ادامه می‌یابند */
+    document.addEventListener('visibilitychange', function () {
+      sliderControllers.forEach(function (controller) {
+        if (document.visibilityState === 'visible') controller.start();
+        else controller.stop();
+      });
     });
   })();
 
