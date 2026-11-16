@@ -123,13 +123,13 @@
     if (manual) setStatus('در حال دریافت قیمت‌ها از سایت…');
     var task = G.loadFeed(true).then(function (f) {
       var feedChanged = !sameFeed(feed, f);
-      feed = f;
       if (!feedChanged) {
         lastFeedSyncAt = Date.now();
         setStatus('قیمت‌ها از سایت به‌روز است · ' + G.nf(f.products.length) + ' محصول · ساعت ' +
           new Date(f.loadedAt).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }));
-        return f;
+        return feed;
       }
+      feed = f;
       f.products.forEach(function (p) {
         /* همان متن جست‌وجوی سایت اصلی + گزینه‌های اختصاصی محصول در فاکتور */
         var opts = (p.opts || []).map(function (o) { return [o.n].concat(o.v || []).join(' '); }).join(' ');
