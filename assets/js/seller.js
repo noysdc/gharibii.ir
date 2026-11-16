@@ -440,7 +440,13 @@
     var cnt = $('hist-count'); if (cnt) cnt.textContent = G.nf(h.length);
     var dot = $('hist-dot'); if (dot) dot.hidden = !todo;
     var HLIM = 3;
-    host.innerHTML = banner + h.map(function (x, i) {
+    var visible = h.map(function (x, i) { return { x: x, i: i }; }).filter(function (entry) {
+      var x = entry.x, online = x.paid && x.pvia === 'zp';
+      var attn = (online && !x.ok) || (!x.paid && x.rep && now < x.exp);
+      return histOpen || entry.i < HLIM || attn;
+    });
+    host.innerHTML = banner + visible.map(function (entry) {
+      var x = entry.x, i = entry.i;
       var exp = !x.paid && now >= x.exp;
       var online = x.paid && x.pvia === 'zp';
       var attn = (online && !x.ok) || (!x.paid && x.rep && !exp);
@@ -464,8 +470,7 @@
           '<button type="button" class="x" data-hdel="' + i + '" aria-label="حذف از لیست">✕</button>' +
         '</div></article>';
     }).join('') + (h.length > HLIM ? '<button type="button" class="btn btn-ghost hist-more" data-hmore aria-expanded="' + (histOpen ? 'true' : 'false') + '">' + (histOpen ? 'جمع کردن لیست ▴' : 'نمایش همه ' + G.nf(h.length) + ' فاکتور ▾') + '</button>' : '');
-    /* پیش‌فرض فقط ۳ فاکتور آخر (و فاکتورهای منتظر بررسی) دیده می‌شود؛ بقیه با دکمه باز می‌شود */
-    if (!histOpen) Array.prototype.forEach.call(host.querySelectorAll('.h-row'), function (row, i) { if (i >= HLIM && !row.classList.contains('h-attn')) row.hidden = true; });
+    /* در حالت بسته، فاکتورهای قدیمی اصلاً وارد DOM نمی‌شوند؛ فاکتورهای نیازمند بررسی همچنان دیده می‌شوند. */
   }
   /* لیست مشترک: فاکتورهای هر دو فروشنده و وضعیت پرداخت‌شان با «یک» درخواست از سرور می‌آید.
      پرداخت درگاه خودکار ثبت می‌شود؛ فروشنده فقط «بررسی کردم» (آنلاین) یا «تأیید پرداخت» (کارت‌به‌کارت) می‌زند */
@@ -475,19 +480,23 @@
     syncing = true;
     G.apiList().then(function (r) {
       syncing = false;
-      var rows = (r && r.items) || [], h = readHist(), hid = readHidden(), fresh = [], byCode = {};
+      var rows = (r && r.items) || [], h = readHist(), hid = readHidden(), fresh = [], byCode = {}, changed = false;
       h.forEach(function (x) { if (x.code) byCode[x.code] = x; });
       rows.forEach(function (m) {
         if (hid.indexOf(m.code) >= 0) return;
         var x = byCode[m.code], isNew = !x;
-        if (!x) { x = { no: m.no, code: m.code, tok: '' }; h.push(x); byCode[m.code] = x; }
+        if (!x) { x = { no: m.no, code: m.code, tok: '' }; h.push(x); byCode[m.code] = x; changed = true; }
+        var before = JSON.stringify([x.no, x.rev, x.ts, x.exp, x.cust, x.total, x.paid, x.pvia, x.pref, x.rep, x.ok]);
         var was = !!x.paid;
         x.no = m.no || x.no; x.rev = m.rv || x.rev || 1; x.ts = m.ts || x.ts; x.exp = m.exp || x.exp; x.cust = m.cust || x.cust || ''; x.total = m.total || x.total;
         x.paid = !!m.paid; x.pvia = m.pv ? 'zp' : ''; x.pref = m.rf || ''; x.rep = m.rp || 0; x.ok = !!m.ck;
+        if (before !== JSON.stringify([x.no, x.rev, x.ts, x.exp, x.cust, x.total, x.paid, x.pvia, x.pref, x.rep, x.ok])) changed = true;
         if (m.pv && !was && !isNew) fresh.push(x.no);
       });
-      h.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
-      writeHist(h); renderHistory();
+      if (changed) {
+        h.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+        writeHist(h); renderHistory();
+      }
       if (fresh.length) G.toast('✅ پرداخت آنلاین ثبت شد: ' + fresh.join('، '));
     }, function () { syncing = false; });
   }
