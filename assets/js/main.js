@@ -89,33 +89,54 @@
     if (productsIndex) return Promise.resolve(productsIndex);
     var meta = document.querySelector('meta[name="site-baseurl"]');
     var base = meta ? meta.getAttribute('content') : '';
-    return fetch(base + '/search.json').then(function (r) { return r.json(); }).then(function (data) { productsIndex = data; return data; }).catch(function () { productsIndex = []; return []; });
+    return fetch(base + '/search.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('search index HTTP ' + r.status); return r.json(); }).then(function (data) { if (!Array.isArray(data)) throw new Error('invalid search index'); productsIndex = data; return data; }).catch(function () { productsIndex = []; return []; });
   }
   function normalize(str) {
-    return (str || '').toString().toLowerCase().replace(/\u064A/g, '\u06CC').replace(/\u0643/g, '\u06A9').replace(/[\u064B-\u065F\u0670]/g, '').trim();
+    return (str || '').toString().toLowerCase()
+      .replace(/[\\u064A\\u0649]/g, '\\u06CC')
+      .replace(/\\u0643/g, '\\u06A9')
+      .replace(/[\\u0622\\u0623\\u0625]/g, '\\u0627')
+      .replace(/\\u0629/g, '\\u0647')
+      .replace(/\\u0640/g, '')
+      .replace(/[\\u064B-\\u065F\\u0670]/g, '')
+      .replace(/[\\u200c\\u200d]/g, ' ')
+      .replace(/[^\\u0600-\\u06FFa-z0-9]+/gi, ' ')
+      .replace(/\\s+/g, ' ').trim();
+  }
+  function searchEscape(str) {
+    return String(str == null ? '' : str).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
   }
   function renderResults(list) {
     if (!searchResults) return;
     if (!list.length) {
-      searchResults.innerHTML = '<div class="search-empty">\u0645\u062D\u0635\u0648\u0644\u06CC \u06CC\u0627\u0641\u062A \u0646\u0634\u062F</div>';
+      searchResults.innerHTML = '<div class="search-empty">محصولی یافت نشد</div>';
       searchResults.hidden = false;
       return;
     }
     searchResults.innerHTML = list.slice(0, 8).map(function (p) {
-      var img = p.image ? '<img src="' + p.image + '" alt="" loading="lazy">' : '';
-      return '<a class="search-item" href="' + p.url + '">' + img + '<span class="search-item-info"><strong>' + p.title + '</strong><small>' + (Number(String(p.price).replace(/,/g, '')) > 0 ? Number(String(p.price).replace(/,/g, '')).toLocaleString('fa-IR') + ' \u062A\u0648\u0645\u0627\u0646' : '') + '</small></span></a>';
+      var img = p.image ? '<img src="' + searchEscape(p.image) + '" alt="" loading="lazy">' : '';
+      var price = Number(String(p.price).replace(/[,\\s]/g, ''));
+      return '<a class="search-item" href="' + searchEscape(p.url) + '">' + img + '<span class="search-item-info"><strong>' + searchEscape(p.title) + '</strong><small>' + (price > 0 ? price.toLocaleString('fa-IR') + ' تومان' : '') + '</small></span></a>';
     }).join('');
     searchResults.hidden = false;
   }
   if (searchInput && searchResults) {
-    var timer = null;
+    var timer = null, searchRun = 0;
     searchInput.addEventListener('input', function () {
       clearTimeout(timer);
+      var run = ++searchRun;
       timer = setTimeout(function () {
         var q = normalize(searchInput.value);
         if (q.length < 2) { searchResults.hidden = true; return; }
+        var terms = q.split(' ').filter(Boolean);
         loadProducts().then(function (products) {
-          var matched = products.filter(function (p) { return normalize(p.title).indexOf(q) !== -1 || normalize(p.category).indexOf(q) !== -1 || normalize(p.category_fa).indexOf(q) !== -1; });
+          if (run !== searchRun || !searchInput.value.trim()) return;
+          var matched = products.filter(function (p) {
+            var hay = normalize(p.search_text || [p.title, p.url, p.category, p.category_fa].join(' '));
+            return terms.every(function (term) { return hay.indexOf(term) !== -1; });
+          });
           renderResults(matched);
         });
       }, 150);
