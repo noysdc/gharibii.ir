@@ -89,7 +89,15 @@
     if (productsIndex) return Promise.resolve(productsIndex);
     var meta = document.querySelector('meta[name="site-baseurl"]');
     var base = meta ? meta.getAttribute('content') : '';
-    return fetch(base + '/search.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('search index HTTP ' + r.status); return r.json(); }).then(function (data) { if (!Array.isArray(data)) throw new Error('invalid search index'); productsIndex = data; return data; }).catch(function () { productsIndex = []; return []; });
+    return fetch(base + '/search.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('search index HTTP ' + r.status); return r.json(); }).then(function (data) {
+      if (!Array.isArray(data)) throw new Error('invalid search index');
+      /* متن جست‌وجوی هر محصول فقط یک‌بار نرمال می‌شود؛ نه در هر بار تایپ کاربر */
+      data.forEach(function (p) {
+        p._searchHaystack = normalize(p.search_text || [p.title, p.url, p.category, p.category_fa].join(' '));
+      });
+      productsIndex = data;
+      return data;
+    }).catch(function () { productsIndex = []; return []; });
   }
   function normalize(str) {
     return (str || '').toString().toLowerCase()
@@ -134,7 +142,7 @@
         loadProducts().then(function (products) {
           if (run !== searchRun || !searchInput.value.trim()) return;
           var matched = products.filter(function (p) {
-            var hay = normalize(p.search_text || [p.title, p.url, p.category, p.category_fa].join(' '));
+            var hay = p._searchHaystack || '';
             return terms.every(function (term) { return hay.indexOf(term) !== -1; });
           });
           renderResults(matched);
