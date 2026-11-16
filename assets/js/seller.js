@@ -7,6 +7,7 @@
   var PAGE = (window.matchMedia && window.matchMedia('(max-width:767px)').matches) ? 20 : 40;   /* موبایل: لیست کوتاه‌تر، با «نمایش بیشتر» ادامه می‌یابد */
 
   var histOpen = false;
+  var pickerSearchTimer = null;
   var feed = null, built = null, seq = 0, shown = PAGE, cat = '', query = '', busy = false, undoSnap = '', remote = Promise.resolve();
   var st = loadState();
 
@@ -534,7 +535,13 @@
     $('btn-fee-reset').addEventListener('click', function () { st.fee = null; $('f-fee').value = fmtIn(feeVal()); dirty(); });
     $('btn-sync').addEventListener('click', function () { sync(true); });
 
-    $('q').addEventListener('input', function (e) { query = e.target.value; shown = PAGE; renderPicker(); });
+    $('q').addEventListener('input', function (e) {
+      query = e.target.value;
+      shown = PAGE;
+      clearTimeout(pickerSearchTimer);
+      /* از رندر چندبارهٔ فهرست هنگام تایپ سریع جلوگیری می‌کند؛ نتیجه همچنان فوری و بدون تغییر منطق جست‌وجو است */
+      pickerSearchTimer = setTimeout(renderPicker, 110);
+    });
     $('chips').addEventListener('click', function (e) {
       var b = e.target.closest('[data-cat]'); if (!b) return;
       cat = b.getAttribute('data-cat'); shown = PAGE; buildChips(); renderPicker();
