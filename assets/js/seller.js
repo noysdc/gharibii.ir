@@ -108,7 +108,11 @@
   function sync(manual) {
     if (manual) setStatus('در حال دریافت قیمت‌ها از سایت…');
     return G.loadFeed(true).then(function (f) {
-      f.products.forEach(function (p) { var opts = (p.opts || []).map(function (o) { return [o.n].concat(o.v || []).join(' '); }).join(' '); p._s = nz([p.t, p.c, p.id, opts].join(' ')); });
+      f.products.forEach(function (p) {
+        /* همان متن جست‌وجوی سایت اصلی + گزینه‌های اختصاصی محصول در فاکتور */
+        var opts = (p.opts || []).map(function (o) { return [o.n].concat(o.v || []).join(' '); }).join(' ');
+        p._s = nz([p.s || '', p.t, p.c, p.id, opts].join(' '));
+      });
       feed = f;
       var changed = reconcile();
       save();
