@@ -554,3 +554,12 @@ html:root:root:root .search-results .search-item-info{min-width:0;flex:1 1 auto;
     max-height:min(65dvh,26rem);
   }
 }
+
+
+/* ---------- بهینه‌سازی اجرای پس‌زمینه بدون تغییر ظاهر ---------- */
+/* جلوه‌های بصری در زمان مخفی بودن تب متوقف می‌شوند؛ در حالت عادی هیچ تغییری در ظاهر ندارند */
+html.page-hidden *,
+html.page-hidden *::before,
+html.page-hidden *::after {
+  animation-play-state: paused !important;
+}
