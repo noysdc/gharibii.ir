@@ -45,7 +45,13 @@
     return p.length === 10 ? (a ? a + '، ' : '') + 'کد پستی: ' + p : a;
   }
   function nz(s) {
-    return G.normDigits(s).toLowerCase().replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/[\u200c\u064b-\u065f]/g, ' ').replace(/\s+/g, ' ').trim();
+    return G.normDigits(s).toLowerCase()
+      .replace(/[يى]/g, 'ی').replace(/ك/g, 'ک')
+      .replace(/[آأإ]/g, 'ا').replace(/ة/g, 'ه')
+      .replace(/ـ/g, '').replace(/[\u064b-\u065f\u0670]/g, '')
+      .replace(/[\u200c\u200d]/g, ' ')
+      .replace(/[^\u0600-\u06FFa-z0-9]+/gi, ' ')
+      .replace(/\s+/g, ' ').trim();
   }
   function hasOpts(i) { return Object.keys(i.o || {}).some(function (k) { return i.o[k]; }); }
   function optString(i) {
@@ -101,7 +107,7 @@
   function sync(manual) {
     if (manual) setStatus('در حال دریافت قیمت‌ها از سایت…');
     return G.loadFeed(true).then(function (f) {
-      f.products.forEach(function (p) { p._s = nz(p.t + ' ' + p.c); });
+      f.products.forEach(function (p) { var opts = (p.opts || []).map(function (o) { return [o.n].concat(o.v || []).join(' '); }).join(' '); p._s = nz([p.t, p.c, p.id, opts].join(' ')); });
       feed = f;
       var changed = reconcile();
       save();
