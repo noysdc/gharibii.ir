@@ -5,7 +5,7 @@ description: "مایو با تم اونجرز. انتخابی شاد برای ت
 folder: "girl-avenger-swimsuit"
 category: girls
 gender: girls
-price: "1998000"
+price: "2598000"
 currency: IRT
 images_dirs: ["/assets/images/products/girls/girl-avenger-swimsuit/"]
 needs_review: true
