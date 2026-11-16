@@ -794,3 +794,30 @@ html[data-theme="dark"]{--sd-line:rgba(143,224,232,.32);--sd-dot:#5fd0dc;--sd-gl
   .sec-break{margin:26px 0 20px}
   .cf-actions{flex-direction:column}
 }
+
+
+/* --- اصلاح بیرون‌زدگی فهرست محصولات در عرض‌های محدود --- */
+.inv-seller-page .picker{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+.inv-seller-page .picker .p-row{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+.inv-seller-page .picker .p-info{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.inv-seller-page .picker .p-info small{
+  display:block;
+  overflow-wrap:anywhere;
+}
+@media (min-width:768px){
+  .inv-seller-page .picker{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:16px;
+  }
+}
