@@ -22,6 +22,10 @@
           <span class="contact-btn-icon">🚚</span>
           <span class="contact-btn-text">ارسال و هزینه‌ها</span>
         </a>
+        <a class="contact-btn" href="{{ '/faq/' | relative_url }}"{% if page.url == '/faq/' %} aria-current="page"{% endif %}>
+          <span class="contact-btn-icon">❔</span>
+          <span class="contact-btn-text">پرسش‌های متداول</span>
+        </a>
         <a class="contact-btn" href="{{ site.size_guide_url | relative_url }}"{% if page.url == '/size-guide/' %} aria-current="page"{% endif %}>
           <span class="contact-btn-icon">📏</span>
           <span class="contact-btn-text">راهنمای سایز</span>
