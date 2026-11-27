@@ -772,7 +772,7 @@ products:
 - file: _products/girls/kpop-huntrix-rumi.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس رومی شکارچیان شیاطین | کت زرد
+  current_title: لباس رومی هانتریکس با کت زرد و شلوارک آبی | غریبی کیش
   title: ''
   sizes: []
   colors: []
