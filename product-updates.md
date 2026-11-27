@@ -1052,7 +1052,7 @@ products:
 - file: _products/girls/wednesday-formal-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس مجلسی ونزدی | پرنسسی
+  current_title: خرید پیراهن ونزدی دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
