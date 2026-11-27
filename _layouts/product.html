@@ -80,14 +80,21 @@ layout: default
   "@context": "https://schema.org",
   "@type": "Product",
   "name": {{ page.title | jsonify }},
+  "sku": {{ page.webzi_id | default: page.slug | jsonify }},
+  "category": {{ cat_title | jsonify }},
   "image": [{% for im in page.images %}{% capture u %}{% include img.html src=im %}{% endcapture %}{{ u | strip | prepend: site.url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}],
-  "description": {{ content | strip_html | strip_newlines | truncate: 300 | jsonify }},
+  "description": {{ page.description | default: content | strip_html | strip_newlines | normalize_whitespace | truncate: 500 | jsonify }},
   "offers": {
     "@type": "Offer",
     "priceCurrency": "IRR",
     "price": "{{ p_num | times: 10 }}",
     "availability": "https://schema.org/{% if page_oos %}OutOfStock{% else %}InStock{% endif %}",
-    "url": {{ page.url | absolute_url | jsonify }}
+    "url": {{ page.url | absolute_url | jsonify }},
+    "seller": {
+      "@type": "Organization",
+      "name": {{ site.title | jsonify }},
+      "url": {{ site.url | jsonify }}
+    }
   }
 }
 </script>
