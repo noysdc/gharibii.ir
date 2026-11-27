@@ -1,7 +1,7 @@
 ---
 layout: product
-title: "لباس پرنسسی دیو و دلبر | دخترانه"
-description: "لباس با تم دیو و دلبر. انتخابی عالی برای تولد و مهمانی‌های خاص. سفارش از فروشگاه غریبی کیش."
+title: "خرید لباس دیو و دلبر دخترانه | غریبی کیش"
+description: "لباس دخترانه با تم دیو و دلبر و پرنسس بل؛ مناسب جشن تولد، مهمانی و عکاسی کودک. برای مشاهده تصاویر و هماهنگی درباره اندازه و موجودی، با فروشگاه غریبی کیش در ارتباط باشید."
 slug: "beauty-and-the-beast-dress"
 category: girls
 gender: girls
@@ -17,6 +17,7 @@ redirect_from:
 webzi_images: ["2f2054f36e49443fa0e98767d55ed250.jpg", "ecd010fbe09b49e78c38a3b0740f4026.JPG", "96c71301295a401fbae295cc876db7d9.jpg", "b9c67bdb06c449d38321bf14756acaab.jpg", "8cd02402ebfa4d8690bd1ac08e4bf1d2.jpg", "68847d3cacf4432790bb0730d6da1377.jpg", "d4ad306a58dd4e269d332363fdaca0b9.jpg", "802d6edb3e864ec6826b6b6f93348722.jpg", "cb68aeac2ffb4b93bea46a02f9d8ac92.png"]
 tags: ["لباس دیو و دلبر", "لباس دیو و دلبر دخترانه", "دیو و دلبر", "پرنسس بل", "لباس شخصیتی", "لباس کودک", "تم تولد", "لباس تولد دخترانه", "مهمانی کودک", "لباس مهمانی دخترانه", "عید نوروز", "لباس عید نوروز دخترانه", "عکاسی کودک", "لباس عکاسی دخترانه", "کریسمس", "فروش ویژه", "فروشگاه غریبی کیش", "کیش"]
 
+lock: [description]
 auto_sig: "b=5e440f8d;d=b62c19bd;g=9af9fb99"
 images:
   - /assets/images/products/girls/beauty-and-the-beast-dress/beauty-and-the-beast-dress-1.webp
