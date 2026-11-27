@@ -12,3 +12,22 @@ layout: default
   <p class="muted">هنوز محصولی در این دسته ثبت نشده است.</p>
   {% endif %}
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ page.title | jsonify }},
+  "numberOfItems": {{ items.size }},
+  "itemListElement": [
+    {%- for item in items %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.index }},
+      "name": {{ item.title | jsonify }},
+      "url": {{ item.url | absolute_url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>
