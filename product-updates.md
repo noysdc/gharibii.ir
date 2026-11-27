@@ -548,7 +548,7 @@ products:
 - file: _products/girls/beauty-and-the-beast-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی دیو و دلبر | دخترانه
+  current_title: خرید لباس دیو و دلبر دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
@@ -636,7 +636,7 @@ products:
 - file: _products/girls/elsa-frozen-collection-2026.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی السا فروزن | کالکشن ۲۰۲۶
+  current_title: خرید لباس پرنسسی السا فروزن | کالکشن ۲۰۲۶
   title: ''
   sizes: []
   colors: []
@@ -740,7 +740,7 @@ products:
 - file: _products/girls/holographic-mermaid-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پری دریایی هولوگرامی دخترانه | درخشان و فانتزی
+  current_title: خرید لباس پری دریایی هولوگرامی دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
@@ -860,7 +860,7 @@ products:
 - file: _products/girls/moana-2-collection-2026.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس موانا ۲ | کالکشن ۲۰۲۶
+  current_title: خرید لباس موانا ۲ دخترانه | کالکشن ۲۰۲۶ غریبی
   title: ''
   sizes: []
   colors: []
@@ -972,7 +972,7 @@ products:
 - file: _products/girls/rapunzel-formal-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس مجلسی راپونزل | دخترانه
+  current_title: خرید لباس پرنسسی راپونزل دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
@@ -988,7 +988,7 @@ products:
 - file: _products/girls/sleeping-beauty-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس پرنسسی زیبای خفته اورورا | آستین کوتاه
+  current_title: خرید لباس زیبای خفته اورورا دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
@@ -1012,7 +1012,7 @@ products:
 - file: _products/girls/sofia-formal-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس مجلسی پرنسس سوفیا
+  current_title: خرید لباس پرنسس سوفیا دخترانه | غریبی کیش
   title: ''
   sizes: []
   colors: []
@@ -1020,7 +1020,7 @@ products:
 - file: _products/girls/tinkerbell-formal-dress.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس مجلسی تینکربل | پری کوچولو
+  current_title: خرید لباس پرنسسی تینکربل کودک | غریبی کیش
   title: ''
   sizes: []
   colors: []
