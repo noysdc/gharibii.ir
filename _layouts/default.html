@@ -68,7 +68,7 @@
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:locale" content="fa_IR">
   <meta property="og:site_name" content="{{ site.title | escape }}">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{% if page.layout == 'product' %}product{% else %}website{% endif %}">
   <meta property="og:title" content="{{ pv_title | escape }}">
   <meta property="og:description" content="{{ pv_desc | strip | escape }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
