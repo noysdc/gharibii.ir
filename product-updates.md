@@ -764,7 +764,7 @@ products:
 - file: _products/girls/kpop-huntrix-rumi-2.md
   category: girls
   category_name: لباس دخترانه
-  current_title: لباس رومی هانتریکس با کت سرمه‌ای پولکی | غریبی کیش
+  current_title: لباس رومی هانتریکس با کت سرمه‌ای طرح پولکی | غریبی کیش
   title: ''
   sizes: []
   colors: []
